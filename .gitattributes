@@ -1,0 +1,40 @@
+# Auto-detect text files and normalize line endings.
+* text=auto
+
+# PowerShell, AHK, .NET -- CRLF on Windows checkout
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ahk text eol=crlf
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.sln text eol=crlf
+
+# TypeScript / JavaScript / Next.js -- LF
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# Docs / config -- LF
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.css text eol=lf
+*.sql text eol=lf
+
+# Archives -- binary
+*.7z binary
+*.zip binary
+
+# Images (potential UI assets)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg text eol=lf
+*.ico binary
+*.webp binary

@@ -1,0 +1,71 @@
+# --- Next.js build output ---
+.next/
+out/
+dist/
+build/
+
+# --- Node.js dependencies ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp
+.pnp.js
+
+# --- TypeScript ---
+*.tsbuildinfo
+next-env.d.ts
+
+# --- C# pipeline build output ---
+**/bin/
+**/obj/
+**/TestResults/
+*.user
+*.suo
+*.cache
+
+# --- Temporary processing artifacts ---
+temp/
+tmp/
+output/
+outputs/
+
+# --- IDE / editor ---
+**/.vs/
+**/.vscode/
+**/.idea/
+
+# --- Archives (generated on demand via /archive-repo skill) ---
+project-archives/*.zip
+project-archives/*.7z
+
+# --- Environment / secrets ---
+.env
+.env.local
+.env.*.local
+*.local.env
+*.secret
+*.credentials
+*.secrets.env
+appsettings.Development.json
+appsettings.Local.json
+
+# --- Supabase local dev ---
+.supabase/
+
+# --- OS ---
+Thumbs.db
+.DS_Store
+
+# --- Machine identity (never committed) ---
+.machine
+
+# --- Claude Code session-local state ---
+.claude/.bump-token
+.claude/scripts/*.log
+.claude/comms.log
+
+# --- Pipeline data artifacts (large raw downloads, OCR output) ---
+pipeline/data/
+pipeline/raw/
+pipeline/cache/

@@ -1,0 +1,55 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-compound-bash.ps1\"",
+            "timeout": 30,
+            "statusMessage": "Checking for compound bash..."
+          },
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/hooks/pre-bash-check.ps1\"",
+            "timeout": 30,
+            "statusMessage": "Checking session/Codex..."
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(next *)",
+      "Bash(dotnet *)",
+      "Bash(powershell *)",
+      "Bash(powershell.exe *)",
+      "Bash(curl *)",
+      "Bash(codex *)",
+      "Bash(npx @openai/codex *)",
+      "Bash(tasklist *)",
+      "Bash(taskkill *)",
+      "Bash(nvidia-smi *)",
+      "Bash(where *)",
+      "Bash(dir *)",
+      "Bash(findstr *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:learn.microsoft.com)",
+      "WebFetch(domain:docs.microsoft.com)",
+      "WebFetch(domain:nextjs.org)",
+      "WebFetch(domain:supabase.com)",
+      "WebFetch(domain:trpc.io)",
+      "WebFetch(domain:orm.drizzle.team)",
+      "WebFetch(domain:npmjs.com)",
+      "WebFetch(domain:leginfo.legislature.ca.gov)"
+    ]
+  }
+}

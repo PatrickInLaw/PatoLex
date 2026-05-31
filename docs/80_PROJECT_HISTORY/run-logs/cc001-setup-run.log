@@ -1,0 +1,25 @@
+[2026-05-31 14:00 PT] START | cc001 PatoLex repo setup | OK
+[2026-05-31 14:05 PT] REVIEW | Read Sample_Repo.7z contents (50 files) | OK
+[2026-05-31 14:10 PT] REVIEW | Read PatoAudio CLAUDE.md, settings, hooks | OK
+[2026-05-31 14:15 PT] REVIEW | Read KolaLaw-DB-2025 conventions | OK
+[2026-05-31 14:20 PT] EXTRACT | Copied sample_extract to PatoLex directory | OK
+[2026-05-31 14:21 PT] REPLACE | find-and-replace placeholders (PatoLex/plx/2026-05-31) -- 29 files updated | OK
+[2026-05-31 14:22 PT] DIRS | Added pipeline/ directory | OK
+[2026-05-31 14:22 PT] CLEAN | Removed TEMPLATE-USAGE.md | OK
+[2026-05-31 14:25 PT] WRITE | CLAUDE.md -- PatoLex customization | OK
+[2026-05-31 14:26 PT] WRITE | .gitignore -- Next.js + C# pipeline | OK
+[2026-05-31 14:26 PT] WRITE | .gitattributes -- TS/TSX rules added | OK
+[2026-05-31 14:28 PT] WRITE | README.md -- PatoLex description | OK
+[2026-05-31 14:28 PT] WRITE | PROJECT_STRUCTURE.md -- web project layout | OK
+[2026-05-31 14:29 PT] WRITE | docs/20_ROADMAP/ROADMAP.md -- 7 milestones | OK
+[2026-05-31 14:30 PT] WRITE | docs/30_SYSTEM_DESIGN/ARCHITECTURE.md -- stack + data model | OK
+[2026-05-31 14:30 PT] WRITE | docs/60_OPERATIONS/SETUP.md -- Supabase + Node requirements | OK
+[2026-05-31 14:31 PT] WRITE | docs/80_PROJECT_HISTORY/CHANGELOG.md -- cc001 entry | OK
+[2026-05-31 14:32 PT] WRITE | .claude/settings.json -- npm/node/next permissions | OK
+[2026-05-31 14:32 PT] WRITE | .claude/hooks/pre-bash-check.ps1 -- no dotnet enforcement | OK
+[2026-05-31 14:33 PT] WRITE | .claude/scripts/ship.ps1 -- npm build | OK
+[2026-05-31 14:33 PT] WRITE | docs/80_PROJECT_HISTORY/lessons/LESSONS_OVERVIEW.md | OK
+[2026-05-31 14:35 PT] WRITE | Session log cc001 | OK
+[2026-05-31 14:36 PT] GIT | git init + initial commit | OK
+[2026-05-31 14:37 PT] GIT | GitHub repo created + pushed | OK
+[2026-05-31 14:38 PT] DONE | Milestone 1 complete -- repo live | OK

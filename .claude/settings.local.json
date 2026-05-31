@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"/c/Program Files/7-Zip/7z.exe\" l Sample_Repo.7z)",
+      "Bash(\"/c/Program Files/7-Zip/7z.exe\" l \"C:/Users/PatrickKolasinski/Documents/GitHub/Sample_Repo.7z\")",
+      "Bash(mkdir -p /tmp/sample_repo)",
+      "Bash(\"/c/Program Files/7-Zip/7z.exe\" x \"C:/Users/PatrickKolasinski/Documents/GitHub/Sample_Repo.7z\" -o/tmp/sample_repo -y)",
+      "Read(//tmp/**)",
+      "Bash(cygpath *)",
+      "Bash(rm -rf /tmp/template_repo)",
+      "Bash(cp -r \"C:/Users/PatrickKolasinski/Documents/GitHub/PatoLex\" /tmp/template_repo)"
+    ]
+  }
+}
