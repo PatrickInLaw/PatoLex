@@ -1,0 +1,16 @@
+[2026-06-01 00:00 PT] START | Gate D apply + verify run | OK
+[2026-06-01 00:00 PT] READ | drizzle.config.ts, client.ts, package.json, migration SQL — all read | OK
+[2026-06-01 00:01 PT] FIX:dotenv | npm install -D dotenv | OK
+[2026-06-01 00:01 PT] FIX:drizzle.config | Added dotenv import + dotenv.config({path:".env.local"}) at top | OK
+[2026-06-01 00:01 PT] FIX:client.ts | Added dotenv import; lazy-load .env.local in getConnectionString() if DATABASE_URL unset | OK
+[2026-06-01 00:01 PT] TYPECHECK | npm run typecheck -- 0 errors | OK
+[2026-06-01 00:02 PT] MIGRATE | npm run db:migrate -- "migrations applied successfully!" wall-clock 1.17s | OK
+[2026-06-01 00:02 PT] VERIFY | Writing gate-d-verify.sql to scratch folder | OK
+[2026-06-01 00:03 PT] CHECK1 | 7/7 tables in information_schema: change_event, designation_history, enactment, lineage_edge, provision, provision_version, source_document | OK
+[2026-06-01 00:03 PT] CHECK2 | 7/7 enum types in pg_type: change_action, enactment_kind, lineage_edge_type, provision_status, source_type, trust_level, unit_type | OK
+[2026-06-01 00:03 PT] CHECK3 | btree_gist extension installed, version 1.7 | OK
+[2026-06-01 00:03 PT] CHECK4 | Both GiST exclusion constraints (contype='x'): designation_history_provision_id_valid_range_excl, provision_version_provision_id_valid_range_excl | OK
+[2026-06-01 00:03 PT] CHECK5 | uuid_generate_v7(): 3 UUIDs all version_nibble='7', variants in {8,9,a,b}, all distinct, time-ordered (u1<=u2<=u3 as text) | OK
+[2026-06-01 00:04 PT] CHECK6 | fts_vector generated column: INSERT prov+prov_version, fts_vector populated with 9 lexemes, ROLLBACK — 0 rows remain | OK
+[2026-06-01 00:04 PT] CHECK7 | GiST exclusion enforces: second overlapping INSERT raised ERROR 23P01 (conflicting key value violates exclusion constraint provision_version_provision_id_valid_range_excl), ROLLBACK — 0 rows remain | OK
+[2026-06-01 00:04 PT] DONE | All 7 checks PASS. Gate D schema live and sound. | OK

@@ -1,0 +1,28 @@
+[2026-06-01 00:00 PT] START | Ingest benchmark task initiated | OK
+[2026-06-01 00:01 PT] INVENTORY | Identified input files: pc_extract_1872.json (720 sections), directives_1883.json (5 records), method_a_final_validation.json (12 directives, 9 applied). Validation targets: pc_extract_1881.json, pc_extract_1883.json | OK
+[2026-06-01 00:02 PT] SCAFFOLD | Creating scripts/ingest/ directory and pipeline script | OK
+[2026-06-01 14:37 PT] INIT | Pipeline started | OK
+[2026-06-01 14:37 PT] PRE-RUN-1 | Truncating tables | OK
+[2026-06-01 14:37 PT] FAIL | PostgresError: cannot call jsonb_to_recordset on a non-array | FAIL
+[2026-06-01 14:38 PT] INIT | Pipeline started | OK
+[2026-06-01 14:38 PT] PRE-RUN-1 | Truncating tables | OK
+[2026-06-01 14:38 PT] FAIL | Error: Missing provision for §626 | FAIL
+[2026-06-01 14:39 PT] INIT | Pipeline started | OK
+[2026-06-01 14:39 PT] PRE-RUN-1 | Truncating tables | OK
+[2026-06-01 14:39 PT] RUN-1 | provisions=720 change_events=732 prov_vers=732 total_ms=584 | OK
+[2026-06-01 14:39 PT] PRE-RUN-2 | Truncating tables | OK
+[2026-06-01 14:39 PT] RUN-2 | provisions=720 change_events=732 prov_vers=732 total_ms=511 | OK
+[2026-06-01 14:39 PT] PRE-RUN-3 | Truncating tables | OK
+[2026-06-01 14:39 PT] RUN-3 | provisions=720 change_events=732 prov_vers=732 total_ms=527 | OK
+[2026-06-01 14:39 PT] COMPLETE | Done. Avg total 541ms over 3 runs. DB left in run-3 state. | OK
+[2026-06-01 14:40 PT] NOTE | Two script bugs fixed during run: (1) sql.json() needed for jsonb_to_recordset params (2) Sections 626-629,632,636 absent from 1872 baseline - stub provisions created | WARN
+[2026-06-01 14:40 PT] REPORT | PIPELINE_BENCHMARKS.md written to docs/30_SYSTEM_DESIGN/ | OK
+[2026-06-01 14:52 PT] 1850-INIT | 1850 act ingest started | OK
+[2026-06-01 14:52 PT] 1850-STAGE1 | source_document id=5 | OK
+[2026-06-01 14:52 PT] 1850-STAGE2 | 11 enactments | OK
+[2026-06-01 14:52 PT] 1850-STAGE3 | 11 provisions | OK
+[2026-06-01 14:52 PT] 1850-STAGE4 | 11 change_events | OK
+[2026-06-01 14:52 PT] 1850-STAGE5 | lineage_edge id=1 SYNTHETIC DEMO | OK
+[2026-06-01 14:52 PT] 1850-FAIL | PostgresError: recursive reference to query "lineage" must not appear within its non-recursive term | FAIL
+[2026-06-01 14:53 PT] 1850-CTE-QUERY | rows=2 cte_ms=3 gist_violations=0 | OK
+[2026-06-01 14:55 PT] 1850-REPORT | Final counts: act_section=11 code_section=726 change_events=743 lineage_edges=1. CTE query OK (2.8ms, 2 rows). GiST violations=0. Benchmark JSON updated. PIPELINE_BENCHMARKS.md updated. | OK

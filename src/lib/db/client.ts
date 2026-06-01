@@ -22,6 +22,7 @@
  * See .env.example for the format.
  */
 
+import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/postgres-js";
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
@@ -33,6 +34,11 @@ let _sql: postgres.Sql | null = null;
 let _db: PostgresJsDatabase<Schema> | null = null;
 
 function getConnectionString(): string {
+  // Load .env.local if DATABASE_URL is not already set (covers tsx scripts and
+  // other Node.js runtimes that don't pre-load the env file).
+  if (!process.env.DATABASE_URL) {
+    dotenv.config({ path: ".env.local" });
+  }
   const url = process.env.DATABASE_URL;
   if (!url) {
     throw new Error(

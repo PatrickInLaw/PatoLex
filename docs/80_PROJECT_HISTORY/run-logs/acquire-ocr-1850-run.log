@@ -1,0 +1,147 @@
+[2026-06-01 14:30 PT] OK | === PatoLex 1850 Benchmark START ===
+[2026-06-01 14:30 PT] OK | Volume: Statutes of California, First Session (1850)
+[2026-06-01 14:30 PT] OK | URL: https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1850/1850.pdf
+[2026-06-01 14:30 PT] OK | ACQUIRE | file=C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-historical\1850-statutes-clerk-assembly.pdf
+[2026-06-01 14:30 PT] OK | ACQUIRE | size=32158865 bytes (30.67 MB)
+[2026-06-01 14:30 PT] OK | ACQUIRE | file already present (pre-downloaded). No network transfer needed.
+[2026-06-01 14:30 PT] OK | ACQUIRE | PDF metadata: image-only, 480 pages, created 2001-01-08 by PixEdit/Acrobat PDFWriter 3.02
+[2026-06-01 14:30 PT] OK | OCR | opening PDF, rendering pages 10-49 at 200 DPI
+[2026-06-01 14:30 PT] OK | OCR | total pages in PDF: 480
+[2026-06-01 14:30 PT] OK | OCR | page 11 (0-idx 10) | 1.0s | chars=3650
+[2026-06-01 14:30 PT] OK | OCR | page 12 (0-idx 11) | 1.1s | chars=4423
+[2026-06-01 14:30 PT] OK | OCR | page 13 (0-idx 12) | 0.5s | chars=1318
+[2026-06-01 14:30 PT] OK | OCR | page 14 (0-idx 13) | 0.8s | chars=3134
+[2026-06-01 14:30 PT] OK | OCR | page 15 (0-idx 14) | 1.0s | chars=3854
+[2026-06-01 14:30 PT] OK | OCR | page 16 (0-idx 15) | 1.2s | chars=4546
+[2026-06-01 14:30 PT] OK | OCR | page 17 (0-idx 16) | 1.1s | chars=4128
+[2026-06-01 14:30 PT] OK | OCR | page 18 (0-idx 17) | 1.0s | chars=4161
+[2026-06-01 14:30 PT] OK | OCR | page 19 (0-idx 18) | 0.9s | chars=3501
+[2026-06-01 14:30 PT] OK | OCR | page 20 (0-idx 19) | 0.9s | chars=3391
+[2026-06-01 14:30 PT] OK | OCR | page 21 (0-idx 20) | 0.6s | chars=1590
+[2026-06-01 14:30 PT] OK | OCR | page 22 (0-idx 21) | 0.7s | chars=2576
+[2026-06-01 14:30 PT] OK | OCR | page 23 (0-idx 22) | 1.1s | chars=4171
+[2026-06-01 14:30 PT] OK | OCR | page 24 (0-idx 23) | 0.8s | chars=2852
+[2026-06-01 14:30 PT] OK | OCR | page 25 (0-idx 24) | 1.3s | chars=5064
+[2026-06-01 14:30 PT] OK | OCR | page 26 (0-idx 25) | 1.2s | chars=4892
+[2026-06-01 14:30 PT] OK | OCR | page 27 (0-idx 26) | 1.1s | chars=4544
+[2026-06-01 14:30 PT] OK | OCR | page 28 (0-idx 27) | 1.2s | chars=4576
+[2026-06-01 14:30 PT] OK | OCR | page 29 (0-idx 28) | 1.1s | chars=4529
+[2026-06-01 14:30 PT] OK | OCR | page 30 (0-idx 29) | 1.2s | chars=4724
+[2026-06-01 14:30 PT] OK | OCR | page 31 (0-idx 30) | 1.3s | chars=5326
+[2026-06-01 14:30 PT] OK | OCR | page 32 (0-idx 31) | 0.5s | chars=1763
+[2026-06-01 14:30 PT] OK | OCR | page 33 (0-idx 32) | 0.6s | chars=2025
+[2026-06-01 14:30 PT] OK | OCR | page 34 (0-idx 33) | 0.6s | chars=2248
+[2026-06-01 14:30 PT] OK | OCR | page 35 (0-idx 34) | 1.1s | chars=4650
+[2026-06-01 14:30 PT] OK | OCR | page 36 (0-idx 35) | 1.1s | chars=4124
+[2026-06-01 14:30 PT] OK | OCR | page 37 (0-idx 36) | 1.2s | chars=4659
+[2026-06-01 14:30 PT] OK | OCR | page 38 (0-idx 37) | 1.1s | chars=4526
+[2026-06-01 14:30 PT] OK | OCR | page 39 (0-idx 38) | 1.1s | chars=4624
+[2026-06-01 14:30 PT] OK | OCR | page 40 (0-idx 39) | 1.2s | chars=4878
+[2026-06-01 14:30 PT] OK | OCR | page 41 (0-idx 40) | 1.1s | chars=4248
+[2026-06-01 14:30 PT] OK | OCR | page 42 (0-idx 41) | 1.2s | chars=4745
+[2026-06-01 14:30 PT] OK | OCR | page 43 (0-idx 42) | 1.1s | chars=4392
+[2026-06-01 14:30 PT] OK | OCR | page 44 (0-idx 43) | 1.1s | chars=4375
+[2026-06-01 14:30 PT] OK | OCR | page 45 (0-idx 44) | 1.4s | chars=5479
+[2026-06-01 14:30 PT] OK | OCR | page 46 (0-idx 45) | 0.6s | chars=1940
+[2026-06-01 14:30 PT] OK | OCR | page 47 (0-idx 46) | 0.9s | chars=3479
+[2026-06-01 14:30 PT] OK | OCR | page 48 (0-idx 47) | 0.7s | chars=2522
+[2026-06-01 14:30 PT] OK | OCR | page 49 (0-idx 48) | 1.1s | chars=4433
+[2026-06-01 14:31 PT] OK | OCR | page 50 (0-idx 49) | 1.5s | chars=5955
+[2026-06-01 14:31 PT] OK | OCR | SUMMARY | pages=40 | total=40.2s | mean=1.0s/page | 59.63 p/min
+[2026-06-01 14:31 PT] OK | OCR | QUALITY SAMPLE | printing first 400 chars of 3 body pages:
+[2026-06-01 14:31 PT] OK | OCR | page 16 sample: 6 CONSTITUTION OF THE UNITED STATES.> | MANNER OF PASSING BILLS, &eo. | Szorroy 7. All bills for raising revenue shall originate in the house of representatives ; but the senate may propose | or concur with amendments as on other bills. . | Every bill which shall have passed the house of representat
+[2026-06-01 14:31 PT] OK | OCR | page 26 sample: 16 TREATY BETWEEN THE UNITED STATES AND MEXICO. ° | . . ARTICLE Y. . | * The boundary line between the two republics shall commence in the Gulf of Mexico, threo leagues from land, | opposite the mouth of the Rio Grande, otherwiso called Rio Bravo del Norte, or opposite the mouth of its deepest | " b
+[2026-06-01 14:31 PT] OK | OCR | page 36 sample: 26 CONSTITUTION: OF THE STATE OF CALIFORNIA, | . ARTICLE II. |  | : RIGHT OF SUFFRAGE, | * Sec. 1. Every white male citizen of the United States, and every white’ malo citizen of Mexico, who shall have | elected to become a citizen of tho United States, under the treaty of peace exchanged and ratifi
+[2026-06-01 14:31 PT] OK | OCR | raw text saved to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-1850\ocr_raw_1850_pages.txt
+[2026-06-01 14:31 PT] OK | PARSE | extracting acts/chapters from OCR text
+[2026-06-01 14:31 PT] OK | PARSE | raw chapter markers found: 2
+[2026-06-01 14:31 PT] OK | PARSE | acts with title: 2
+[2026-06-01 14:31 PT] OK | PARSE | parse time: 0.00s
+[2026-06-01 14:31 PT] OK | PARSE | acts/min: 60033.0
+[2026-06-01 14:31 PT] OK | PARSE | wrote 2 acts to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-1850\acts_1850_sample.json
+[2026-06-01 14:31 PT] OK | PARSE | act[0] chap=28 date='Approved, April 14, 1802' title='AN ACT to establish u uniform rule of Nuturalization, arid to repeal the acta he'
+[2026-06-01 14:31 PT] OK | PARSE | act[1] chap=47 date='' title='AN ACT in addition to an act entitled “ An act to establish a uniform rule of, N'
+[2026-06-01 14:31 PT] OK | === BENCHMARK SUMMARY ===
+[2026-06-01 14:31 PT] OK | ACQUIRE | 30.67 MB | pre-downloaded (no network transfer timed)
+[2026-06-01 14:31 PT] OK | OCR     | 40 pages | 40.2s total | 1.0s/page | 59.63 p/min | engine=Tesseract5 | DPI=200
+[2026-06-01 14:31 PT] OK | PARSE   | 2 acts extracted | 0.00s | 60033.0 acts/min
+[2026-06-01 14:31 PT] OK | OUTPUT  | C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-1850\acts_1850_sample.json
+[2026-06-01 14:31 PT] OK | === PatoLex 1850 Benchmark END ===
+[2026-06-01 14:32 PT] OK | --- Pass 2: CA session law body pages (pages 55-94) ---
+[2026-06-01 14:32 PT] OK | ACQUIRE | 30.67 MB | disk read time=0.02s (1796.2 MB/s local I/O)
+[2026-06-01 14:32 PT] OK | ACQUIRE | NOTE: file pre-downloaded. To time network acquire, would need fresh download.
+[2026-06-01 14:32 PT] OK | ACQUIRE | PDF: 480 pages, image-only (no text layer), PixEdit scan, ~67 KB/page avg
+[2026-06-01 14:32 PT] OK | OCR | target pages 55-94 (1-indexed) | CA First Session body | DPI=200 | engine=Tesseract5
+[2026-06-01 14:32 PT] OK | OCR | page 55 | 0.6s | chars=1880
+[2026-06-01 14:32 PT] OK | OCR | page 56 | 1.0s | chars=4013
+[2026-06-01 14:32 PT] OK | OCR | page 57 | 1.1s | chars=4133
+[2026-06-01 14:32 PT] OK | OCR | page 58 | 1.0s | chars=4207
+[2026-06-01 14:32 PT] OK | OCR | page 59 | 1.1s | chars=4156
+[2026-06-01 14:32 PT] OK | OCR | page 60 | 1.3s | chars=5197
+[2026-06-01 14:32 PT] OK | OCR | page 61 | 0.8s | chars=2990
+[2026-06-01 14:32 PT] OK | OCR | page 62 | 1.3s | chars=5079
+[2026-06-01 14:32 PT] OK | OCR | page 63 | 1.1s | chars=4393
+[2026-06-01 14:32 PT] OK | OCR | page 64 | 1.1s | chars=4051
+[2026-06-01 14:32 PT] OK | OCR | page 65 | 1.1s | chars=4388
+[2026-06-01 14:33 PT] OK | OCR | page 66 | 0.8s | chars=2827
+[2026-06-01 14:33 PT] OK | OCR | page 67 | 1.2s | chars=4567
+[2026-06-01 14:33 PT] OK | OCR | page 68 | 1.1s | chars=4095
+[2026-06-01 14:33 PT] OK | OCR | page 69 | 1.2s | chars=4664
+[2026-06-01 14:33 PT] OK | OCR | page 70 | 1.2s | chars=4898
+[2026-06-01 14:33 PT] OK | OCR | page 71 | 1.2s | chars=4696
+[2026-06-01 14:33 PT] OK | OCR | page 72 | 1.2s | chars=4851
+[2026-06-01 14:33 PT] OK | OCR | page 73 | 1.1s | chars=3934
+[2026-06-01 14:33 PT] OK | OCR | page 74 | 1.2s | chars=4790
+[2026-06-01 14:33 PT] OK | OCR | page 75 | 0.9s | chars=3382
+[2026-06-01 14:33 PT] OK | OCR | page 76 | 1.2s | chars=4858
+[2026-06-01 14:33 PT] OK | OCR | page 77 | 1.1s | chars=4622
+[2026-06-01 14:33 PT] OK | OCR | page 78 | 1.2s | chars=4620
+[2026-06-01 14:33 PT] OK | OCR | page 79 | 1.1s | chars=4408
+[2026-06-01 14:33 PT] OK | OCR | page 80 | 1.0s | chars=4110
+[2026-06-01 14:33 PT] OK | OCR | page 81 | 1.2s | chars=4857
+[2026-06-01 14:33 PT] OK | OCR | page 82 | 1.3s | chars=5010
+[2026-06-01 14:33 PT] OK | OCR | page 83 | 1.2s | chars=4927
+[2026-06-01 14:33 PT] OK | OCR | page 84 | 1.1s | chars=4210
+[2026-06-01 14:33 PT] OK | OCR | page 85 | 1.3s | chars=5200
+[2026-06-01 14:33 PT] OK | OCR | page 86 | 1.1s | chars=4089
+[2026-06-01 14:33 PT] OK | OCR | page 87 | 1.1s | chars=4475
+[2026-06-01 14:33 PT] OK | OCR | page 88 | 1.2s | chars=4875
+[2026-06-01 14:33 PT] OK | OCR | page 89 | 1.2s | chars=4782
+[2026-06-01 14:33 PT] OK | OCR | page 90 | 1.3s | chars=5276
+[2026-06-01 14:33 PT] OK | OCR | page 91 | 1.0s | chars=4080
+[2026-06-01 14:33 PT] OK | OCR | page 92 | 1.2s | chars=4962
+[2026-06-01 14:33 PT] OK | OCR | page 93 | 0.9s | chars=3376
+[2026-06-01 14:33 PT] OK | OCR | page 94 | 1.3s | chars=5129
+[2026-06-01 14:33 PT] OK | OCR | SUMMARY | pages=40 | wall=44.4s | mean=1.11s/page | 54.0 p/min | mean_chars/page=4376
+[2026-06-01 14:33 PT] OK | OCR | raw text saved to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-1850\ocr_raw_1850_body_pages.txt
+[2026-06-01 14:33 PT] OK | OCR | QUALITY SAMPLES (first 300 chars each):
+[2026-06-01 14:33 PT] OK | OCR | page 55: ‘ or THE ; STATE OF CALIFORNIA, | ’ PASSED AT THE FIRST SESSION OF THE LEGISLATURE, BEGUN THE FIFTEENTH DAY OF DECEMBER, 1819, AND ENDED ON THE TWENTY-SECOND DAY OF APRIL, 1850, AT PUEBLA DE SAN JOSE. : Chapter 1. ’ AN ACT concerning the Public Archives. Passed January 5, 1850. The People of the Sta
+[2026-06-01 14:33 PT] OK | OCR | page 61: FIRST SESSION. 51 ‘ Chap. 7. ; AN ACT fixing the time for Acts and Joint Resolutions to take effect. , Passed January 24, 1850. \ The People of the State of California, represented in Senate and Assembly, do enact as follows : . § 1. All Acts and Joint Resolutions shall take effect, from and after t
+[2026-06-01 14:33 PT] OK | OCR | page 68: 58 LAWS OF THE STATE OF CALIFORNIA. : sively ; and if a majority of said Justices shall not attend on the twonty-first day, or if a majority shall attend, at any day of the term, and shall afterwards fail to attend for twenty successive days, the Court Adjournment of shall stand adjourned to the nex
+[2026-06-01 14:33 PT] OK | OCR | page 76: 86 LAWS OF THE STATE OF CALIFORNIA. ordered so lo do by the Loard, and shall register the names of all pilots, with the date of their licenses ; Monthly record their registers and books shall always be open to public inspection. departure of alot § 8. He shall kecp a monthly record of the arrival an
+[2026-06-01 14:33 PT] OK | OCR | page 86: 76 LAWS OF THE’ STATE OF CALIFORNTA. Failing to file a § 17. If any officer, when required so to do, shall fail to file a new bond, his office shall be deomed new bond when required. vacant. Fonm of addi- § 18. Such additional bond shall be in such penalty as shall be directed hy ihe court, and shal
+[2026-06-01 14:33 PT] OK | PARSE | extracting CA First Session acts from OCR text
+[2026-06-01 14:33 PT] OK | PARSE | acts extracted: 11 | parse_time=0.005s
+[2026-06-01 14:33 PT] OK | PARSE | wrote 11 acts to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-1850\acts_1850_sample.json
+[2026-06-01 14:33 PT] OK | PARSE | acts/min (instantaneous): 131940
+[2026-06-01 14:33 PT] OK | PARSE | [0] chap=   8 src_pg= 61 date='Passed January 31, 1850' title='AN ACT creating the office of State Translator.'
+[2026-06-01 14:33 PT] OK | PARSE | [1] chap=   9 src_pg= 61 date='Passed January 31, 1850' title='AN ACT prescribing the mode of receiving, keeping, and paying out the Public Funds.'
+[2026-06-01 14:33 PT] OK | PARSE | [2] chap=  11 src_pg= 65 date='' title='AN ACT concerning the office of Attorney General.'
+[2026-06-01 14:33 PT] OK | PARSE | [3] chap=  12 src_pg= 66 date='Passed February 14, 1850' title='AN ACT authorizing the Secretary of State, Comptroller, Treasurer, Surveyor General, and A'
+[2026-06-01 14:33 PT] OK | PARSE | [4] chap=  15 src_pg= 68 date='Passed February 20, 1850' title='* AN ACT subdividing the State inlo Counties and establishing the Seals of Justice therein'
+[2026-06-01 14:33 PT] OK | PARSE | [5] chap=  17 src_pg= 75 date='Passed February 25, 1850' title='‘AN ACT defining the amount of revenue to be collected to defray the expenses of the Gover'
+[2026-06-01 14:33 PT] OK | PARSE | [6] chap=  18 src_pg= 75 date='Passed February 25, 1850' title='AN ACT to cstablish Pilots and Pilot Regulations for the Port of San Francisco,'
+[2026-06-01 14:33 PT] OK | PARSE | [7] chap=  19 src_pg= 79 date='Passed February 27, 1850' title='AN ACT authorizing a loan on the fuith and credit of the State, to pay the expenses of the'
+[2026-06-01 14:33 PT] OK | === FINAL BENCHMARK SUMMARY ===
+[2026-06-01 14:33 PT] OK | Volume  : Statutes of California, First Session (1850)
+[2026-06-01 14:33 PT] OK | URL     : https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1850/1850.pdf
+[2026-06-01 14:33 PT] OK | Size    : 30.67 MB (32,158,865 bytes) | 480 pages image-only
+[2026-06-01 14:33 PT] OK | ACQUIRE : file pre-downloaded; disk I/O rate=1796.2 MB/s
+[2026-06-01 14:33 PT] OK | OCR     : pages=40 (pages 55-94) | total=44.4s | 1.11s/page | 54.0 p/min | Tesseract5 200DPI
+[2026-06-01 14:33 PT] OK | QUALITY : mean 4376 chars/page; scan is legible (19c serif type, minor foxing/scan artifacts)
+[2026-06-01 14:33 PT] OK | PARSE   : 11 acts in sample | 0.005s | parse is regex-based, fast
+[2026-06-01 14:33 PT] OK | OUTPUT  : C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-1850\acts_1850_sample.json
+[2026-06-01 14:33 PT] OK | === PatoLex 1850 Benchmark COMPLETE ===
+[2026-06-01 14:33 PT] OK | ACQUIRE TIMING | downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1850/1850.pdf
+[2026-06-01 14:34 PT] OK | ACQUIRE TIMING | downloaded 30.67 MB in 7.2s = 4.26 MB/s
+[2026-06-01 14:34 PT] OK | ACQUIRE TIMING | saved to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-1850\1850.pdf
