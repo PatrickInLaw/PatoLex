@@ -91,6 +91,22 @@ Full detail: `PatoLex-scratch/gate-b-historical/clean_scan_sourcing.md`.
 
 ---
 
+## 1c. Full-corpus inventory + the blank-slate reframe (cc002)
+
+**The corpus is completable from clean sources — no true blocking gap for Phase 1.** And the "baseline editions" worry largely dissolves:
+
+**Blank-slate principle (Patrick):** California had no state law before 1850. The first Legislature (1849-50) enacted the founding statutes *from nothing*, and every change since is a session-law act. **The codifications (1872 Field Codes; the ~25 later codes 1929-1992) were themselves enacted *by acts in the session laws*** — so the session-law chain IS the complete law from a blank page. We do not need separate "baseline editions" as sources of truth; the codification acts are in the Chief Clerk PDFs. (Asterisks, both out of statutory scope: pre-1850 Mexican/Spanish land law = case-law/federal; the Constitution is a parallel track, 1849 then 1879.)
+
+**Session-law backbone — unbroken clean coverage 1849-2025:** Chief Clerk 653 PDFs (1850-2008) + PUBINFO (1993-2025) + HathiTrust library-native for 1849 and 1852-1868. This is the complete amendment record for all 29 codes. ~90% of session-volume coverage is clean now.
+
+**Minor gaps (none block reconstruction):** Penal/Civil/CCP 1872-1905 standalone editions are mostly Google on IA (mitigated by MSN-scanned 1903-06 + HathiTrust); 8 of 29 codes lack free pre-1993 *annotated* editions (validation-only — PUBINFO `history` covers 1993+, HeinOnline pre-1993); the Bills corpus (1,837 vols) is Google-only but is **Phase 2** (Phase 1 uses Statutes volumes + PUBINFO chaptered XML, not enrolled bills).
+
+**METHOD DECISION — production = Method A (forward-from-session-laws).** The clean session-law backbone is exactly what forward-reconstruction needs. Method B (annotation-edition diffing) is **not uniformly supportable** — only 14 of 29 codes have free clean annotated editions, most covering 1-2 decades. **So: reconstruct forward by parsing session-law amendment directives; use annotated editions as a VALIDATION layer (for the 14 codes that have them) + the Index + PUBINFO history.** Note this is *not* the method the Penal Code proof validated (that used annotation-driven, Method B) — so **parsing raw session-law amendment directives at scale is the next risk to retire.** Method A is also inherently event-sourced (one act = one change-event), which is exactly the model that emits both the temporal DB and a Git history of the law.
+
+Full detail: `PatoLex-scratch/gate-b-historical/full_corpus_source_inventory.md`.
+
+---
+
 ## 2. OCR — harvest first, correct selectively (revised per Patrick)
 
 Existing OCR already covers the digitized corpus, so we do **not** build an OCR farm. The pipeline is:

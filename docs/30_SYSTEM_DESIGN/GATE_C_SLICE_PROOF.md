@@ -106,6 +106,10 @@ Attempt to extend the 2-page result to ~50 pages across 3 editions (1902/1906/19
 - **What was confirmed:** the **inter-engine disagreement proxy works** as a triage/flagging signal. The validated 1906 source held low disagreement (0.12) across 17 pages, consistent with the 1.5% anchor; a 1915 edition looked cleaner (0.095); a **1902 edition was worse (0.167 → est. 5-8% CER)** and the proxy correctly flagged it for review.
 - **Takeaway:** legal-grade is real on good scans, **scan/edition quality varies** (so per-source proxy triage is needed), and the production accuracy number should be firmed with a human-gold audit set before "production-validated" is claimed. GO verdict stands; the *measurement* is what's still thin, not the conclusion.
 
+### Method consequence (full-corpus inventory)
+
+The full-corpus inventory (DATA_SOURCES_HISTORICAL §1c) shows the **production method must be forward-from-session-laws (Method A)** — annotated editions exist for only 14/29 codes, so the annotation-driven method this proof validated (Method B) **does not scale** and demotes to a validation layer. **Open risk:** parsing raw session-law amendment directives ("Section X of the Y Code is amended to read…") at scale is **not yet proven** — the next slice spike should re-run the Penal Code reconstruction via Method A (parse the 1872 codification act + subsequent amending acts from the *session laws*, apply forward, validate against the annotated editions + Index). OCR (GO) and the annotation-driven reconstruction are proven; session-law amendment-parsing is the remaining proof.
+
 ## Revision History
 
 | Date | Change |

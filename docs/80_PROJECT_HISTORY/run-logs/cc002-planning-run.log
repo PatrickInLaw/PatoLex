@@ -47,3 +47,8 @@
 [2026-06-01 12:05 PT] WRITE | DATA_SOURCES_HISTORICAL.md -- clean-scan sourcing map (sec 1b) + HathiTrust terms caveat | OK
 [2026-06-01 12:40 PT] VAL-50 | Disagreement proxy confirmed as triage signal (47 pages/3 eds); 1906 holds ~1.5%, 1902 worse (~5-8%, flagged). True CER still rests on 2 human-verified pages -- need ~10-20 page human-gold audit to firm | WARN
 [2026-06-01 12:45 PT] WRITE | GATE_C_SLICE_PROOF.md -- val-50 broadening note (honest limits) | OK
+[2026-06-01 13:30 PT] INVENTORY | Full-corpus source map: completable from clean sources; session-law backbone 1849-2025 unbroken; ~90% clean; gaps minor (Bills=Phase2) | OK
+[2026-06-01 13:35 PT] DECISION | Blank-slate confirmed (Patrick): session laws ARE the law from 1850. Production method = forward-from-session-laws (Method A); annotated editions = validation (14/29 codes only) | OK
+[2026-06-01 13:38 PT] RISK | Open: session-law amendment-directive parsing at scale not yet proven (spike used annotation method B). Next = Method-A Penal Code re-spike | WARN
+[2026-06-01 13:40 PT] IDEA | Patrick: emit CA law as a Git repo (bills=branches, chaptering=merge, double-jointing=conflict); DB = system of record, git = generated artifact. Recorded in memory | OK
+[2026-06-01 13:45 PT] WRITE | DATA_SOURCES_HISTORICAL §1c + GATE_C method note + ROADMAP (Method A, blank-slate, git) | OK

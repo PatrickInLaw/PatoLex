@@ -2,7 +2,7 @@
 
 ## Current Status
 
-**Gate:** C (Penal Code slice proof) — **core risks RETIRED (cc002)**. Reconstruction method validated (85% vs Index) AND OCR proven legal-grade (~1.5% body-CER on clean non-Google scans, 99% ensemble flag-recall). Next: broaden OCR validation + map clean-scan sourcing at scale, then schema (Gate D). No product code yet.
+**Gate:** C (Penal Code slice proof) — **core risks RETIRED (cc002)**. Reconstruction method validated (85% vs Index) AND OCR proven legal-grade (~1.5% body-CER on clean non-Google scans, 99% ensemble flag-recall). Full-corpus inventory done: corpus is **completable from clean sources** (unbroken session-law backbone 1849-2025); **production method = forward-from-session-laws (Method A)**. Remaining proof: parse raw session-law amendment directives at scale (the spike proved a non-scaling annotation method + OCR, not this). Next: a Method-A Penal Code re-spike, then event-sourced schema (Gate D). No product code yet.
 
 ## Goal & Philosophy
 
@@ -14,7 +14,7 @@ PatoLex is a public website where any attorney or researcher can look up any Cal
 
 Point-in-time text is **reconstructed**, never just downloaded. Two segments meet at a **~1993 seam**:
 
-- **Historical (1849-1993) — built FIRST.** Forward from the 1872 code baseline, applying each session's amendments (text harvested from existing Google/HathiTrust OCR, corrected as needed — not OCR'd from scratch). Pre-1872 is an act-based, separable sub-project. See `docs/30_SYSTEM_DESIGN/DATA_SOURCES_HISTORICAL.md`.
+- **Historical (1849-1993) — built FIRST.** **Blank-slate principle:** CA had no law before 1850, so the complete clean **session-law chain (1849-2025) IS the law from a blank page** — codifications (1872 etc.) are themselves acts within it. Reconstruct **forward by parsing session-law amendment directives (Method A)** from **clean non-Google scans** (Google scans fail OCR); annotated editions = validation only (exist for 14/29 codes). Event-sourced (one act = one change-event) so it can emit both the temporal DB and a **Git history of the law** (see memory: law-as-git-repo). See `docs/30_SYSTEM_DESIGN/DATA_SOURCES_HISTORICAL.md`.
 - **Modern (1993-present) — built SECOND ("light speed").** Backward from the current `LAW_SECTION_TBL` snapshot, applying chaptered bill XML. See `docs/30_SYSTEM_DESIGN/DATA_SOURCES.md`.
 - **The seam is a correctness oracle:** the two directions must agree where they overlap, and every historical amendment must match the modern `history` strings.
 
@@ -67,4 +67,5 @@ Web stack note: data access is **RSC + Server Actions over a transport-agnostic 
 | 2026-05-31 | cc002: Major revision -- split scope, Gate B recon, vertical-slice, two-DB, schema requirements, tRPC deferred. |
 | 2026-05-31 | cc002: Gate B done (modern). Reconstruction = amendment-application validated against current snapshot. |
 | 2026-05-31 | cc002: Data-first reorder (Patrick) -- Penal Code 1872-1900 slice proof becomes Gate C (annotated-edition diffing, JSON scratch); schema follows as Gate D. Acquisition done (1872 baseline + 653-vol manifest). |
+| 2026-06-01 | cc002: OCR risk RETIRED (clean scans -> ~1.5% body-CER, 99% flag-recall; Google scans were the blocker). Full-corpus inventory: completable from clean sources, blank-slate principle confirmed, production method = forward-from-session-laws (Method A). Open risk: session-law amendment parsing at scale. Idea: emit law as a Git repo. |
 | 2026-05-31 | cc002: **Reversed to historical-first / risk-first** (Patrick's call). Full 1849-present is the deliverable; no launch until complete + validated. Gate B-Historical done (acquisition solved via Internet Archive, three-era model, two-pass OCR). Gates re-sequenced: schema -> historical one-code slice proof (risk gate) -> historical scale-out -> modern layer -> full validation -> web -> launch. |
