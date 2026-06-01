@@ -37,6 +37,11 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Resolution:** serve from **commercially/contractually clean channels — Internet Archive + CA-government (Chief Clerk, leginfo)** — public domain, no strings. HathiTrust = non-commercial validation/bootstrap aid only. Catalog HTIDs remain useful as an index.
 - **Distribution model:** PatoLex heading toward **free, likely nonprofit** (donations offset maintenance). Lowers liability surface.
 
+### Phase 6 — Acquisition (PDFs found, clean channels)
+- **Penal Code 1872 baseline downloaded:** Internet Archive `penalcodecalifo00burcgoog` (original Sacramento 1872 as-enacted, 697pp + OCR). § 187 OCR verified clean.
+- **Session-law manifest built:** 653 statute-volume PDFs, 1850-2008, from the CA Assembly Chief Clerk archive — URLs + sizes verified (HTTP 200). Filenames irregular across 8 eras (enumerated, not patterned). Saved to `docs/30_SYSTEM_DESIGN/sources/chief_clerk_statutes_manifest.csv`. Archive ends 2008; 2009+ from PUBINFO.
+- Next-step sources identified: Desty 1881 annotated PC (`penalcodecalifo03caligoog`), *Index to the Laws of CA 1850-1893* (`indextolawscali00caligoog`), other three 1872 codes.
+
 ---
 
 ## Files Changed
@@ -89,4 +94,5 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 ## Commits
 
 - `6cc71dd` — cc002 part 1 (modern Gate B + scope/two-DB/tRPC).
-- (this /ucp) — cc002 part 2 (historical-first reversal, Gate B-Historical, catalog, licensing).
+- `70c0720` — cc002 part 2 (historical-first reversal, Gate B-Historical, catalog, licensing).
+- (this /ucp) — cc002 part 3 (acquisition: Chief Clerk manifest of 653 vols + Penal Code 1872 baseline).

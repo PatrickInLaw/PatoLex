@@ -18,3 +18,6 @@
 [2026-05-31 17:30 PT] RESULT | Reconstruction model: 3 eras, forward-from-1872, 1943 Govt Code biggest event, join ~1991, trust-level validation | OK
 [2026-05-31 17:35 PT] WRITE | Catalog copied to docs/30_SYSTEM_DESIGN/sources/ (xlsx + csv); DATA_SOURCES_HISTORICAL.md rewritten accurately | OK
 [2026-05-31 17:38 PT] WRITE | ROADMAP -- historical-first gates updated for harvest-existing-OCR + catalog | OK
+21	[2026-05-31 18:20 PT] ACQUIRE | Gate B-Historical Penal Code vertical-slice acquisition -- IA candidate survey, download verified | OK
+[2026-05-31 18:25 PT] ACQUIRE | Penal Code 1872 baseline downloaded (IA penalcodecalifo00burcgoog, 697pp + OCR) -- section text clean | OK
+[2026-05-31 18:35 PT] WRITE | Chief Clerk statutes manifest -- 653 session-law PDFs 1850-2008, URLs+sizes verified -> sources/chief_clerk_statutes_manifest.csv | OK
