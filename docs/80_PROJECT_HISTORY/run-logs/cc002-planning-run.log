@@ -28,3 +28,8 @@
 [2026-05-31 20:30 PT] GATE-C-STEP-4 | Validate: annotation-driven method (1903 history notes vs Index 1850-1893) = 85% agreement / 27-section overlap. 2 fixable flaws. QUALIFIED-GO | OK
 [2026-05-31 20:35 PT] WRITE | docs/30_SYSTEM_DESIGN/GATE_C_SLICE_PROOF.md -- proof synthesis + verdict | OK
 [2026-05-31 20:36 PT] GOAL | Autonomous goal met -- drove proof through step 4 (validation) | OK
+[2026-05-31 21:00 PT] OCR-SPIKE | Inventory: 5080 local (16GB) + 5090 Tailscale (32GB) via Ollama; qwen2.5vl 7B/32B, llava/llama3.2-vision pulled; Falcon-OCR cached | OK
+[2026-05-31 21:10 PT] OCR-SPIKE | Test set: 20 PC pages rendered + 5 gold transcriptions | OK
+[2026-05-31 22:30 PT] OCR-SPIKE | Benchmark (144 rows): best qwen2.5vl:7b ~55% page-CER (34-43% law pages) -- NOT legal-grade. 5090 3x faster; both usable; batch worse; ~23K pg/day | WARN
+[2026-05-31 22:35 PT] OCR-SPIKE | Caveats: page-CER incl. marginalia overstates body error; cross-model diagnostic not run; Tesseract/Falcon untested. Text-layer risk ACTIVE | WARN
+[2026-05-31 22:40 PT] WRITE | GATE_C_SLICE_PROOF.md -- OCR benchmark section + verdict | OK

@@ -47,6 +47,12 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Inter-edition OCR text-diffing rejected** (median same-section similarity 0.07 — but see caveat: likely alignment/segmentation failure + bundling, not pure OCR garbling). **Annotation-driven method adopted + validated** vs *Index 1850-1893* at 85% (27-section overlap).
 - **QUALIFIED-GO:** timeline method proven; point-in-time *text* layer is the remaining bounded risk → next step is a vision-LLM re-OCR spike on the 5090 + 5080.
 
+### Phase 8 — OCR benchmark (round 1) + constraints
+- Both GPU boxes reachable via Ollama (5080 local 16GB, 5090 Tailscale 32GB). Benchmarked qwen2.5vl(7B/32B), llava:34b, llama3.2-vision, minicpm-v on 20 PC pages / 5 gold.
+- **Best = qwen2.5vl:7b ~55% page-CER (34-43% on law pages) — NOT legal-grade.** 5090 3× faster + only box for >7B; batching worse than sequential; ~23K pages/day combined.
+- Caveats (adversarial): page-CER includes marginalia (overstates body error); cross-model diagnostic not actually run; Tesseract/Falcon-OCR/cloud untested. **Text-layer risk ACTIVE, not retired.**
+- **Patrick constraints (2026-06-01):** full historical coverage is core/non-negotiable (dead without it); NO line-by-line human review — accuracy via automation (consensus + flagging), humans spot-check + audit only. Round-2 launched to settle text-layer viability.
+
 ---
 
 ## Files Changed

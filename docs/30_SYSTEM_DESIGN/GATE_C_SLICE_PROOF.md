@@ -51,6 +51,21 @@ The **reconstruction-and-validation *method* is sound and was confirmed against 
 
 ---
 
+## OCR Benchmark (5090 + 5080) — text-layer risk NOT yet retired
+
+First-cut benchmark: 20 Penal Code page images (1872 + 1903), 5 with hand-verified gold; models via Ollama on both boxes. Artifacts: `PatoLex-scratch/gate-b-historical/ocr_benchmark_{results.csv,report.md}`.
+
+**Quality (vs gold):** best model = `qwen2.5vl:7b` at **~55% mean page-CER** (34-43% on substantive law pages, >70% on title pages). `minicpm-v` disqualified (hallucination/repetition loops, CER >300%). `llama3.2-vision:11b` ~76%. **None is legal-grade** (need CER well under 5%, realistically <1% for served text).
+
+**Infra (answers the hardware question):** BOTH machines usable. 5090 ~**3× faster** (5.1s/pg vs 14.5s/pg) and the only box with VRAM headroom for >7B models (5080 maxes 16GB at 7B). **Batching (4-concurrent) is WORSE (~0.3×)** — Ollama serializes on one GPU; use sequential. Combined throughput ~**23K pages/day**.
+
+**Critical caveats (adversarial review of the subagent's read):**
+1. **CER is whole-page**, including marginal notes, running heads, case-citation numerals, and library stamps — content vision-LLMs routinely omit/reorder/normalize. It **likely overstates error on the statutory text itself** (the part we serve). Must re-measure CER on **section-text-only**.
+2. The "0.0% mutual CER" the subagent cited as proof of "genuine OCR difficulty" compared the **same model on two machines** — it only proves determinism, **not** that independent OCRs agree. The intended cross-*model* diagnostic (Q1) was not actually run.
+3. **The dedicated OCR engines were never tested:** Falcon-OCR failed to load (transformers API mismatch), Tesseract isn't installed, no cloud Document AI ceiling reference. A general vision-LLM is not the tool most likely to win verbatim transcription.
+
+**Verdict:** vanilla local vision-LLM OCR is **not legal-grade** on 1870s pages out of the box; the text-layer risk is **active, not retired**. Path to retire it: (a) re-measure body-text-only CER; (b) test Tesseract + fix Falcon-OCR + a cloud ceiling reference; (c) multi-model consensus/voting with disagreement-flagging; (d) likely fine-tuning on period legal typography and/or higher-quality source scans; (e) human-verified baseline + per-section trust levels. The reconstruction *method* (annotation-driven, §ahead) still holds; the *exact-text* layer needs real work.
+
 ## Revision History
 
 | Date | Change |
