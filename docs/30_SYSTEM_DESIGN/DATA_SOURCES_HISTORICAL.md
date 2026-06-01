@@ -63,6 +63,34 @@ The **content** is public domain (government-edicts doctrine; CA Gov. Code §102
 
 ---
 
+## 1b. Clean-scan sourcing map (scale-out) — cc002
+
+**Critical OCR finding (Gate C, round 3):** scan quality is the whole ballgame — Google Books scans fail (40%+ CER), clean non-Google scans hit legal-grade (~1.5%). So acquisition must target **clean** scans, identified by source:
+- **Internet Archive non-`goog` items** (library/archive-native, often JP2 300-400 DPI) — clean, contractually clean. *Preferred.*
+- **CA Assembly Chief Clerk PDFs** (our 653-vol manifest) — repository scans, CA-gov, no strings. *Preferred, esp. 1887-2008.*
+- **HathiTrust library-native scans** — high quality BUT verify channel terms before re-hosting (public-domain *content* ≠ unrestricted *channel*; see §1a). Treat as fallback pending terms check, not a primary re-host source.
+
+| Era | Best clean source |
+|-----|-------------------|
+| 1849-1851 | HathiTrust UC Berkeley library scans (verify terms) |
+| 1852-1868 | HathiTrust NYPL library scans (IA has no clean full-session vols here) |
+| 1869-1885 | **IA non-goog 2023 uploads** (300 DPI JP2) + Chief Clerk PDFs |
+| 1887-1913 | **Chief Clerk PDFs** (verified) |
+| 1915-1966 | Chief Clerk PDFs + HathiTrust UMN |
+| 1967-2008 | **Chief Clerk PDFs** (all sessions in manifest) |
+| Penal Code 1906+ | **IA non-goog** `penalcodeofcalif00cali` (validated clean scan) + annotated eds |
+
+**Coverage:** ~60-65% of the 4,034-vol catalog has a clean non-Google source. The ~35-40% Google-only is **almost entirely the Bills sheets (1,837 vols)** — Phase 2 material, NOT needed for Phase 1 statutes reconstruction.
+
+**Gaps to resolve:**
+1. **Penal Code 1872-1905** (the baseline era) — IA editions are all `goog`; HathiTrust UC may cover it but needs per-item `orig` verification, else a **law-library re-scan** of the first three decades. *High priority — the 1872 baseline must be near-perfect.*
+2. IA Statutes 1852-1868 — use HathiTrust NYPL.
+3. Bills corpus 1903-1988 — Google-only, Phase 2 re-scan campaign.
+
+Full detail: `PatoLex-scratch/gate-b-historical/clean_scan_sourcing.md`.
+
+---
+
 ## 2. OCR — harvest first, correct selectively (revised per Patrick)
 
 Existing OCR already covers the digitized corpus, so we do **not** build an OCR farm. The pipeline is:

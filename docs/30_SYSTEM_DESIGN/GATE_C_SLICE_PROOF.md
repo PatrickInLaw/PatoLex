@@ -99,6 +99,13 @@ Tested the suspected lever directly: a **clean, non-Google Internet Archive scan
 
 **Net: the core technical risk of the entire project — legal-grade text from 19th-century scans — is RETIRED.** Recipe: source clean non-Google scans (IA/HathiTrust JP2) → Tesseract 5 + qwen2.5vl → disagreement-flagging → spot-audit. Avoid Google Books scans entirely.
 
+### Validation broadening (val-50) — partial; proxy confirmed, true-CER still thin
+
+Attempt to extend the 2-page result to ~50 pages across 3 editions (1902/1906/1915):
+- **Honest limitation:** true CER could NOT be auto-extended — bootstrapping "gold" from Tesseract is circular (its own errors corrupt the reference). **We still have only 2 human-verified gold pages.** A robust accuracy number requires a small **human-transcribed gold set (~10-20 pages)** — which fits the allowed "audit/spot-check," not line-by-line review.
+- **What was confirmed:** the **inter-engine disagreement proxy works** as a triage/flagging signal. The validated 1906 source held low disagreement (0.12) across 17 pages, consistent with the 1.5% anchor; a 1915 edition looked cleaner (0.095); a **1902 edition was worse (0.167 → est. 5-8% CER)** and the proxy correctly flagged it for review.
+- **Takeaway:** legal-grade is real on good scans, **scan/edition quality varies** (so per-source proxy triage is needed), and the production accuracy number should be firmed with a human-gold audit set before "production-validated" is claimed. GO verdict stands; the *measurement* is what's still thin, not the conclusion.
+
 ## Revision History
 
 | Date | Change |
