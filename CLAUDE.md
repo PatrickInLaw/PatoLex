@@ -121,13 +121,14 @@ The `bump.ps1` script is included for consistency but will run in pre-scaffold (
 
 ---
 
-## MANDATORY: Codex Review (Hans) -- when product code changes
+## MANDATORY: Adversarial Review (Hans) -- when product code changes
 
-For substantive `src/` or `pipeline/` changes, request Codex review via `/codex-chat` before pushing. The pre-bash hook warns (does not block) when pushing product code that Codex has not reviewed since the last outbound message.
+For substantive `src/` or `pipeline/` changes, run a **Hans review** before pushing. The pre-bash hook warns (does not block) when product code is pushed without an adversarial review since the last change.
 
-Codex CLI runs in a separate terminal tab titled `PatoLex_Codex`; comms are file-based via `docs/00_Inbox/comms/to-codex.md` and `from-codex.md`.
+**"Hans" is NOT Codex.** Hans is a **clean-slate adversarial-review subagent** — spawned with fresh context (no confirmation bias) that takes on the persona of a cranky, detail-obsessed, older Gen-X German engineer who takes pleasure in finding *every* flaw in the work he audits: blunt, direct, merciless, and exhaustively thorough, stopping only when he has found everything. Run Hans before shipping product code, and run him twice for anything touching the data pipeline or schema.
 
-**"Hans review"** = Codex adversarial review. Run it before shipping product code, and run it twice for anything touching the data pipeline or schema.
+- **Invoke Hans** by spawning the `verify-auditor` agent (`.claude/agents/verify-auditor.md`) with a tightly-scoped audit brief. Override to Opus for gate-level scope. *(The verify-auditor agent should carry the Hans persona above.)*
+- **Codex** (`/codex-chat`) is a *separate, optional* external reviewer: the Codex CLI in a terminal tab titled `PatoLex_Codex`, comms file-based via `docs/00_Inbox/comms/to-codex.md` / `from-codex.md`. Use it as an additional adversarial pass when available -- it is not a substitute for Hans, nor Hans for it.
 
 ---
 

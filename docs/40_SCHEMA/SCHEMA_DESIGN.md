@@ -93,7 +93,9 @@ The event log is the write side; **end-user queries never replay it.** Two mater
 
 ## Staging vs. serving
 
-The full event model lives in **local Postgres / SQL Server** (build/ETL/reconstruction/validation — disposable, fast). **Supabase** receives only the **materialized `provision_version` read model** (+ FTS indexes), published once validated. The **Git repo** is emitted from the event log. One Drizzle schema definition; the publish step promotes finished data local → Supabase.
+The full event model lives in **local PostgreSQL 16** (build/ETL/reconstruction/validation — disposable, fast). **Supabase** (also PostgreSQL 16) receives only the **materialized `provision_version` read model** (+ FTS indexes), published once validated. The **Git repo** is emitted from the event log. One Drizzle schema definition; the publish step promotes finished data local → Supabase.
+
+**Why Postgres for staging (not SQL Server):** this schema depends on Postgres-only features that are central to correctness — `daterange`, **GiST exclusion constraints** (the no-overlapping-versions guarantee), `tsvector` FTS, and stored generated columns. SQL Server has no equivalents that preserve these guarantees, and the whole point of the two-DB design is **one Drizzle schema, identical dialect** on both sides (staging mirrors serving exactly, no translation). The SQL Server box in the local infra (`local-infra-sql-tailscale`) is other-project infrastructure / optional JSON-or-SQL scratch space — **not** the staging DB for PatoLex. Install a local Postgres 16 (native or Docker) for staging; the C# pipeline connects to it on the direct port 5432 (per CLAUDE.md).
 
 ---
 

@@ -91,6 +91,10 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Opus verified the final migration**: `uuid_generate_v7()` bit-layout correct (v7 nibble@hex-13, variant@17, time-ordered); btree_gist before both exclusion constraints; FK/function ordering valid; single clean migration. Fixed `.gitignore` to track `drizzle/meta/` (the migration ledger). **Commit-ready.**
 - **NOTE (for Patrick):** CLAUDE.md says *"Hans review = Codex adversarial review"* but Patrick clarified **Hans ≠ Codex**. Used the `verify-auditor` agent as the adversarial pass. CLAUDE.md's Hans/Codex line needs correcting once Hans is defined.
 
+### Phase 14 — Hans definition fixed + staging-DB (Postgres) clarified
+- **Hans defined correctly (Patrick).** Hans is a **clean-slate adversarial-review subagent** with a persona: cranky, detail-obsessed, older Gen-X German engineer who delights in finding every flaw — blunt, merciless, exhaustive. NOT Codex (cc001's CLAUDE.md error). Recon confirmed Hans has been *used* in KolaLaw audits (`cc0NN-hans-pass-*.md`) but never formally written down; the `verify-auditor` agent fills the role. **Fixed CLAUDE.md** to define Hans and separate it from Codex (a distinct, optional external reviewer). Added memory `hans-is-not-codex`. Attempted to bake the persona into `.claude/agents/verify-auditor.md` but the **safety classifier blocked agent self-modification** — persona lives in CLAUDE.md + memory pending Patrick's explicit go to edit the agent file.
+- **Staging DB clarified → PostgreSQL 16 both sides.** Patrick asked whether Postgres was installed (had mentioned SQL Server for staging). Answer: **no, not installed**, and the Gate D schema is **Postgres-only by necessity** (GiST exclusion constraints, `daterange`, `tsvector`, generated columns — SQL Server can't express them), and the design wants one identical Drizzle schema on both sides. So staging = **local PostgreSQL 16** (to be installed), serving = Supabase Postgres; the SQL Server box is other-project/scratch infra, NOT PatoLex staging. Corrected `SCHEMA_DESIGN.md`, `ROADMAP.md`, `HANDOFF`, and the `local-infra-sql-tailscale` memory. **Installing local Postgres 16 + applying the migration is the immediate next step.**
+
 ---
 
 ## Files Changed
@@ -158,4 +162,5 @@ Current state (end of cc002 work-in-progress): scope set (historical-first, full
 - `91dbc1e` — part 11 (session-log brought current pre-compaction).
 - `4d5a408` — part 12 (Method A re-spike QUALIFIED-GO, LAW_AS_GIT.md, ADJACENT_DOMAINS_FEASIBILITY.md, perpetuity memory, ROADMAP status).
 - `93201e6` — part 13 (Gate D SCHEMA_DESIGN refined: CQRS/perf, diffs, GUID, lineage DAG; CA-reg baseline-plus-forward; HANDOFF_cc002_to_cc003.md; gate-d memory).
-- (this /ucp) — part 14 (Gate D DDL implemented + adversarially reviewed + revised: first product code — Drizzle schema, 7 tables, pure-v7, dual GiST exclusions).
+- `0bf84aa` — part 14 (Gate D DDL implemented + adversarially reviewed + revised: first product code — Drizzle schema, 7 tables, pure-v7, dual GiST exclusions).
+- (this /ucp) — part 15 (Hans defined correctly in CLAUDE.md [≠ Codex]; staging-DB clarified to PostgreSQL 16 both sides; memories added).

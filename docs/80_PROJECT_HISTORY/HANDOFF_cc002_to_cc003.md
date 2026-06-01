@@ -1,7 +1,7 @@
 # Handoff: cc002 → cc003
 
 **From:** cc002 (Opus, orchestrator) · **Date:** 2026-06-01
-**Your likely first job:** implement the **Gate D DDL** (the database tables for the schema cc002 designed), then begin the historical build at the 1872 baseline.
+**Status update:** cc002 went further than planned and **already implemented + adversarially reviewed the Gate D DDL** (Drizzle, 7 tables, in `src/lib/db/` + `drizzle/`; `db:generate` + `typecheck` pass; NOT yet applied to a live DB). **Your likely first job:** stand up local PostgreSQL 16, apply the migration, then begin the historical build at the 1872 baseline.
 
 Read this, then read (in order): `CLAUDE.md`, `docs/20_ROADMAP/ROADMAP.md`, `docs/40_SCHEMA/SCHEMA_DESIGN.md`, the memory index. This handoff is the orientation; those are the authority.
 
@@ -29,13 +29,13 @@ PatoLex = a public, point-in-time archive of California statutory law (what any 
 5. **Diffs are captured but derived** from stored whole-section texts (never the reverse). `change_event.diff_from_prior` = token-level structured diff for the UI redline; at the Git level, word-diff is free via `git diff --word-diff`.
 6. **Recodification = a typed lineage DAG** (`lineage_edge`): renumber/transfer keep identity (1:1); split (hybrid primary-successor rule) / merge / repeal_reenact / repeal_without_successor. One mechanism for both the rare-huge (1872, 1943) and the frequent-small (decimal spinoffs, renumbers). "Full history of a provision" = recursive CTE over the edge graph.
 7. **Build order:** start at the **proven 1872 codified baseline**, run Method A **forward to the ~1991 seam** (Penal Code first), THEN do **1850–1871 pre-code** as a later distinct pass (uncodified `act_section`s feeding the 1872 codification edges). **Do NOT start cold at 1850** — the pre-code act-era is a different, still-unproven modeling problem.
-8. **Two databases:** local Postgres/SQL Server (build/staging) + Supabase (serving). One Drizzle schema; publish step promotes finished data. Stack: Next.js 15 + TS + Drizzle; **tRPC deferred** (RSC + Server Actions over `src/server/`).
+8. **Two databases — Postgres BOTH sides:** local **PostgreSQL 16** (build/staging) + Supabase PostgreSQL 16 (serving). One Drizzle schema; publish step promotes finished data. The schema is Postgres-only by necessity (GiST exclusion / daterange / tsvector / generated columns) — **SQL Server is NOT the staging DB** (it's other-project infra). Stack: Next.js 15 + TS + Drizzle; **tRPC deferred** (RSC + Server Actions over `src/server/`).
 
 ---
 
-## Your concrete first steps (Gate D DDL → first build vertical)
+## Your concrete first steps (apply DDL → first build vertical)
 
-1. **Implement the Gate D DDL** per `docs/40_SCHEMA/SCHEMA_DESIGN.md`: `source_document`, `enactment`, `provision`, `designation_history`, `change_event`, `lineage_edge`, and the materialized `provision_version` read model. Postgres needs the `btree_gist` extension for the daterange GiST exclusion constraint. Use Drizzle. Target the **local** staging DB first (SQL Server/Postgres creds obtainable from the `patoaudio`/`kolalawdb` repos — Patrick authorized agents to retrieve them).
+1. **Stand up local PostgreSQL 16 and apply the existing migration.** The DDL is already written (`drizzle/0000_breezy_randall_flagg.sql`, schema in `src/lib/db/schema/`). Install Postgres 16 (native or Docker — NOT SQL Server; the schema is Postgres-only), set `DATABASE_URL` (direct, port 5432) in `.env.local`, run `npm install` then `npm run db:migrate`. Confirm `btree_gist`, both GiST exclusion constraints, the `uuid_generate_v7()` function, and the generated `fts_vector` all apply cleanly. (This is the step cc002 deliberately did NOT do — needs a live DB + Patrick's go on the install.)
 2. **Seed the 1872 Penal Code baseline** as `enact` events (clean text already in scratch — see below).
 3. **Run Method A 1872→~1900 for the Penal Code** into the schema, including the bounded OCR task: the **1873–80 "Amendments to the Codes" text lives in the image-only Chief Clerk PDFs** (Tesseract pass; clean scans → ~1.5% CER). This is the first production vertical and the template for all codes.
 4. **Materialize + validate + emit:** build `provision_version`, validate against the annotated editions + *Index to the Laws 1850–1893*, and emit the first Git-history slice as an end-to-end proof.
