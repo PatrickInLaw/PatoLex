@@ -4,95 +4,89 @@
 |-------|-------|
 | Session | cc002 |
 | Date | 2026-05-31 |
-| Agent | Claude Code / Opus 4.8 |
-| Context | First real dev session: roadmap sanity-check, scope revision, Gate B data reconnaissance |
+| Agent | Claude Code / Opus 4.8 (orchestrator) |
+| Context | First real session: roadmap sanity-check, scope/tech revision, Gate B (modern + historical) reconnaissance |
 | Branch | main |
 
 ---
 
 ## What Was Done
 
-cc001 was repository structure setup. cc002 was the first substantive session: review cc001's deliverables, sanity-check the scope and tech decisions (made by a prior Sonnet session), revise the plan, then execute Gate B (data source reconnaissance).
+cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed Gate B reconnaissance — twice (modern, then historical after a strategic reversal). Nearly all reading/downloading/research was delegated to sonnet/haiku subagents; Opus orchestrated and synthesized.
 
-### 1. Scope split (North Star vs. POC)
-The 1849-to-present vision is a moonshot, not a POC: pre-1992 law has no clean digital source (requires OCR of bound *Statutes of California* volumes + historical amendment-chain reconstruction) — a multi-year research program. Even Westlaw/Lexis/HeinOnline have only partial depth there. Split, with Patrick's approval:
-- **POC (Phase 1):** modern point-in-time archive, 1991-92 session to present, from California's official bulk legislative data.
-- **North Star (Phase 2):** full historical depth to 1849, only after the modern POC is solid.
+### Phase 1 — Plan sanity-check (early)
+- **Scope** initially split into modern POC (1991-present) vs. 1849 north star.
+- **Two-database architecture:** local Postgres (build/staging) + Supabase (serving); one Drizzle schema, publish step. (Reversed cc001's "no local Postgres.")
+- **tRPC deferred:** data access = RSC + Server Actions over a transport-agnostic service layer (`src/server/`); MCP likely the first external interface, public API later.
 
-### 2. Two-database architecture
-Reversed cc001's "no local Postgres" decision for the pipeline:
-- **Local PostgreSQL 16** — pipeline build/staging (ETL, amendment diffing, experimentation, ad-hoc + Claude Code analysis). Disposable, fast.
-- **Supabase PostgreSQL 16** — public serving layer. One Drizzle schema applied to both; a publish step promotes finished data local -> Supabase.
+### Phase 2 — Gate B (modern)
+- Confirmed leginfo PUBINFO bulk data; **LAW tables are current-only** (no history) → reconstruct **backward from the current snapshot** via chaptered bill XML; POC floor ~Jan 1994. Operative-date, double-jointing (§9605), section-identity rules documented. → `DATA_SOURCES.md`.
 
-### 3. Roadmap / gate re-sequencing
-Rewrote ROADMAP around recon-before-scaffolding and vertical-slice-first: Gate B (data recon, no code) -> C (schema) -> D (pipeline, one-code slice) -> E (web + point-in-time read) -> F (search) -> G (scale-out + correctness validation + launch). Phase 2 = Gates H (historical OCR) and I (public API/citator).
+### Phase 3 — STRATEGIC REVERSAL: historical-first / risk-first (Patrick)
+- Patrick reversed to **historical-first**: solve the hardest part (1849 reconstruction off scans) FIRST to prove feasibility; **no public launch until the full 1849-present corpus is present and validated**; quality over speed/revenue.
 
-### 4. tRPC deferred
-Data access = RSC + Server Actions over a transport-agnostic service layer (`src/server/`). tRPC is private/TS-only, so it does not serve the MCP-then-API path; deferred. Likely external-interface order: RSC/Server Actions -> MCP server -> public REST API.
+### Phase 4 — Gate B (historical)
+- Three sonnet subagents (acquisition, reconstruction model, OCR). Findings → `DATA_SOURCES_HISTORICAL.md`:
+  - **Acquisition solved + verified by download.** Patrick supplied a catalog (`CA_Legislative_Publications_Catalog.xlsx`, **4,034 vols, every row has HathiTrust + Google links**) → copied to `docs/30_SYSTEM_DESIGN/sources/`. Plus CA Assembly Chief Clerk archive (all statute vols 1850-2008, image PDFs, free) and Internet Archive (1872 Codes w/ existing OCR).
+  - **OCR mostly already exists** → harvest + selectively correct (5090 as correction engine), NOT an OCR farm. Existing OCR ~85-90% on 19th-c. text → below legal standard → targeted correction; #1 risk = silent section-number corruption.
+  - **Three-era model:** pre-code (1850-1872, act-based, separable) / 1872 codification baseline / 1873-1993 forward-from-baseline; meets modern era at the **~1991 seam** (validation oracle). Biggest structural risk = recodification events, esp. the **1943 Government Code / Political Code dissolution**.
+  - **Validation:** annotation-history chains (Deering's/West's), HeinOnline compiled editions, join-point reconciliation, trust-level classification per version.
 
-### 5. Gate B reconnaissance (completed this session)
-Dispatched two sonnet subagents (data inventory + reconstruction methodology) plus a haiku subagent (this session log). Findings synthesized into `docs/30_SYSTEM_DESIGN/DATA_SOURCES.md`. Headline results:
-- **Source confirmed:** `https://downloads.leginfo.legislature.ca.gov/` — biennial `pubinfo_YYYY.zip` (1989-2025), MySQL `capublic` schema, tab-delimited `.dat` + `.lob` text. 162,169 current code sections, 30 codes + Constitution, ~215 MB text/snapshot, public domain.
-- **Critical finding:** `LAW_SECTION_TBL` is a **current-only snapshot** (all rows `active_flg='Y'`; loader truncates/replaces). Older archives (1989-2003) lack the law tables entirely. So point-in-time text cannot be downloaded — it must be **reconstructed** by parsing chaptered bill text (`BILL_VERSION_TBL`, back to 1993-94) and applying amendments in operative order, validated against the current snapshot.
-- **POC floor:** Jan 1, 1994. Pre-1993 -> Phase 2 OCR.
-- **Legal-correctness rules confirmed necessary** (not gold-plating): operative-vs-effective dates (Gov. Code §9600), double-jointing / chaptering-out resolution (§9605, ~140-221 bills/session), synthetic `section_id` + number-history for renumbering/recodification, provenance per version.
-- **#1 risk to spike in Gate D:** chaptered bill XML format + whether bill->code-section linkage is explicit or must be parsed from "Section X of the Y Code is amended to read:".
+### Phase 5 — Licensing / channel analysis (CRITICAL)
+- Patrick supplied the HathiTrust datasets page. Finding: the **content is public domain**, but the **HathiTrust/Google bound datasets prohibit re-hosting, search-services, and third-party sharing** — which describe PatoLex exactly. **Going free/nonprofit cures only the "commercial" prong; the other prohibitions still bar those channels.**
+- **Resolution:** serve from **commercially/contractually clean channels — Internet Archive + CA-government (Chief Clerk, leginfo)** — public domain, no strings. HathiTrust = non-commercial validation/bootstrap aid only. Catalog HTIDs remain useful as an index.
+- **Distribution model:** PatoLex heading toward **free, likely nonprofit** (donations offset maintenance). Lowers liability surface.
 
 ---
 
 ## Files Changed
 
-**Modified:**
-- `docs/20_ROADMAP/ROADMAP.md` — full rewrite; later updated to mark Gate B done, Gate C next.
-- `docs/30_SYSTEM_DESIGN/ARCHITECTURE.md` — scope, two-DB, data model (operative date, provenance, GiST exclusion), API/data-access strategy.
-- `README.md`, `CLAUDE.md` — North Star vs. POC scope; tRPC deferral; layer-discipline fix (client components never touch DB; service layer is the single data-access point).
+**New:** `docs/30_SYSTEM_DESIGN/DATA_SOURCES.md` (modern), `docs/30_SYSTEM_DESIGN/DATA_SOURCES_HISTORICAL.md` (historical + licensing), `docs/30_SYSTEM_DESIGN/sources/CA_Legislative_Publications_Catalog.xlsx` + `.csv`, run-log, this session log. Memory: orchestrator-only, both-logs, historical-first, quality-first philosophy.
 
-**New:**
-- `docs/30_SYSTEM_DESIGN/DATA_SOURCES.md` — Gate B report (authoritative data-source + reconstruction-strategy record).
-- `docs/80_PROJECT_HISTORY/run-logs/cc002-planning-run.log` — run log.
-- Memory: `orchestrator-only-model.md`, `both-logs-every-session.md` (+ MEMORY.md index).
+**Modified:** `docs/20_ROADMAP/ROADMAP.md` (historical-first re-sequence), `docs/30_SYSTEM_DESIGN/ARCHITECTURE.md`, `README.md`, `CLAUDE.md`.
 
 ---
 
 ## Decisions Made
 
-1. North Star vs. POC split — POC = modern era (1991-present) from bulk data.
-2. Two-database architecture — local Postgres (build) + Supabase (serve).
-3. Gate B (data recon) mandatory before any pipeline code — now complete.
-4. Vertical-slice-first — one code end-to-end before scaling.
-5. Schema: synthetic section IDs, operative-date ranges, provenance, daterange GiST exclusion, double-jointed-loser audit table.
-6. Reconstruction = amendment-application validated against current snapshot (not snapshot-diff — historical snapshots don't exist).
-7. tRPC deferred — RSC + Server Actions over a transport-agnostic service layer.
-8. Working model: Opus orchestrates; reading/code/download delegated to haiku/sonnet/local.
+1. Historical-first / risk-first; full 1849-present is the deliverable; no launch until complete + validated.
+2. Distribution: free, likely nonprofit (not commercial).
+3. Reconstruction: forward-from-1872 (historical) + backward-from-current-snapshot (modern), meeting at the ~1991 seam.
+4. Data channels: Internet Archive + CA-gov only (public domain, no contractual strings); HathiTrust/Google bound datasets excluded for re-host/search/share reasons.
+5. OCR: harvest existing + selective correction (5090), not an OCR farm.
+6. Schema must be era-aware: synthetic section lineage, recodification events, operative-date ranges, provenance, trust-level.
+7. Two-DB architecture; tRPC deferred.
+8. Working model: Opus orchestrates; reading/code/download → cheaper models. Session logs NOT a haiku job.
 
 ---
 
 ## Open Items at Close
 
-- Gate C (schema design) — HIGH, next.
-- Gate D spike: chaptered bill XML format + bill->section linkage — HIGH (resolve early in Gate D).
-- Local Postgres + Supabase Pro tier setup — MEDIUM.
-- Commit cc002 docs — pending Patrick's go-ahead.
+- Gate C (era-aware schema) — HIGH.
+- Gate D: **Penal Code historical slice proof** (the risk gate) — HIGH.
+- Confirm 1989/1991 PUBINFO contain LAW_SECTION_TBL; per-volume existing-OCR quality distribution.
+- 1937-1953 recodification disposition tables; pre-1873 repeal scope.
 
 ---
 
 ## Next Session Should Start With
 
-1. Design the schema (Gate C) from `DATA_SOURCES.md`: `codes -> sections (synthetic id) -> statute_versions (operative_range, provenance, GiST exclusion)`, `section_number_history`, `bill`/`amendment`, chaptered-out audit table. Drizzle, applied to local + Supabase.
-2. Stand up local Postgres 16 for staging.
-3. Plan the Gate D bill-XML spike before writing pipeline code.
+1. Decide order: Gate C (schema) vs. jump straight to the Gate D Penal Code slice proof (the risk-retirement test).
+2. Stand up local Postgres 16.
+3. Begin the Penal Code 1872 baseline harvest + correction.
 
 ---
 
 ## Lessons Learned
 
-- **Dual logging is mandatory:** every session needs both a run log (real-time) and a session log (summary).
-- **Recon-as-a-gate prevents rework:** Gate B overturned a core assumption (no historical snapshots exist) before any pipeline code was written.
-- **The `block-compound-bash` hook scans the raw command for `; `, `&&`, `||`, `cd ` — including inside quoted strings and PowerShell hashtables.** Telegram/JSON sends must avoid `; ` entirely: put `chat_id` in the URL, scrub semicolons from message text, and use `| Out-Null` rather than `; 'done'`.
-- **Delegated doc writes can come back mangled:** the haiku session-log draft rendered literal "backtick"/"C hash"/`�` artifacts; rewritten cleanly by the orchestrator. When a delegated doc is malformed, fix in place rather than re-delegating.
+- **Recon before report.** Wrote the historical report before the acquisition agent returned and it contained invented specifics; corrected against verified data. Rule: never synthesize a report ahead of the subagent results it summarizes.
+- **Public-domain content ≠ unrestricted channel.** The binding constraint can be the delivery channel's contract (HathiTrust/Google), not copyright — and free/nonprofit status doesn't lift re-host/search/share terms. Choose clean channels.
+- **`block-compound-bash` scans raw command text for `; ` etc.** — including inside quoted strings, PowerShell hashtables, and `cat <<EOF` heredocs. Use `Invoke-RestMethod` with `chat_id` in the URL and no semicolons for Telegram; use the Write tool instead of `cat >>` for logs.
+- Session logs are not a haiku job (haiku draft came back mangled).
 
 ---
 
 ## Commits
 
-None yet this session (awaiting go-ahead).
+- `6cc71dd` — cc002 part 1 (modern Gate B + scope/two-DB/tRPC).
+- (this /ucp) — cc002 part 2 (historical-first reversal, Gate B-Historical, catalog, licensing).
