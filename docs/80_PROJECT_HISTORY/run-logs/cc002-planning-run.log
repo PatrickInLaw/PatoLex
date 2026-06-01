@@ -37,3 +37,8 @@
 [2026-06-01 09:35 PT] OCR-R2 | Blocker = scan quality (Google JPEG ~150-200dpi); best engines (surya/Falcon/GOT/Paddle) need Linux, untested; consensus flag-recall 74-94% (architecture OK) | WARN
 [2026-06-01 09:40 PT] OCR-R2 | VERDICT NOT-YET but viable; gap 6-18pts; next = test a clean non-Google high-res scan | WARN
 [2026-06-01 09:45 PT] CLEAN | Removed spurious SESSION_cc003 log written by subagent (still cc002); kept ocr-round2-run.log | OK
+[2026-06-01 11:00 PT] OCR-R3 | Clean non-Google IA scan: body-CER 1.2% (Tesseract/187), 1.9% (qwen2.5vl/211); mean best 1.5% -- LEGAL-GRADE | OK
+[2026-06-01 11:05 PT] OCR-R3 | Scan-quality delta -37.5 pts (Google->clean). Scans were the blocker, not engines/typography | OK
+[2026-06-01 11:08 PT] OCR-R3 | Ensemble flag-recall 99.2% -> automation+spot-audit architecture confirmed (no line-by-line) | OK
+[2026-06-01 11:10 PT] OCR-R3 | VERDICT GO -- core text-layer risk RETIRED. Caveats: 2-page sample; WSL unreached (off critical path); scan-sourcing-at-scale now the dependency | OK
+[2026-06-01 11:15 PT] WRITE | GATE_C_SLICE_PROOF.md -- round-3 GO + recipe; verdict upgraded | OK

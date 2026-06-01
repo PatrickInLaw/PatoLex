@@ -53,6 +53,11 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - Caveats (adversarial): page-CER includes marginalia (overstates body error); cross-model diagnostic not actually run; Tesseract/Falcon-OCR/cloud untested. **Text-layer risk ACTIVE, not retired.**
 - **Patrick constraints (2026-06-01):** full historical coverage is core/non-negotiable (dead without it); NO line-by-line human review — accuracy via automation (consensus + flagging), humans spot-check + audit only. Round-2 launched to settle text-layer viability.
 
+### Phase 9 — OCR rounds 2-3: text-layer risk RETIRED
+- **Round 2:** body-text-only CER ~17% (vs the inflated 55% page-level). Identified Google Books JPEG scan quality as the dominant limiter; consensus flag-recall 74-94%.
+- **Round 3 (decisive):** on a **clean non-Google IA scan**, body-CER hit **1.2% / 1.9%** on §187/§211 (mean best 1.5%) — **legal-grade**. Scan-quality delta −37.5 pts. Ensemble flag-recall **99.2%**. **VERDICT: GO** — the project's core technical risk is retired. Recipe: clean scans (IA/HathiTrust JP2) + Tesseract 5 + qwen2.5vl + disagreement-flagging + spot-audit. Fine-tuning optional (<0.5% only).
+- Caveats: 2-page sample (needs broader validation); WSL unreached by the subagent (Patrick says it's installed — off critical path); clean-scan SOURCING at scale is the new dependency.
+
 ---
 
 ## Files Changed

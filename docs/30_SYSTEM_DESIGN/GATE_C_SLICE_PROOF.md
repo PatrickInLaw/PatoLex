@@ -6,7 +6,11 @@
 
 ---
 
-## Verdict: QUALIFIED-GO
+## Verdict: GO (upgraded from QUALIFIED-GO after Round-3 OCR)
+
+> **Update (Round-3):** the text-layer risk is **retired** — clean non-Google scans yield ~1.5% body-CER with 99% flag-recall. The recipe is: clean scans + Tesseract 5 + qwen2.5vl + disagreement-flagging + spot-audit. The QUALIFIED-GO below was the pre-clean-scan assessment; see "OCR Benchmark Round 3" near the end.
+
+## Verdict (original): QUALIFIED-GO
 
 The **reconstruction-and-validation *method* is sound and was confirmed against an independent source.** The remaining risk is **text-extraction quality**, which is a known, bounded engineering problem with hardware we already have — not a fundamental unknown. Risk-first goal met: the thing most likely to be impossible (trustworthy reconstruction + validation) is demonstrably achievable; what's left is execution quality.
 
@@ -77,6 +81,23 @@ Re-ran on the 5 gold pages with body-text-only scoring, a scan-resolution test, 
 - **Automation architecture validated.** 2-engine consensus gave **74–94% flag-recall** — i.e., most real errors land on engine-disagreement spans, so they'd be auto-flagged for spot-check. This is what makes "no line-by-line human review" viable. Caveat: consensus *accuracy* was no better than the best single engine because the two engines make **correlated** errors on Victorian type — voting needs more diverse/independent engines (the ones we couldn't install) or a better base.
 
 **Verdict: NOT-YET, but viable.** The architecture works and the real error rate is far lower than first reported; the blocker is **source scan quality** plus **untested best-in-class engines (Linux)**. Projected path to <1% (estimates, not yet measured): clean scans + preprocessing → ~3–8%; + multi-engine ensemble + fine-tuning on ~500 gold pages → <1%. **Next decisive experiment: OCR one genuinely clean high-res scan** before committing to fine-tuning. (Only 5 gold pages tested — indicative, not statistically firm.)
+
+### OCR Benchmark Round 3 — THE BLOCKER WAS THE SCANS. Verdict: GO.
+
+Tested the suspected lever directly: a **clean, non-Google Internet Archive scan** (`penalcodeofcalif00cali`) vs the Google Books scans, same engines.
+
+- **Legal-grade is achievable.** Best body-CER on the clean scan: **§187 = 1.2% (Tesseract 5), §211 = 1.9% (qwen2.5vl)** — at/below the ~2% bar. Mean best-per-page **1.5%**.
+- **Scan quality was the whole problem.** Mean CER improved **−37.5 points** Google→clean (Tesseract on §187: 42.5% → 1.2%). The earlier rounds' failures were the Google Books JPEG scans, not the engines or the typography.
+- **Automation architecture confirmed:** ensemble disagreement **flag-recall = 99.2%** at 1–2% residual CER → humans review only flagged spans, never line-by-line. Patrick's constraint is satisfiable.
+- **Per-page engine winner varies** (Tesseract best on §187, qwen2.5vl best on §211) — which is exactly why a 2-engine ensemble + flagging is the right design.
+- **Fine-tuning is now OPTIONAL** (only to push below ~0.5%), not required for legal-grade.
+
+**Caveats (honest):**
+1. **Small sample** — 2 clean pages. Strong signal, not a statistical guarantee; needs a broader (50–100 page) validation before "production-ready" is claimed.
+2. **WSL discrepancy:** the subagent reported it could not reach WSL (so Surya/PaddleOCR/Falcon-OCR/GOT remained untested) — yet Patrick states WSL is installed on both machines. Needs a quick check of how the agent invoked it. **Not on the critical path now** — clean scans made even Windows Tesseract legal-grade — but worth resolving for the <0.5% push.
+3. **Scan SOURCING at scale is the new dependency:** we proved a clean non-Google scan exists and works for one edition; we must confirm clean (non-Google, JP2/300dpi+) scans are obtainable across the full corpus. The 4,034-vol catalog is HathiTrust/Google-linked; map clean alternates.
+
+**Net: the core technical risk of the entire project — legal-grade text from 19th-century scans — is RETIRED.** Recipe: source clean non-Google scans (IA/HathiTrust JP2) → Tesseract 5 + qwen2.5vl → disagreement-flagging → spot-audit. Avoid Google Books scans entirely.
 
 ## Revision History
 
