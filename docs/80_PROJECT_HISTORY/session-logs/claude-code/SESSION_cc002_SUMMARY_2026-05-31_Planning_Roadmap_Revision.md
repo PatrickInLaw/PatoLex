@@ -76,9 +76,9 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 
 ## Next Session Should Start With
 
-1. Decide order: Gate C (schema) vs. jump straight to the Gate D Penal Code slice proof (the risk-retirement test).
-2. Stand up local Postgres 16.
-3. Begin the Penal Code 1872 baseline harvest + correction.
+Decided (Patrick): **data-first**. Gate C is now the Penal Code 1872-1900 slice proof (annotated-edition diffing, JSON scratch); the era-aware schema follows as Gate D, designed from the proof's learnings. Autonomous goal set: drive the proof through step 4 (validation).
+1. Pull annotated PC editions (Desty 1881/83/85/89, Deering 1903) + Index to Laws 1850-1893 from Internet Archive.
+2. Extract sections + history notes (JSON); reconstruct timelines; validate vs Index + internal consistency.
 
 ---
 
