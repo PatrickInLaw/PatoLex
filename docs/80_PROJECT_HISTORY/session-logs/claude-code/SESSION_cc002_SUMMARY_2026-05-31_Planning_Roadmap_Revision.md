@@ -66,11 +66,17 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Candid status:** OCR retired (GO) + reconstruction proven *in principle* (Method B), but the **production method (A: parsing raw session-law amendment directives at scale) is NOT yet proven** — the next risk to retire.
 - **Idea recorded (memory `law-as-git-repo-idea`):** emit CA law as a Git repo (bills=branches, chaptering=merge, double-jointing=merge-conflict, `git blame`=legislative history). DB = system of record, git = generated open-source artifact. Method A is inherently event-sourced, so it emits both from one model.
 
+### Phase 11 — Method-A re-spike (engine validated), law-as-git design, adjacent-domain feasibility
+- **Method-A re-spike → QUALIFIED-GO.** Ran the production engine end-to-end (1872 baseline → parse session-law directives → apply forward → validate vs annotated edition) on the 1883 Penal Code slice. **Directive parser: 100% precision/recall** on 12 hand-checked directives. Validation: 3/5 exact MATCH, 1 NEAR (marginal-note OCR noise ~0.08 CER), 1 MISMATCH — and the mismatch was a **Google-scan OCR digit error** (§634→"834"), not a method failure. **The production engine is validated.** Remaining = a bounded sourcing/OCR task: 1873–80 code amendments live in a separate "Amendments to the Codes" volume whose clean text is in image-only Chief Clerk PDFs (Tesseract pass needed). **Section-number collisions** across numbering schemes (§634 = game law vs. plumbing) reinforce the synthetic `section_id` lineage requirement for Gate D.
+- **`LAW_AS_GIT.md` written.** Serious review of Patrick's law-as-Git idea. **Adopt** the data-model and the distribution-artifact framings; **reject** Git's engine for reconciliation (correctness boundary: whole-section replacement + §9605 chapter-order priority + recodification lineage would make Git's three-way merge fabricate statute text that was never enacted). Two flagship features specced: (1) point-in-time full-corpus clone, (2) live bill tracking (modern+forward). Gate D schema implications enumerated (trailer fields the emitter needs).
+- **Perpetuity intent recorded (Patrick):** build once, hand to a law school/nonprofit to steward forever. The **git repo is the durable handoff vehicle** (survives even if the serving stack goes dark) — reframes it from export to gift. Memory `patolex-perpetuity-gift`.
+- **Adjacent-domain feasibility researched** (2 sonnet agents, fully sourced) → `ADJACENT_DOMAINS_FEASIBILITY.md`: **CA regulatory** feasible but operationally hard (Notice Register is the event stream but PDF-only; OAL deleted pre-2018 issues; no state bulk export). **Federal statutory** *easier* than CA — OLRC **Classification Tables pre-compute** the Public-Law→section mapping (the hard thing we parse, the feds publish), USLM XML standard, `nickvido/us-code` already commits release-points to git. **Federal regulatory** best-resourced — **eCFR already does point-in-time** via free API since 2017. Strategic read: the federal ecosystem validates our thesis; deep-historical **CA point-in-time statutes is the genuinely unfilled niche**, unfilled because CA has no pre-computed amendment map — and our Method-A parser *is* that capability (the moat). Actionable: design Gate D schema **USLM/Akoma-Ntoso-aware** so a federal v2 is a parser swap; build Feature 2 on primary gov sources only (ProPublica/GovTrack/Sunlight APIs all died; Congress.gov + leginfo persist).
+
 ---
 
 ## Files Changed
 
-**New:** `docs/30_SYSTEM_DESIGN/DATA_SOURCES.md` (modern), `docs/30_SYSTEM_DESIGN/DATA_SOURCES_HISTORICAL.md` (historical + licensing), `docs/30_SYSTEM_DESIGN/sources/CA_Legislative_Publications_Catalog.xlsx` + `.csv`, run-log, this session log. Memory: orchestrator-only, both-logs, historical-first, quality-first philosophy.
+**New:** `docs/30_SYSTEM_DESIGN/DATA_SOURCES.md` (modern), `docs/30_SYSTEM_DESIGN/DATA_SOURCES_HISTORICAL.md` (historical + licensing), `docs/30_SYSTEM_DESIGN/sources/CA_Legislative_Publications_Catalog.xlsx` + `.csv`, `docs/30_SYSTEM_DESIGN/GATE_C_SLICE_PROOF.md`, `docs/30_SYSTEM_DESIGN/LAW_AS_GIT.md`, `docs/30_SYSTEM_DESIGN/ADJACENT_DOMAINS_FEASIBILITY.md`, `docs/30_SYSTEM_DESIGN/sources/chief_clerk_statutes_manifest.csv`, run-log, this session log. Memory: orchestrator-only, both-logs, historical-first, quality-first philosophy, local-infra, law-as-git-repo-idea, patolex-perpetuity-gift.
 
 **Modified:** `docs/20_ROADMAP/ROADMAP.md` (historical-first re-sequence), `docs/30_SYSTEM_DESIGN/ARCHITECTURE.md`, `README.md`, `CLAUDE.md`.
 
@@ -91,21 +97,23 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 
 ## Open Items at Close
 
-- Gate C (era-aware schema) — HIGH.
-- Gate D: **Penal Code historical slice proof** (the risk gate) — HIGH.
+- **Gate D: event-sourced schema** — now the immediate next gate (Method A validated).
+- Bounded engineering task: OCR the 1873–80 Chief Clerk statute volumes (clean scans) to fill the "Amendments to the Codes" gap and extend the Method-A proof across that window.
+- ~10–20 page human-gold OCR audit (firm the production accuracy number); source a clean 1872–1905 Penal Code baseline.
 - Confirm 1989/1991 PUBINFO contain LAW_SECTION_TBL; per-volume existing-OCR quality distribution.
 - 1937-1953 recodification disposition tables; pre-1873 repeal scope.
+- Resolve the WSL access discrepancy (low priority; off critical path).
 
 ---
 
 ## Next Session Should Start With
 
-Current state (end of cc002 work-in-progress): scope set (historical-first, full 1849-present, free/nonprofit), sources fully mapped + proven completable (blank-slate), OCR risk retired (clean scans), reconstruction method chosen (Method A, forward-from-session-laws), git-repo artifact scoped.
+Current state (end of cc002 work-in-progress): scope set (historical-first, full 1849-present, free/nonprofit); sources mapped + proven completable (blank-slate); OCR risk retired (clean scans); **reconstruction engine validated — Method A QUALIFIED-GO**; law-as-git boundary fixed (git = emitted artifact, never the merge engine); perpetuity/handoff intent recorded; adjacent-domain feasibility documented.
 
 **Next (cc002 continues or cc003):**
-1. **Method-A re-spike (the last real technical unknown):** parse the Penal Code's 1872 codification act + the next ~2 decades of amending acts *from the session laws* (clean scans), apply forward, validate against the annotated editions + Index. Proves the production engine.
-2. **Gate D — event-sourced schema:** per-change events (author / 3 dates: chaptered-effective-operative / bill / diff / conflict-resolution), designed to emit BOTH the temporal DB (system of record) AND the Git history. Local SQL Server / Postgres staging.
-3. **Parallel threads:** ~10-20 page human-gold OCR audit (firm the accuracy number); source a clean 1872-1905 Penal Code baseline (HathiTrust-UC check or law-library re-scan).
+1. **Gate D — event-sourced schema (now the lead task).** Per-change events: author / 3 dates (chaptered-effective-operative) / bill / chapter # / diff / §9605 resolution metadata / synthetic `section_id` lineage / provenance + trust-level. Must emit BOTH the temporal DB (system of record) AND the Git history. **Design USLM/Akoma-Ntoso-aware** so a future federal v2 is a parser swap. Local SQL Server / Postgres staging.
+2. **Extend the Method-A proof:** OCR the 1873–80 Chief Clerk volumes (Tesseract on clean scans) and run a heavier amendment session to stress the parser beyond the light 1883 slice.
+3. **Parallel threads:** human-gold OCR audit; clean 1872–1905 Penal Code baseline sourcing.
 
 ---
 
@@ -128,4 +136,5 @@ Current state (end of cc002 work-in-progress): scope set (historical-first, full
 - `b3512e2` / `0d0bf44` / `b63b692` — parts 6-8 (OCR rounds 1-3; round 3 = GO, legal-grade on clean scans).
 - `54b99d3` — part 9 (clean-scan sourcing map + broadened OCR validation).
 - `88e5c91` — part 10 (full-corpus inventory, blank-slate, Method A decision, git-repo idea).
-- (this /ucp) — part 11 (session-log brought current pre-compaction).
+- `91dbc1e` — part 11 (session-log brought current pre-compaction).
+- (this /ucp) — part 12 (Method A re-spike QUALIFIED-GO, LAW_AS_GIT.md, ADJACENT_DOMAINS_FEASIBILITY.md, perpetuity memory, ROADMAP status).
