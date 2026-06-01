@@ -58,6 +58,14 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Round 3 (decisive):** on a **clean non-Google IA scan**, body-CER hit **1.2% / 1.9%** on §187/§211 (mean best 1.5%) — **legal-grade**. Scan-quality delta −37.5 pts. Ensemble flag-recall **99.2%**. **VERDICT: GO** — the project's core technical risk is retired. Recipe: clean scans (IA/HathiTrust JP2) + Tesseract 5 + qwen2.5vl + disagreement-flagging + spot-audit. Fine-tuning optional (<0.5% only).
 - Caveats: 2-page sample (needs broader validation); WSL unreached by the subagent (Patrick says it's installed — off critical path); clean-scan SOURCING at scale is the new dependency.
 
+### Phase 10 — validation broadening, sourcing map, full-corpus inventory, method decision
+- **Val-50:** inter-engine disagreement proxy confirmed as a triage signal (1906 holds ~1.5%, a 1902 edition worse ~5-8% and correctly flagged). True CER still rests on 2 human-verified pages — a ~10-20 page **human-gold audit** is needed to firm the production number (fits "audit," not line-by-line).
+- **Clean-scan sourcing map (§1b):** ~60-65% of catalog has a clean non-Google source (IA non-goog + Chief Clerk PDFs, both clean-licensed; HathiTrust library scans as fallback pending terms). Google-only ~35-40% is mostly the Phase-2 Bills corpus.
+- **Full-corpus inventory (§1c) + BLANK-SLATE PRINCIPLE (Patrick):** CA had no law before 1850, so the unbroken clean **session-law chain 1849-2025 IS the complete law** — codifications are themselves acts within it. **Corpus completable from clean sources, no Phase-1 blocking gap.**
+- **METHOD DECISION:** production = **forward-from-session-laws (Method A)**. Annotated editions exist for only 14/29 codes → Method B (annotation-driven, which the spike used) does NOT scale → demoted to validation layer.
+- **Candid status:** OCR retired (GO) + reconstruction proven *in principle* (Method B), but the **production method (A: parsing raw session-law amendment directives at scale) is NOT yet proven** — the next risk to retire.
+- **Idea recorded (memory `law-as-git-repo-idea`):** emit CA law as a Git repo (bills=branches, chaptering=merge, double-jointing=merge-conflict, `git blame`=legislative history). DB = system of record, git = generated open-source artifact. Method A is inherently event-sourced, so it emits both from one model.
+
 ---
 
 ## Files Changed
@@ -92,9 +100,12 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 
 ## Next Session Should Start With
 
-Decided (Patrick): **data-first**. Gate C is now the Penal Code 1872-1900 slice proof (annotated-edition diffing, JSON scratch); the era-aware schema follows as Gate D, designed from the proof's learnings. Autonomous goal set: drive the proof through step 4 (validation).
-1. Pull annotated PC editions (Desty 1881/83/85/89, Deering 1903) + Index to Laws 1850-1893 from Internet Archive.
-2. Extract sections + history notes (JSON); reconstruct timelines; validate vs Index + internal consistency.
+Current state (end of cc002 work-in-progress): scope set (historical-first, full 1849-present, free/nonprofit), sources fully mapped + proven completable (blank-slate), OCR risk retired (clean scans), reconstruction method chosen (Method A, forward-from-session-laws), git-repo artifact scoped.
+
+**Next (cc002 continues or cc003):**
+1. **Method-A re-spike (the last real technical unknown):** parse the Penal Code's 1872 codification act + the next ~2 decades of amending acts *from the session laws* (clean scans), apply forward, validate against the annotated editions + Index. Proves the production engine.
+2. **Gate D — event-sourced schema:** per-change events (author / 3 dates: chaptered-effective-operative / bill / diff / conflict-resolution), designed to emit BOTH the temporal DB (system of record) AND the Git history. Local SQL Server / Postgres staging.
+3. **Parallel threads:** ~10-20 page human-gold OCR audit (firm the accuracy number); source a clean 1872-1905 Penal Code baseline (HathiTrust-UC check or law-library re-scan).
 
 ---
 
@@ -111,6 +122,10 @@ Decided (Patrick): **data-first**. Gate C is now the Penal Code 1872-1900 slice 
 
 - `6cc71dd` — cc002 part 1 (modern Gate B + scope/two-DB/tRPC).
 - `70c0720` — cc002 part 2 (historical-first reversal, Gate B-Historical, catalog, licensing).
-- `dbfe8d1` — cc002 part 3 (acquisition: Chief Clerk manifest + Penal Code 1872 baseline).
-- `e52889a` — cc002 part 4 (data-first reorder).
-- (this /ucp) — cc002 part 5 (Gate C slice proof: QUALIFIED-GO, annotation-driven method validated).
+- `dbfe8d1` — part 3 (acquisition: Chief Clerk manifest + Penal Code 1872 baseline).
+- `e52889a` — part 4 (data-first reorder).
+- `a0ed5fb` — part 5 (Gate C slice proof: annotation-driven method validated).
+- `b3512e2` / `0d0bf44` / `b63b692` — parts 6-8 (OCR rounds 1-3; round 3 = GO, legal-grade on clean scans).
+- `54b99d3` — part 9 (clean-scan sourcing map + broadened OCR validation).
+- `88e5c91` — part 10 (full-corpus inventory, blank-slate, Method A decision, git-repo idea).
+- (this /ucp) — part 11 (session-log brought current pre-compaction).
