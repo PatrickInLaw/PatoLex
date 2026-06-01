@@ -113,3 +113,258 @@
 [2026-06-01 15:41 PT] OK | VOL-1860 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1860/1860.PDF
 [2026-06-01 15:41 PT] OK | VOL-1860 | Downloaded 18.9 MB in 6.1s (3.1 MB/s)
 [2026-06-01 15:41 PT] OK | VOL-1860 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:43 PT] OK | VOL-1860 | OCR complete: 120/453 pages | 96s total | 0.8s/page
+[2026-06-01 15:43 PT] OK | VOL-1860 | OCR quality estimate: 2346 non-space chars/page -> GOOD
+[2026-06-01 15:43 PT] OK | VOL-1860 | Parsed 0 acts
+[2026-06-01 15:43 PT] OK | VOL-1860 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1860.json
+[2026-06-01 15:43 PT] OK | BENCH | 1860 | pages_ocrd=120/453 | acts=0 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 15:43 PT] OK | VOL-1861 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1861/1861.pdf
+[2026-06-01 15:43 PT] OK | VOL-1861 | Downloaded 38.4 MB in 9.1s (4.2 MB/s)
+[2026-06-01 15:43 PT] OK | VOL-1861 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:45 PT] OK | VOL-1861 | OCR complete: 120/730 pages | 103s total | 0.9s/page
+[2026-06-01 15:45 PT] OK | VOL-1861 | OCR quality estimate: 2537 non-space chars/page -> GOOD
+[2026-06-01 15:45 PT] OK | VOL-1861 | Parsed 1 acts
+[2026-06-01 15:45 PT] OK | VOL-1861 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1861.json
+[2026-06-01 15:45 PT] OK | BENCH | 1861 | pages_ocrd=120/730 | acts=1 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 15:45 PT] OK | VOL-1862 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1862/1862.PDF
+[2026-06-01 15:45 PT] OK | VOL-1862 | Downloaded 27.8 MB in 6.7s (4.1 MB/s)
+[2026-06-01 15:45 PT] OK | VOL-1862 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:47 PT] OK | VOL-1862 | OCR complete: 120/660 pages | 100s total | 0.8s/page
+[2026-06-01 15:47 PT] OK | VOL-1862 | OCR quality estimate: 2446 non-space chars/page -> GOOD
+[2026-06-01 15:47 PT] OK | VOL-1862 | Parsed 0 acts
+[2026-06-01 15:47 PT] OK | VOL-1862 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1862.json
+[2026-06-01 15:47 PT] OK | BENCH | 1862 | pages_ocrd=120/660 | acts=0 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 15:47 PT] OK | VOL-1863 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1863/1863.PDF
+[2026-06-01 15:47 PT] OK | VOL-1863 | Downloaded 39.3 MB in 9.1s (4.3 MB/s)
+[2026-06-01 15:47 PT] OK | VOL-1863 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:48 PT] OK | VOL-1863 | OCR complete: 120/863 pages | 106s total | 0.9s/page
+[2026-06-01 15:48 PT] OK | VOL-1863 | OCR quality estimate: 2625 non-space chars/page -> GOOD
+[2026-06-01 15:48 PT] OK | VOL-1863 | Parsed 0 acts
+[2026-06-01 15:48 PT] OK | VOL-1863 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1863.json
+[2026-06-01 15:48 PT] OK | BENCH | 1863 | pages_ocrd=120/863 | acts=0 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 15:48 PT] OK | VOL-1863-64 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1864/1863_64.pdf
+[2026-06-01 15:49 PT] OK | VOL-1863-64 | Downloaded 34.0 MB in 9.8s (3.5 MB/s)
+[2026-06-01 15:49 PT] OK | VOL-1863-64 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:50 PT] OK | VOL-1863-64 | OCR complete: 120/644 pages | 104s total | 0.9s/page
+[2026-06-01 15:50 PT] OK | VOL-1863-64 | OCR quality estimate: 2654 non-space chars/page -> GOOD
+[2026-06-01 15:50 PT] OK | VOL-1863-64 | Parsed 0 acts
+[2026-06-01 15:50 PT] OK | VOL-1863-64 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1863_64.json
+[2026-06-01 15:50 PT] OK | BENCH | 1863-64 | pages_ocrd=120/644 | acts=0 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 15:50 PT] OK | VOL-1865-66 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1865/1865_66.PDF
+[2026-06-01 15:51 PT] OK | VOL-1865-66 | Downloaded 53.7 MB in 13.2s (4.1 MB/s)
+[2026-06-01 15:51 PT] OK | VOL-1865-66 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:52 PT] OK | VOL-1865-66 | OCR complete: 120/999 pages | 102s total | 0.9s/page
+[2026-06-01 15:52 PT] OK | VOL-1865-66 | OCR quality estimate: 2628 non-space chars/page -> GOOD
+[2026-06-01 15:52 PT] OK | VOL-1865-66 | Parsed 2 acts
+[2026-06-01 15:52 PT] OK | VOL-1865-66 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1865_66.json
+[2026-06-01 15:52 PT] OK | BENCH | 1865-66 | pages_ocrd=120/999 | acts=2 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 15:52 PT] OK | VOL-1867-68 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1867/1867_68.pdf
+[2026-06-01 15:52 PT] OK | VOL-1867-68 | Downloaded 42.1 MB in 12.9s (3.3 MB/s)
+[2026-06-01 15:52 PT] OK | VOL-1867-68 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:54 PT] OK | VOL-1867-68 | OCR complete: 120/828 pages | 102s total | 0.9s/page
+[2026-06-01 15:54 PT] OK | VOL-1867-68 | OCR quality estimate: 2561 non-space chars/page -> GOOD
+[2026-06-01 15:54 PT] OK | VOL-1867-68 | Parsed 68 acts
+[2026-06-01 15:54 PT] OK | VOL-1867-68 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1867_68.json
+[2026-06-01 15:54 PT] OK | BENCH | 1867-68 | pages_ocrd=120/828 | acts=68 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 15:54 PT] OK | VOL-1869-70 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1869/1869_70.PDF
+[2026-06-01 15:54 PT] OK | VOL-1869-70 | Downloaded 43.9 MB in 10.8s (4.1 MB/s)
+[2026-06-01 15:54 PT] OK | VOL-1869-70 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:56 PT] OK | VOL-1869-70 | OCR complete: 120/1027 pages | 98s total | 0.8s/page
+[2026-06-01 15:56 PT] OK | VOL-1869-70 | OCR quality estimate: 2461 non-space chars/page -> GOOD
+[2026-06-01 15:56 PT] OK | VOL-1869-70 | Parsed 56 acts
+[2026-06-01 15:56 PT] OK | VOL-1869-70 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1869_70.json
+[2026-06-01 15:56 PT] OK | BENCH | 1869-70 | pages_ocrd=120/1027 | acts=56 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 15:56 PT] OK | VOL-1871-72 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1871/1871_72.PDF
+[2026-06-01 15:56 PT] OK | VOL-1871-72 | Downloaded 56.2 MB in 15.6s (3.6 MB/s)
+[2026-06-01 15:56 PT] OK | VOL-1871-72 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:58 PT] OK | VOL-1871-72 | OCR complete: 120/1064 pages | 95s total | 0.8s/page
+[2026-06-01 15:58 PT] OK | VOL-1871-72 | OCR quality estimate: 2376 non-space chars/page -> GOOD
+[2026-06-01 15:58 PT] OK | VOL-1871-72 | Parsed 41 acts
+[2026-06-01 15:58 PT] OK | VOL-1871-72 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1871_72.json
+[2026-06-01 15:58 PT] OK | BENCH | 1871-72 | pages_ocrd=120/1064 | acts=41 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 15:58 PT] OK | MAIN | STEP2 complete: 19 volumes processed, 667 acts
+[2026-06-01 15:58 PT] OK | MAIN | === FINAL SUMMARY ===
+[2026-06-01 15:58 PT] OK | MAIN |   1850: 26 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 15:58 PT] OK | MAIN |   1851: 13 acts | 120/545 pages | 0.7s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1852: 0 acts | ?/? pages | ?s/pg | ? | DOWNLOAD_FAIL: IncompleteRead(2770335 bytes read, 10407387 more expected)
+[2026-06-01 15:58 PT] OK | MAIN |   1853: 82 acts | 120/318 pages | 0.7s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1854: 92 acts | 120/230 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1855: 90 acts | 120/324 pages | 0.7s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1856: 97 acts | 120/239 pages | 0.7s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1857: 99 acts | 120/394 pages | 0.7s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1858: 0 acts | 120/386 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1859: 0 acts | 120/427 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1860: 0 acts | 120/453 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1861: 1 acts | 120/730 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1862: 0 acts | 120/660 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1863: 0 acts | 120/863 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1863-64: 0 acts | 120/644 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1865-66: 2 acts | 120/999 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1867-68: 68 acts | 120/828 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1869-70: 56 acts | 120/1027 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN |   1871-72: 41 acts | 120/1064 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 15:58 PT] OK | MAIN | === PatoLex Pre-Code Pipeline END ===
+[2026-06-01 15:58 PT] OK | VOL-1852 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1852/1852.PDF (chunked)
+[2026-06-01 15:58 PT] OK | MAIN | === PatoLex Pre-Code Pipeline START ===
+[2026-06-01 15:58 PT] OK | MAIN | Steps: step1=False step2=True
+[2026-06-01 15:58 PT] OK | STEP2 | === Scale 1850-1871 ===
+[2026-06-01 15:58 PT] OK | VOL-1850 | Already done (26 acts). Skipping.
+[2026-06-01 15:58 PT] OK | VOL-1851 | Already done (13 acts). Skipping.
+[2026-06-01 15:58 PT] OK | VOL-1852 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1852/1852.PDF
+[2026-06-01 15:58 PT] OK | VOL-1852 | Downloaded 12.6 MB in 4.0s
+[2026-06-01 15:58 PT] OK | VOL-1852 | OCR pages 11-131/288
+[2026-06-01 15:58 PT] OK | VOL-1852 | Downloaded 12.6 MB in 3.9s (3.2 MB/s)
+[2026-06-01 15:58 PT] OK | VOL-1852 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:00 PT] OK | VOL-1852 | OCR done: 120/288 pages | 0.8s/page | GOOD
+[2026-06-01 16:00 PT] OK | VOL-1852 | Parsed 52 acts
+[2026-06-01 16:00 PT] OK | VOL-1852 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1852.json
+[2026-06-01 16:00 PT] OK | BENCH | 1852 | pages_ocrd=120/288 | acts=52 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 16:00 PT] OK | VOL-1852 | OCR complete: 120/288 pages | 94s total | 0.8s/page
+[2026-06-01 16:00 PT] OK | VOL-1852 | OCR quality estimate: 2423 non-space chars/page -> GOOD
+[2026-06-01 16:00 PT] OK | VOL-1852 | Parsed 183 acts
+[2026-06-01 16:00 PT] OK | VOL-1852 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1852.json
+[2026-06-01 16:00 PT] OK | BENCH | 1852 | pages_ocrd=120/288 | acts=183 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 16:00 PT] OK | VOL-1853 | Already done (82 acts). Skipping.
+[2026-06-01 16:00 PT] OK | VOL-1854 | Already done (92 acts). Skipping.
+[2026-06-01 16:00 PT] OK | VOL-1855 | Already done (90 acts). Skipping.
+[2026-06-01 16:00 PT] OK | VOL-1856 | Already done (97 acts). Skipping.
+[2026-06-01 16:00 PT] OK | VOL-1857 | Already done (99 acts). Skipping.
+[2026-06-01 16:00 PT] OK | VOL-1858 | PDF exists: 20.9 MB
+[2026-06-01 16:00 PT] OK | VOL-1858 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:01 PT] OK | VOL-1858 | OCR complete: 120/386 pages | 101s total | 0.8s/page
+[2026-06-01 16:01 PT] OK | VOL-1858 | OCR quality estimate: 2591 non-space chars/page -> GOOD
+[2026-06-01 16:01 PT] OK | VOL-1858 | Parsed 55 acts
+[2026-06-01 16:01 PT] OK | VOL-1858 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1858.json
+[2026-06-01 16:01 PT] OK | BENCH | 1858 | pages_ocrd=120/386 | acts=55 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 16:01 PT] OK | VOL-1859 | PDF exists: 21.2 MB
+[2026-06-01 16:01 PT] OK | VOL-1859 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:03 PT] OK | VOL-1859 | OCR complete: 120/427 pages | 96s total | 0.8s/page
+[2026-06-01 16:03 PT] OK | VOL-1859 | OCR quality estimate: 2514 non-space chars/page -> GOOD
+[2026-06-01 16:03 PT] OK | VOL-1859 | Parsed 39 acts
+[2026-06-01 16:03 PT] OK | VOL-1859 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1859.json
+[2026-06-01 16:03 PT] OK | BENCH | 1859 | pages_ocrd=120/427 | acts=39 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 16:03 PT] OK | VOL-1860 | PDF exists: 18.9 MB
+[2026-06-01 16:03 PT] OK | VOL-1860 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:05 PT] OK | VOL-1860 | OCR complete: 120/453 pages | 99s total | 0.8s/page
+[2026-06-01 16:05 PT] OK | VOL-1860 | OCR quality estimate: 2501 non-space chars/page -> GOOD
+[2026-06-01 16:05 PT] OK | VOL-1860 | Parsed 27 acts
+[2026-06-01 16:05 PT] OK | VOL-1860 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1860.json
+[2026-06-01 16:05 PT] OK | BENCH | 1860 | pages_ocrd=120/453 | acts=27 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 16:05 PT] OK | VOL-1861 | PDF exists: 38.4 MB
+[2026-06-01 16:05 PT] OK | VOL-1861 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:06 PT] OK | VOL-1861 | OCR complete: 120/730 pages | 108s total | 0.9s/page
+[2026-06-01 16:06 PT] OK | VOL-1861 | OCR quality estimate: 2642 non-space chars/page -> GOOD
+[2026-06-01 16:06 PT] OK | VOL-1861 | Parsed 41 acts
+[2026-06-01 16:06 PT] OK | VOL-1861 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1861.json
+[2026-06-01 16:06 PT] OK | BENCH | 1861 | pages_ocrd=120/730 | acts=41 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 16:06 PT] OK | VOL-1862 | PDF exists: 27.8 MB
+[2026-06-01 16:06 PT] OK | VOL-1862 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:08 PT] OK | VOL-1862 | OCR complete: 120/660 pages | 105s total | 0.9s/page
+[2026-06-01 16:08 PT] OK | VOL-1862 | OCR quality estimate: 2533 non-space chars/page -> GOOD
+[2026-06-01 16:08 PT] OK | VOL-1862 | Parsed 24 acts
+[2026-06-01 16:08 PT] OK | VOL-1862 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1862.json
+[2026-06-01 16:08 PT] OK | BENCH | 1862 | pages_ocrd=120/660 | acts=24 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 16:08 PT] OK | VOL-1863 | PDF exists: 39.3 MB
+[2026-06-01 16:08 PT] OK | VOL-1863 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:10 PT] OK | VOL-1863 | OCR complete: 120/863 pages | 112s total | 0.9s/page
+[2026-06-01 16:10 PT] OK | VOL-1863 | OCR quality estimate: 2701 non-space chars/page -> GOOD
+[2026-06-01 16:10 PT] OK | VOL-1863 | Parsed 17 acts
+[2026-06-01 16:10 PT] OK | VOL-1863 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1863.json
+[2026-06-01 16:10 PT] OK | BENCH | 1863 | pages_ocrd=120/863 | acts=17 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 16:10 PT] OK | VOL-1863-64 | PDF exists: 34.0 MB
+[2026-06-01 16:10 PT] OK | VOL-1863-64 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:12 PT] OK | VOL-1863-64 | OCR complete: 120/644 pages | 110s total | 0.9s/page
+[2026-06-01 16:12 PT] OK | VOL-1863-64 | OCR quality estimate: 2749 non-space chars/page -> GOOD
+[2026-06-01 16:12 PT] OK | VOL-1863-64 | Parsed 21 acts
+[2026-06-01 16:12 PT] OK | VOL-1863-64 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1863_64.json
+[2026-06-01 16:12 PT] OK | BENCH | 1863-64 | pages_ocrd=120/644 | acts=21 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 16:12 PT] OK | VOL-1865-66 | PDF exists: 53.7 MB
+[2026-06-01 16:12 PT] OK | VOL-1865-66 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:14 PT] OK | VOL-1865-66 | OCR complete: 120/999 pages | 104s total | 0.9s/page
+[2026-06-01 16:14 PT] OK | VOL-1865-66 | OCR quality estimate: 2688 non-space chars/page -> GOOD
+[2026-06-01 16:14 PT] OK | VOL-1865-66 | Parsed 16 acts
+[2026-06-01 16:14 PT] OK | VOL-1865-66 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1865_66.json
+[2026-06-01 16:14 PT] OK | BENCH | 1865-66 | pages_ocrd=120/999 | acts=16 | sec/pg=0.9 | quality=GOOD | status=DONE
+[2026-06-01 16:14 PT] OK | VOL-1867-68 | Already done (68 acts). Skipping.
+[2026-06-01 16:14 PT] OK | VOL-1869-70 | Already done (56 acts). Skipping.
+[2026-06-01 16:14 PT] OK | VOL-1871-72 | Already done (41 acts). Skipping.
+[2026-06-01 16:14 PT] OK | MAIN | STEP2 complete: 19 volumes processed, 1087 acts
+[2026-06-01 16:14 PT] OK | MAIN | === FINAL SUMMARY ===
+[2026-06-01 16:14 PT] OK | MAIN |   1850: 26 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1851: 13 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1852: 183 acts | 120/288 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1853: 82 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1854: 92 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1855: 90 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1856: 97 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1857: 99 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1858: 55 acts | 120/386 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1859: 39 acts | 120/427 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1860: 27 acts | 120/453 pages | 0.8s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1861: 41 acts | 120/730 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1862: 24 acts | 120/660 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1863: 17 acts | 120/863 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1863-64: 21 acts | 120/644 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1865-66: 16 acts | 120/999 pages | 0.9s/pg | GOOD | DONE
+[2026-06-01 16:14 PT] OK | MAIN |   1867-68: 68 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1869-70: 56 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN |   1871-72: 41 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:14 PT] OK | MAIN | === PatoLex Pre-Code Pipeline END ===
+[2026-06-01 16:15 PT] OK | MAIN | === PatoLex Pre-Code Pipeline START ===
+[2026-06-01 16:15 PT] OK | MAIN | Steps: step1=False step2=True
+[2026-06-01 16:15 PT] OK | STEP2 | === Scale 1850-1871 ===
+[2026-06-01 16:15 PT] OK | VOL-1850 | Already done (26 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1851 | Already done (13 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1852 | PDF exists: 12.6 MB
+[2026-06-01 16:15 PT] OK | VOL-1852 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 16:15 PT] OK | VOL-1852 | Loading cached OCR from C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\ocr_raw_1852.txt
+[2026-06-01 16:15 PT] OK | VOL-1852 | OCR complete: 120/288 pages | 0s total | 0.0s/page
+[2026-06-01 16:15 PT] OK | VOL-1852 | OCR quality estimate: 2424 non-space chars/page -> GOOD
+[2026-06-01 16:15 PT] OK | VOL-1852 | Parsed 59 acts
+[2026-06-01 16:15 PT] OK | VOL-1852 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1852.json
+[2026-06-01 16:15 PT] OK | BENCH | 1852 | pages_ocrd=120/288 | acts=59 | sec/pg=0.0 | quality=GOOD | status=DONE
+[2026-06-01 16:15 PT] OK | VOL-1853 | Already done (82 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1854 | Already done (92 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1855 | Already done (90 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1856 | Already done (97 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1857 | Already done (99 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1858 | Already done (55 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1859 | Already done (39 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1860 | Already done (27 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1861 | Already done (41 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1862 | Already done (24 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1863 | Already done (17 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1863-64 | Already done (21 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1865-66 | Already done (16 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1867-68 | Already done (68 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1869-70 | Already done (56 acts). Skipping.
+[2026-06-01 16:15 PT] OK | VOL-1871-72 | Already done (41 acts). Skipping.
+[2026-06-01 16:15 PT] OK | MAIN | STEP2 complete: 19 volumes processed, 963 acts
+[2026-06-01 16:15 PT] OK | MAIN | === FINAL SUMMARY ===
+[2026-06-01 16:15 PT] OK | MAIN |   1850: 26 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1851: 13 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1852: 59 acts | 120/288 pages | 0.0s/pg | GOOD | DONE
+[2026-06-01 16:15 PT] OK | MAIN |   1853: 82 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1854: 92 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1855: 90 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1856: 97 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1857: 99 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1858: 55 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1859: 39 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1860: 27 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1861: 41 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1862: 24 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1863: 17 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1863-64: 21 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1865-66: 16 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1867-68: 68 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1869-70: 56 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN |   1871-72: 41 acts | ?/? pages | ?s/pg | ? | CACHED
+[2026-06-01 16:15 PT] OK | MAIN | === PatoLex Pre-Code Pipeline END ===
+[2026-06-01 16:15 PT] OK | FINAL | === COMPLETE PIPELINE SUMMARY ===
+[2026-06-01 16:15 PT] OK | FINAL | Total acts parsed: 963 across 19 volumes (1850-1871-72)
+[2026-06-01 16:15 PT] OK | FINAL | All 19 volumes: DONE. 0 remaining.
+[2026-06-01 16:15 PT] OK | FINAL | Parser fix: 1850 before=11 acts, after=26 acts, delta=+15, zero regression
+[2026-06-01 16:15 PT] OK | FINAL | Coverage: 120 pages OCR per volume, full counts 230-1064pg. Body coverage 11-52%. Acts captured is a sample, not full ingestion.
+[2026-06-01 16:15 PT] OK | FINAL | Quality: OCR GOOD all volumes (2000-2700 non-space chars/pg, Tesseract5 200DPI). Qualitative CER ~3-7%.
+[2026-06-01 16:15 PT] OK | FINAL | Output: gate-b-precode/acts_{year}.json (19 files)

@@ -1,0 +1,18 @@
+[2026-06-01 15:37 PT] START | Investigating pure-1872 Civil Code and CCP baselines | OK
+[2026-06-01 15:37 PT] FORMAT | Inspected pc_extract_1872.json -- array of {section_num, text, history_notes} | OK
+[2026-06-01 15:38 PT] SEARCH | Beginning Internet Archive searches for 1872 Civil Code and CCP | OK
+[2026-06-01 15:50 PT] SEARCH | IA search complete: 50+ items found. No true 1872/1874 first edition Civil Code on IA | OK
+[2026-06-01 16:00 PT] SEARCH | HathiTrust API: found true 1872 CCP (njp.32101074862267, Princeton, full-view PD) | OK
+[2026-06-01 16:00 PT] SEARCH | HathiTrust API: found 1874 Civil Code Haymond/Burch (mdp.35112104866969, U Michigan) | OK
+[2026-06-01 16:05 PT] SEARCH | IA Burch/Haymond CCP 1872: 4 Google-scan vols: codecivilproced00-03burcgoog | OK
+[2026-06-01 16:10 PT] DOWNLOAD | Downloaded CCP Vol I raw OCR: ccp_vol1_1872_burch_raw.txt (2.25MB) | OK
+[2026-06-01 16:10 PT] DOWNLOAD | Downloaded CCP Vol II raw OCR: ccp_vol2_1872_burch_raw.txt (1.59MB) | OK
+[2026-06-01 16:15 PT] DOWNLOAD | Downloaded CA Assembly 1871-72 Statutes PDF (59MB, image-only, no text layer) | OK
+[2026-06-01 16:20 PT] PARSE-CCP | CCP parsing: Haymond/Burch annotated edition OCR is extremely noisy (2-col layout + interleaved annotations). Multiple parsers developed. Best result: 324 sections, ~18% coverage, significant OCR artifacts | WARN
+[2026-06-01 16:30 PT] DOWNLOAD | Downloaded Civil Code 1897 Deering (IA scan, non-Google): civil_code_1897_raw.txt (1.86MB) | OK
+[2026-06-01 16:45 PT] PARSE-CIVIL | Civil Code 1897 Deering parser complete: 2239 sections, range 1-3543, 1941 flagged pure-1872 | OK
+[2026-06-01 17:00 PT] OUTPUT | civil_1872_PURE_sections.json written (2239 sections) | OK
+[2026-06-01 17:00 PT] OUTPUT | ccp_1872_PURE_sections.json written (324 sections, quality-flagged) | OK
+[2026-06-01 17:05 PT] ASSESS | Civil Code: USABLE. 2239/3543 secs (63%), 1941 pure-1872, 298 amendment-flagged. Non-Google IA scan. RECOMMEND for use with quality flag. | OK
+[2026-06-01 17:05 PT] ASSESS | CCP: NOT USABLE as-is. 324/~1800 secs (18%), heavy OCR artifacts from Google 2-col scan. RECOMMEND HathiTrust njp.32101074862267 (S.Whitney 1872 Princeton scan) as priority source. | WARN
+[2026-06-01 17:05 PT] COMPLETE | Investigation complete. See task final report. | OK

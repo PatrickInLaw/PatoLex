@@ -1,0 +1,21 @@
+[2026-06-01 00:00 PT] START | cc003: Content-addressed artifact registry | OK
+[2026-06-01 00:01 PT] STEP 1 | Schema: added content_sha256, edition_year, claimed_year, verification_note to source_document | OK
+[2026-06-01 00:02 PT] STEP 1 | Migration 0001_bouncy_garia.sql generated and applied | OK
+[2026-06-01 00:03 PT] STEP 1 | DB verified: 15 columns in source_document; uq_source_document_content_sha256 partial unique index present | OK
+[2026-06-01 00:04 PT] STEP 1 | npm run typecheck: PASS | OK
+[2026-06-01 00:05 PT] STEP 2 | scripts/ingest/register-artifact.ts written; typecheck PASS | OK
+[2026-06-01 00:06 PT] STEP 3 | Penal Code djvu: title-page evidence: "Act of Congress, August 22d, 1ST2" (=1872); Code Commission dedication signed by Haymond & Co.; edition_year=1872 | OK
+[2026-06-01 00:07 PT] STEP 3 | Political Code JSON: section text "This Code takes effect...first day of January, eighteen hundred and seventy-three" — State Printer 1872 edition; edition_year=1872 | OK
+[2026-06-01 00:08 PT] STEP 3 | civil_1880REPRINT JSON: contains "[In effect April 5, 1880.]" throughout — post-1872 amendments; IA civilcodestatec09hartgoog = Hart/Whitney 1880 reprint; edition_year=1880 | OK
+[2026-06-01 00:09 PT] STEP 3 | ccp_1880REPRINT JSON: contains "Talcott V. Blanding, March 10th, 1880" and other 1880 case refs; IA codecivilproced03caligoog = Newman 1880 reprint; edition_year=1880 | OK
+[2026-06-01 00:10 PT] STEP 3 | 1850.pdf / acts_1850_sample.json: acts dated "Passed January 31, 1850", "Passed February 14, 1850", "FIRST SESSION"; edition_year=1850 | OK
+[2026-06-01 00:11 PT] STEP 4 | Registering 5 artifacts via register-artifact.ts | OK
+[2026-06-01 00:12 PT] STEP 4 | id=6 Penal Code 1872 djvu: sha256=e3355b41..., edition_year=1872, mismatch=false | OK
+[2026-06-01 00:13 PT] STEP 4 | id=7 Political Code 1872 JSON: sha256=ff05de5b..., edition_year=1872, mismatch=false | OK
+[2026-06-01 00:14 PT] STEP 4 | id=8 Civil Code 1880 reprint JSON: sha256=fe3d7aac..., edition_year=1880, claimed_year=1872, MISMATCH=true | WARN
+[2026-06-01 00:15 PT] STEP 4 | id=9 CCP 1880 reprint JSON: sha256=1cf9a48b..., edition_year=1880, claimed_year=1872, MISMATCH=true | WARN
+[2026-06-01 00:16 PT] STEP 4 | id=10 1850 Statutes PDF: sha256=9ccbe75c..., edition_year=1850, mismatch=false | OK
+[2026-06-01 00:17 PT] STEP 4 | DB query confirmed: 5 rows inserted, rows 8+9 show mismatch=t | OK
+[2026-06-01 00:18 PT] STEP 5 | docs/30_SYSTEM_DESIGN/ARTIFACT_REGISTRY.md written | OK
+[2026-06-01 00:19 PT] FINAL | npm run typecheck: PASS | OK
+[2026-06-01 00:19 PT] DONE | cc003 artifact registry complete | OK

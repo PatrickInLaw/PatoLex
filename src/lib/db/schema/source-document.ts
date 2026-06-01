@@ -7,13 +7,16 @@
  * during QA.
  */
 
+import { sql } from "drizzle-orm";
 import {
   bigint,
   boolean,
   doublePrecision,
+  integer,
   pgTable,
   text,
   timestamp,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { sourceTypeEnum, trustLevelEnum } from "./enums.js";
 
@@ -82,4 +85,96 @@ export const sourceDocument = pgTable("source_document", {
    * false = do not serve raw text.
    */
   cleanChannel: boolean("clean_channel").notNull().default(false),
-});
+
+  /**
+   * SHA-256 hex digest of the artifact's raw bytes (the content-derived
+   * identity). UNIQUE — same bytes = same artifact regardless of filename.
+   * Content is the authority; this hash anchors provenance independently of
+   * filenames or catalog metadata.
+   */
+  contentSha256: text("content_sha256"),
+
+  /**
+   * VERIFIED publication/edition year, read from the artifact's OWN CONTENT
+   * (title page, colophon, copyright notice) — NOT the filename or catalog.
+   * This is the authoritative edition year stored in the registry.
+   */
+  editionYear: integer("edition_year"),
+
+  /**
+   * What a filename, catalog entry, or acquisition agent asserted about the
+   * edition year before verification. Kept to enable claimed-vs-verified
+   * mismatch detection. Nullable — omit when provenance was clean from the start.
+   */
+  claimedYear: integer("claimed_year"),
+
+  /**
+   * How edition_year was determined: human-readable evidence trail, e.g.
+   * "title page p.3: 'Sacramento, 1872'" or "section text contains
+   * '[In effect April 5, 1880.]' — post-1872 amendment language".
+   * Nullable — fill in whenever edition_year is set.
+   */
+  verificationNote: text("verification_note"),
+
+  /**
+   * Current filename or relative path to the artifact on disk.
+   * CONVENIENCE POINTER ONLY — non-authoritative. The registry (content_sha256)
+   * is the identity; this field is a human-readable hint. Auto-derived from
+   * --file argument (basename) if not supplied explicitly.
+   */
+  fileName: text("file_name"),
+
+  /**
+   * Exact source locator for the artifact: Internet Archive details URL,
+   * Chief Clerk direct file URL, leginfo URL, etc.
+   * Distinct from source_channel (which is the repository/channel name,
+   * e.g. "Internet Archive" or "CA Assembly Chief Clerk").
+   */
+  sourceUri: text("source_uri"),
+
+  /**
+   * Which body of law this artifact covers.
+   * Values: 'penal_code' | 'civil_code' | 'code_civil_procedure' |
+   *         'political_code' | 'uncodified_statutes' | 'index' | 'other'
+   * Stored as text for domain-neutral flexibility (not a DB enum).
+   * Artifact-level — one row = one corpus.
+   */
+  corpus: text("corpus"),
+
+  /**
+   * First year of the span of law the artifact covers.
+   * E.g. an 1850 session-law volume = 1850; an 1880 code reprint that
+   * incorporates amendments from 1872 forward = 1872 (code origin).
+   */
+  coverageStartYear: integer("coverage_start_year"),
+
+  /**
+   * Last year of the span of law the artifact covers.
+   * E.g. an 1880 reprint as-amended-through-1880 = 1880;
+   * a single-session volume = same as coverage_start_year.
+   */
+  coverageEndYear: integer("coverage_end_year"),
+
+  /**
+   * Human-readable section number range this artifact covers.
+   * E.g. "1-1685", "1-3525", "Penal 1-1620". Nullable.
+   */
+  sectionRange: text("section_range"),
+
+  /**
+   * Total number of pages in the artifact. Nullable.
+   * Derived from the actual file (PDF page count, djvu page markers, etc.).
+   */
+  pageCount: integer("page_count"),
+
+  /**
+   * Physical format of the artifact file.
+   * Values: 'pdf' | 'ocr_text' | 'parsed_json'
+   * Nullable — fill in when known.
+   */
+  mediaFormat: text("media_format"),
+}, (table) => [
+  uniqueIndex("uq_source_document_content_sha256")
+    .on(table.contentSha256)
+    .where(sql`${table.contentSha256} IS NOT NULL`),
+]);

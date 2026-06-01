@@ -1,0 +1,16 @@
+[2026-06-01 00:00 PT] START | cc004: Extend artifact registry with full provenance field set | OK
+[2026-06-01 00:01 PT] SCHEMA | Added 8 new columns to source-document.ts (file_name, source_uri, corpus, coverage_start_year, coverage_end_year, section_range, page_count, media_format) | OK
+[2026-06-01 00:02 PT] MIGRATION | Generated 0002_soft_black_widow.sql via npm run db:generate | OK
+[2026-06-01 00:03 PT] MIGRATION | Applied 0002 via npm run db:migrate — all 8 columns added to source_document | OK
+[2026-06-01 00:04 PT] VERIFY | psql column list confirms 23 columns (was 15) | OK
+[2026-06-01 00:05 PT] TYPECHECK | npm run typecheck — no errors after schema change | OK
+[2026-06-01 00:06 PT] TOOL | Updated register-artifact.ts — added 8 new CLI flags, auto-derives file_name from path basename, persists all new fields in both INSERT and UPDATE paths | OK
+[2026-06-01 00:07 PT] TYPECHECK | npm run typecheck — clean after register-artifact.ts update | OK
+[2026-06-01 00:08 PT] REGISTER | id=6 Penal Code 1872 djvu.txt: corpus=penal_code, source_channel=Internet Archive, source_uri=https://archive.org/details/penalcodecalifo00burcgoog, coverage=1872/1872, section_range=1-1685, media_format=ocr_text | OK
+[2026-06-01 00:09 PT] REGISTER | id=7 Political Code 1872 json: corpus=political_code, source_uri=https://archive.org/details/politicalcodest01caligoog, coverage=1872/1872, section_range=1-4505, media_format=parsed_json | OK
+[2026-06-01 00:10 PT] REGISTER | id=8 Civil Code 1880 reprint (QUARANTINED): corpus=civil_code, claimed_year=1872, edition_year=1880, coverage=1872/1880, section_range=1-3525 — MISMATCH guard fired as expected | OK
+[2026-06-01 00:11 PT] REGISTER | id=9 CCP 1880 reprint (QUARANTINED): corpus=code_civil_procedure, claimed_year=1872, edition_year=1880, coverage=1872/1880, section_range=1-2104 — MISMATCH guard fired as expected | OK
+[2026-06-01 00:12 PT] REGISTER | id=10 1850 Statutes PDF: corpus=uncodified_statutes, source_channel=CA Assembly Chief Clerk, source_uri=https://clerk.assembly.ca.gov/.../1850.pdf, coverage=1850/1850, page_count=480, media_format=pdf | OK
+[2026-06-01 00:13 PT] VERIFY | psql SELECT audit query — all 5 rows have complete corpus/coverage/section_range/media_format/source_channel/source_uri/file_name | OK
+[2026-06-01 00:14 PT] DOCS | Updated ARTIFACT_REGISTRY.md — full field reference table, sample audit query, updated revision history | OK
+[2026-06-01 00:15 PT] COMPLETE | Migration 0002 applied, tool updated, 5 artifacts re-registered, docs updated, typecheck clean | OK
