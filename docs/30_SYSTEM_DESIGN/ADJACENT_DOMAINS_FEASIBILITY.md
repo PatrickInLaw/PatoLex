@@ -11,7 +11,7 @@ This note records a researched feasibility assessment of applying the PatoLex po
 | Domain | Feasibility | Biggest enabler | Biggest obstacle |
 |--------|-------------|-----------------|------------------|
 | **CA statutes** (our scope) | Proven (cc002) | Blank-slate session-law chain; Method A validated | No pre-computed amendment mapping → must parse (this is also the moat) |
-| **CA regulatory (CCR)** | Feasible, operationally hard | Notice Register = event stream; text is public domain | No structured event-stream XML; OAL deleted pre-2018 Notice Register; commercial-only digitized history |
+| **CA regulatory (CCR)** | Feasible via **baseline-plus-forward** (deep history hard) | Forward-only = eCFR's own model; asset accrues; drops into the same schema | Acquiring a clean current-CCR **baseline** (official text is behind Westlaw/Barclays, no bulk export) |
 | **Federal statutory (US Code)** | Highly feasible (easier than CA) | OLRC **Classification Tables pre-compute** the Public-Law→section mapping; USLM XML | Positive vs. non-positive titles; pre-1994 not machine-readable |
 | **Federal regulatory (CFR)** | Highly feasible (best-resourced) | **eCFR already does point-in-time** via free API; FR = XML event stream | Volume (~186k pages, 3,000+ rules/yr); pre-1994 gap |
 
@@ -29,7 +29,20 @@ This note records a researched feasibility assessment of applying the PatoLex po
   - **OAL deleted all pre-2018 Notice Register issues** from its site in 2019 (accessibility compliance); 2002–2017 survive only via web archives, pre-2002 only on microfiche/print at law libraries ([UCLA Law Library](https://libguides.law.ucla.edu/caladminlaw/history)).
   - No free point-in-time historical CCR exists anywhere online.
 - **Volume:** ~600+ regulatory actions/yr from 200+ agencies — similar order to statutes.
-- **Verdict:** same architecture applies, but reconstruction requires OCR of Notice Register PDFs and the historical record is fragmented. A plausible **later** extension; not near-term.
+- **Verdict:** full *historical* reconstruction requires OCR of Notice Register PDFs and the record is fragmented — but a **baseline-plus-forward** approach sidesteps all of that (see next).
+
+### CA Regulatory via baseline-plus-forward (the recommended shape)
+
+Rather than reconstruct deep CCR history, take a **clean snapshot of the current CCR as a dated baseline and track forward** from it. This is the correct shape for CA regs, not a compromise:
+
+- **It avoids every hard part.** The difficulty was *historical* (PDF-only Notice Register, OAL's deleted pre-2018 issues, microfiche). Forward-only never touches it. You're left with two clean problems: (1) acquire one complete baseline snapshot; (2) apply the forward event stream (OAL-approved actions, weekly, each with adopted text + effective date). Forward documents are modern/born-digital — text extraction, not OCR of old scans. Volume (~600 actions/yr) is trivial.
+- **It's exactly what eCFR does.** The federal government's own point-in-time CFR only reaches back to 2017 — a baseline + forward. We'd be doing for CA precisely what the feds chose for the CFR. Strong validation that the model is sufficient.
+- **The asset accrues.** Year one = "current CCR + change tracking" (already useful — commercial players don't expose free point-in-time). Each year forward silently becomes the free historical CCR archive nobody else offers. Deep history can be backfilled *behind* the baseline later (steward, via microfiche OCR) without ever blocking.
+- **Maps cleanly to law-as-git + the Gate D schema:** the baseline = a bulk set of `enact` events dated at the baseline; each OAL action = an `enactment` with `amend`/`add`/`repeal` `change_event`s. `unit_type = reg_section`. No new machinery (see `SCHEMA_DESIGN.md`).
+
+**The one load-bearing unknown — the baseline itself.** A point-in-time archive is only as trustworthy as its baseline, and the official current CCR lives behind **Westlaw/Barclays with no bulk export**. The *text* is public domain, but **channel terms bind regardless of copyright** (the HathiTrust lesson). Malamud's 2012 full-CCR publication proves it's *legally* publishable but it's stale. Before committing to CA regs, **verify a clean, complete, defensibly-sourced current-CCR baseline is obtainable through a non-Westlaw channel.** Smaller caveats: **Title 24 (building standards)** is published separately (special-case or scope out); no structured feed (build a small OAL/Notice-Register PDF parser).
+
+- **Verdict:** **feasible and recommended via baseline-plus-forward**, gated on confirming clean baseline acquisition. Still a **later** extension — parked behind CA statutes. The only thing that matters *now* is keeping the Gate D schema domain-neutral so CCR drops in (done — see `SCHEMA_DESIGN.md`).
 
 ## Federal Statutory Law (US Code)
 
