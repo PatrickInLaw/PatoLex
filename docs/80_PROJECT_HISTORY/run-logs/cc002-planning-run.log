@@ -1,0 +1,17 @@
+[2026-05-31 15:00 PT] START | cc002 planning + roadmap sanity-check | OK
+[2026-05-31 15:05 PT] REVIEW | Read all cc001 docs (roadmap, arch, setup, lessons, session log, structure) | OK
+[2026-05-31 15:10 PT] RESEARCH | Confirmed CA leginfo Downloadable Files = bulk DB-ready data, coverage from 1991-1992 session | OK
+[2026-05-31 15:15 PT] DECISION | Scope split: modern POC (1991-present) vs 1849 north star (Phase 2) -- approved by Patrick | OK
+[2026-05-31 15:16 PT] DECISION | Two-DB architecture: local Postgres staging + Supabase serving | OK
+[2026-05-31 15:20 PT] WRITE | ROADMAP.md -- full revision (Gate B recon, vertical slice, two-DB, validation gate) | OK
+[2026-05-31 15:22 PT] WRITE | ARCHITECTURE.md -- bulk source, two-DB, operative-date model, provenance, GiST exclusion | OK
+[2026-05-31 15:24 PT] WRITE | README.md + CLAUDE.md -- scope clarification (north star vs POC) | OK
+[2026-05-31 15:30 PT] DECISION | tRPC deferred -- RSC + Server Actions over transport-agnostic service layer; MCP before API | OK
+[2026-05-31 15:32 PT] WRITE | ARCHITECTURE.md + CLAUDE.md -- data-access strategy / tRPC deferral | OK
+[2026-05-31 15:35 PT] DELEGATE | Gate B recon dispatched: 2 sonnet subagents (bulk-data inventory + reconstruction methodology) + haiku (session log) | OK
+[2026-05-31 15:55 PT] RESULT | Gate B recon returned -- bulk source confirmed; LAW tables current-only; reconstruction = amendment-application; POC floor Jan 1 1994 | OK
+[2026-05-31 15:58 PT] WRITE | docs/30_SYSTEM_DESIGN/DATA_SOURCES.md -- Gate B synthesis report | OK
+[2026-05-31 16:00 PT] WRITE | ROADMAP.md -- Gate B marked done; Gate C next; open questions updated | OK
+[2026-05-31 16:20 PT] COMMS | Telegram Gate B summary sent (after working around block-compound-bash semicolon scan) | OK
+[2026-05-31 16:25 PT] FIX | Rewrote cc002 session log (haiku draft had backtick/C# mojibake artifacts) | OK
+[2026-05-31 16:26 PT] DONE | cc002 complete -- Gate B closed; awaiting commit go-ahead | OK

@@ -6,7 +6,9 @@
 
 ## What PatoLex Is
 
-PatoLex is a public-facing web application that provides a complete, searchable archive of California's statutory law with full historical depth — every version of every statute from statehood (1849-1851) to the present. The target users are attorneys and legal researchers who need to know exactly what a statute said at a specific point in time. The project is also a proof-of-concept for agentic coding and design at scale. The stack is Next.js 15 + TypeScript (web frontend), Supabase PostgreSQL (database), tRPC (API), and a separate C# console/worker pipeline for crawling and parsing CA state archive documents. Deployment: Vercel (frontend) + Supabase (managed DB). The data pipeline runs on local machines.
+PatoLex is a public-facing web application that provides a searchable, point-in-time archive of California's statutory law — letting attorneys and legal researchers see exactly what a statute said on any given date. The target users are attorneys and legal researchers. The project is also a proof-of-concept for agentic coding and design at scale.
+
+**Scope (see `docs/20_ROADMAP/ROADMAP.md`):** The *North Star* is full historical depth from statehood (1849) to present. The *POC* — what we build first — is the **modern point-in-time archive (1991–present)**, reconstructed from California's official bulk legislative data. Pre-1992 historical depth (OCR of session-law volumes) is **Phase 2**. Do not treat 1849 coverage as a near-term deliverable. The stack is Next.js 15 + TypeScript (web frontend), Supabase PostgreSQL (database), tRPC (API), and a separate C# console/worker pipeline for crawling and parsing CA state archive documents. Deployment: Vercel (frontend) + Supabase (managed DB). The data pipeline runs on local machines.
 
 Default bias for new dependencies: **TypeScript-native** for the web layer, **C#/.NET-native** for the pipeline. Microsoft-aligned where applicable.
 
@@ -165,7 +167,7 @@ Codex CLI runs in a separate terminal tab titled `PatoLex_Codex`; comms are file
 
 ## Coding Conventions
 
-**Web layer stack:** Next.js 15 (App Router) + TypeScript 5 + Tailwind CSS + shadcn/ui + tRPC + Drizzle ORM
+**Web layer stack:** Next.js 15 (App Router) + TypeScript 5 + Tailwind CSS + shadcn/ui + Drizzle ORM. Data access is **RSC + Server Actions over a transport-agnostic service layer** (`src/server/`); **tRPC is deferred**, not adopted up front (MCP server is the likely first external interface, public API later — see ARCHITECTURE.md).
 
 **Pipeline stack:** C# (.NET 8 LTS) console app or Worker Service -- AngleSharp, PdfPig, Tesseract.NET, Dapper
 
@@ -176,7 +178,7 @@ Codex CLI runs in a separate terminal tab titled `PatoLex_Codex`; comms are file
 - Components: `PascalCase`
 - Functions/variables: `camelCase`
 - Types/interfaces: `PascalCase`, no `I` prefix
-- tRPC routers: `camelCase` procedure names
+- Service-layer functions: `camelCase`
 
 **Naming conventions (C# pipeline):**
 - Standard .NET PascalCase for types and methods
@@ -184,10 +186,10 @@ Codex CLI runs in a separate terminal tab titled `PatoLex_Codex`; comms are file
 
 **Layer discipline:**
 - `src/app/` -- Next.js App Router pages and layouts (no DB calls directly)
-- `src/server/` -- tRPC routers and server-side logic
+- `src/server/` -- transport-agnostic service/query layer + server-side logic (the single place data access lives; consumed by RSC, Server Actions, and later MCP/API)
 - `src/lib/db/` -- Drizzle schema definitions and DB client
 - `pipeline/` -- C# pipeline project(s) for crawling, OCR, parsing, and loading
-- Never call DB from React components; always go through tRPC
+- Never call the DB from *client* components; all data access goes through the `src/server/` service layer (Server Components and Server Actions call it directly)
 
 **Environment / secrets:**
 - Never commit `.env.local` (gitignored)

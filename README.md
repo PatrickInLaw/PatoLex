@@ -1,6 +1,9 @@
 # PatoLex
 
-PatoLex is a public-facing web application providing a complete, searchable archive of California's statutory law with full historical depth -- every version of every statute from statehood (1849-1851) to the present. Built for attorneys and legal researchers who need to know exactly what a statute said at a specific point in time. A gap in coverage left by the major legal research providers.
+PatoLex is a public-facing web application providing a searchable, point-in-time archive of California's statutory law -- letting attorneys and legal researchers see exactly what a statute said on any given date. A gap in coverage left by the major legal research providers.
+
+**North Star:** full historical depth -- every version of every statute from statehood (1849) to the present.
+**POC scope (current):** the modern point-in-time archive (1991-1992 legislative session to present), built from California's official bulk legislative data. Pre-1992 historical depth is a Phase 2 research program. See [ROADMAP.md](docs/20_ROADMAP/ROADMAP.md).
 
 ## Getting Started
 
