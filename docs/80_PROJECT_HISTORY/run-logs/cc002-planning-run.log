@@ -18,6 +18,13 @@
 [2026-05-31 17:30 PT] RESULT | Reconstruction model: 3 eras, forward-from-1872, 1943 Govt Code biggest event, join ~1991, trust-level validation | OK
 [2026-05-31 17:35 PT] WRITE | Catalog copied to docs/30_SYSTEM_DESIGN/sources/ (xlsx + csv); DATA_SOURCES_HISTORICAL.md rewritten accurately | OK
 [2026-05-31 17:38 PT] WRITE | ROADMAP -- historical-first gates updated for harvest-existing-OCR + catalog | OK
-21	[2026-05-31 18:20 PT] ACQUIRE | Gate B-Historical Penal Code vertical-slice acquisition -- IA candidate survey, download verified | OK
+[2026-05-31 18:20 PT] ACQUIRE | Gate B-Historical Penal Code vertical-slice acquisition -- IA candidate survey, download verified | OK
 [2026-05-31 18:25 PT] ACQUIRE | Penal Code 1872 baseline downloaded (IA penalcodecalifo00burcgoog, 697pp + OCR) -- section text clean | OK
 [2026-05-31 18:35 PT] WRITE | Chief Clerk statutes manifest -- 653 session-law PDFs 1850-2008, URLs+sizes verified -> sources/chief_clerk_statutes_manifest.csv | OK
+[2026-05-31 19:00 PT] GATE-C-STEP-1 | Downloaded OCR .txt for 5 Penal Code editions from IA (1881, 1883, 1885, 1889, 1903) -- all 5 OK, no 404s | OK
+[2026-05-31 19:30 PT] GATE-C-STEP-2 | Parsed all 6 editions (1872-1903) to JSON -- 509-720 sections each; 1903 Deering 320/361 sections have history notes | OK
+[2026-05-31 19:30 PT] GATE-C-STEP-2 | OCR issues: double-spaces, split section headers, garbled chars; sec 187 not found in 1872/1883/1885/1889 (OCR artifact) | WARN
+[2026-05-31 20:00 PT] GATE-C-STEP-3 | Reconstruct: inter-edition OCR diffing FAILS (median sim 1872->1881 = 0.07; scans diverge); only 8% corroborated -> method rejected | WARN
+[2026-05-31 20:30 PT] GATE-C-STEP-4 | Validate: annotation-driven method (1903 history notes vs Index 1850-1893) = 85% agreement / 27-section overlap. 2 fixable flaws. QUALIFIED-GO | OK
+[2026-05-31 20:35 PT] WRITE | docs/30_SYSTEM_DESIGN/GATE_C_SLICE_PROOF.md -- proof synthesis + verdict | OK
+[2026-05-31 20:36 PT] GOAL | Autonomous goal met -- drove proof through step 4 (validation) | OK

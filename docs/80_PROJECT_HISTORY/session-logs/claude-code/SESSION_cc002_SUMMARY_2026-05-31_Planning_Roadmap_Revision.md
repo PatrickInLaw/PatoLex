@@ -42,6 +42,11 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Session-law manifest built:** 653 statute-volume PDFs, 1850-2008, from the CA Assembly Chief Clerk archive — URLs + sizes verified (HTTP 200). Filenames irregular across 8 eras (enumerated, not patterned). Saved to `docs/30_SYSTEM_DESIGN/sources/chief_clerk_statutes_manifest.csv`. Archive ends 2008; 2009+ from PUBINFO.
 - Next-step sources identified: Desty 1881 annotated PC (`penalcodecalifo03caligoog`), *Index to the Laws of CA 1850-1893* (`indextolawscali00caligoog`), other three 1872 codes.
 
+### Phase 7 — Gate C slice proof (autonomous, through validation)
+- Ran the Penal Code 1872-1903 proof end-to-end via sonnet subagents (pull editions → extract → reconstruct → validate). → `docs/30_SYSTEM_DESIGN/GATE_C_SLICE_PROOF.md`.
+- **Inter-edition OCR text-diffing rejected** (median same-section similarity 0.07 — but see caveat: likely alignment/segmentation failure + bundling, not pure OCR garbling). **Annotation-driven method adopted + validated** vs *Index 1850-1893* at 85% (27-section overlap).
+- **QUALIFIED-GO:** timeline method proven; point-in-time *text* layer is the remaining bounded risk → next step is a vision-LLM re-OCR spike on the 5090 + 5080.
+
 ---
 
 ## Files Changed
@@ -95,4 +100,6 @@ Decided (Patrick): **data-first**. Gate C is now the Penal Code 1872-1900 slice 
 
 - `6cc71dd` — cc002 part 1 (modern Gate B + scope/two-DB/tRPC).
 - `70c0720` — cc002 part 2 (historical-first reversal, Gate B-Historical, catalog, licensing).
-- (this /ucp) — cc002 part 3 (acquisition: Chief Clerk manifest of 653 vols + Penal Code 1872 baseline).
+- `dbfe8d1` — cc002 part 3 (acquisition: Chief Clerk manifest + Penal Code 1872 baseline).
+- `e52889a` — cc002 part 4 (data-first reorder).
+- (this /ucp) — cc002 part 5 (Gate C slice proof: QUALIFIED-GO, annotation-driven method validated).
