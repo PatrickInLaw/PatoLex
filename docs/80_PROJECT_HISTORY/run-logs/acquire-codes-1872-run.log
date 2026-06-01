@@ -1,0 +1,133 @@
+[2026-06-01 15:30 PT] ACQUIRE | Starting 1872 California Code baseline acquisition (Civil Code, CCP, Political Code) | OK
+
+== SOURCE SELECTION ==
+
+[2026-06-01 15:31 PT] SEARCH | Searched archive.org for as-enacted 1872 editions (Code Commissioners editions) | OK
+[2026-06-01 15:31 PT] NOTE | No pure unamended 1872 State Printer first printings found on IA for Civil Code or CCP. Earliest available digitized editions are 1874-1880 annotated/amended editions. Political Code has 1872 State Printer (T.A. Springer) edition. | WARN
+
+== IA IDENTIFIERS SELECTED ==
+
+Civil Code:
+  Identifier: civilcodestatec09hartgoog
+  URL: https://archive.org/details/civilcodestatec09hartgoog
+  Title: The Civil Code of the State of California: as enacted in 1872, amended at subsequent sessions
+  Publisher: S. Whitney (San Francisco), 1880 — Albert Hart edition
+  Why chosen: Single-volume edition covering full section range 1-3525 (vs. Haymond/Burch annotated Vol I
+    which only covers ~1-2079). Hart/Whitney 1880 edition is the earliest SINGLE-VOLUME full-coverage
+    Civil Code on IA. Non-Google-scan identifier but IS a Google Books digitization (uploaded by 'tpb').
+    Identifier ends in 'goog'. Note: the original 1872 State Printer Civil Code was not found on IA.
+  djvu.txt size: 1,315,675 bytes (1,284.8 KB downloaded)
+  Download time: 1.7s
+
+Code of Civil Procedure:
+  Identifier: codecivilproced03caligoog
+  URL: https://archive.org/details/codecivilproced03caligoog
+  Title: The Code of Civil Procedure of the State of California, adopted March 11th, 1872, and amended in 1880
+  Publisher: S. Whitney (San Francisco), 1880 — Nathan Newman edition
+  Why chosen: Earliest full CCP on IA with complete section coverage 1-2104. Only 1872+amendments
+    available; no pure unamended 1872 CCP found on IA. 1880 amendments are relatively minor (constitution
+    adaptation). Identifier ends in 'goog' (Google scan).
+  djvu.txt size: 1,884.9 KB downloaded
+  Download time: 8.2s
+
+Political Code (2 volumes):
+  Vol 1 Identifier: politicalcodest01caligoog
+  Vol 1 URL: https://archive.org/details/politicalcodest01caligoog
+  Vol 2 Identifier: politicalcodest00haymgoog
+  Vol 2 URL: https://archive.org/details/politicalcodest00haymgoog
+  Title: The Political Code of the State of California (T.A. Springer, State Printer, 1872)
+  Publisher: T.A. Springer, State Printer, Sacramento — OFFICIAL 1872 first printing
+  Why chosen: BEST AVAILABLE — the actual as-enacted State Printer first edition (August 1872),
+    certified by Commissioners Haymond, Burch & McKune. Two volumes: Vol 1 covers sections 1-~3597,
+    Vol 2 covers sections ~3607-4505. No non-Google alternatives found on IA. Both identifiers end
+    in 'goog' but this is the official as-enacted text (not annotated/amended).
+  Vol 1 djvu.txt: 1,236.2 KB | Vol 2 djvu.txt: 1,058.3 KB
+  Download times: Vol1=1.0s, Vol2=1.5s
+
+== PARSE RESULTS ==
+
+[2026-06-01 15:32 PT] PARSE | Civil Code: civilcodestatec09hartgoog body start at line 707 (enacting clause) | OK
+[2026-06-01 15:32 PT] PARSE | Civil Code: 1771 sections found, range §1-§3525, format §N. | OK
+[2026-06-01 15:32 PT] PARSE | Civil Code: parse time 0.016s, output 1132.1 KB | OK
+[2026-06-01 15:32 PT] PARSE | CCP: codecivilproced03caligoog body start at line 2508 | OK
+[2026-06-01 15:32 PT] PARSE | CCP: 1416 sections found, range §1-§2104, format §N. | OK
+[2026-06-01 15:32 PT] PARSE | CCP: parse time 0.023s, output 1203.5 KB (incl. annotations) | OK
+[2026-06-01 15:33 PT] PARSE | Political Code Vol1: body start at line 5872, Vol2: line 2767 | OK
+[2026-06-01 15:33 PT] PARSE | Political Code: 2307 sections found, range 1-4505, format N. (number-dot) | OK
+[2026-06-01 15:33 PT] PARSE | Political Code: parse time 0.029s, output 537.1 KB | OK
+
+== BENCHMARK SUMMARY ==
+
+Code             | IA Identifier              | DL Size | DL Time | Sections | Range     | Parse  | Out KB | Gaps>10 | Short<30
+Civil Code       | civilcodestatec09hartgoog  | 1285 KB | 1.7s    | 1771     | 1-3525    | 0.016s | 1132   | 27      | 0
+CCP              | codecivilproced03caligoog  | 1885 KB | 8.2s    | 1416     | 1-2104    | 0.023s | 1204   | 1       | 14
+Political Code   | pol01caligoog+haymgoog     | 2294 KB | 2.5s    | 2307     | 1-4505    | 0.029s | 537    | 93      | 738
+
+Total sections across all 3 codes: 5494
+(Penal Code baseline was previously parsed as pc_extract_1872.json)
+
+== QUALITY SPOT CHECKS ==
+
+Civil Code:
+  §1: "This Act shall be known as The Civil Code of the State of California, and is in Four Divisions..." OK
+  §2: "This Code takes effect at twelve o'clock noon on the first day of January, eighteen hundred and seventy-three." OK
+  §162: Property rights of wife — substantive legal text, correct
+  §2316: Actual authority definition — correct Civil Code contracts content
+  §3000: Pledge sale provision — correct
+  §3480: Public nuisance definition — correct
+  Quality: GOOD. Avg 575 chars/section, 32% non-ASCII (OCR noise from 1880 Google scan), 0 empty/short sections.
+
+CCP:
+  §1: "This act shall be known as The Code of Civil Procedure of California..." OK (OCR garble in 'Pbooedubb' = 'Procedure')
+  §33: Courts of Justice enumeration — correct
+  §307: "There is in this State but one form of civil actions..." — correct
+  §1823: Evidence definition — correct
+  §2097: Affirmation in lieu of oath — correct
+  §2104: Money deposited in court — correct
+  Quality: GOOD. Avg 786 chars/section (includes case citation annotations), 69% non-ASCII (high due to
+    heavy annotation with case citations garbled). The annotations add noise but preserve original section text.
+    §1000 not found (gap at 966-1003).
+
+Political Code:
+  §1: Definition of "signature" — actually §1 of Political Code defines terms (correct)
+  §2: "This Code takes effect at twelve o'clock, noon." — correct
+  §50: "Allegiance may be renounced." — correct (short section by design)
+  §200: Yuba County Seat distances — correct (Part II legal distances table)
+  §800: "Certificate of filing bond and oath." — short but correct
+  §3607: "All property within this State, except the property of the United States..." — CORRECT section for taxation
+  §4000: "Every county is a body politic and corporate..." — correct
+  §4504: Repeal construction rule — correct
+  Quality: MODERATE. 738 short sections (<30 chars) due to: (a) intrinsically short Political Code
+    sections (many are 1-2 sentences), and (b) some TOC-style margin notes captured as sections.
+    93 gaps >10 reflect the complex typesetting of the Springer State Printer edition where sections
+    appear out of sequential order in the OCR text due to margin note formatting. Avg 159 chars/section.
+    10% non-ASCII (best of the three — State Printer edition has cleaner type).
+    Political Code missing range 2608-3606: sections in this range DO exist in Vol 1 (confirmed Vol 1
+    reaches section 3597). The gaps are typesetting artifacts, not missing volumes.
+
+== OUTPUT FILES ==
+
+C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-codes-1872\civil_1872_sections.json   (1132 KB, 1771 sections)
+C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-codes-1872\ccp_1872_sections.json     (1204 KB, 1416 sections)
+C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-codes-1872\political_1872_sections.json  (537 KB, 2307 sections)
+
+== FLAGS / CAVEATS ==
+
+1. Civil Code: Vol I of Haymond/Burch annotated first edition (1874) is on IA but only covers §1-§2079.
+   Used Hart/Whitney 1880 edition instead for full coverage (§1-§3525). The 1880 amendments are
+   minor constitutional adaptations; core 1872 text is preserved. Sections 3526-3543 not found —
+   may be in an appendix or represent the 1879 constitutional adaptation sections.
+
+2. CCP: Only 1872+1880 amended editions found on IA. No pure as-enacted 1872 CCP available.
+   The 1880 amendments include constitutional conformance changes. Core procedural sections intact.
+
+3. Political Code: Official 1872 State Printer (Springer) edition used — best available provenance.
+   Two-volume structure: Vol1 (politicalcodest01caligoog) + Vol2 (politicalcodest00haymgoog).
+   Combined coverage: 1-4505 with gaps. The Springer edition has a complex layout where sub-item
+   tables (like county seat distance tables, §§150-200) produce many short single-line sections.
+
+4. All three codes: identifiers ending in 'goog' (Google Books scans). No non-Google alternatives
+   found for 1872 editions of these three codes on IA, unlike the Penal Code where we had the
+   same situation (penalcodecalifo00burcgoog was also a Google scan).
+
+[2026-06-01 15:35 PT] COMPLETE | All three 1872 baseline codes acquired and parsed | OK

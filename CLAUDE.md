@@ -170,7 +170,7 @@ For substantive `src/` or `pipeline/` changes, run a **Hans review** before push
 
 **Web layer stack:** Next.js 15 (App Router) + TypeScript 5 + Tailwind CSS + shadcn/ui + Drizzle ORM. Data access is **RSC + Server Actions over a transport-agnostic service layer** (`src/server/`); **tRPC is deferred**, not adopted up front (MCP server is the likely first external interface, public API later — see ARCHITECTURE.md).
 
-**Pipeline stack:** C# (.NET 8 LTS) console app or Worker Service -- AngleSharp, PdfPig, Tesseract.NET, Dapper
+**Pipeline stack:** The **historical corpus build (cc002 decision) uses Python (OCR/parse — Tesseract 5 + qwen2.5vl ensemble, PyMuPDF) + TypeScript/Drizzle (ingest against the same schema)**. This is the proven, working toolchain for the one-time 1850-forward reconstruction. The originally-specified **C# (.NET 8 LTS) pipeline (AngleSharp, PdfPig, Tesseract.NET, Dapper) is DEFERRED** — reserved for an ongoing modern-era crawler/worker if/when wanted, not the historical ETL.
 
 **Database:** PostgreSQL 16 via Supabase. Connection pooling: use PgBouncer URL (port 6543) for serverless Vercel functions, direct URL (port 5432) for the C# pipeline.
 

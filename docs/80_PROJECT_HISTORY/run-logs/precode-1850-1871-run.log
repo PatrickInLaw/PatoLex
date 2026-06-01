@@ -1,0 +1,115 @@
+[2026-06-01 15:28 PT] OK | MAIN | === PatoLex Pre-Code Pipeline START ===
+[2026-06-01 15:28 PT] OK | MAIN | Steps: step1=True step2=False
+[2026-06-01 15:28 PT] OK | STEP1 | === Fix + Validate 1850 Parser ===
+[2026-06-01 15:28 PT] OK | STEP1 | OLD parser: found 11 chapter headers in 1850 OCR text
+[2026-06-01 15:28 PT] OK | STEP1 | OLD chapters found: [8, 9, 11, 12, 15, 17, 18, 19, 20, 23, 24]
+[2026-06-01 15:28 PT] OK | STEP1 | NEW parser: found 18 acts in 1850 OCR text
+[2026-06-01 15:28 PT] OK | STEP1 | NEW chapters found: [1, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 26]
+[2026-06-01 15:28 PT] OK | STEP1 | GAINED: [1, 7, 10, 14, 16, 25, 26]
+[2026-06-01 15:28 PT] OK | STEP1 | LOST (regression check): []
+[2026-06-01 15:28 PT] OK | STEP1 |   chap=  1 pg= 55 date='Passed January 5, 1850' title='AN ACT concerning the Public Archives.'
+[2026-06-01 15:28 PT] OK | STEP1 |   chap=  7 pg= 61 date='Passed January 24, 1850' title='AN ACT fixing the time for Acts and Joint Resolutions to take effect.'
+[2026-06-01 15:28 PT] OK | STEP1 |   chap=  8 pg= 61 date='Passed January 31, 1850' title='AN ACT creating the office of State Translator.'
+[2026-06-01 15:28 PT] OK | STEP1 |   chap=  9 pg= 61 date='Passed January 31, 1850' title='AN ACT prescribing the mode of receiving, keeping, and paying out the Public Fun'
+[2026-06-01 15:28 PT] OK | STEP1 |   chap= 10 pg= 63 date='Passed February 1, 1850' title='Chap. 10. : |'
+[2026-06-01 15:28 PT] OK | STEP1 | Wrote 18 acts to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1850.json
+[2026-06-01 15:28 PT] OK | STEP1 | OCR quality estimate: avg line len=96 chars (>50=good, 30-50=fair, <30=noisy)
+[2026-06-01 15:28 PT] OK | BENCH | 1850 | pages_ocrd=40/480 (body sample) | acts_new=18 | acts_old=11 | delta=+7 | sec/pg=~5.0 (from prior run) | quality=GOOD (clean inst. scan, minor OCR noise)
+[2026-06-01 15:28 PT] OK | MAIN | STEP1 complete: 18 acts from 1850 (re-parsed)
+[2026-06-01 15:28 PT] OK | MAIN | === FINAL SUMMARY ===
+[2026-06-01 15:28 PT] OK | MAIN | 1850 re-parse: 18 acts
+[2026-06-01 15:28 PT] OK | MAIN | === PatoLex Pre-Code Pipeline END ===
+[2026-06-01 15:29 PT] OK | MAIN | === PatoLex Pre-Code Pipeline START ===
+[2026-06-01 15:29 PT] OK | MAIN | Steps: step1=True step2=False
+[2026-06-01 15:29 PT] OK | STEP1 | === Fix + Validate 1850 Parser ===
+[2026-06-01 15:29 PT] OK | STEP1 | OLD parser: found 11 chapter headers in 1850 OCR text
+[2026-06-01 15:29 PT] OK | STEP1 | OLD chapters found: [8, 9, 11, 12, 15, 17, 18, 19, 20, 23, 24]
+[2026-06-01 15:29 PT] OK | STEP1 | NEW parser: found 26 acts in 1850 OCR text
+[2026-06-01 15:29 PT] OK | STEP1 | NEW chapters found: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+[2026-06-01 15:29 PT] OK | STEP1 | GAINED: [1, 2, 3, 4, 5, 6, 7, 10, 13, 14, 16, 21, 22, 25, 26]
+[2026-06-01 15:29 PT] OK | STEP1 | LOST (regression check): []
+[2026-06-01 15:29 PT] OK | STEP1 |   chap=  1 pg= 55 date='Passed January 5, 1850' title='AN ACT concerning the Public Archives.'
+[2026-06-01 15:29 PT] OK | STEP1 |   chap=  2 pg= 55 date='' title='AN ACT to create the office of State Printer, and define his duties, .'
+[2026-06-01 15:29 PT] OK | STEP1 |   chap=  3 pg= 56 date='Passed January 8, 1850' title='AN ACT in relation to the appointment of Pilots for the different Ports and Harb'
+[2026-06-01 15:29 PT] OK | STEP1 |   chap=  4 pg= 57 date='Passed January 19, 1850' title='AN ACT concerning the office of Comptroller. .'
+[2026-06-01 15:29 PT] OK | STEP1 |   chap=  5 pg= 58 date='' title=': AN ACT concerning the office of State Treasurer.'
+[2026-06-01 15:29 PT] OK | STEP1 | Wrote 26 acts to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1850.json
+[2026-06-01 15:29 PT] OK | STEP1 | OCR quality estimate: avg line len=96 chars (>50=good, 30-50=fair, <30=noisy)
+[2026-06-01 15:29 PT] OK | BENCH | 1850 | pages_ocrd=40/480 (body sample) | acts_new=26 | acts_old=11 | delta=+15 | sec/pg=~5.0 (from prior run) | quality=GOOD (clean inst. scan, minor OCR noise)
+[2026-06-01 15:29 PT] OK | MAIN | STEP1 complete: 26 acts from 1850 (re-parsed)
+[2026-06-01 15:29 PT] OK | MAIN | === FINAL SUMMARY ===
+[2026-06-01 15:29 PT] OK | MAIN | 1850 re-parse: 26 acts
+[2026-06-01 15:29 PT] OK | MAIN | === PatoLex Pre-Code Pipeline END ===
+[2026-06-01 15:29 PT] OK | MAIN | === PatoLex Pre-Code Pipeline START ===
+[2026-06-01 15:29 PT] OK | MAIN | Steps: step1=False step2=True
+[2026-06-01 15:29 PT] OK | STEP2 | === Scale 1850-1871 ===
+[2026-06-01 15:29 PT] OK | VOL-1850 | Already done (26 acts). Skipping.
+[2026-06-01 15:29 PT] OK | VOL-1851 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1851/1851.pdf
+[2026-06-01 15:29 PT] OK | VOL-1851 | Downloaded 21.6 MB in 6.8s (3.2 MB/s)
+[2026-06-01 15:29 PT] OK | VOL-1851 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:30 PT] OK | VOL-1851 | OCR complete: 120/545 pages | 89s total | 0.7s/page
+[2026-06-01 15:30 PT] OK | VOL-1851 | OCR quality estimate: 2491 non-space chars/page -> GOOD
+[2026-06-01 15:30 PT] OK | VOL-1851 | Parsed 13 acts
+[2026-06-01 15:30 PT] OK | VOL-1851 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1851.json
+[2026-06-01 15:30 PT] OK | BENCH | 1851 | pages_ocrd=120/545 | acts=13 | sec/pg=0.7 | quality=GOOD | status=DONE
+[2026-06-01 15:30 PT] OK | VOL-1852 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1852/1852.PDF
+[2026-06-01 15:30 PT] FAIL | VOL-1852 | Download failed: IncompleteRead(2770335 bytes read, 10407387 more expected)
+[2026-06-01 15:30 PT] OK | VOL-1853 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1853/1853.pdf
+[2026-06-01 15:30 PT] OK | VOL-1853 | Downloaded 13.6 MB in 3.5s (3.9 MB/s)
+[2026-06-01 15:30 PT] OK | VOL-1853 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:32 PT] OK | VOL-1853 | OCR complete: 120/318 pages | 80s total | 0.7s/page
+[2026-06-01 15:32 PT] OK | VOL-1853 | OCR quality estimate: 2030 non-space chars/page -> GOOD
+[2026-06-01 15:32 PT] OK | VOL-1853 | Parsed 82 acts
+[2026-06-01 15:32 PT] OK | VOL-1853 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1853.json
+[2026-06-01 15:32 PT] OK | BENCH | 1853 | pages_ocrd=120/318 | acts=82 | sec/pg=0.7 | quality=GOOD | status=DONE
+[2026-06-01 15:32 PT] OK | VOL-1854 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1854/1854.PDF
+[2026-06-01 15:32 PT] OK | VOL-1854 | Downloaded 11.7 MB in 3.2s (3.7 MB/s)
+[2026-06-01 15:32 PT] OK | VOL-1854 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:33 PT] OK | VOL-1854 | OCR complete: 120/230 pages | 100s total | 0.8s/page
+[2026-06-01 15:33 PT] OK | VOL-1854 | OCR quality estimate: 2755 non-space chars/page -> GOOD
+[2026-06-01 15:33 PT] OK | VOL-1854 | Parsed 92 acts
+[2026-06-01 15:33 PT] OK | VOL-1854 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1854.json
+[2026-06-01 15:33 PT] OK | BENCH | 1854 | pages_ocrd=120/230 | acts=92 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 15:33 PT] OK | VOL-1855 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1855/1855.PDF
+[2026-06-01 15:33 PT] OK | VOL-1855 | Downloaded 15.0 MB in 4.5s (3.4 MB/s)
+[2026-06-01 15:33 PT] OK | VOL-1855 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:35 PT] OK | VOL-1855 | OCR complete: 120/324 pages | 85s total | 0.7s/page
+[2026-06-01 15:35 PT] OK | VOL-1855 | OCR quality estimate: 2247 non-space chars/page -> GOOD
+[2026-06-01 15:35 PT] OK | VOL-1855 | Parsed 90 acts
+[2026-06-01 15:35 PT] OK | VOL-1855 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1855.json
+[2026-06-01 15:35 PT] OK | BENCH | 1855 | pages_ocrd=120/324 | acts=90 | sec/pg=0.7 | quality=GOOD | status=DONE
+[2026-06-01 15:35 PT] OK | VOL-1856 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1856/1856.PDF
+[2026-06-01 15:35 PT] OK | VOL-1856 | Downloaded 11.7 MB in 3.0s (4.0 MB/s)
+[2026-06-01 15:35 PT] OK | VOL-1856 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:36 PT] OK | VOL-1856 | OCR complete: 120/239 pages | 81s total | 0.7s/page
+[2026-06-01 15:36 PT] OK | VOL-1856 | OCR quality estimate: 2132 non-space chars/page -> GOOD
+[2026-06-01 15:36 PT] OK | VOL-1856 | Parsed 97 acts
+[2026-06-01 15:36 PT] OK | VOL-1856 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1856.json
+[2026-06-01 15:36 PT] OK | BENCH | 1856 | pages_ocrd=120/239 | acts=97 | sec/pg=0.7 | quality=GOOD | status=DONE
+[2026-06-01 15:36 PT] OK | VOL-1857 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1857/1857.PDF
+[2026-06-01 15:36 PT] OK | VOL-1857 | Downloaded 17.8 MB in 4.4s (4.0 MB/s)
+[2026-06-01 15:36 PT] OK | VOL-1857 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:38 PT] OK | VOL-1857 | OCR complete: 120/394 pages | 84s total | 0.7s/page
+[2026-06-01 15:38 PT] OK | VOL-1857 | OCR quality estimate: 2169 non-space chars/page -> GOOD
+[2026-06-01 15:38 PT] OK | VOL-1857 | Parsed 99 acts
+[2026-06-01 15:38 PT] OK | VOL-1857 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1857.json
+[2026-06-01 15:38 PT] OK | BENCH | 1857 | pages_ocrd=120/394 | acts=99 | sec/pg=0.7 | quality=GOOD | status=DONE
+[2026-06-01 15:38 PT] OK | VOL-1858 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1858/1858.pdf
+[2026-06-01 15:38 PT] OK | VOL-1858 | Downloaded 20.9 MB in 6.0s (3.5 MB/s)
+[2026-06-01 15:38 PT] OK | VOL-1858 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:40 PT] OK | VOL-1858 | OCR complete: 120/386 pages | 99s total | 0.8s/page
+[2026-06-01 15:40 PT] OK | VOL-1858 | OCR quality estimate: 2484 non-space chars/page -> GOOD
+[2026-06-01 15:40 PT] OK | VOL-1858 | Parsed 0 acts
+[2026-06-01 15:40 PT] OK | VOL-1858 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1858.json
+[2026-06-01 15:40 PT] OK | BENCH | 1858 | pages_ocrd=120/386 | acts=0 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 15:40 PT] OK | VOL-1859 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1859/1859.pdf
+[2026-06-01 15:40 PT] OK | VOL-1859 | Downloaded 21.2 MB in 5.0s (4.2 MB/s)
+[2026-06-01 15:40 PT] OK | VOL-1859 | Starting OCR (DPI=200, max=120 pages)
+[2026-06-01 15:41 PT] OK | VOL-1859 | OCR complete: 120/427 pages | 95s total | 0.8s/page
+[2026-06-01 15:41 PT] OK | VOL-1859 | OCR quality estimate: 2389 non-space chars/page -> GOOD
+[2026-06-01 15:41 PT] OK | VOL-1859 | Parsed 0 acts
+[2026-06-01 15:41 PT] OK | VOL-1859 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1859.json
+[2026-06-01 15:41 PT] OK | BENCH | 1859 | pages_ocrd=120/427 | acts=0 | sec/pg=0.8 | quality=GOOD | status=DONE
+[2026-06-01 15:41 PT] OK | VOL-1860 | Downloading https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1860/1860.PDF
+[2026-06-01 15:41 PT] OK | VOL-1860 | Downloaded 18.9 MB in 6.1s (3.1 MB/s)
+[2026-06-01 15:41 PT] OK | VOL-1860 | Starting OCR (DPI=200, max=120 pages)
