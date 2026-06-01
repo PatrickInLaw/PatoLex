@@ -83,6 +83,14 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Build order locked:** start at the proven **1872 baseline**, Method A forward to the ~1991 seam (Penal Code first); **1850–71 pre-code = later distinct pass**. Not cold at 1850.
 - **Handoff written → `docs/80_PROJECT_HISTORY/HANDOFF_cc002_to_cc003.md`** — cc003 to implement the Gate D **DDL** (Drizzle tables, local staging DB, `btree_gist`), then seed the 1872 Penal Code baseline and run the first Method-A build vertical. Includes all decided constraints, artifact/scratch locations, working rules, open threads. (DDL = Data Definition Language — the `CREATE TABLE`/index/constraint SQL.)
 
+### Phase 13 — Gate D DDL implemented (first product code)
+- **Decided context wouldn't be wasted — kept building.** Implemented the Gate D schema as Drizzle DDL (orchestrated: sonnet wrote, Opus reviewed, verify-auditor "Hans" adversarially audited, sonnet revised, Opus verified).
+- **Scaffold (first `src/` code):** `package.json`, `tsconfig.json`, `drizzle.config.ts`, `src/lib/db/{client.ts, schema/*}`, `.env.example`, `drizzle/0000_breezy_randall_flagg.sql` + `drizzle/README.md`. Minimal DB-layer only (no Next.js app yet — YAGNI until Gate H). Postgres 16 + Drizzle + postgres-js.
+- **7 tables** per `SCHEMA_DESIGN.md`: `source_document`, `enactment`, `provision`, `designation_history`, `change_event`, `lineage_edge`, materialized `provision_version`. `db:generate` + `typecheck` pass.
+- **Adversarial review (verify-auditor = "Hans") caught real issues**, all fixed in one revision pass: a `charteredOut`→`chapteredOut` TS typo; the fragile packed-bigint `sequence` replaced with explicit `in_act_order` + tuple sort `(operative_date, chapter_number, in_act_order)`; missing `designation_history` GiST exclusion constraint added; missing `lineage_edge.continues` flag added; `bill_number` added to `enactment`; **`public_id` made PURE UUIDv7** (added a `uuid_generate_v7()` SQL function as the default — no v4 anywhere, per Patrick); deferrable self-FKs; `ocr_cer_estimate` 0–1 CHECK; FTS generated column + GIN index made Drizzle-native (so regeneration won't regress); lazy DB client (CI-safe). Rejected with reasons: cross-table repeal-text CHECK (→ Gate-G validation), redundant-index removal (read model is write-once), `legislature`-as-integer (CA has special sessions).
+- **Opus verified the final migration**: `uuid_generate_v7()` bit-layout correct (v7 nibble@hex-13, variant@17, time-ordered); btree_gist before both exclusion constraints; FK/function ordering valid; single clean migration. Fixed `.gitignore` to track `drizzle/meta/` (the migration ledger). **Commit-ready.**
+- **NOTE (for Patrick):** CLAUDE.md says *"Hans review = Codex adversarial review"* but Patrick clarified **Hans ≠ Codex**. Used the `verify-auditor` agent as the adversarial pass. CLAUDE.md's Hans/Codex line needs correcting once Hans is defined.
+
 ---
 
 ## Files Changed
@@ -149,4 +157,5 @@ Current state (end of cc002 work-in-progress): scope set (historical-first, full
 - `88e5c91` — part 10 (full-corpus inventory, blank-slate, Method A decision, git-repo idea).
 - `91dbc1e` — part 11 (session-log brought current pre-compaction).
 - `4d5a408` — part 12 (Method A re-spike QUALIFIED-GO, LAW_AS_GIT.md, ADJACENT_DOMAINS_FEASIBILITY.md, perpetuity memory, ROADMAP status).
-- (this /ucp) — part 13 (Gate D SCHEMA_DESIGN refined: CQRS/perf, diffs, GUID, lineage DAG; CA-reg baseline-plus-forward; HANDOFF_cc002_to_cc003.md; gate-d memory).
+- `93201e6` — part 13 (Gate D SCHEMA_DESIGN refined: CQRS/perf, diffs, GUID, lineage DAG; CA-reg baseline-plus-forward; HANDOFF_cc002_to_cc003.md; gate-d memory).
+- (this /ucp) — part 14 (Gate D DDL implemented + adversarially reviewed + revised: first product code — Drizzle schema, 7 tables, pure-v7, dual GiST exclusions).

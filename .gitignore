@@ -69,3 +69,8 @@ Thumbs.db
 pipeline/data/
 pipeline/raw/
 pipeline/cache/
+
+# --- Drizzle kit ---
+# Commit the ENTIRE drizzle/ folder: the *.sql migrations AND drizzle/meta/
+# (_journal.json is the migration ledger; snapshots are the diff baseline).
+# Per Drizzle docs, the meta folder belongs in source control.

@@ -1,0 +1,38 @@
+[2026-06-01 09:00 PT] START | Gate D DDL implementation — Drizzle schema scaffold | OK
+[2026-06-01 09:00 PT] READ | SCHEMA_DESIGN.md and CLAUDE.md fully read | OK
+[2026-06-01 09:01 PT] PLAN | 7 entities: source_document, enactment, provision, designation_history, change_event, lineage_edge, provision_version | OK
+[2026-06-01 09:05 PT] SCAFFOLD | package.json, tsconfig.json, drizzle.config.ts, .env.example, .gitignore additions | OK
+[2026-06-01 09:06 PT] SCHEMA | src/lib/db/schema/_types.ts — customType daterange + tsvector | OK
+[2026-06-01 09:07 PT] SCHEMA | src/lib/db/schema/enums.ts — 7 pgEnum definitions | OK
+[2026-06-01 09:08 PT] SCHEMA | src/lib/db/schema/source-document.ts | OK
+[2026-06-01 09:09 PT] SCHEMA | src/lib/db/schema/enactment.ts | OK
+[2026-06-01 09:10 PT] SCHEMA | src/lib/db/schema/provision.ts — bigint id + uuid public_id | OK
+[2026-06-01 09:11 PT] SCHEMA | src/lib/db/schema/designation-history.ts | OK
+[2026-06-01 09:12 PT] SCHEMA | src/lib/db/schema/change-event.ts — self-FK AnyPgColumn fix | OK
+[2026-06-01 09:13 PT] SCHEMA | src/lib/db/schema/lineage-edge.ts | OK
+[2026-06-01 09:14 PT] SCHEMA | src/lib/db/schema/provision-version.ts | OK
+[2026-06-01 09:15 PT] SCHEMA | src/lib/db/schema/index.ts — barrel export | OK
+[2026-06-01 09:16 PT] CLIENT | src/lib/db/client.ts — postgres-js + drizzle wrapper | OK
+[2026-06-01 09:17 PT] INSTALL | npm install — drizzle-orm ^0.45.2 (SQL injection fix), postgres, drizzle-kit, tsx, typescript | OK
+[2026-06-01 09:18 PT] GENERATE | npm run db:generate — 7 tables emitted to drizzle/0000_wandering_shinobi_shaw.sql | OK
+[2026-06-01 09:19 PT] TYPECHECK | tsc --noEmit — 0 errors after AnyPgColumn self-FK fix | OK
+[2026-06-01 09:20 PT] HAND-EDIT | Migration SQL: (1) CREATE EXTENSION btree_gist; (2) fts_vector GENERATED ALWAYS stored; (3) GiST EXCLUDE constraint; (4) GIN index on fts_vector | OK
+[2026-06-01 09:21 PT] TYPECHECK | Final tsc --noEmit — 0 errors | OK
+[2026-06-01 09:21 PT] COMPLETE | Gate D DDL scaffold complete — ready for Codex review before commit | OK
+[2026-06-01 11:00 PT] START | Gate D adversarial-review revision (12 items) | OK
+[2026-06-01 11:01 PT] FIX-1 | change-event.ts: charteredOut → chapteredOut (typo fix) | OK
+[2026-06-01 11:02 PT] FIX-2 | change-event.ts: replaced sequence bigint with in_act_order integer NOT NULL; updated module docstring with canonical §9605 ordering tuple | OK
+[2026-06-01 11:03 PT] FIX-3 | designation-history.ts: added GiST exclusion constraint doc comment; updated query pattern comment to remove misleading ORDER BY/LIMIT 1 note | OK
+[2026-06-01 11:04 PT] FIX-4 | provision.ts: replaced defaultRandom()/gen_random_uuid() with .default(sql`uuid_generate_v7()`); updated module and column docstrings | OK
+[2026-06-01 11:05 PT] FIX-5 | enactment.ts: added bill_number text nullable column with doc comment | OK
+[2026-06-01 11:06 PT] FIX-6 | lineage-edge.ts: added continues boolean nullable column with doc comment | OK
+[2026-06-01 11:07 PT] FIX-7 | migration SQL: DEFERRABLE INITIALLY DEFERRED on supersedes_id, superseded_by_id, double_jointed_with_id FKs (HAND-EDITED 6) | OK
+[2026-06-01 11:08 PT] FIX-8 | migration SQL: CHECK constraint on source_document.ocr_cer_estimate (HAND-EDITED 5); added inline doc comment to source-document.ts | OK
+[2026-06-01 11:09 PT] FIX-9 | provision-version.ts: fts_vector now uses tsvector customType + generatedAlwaysAs(sql`to_tsvector(...)`) natively; GIN index via .using('gin', ...); removed old hand-edit docstring for these two items | OK
+[2026-06-01 11:10 PT] FIX-10 | client.ts: replaced eager init with lazy getDb()/getSql() singleton; DATABASE_URL read on first call, not at import | OK
+[2026-06-01 11:11 PT] FIX-11 | drizzle/README.md created — documents all hand-edited sections, regeneration checklist, and population model; _types.ts dangling reference fixed | OK
+[2026-06-01 11:12 PT] FIX-12 | provision-version.ts + README: ETL/Gate-G invariant (repeal → text IS NULL) documented; explicit note that it is NOT a DDL CHECK | OK
+[2026-06-01 11:13 PT] GENERATE | npm run db:generate — regenerated drizzle/0000_breezy_randall_flagg.sql; verified: in_act_order, bill_number, continues, uuid_generate_v7(), GENERATED ALWAYS tsvector, GIN index all present | OK
+[2026-06-01 11:14 PT] HAND-EDIT | Migration: (1) btree_gist; (2) uuid_generate_v7() function; (3) provision_version EXCLUDE; (4) designation_history EXCLUDE; (5) ocr_cer_estimate CHECK; (6) DEFERRABLE FKs | OK
+[2026-06-01 11:15 PT] TYPECHECK | tsc --noEmit — 0 errors | OK
+[2026-06-01 11:15 PT] COMPLETE | All 12 adversarial-review items applied; migration regenerated and hand-edited; typecheck passes | OK
