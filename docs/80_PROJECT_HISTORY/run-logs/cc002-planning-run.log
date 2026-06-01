@@ -33,3 +33,7 @@
 [2026-05-31 22:30 PT] OCR-SPIKE | Benchmark (144 rows): best qwen2.5vl:7b ~55% page-CER (34-43% law pages) -- NOT legal-grade. 5090 3x faster; both usable; batch worse; ~23K pg/day | WARN
 [2026-05-31 22:35 PT] OCR-SPIKE | Caveats: page-CER incl. marginalia overstates body error; cross-model diagnostic not run; Tesseract/Falcon untested. Text-layer risk ACTIVE | WARN
 [2026-05-31 22:40 PT] WRITE | GATE_C_SLICE_PROOF.md -- OCR benchmark section + verdict | OK
+[2026-06-01 09:30 PT] OCR-R2 | Body-only CER ~17% (8.7-13% law pages) vs 55% page-level -- metric was inflated by marginalia | OK
+[2026-06-01 09:35 PT] OCR-R2 | Blocker = scan quality (Google JPEG ~150-200dpi); best engines (surya/Falcon/GOT/Paddle) need Linux, untested; consensus flag-recall 74-94% (architecture OK) | WARN
+[2026-06-01 09:40 PT] OCR-R2 | VERDICT NOT-YET but viable; gap 6-18pts; next = test a clean non-Google high-res scan | WARN
+[2026-06-01 09:45 PT] CLEAN | Removed spurious SESSION_cc003 log written by subagent (still cc002); kept ocr-round2-run.log | OK

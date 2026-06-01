@@ -1,0 +1,177 @@
+[2026-06-01 07:17 PT] OK | MAIN | PatoLex OCR Round-2 starting
+[2026-06-01 07:17 PT] OK | MAIN | === TASK 1: Body-only CER ===
+[2026-06-01 07:17 PT] OK | TASK1 | Computing body-only CER from round-1 raw outputs
+[2026-06-01 07:17 PT] OK | TASK1 | 1872_title_page.png qwen2.5vl round-1: page_cer=0.800 body_cer=0.282
+[2026-06-01 07:17 PT] OK | TASK1 | Running qwen2.5vl with body-only prompt: 1872_title_page.png
+[2026-06-01 07:17 PT] OK | TASK1 | 1872_title_page.png body-prompt: page_cer=0.800 body_cer=0.282 lat=13.6s
+[2026-06-01 07:17 PT] OK | TASK1 | 1872_toc_start.png qwen2.5vl round-1: page_cer=0.511 body_cer=0.293
+[2026-06-01 07:17 PT] OK | TASK1 | Running qwen2.5vl with body-only prompt: 1872_toc_start.png
+[2026-06-01 07:18 PT] OK | TASK1 | 1872_toc_start.png body-prompt: page_cer=0.794 body_cer=0.685 lat=9.6s
+[2026-06-01 07:18 PT] OK | TASK1 | 1872_sec187_murder.png qwen2.5vl round-1: page_cer=0.399 body_cer=0.125
+[2026-06-01 07:18 PT] OK | TASK1 | Running qwen2.5vl with body-only prompt: 1872_sec187_murder.png
+[2026-06-01 07:18 PT] OK | TASK1 | 1872_sec187_murder.png body-prompt: page_cer=0.549 body_cer=0.333 lat=12.8s
+[2026-06-01 07:18 PT] OK | TASK1 | 1903_title_page.png qwen2.5vl round-1: page_cer=0.684 body_cer=0.014
+[2026-06-01 07:18 PT] OK | TASK1 | Running qwen2.5vl with body-only prompt: 1903_title_page.png
+[2026-06-01 07:18 PT] OK | TASK1 | 1903_title_page.png body-prompt: page_cer=0.684 body_cer=0.014 lat=7.8s
+[2026-06-01 07:18 PT] OK | TASK1 | 1903_sec211_robbery.png qwen2.5vl round-1: page_cer=0.465 body_cer=0.129
+[2026-06-01 07:18 PT] OK | TASK1 | Running qwen2.5vl with body-only prompt: 1903_sec211_robbery.png
+[2026-06-01 07:18 PT] OK | TASK1 | 1903_sec211_robbery.png body-prompt: page_cer=0.499 body_cer=0.160 lat=13.2s
+[2026-06-01 07:18 PT] OK | TASK1 | Done. 10 rows written.
+[2026-06-01 07:18 PT] OK | MAIN | === TASK 2a: 600 DPI ===
+[2026-06-01 07:18 PT] OK | TASK2a | Rendering gold pages at 600 DPI and re-OCRing
+[2026-06-01 07:18 PT] OK | TASK2a | Rendered 1872_title_page.png at 600 DPI -> 1872_title_page.png (1204KB)
+[2026-06-01 07:18 PT] OK | TASK2a | Running qwen2.5vl on 600dpi 1872_title_page.png
+[2026-06-01 07:18 PT] OK | TASK2a | 1872_title_page.png 600dpi: page_cer=0.800 body_cer=0.282 lat=7.6s
+[2026-06-01 07:18 PT] OK | TASK2a | Rendered 1872_toc_start.png at 600 DPI -> 1872_toc_start.png (221KB)
+[2026-06-01 07:18 PT] OK | TASK2a | Running qwen2.5vl on 600dpi 1872_toc_start.png
+[2026-06-01 07:19 PT] OK | TASK2a | 1872_toc_start.png 600dpi: page_cer=0.794 body_cer=0.685 lat=9.4s
+[2026-06-01 07:19 PT] OK | TASK2a | Rendered 1872_sec187_murder.png at 600 DPI -> 1872_sec187_murder.png (324KB)
+[2026-06-01 07:19 PT] OK | TASK2a | Running qwen2.5vl on 600dpi 1872_sec187_murder.png
+[2026-06-01 07:19 PT] OK | TASK2a | 1872_sec187_murder.png 600dpi: page_cer=0.549 body_cer=0.333 lat=12.7s
+[2026-06-01 07:19 PT] OK | TASK2a | Rendered 1903_title_page.png at 600 DPI -> 1903_title_page.png (87KB)
+[2026-06-01 07:19 PT] OK | TASK2a | Running qwen2.5vl on 600dpi 1903_title_page.png
+[2026-06-01 07:19 PT] OK | TASK2a | 1903_title_page.png 600dpi: page_cer=0.684 body_cer=0.014 lat=8.0s
+[2026-06-01 07:19 PT] OK | TASK2a | Rendered 1903_sec211_robbery.png at 600 DPI -> 1903_sec211_robbery.png (249KB)
+[2026-06-01 07:19 PT] OK | TASK2a | Running qwen2.5vl on 600dpi 1903_sec211_robbery.png
+[2026-06-01 07:19 PT] OK | TASK2a | 1903_sec211_robbery.png 600dpi: page_cer=0.450 body_cer=0.087 lat=14.6s
+[2026-06-01 07:19 PT] OK | TASK2a | Done. 5 rows written.
+[2026-06-01 07:19 PT] OK | MAIN | === TASK 2b: Internet Archive scan ===
+[2026-06-01 07:19 PT] OK | TASK2b | Fetching Internet Archive non-Google scan for comparison
+[2026-06-01 07:19 PT] OK | TASK2b | Downloading IA PDF: https://archive.org/download/penalcodecalifo00caliiala/penalcodecalifo00caliiala.pdf
+[2026-06-01 07:19 PT] WARN | TASK2b | IA full PDF download failed: HTTP Error 503: Service Unavailable — trying page-image API
+[2026-06-01 07:19 PT] OK | TASK2b | Downloading IA page image: https://archive.org/download/penalcodecalifo00caliiala/page/n147_w800.jpg
+[2026-06-01 07:19 PT] FAIL | TASK2b | IA page image download failed: HTTP Error 404: Not Found
+[2026-06-01 07:19 PT] OK | TASK2b | Trying alternate IA identifier: https://archive.org/download/penalcodecalifo00cali/page/n147_w800.jpg
+[2026-06-01 07:19 PT] FAIL | TASK2b | Alt IA download also failed: HTTP Error 404: Not Found — skipping TASK2b
+[2026-06-01 07:19 PT] OK | MAIN | === TASK 3: Dedicated engines ===
+[2026-06-01 07:19 PT] OK | TASK3 | Running dedicated OCR engines on gold pages
+[2026-06-01 07:19 PT] OK | TASK3 | Running tesseract5 on 1872_title_page.png
+[2026-06-01 07:19 PT] FAIL | TASK3 | tesseract5 on 1872_title_page.png FAILED: Error: tesseract is not installed or it's not in your PATH. See README file for more information.
+[2026-06-01 07:19 PT] OK | TASK3 | Running surya-ocr on 1872_title_page.png
+[2026-06-01 07:19 PT] FAIL | TASK3 | surya-ocr on 1872_title_page.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-
+[2026-06-01 07:19 PT] OK | TASK3 | Running paddleocr on 1872_title_page.png
+[2026-06-01 07:19 PT] FAIL | TASK3 | paddleocr on 1872_title_page.png FAILED: ImportError: No module named 'paddleocr'
+[2026-06-01 07:19 PT] OK | TASK3 | Running falcon-ocr on 1872_title_page.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | falcon-ocr on 1872_title_page.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\AppData\Local\Programs\
+[2026-06-01 07:20 PT] OK | TASK3 | Running got-ocr2 on 1872_title_page.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | got-ocr2 on 1872_title_page.png FAILED: ImportError: This modeling file requires the following packages that were not found in your environm
+[2026-06-01 07:20 PT] OK | TASK3 | Running tesseract5 on 1872_toc_start.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | tesseract5 on 1872_toc_start.png FAILED: Error: tesseract is not installed or it's not in your PATH. See README file for more information.
+[2026-06-01 07:20 PT] OK | TASK3 | Running surya-ocr on 1872_toc_start.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | surya-ocr on 1872_toc_start.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-
+[2026-06-01 07:20 PT] OK | TASK3 | Running paddleocr on 1872_toc_start.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | paddleocr on 1872_toc_start.png FAILED: ImportError: No module named 'paddleocr'
+[2026-06-01 07:20 PT] OK | TASK3 | Running falcon-ocr on 1872_toc_start.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | falcon-ocr on 1872_toc_start.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\AppData\Local\Programs\
+[2026-06-01 07:20 PT] OK | TASK3 | Running got-ocr2 on 1872_toc_start.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | got-ocr2 on 1872_toc_start.png FAILED: ImportError: This modeling file requires the following packages that were not found in your environm
+[2026-06-01 07:20 PT] OK | TASK3 | Running tesseract5 on 1872_sec187_murder.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | tesseract5 on 1872_sec187_murder.png FAILED: Error: tesseract is not installed or it's not in your PATH. See README file for more information.
+[2026-06-01 07:20 PT] OK | TASK3 | Running surya-ocr on 1872_sec187_murder.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | surya-ocr on 1872_sec187_murder.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-
+[2026-06-01 07:20 PT] OK | TASK3 | Running paddleocr on 1872_sec187_murder.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | paddleocr on 1872_sec187_murder.png FAILED: ImportError: No module named 'paddleocr'
+[2026-06-01 07:20 PT] OK | TASK3 | Running falcon-ocr on 1872_sec187_murder.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | falcon-ocr on 1872_sec187_murder.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\AppData\Local\Programs\
+[2026-06-01 07:20 PT] OK | TASK3 | Running got-ocr2 on 1872_sec187_murder.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | got-ocr2 on 1872_sec187_murder.png FAILED: ImportError: This modeling file requires the following packages that were not found in your environm
+[2026-06-01 07:20 PT] OK | TASK3 | Running tesseract5 on 1903_title_page.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | tesseract5 on 1903_title_page.png FAILED: Error: tesseract is not installed or it's not in your PATH. See README file for more information.
+[2026-06-01 07:20 PT] OK | TASK3 | Running surya-ocr on 1903_title_page.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | surya-ocr on 1903_title_page.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-
+[2026-06-01 07:20 PT] OK | TASK3 | Running paddleocr on 1903_title_page.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | paddleocr on 1903_title_page.png FAILED: ImportError: No module named 'paddleocr'
+[2026-06-01 07:20 PT] OK | TASK3 | Running falcon-ocr on 1903_title_page.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | falcon-ocr on 1903_title_page.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\AppData\Local\Programs\
+[2026-06-01 07:20 PT] OK | TASK3 | Running got-ocr2 on 1903_title_page.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | got-ocr2 on 1903_title_page.png FAILED: ImportError: This modeling file requires the following packages that were not found in your environm
+[2026-06-01 07:20 PT] OK | TASK3 | Running tesseract5 on 1903_sec211_robbery.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | tesseract5 on 1903_sec211_robbery.png FAILED: Error: tesseract is not installed or it's not in your PATH. See README file for more information.
+[2026-06-01 07:20 PT] OK | TASK3 | Running surya-ocr on 1903_sec211_robbery.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | surya-ocr on 1903_sec211_robbery.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-
+[2026-06-01 07:20 PT] OK | TASK3 | Running paddleocr on 1903_sec211_robbery.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | paddleocr on 1903_sec211_robbery.png FAILED: ImportError: No module named 'paddleocr'
+[2026-06-01 07:20 PT] OK | TASK3 | Running falcon-ocr on 1903_sec211_robbery.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | falcon-ocr on 1903_sec211_robbery.png FAILED: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\AppData\Local\Programs\
+[2026-06-01 07:20 PT] OK | TASK3 | Running got-ocr2 on 1903_sec211_robbery.png
+[2026-06-01 07:20 PT] FAIL | TASK3 | got-ocr2 on 1903_sec211_robbery.png FAILED: ImportError: This modeling file requires the following packages that were not found in your environm
+[2026-06-01 07:20 PT] OK | TASK3 | Done. 25 rows written.
+[2026-06-01 07:20 PT] OK | MAIN | === TASK 4: Consensus ===
+[2026-06-01 07:20 PT] OK | TASK4 | Building multi-model consensus and measuring flag recall
+[2026-06-01 07:20 PT] OK | TASK4 | 1872_title_page.png: consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi']
+[2026-06-01 07:20 PT] OK | TASK4 | 1872_title_page.png: consensus body_cer=0.282 best_single=0.282 flag_recall=0.000
+[2026-06-01 07:20 PT] OK | TASK4 | 1872_toc_start.png: consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi']
+[2026-06-01 07:20 PT] OK | TASK4 | 1872_toc_start.png: consensus body_cer=0.685 best_single=0.685 flag_recall=0.000
+[2026-06-01 07:20 PT] OK | TASK4 | 1872_sec187_murder.png: consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi']
+[2026-06-01 07:20 PT] OK | TASK4 | 1872_sec187_murder.png: consensus body_cer=0.333 best_single=0.333 flag_recall=0.000
+[2026-06-01 07:20 PT] OK | TASK4 | 1903_title_page.png: consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi']
+[2026-06-01 07:20 PT] OK | TASK4 | 1903_title_page.png: consensus body_cer=0.014 best_single=0.014 flag_recall=0.000
+[2026-06-01 07:20 PT] OK | TASK4 | 1903_sec211_robbery.png: consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi']
+[2026-06-01 07:20 PT] OK | TASK4 | 1903_sec211_robbery.png: consensus body_cer=0.161 best_single=0.087 flag_recall=0.269
+[2026-06-01 07:20 PT] OK | TASK4 | Done. 5 rows written.
+[2026-06-01 07:20 PT] OK | MAIN | === GENERATING REPORT ===
+[2026-06-01 07:20 PT] OK | REPORT | Generating ocr_round2_report.md
+[2026-06-01 07:20 PT] OK | REPORT | Report written to C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-historical\ocr_round2_report.md
+[2026-06-01 07:20 PT] OK | MAIN | Round-2 complete
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Starting follow-up: Tesseract + Falcon-OCR
+[2026-06-01 07:29 PT] OK | FOLLOWUP | --- Tesseract ---
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract on 1872_title_page.png
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract 1872_title_page.png: page_cer=0.847 body_cer=0.469 lat=0.9s
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract on 1872_toc_start.png
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract 1872_toc_start.png: page_cer=0.702 body_cer=0.575 lat=0.7s
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract on 1872_sec187_murder.png
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract 1872_sec187_murder.png: page_cer=0.403 body_cer=0.205 lat=0.9s
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract on 1903_title_page.png
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract 1903_title_page.png: page_cer=0.734 body_cer=0.180 lat=0.3s
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract on 1903_sec211_robbery.png
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract 1903_sec211_robbery.png: page_cer=0.427 body_cer=0.103 lat=0.7s
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Tesseract done: 5 rows
+[2026-06-01 07:29 PT] OK | FOLLOWUP | --- Falcon-OCR ---
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Falcon-OCR on 1872_title_page.png
+[2026-06-01 07:29 PT] OK | FALCON | Loading Falcon-OCR model (first call)...
+[2026-06-01 07:29 PT] FAIL | FOLLOWUP | Falcon-OCR FAILED on 1872_title_page.png: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\Pat
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Falcon-OCR on 1872_toc_start.png
+[2026-06-01 07:29 PT] OK | FALCON | Loading Falcon-OCR model (first call)...
+[2026-06-01 07:29 PT] FAIL | FOLLOWUP | Falcon-OCR FAILED on 1872_toc_start.png: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\Pat
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Falcon-OCR on 1872_sec187_murder.png
+[2026-06-01 07:29 PT] OK | FALCON | Loading Falcon-OCR model (first call)...
+[2026-06-01 07:29 PT] FAIL | FOLLOWUP | Falcon-OCR FAILED on 1872_sec187_murder.png: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\Pat
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Falcon-OCR on 1903_title_page.png
+[2026-06-01 07:29 PT] OK | FALCON | Loading Falcon-OCR model (first call)...
+[2026-06-01 07:29 PT] FAIL | FOLLOWUP | Falcon-OCR FAILED on 1903_title_page.png: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\Pat
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Falcon-OCR on 1903_sec211_robbery.png
+[2026-06-01 07:29 PT] OK | FALCON | Loading Falcon-OCR model (first call)...
+[2026-06-01 07:29 PT] FAIL | FOLLOWUP | Falcon-OCR FAILED on 1903_sec211_robbery.png: Error: Traceback (most recent call last):
+  File "C:\Users\PatrickKolasinski\Pat
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Falcon-OCR done: 5 rows
+[2026-06-01 07:29 PT] OK | FOLLOWUP | Follow-up complete
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | Computing consensus with Tesseract + qwen2.5vl for gold pages
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1872_title_page.png: computing consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi', 'tesseract5']
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1872_title_page.png: cons_body_cer=0.344 best_single=0.312 flag_recall=0.711 (27/38 errors flagged)
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1872_toc_start.png: computing consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi', 'tesseract5']
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1872_toc_start.png: cons_body_cer=0.694 best_single=0.575 flag_recall=0.688 (121/176 errors flagged)
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1872_sec187_murder.png: computing consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi', 'tesseract5']
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1872_sec187_murder.png: cons_body_cer=0.380 best_single=0.205 flag_recall=0.712 (247/347 errors flagged)
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1903_title_page.png: computing consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi', 'tesseract5']
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1903_title_page.png: cons_body_cer=0.105 best_single=0.049 flag_recall=0.667 (32/48 errors flagged)
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1903_sec211_robbery.png: computing consensus from ['qwen2.5vl_bodyprompt', 'qwen2.5vl_600dpi', 'tesseract5']
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | 1903_sec211_robbery.png: cons_body_cer=0.213 best_single=0.110 flag_recall=0.941 (271/288 errors flagged)
+[2026-06-01 07:32 PT] OK | CONSENSUS2 | Done: 5 rows written
+[2026-06-01 07:32 PT] OK | REPORT2 | Generating final report
+[2026-06-01 07:32 PT] OK | REPORT2 | Final report written: C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-historical\ocr_round2_report.md
+[2026-06-01 07:32 PT] OK | FINAL | Round-2 complete
+[2026-06-01 07:33 PT] OK | FINAL | Round-2 benchmark complete. Key results: body CER (qwen2.5vl) 8.7-12.9% on law pages; Tesseract 10.3-20.5%; consensus flag recall 74.3%; 4/5 dedicated engines failed (Linux-only deps). Files: ocr_round2_results.csv, ocr_round2_report.md

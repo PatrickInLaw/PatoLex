@@ -66,6 +66,18 @@ First-cut benchmark: 20 Penal Code page images (1872 + 1903), 5 with hand-verifi
 
 **Verdict:** vanilla local vision-LLM OCR is **not legal-grade** on 1870s pages out of the box; the text-layer risk is **active, not retired**. Path to retire it: (a) re-measure body-text-only CER; (b) test Tesseract + fix Falcon-OCR + a cloud ceiling reference; (c) multi-model consensus/voting with disagreement-flagging; (d) likely fine-tuning on period legal typography and/or higher-quality source scans; (e) human-verified baseline + per-section trust levels. The reconstruction *method* (annotation-driven, §ahead) still holds; the *exact-text* layer needs real work.
 
+### OCR Benchmark Round 2 — metric corrected, blocker identified
+
+Re-ran on the 5 gold pages with body-text-only scoring, a scan-resolution test, more engines, and consensus.
+
+- **The 55% was a false alarm.** Scored on **statutory body text only**, mean CER ≈ **17%** (8.7–13% on substantive law pages, 1.4% on a clean title page). The round-1 number was dominated by marginalia/headers/stamps we don't serve.
+- **Still NOT legal-grade.** Best body-CER **8.7%** (qwen2.5vl, 600 DPI) vs a <2% (ideally <1%) target — a **6–18 pt gap**.
+- **Scan quality is the dominant limiter, not the model.** The test images are Google Books scans (JPEG-compressed, effective ~150–200 DPI); higher render DPI barely helps because the detail isn't in the source. The decisive lever — a genuinely clean non-Google scan (IA microfilm / HathiTrust 300+ DPI grayscale) — is **still untested** (the IA image API 404'd).
+- **The strongest OCR engines couldn't be tested on this box.** surya, Falcon-OCR, GOT-OCR2.0, PaddleOCR all failed to install (triton/Docker Linux-only; Python 3.12 / torch 2.11 incompatibilities). Only qwen2.5vl + Tesseract ran (qwen2.5vl won). **Implication: the OCR pipeline likely needs a Linux environment** (WSL or the GPU box on Linux).
+- **Automation architecture validated.** 2-engine consensus gave **74–94% flag-recall** — i.e., most real errors land on engine-disagreement spans, so they'd be auto-flagged for spot-check. This is what makes "no line-by-line human review" viable. Caveat: consensus *accuracy* was no better than the best single engine because the two engines make **correlated** errors on Victorian type — voting needs more diverse/independent engines (the ones we couldn't install) or a better base.
+
+**Verdict: NOT-YET, but viable.** The architecture works and the real error rate is far lower than first reported; the blocker is **source scan quality** plus **untested best-in-class engines (Linux)**. Projected path to <1% (estimates, not yet measured): clean scans + preprocessing → ~3–8%; + multi-engine ensemble + fine-tuning on ~500 gold pages → <1%. **Next decisive experiment: OCR one genuinely clean high-res scan** before committing to fine-tuning. (Only 5 gold pages tested — indicative, not statistically firm.)
+
 ## Revision History
 
 | Date | Change |
