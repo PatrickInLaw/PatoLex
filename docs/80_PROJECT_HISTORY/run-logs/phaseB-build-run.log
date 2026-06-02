@@ -1,0 +1,46 @@
+[2026-06-02 06:40 PT] PHASEB | Start: code + offline dry-run + A/B only; NO DB writes; running pipeline untouched | OK
+[2026-06-02 06:40 PT] PHASEB | Inputs verified: production page_ocr_results.json has tess/doctr/surya_text; opusgold manifest maps gold pages to banked per-engine outputs | OK
+[2026-06-02 07:37 PT] PHASEB-AB | START A/B: version-A (Tesseract-only) vs version-B (token consensus) vs OpusGold | OK
+[2026-06-02 07:37 PT] PHASEB-AB | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 07:37 PT] PHASEB-AB | early_1850_p60: A=21.11% B=21.16% delta=0.05% fixed=1 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | early_1852_p40: A=5.08% B=4.56% delta=-0.52% fixed=20 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | early_1852_p70: A=3.43% B=3.68% delta=0.25% fixed=19 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | mid_1858_p50: A=14.13% B=15.27% delta=1.14% fixed=4 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | mid_1858_p90: A=30.84% B=30.84% delta=0.0% fixed=3 regressed=2 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | mid_1861_p80: A=13.88% B=14.41% delta=0.53% fixed=5 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | mid_1861_p130: A=4.57% B=5.67% delta=1.1% fixed=20 regressed=4 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | late_1867_68_p100: A=20.16% B=20.89% delta=0.73% fixed=6 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | late_1867_68_p160: A=64.83% B=64.74% delta=-0.09% fixed=10 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | late_1871_72_p120: A=9.98% B=10.9% delta=0.92% fixed=14 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | late_1871_72_p200: A=2.11% B=2.38% delta=0.27% fixed=10 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | era1880_p076: A=2.47% B=2.22% delta=-0.25% fixed=4 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | era1880_p096: A=1.09% B=2.24% delta=1.15% fixed=13 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | era1889_p199: A=2.76% B=3.58% delta=0.82% fixed=3 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | era1889_p219: A=2.06% B=2.03% delta=-0.03% fixed=4 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | era1899_p142: A=13.76% B=13.9% delta=0.14% fixed=3 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | era1899_p162: A=0.93% B=3.79% delta=2.86% fixed=5 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:37 PT] PHASEB-AB | results JSON -> C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex\pipeline\ab_compare_results.json | OK
+[2026-06-02 07:37 PT] PHASEB-AB | report -> C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex\docs\80_PROJECT_HISTORY\AB_CONSENSUS_VS_SINGLE.md | OK
+[2026-06-02 07:37 PT] PHASEB-AB | END A/B | OK
+[2026-06-02 07:38 PT] PHASEB-AB | START A/B: version-A (Tesseract-only) vs version-B (token consensus) vs OpusGold | OK
+[2026-06-02 07:38 PT] PHASEB-AB | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 07:38 PT] PHASEB-AB | early_1850_p60: A=21.11% B=21.16% delta=0.05% fixed=1 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | early_1852_p40: A=5.08% B=4.56% delta=-0.52% fixed=20 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | early_1852_p70: A=3.43% B=3.68% delta=0.25% fixed=19 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | mid_1858_p50: A=14.13% B=15.27% delta=1.14% fixed=4 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | mid_1858_p90: A=30.84% B=30.84% delta=0.0% fixed=3 regressed=2 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | mid_1861_p80: A=13.88% B=14.41% delta=0.53% fixed=5 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | mid_1861_p130: A=4.57% B=5.67% delta=1.1% fixed=20 regressed=4 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | late_1867_68_p100: A=20.16% B=20.89% delta=0.73% fixed=6 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | late_1867_68_p160: A=64.83% B=64.74% delta=-0.09% fixed=10 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | late_1871_72_p120: A=9.98% B=10.9% delta=0.92% fixed=14 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | late_1871_72_p200: A=2.11% B=2.38% delta=0.27% fixed=10 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | era1880_p076: A=2.47% B=2.22% delta=-0.25% fixed=4 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | era1880_p096: A=1.09% B=2.24% delta=1.15% fixed=13 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | era1889_p199: A=2.76% B=3.58% delta=0.82% fixed=3 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | era1889_p219: A=2.06% B=2.03% delta=-0.03% fixed=4 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | era1899_p142: A=13.76% B=13.9% delta=0.14% fixed=3 regressed=1 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | era1899_p162: A=0.93% B=3.79% delta=2.86% fixed=5 regressed=0 (token_majority_3) | OK
+[2026-06-02 07:38 PT] PHASEB-AB | results JSON -> C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex\pipeline\ab_compare_results.json | OK
+[2026-06-02 07:38 PT] PHASEB-AB | report -> C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex\docs\80_PROJECT_HISTORY\AB_CONSENSUS_VS_SINGLE.md | OK
+[2026-06-02 07:38 PT] PHASEB-AB | END A/B | OK

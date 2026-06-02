@@ -40,3 +40,4 @@
 [2026-06-02 07:20 PT] INGEST | 1869-70: running ingest_from_ocr.py | OK
 [2026-06-02 07:21 PT] INGEST | 1869-70: DB confirmed. enactment total now 3347 | OK
 [2026-06-02 07:21 PT] WATCHER | Remaining to ingest: 1871-72, 1873-74, 1875-76 | enactment total=3347 | OK
+[2026-06-02 07:40 PT] READY | 1871-72: OCR_COMPLETE.marker present on 5090 -- fetching | OK

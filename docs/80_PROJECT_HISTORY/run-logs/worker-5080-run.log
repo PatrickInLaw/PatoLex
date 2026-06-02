@@ -6,3 +6,6 @@
 [2026-06-02 06:33 PT] VERIFY | 5090 queue: 1871-72 in_progress by 5080-1 (atomic claim via shared lock); 5090 has 1865-66/1867-68/1869-70 -> NO collision | OK
 [2026-06-02 06:33 PT] VERIFY | Task PatoLex_OCR_5080 Running; Task PatoLex_OCR_5080_Backoff_0800 Ready, Next Run 08:00; ingest_watcher.py running (pid 50996) | OK
 [2026-06-02 06:33 PT] PROGRESS | 1871-72 rendering (874 pages so far); on OCR exit-0 worker scp's outputs+marker to 5090 -> ingest loop ingests | OK
+[2026-06-02 07:39 PT] PUSH | 1871-72: OCR outputs pushed to 5090 | OK
+[2026-06-02 07:39 PT] RUN | 1871-72: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 07:40 PT] WORKER | queue drained / no claimable volume -- exiting | OK
