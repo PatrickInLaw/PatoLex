@@ -1,0 +1,22 @@
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | dissent_filter.py loaded successfully | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | START OpusGold scoring 1880-1899 era extension | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | dissent_filter available: True | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | VLM engines: ['qwen25vl'] (got_ocr excluded - failed on all new pages) | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | New pages: late_1867_68_p160, era1880_p076, era1880_p096, era1889_p199, era1889_p219, era1899_p142, era1899_p162 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Processing page: late_1867_68_p160 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Processing page: era1880_p076 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Processing page: era1880_p096 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Processing page: era1889_p199 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Processing page: era1889_p219 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Processing page: era1899_p142 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Processing page: era1899_p162 | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Loaded prior era results: ['1850', '1852', '1858', '1861', '1867', '1871'] | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Combined 1850-1899 aggregate built from per-page data | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\opusgold_scoring_1880_1899.json | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Self-check saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\opusgold_selfcheck_1880_1899.json | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | New-pages VLM-aug silent: 0.67%  queue: 15.92% | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | All new eras at legal-grade: True | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | Combined 1850-1899 VLM-aug silent: 1.04% | OK
+[2026-06-02 22:20 PT] opusgold-scoring-1880-1899 | END OpusGold scoring 1880-1899 era extension | OK
+[2026-06-02 22:21 PT] opusgold-scoring-1880-1899 | SUMMARY: 7/7 pages scored; all new eras (1867s,1880,1889,1899) at/under legal-grade; combined 1850-1899 VLM-aug silent=1.04%; CER trend 1850->1899 IMPROVING (19.58%->7.12%); surya013 truncated output on era1880_p096 (inf CER -- doctr used as best); self-check low across all new pages (max 6 positions / 1.6% on era1899_p142, apparatus-skip artifacts) | OK

@@ -1,0 +1,20 @@
+[2026-06-02 21:57 PT] opusgold-scoring | dissent_filter.py loaded successfully | OK
+[2026-06-02 21:57 PT] opusgold-scoring | START OpusGold scoring | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:57 PT] opusgold-scoring | dissent_filter available: True | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Pages: early_1850_p60, early_1852_p40, early_1852_p70, mid_1858_p50, mid_1858_p90, mid_1861_p80, mid_1861_p130, late_1867_68_p100, late_1871_72_p120, late_1871_72_p200 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: early_1850_p60 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: early_1852_p40 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: early_1852_p70 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: mid_1858_p50 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: mid_1858_p90 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: mid_1861_p80 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: mid_1861_p130 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: late_1867_68_p100 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: late_1871_72_p120 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Processing page: late_1871_72_p200 | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\opusgold_scoring_results.json | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Self-check saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\opusgold_selfcheck.json | OK
+[2026-06-02 21:57 PT] opusgold-scoring | Aggregate VLM-aug silent: 1.29%  queue: 19.69% | OK
+[2026-06-02 21:57 PT] opusgold-scoring | All eras at legal-grade: False | OK
+[2026-06-02 21:57 PT] opusgold-scoring | END OpusGold scoring | OK

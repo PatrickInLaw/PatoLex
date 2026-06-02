@@ -135,3 +135,24 @@
 [2026-06-01 21:53 PT] PADDLE-OG | PaddleOCR 2.9 on 5090 (paddle-venv): 17/17 OK | OK
 [2026-06-01 21:53 PT] PADDLE-OG-LOCAL | PaddleOCR 3.6 local: 0/17 OK - OneDNN Unimplemented error (ConvertPirAttribute2RuntimeAttribute), ran on 5090 instead | WARN
 [2026-06-01 21:54 PT] QWEN-OG | Starting Qwen2.5VL:32b on 17 pages | OK
+[2026-06-01 21:55 PT] QWEN-OG | era1880_p076: 71.2s 2637b | OK
+[2026-06-01 21:56 PT] QWEN-OG | era1880_p096: 60.9s 2907b | OK
+[2026-06-01 21:57 PT] QWEN-OG | era1889_p199: 64.1s 2711b | OK
+[2026-06-01 21:58 PT] QWEN-OG | era1889_p219: 65.4s 3030b | OK
+[2026-06-01 21:59 PT] QWEN-OG | era1899_p142: 64.8s 2765b | OK
+[2026-06-01 22:00 PT] QWEN-OG | era1899_p162: 62.8s 2901b | OK
+[2026-06-01 22:01 PT] QWEN-OG | early_1850_p60: 72.7s 2994b | OK
+[2026-06-01 22:02 PT] QWEN-OG | early_1852_p40: 59.2s 2661b | OK
+[2026-06-01 22:04 PT] QWEN-OG | early_1852_p70: 68.7s 3126b | OK
+[2026-06-01 22:04 PT] GOT-OCR-OG | GOT-OCR 2.0 local: 0/11 FAIL - DynamicCache.seen_tokens AttributeError (transformers version mismatch, needs older transformers) | FAIL
+[2026-06-01 22:05 PT] QWEN-OG | mid_1858_p50: 65.6s 3105b | OK
+[2026-06-01 22:06 PT] QWEN-OG | mid_1858_p90: 62.2s 2465b | OK
+[2026-06-01 22:07 PT] QWEN-OG | mid_1861_p80: 46.5s 1932b | OK
+[2026-06-01 22:08 PT] QWEN-OG | mid_1861_p130: 79.2s 3221b | OK
+[2026-06-01 22:09 PT] QWEN-OG | late_1867_68_p100: 62.1s 2648b | OK
+[2026-06-01 22:10 PT] QWEN-OG | late_1867_68_p160: 50.0s 2081b | OK
+[2026-06-01 22:11 PT] QWEN-OG | late_1871_72_p120: 72.4s 3272b | OK
+[2026-06-01 22:12 PT] QWEN-OG | late_1871_72_p200: 73.0s 3277b | OK
+[2026-06-01 22:12 PT] QWEN-OG | Done. 17/17 OK | OK
+[2026-06-01 22:13 PT] MANIFEST | opusgold_manifest.json written: 17 pages, 5 engines each (tesseract/surya013/doctr/paddleocr2/qwen25vl), 0 got_ocr | OK
+[2026-06-01 22:13 PT] OPUSGOLD-PREP | All phases complete. 17/17 pages rendered+preprocessed+OCRd. VLM: qwen25vl 17/17 OK, got_ocr 0/17 FAIL | OK

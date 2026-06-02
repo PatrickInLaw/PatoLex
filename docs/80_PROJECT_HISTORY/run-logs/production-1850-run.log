@@ -1,0 +1,51 @@
+[2026-06-01 00:00 PT] INIT | Production 1850 run started -- pre-flight checks | OK
+[2026-06-01 22:11 PT] STAGE0 | Computing SHA256 of 1850_Statutes.pdf | OK
+[2026-06-01 22:11 PT] STAGE0 | SHA256=9ccbe75c7b0c26dfb70528cbd07447423e71b0f576f6c723af094f7be322017b (25ms) | OK
+[2026-06-01 22:11 PT] STAGE0 | SHA256 matches manifest -- file integrity verified | OK
+[2026-06-01 22:11 PT] STAGE0 | No existing row with this SHA256 -- proceeding with ingest | OK
+[2026-06-01 22:11 PT] STAGE0 | PDF opened: 480 pages | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | Rendering 480 pages at 300 DPI to C:\Users\PatrickKolasinski\PatoLex-scratch\production-1850\pages_raw | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 1/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 2/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 3/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 4/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 5/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 51/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 101/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 151/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 201/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 251/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 301/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 351/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 401/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | page 451/480 | OK
+[2026-06-01 22:11 PT] STAGE1-RENDER | Render complete: 480 pages in 31.8s (0.07s/page) | OK
+[2026-06-01 22:11 PT] STAGE2-PREPROCESS | Preprocessing 480 pages (v2 grayscale track) | OK
+[2026-06-01 22:11 PT] STAGE2-PREPROCESS | page 1/480 ok=1 fail=0 | OK
+[2026-06-01 22:11 PT] STAGE2-PREPROCESS | page 2/480 ok=2 fail=0 | OK
+[2026-06-01 22:11 PT] STAGE2-PREPROCESS | page 3/480 ok=3 fail=0 | OK
+[2026-06-01 22:12 PT] STAGE2-PREPROCESS | page 51/480 ok=51 fail=0 | OK
+[2026-06-01 22:13 PT] STAGE2-PREPROCESS | page 101/480 ok=101 fail=0 | OK
+[2026-06-01 22:14 PT] STAGE2-PREPROCESS | page 151/480 ok=151 fail=0 | OK
+[2026-06-01 22:16 PT] STAGE2-PREPROCESS | page 201/480 ok=201 fail=0 | OK
+[2026-06-01 22:17 PT] STAGE2-PREPROCESS | page 251/480 ok=251 fail=0 | OK
+[2026-06-01 22:18 PT] STAGE2-PREPROCESS | page 301/480 ok=301 fail=0 | OK
+[2026-06-01 22:19 PT] STAGE2-PREPROCESS | page 351/480 ok=351 fail=0 | OK
+[2026-06-01 22:20 PT] STAGE2-PREPROCESS | page 401/480 ok=401 fail=0 | OK
+[2026-06-01 22:21 PT] STAGE2-PREPROCESS | page 451/480 ok=451 fail=0 | OK
+[2026-06-01 22:22 PT] STAGE2-PREPROCESS | Preprocessing done: 480 OK / 0 FAIL in 628.5s | OK
+[2026-06-01 22:22 PT] STAGE3-CLASSIFY | Classifying 426 body-candidate pages (density + text scan) | OK
+[2026-06-01 22:22 PT] STAGE3-CLASSIFY | Reference body density (pages 54-93): median=0.1244 | OK
+[2026-06-01 22:22 PT] STAGE3-CLASSIFY | Classification done in 13.9s: body=423, front_matter=54, index=1, empty=2 | OK
+[2026-06-01 22:22 PT] STAGE3-CLASSIFY | Front-matter pages: 1-54 (0-indexed 0-53) | OK
+[2026-06-01 22:22 PT] STAGE3-CLASSIFY | Index pages detected (sparse+end): [479] | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | Loading docTR model (GPU: RTX 5080) | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | docTR running on GPU: NVIDIA GeForce RTX 5080 | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | Starting OCR consensus on 423 body pages | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | page 55 (1/423): agree=0.67 hi=False 1.5s | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | page 56 (2/423): agree=0.68 hi=False 1.5s | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | page 57 (3/423): agree=0.66 hi=False 1.6s | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | page 58 (4/423): agree=0.68 hi=False 1.6s | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | page 59 (5/423): agree=0.65 hi=False 1.6s | OK
+[2026-06-01 22:22 PT] STAGE4-OCR | page 75 (21/423): agree=0.76 hi=True 1.3s | OK
+[2026-06-01 22:23 PT] STAGE4-OCR | page 95 (41/423): agree=0.52 hi=False 1.2s | OK
