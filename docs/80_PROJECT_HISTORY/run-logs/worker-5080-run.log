@@ -34,3 +34,9 @@
 [2026-06-02 13:25 PT] PUSH | 1875-76-code: OCR outputs pushed to 5090 | OK
 [2026-06-02 13:25 PT] RUN | 1875-76-code: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-02 13:25 PT] RUN | 1877-78-code: START local OCR (1877-78_Code.pdf) on 5080 | OK
+[2026-06-02 13:33 PT] PUSH | 1877-78-code: OCR outputs pushed to 5090 | OK
+[2026-06-02 13:33 PT] RUN | 1877-78-code: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 13:33 PT] RUN | 1880-code: START local OCR (1880_Code.pdf) on 5080 | OK
+[2026-06-02 13:58 PT] PUSH | 1880-code: OCR outputs pushed to 5090 | OK
+[2026-06-02 13:58 PT] RUN | 1880-code: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 13:58 PT] RUN | 1893: START local OCR (1893_Statutes.pdf) on 5080 | OK
