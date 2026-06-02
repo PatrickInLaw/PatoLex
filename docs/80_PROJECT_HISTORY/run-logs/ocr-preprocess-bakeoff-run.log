@@ -1,0 +1,48 @@
+[2026-06-01 19:38 PT] SESSION | OCR preprocessing bakeoff started | OK
+[2026-06-01 19:38 PT] PREPROCESS | Starting preprocessing pipeline on all bakeoff pages | OK
+[2026-06-01 19:38 PT] PREPROCESS | 1872_body_marginal_p21: deskew=0.0° margin=right w=1484->1172 | OK
+[2026-06-01 19:38 PT] PREPROCESS | 1872_sec187_murder: deskew=0.0° margin=left w=1484->1093 | OK
+[2026-06-01 19:38 PT] PREPROCESS | 1872_sec211_robbery: deskew=0.0° margin=left w=1484->1103 | OK
+[2026-06-01 19:38 PT] PREPROCESS | 1903_sec187_murder: deskew=0.0° margin=right w=1455->1243 | OK
+[2026-06-01 19:38 PT] PREPROCESS | 1903_sec211_robbery: deskew=0.0° margin=right w=1455->1238 | OK
+[2026-06-01 19:38 PT] PREPROCESS | early_1850_p60: deskew=0.0° no-margin w=2400->2400 | OK
+[2026-06-01 19:38 PT] PREPROCESS | early_1850_p90: deskew=0.0° margin=right w=2400->1885 | OK
+[2026-06-01 19:38 PT] PREPROCESS | early_1852_p40: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | early_1852_p70: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | late_1867_68_p100: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | late_1867_68_p160: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | late_1871_72_p120: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | late_1871_72_p200: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | mid_1858_p50: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | mid_1858_p90: deskew=0.0° margin=right w=1575->1393 | OK
+[2026-06-01 19:38 PT] PREPROCESS | mid_1861_p130: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:38 PT] PREPROCESS | mid_1861_p80: deskew=0.0° margin=right w=1575->1287 | OK
+[2026-06-01 19:38 PT] PREPROCESS | Metadata saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\pages_preprocessed\_preprocess_meta.json | OK
+[2026-06-01 19:40 PT] PREPROCESS | Starting preprocessing pipeline on all bakeoff pages | OK
+[2026-06-01 19:40 PT] PREPROCESS | 1872_body_marginal_p21: deskew=0.0° margin=right w=1484->1172 | OK
+[2026-06-01 19:40 PT] PREPROCESS | 1872_sec187_murder: deskew=0.0° margin=left w=1484->1093 | OK
+[2026-06-01 19:40 PT] PREPROCESS | 1872_sec211_robbery: deskew=0.0° margin=left w=1484->1103 | OK
+[2026-06-01 19:40 PT] PREPROCESS | 1903_sec187_murder: deskew=0.0° margin=right w=1455->1243 | OK
+[2026-06-01 19:40 PT] PREPROCESS | 1903_sec211_robbery: deskew=0.0° margin=right w=1455->1238 | OK
+[2026-06-01 19:40 PT] PREPROCESS | early_1850_p60: deskew=0.0° no-margin w=2400->2400 | OK
+[2026-06-01 19:40 PT] PREPROCESS | early_1850_p90: deskew=0.0° margin=right w=2400->1885 | OK
+[2026-06-01 19:40 PT] PREPROCESS | early_1852_p40: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | early_1852_p70: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | late_1867_68_p100: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | late_1867_68_p160: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | late_1871_72_p120: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | late_1871_72_p200: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | mid_1858_p50: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | mid_1858_p90: deskew=0.0° margin=right w=1575->1393 | OK
+[2026-06-01 19:40 PT] PREPROCESS | mid_1861_p130: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 19:40 PT] PREPROCESS | mid_1861_p80: deskew=0.0° margin=right w=1575->1287 | OK
+[2026-06-01 19:40 PT] PREPROCESS | Metadata saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\pages_preprocessed\_preprocess_meta.json | OK
+[2026-06-01 19:46 PT] RUN-TESSERACT | Preprocessed 17/17 pages OK | OK
+[2026-06-01 19:46 PT] RUN-DOCTR | Preprocessed 17/17 pages OK | OK
+[2026-06-01 19:46 PT] RUN-SURYA013 | Preprocessed 13/17 OK; 4 pages used raw fallback (Surya fillPoly UMat bug on high-contrast binarized images) | WARN
+[2026-06-01 19:46 PT] RUN-PADDLE | Preprocessed 17/17 pages OK | OK
+[2026-06-01 19:46 PT] COMPARE | RAW vs PREPROCESSED analysis complete | OK
+[2026-06-01 19:46 PT] RESULT | doctr early-class: 0.633->0.654 (+0.021 IMPROVED); surya013: 0.679->0.692 (+0.013 IMPROVED); paddle: 0.624->0.604 (-0.020 DEGRADED) | OK
+[2026-06-01 19:46 PT] FAITHFULNESS | All 4 engines PASS kidnaping litmus on both raw and preprocessed | OK
+[2026-06-01 19:46 PT] CER | Preprocessing adds +0.6-1.1% CER penalty vs gold (gold is AI-draft; directional only; gold format mismatch suspected) | WARN
+[2026-06-01 19:46 PT] SESSION | Preprocessing bakeoff complete. Report: ocr-bakeoff/PREPROCESS_REPORT.md | OK
