@@ -41,3 +41,7 @@
 [2026-06-02 07:21 PT] INGEST | 1869-70: DB confirmed. enactment total now 3347 | OK
 [2026-06-02 07:21 PT] WATCHER | Remaining to ingest: 1871-72, 1873-74, 1875-76 | enactment total=3347 | OK
 [2026-06-02 07:40 PT] READY | 1871-72: OCR_COMPLETE.marker present on 5090 -- fetching | OK
+[2026-06-02 07:40 PT] FETCH | 1871-72: pulled OK (1053 pages, sha d44f92461f20) -> C:\Users\PatrickKolasinski\PatoLex-scratch\production-1871-72\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 07:40 PT] INGEST | 1871-72: running ingest_from_ocr.py | OK
+[2026-06-02 07:41 PT] INGEST | 1871-72: DB confirmed. enactment total now 3678 | OK
+[2026-06-02 07:41 PT] WATCHER | Remaining to ingest: 1873-74, 1875-76 | enactment total=3678 | OK
