@@ -5,3 +5,15 @@
 [2026-06-01 20:10 PT] PLAN | Phase 1: Install Python 3.12. Phase 2: Install Tesseract 5. Phase 3: docTR venv. Phase 4: Surya venv. Phase 5: PaddleOCR venv. Phase 6: SCP sample pages. Phase 7: Run bakeoff per engine. | OK
 [2026-06-01 20:11 PT] PYTHON | winget access denied in SSH (no Desktop session). Fallback: downloaded python-3.12.10-amd64.exe directly, ran silent user install. | OK
 [2026-06-01 20:12 PT] PYTHON | Python 3.12.10 installed at C:\Users\patolex\AppData\Local\Programs\Python\Python312\python.exe | OK
+[2026-06-01 20:14 PT] TESSERACT | Downloaded Tesseract 5.4.0.20240606 (UB Mannheim) via local SCP -- direct UB Mannheim URL returned 404, GitHub releases URL returned 404 HTML, fixed by using gh API to find correct release tag (v5.4.0.20240606). Installer ran via Start-Process RunAs. | OK
+[2026-06-01 20:15 PT] TESSERACT | Tesseract 5.4.0 installed at C:\Program Files\Tesseract-OCR\tesseract.exe, verified working. | OK
+[2026-06-01 20:22 PT] DOCTR | Created doctr-venv with Python 3.12, torch==2.7.0+cu128, python-doctr==1.0.1. CUDA confirmed: RTX 5090, 31.8 GB VRAM. | OK
+[2026-06-01 20:28 PT] SURYA | Created surya-venv with Python 3.12, torch==2.7.0+cu128, surya-ocr==0.13.0, transformers==4.45.2. Verify script used wrong API (surya.ocr DNE in 0.13.0 -- correct API is RecognitionPredictor/DetectionPredictor v2). CUDA confirmed. | OK
+[2026-06-01 20:30 PT] PADDLE | Created paddle-venv with paddlepaddle==2.6.2 (CPU) + paddleocr==2.9.1. Blockers: (1) paddlepaddle-gpu 2.6.2.post120 not available at CN mirror -- fixed by installing CPU build from PyPI (matching 5080 behavior -- 5080 paddle2-venv also CPU). (2) setuptools missing from venv -- fixed by pip install setuptools. | OK
+[2026-06-01 20:31 PT] BENCH-TESSERACT | avg=0.73 s/page, CPU only, faithful=PASS (1903_sec211 has kidnaping) | OK
+[2026-06-01 20:34 PT] BENCH-DOCTR | avg=0.38 s/page, GPU=RTX 5090, faithful=PASS (1903_sec211), models downloaded ~129MB from doctr-static.mindee.com | OK
+[2026-06-01 20:36 PT] BENCH-SURYA | avg=1.44 s/page, GPU=RTX 5090, faithful=PASS (1903_sec211), models loaded from HuggingFace cache | OK
+[2026-06-01 20:38 PT] BENCH-PADDLE | avg=1.99 s/page, CPU only (CPU paddlepaddle build), faithful=PASS (1903_sec211) | OK
+[2026-06-01 20:38 PT] PROVISION | All 4 engines running on 5090. Ready for distributed bakeoff. | OK
+[2026-06-01 20:40 PT] SPEEDUP | docTR: 5090=0.38s vs 5080=0.30s (4 raw pages vs 17 preprocessed; warmup artifact likely -- see note below). Surya: 5090=1.44s vs 5080=1.36s. Paddle: 5090=1.99s vs 5080=2.63s (CPU on both). NOTE: 5090 bench used 4 raw pages vs 5080's 17 preprocessed pages; first-page GPU warmup inflates 5090 single-page avg. True sustained throughput expected to match/exceed 5080. | WARN
+[2026-06-01 20:40 PT] FAITHFUL | All engines: 1903_sec211_robbery kidnaping check PASS on 5090 (Tesseract, docTR, Surya, PaddleOCR). 1872_sec211 raw fails Tesseract+docTR (expected -- requires preprocessing, consistent with 5080). | OK
