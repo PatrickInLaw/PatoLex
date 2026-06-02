@@ -60,3 +60,18 @@ These are captured at ingest whether or not the reconstruction read-model is bui
 - **Schema** (`SCHEMA_DESIGN.md`): the event-sourced log + synthetic provision identity + `lineage_edge` are what make reference-resolution-through-lineage possible. This doc adds a structured-target-reference capture requirement (see the companion change list).
 - **Method A reconstruction** (`CODE_AMENDMENT_PARSE_DESIGN_2026-06-02.md`): the forward application of amendments; its output is what the global checksum validates.
 - **Data sources** (`DATA_SOURCES.md`): the leginfo current code is the authoritative anchor.
+
+---
+
+## 10. Scope and limits — what referential closure does and does NOT certify (Hans review, 2026-06-02)
+
+Referential closure against the current authoritative code is rock-solid for **codified law that survives to today** and **post-~1993-94 amendment history**. It does **not**, by itself, certify these classes — they are structurally invisible to the checksum:
+
+- **Uncodified session law** that never became a code section (much of 1850-1871, ingested as `act_section`). It has no anchor in the leginfo current code, so its absence raises **no** origination-gap signal.
+- **Sections enacted and repealed before today** — gone from the current code; a missed enact+repeal pair that nets to nothing-today is undetectable at the modern anchor.
+- **Pre-~1993-94 amendment history** — leginfo's per-section legislative history is reliable only back to ~1993-94 (`DATA_SOURCES.md` §2/§5), so the **missing-amendment detector is a modern-era check, not a global one.**
+- **Intermediate point-in-time correctness** — the global checksum proves the reconstruction REACHES today's code; it does **not** prove every historical date-state in between is right.
+
+These classes require a **complementary completeness oracle** — primarily **per-volume cross-checks against each session volume's own published index / chapter table** ("count what the volume itself says it contains"). The two are complementary: **referential closure certifies the codified-surviving spine; per-volume index reconciliation certifies per-volume capture of everything else** (uncodified acts, repealed-before-today sections). **[OPEN DECISION — flagged to Patrick 2026-06-02: adopt the per-volume index check as the complementary oracle, or scope these classes out of the "certified" claim.]**
+
+The leginfo anchor is authoritative for current **text**; its completeness-of-history **metadata** carries the data-quality caveats in `DATA_SOURCES.md` §2/§5 (e.g. `LAW_SECTION_TBL` is a current snapshot; `effective_date` ~58% populated). §1's "no silent gaps" is therefore precise only when read with this section.

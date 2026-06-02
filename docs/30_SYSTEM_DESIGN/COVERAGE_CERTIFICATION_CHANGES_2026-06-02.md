@@ -45,3 +45,19 @@ Grounded in the actual code (`src/lib/db/schema/*.ts`, `pipeline/`), not from me
 - `target_code` as a free-text vs an enum — codes are a closed-ish set but evolve (Family Code 1992); lean text + a controlled vocabulary.
 - How does resolution interact with the not-yet-loaded 1872 baseline (every pre-baseline amendment is `deferred` until the baseline exists)?
 - Repeal/`add` directives and multi-section "amend and also to repeal" acts (seen in 1875-76-code p.22) — confirm action classification covers them.
+
+---
+
+## Post-Hans revisions (2026-06-02) — verdict was NO-GO; must-fix before migration 0005
+
+1. **`in_act_order` COLLISION (BLOCKER, corrected).** `in_act_order` is the **act's** ordinal within the volume, NOT the directive's within the act (`change-event.ts:103-108`, `ingest_clean.py:201`). A code-amendment act amends multiple sections → multiple change_events sharing the same `in_act_order` → they **collide** on `uq_change_event_src_doc_in_act_order`. **FIX:** add an `in_directive_order` column (0-indexed directive within the act) and make the unique index `(source_document_id, in_act_order, in_directive_order)`. version-B is unaffected (one act = one change_event → `in_directive_order = 0`). My earlier claim that they'd be "distinguished by in_act_order" was wrong.
+2. **`designation_history` resolution index + collision (BLOCKER for the resolution pass).** `designation_history` has no `(code, section_number)` index — the resolution lookup would full-scan per target. ADD `idx_designation_history_code_section`. Also the **(code, section_number) collision** (§634 game-law vs plumbing — `designation-history.ts:9`): the as-of-date lookup can return >1 provision; status `ambiguous`, disambiguated by `unit_type`/lineage, NOT auto-failed.
+3. **Indexes for the new query paths:** unresolved rows (null `provision_id`) need a lookup index on `(target_code, target_designation_normalized)` (the existing `idx_change_event_provision_date` is useless when `provision_id` is null); the origination-gap query needs a partial index on `change_event(action)` / `WHERE action='enact'`.
+4. **`trust_level` for unresolved rows** is undefined — an unresolved row's TARGET is unknown, which is distinct from text-quality `ocr_uncertain`. Keep the text's `trust_level`; the `target_resolution_status` is the separate axis (do NOT overload trust_level).
+5. **General-statute-amends-code is a SEPARATE, harder grammar** ("Section 15 of the Act of April 5, 1853 is hereby repealed") — NOT the Code-amendment directive grammar. Own parse path; do not treat as solved by change #4.
+6. **Sequencing dependencies (state them):** the missing-amendment detector depends on the leginfo modern-tier load (**Gate F, not started**); pre-1872 amendment resolution is `deferred` until the **1872 baseline** is loaded.
+7. **Pre-migration code updates (REQUIRED before applying 0005):** `ingest_clean.py` `CHANGE_EVENT_SQL` (~line 648) and `ingest_from_ocr.py` (~line 467) hardcode the change_event column list — add the 4 new columns FIRST, or every post-migration insert silently writes NULL targets. (Also: `ingest_from_ocr.py` still carries the F5 `safe_str` ASCII-strip and F13 fabricated-date bugs — must not be the post-0005 ingest path.)
+8. **Migration 0005 does not exist yet** — "0005" is the label for the proposed migration, to be authored.
+
+## Other docs to bring into consistency (Hans Part C — follow-up, with the implementation)
+`SCHEMA_DESIGN.md` (new fields + nullable `provision_id` rationale + `reference_resolution_status`), `ROADMAP.md` (Gate G → reference the certification model + gap detectors), `ARCHITECTURE.md` (add the certification loop), `DATA_SOURCES.md` (note its anchor role + carry the §2/§5 caveats), `CODE_AMENDMENT_PARSE_DESIGN_2026-06-02.md` (cross-link as the producer; its open Qs 3/4/5 are load-bearing for target capture).
