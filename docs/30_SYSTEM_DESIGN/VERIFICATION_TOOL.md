@@ -2,6 +2,8 @@
 
 **Status:** Design (cc002, 2026-06-02). The mechanism that makes legal-grade OCR accuracy affordable at corpus scale — "no line-by-line human review; humans only resolve *flagged disagreements*." Build target: a **WinUI3** desktop verification app (Microsoft-aligned). Design now; build when production OCR generates the disagreement queue (after the engine pick + first production run).
 
+**Sister mechanism:** `CROWDSOURCE_CORRECTION.md`. The WinUI3 tool (in-house / outsourced reviewers) and the public crowd-correction wiki are sibling consumers of the same pipeline disagreement queue. Both write `change_event`s at the appropriate `trust_level`. The WinUI3 tool handles bulk backlog at speed and scale; the public wiki handles the long tail and ongoing corrections with gamified community participation. Same trust engine; different audiences and operational modes.
+
 ## The principle
 Accuracy comes from **automated multi-engine disagreement detection** + **cheap, multi-reviewer human resolution of only the disagreements** — never wholesale human re-reading. (See memory `patolex-historical-first` QA standard.)
 

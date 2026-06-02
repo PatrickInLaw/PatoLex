@@ -1,0 +1,53 @@
+[2026-06-02 21:46 PT] dissent-filter | START dissent-filter measurement | OK
+[2026-06-02 21:46 PT] dissent-filter | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:46 PT] dissent-filter | Rule 8 (degraded VLM guard): ENABLED | OK
+[2026-06-02 21:46 PT] dissent-filter | Processing page: early_1850_p90 | OK
+[2026-06-02 21:46 PT] dissent-filter | START dissent-filter measurement | OK
+[2026-06-02 21:46 PT] dissent-filter | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:46 PT] dissent-filter | Rule 8 (degraded VLM guard): ENABLED | OK
+[2026-06-02 21:46 PT] dissent-filter | Processing page: early_1850_p90 | OK
+[2026-06-02 21:46 PT] dissent-filter | Processing page: 1872_body_marginal_p21 | OK
+[2026-06-02 21:46 PT] dissent-filter | Processing page: 1872_sec187_murder | OK
+[2026-06-02 21:46 PT] dissent-filter | Processing page: 1872_sec211_robbery | OK
+[2026-06-02 21:46 PT] dissent-filter | Processing page: 1903_sec187_murder | OK
+[2026-06-02 21:46 PT] dissent-filter | Processing page: 1903_sec211_robbery | OK
+[2026-06-02 21:46 PT] dissent-filter | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\dissent_filter_results.json | OK
+[2026-06-02 21:46 PT] dissent-filter | PRIMARY UF: queue=32.89% silent=0.5% ff=80.2% | OK
+[2026-06-02 21:46 PT] dissent-filter | PRIMARY FI: queue=31.89% silent=0.73% ff=80.0% | OK
+[2026-06-02 21:46 PT] dissent-filter | Floor retention (filtered): 100.0% | OK
+[2026-06-02 21:46 PT] dissent-filter | END dissent-filter measurement | OK
+[2026-06-02 21:49 PT] dissent-filter | START dissent-filter measurement | OK
+[2026-06-02 21:49 PT] dissent-filter | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:49 PT] dissent-filter | Rule 8 (degraded VLM guard): ENABLED | OK
+[2026-06-02 21:49 PT] dissent-filter | Processing page: early_1850_p90 | OK
+[2026-06-02 21:49 PT] dissent-filter | Processing page: 1872_body_marginal_p21 | OK
+[2026-06-02 21:49 PT] dissent-filter | Processing page: 1872_sec187_murder | OK
+[2026-06-02 21:49 PT] dissent-filter | Processing page: 1872_sec211_robbery | OK
+[2026-06-02 21:49 PT] dissent-filter | Processing page: 1903_sec187_murder | OK
+[2026-06-02 21:49 PT] dissent-filter | Processing page: 1903_sec211_robbery | OK
+[2026-06-02 21:49 PT] dissent-filter | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\dissent_filter_results.json | OK
+[2026-06-02 21:49 PT] dissent-filter | PRIMARY UF: queue=32.89% silent=0.5% ff=80.2% | OK
+[2026-06-02 21:49 PT] dissent-filter | PRIMARY FI: queue=31.89% silent=0.73% ff=80.0% | OK
+[2026-06-02 21:49 PT] dissent-filter | Floor retention (filtered): 100.0% | OK
+[2026-06-02 21:49 PT] dissent-filter | END dissent-filter measurement | OK
+[2026-06-02 21:53 PT] dissent-filter | START dissent-filter measurement | OK
+[2026-06-02 21:53 PT] dissent-filter | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:53 PT] dissent-filter | Rule 8 (degraded VLM guard): ENABLED | OK
+[2026-06-02 21:53 PT] dissent-filter | Processing page: early_1850_p90 | OK
+[2026-06-02 21:53 PT] dissent-filter | Processing page: 1872_body_marginal_p21 | OK
+[2026-06-02 21:53 PT] dissent-filter | Processing page: 1872_sec187_murder | OK
+[2026-06-02 21:53 PT] dissent-filter | Processing page: 1872_sec211_robbery | OK
+[2026-06-02 21:53 PT] dissent-filter | Processing page: 1903_sec187_murder | OK
+[2026-06-02 21:53 PT] dissent-filter | Processing page: 1903_sec211_robbery | OK
+[2026-06-02 21:53 PT] dissent-filter | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\dissent_filter_results.json | OK
+[2026-06-02 21:53 PT] dissent-filter | PRIMARY UF: queue=32.89% silent=0.5% ff=80.2% | OK
+[2026-06-02 21:53 PT] dissent-filter | PRIMARY FI (both): queue=31.89% silent=0.73% ff=80.0% | OK
+[2026-06-02 21:53 PT] dissent-filter | PRIMARY FI (qwen): queue=21.1% silent=0.84% ff=40.0% | OK
+[2026-06-02 21:53 PT] dissent-filter | Floor retention (both filtered): 100.0% | OK
+[2026-06-02 21:53 PT] dissent-filter | Floor retention (qwen filtered): 100.0% | OK
+[2026-06-02 21:53 PT] dissent-filter | END dissent-filter measurement | OK
+[2026-06-02 21:53 PT] dissent-filter | SUMMARY: filter built, 3 conditions measured (UF-both, FI-both, FI-qwen-only) | OK
+[2026-06-02 21:53 PT] dissent-filter | PRIMARY early_1850_p90: UF queue=32.89% ff=80.2% -> FQ queue=21.10% ff=40.0% (qwen-only filtered) | OK
+[2026-06-02 21:53 PT] dissent-filter | Floor-break retention: 100% in all filtered conditions | OK
+[2026-06-02 21:53 PT] dissent-filter | Silent error stays <=1.5% (0.84% qwen-filtered) -- no regression | OK
+[2026-06-02 21:53 PT] dissent-filter | RECOMMENDATION: use qwen25vl only + token rules (R1-R9) | OK

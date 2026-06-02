@@ -139,6 +139,15 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **5090-vs-5080 benchmark (proper, warmup-discarded):** Surya batched on the 5090 = **0.70 s/page** (the 5080's 16 GB OOMs on Surya batching — the 5090's 32 GB is required; 6.4×). docTR ~0.23 s/page either box. Production split: Surya/5090 + docTR/5080 + Tesseract/CPU + VLM vectors (qwen/GOT)/5090. Found + patched a Surya 0.13 + OpenCV 4.13 `fillPoly` bug (PIL fallback) — note for fresh installs.
 - **Honest caveat:** the 0.50% rests on ONE strong session-law page → directional. 10+ session-law gold pages needed to firm the floor-break + false-flag rates.
 
+### Phase 18 — Overnight autonomous run: crowd-source reframe + OpusGold (2026-06-01 night)
+
+- **Patrick set two directions before bed:**
+  - **(a) Crowd-source wiki correction model** (`docs/30_SYSTEM_DESIGN/CROWDSOURCE_CORRECTION.md`): launch open-source with **processed text + source-page image + a correction path**. "Close enough with source images + correction options" is production-acceptable for attorneys because they verify against the image. Random-teleport-to-review (driven by the pipeline's confidence/disagreement flags), attribution/leaderboard/reputation, a multi-reviewer trust ladder (`ocr_consensus`→`crowd_proposed`→`crowd_confirmed`→`expert_verified`), corrections as `change_event`s with contributor provenance. **Evolves the launch bar** — completeness unchanged; "validated" now means OCR-confidence + source-image display + correction, not perfection-before-launch. The public wiki is the gamified sibling of the in-house VERIFICATION_TOOL.md captcha tool (same trust engine).
+  - **(b) OpusGold:** human gold is the bottleneck, so Opus itself transcribes session-law pages as an **independent frontier-model reference** (different failure modes than the OCR engines) to firm the accuracy result across eras and extend toward 1900 (then 1950/1975/1993 as the clock allows).
+- **OpusGold produced — 10 pages, 1850-1872** (faithful, statutory-text-only): early_1850_p60, early_1852_p40/p70, mid_1858_p50/p90, mid_1861_p80/p130, late_1867_68_p100, late_1871_72_p120/p200. Self-check: positions where the 6-vector consensus is unanimous but OpusGold differs are re-examined as candidate Opus errors.
+- **Operational:** Telegram check-ins + /ucp on a ~40-min ScheduleWakeup heartbeat; era ladder 1900→1950→1975→1993 as the clock allows; stop ~4:30am.
+- **Design tensions surfaced (for Patrick, resolve at Gate H):** citation-stability vs live crowd correction (bulk-correction mechanism undesigned); Git-immutability vs OCR corrections (proposed: rewrite file content + attach a git-note, keep commit metadata); contribution licensing (CC0 vs attribution); Gate I launch-bar wording.
+
 ---
 
 ## Files Changed

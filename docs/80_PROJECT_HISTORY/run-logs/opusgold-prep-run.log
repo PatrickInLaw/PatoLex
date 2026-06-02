@@ -1,0 +1,137 @@
+[2026-06-01 00:00 PT] OPUSGOLD-PREP | Run log initialized | OK
+[2026-06-01 21:42 PT] RENDER | OpusGold page rendering started | OK
+[2026-06-01 21:42 PT] PAGE-SELECT | era1880: total=300 pages, searching from 75 | OK
+[2026-06-01 21:42 PT] PAGE-SELECT | era1880: page_idx=75 (1-based=76) STATUTORY confirmed, text[:80]='28 STATUTES OF CALIFORNIA,\nCHAPTER XLI.\n\nAn Act to amend an Act entitled “An act' | OK
+[2026-06-01 21:42 PT] PAGE-SELECT | era1880: page_idx=95 (1-based=96) STATUTORY confirmed, text[:80]='48 STATUTES OF CALIFORNIA,\nin all its offices, station houses, warehouses, and l' | OK
+[2026-06-01 21:42 PT] RENDER | Rendered era1880_p076.png from 1880_Statutes pdf_page_idx=75 (1-based=76) shape=(2455, 1575, 3) | OK
+[2026-06-01 21:42 PT] RENDER | Rendered era1880_p096.png from 1880_Statutes pdf_page_idx=95 (1-based=96) shape=(2455, 1575, 3) | OK
+[2026-06-01 21:42 PT] PAGE-SELECT | era1889: total=792 pages, searching from 198 | OK
+[2026-06-01 21:42 PT] PAGE-SELECT | era1889: page_idx=198 (1-based=199) STATUTORY confirmed, text[:80]='TWENYY-EIGHTH SESSION. 143\nCHAPTER CXXXYV.\nAn Act to provide for the maintenance' | OK
+[2026-06-01 21:43 PT] PAGE-SELECT | era1889: page_idx=218 (1-based=219) STATUTORY confirmed, text[:80]='TWENTY-EIGHTH SESSION. 163\n\nSection 7. Subdivision One. The expenses incurred fo' | OK
+[2026-06-01 21:43 PT] RENDER | Rendered era1889_p199.png from 1889_Statutes pdf_page_idx=198 (1-based=199) shape=(2455, 1575, 3) | OK
+[2026-06-01 21:43 PT] RENDER | Rendered era1889_p219.png from 1889_Statutes pdf_page_idx=218 (1-based=219) shape=(2455, 1575, 3) | OK
+[2026-06-01 21:43 PT] PAGE-SELECT | era1899: total=566 pages, searching from 141 | OK
+[2026-06-01 21:43 PT] PAGE-SELECT | era1899: page_idx=141 (1-based=142) STATUTORY confirmed, text[:80]='86 STATUTES OF CALIFORNIA.\nshall appoint for each precinct, from the electors th' | OK
+[2026-06-01 21:43 PT] PAGE-SELECT | era1899: page_idx=161 (1-based=162) STATUTORY confirmed, text[:80]='106 STATUTES OF CALIFORNIA.\nCHAPTER XCII.\n\nAn act to amend section one of “An ac' | OK
+[2026-06-01 21:43 PT] RENDER | Rendered era1899_p142.png from 1899_Statutes pdf_page_idx=141 (1-based=142) shape=(2213, 1575, 3) | OK
+[2026-06-01 21:43 PT] RENDER | Rendered era1899_p162.png from 1899_Statutes pdf_page_idx=161 (1-based=162) shape=(2246, 1575, 3) | OK
+[2026-06-01 21:43 PT] RENDER | Done. 6 pages rendered. Summary: C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\pages_opusgold\_render_results.json | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | OpusGold preprocessing started (17 pages) | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | early_1850_p60: OK deskew=0.0° margin=right sz=[2400, 3000]->[1901, 2435] 1.4s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | early_1852_p40: OK deskew=0.0° margin=right sz=[1575, 2609]->[1229, 2212] 0.84s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | early_1852_p70: OK deskew=0.0° margin=right sz=[1575, 2609]->[1226, 2287] 0.78s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | mid_1858_p50: OK deskew=0.0° margin=right sz=[1575, 2642]->[1231, 2338] 0.86s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | mid_1858_p90: OK deskew=0.0° margin=right sz=[1575, 2642]->[1393, 2345] 0.87s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | mid_1861_p80: OK deskew=0.0° margin=right sz=[1575, 2459]->[1287, 1939] 0.72s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | mid_1861_p130: OK deskew=0.0° margin=right sz=[1575, 2459]->[1302, 2082] 0.75s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | late_1867_68_p100: OK deskew=0.0° margin=right sz=[1575, 2642]->[1400, 2314] 0.85s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | late_1867_68_p160: OK deskew=0.0° margin=right sz=[1575, 2642]->[1260, 2295] 0.84s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | late_1871_72_p120: OK deskew=0.0° margin=None sz=[1575, 2609]->[1575, 2299] 0.84s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | late_1871_72_p200: OK deskew=0.0° margin=right sz=[1575, 2609]->[1294, 2336] 0.81s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | era1880_p076: OK deskew=0.0° margin=left sz=[1575, 2455]->[1265, 2087] 0.69s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | era1880_p096: OK deskew=0.0° margin=left sz=[1575, 2455]->[1235, 1990] 0.71s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | era1889_p199: OK deskew=0.0° margin=right sz=[1575, 2455]->[1280, 2251] 0.78s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | era1889_p219: OK deskew=0.0° margin=right sz=[1575, 2455]->[1224, 2194] 0.72s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | era1899_p142: OK deskew=0.0° margin=left sz=[1575, 2213]->[1250, 1945] 0.65s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | era1899_p162: OK deskew=0.0° margin=left sz=[1575, 2246]->[1201, 1813] 0.67s | OK
+[2026-06-01 21:43 PT] PREPROCESS-OG | Done. 17 OK, 0 FAIL. Meta: C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\pages_preprocessed_opusgold\_preprocess_meta_opusgold.json | OK
+[2026-06-01 21:44 PT] TESS-OG | Starting Tesseract on 17 pages | OK
+[2026-06-01 21:44 PT] TESS-OG | early_1850_p60: 0.9s 2808b | OK
+[2026-06-01 21:44 PT] TESS-OG | early_1852_p40: 0.9s 2851b | OK
+[2026-06-01 21:44 PT] TESS-OG | early_1852_p70: 1.0s 3310b | OK
+[2026-06-01 21:44 PT] TESS-OG | era1880_p076: 0.9s 2688b | OK
+[2026-06-01 21:44 PT] TESS-OG | era1880_p096: 1.0s 2983b | OK
+[2026-06-01 21:44 PT] TESS-OG | era1889_p199: 0.9s 2734b | OK
+[2026-06-01 21:44 PT] TESS-OG | era1889_p219: 1.0s 3069b | OK
+[2026-06-01 21:44 PT] TESS-OG | era1899_p142: 1.0s 2599b | OK
+[2026-06-01 21:44 PT] TESS-OG | era1899_p162: 0.9s 2931b | OK
+[2026-06-01 21:44 PT] TESS-OG | late_1867_68_p100: 0.9s 2764b | OK
+[2026-06-01 21:44 PT] TESS-OG | late_1867_68_p160: 0.7s 2129b | OK
+[2026-06-01 21:44 PT] TESS-OG | late_1871_72_p120: 1.1s 3417b | OK
+[2026-06-01 21:44 PT] TESS-OG | late_1871_72_p200: 1.2s 3355b | OK
+[2026-06-01 21:44 PT] TESS-OG | mid_1858_p50: 1.0s 3149b | OK
+[2026-06-01 21:44 PT] TESS-OG | mid_1858_p90: 0.9s 2585b | OK
+[2026-06-01 21:44 PT] TESS-OG | mid_1861_p130: 1.0s 3202b | OK
+[2026-06-01 21:44 PT] TESS-OG | mid_1861_p80: 0.7s 2011b | OK
+[2026-06-01 21:44 PT] TESS-OG | Done. 17/17 OK | OK
+[2026-06-01 21:44 PT] SURYA-OG | Loading Surya 0.13 models, then 17 pages | OK
+[2026-06-01 21:45 PT] SURYA-OG | Model load FAIL: 'encoder' | FAIL
+[2026-06-01 21:49 PT] DOCTR-OG | Loading docTR, then 17 pages | OK
+[2026-06-01 21:50 PT] DOCTR-OG | GPU: NVIDIA GeForce RTX 5080 | OK
+[2026-06-01 21:50 PT] DOCTR-OG | early_1850_p60: 0.8s 2771b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | early_1852_p40: 0.3s 2740b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | early_1852_p70: 0.3s 3273b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | era1880_p076: 0.3s 2666b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | era1880_p096: 0.3s 2955b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | era1889_p199: 0.3s 2738b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | era1889_p219: 0.3s 3053b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | era1899_p142: 0.3s 2593b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | era1899_p162: 0.3s 2912b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | late_1867_68_p100: 0.3s 2794b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | late_1867_68_p160: 0.2s 2106b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | late_1871_72_p120: 0.4s 3415b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | late_1871_72_p200: 0.3s 3370b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | mid_1858_p50: 0.3s 3134b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | mid_1858_p90: 0.3s 2555b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | mid_1861_p130: 0.3s 3193b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | mid_1861_p80: 0.2s 1992b | OK
+[2026-06-01 21:50 PT] DOCTR-OG | Done. 17/17 OK | OK
+[2026-06-01 21:50 PT] PADDLE-OG | Loading PaddleOCR 2.x, then 17 pages | OK
+[2026-06-01 21:50 PT] PADDLE-OG | early_1850_p60: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | early_1852_p40: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | early_1852_p70: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | era1880_p076: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | era1880_p096: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | era1889_p199: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | era1889_p219: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | era1899_p142: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | era1899_p162: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | late_1867_68_p100: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | late_1867_68_p160: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | late_1871_72_p120: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | late_1871_72_p200: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | mid_1858_p50: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | mid_1858_p90: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | mid_1861_p130: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | mid_1861_p80: FAIL PaddleOCR.predict() got an unexpected keyword argument 'cls' | FAIL
+[2026-06-01 21:50 PT] PADDLE-OG | Done. 0/17 OK | WARN
+[2026-06-01 21:51 PT] PADDLE-OG | Loading PaddleOCR (v3 API), then 17 pages | OK
+[2026-06-01 21:51 PT] PADDLE-OG | early_1850_p60: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | early_1852_p40: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | early_1852_p70: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | era1880_p076: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | era1880_p096: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | era1889_p199: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | era1889_p219: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | era1899_p142: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | era1899_p162: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | late_1867_68_p100: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | late_1867_68_p160: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | late_1871_72_p120: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | late_1871_72_p200: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | mid_1858_p50: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | mid_1858_p90: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | mid_1861_p130: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | mid_1861_p80: FAIL (Unimplemented) ConvertPirAttribute2RuntimeAttribute not support [pir::ArrayAttribute<pir::DoubleAttribute>]  (at ..\paddle\fluid\framework\new_executor\instruction\onednn\onednn_instruction.cc:118)
+ | FAIL
+[2026-06-01 21:51 PT] PADDLE-OG | Done. 0/17 OK | WARN
+[2026-06-01 21:53 PT] SURYA-OG | Surya 0.13 on 5090 RTX5090 (surya-venv): 17/17 OK | OK
+[2026-06-01 21:53 PT] PADDLE-OG | PaddleOCR 2.9 on 5090 (paddle-venv): 17/17 OK | OK
+[2026-06-01 21:53 PT] PADDLE-OG-LOCAL | PaddleOCR 3.6 local: 0/17 OK - OneDNN Unimplemented error (ConvertPirAttribute2RuntimeAttribute), ran on 5090 instead | WARN
+[2026-06-01 21:54 PT] QWEN-OG | Starting Qwen2.5VL:32b on 17 pages | OK
