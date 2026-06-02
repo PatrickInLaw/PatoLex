@@ -193,6 +193,13 @@ export const sourceDocument = pgTable("source_document", {
    *     consensus_output_path: string   // banked consensus_output.json (Phase C
    *                                     // per-token disagreement substrate)
    *   }
+   *
+   * H2 (banking order): consensus_output.json is banked by ingest_clean.py ONLY
+   * AFTER the volume's DB commit succeeds, so a rolled-back volume never leaves
+   * an orphan file pointing at a source_document with no committed rows. The
+   * bank step is idempotent (it overwrites), so a later successful re-run
+   * re-banks deterministically. ocr_stats.consensus_output_path is set in the
+   * same committed txn that produced the events it indexes.
    */
   ocrStats: jsonb("ocr_stats"),
 }, (table) => [

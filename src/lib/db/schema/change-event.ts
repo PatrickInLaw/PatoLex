@@ -173,9 +173,12 @@ export const changeEvent = pgTable(
 
     /**
      * Agreement ratio for this act in [0,1] — the consensus agreement signal
-     * that backs `confident`. Derived from the per-token consensus on the act's
-     * source page(s) (mean token confidence / page_agreement_ratio). NULL when
-     * no consensus was available (never a sentinel — see ocr_cer_estimate S2-C
+     * that backs `confident`. Hans H3: this is the MEAN per-page consensus
+     * confidence aggregated over EVERY page the act spans (not just its start
+     * page). The span is derived from the parsed act order (the parser records
+     * only a start page); see ocr_provenance.page_span for the exact pages and
+     * the page_span_derived honesty flag. NULL when no consensus was available
+     * for any page in the span (never a sentinel — see ocr_cer_estimate S2-C
      * convention). `real` (float4) matches the 0–1 ratio domain.
      */
     confidence: real("confidence"),
@@ -186,15 +189,21 @@ export const changeEvent = pgTable(
      * (VLM-flagging + crowd correction) is a QUERY over persisted data, never a
      * re-derivation. Shape (written by ingest_clean.py):
      *   {
-     *     engines: string[],            // engines present for this act's page(s)
-     *     consensus_method: string,     // "token_majority_3" | ... | "single"
-     *     agreement: number|null,       // same value as `confidence`
+     *     engines: string[],            // union of engines across the act's span
+     *     consensus_method: string,     // "token_majority_3"|..|"single"|"mixed"
+     *     agreement: number|null,       // same value as `confidence` (span mean)
      *     chapter_raw: string,          // the raw parsed chapter numeral
      *     chapter_ocr_substituted: bool,// F11: chapter needed OCR substitution
      *     date_unknown: bool,           // F13: no real date parsed -> NULL date
-     *     page_ref: string,             // "p. NN"
-     *     n_agree: number|null,         // agreeing engines (page-level proxy)
-     *     n_present: number|null,       // engines present (page-level proxy)
+     *     page_ref: string,             // "p. NN" or "pp. NN-MM" for a span
+     *     n_agree: number|null,         // per-token; see consensus_output.json
+     *     n_present: number|null,       // max engines present over the span
+     *     page_span: {                  // H3: pages the signal was aggregated over
+     *       start_page: number,         // parser-certified start page
+     *       end_page: number,           // DERIVED end page (see page_span_derived)
+     *       pages_with_consensus: number[],
+     *       page_span_derived: bool     // true when end_page was inferred
+     *     },
      *     disagreement: {               // Phase C substrate (per-act summary)
      *       low_confidence_token_count: number,
      *       low_confidence_tokens: Array<{
@@ -219,17 +228,29 @@ export const changeEvent = pgTable(
     index("idx_change_event_enactment_id").on(t.enactmentId),
 
     /**
-     * CANONICAL ACT KEY (Hans S2-A). The physical-act identity is
+     * WITHIN-RUN ACT KEY (Hans S2-A, corrected by pass-3 C4). The act key is
      * (source_document_id, in_act_order): the 0-indexed ordinal of the act in
-     * the parsed volume, scoped to its source document. UNIQUE so the clean
-     * re-ingest's `ON CONFLICT (source_document_id, in_act_order) DO NOTHING`
-     * is idempotent and a volume can never durably double-insert the same act.
+     * the parsed volume, scoped to its source document.
      *
-     * APPLY ORDER (see migration note): this UNIQUE index must be created ONLY
-     * AFTER the clean re-ingest purges per source_document, OR after verifying
-     * no existing rows share a (source_document_id, in_act_order) pair —
-     * version-A data may have written non-unique pairs. The nullable column
-     * adds above are safe to apply anytime; this index is NOT.
+     * HONESTY (Hans C4): this is NOT a cross-version-stable physical-act
+     * identity. in_act_order is stable only WITHIN a single parse run — a later
+     * parse with different act ordering can assign ordinal N to a different act.
+     * That is acceptable because the re-ingest does not match on this key across
+     * runs: ingest_clean.commit_volume PURGES every row for the source_document
+     * and re-inserts from scratch (C1). The key therefore only needs to be
+     * unique WITHIN the one run that writes it.
+     *
+     * This UNIQUE index is a durable post-ingest GUARANTEE that a volume never
+     * double-inserts the same ordinal. It is NOT required for the INSERT to run:
+     * after C1's purge there is nothing to conflict with, so ingest_clean uses a
+     * plain INSERT (no `ON CONFLICT`).
+     *
+     * CREATED IN MIGRATION 0004 (NOT 0003). Apply order is: 0003 column adds ->
+     * re-ingest (purge+reinsert eliminates version-A dups) -> zero-dup check
+     * (drizzle/dedup_precheck.sql) -> 0004 (this unique index). Declaring it here
+     * keeps the Drizzle schema authoritative; the migration that actually
+     * creates it is 0004 (0003 deliberately omits it to avoid the half-migration
+     * hazard of a unique index over still-duplicated version-A rows).
      */
     uniqueIndex("uq_change_event_src_doc_in_act_order").on(
       t.sourceDocumentId,

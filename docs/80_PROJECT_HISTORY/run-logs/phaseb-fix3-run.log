@@ -1,0 +1,15 @@
+[2026-06-02 00:00 PT] FIX3-START | Hans pass-3 ordered fixes (C1-C5,M3,H3,M2,H2) — CODE+MIGRATIONS+DRY-RUN ONLY, zero DB writes | OK
+[2026-06-02 08:40 PT] M3 | consensus.py single-engine path: confidence SINGLE_ENGINE_CONFIDENCE(0.3333) not 1.0; page_confidence + agreement_ratio honest | OK
+[2026-06-02 08:40 PT] M2 | test_consensus.py: capture_candidates byte-identical committed_text test (4 multi-engine cases) + single-engine conf test | OK
+[2026-06-02 08:40 PT] CONSENSUS-TESTS | 9/9 PASS (incl 2 new) | OK
+[2026-06-02 08:41 PT] C1 | ingest_clean.commit_volume: scoped per-source_document purge (provision_version/designation_history/change_event/orphan provision/enactment) inside txn BEFORE inserts; EXISTS skip + ON CONFLICT REMOVED; plain INSERT post-purge | OK
+[2026-06-02 08:41 PT] C3 | _resolve_source_document_id by content_sha256 (read sha256.txt); FAIL LOUD on 0 or >1 matches; explicit stale-1850 id=1 guard | OK
+[2026-06-02 08:41 PT] C4 | dropped cross-version-stable-key claim in ingest_clean header + dry-run print + change-event.ts | OK
+[2026-06-02 08:41 PT] H3 | per-act confidence aggregates over DERIVED page span (all spanned pages), not just source_page; page_span provenance + page_span_derived honesty flag | OK
+[2026-06-02 08:41 PT] H2 | bank_consensus_output moved to AFTER successful commit (no orphan file on rollback); docs updated | OK
+[2026-06-02 08:41 PT] C2/H1 | 0003 SQL: UNIQUE index REMOVED; new 0004_clever_proteus.sql creates it; journal+snapshots split (0003 no-index, 0004 index); change-event.ts notes index created in 0004 | OK
+[2026-06-02 08:41 PT] C5 | drizzle/dedup_precheck.sql: read-only idempotent HAVING-count>1 report + hard-gate DO block + 1850-id=1 detector + commented manual purge | OK
+[2026-06-02 08:42 PT] DRY-RUN-1858 | 224 acts WOULD purge+insert; purge SQL built+printed; skip-logic gone; multi-page spans aggregated; deterministic | OK
+[2026-06-02 08:42 PT] DRY-RUN-1850 | C3 correctly REFUSES (no sha256.txt) — fail-loud as designed | WARN
+[2026-06-02 08:42 PT] SHA-INVENTORY | 1851-1875-76 ALL have sha256.txt+parsed (re-ingestable); 1850 MISSING sha256.txt -> NOT re-ingestable until produced | WARN
+[2026-06-02 08:42 PT] FIX3-DONE | all 9 items addressed; no DB writes; no --commit; no git commit (left for review) | OK

@@ -64,6 +64,7 @@ Thumbs.db
 .claude/.bump-token
 .claude/scripts/*.log
 .claude/comms.log
+.claude/scheduled_tasks.lock
 
 # --- Pipeline data artifacts (large raw downloads, OCR output) ---
 pipeline/data/

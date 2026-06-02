@@ -28,7 +28,9 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from consensus import build_consensus, _choose_spine, tokenize  # noqa: E402
+from consensus import (  # noqa: E402
+    build_consensus, _choose_spine, tokenize, SINGLE_ENGINE_CONFIDENCE,
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -157,6 +159,67 @@ def test_garble_metric_detects_phantom_fragment():
     assert g_old["sliver_after_word"] == 1, g_old
     assert g_new["garble_total"] == 0, f"fixed garble should be 0: {g_new}"
     assert g_single["garble_total"] == 0, f"clean single garble should be 0: {g_single}"
+
+
+# --------------------------------------------------------------------------- #
+# Hans M2: capture_candidates must NOT change the committed text
+# --------------------------------------------------------------------------- #
+# The production path runs build_consensus(..., capture_candidates=True) (it
+# banks the per-engine candidate disagreement substrate). capture_candidates
+# MUST be purely additive: the committed_text it produces has to be BYTE-
+# IDENTICAL to the default (False) path, or production would commit different
+# law than the tests verify. This locks that invariant for the multi-engine
+# cases (the paths production actually runs).
+_M2_CASES = [
+    # 3-engine: word-split repair case
+    {"tesseract": HANS_TESS, "doctr": HANS_DOCTR, "surya": HANS_SURYA},
+    # 3-engine: majority misread correction
+    {
+        "tesseract": "AN ACT fixing the time for Acts and Joint Resolutions.",
+        "doctr": "AN ACT firing the lime for Acts and Joint Resolutions.",
+        "surya": "AN ACT fixing the time for Acts and Joint Resolutions.",
+    },
+    # 2-engine: unanimity machinery
+    {
+        "tesseract": "Sealer of Weights and Measures",
+        "surya": "Sealer of Weights and Measures",
+    },
+    # 3-engine: two engines split (no forced merge)
+    {
+        "tesseract": "Sealer of W eights and Measures",
+        "doctr": "Sealer of W eights and Measures",
+        "surya": "Sealer of Weights and Measures",
+    },
+]
+
+
+def test_capture_candidates_committed_text_identical():
+    """capture_candidates=True must yield byte-identical committed_text to False."""
+    for i, case in enumerate(_M2_CASES):
+        plain = build_consensus(case).committed_text
+        captured = build_consensus(case, capture_candidates=True).committed_text
+        assert plain == captured, (
+            f"M2 case {i}: capture_candidates changed committed_text:\n"
+            f"  False -> {plain!r}\n  True  -> {captured!r}"
+        )
+
+
+def test_single_engine_confidence_not_one():
+    """Hans M3: a single-engine page must NOT report confidence 1.0."""
+    r = build_consensus({"tesseract": "AN ACT to do a thing."})
+    assert r.method == "single"
+    assert r.page_confidence == SINGLE_ENGINE_CONFIDENCE, r.page_confidence
+    assert r.page_confidence < 1.0
+    assert r.token_agreement_ratio == 0.0
+    for t in r.tokens:
+        assert t.confidence == SINGLE_ENGINE_CONFIDENCE, t.confidence
+        assert t.confidence < 1.0
+    # committed surfaces are still faithful (verbatim engine tokens)
+    assert r.committed_text == "AN ACT to do a thing."
+    # and capture_candidates doesn't change the single-engine committed text
+    assert build_consensus(
+        {"tesseract": "AN ACT to do a thing."}, capture_candidates=True
+    ).committed_text == r.committed_text
 
 
 # --------------------------------------------------------------------------- #

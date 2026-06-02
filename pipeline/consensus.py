@@ -110,6 +110,15 @@ ENGINE_PRIORITY = ["tesseract", "doctr", "surya"]
 
 GAP = None  # sentinel for "this engine has no token at this position"
 
+# Single-engine pages have ZERO corroboration: only one engine read the page,
+# so NOTHING can vouch for any token. Honest confidence for such tokens is the
+# 1/N_MAX_ENGINES floor (one of the three pipeline engines agreed — itself —
+# and no other), NEVER 1.0 (Hans M3: 1.0 falsely asserts full agreement when
+# there is none). N_MAX_ENGINES is the corpus engine ceiling (tesseract+doctr+
+# surya). Deterministic constant: same input -> same value.
+N_MAX_ENGINES = 3
+SINGLE_ENGINE_CONFIDENCE = round(1.0 / N_MAX_ENGINES, 4)  # 0.3333
+
 
 def _priority(engine: str) -> int:
     try:
@@ -409,16 +418,28 @@ def build_consensus(
     }
 
     if len(engines) == 1:
+        # ZERO corroboration: one engine, nothing to agree with it. Hans M3:
+        # emit an honest low confidence (SINGLE_ENGINE_CONFIDENCE), NEVER 1.0.
+        # n_present stays 1 (one engine truly present); n_agree stays 1 (the
+        # token trivially agrees with itself) — but confidence (and the page
+        # aggregates) reflect that NO independent engine vouched for the read.
         e = engines[0]
         toks = [
             CommittedToken(
-                t, vote_key(t), 1, 1, 1.0, [e],
+                t, vote_key(t), 1, 1, SINGLE_ENGINE_CONFIDENCE, [e],
                 candidates=([{"engine": e, "token": t}] if capture_candidates else None),
             )
             for t in engine_tokens[e]
         ]
         text = " ".join(t.surface for t in toks)
-        return ConsensusResult(text, toks, 1.0, 1.0, "single", engines, len(toks))
+        # page_confidence / token_agreement_ratio honestly reflect zero
+        # corroboration (not 1.0): a single-engine page is uncorroborated.
+        return ConsensusResult(
+            text, toks,
+            SINGLE_ENGINE_CONFIDENCE,   # page_confidence (was dishonest 1.0)
+            0.0,                        # token_agreement_ratio: no >=2 agreement possible
+            "single", engines, len(toks),
+        )
 
     if _legacy_spine_no_merge:
         # Pre-S1A-fix path (A/B measurement only): most-tokens spine, NO merge.

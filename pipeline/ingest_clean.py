@@ -9,16 +9,36 @@ WHAT CHANGED vs the old ingest (and WHY)
   F5  No more `safe_str` ASCII errors="replace" and no hand-escaped SQL string
       concat. Inserts are **psycopg parameterized** (`%s` placeholders), so §,
       long-s, em-dashes, accents survive verbatim — full UTF-8 committed text.
-  F6  The WHOLE VOLUME runs in ONE transaction (every act's enactment +
-      provision + designation_history + change_event). Any failure -> rollback
-      the ENTIRE volume (all acts or none) + raise (Hans S2-B: the old per-act
-      commit left acts 0..N-1 durably committed on a mid-volume failure). The
-      volume is NEVER marked done on a partial ingest, so a gap is always
+  F6  The WHOLE VOLUME runs in ONE transaction (the scoped purge + every act's
+      enactment + provision + designation_history + change_event). Any failure ->
+      rollback the ENTIRE volume (all acts or none) + raise (Hans S2-B: the old
+      per-act commit left acts 0..N-1 durably committed on a mid-volume failure).
+      The volume is NEVER marked done on a partial ingest, so a gap is always
       revisited, never silent.
-  F7  ONE canonical physical-act key everywhere: (source_document_id,
+
+  C1  RE-INGEST REPLACES, NEVER SKIPS (Hans pass-3). Inside the volume txn,
+      BEFORE the insert loop, ALL prior rows for the resolved source_document are
+      PURGED (provision_version, designation_history, change_event, orphan
+      provision, enactment). The old EXISTS skip-on-existing + ON CONFLICT DO
+      NOTHING are REMOVED — they silently discarded the new consensus text and
+      kept lossy version-A. Re-running is now idempotent (purge + reinsert).
+
+  C3  source_document is resolved by content_sha256 (the volume's content
+      identity, read from sha256.txt — same source the registry used), NOT by a
+      citation LIKE + ORDER BY id (which landed on the stale 1850 skeleton id=1).
+      Resolution FAILS LOUD on zero or multiple matches, and explicitly refuses
+      the stale 1850 id=1 duplicate.
+  F7  ONE within-run physical-act key everywhere: (source_document_id,
       in_act_order). in_act_order is the 0-indexed ordinal position of the act
       in the parsed volume — it survives a garbled chapter number. Chapter
       number is best-effort DISPLAY only, never a dedup key.
+      HONESTY (Hans C4): this key is stable ONLY WITHIN A SINGLE PARSE RUN. If
+      the parser's act ordering changes between runs, in_act_order N can denote
+      a DIFFERENT physical act. That is fine here because the re-ingest does NOT
+      match on this key across runs — it PURGES every row for the source_document
+      first (see commit_volume / C1) and re-inserts from scratch, so the key only
+      ever needs to be unique within the one run that writes it. It is NOT a
+      cross-version-stable identity, and nothing treats it as one.
   F8  No hardcoded ocr_cer_estimate=0.015 / scan_quality='good'. The per-volume
       OCR quality estimate is derived from the consensus per-token confidence
       (mean token confidence -> rough CER proxy); scan_quality is bucketed from
@@ -346,6 +366,11 @@ def bank_consensus_output(plan: dict) -> Optional[str]:
     page_ocr_results.json. No DB. Idempotent: overwrites with the freshly-derived
     deterministic payload. Returns the written path (or None if no consensus).
 
+    Hans H2: commit_volume calls this ONLY AFTER a successful DB commit, so a
+    rolled-back volume never leaves an orphan file dangling off a
+    source_document with no committed rows. Idempotence (overwrite) means a
+    later successful re-run re-banks cleanly.
+
     This is what makes the Phase C disagreement/review queue a QUERY over
     persisted data: source_document.ocr_stats.consensus_output_path points here,
     and each change_event.ocr_provenance.disagreement summarizes the per-act slice.
@@ -367,6 +392,85 @@ def bank_consensus_output(plan: dict) -> Optional[str]:
         f"({payload['n_pages']} pages, "
         f"low_conf_threshold={payload['low_confidence_threshold']})", "OK")
     return str(out_path)
+
+
+def _derive_act_page_spans(confident_acts: list) -> List[Tuple[int, int]]:
+    """
+    Hans H3: derive each act's INCLUSIVE [start_page, end_page] page span so the
+    per-act confidence can aggregate over EVERY page the act spans, not just its
+    start page.
+
+    SOURCE LIMITATION (documented honestly): the parser records only a single
+    `source_page` per act (the act's START page). It does NOT record an end page
+    or an explicit page range. We therefore DERIVE the end page as the start
+    page of the NEXT act that begins on a strictly later page (minus none — the
+    next act may begin on the same page, so the span is inclusive up to that
+    next act's start page). For the LAST act we cannot know its end page from
+    this data, so its span is just its own start page (single page). This is a
+    best-effort span, not a parser-certified one; where it is wrong it can only
+    OVER-include a neighbouring page (widening uncertainty), never hide it.
+
+    Deterministic: depends only on the parsed-order source_page sequence.
+    """
+    starts: List[int] = []
+    for a in confident_acts:
+        try:
+            starts.append(int(str(a.get("source_page", "")).strip() or 0))
+        except ValueError:
+            starts.append(0)
+    n = len(starts)
+    spans: List[Tuple[int, int]] = []
+    for i, sp in enumerate(starts):
+        end = sp
+        # find the next act that begins on a strictly later page
+        for j in range(i + 1, n):
+            if starts[j] > sp:
+                end = starts[j]   # inclusive: the next act may share its 1st page
+                break
+        if end < sp:
+            end = sp
+        spans.append((sp, end))
+    return spans
+
+
+def _aggregate_span_signal(by_page: dict, start_page: int, end_page: int):
+    """
+    Aggregate the per-page consensus signals across an act's INCLUSIVE page span
+    (Hans H3). Returns (agreement, engines, method, low_tokens, n_present,
+    pages_covered, page_ref) using only pages that actually have consensus.
+
+      agreement  = mean page_confidence over covered pages (None if none covered)
+      engines    = sorted union of engines across covered pages
+      method     = the covered pages' method if unanimous, else "mixed"
+      low_tokens = concatenation of low-confidence tokens across ALL covered pages
+      n_present  = max engines present on any covered page (page-level proxy)
+    """
+    covered = []
+    for p in range(start_page, end_page + 1):
+        pc = by_page.get(str(p))
+        if pc is not None:
+            covered.append((p, pc))
+    if not covered:
+        return None, [], None, [], None, [], "p. " + str(start_page)
+
+    confs = [pc["page_confidence"] for _, pc in covered]
+    agreement = round(sum(confs) / len(confs), 4)
+    engines_set: set = set()
+    methods: set = set()
+    low_tokens: list = []
+    for _, pc in covered:
+        engines_set.update(pc["engines_used"])
+        methods.add(pc["method"])
+        low_tokens.extend(pc["low_confidence_tokens"])
+    engines = sorted(engines_set)
+    method = methods.pop() if len(methods) == 1 else "mixed"
+    n_present = max(len(pc["engines_used"]) for _, pc in covered) or None
+    pages_covered = [p for p, _ in covered]
+    if start_page == end_page:
+        page_ref = "p. " + str(start_page)
+    else:
+        page_ref = f"pp. {start_page}-{end_page}"
+    return agreement, engines, method, low_tokens, n_present, pages_covered, page_ref
 
 
 def plan_volume(session_label: str) -> dict:
@@ -423,6 +527,10 @@ def plan_volume(session_label: str) -> dict:
         "consensus_output_path": consensus_output_path,
     }
 
+    # Hans H3: derive each act's inclusive page span ONCE (parsed-order based),
+    # so per-act confidence can aggregate across EVERY page the act spans.
+    act_spans = _derive_act_page_spans(confident_acts)
+
     planned: List[PlannedAct] = []
     for idx, act in enumerate(confident_acts):
         chapter_int = int(act.get("chapter_int", 0) or 0)
@@ -436,25 +544,20 @@ def plan_volume(session_label: str) -> dict:
         designation = citation
         confident = (not date_unknown) and (not chap_subst) and chapter_int > 0
 
-        # ---- join the act to its source page's consensus signal --------------
-        src_page = str(act.get("source_page", "")).strip()
-        page_ref = "p. " + (src_page if src_page else "0")
-        pc = by_page.get(src_page)
-        if pc is not None:
-            agreement = pc["page_confidence"]
-            engines = pc["engines_used"]
-            method = pc["method"]
-            low_toks = pc["low_confidence_tokens"]
-        else:
-            # no consensus for this page -> honest NULLs, not a fabricated 1.0
-            agreement = None
-            engines = []
-            method = None
-            low_toks = []
-
-        # page-level n_agree/n_present proxy (engines that produced this page):
-        n_present = len(engines) if engines else None
-        n_agree = None  # per-act agreement is page_confidence; per-token in payload
+        # ---- H3: aggregate the consensus signal across ALL pages this act spans
+        # (not just the start page). The parser records only a start page, so the
+        # span is derived (see _derive_act_page_spans); the aggregate UNDERSTATES
+        # uncertainty no more than the single-page proxy did, and usually states
+        # it more honestly (a 4-page act now reflects all 4 pages' agreement +
+        # every low-confidence token across them).
+        start_page, end_page = act_spans[idx]
+        (agreement, engines, method, low_toks, n_present,
+         pages_covered, page_ref) = _aggregate_span_signal(
+            by_page, start_page, end_page
+        )
+        # per-token n_agree lives in consensus_output.json; the per-act page-level
+        # proxy is the span's aggregate agreement (n_present above).
+        n_agree = None
 
         ocr_provenance = {
             "engines": engines,
@@ -466,9 +569,20 @@ def plan_volume(session_label: str) -> dict:
             "page_ref": page_ref,
             "n_agree": n_agree,
             "n_present": n_present,
+            # H3: the exact pages this act's signal was aggregated over (derived
+            # span; start page is parser-certified, end page is derived — see
+            # _derive_act_page_spans). page_span_derived flags the limitation.
+            "page_span": {
+                "start_page": start_page,
+                "end_page": end_page,
+                "pages_with_consensus": pages_covered,
+                "page_span_derived": start_page != end_page,
+            },
             "disagreement": {
+                # aggregated across ALL covered pages of the act's span (H3),
+                # not just the start page.
                 "low_confidence_token_count": len(low_toks),
-                # cap the inline list so a pathological page can't bloat the row;
+                # cap the inline list so a pathological span can't bloat the row;
                 # the FULL per-token stream lives in consensus_output.json, which
                 # this provenance references via source_document.ocr_stats.
                 "low_confidence_tokens": low_toks[:50],
@@ -535,9 +649,14 @@ CHANGE_EVENT_SQL = (
     " chaptered_out, trust_level, source_document_id, page_ref, "
     " confident, confidence, ocr_provenance) "
     "VALUES (%s, %s, 'enact', %s, %s, %s, false, %s, %s, %s, %s, %s, %s) "
-    # S2-A canonical key: idempotent re-ingest. Requires the UNIQUE index
-    # uq_change_event_src_doc_in_act_order to exist (apply per migration plan).
-    "ON CONFLICT (source_document_id, in_act_order) DO NOTHING "
+    # Hans C2/C1 DECISION: NO `ON CONFLICT`. commit_volume purges ALL rows for
+    # this source_document INSIDE the same transaction BEFORE this insert loop,
+    # so there is provably nothing to conflict with: in_act_order = enumerate
+    # index is unique by construction within one parse run. A plain INSERT is
+    # therefore correct and removes the old apply-order circular dependency
+    # (the insert no longer requires the UNIQUE index to pre-exist). The UNIQUE
+    # index (migration 0004) is a durable post-ingest GUARANTEE, applied AFTER
+    # the re-ingest + zero-dup check — it is not needed for this INSERT to run.
     "RETURNING id;"
 )
 # Per-volume source_document quality signals (capture-ALL-signals). Writes the
@@ -548,10 +667,55 @@ SOURCE_DOC_UPDATE_SQL = (
     "SET scan_quality = %s, ocr_cer_estimate = %s, ocr_stats = %s "
     "WHERE id = %s;"
 )
-# Canonical dedup check on (source_document_id, in_act_order):
-EXISTS_SQL = (
-    "SELECT 1 FROM change_event "
-    "WHERE source_document_id = %s AND in_act_order = %s LIMIT 1;"
+# --------------------------------------------------------------------------- #
+# Hans C1: SCOPED IDEMPOTENT PURGE of ALL prior rows for one source_document.
+# --------------------------------------------------------------------------- #
+# Runs INSIDE the per-volume transaction, BEFORE the insert loop, so a re-ingest
+# REPLACES version-A rather than skipping it (the old EXISTS skip silently
+# discarded the new consensus text and kept the lossy version-A rows). Modeled
+# on ingest_from_ocr.py:366-381 but parameterized (psycopg %s) and adapted to
+# this schema (provision_version carries source_document_id + source_change_
+# event_id; provision is purged only when orphaned of BOTH change_event and
+# designation_history, and only for THIS volume's designation namespace).
+#
+# Order matters (FK-safe, child-before-parent):
+#   1. provision_version  — read model rows produced from this doc's events
+#   2. designation_history — joined to provisions touched by this doc's events
+#   3. change_event       — this doc's events
+#   4. provision          — now-orphaned act_section provisions for this volume
+#   5. enactment          — this doc's enactments
+PURGE_COUNT_SQL = (
+    "SELECT count(*) FROM enactment WHERE source_document_id = %s;"
+)
+PURGE_PROVISION_VERSION_SQL = (
+    "DELETE FROM provision_version "
+    "WHERE source_document_id = %s "
+    "   OR source_change_event_id IN "
+    "      (SELECT id FROM change_event WHERE source_document_id = %s);"
+)
+PURGE_DESIGNATION_HISTORY_SQL = (
+    "DELETE FROM designation_history dh "
+    "USING provision p, change_event ce "
+    "WHERE dh.provision_id = p.id AND ce.provision_id = p.id "
+    "  AND ce.source_document_id = %s;"
+)
+PURGE_CHANGE_EVENT_SQL = (
+    "DELETE FROM change_event WHERE source_document_id = %s;"
+)
+# Orphan provisions: act_section provisions in THIS volume's designation
+# namespace ('Stats. <label> %') that no longer have any change_event or
+# designation_history pointing at them (i.e. they were created only by this
+# volume's now-deleted events). The LIKE namespace prevents touching other
+# volumes' provisions that happen to be orphaned for unrelated reasons.
+PURGE_ORPHAN_PROVISION_SQL = (
+    "DELETE FROM provision p "
+    "WHERE p.jurisdiction = 'CA' AND p.unit_type = 'act_section' "
+    "  AND p.current_designation LIKE %s "
+    "  AND NOT EXISTS (SELECT 1 FROM change_event ce WHERE ce.provision_id = p.id) "
+    "  AND NOT EXISTS (SELECT 1 FROM designation_history dh WHERE dh.provision_id = p.id);"
+)
+PURGE_ENACTMENT_SQL = (
+    "DELETE FROM enactment WHERE source_document_id = %s;"
 )
 
 
@@ -576,7 +740,6 @@ def build_param_plan(src_doc_id, plan) -> List[dict]:
     for act in plan["acts"]:
         rows.append({
             "in_act_order": act.in_act_order,
-            "exists_check": (src_doc_id, act.in_act_order),
             "enactment": enactment_params(src_doc_id, plan, act),
             "provision": (act.designation,),
             "designation_history": (
@@ -629,7 +792,35 @@ def dry_run(session_label: str):
 
     print(f"\n=== DRY-RUN PLAN: Stats. {session_label} ===")
     print(f"  source_document key   : {placeholder_src}")
-    print(f"  canonical act key     : (source_document_id, in_act_order)")
+
+    # ---- C3: how the source_document WOULD be resolved (by content identity) --
+    try:
+        sha = _read_volume_sha256(session_label)
+        print(f"  resolve by (C3)       : content_sha256 = {sha}")
+        print(f"    resolver SQL        : SELECT id FROM source_document "
+              f"WHERE content_sha256 = %s ORDER BY id;  -- FAIL if 0 or >1 rows")
+        if session_label == "1850":
+            print(f"    stale-1850 guard    : refuse if id=1 OR a 'CA Statutes 1850%' "
+                  f"id=1 skeleton still exists (manual purge required — see runbook)")
+    except RuntimeError as e:
+        print(f"  resolve by (C3)       : !! {e}")
+
+    # ---- C1: the SCOPED PURGE that WOULD run inside the txn BEFORE inserts -----
+    print(f"\n  --- C1 SCOPED PURGE (WOULD run inside the volume txn, BEFORE inserts) ---")
+    print(f"    (replaces version-A; re-ingest is idempotent purge+reinsert; "
+          f"skip-on-existing / ON CONFLICT REMOVED)")
+    print(f"    1. {PURGE_COUNT_SQL}")
+    print(f"    2. {PURGE_PROVISION_VERSION_SQL}")
+    print(f"    3. {PURGE_DESIGNATION_HISTORY_SQL}")
+    print(f"    4. {PURGE_CHANGE_EVENT_SQL}")
+    print(f"    5. {PURGE_ORPHAN_PROVISION_SQL}")
+    print(f"       (param: {('Stats. ' + session_label + ' %')!r})")
+    print(f"    6. {PURGE_ENACTMENT_SQL}")
+    print(f"    change_event INSERT (no ON CONFLICT — plain INSERT post-purge):")
+    print(f"      {CHANGE_EVENT_SQL.strip()}")
+
+    print(f"\n  within-run act key    : (source_document_id, in_act_order) "
+          f"[unique per parse run; purge+reinsert, NOT cross-version-stable]")
     print(f"  acts to ingest        : {n}")
     print(f"    confident=True      : {n_confident}")
     print(f"    date_unknown        : {n_date_unknown}  (operative_date -> NULL, flagged)")
@@ -744,55 +935,152 @@ def _connect():
     )
 
 
-def _resolve_source_document_id(cur, session_label: str) -> int:
-    cur.execute(
-        "SELECT id FROM source_document "
-        "WHERE citation LIKE %s AND page_count IS NOT NULL "
-        "ORDER BY id LIMIT 1;",
-        (f"Stats. {session_label}%",),
-    )
-    row = cur.fetchone()
-    if not row:
+def _read_volume_sha256(session_label: str) -> str:
+    """
+    Hans C3: the volume's content_sha256 is its IDENTITY. The registry
+    (ingest_from_ocr.py:306-315) keyed source_document by the sha written to
+    <scratch>/production-<label>/sha256.txt. We read that SAME file so the
+    resolver lands on the SAME row the registry created — never on a citation
+    LIKE near-match (which the old resolver used, and which sorted by id and so
+    landed on the stale 1850 skeleton id=1). The sha is NOT carried in the
+    banked parsed_acts JSON, so we read sha256.txt directly (identical source
+    to the registry; not recomputed here, to avoid a divergent hash).
+    """
+    scratch = SCRATCH_ROOT / ("production-" + session_label)
+    sha_path = scratch / "sha256.txt"
+    if not sha_path.exists():
         raise RuntimeError(
-            f"{session_label}: no production source_document found — "
-            f"refusing to ingest (volume not ready)."
+            f"{session_label}: sha256.txt not found at {sha_path} — cannot "
+            f"resolve source_document by content identity; refusing to ingest."
         )
-    return int(row[0])
+    sha = sha_path.read_text(encoding="utf-8").strip()
+    if not sha:
+        raise RuntimeError(
+            f"{session_label}: sha256.txt is empty — cannot resolve "
+            f"source_document by content identity; refusing to ingest."
+        )
+    return sha
+
+
+def _resolve_source_document_id(cur, session_label: str) -> int:
+    """
+    Resolve the production source_document by content_sha256 (Hans C3).
+
+    FAIL LOUD on:
+      * no match            — volume not registered / not ready,
+      * multiple matches    — ambiguous identity (must never silently pick),
+      * the stale 1850 dup  — if resolution would target id=1 (the 26-row
+                              skeleton duplicate), refuse and require the manual
+                              purge documented in the runbook / 0004 notes.
+
+    The old resolver used `citation LIKE ... ORDER BY id LIMIT 1`, which on the
+    live DB lands on the LOWEST id — for 1850 that is the stale skeleton id=1 —
+    producing a split-brain corpus. content_sha256 is the content-derived
+    identity (uq_source_document_content_sha256), so it is unambiguous when the
+    data is clean and FAILS rather than guesses when it is not.
+    """
+    sha = _read_volume_sha256(session_label)
+    cur.execute(
+        "SELECT id FROM source_document WHERE content_sha256 = %s ORDER BY id;",
+        (sha,),
+    )
+    rows = cur.fetchall()
+    if not rows:
+        raise RuntimeError(
+            f"{session_label}: no source_document with content_sha256={sha[:12]}… "
+            f"— volume not registered/ready; refusing to ingest."
+        )
+    if len(rows) > 1:
+        ids = ", ".join(str(r[0]) for r in rows)
+        raise RuntimeError(
+            f"{session_label}: AMBIGUOUS source_document — {len(rows)} rows share "
+            f"content_sha256={sha[:12]}… (ids: {ids}). Refusing to ingest; "
+            f"resolve the duplicate manually before re-running."
+        )
+    src_doc_id = int(rows[0][0])
+
+    # Explicit stale-1850-duplicate guard (Hans C3). The known bad row is the
+    # 1850 skeleton source_document id=1 (26 skeleton rows, NULL/placeholder
+    # content). It must NEVER be the ingest target. If the sha resolution itself
+    # somehow lands on id=1, OR a stale id=1 still exists alongside the real
+    # 1850 row, refuse and point at the documented manual purge.
+    if session_label == "1850":
+        if src_doc_id == 1:
+            raise RuntimeError(
+                "1850: resolver targeted source_document id=1, the STALE "
+                "skeleton duplicate. Refusing to ingest. Run the manual purge "
+                "documented in drizzle/0004_*.sql notes / the runbook "
+                "(dedup_precheck.sql) to remove id=1 first, then re-run."
+            )
+        cur.execute(
+            "SELECT id FROM source_document "
+            "WHERE id = 1 AND citation LIKE 'CA Statutes 1850%';"
+        )
+        if cur.fetchone() is not None:
+            raise RuntimeError(
+                "1850: a STALE skeleton source_document id=1 still exists "
+                "alongside the resolved production row "
+                f"id={src_doc_id}. Refusing to ingest (ambiguous 1850 corpus). "
+                "Purge id=1 manually first — see dedup_precheck.sql / runbook."
+            )
+    return src_doc_id
+
+
+def _purge_source_document(cur, src_doc_id: int, session_label: str) -> int:
+    """
+    Hans C1: scoped, idempotent purge of ALL prior rows for one source_document,
+    INSIDE the caller's open transaction (no commit/rollback here). Returns the
+    count of enactments that existed before the purge (0 on a first ingest).
+
+    This is what makes the re-ingest REPLACE version-A instead of skipping it,
+    and what makes re-running idempotent (purge + reinsert). Child-before-parent
+    order keeps every FK satisfied at each step.
+    """
+    cur.execute(PURGE_COUNT_SQL, (src_doc_id,))
+    purge_before = int(cur.fetchone()[0])
+    cur.execute(PURGE_PROVISION_VERSION_SQL, (src_doc_id, src_doc_id))
+    cur.execute(PURGE_DESIGNATION_HISTORY_SQL, (src_doc_id,))
+    cur.execute(PURGE_CHANGE_EVENT_SQL, (src_doc_id,))
+    cur.execute(PURGE_ORPHAN_PROVISION_SQL, (f"Stats. {session_label} %",))
+    cur.execute(PURGE_ENACTMENT_SQL, (src_doc_id,))
+    return purge_before
 
 
 def commit_volume(session_label: str):
     """
     Transactional, fail-loud commit. NOT used in Phase B (no DB writes allowed).
 
-    Hans S2-B FIX: the ENTIRE volume is ONE transaction (all acts or none).
-    The old code did `conn.commit()` per act, so a mid-volume failure left acts
-    0..N-1 durably committed even though F6 requires "fail the whole volume" —
-    a partial volume would then be silently half-present and (per F6) never
-    revisited cleanly. Now: a single transaction spans every act; ANY error ->
-    `conn.rollback()` discards the WHOLE volume + raise (volume FAILS, is NEVER
-    marked done). UTF-8 preserved via parameter binding.
+    Hans S2-B: the ENTIRE volume is ONE transaction (all acts or none). ANY
+    error -> `conn.rollback()` discards the WHOLE volume + raise (volume FAILS,
+    is NEVER marked done). UTF-8 preserved via parameter binding.
 
-    Duplicate acts (already present by canonical key) are skipped WITHIN the same
-    transaction (no per-act rollback that would discard prior inserts).
+    Hans C1: the transaction FIRST resolves the source_document by content
+    identity (C3), then PURGES all of that document's prior rows (version-A),
+    then re-inserts. So a re-ingest REPLACES version-A; it never silently skips.
+    Re-running is idempotent (purge + reinsert -> same final rows). The old
+    EXISTS skip-on-existing + ON CONFLICT DO NOTHING are GONE: after the purge
+    there is nothing to conflict with, and in_act_order (enumerate index) is
+    unique within one parse run, so a plain INSERT is correct.
+
+    Hans H2: consensus_output.json is banked ONLY AFTER the DB commit succeeds,
+    so a rolled-back volume never leaves an orphan file dangling off a
+    source_document that has no committed rows. (bank_consensus_output is itself
+    idempotent — it overwrites — so a later successful re-run re-banks cleanly.)
     """
     plan = plan_volume(session_label)
-    # Bank the per-token consensus_output.json FIRST (no DB; the Phase C
-    # substrate is durable even if the DB commit is later deferred/rolled back).
-    bank_consensus_output(plan)
 
     from psycopg.types.json import Jsonb  # jsonb param wrapper (commit-path only)
 
     conn = _connect()
     conn.autocommit = False  # ONE explicit transaction for the whole volume
-    inserted = skipped = 0
+    inserted = 0
+    purged = 0
     try:
         with conn.cursor() as cur:
             src_doc_id = _resolve_source_document_id(cur, session_label)
+            # ---- C1: purge version-A for THIS source_document, in-txn --------
+            purged = _purge_source_document(cur, src_doc_id, session_label)
             for act in plan["acts"]:
-                cur.execute(EXISTS_SQL, (src_doc_id, act.in_act_order))
-                if cur.fetchone():
-                    skipped += 1
-                    continue  # already present; do NOT re-insert, do NOT rollback
                 cur.execute(ENACTMENT_SQL, enactment_params(src_doc_id, plan, act))
                 enact_id = cur.fetchone()[0]
                 cur.execute(PROVISION_SQL, (act.designation,))
@@ -807,13 +1095,10 @@ def commit_volume(session_label: str):
                     act.in_act_order, act.trust_level, src_doc_id, act.page_ref,
                     act.confident, act.confidence, Jsonb(act.ocr_provenance),
                 ))
-                # ON CONFLICT DO NOTHING -> RETURNING is empty on a concurrent dup;
-                # that means the act was inserted by someone else after our EXISTS
-                # check. Treat as skipped (do NOT roll back the volume).
-                if cur.fetchone() is None:
-                    skipped += 1
-                else:
-                    inserted += 1
+                # plain INSERT (no ON CONFLICT): post-purge there is nothing to
+                # conflict with, so RETURNING always yields the new id.
+                cur.fetchone()
+                inserted += 1
             # ---- per-volume source_document signals (real, computed) ----------
             cur.execute(SOURCE_DOC_UPDATE_SQL, (
                 plan["scan_quality"],
@@ -823,19 +1108,25 @@ def commit_volume(session_label: str):
             ))
         conn.commit()  # COMMIT ONCE — all acts or none (S2-B / F6)
         log("INGEST-COMMIT",
-            f"{session_label}: inserted={inserted} skipped(dup)={skipped} | "
+            f"{session_label}: purged(prior_enactments)={purged} inserted={inserted} | "
             f"scan_quality={plan['scan_quality']} cer={plan['ocr_cer_estimate']} | "
-            f"volume committed atomically (single txn)",
+            f"volume REPLACED atomically (single txn, purge+reinsert)",
             "OK")
     except Exception as e:
         conn.rollback()  # discard the ENTIRE volume — nothing durable on failure
         # FAIL THE VOLUME — never mark done on partial ingest (F6/S2-B)
         raise RuntimeError(
             f"{session_label}: volume FAILED ({str(e)[:200]}) — entire volume "
-            f"rolled back (0 acts committed), NOT marked done."
+            f"rolled back (0 acts committed/purged), NOT marked done."
         ) from e
     finally:
         conn.close()
+
+    # ---- H2: bank consensus_output.json ONLY AFTER a successful commit -------
+    # If the txn rolled back we never reach here, so no orphan file is left
+    # pointing at a source_document with no committed rows. bank_consensus_output
+    # is idempotent (overwrite), so a later re-run re-banks deterministically.
+    bank_consensus_output(plan)
 
 
 # --------------------------------------------------------------------------- #

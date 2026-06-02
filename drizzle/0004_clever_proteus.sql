@@ -1,0 +1,28 @@
+-- ============================================================================
+-- 0004 — UNIQUE index on change_event (source_document_id, in_act_order)
+-- ============================================================================
+-- Hans pass-3 C2/H1: split out of 0003 so the safe column adds (0003) and this
+-- uniqueness guarantee (0004) are separate migrations. This avoids the
+-- half-migration hazard of creating a unique index over still-duplicated
+-- version-A rows in the same migration as non-blocking column adds.
+--
+-- APPLY ONLY AFTER (see 0003 header for the full ordered runbook):
+--   1. 0003 applied (column adds).
+--   2. ingest_clean.py --commit run for every volume (its per-volume scoped
+--      purge + reinsert REPLACES version-A and so eliminates duplicate
+--      (source_document_id, in_act_order) pairs — Hans C1).
+--   3. drizzle/dedup_precheck.sql confirms ZERO rows from the
+--      HAVING count(*) > 1 duplicate query.
+-- If duplicates remain (step 3 non-empty), this migration WILL FAIL — that is
+-- by design: do not force it; finish the re-ingest first.
+--
+-- TRANSACTIONAL: a single non-CONCURRENT CREATE UNIQUE INDEX statement. Drizzle
+-- runs each migration file in a transaction, so this either fully creates the
+-- index or rolls back cleanly (no half-applied state).
+--
+-- The change_event INSERT path in ingest_clean.py does NOT depend on this index
+-- (it uses a plain INSERT after the C1 purge — no ON CONFLICT). This index is a
+-- durable GUARANTEE that no volume can ever double-insert the same ordinal.
+-- ============================================================================
+
+CREATE UNIQUE INDEX "uq_change_event_src_doc_in_act_order" ON "change_event" USING btree ("source_document_id","in_act_order");
