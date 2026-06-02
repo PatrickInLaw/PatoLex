@@ -1,0 +1,14 @@
+[2026-06-02 05:15 PT] INVESTIGATE | 5090 has 4 python procs: 2x ocr_batch_5090.py + 2x ocr_only_5090.py both on 1863 (RACE on same JSON). GPU util 0% / 4.5GB. | WARN
+[2026-06-02 05:15 PT] INVESTIGATE | 5090 banked: 1861 complete (723p), 1863 partial (100p advancing). Only those 2 production dirs on 5090. | OK
+[2026-06-02 05:15 PT] INVESTIGATE | 5080 DB ingested production: 1850-1861 (clean). 1862 local OCR partial (1656KB) NOT ingested + NOT on 5090. | OK
+[2026-06-02 05:15 PT] PLAN | Remaining OCR: 1862,1863,1863-64,1865-66,1867-68,1869-70,1871-72,1873-74,1875-76. Build shared forward queue + 3 detached workers on 5090. | OK
+[2026-06-02 05:15 PT] STOP-OLD | Cleanly stopped old 2x ocr_batch + 2x ocr_only (1863 race). GPU cleared to 1.8GB. No banked loss. | OK
+[2026-06-02 05:15 PT] LAUNCH-V1 | Start-Process -Hidden launched 3 queue workers; shared queue claimed 1862/1863/1863-64 forward, no collision. | OK
+[2026-06-02 05:21 PT] SURVIVE-FAIL | All 3 workers DIED when launching SSH session closed. Start-Process detachment NOT SSH-session-safe on this box. GPU flat 1.8GB. | FAIL
+[2026-06-02 05:21 PT] SURVIVE-FAIL | Banked OCR intact: 1861=723p, 1863 advanced 100->175p (resumable). 1862/1863-64 in render, no JSON yet. Idempotent. | OK
+[2026-06-02 05:22 PT] PIVOT | Switching to Scheduled Task (run as patolex w/ stored creds) running a long-lived supervisor -> spawns 3 workers. Detaches from SSH session. | OK
+[2026-06-02 06:05 PT] VERIFY-RESUME | Fresh session re-verify after Claude process death. 5090 Scheduled Task PatoLex_OCR_5090=Running; supervisor pid 39572 parent=svchost Schedule (Task Scheduler, NOT SSH) => SESSION-INDEPENDENT confirmed. | OK
+[2026-06-02 06:05 PT] VERIFY-RESUME | 5090: 3 forward workers alive (5090-1=1862, 5090-2=1863 p446/855, 5090-3=1863-64 p67/632). Queue 1865-76 pending in chrono order. Heartbeats fresh. GPU 96% util 15.5GB/32 (per-worker peak 5.8-8.6GB). 3 workers saturate GPU => no 4th. | OK
+[2026-06-02 06:05 PT] VERIFY-RESUME | 5080 clean: no stray python, GPU idle 1.7GB/16. Crashed reverse-stream helper left nothing stuck (no kill needed). PowerShell responsive. | OK
+[2026-06-02 06:05 PT] VERIFY-RESUME | DB: source_document=20, enactment/provision/change_event=2091 each. Real ingested volumes 1850-1861 (citation 'Stats. YYYY, Statutes of California', page_count set). Skeleton rows ids 13-19 (1862-1872, NULL page_count, stale partial enactments from prior run). | OK
+[2026-06-02 06:05 PT] PLAN-INGEST | Build detached ingest loop on 5080: scp page_ocr_results.json from 5090 on OCR_COMPLETE.marker -> upgrade skeleton source_document (one row/vol, clean purge key) -> reparse.py + re_ingest_fixed.py per-vol. Detached via Scheduled Task. | OK

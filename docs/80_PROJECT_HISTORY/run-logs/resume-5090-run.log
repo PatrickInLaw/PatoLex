@@ -1,0 +1,19 @@
+[2026-06-02 03:10 PT] INIT | Resume 5090 OCR for large volumes 1861-1875; verify on 1861 first | OK
+[2026-06-02 03:12 PT] GPU-CHECK | 5090 free 30410 MiB (idle), 5080 free 15269 MiB. Batch state: completed 1851-1860, failed 1861,1862. | OK
+[2026-06-02 03:35 PT] PROVISION-5090 | surya-venv: added PyMuPDF 1.27.2.3, pytesseract 0.3.13, python-doctr 1.0.1 (torch held 2.7.0+cu128, pillow 10.4.0). Tesseract 5.4.0 copied. All engines import; CUDA=True on RTX 5090. | OK
+[2026-06-02 03:50 PT] ARCH | OCR-only on 5090 (ocr_only_5090.py, no DB) writes page_ocr_results.json; parse+ingest local on 5080 (ingest_from_ocr.py: ROUND2 parser + STAGE6 ingest, covers 1861-1875-76). Staged all 9 large Statutes PDFs + batch driver to 5090. | OK
+[2026-06-02 04:09 PT] VERIFY-1861 | Started 1861 OCR on 5090 (730pp, sha b1e0b569...). Render 28.7s. Preprocess + 3-engine Surya+docTR+Tess consensus running. | OK
+[2026-06-02 04:20 PT] VERIFY-1861 | Preprocess 730 OK/0 FAIL (620s). Body=723 pages. docTR+Surya loaded on RTX 5090 (fp16/cuda). OCR started Surya=True. | OK
+[2026-06-02 04:20 PT] VERIFY-1861 | GATE PASS (early): page 1/723 3-engine consensus agree=0.59, NO cudaErrorMemoryAllocation, peakVRAM=4688MB (vs 5080 16GB OOM). Per-page hygiene holding VRAM low. ~4.2s/page. | OK
+[2026-06-02 04:23 PT] VERIFY-1861 | Sustained healthy: pages 21/41/61 peakVRAM 5364/5966/5966MB (PLATEAUED, no leak). agreement varies by page (0.22 sparse .. 0.80 hi=True body) -- consensus NOT collapsing. ~2.6s/page warmed. Gate criteria met; awaiting full completion before launching rest. | OK
+[2026-06-02 04:24 PT] DECISION | Honored explicit user gate: NOT starting 1862 (5080) or 5090 batch until 1861 fully completes (auto-mode classifier correctly blocked premature 1862 launch). | OK
+[2026-06-02 04:50 PT] VERIFY-1861 RESULT | *** GATE PASS *** 1861 OCR COMPLETE on 5090, exit 0, NO cudaErrorMemoryAllocation. 723/723 body pages 3-engine consensus. PEAK VRAM allocated=6135MB reserved=7046MB (22% of 32GB; 5080 16GB OOM'd here). Confidence: mean_agree=0.7706 median=0.7905, high(>=0.65)=678 medium=33 low=12. ~41 min OCR wall (~17 p/min). | OK
+[2026-06-02 04:51 PT] PARALLEL | Gate passed -> launching BOTH boxes: 5090 ocr_batch on 1863,1863-64,1865-66,1867-68,1869-70,1871-72,1873-74,1875-76 (largest); 5080 full pipeline on 1862 (660pp, smallest). Ingest 1861 locally first. | OK
+[2026-06-02 04:52 PT] INGEST | === ingest_from_ocr.py start: 1861 === | OK
+[2026-06-02 04:52 PT] STAGE5-PARSE | 1861: confident=253 flagged=5 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 04:52 PT] STAGE6-INGEST | 1861: updated skeleton source_document id=12 | OK
+[2026-06-02 04:52 PT] STAGE6-INGEST | 1861: purged prior enactments=41 | ingesting 253 confident acts | OK
+[2026-06-02 04:53 PT] STAGE6-INGEST | 1861: enactments=253 provisions=253 change_events=253 errors=0 | OK
+[2026-06-02 04:53 PT] STAGE6-INGEST | 1861: DB TOTALS source_document=20 enactment=2091 provision=2091 change_event=2091 | OK
+[2026-06-02 04:53 PT] INGEST | === ingest_from_ocr.py done === | OK
+[2026-06-02 04:58 PT] 5080-STALL | 1862 on 5080 HUNG at 'Loading docTR model' (2 attempts, incl HF_HUB_OFFLINE=1): GPU 677MB/0-2%, python CPU frozen at 12s/88MB -- hard block at docTR ocr_predictor load, NOT network (offline didn't fix). Avoiding thrash (CLAUDE rule). DECISION: abandon 5080 OCR stream; route ALL remaining volumes through proven 5090. 5080 stays DB/ingest box. 1862 re-queued to 5090 after current batch. | WARN

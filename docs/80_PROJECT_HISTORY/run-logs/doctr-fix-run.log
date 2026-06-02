@@ -1,0 +1,16 @@
+[2026-06-02 HH:MM PT] START | docTR 5080 model-load hang investigation, isolation only | OK
+[2026-06-02 HH:MM PT] ENV | 5080 single GPU, ~1.7GB used idle; doctr v1.0.1, torch 2.7.0+cu128; prod python = Python312 (not the doctr-venv); cache has fast_base+crnn only, NO db_resnet50/orientation weights | OK
+[2026-06-02 HH:MM PT] H1 | default ocr_predictor + OFFLINE -> HANG (timeout 180s) [reproduced reported bug] | OK
+[2026-06-02 HH:MM PT] H2 | default ocr_predictor + ONLINE -> HANG (timeout 180s) -> rules OUT missing-weights/network fetch | OK
+[2026-06-02 HH:MM PT] H3 | pinned fast_base+crnn, orientation disabled, OFFLINE -> PASS load + OCR 60 lines in 39.7s [production fix] | OK
+[2026-06-02 HH:MM PT] H4 | pinned + OMP1 + KMP_DUPLICATE_LIB_OK -> PASS 39.4s (threading guards no effect) | OK
+[2026-06-02 HH:MM PT] H5 | default ocr_predictor + ONLINE + OMP1 + KMP -> HANG -> rules OUT OpenMP/threading deadlock | OK
+[2026-06-02 HH:MM PT] H6 | pinned OFFLINE on CPU -> PASS 35.1s -> rules OUT GPU-context contention | OK
+[2026-06-02 HH:MM PT] DIAG | Root cause isolated: the DEFAULT ocr_predictor construction hangs (orientation classifiers + db_resnet50 path). Pinned arch w/ orientation disabled is the fix. | OK
+[2026-06-02 HH:MM PT] PINPOINT | building db_resnet50 detection predictor ALONE (online) -> HANG -> the default detector weights are an uncached-fetch that stalls | OK
+[2026-06-02 HH:MM PT] PINPOINT | ocr_predictor with orientation ON (fast_base det) -> HANG -> orientation MobileNet classifiers ALSO stall (separate uncached fetch) | OK
+[2026-06-02 HH:MM PT] CONFIRM1 | FIX config (pinned fast_base+crnn, orientation disabled, offline) on 5080 GPU -> PASS load + OCR in 39.6s | OK
+[2026-06-02 HH:MM PT] CONFIRM2 | FIX config repeat on 5080 GPU -> PASS load + OCR in 39.1s (repeatable, not a fluke) | OK
+[2026-06-02 HH:MM PT] ROOTCAUSE | docTR ocr_predictor stalls whenever it must resolve weights NOT already in ~/.cache/doctr (db_resnet50 detector + orientation MobileNets). The HF-hub/download resolution for those uncached docTR weights hangs on this box (5080) indefinitely, online OR offline. fast_base + crnn_vgg16_bn ARE cached and load in ~32s. NOT OpenMP, NOT GPU contention, NOT a stale-process lock. | OK
+[2026-06-02 HH:MM PT] FIX | Set offline+USE_TORCH env BEFORE imports; call ocr_predictor(det_arch='fast_base', reco_arch='crnn_vgg16_bn', pretrained=True, assume_straight_pages=True, disable_page_orientation=True, disable_crop_orientation=True). Already present in production_pipeline.py lines 39-45 + 500-510. | OK
+[2026-06-02 HH:MM PT] END | Investigation complete, isolation maintained (no batch/queue/process touched). Test scripts in tmp-doctr-fix/. | OK

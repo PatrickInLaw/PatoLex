@@ -1,0 +1,4 @@
+[2026-06-02 05:07 PT] STEP1 | 5080 parallel OCR stream startup; 5090 running 1862-1875 FORWARD, 5080 will run REVERSE | OK
+[2026-06-02 05:07 PT] STEP1 | GPU state: RTX 5080, 1476MiB/16303MiB used (desktop/Broadcast/Ollama only), no python compute process holding VRAM | OK
+[2026-06-02 05:07 PT] STEP1 | Two stray python PIDs 11228 (start 04:52) + 31584 (start 04:57), ~92MB WS, ~12s CPU -- suspected hung docTR-load attempts from prior session | WARN
+[2026-06-02 05:07 PT] STEP1 | batch state: completed 1851-1860; failed [1861,1862] (1861 actually OK on 5090; 1862 = docTR hang) | OK

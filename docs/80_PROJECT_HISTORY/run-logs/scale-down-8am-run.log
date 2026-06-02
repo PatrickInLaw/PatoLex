@@ -1,0 +1,11 @@
+[2026-06-02 START] INIT | Begin 5090 scale-to-1-at-0800 task | OK
+[2026-06-02 06:00 PT] INSPECT | PatoLex_OCR_5090 -> supervisor_5090.ps1 -Count 3; relaunch loop, MAX_RESTARTS=3, NO dynamic config in running copy | OK
+[2026-06-02 06:00 PT] INSPECT | 3 worker roots PID 39104/28492/37116 under supervisor PID 39572 (PPID 2720 Task Scheduler); queue 1862/1863/1863-64 in_progress, rest pending | OK
+[2026-06-02 06:01 PT] DESIGN | Running procs use OLD in-memory code; on-disk edits only affect next incarnation. Mechanism: hold pending->held to fence old workers, end old supervisor, drain, restore, relaunch task -Count 1 | OK
+[2026-06-02 06:02 PT] IMPL | Upgraded supervisor_5090.ps1 (reads max_workers.txt each loop, never relaunches beyond max, STOP_WORKER.flag aware) + queue_worker.py (STOP flag check between volumes, held non-claimable). Backups *.bak | OK
+[2026-06-02 06:03 PT] IMPL | scale_to_one_5090.ps1 with hour-guard (abort if hour<8 unless -Force), idempotency (no-op if <=1 worker), -DryRun | OK
+[2026-06-02 06:04 PT] VERIFY | PS parse OK (supervisor+scale); python py_compile OK (worker) | OK
+[2026-06-02 06:05 PT] VERIFY | -DryRun at 06:05 PT hit hour guard FIRST and ABORTED (current hour 6 < ScaleHour 8); queue UNMUTATED (3 in_progress/5 pending/1 done, no held) | OK
+[2026-06-02 06:06 PT] TASK | Registered PatoLex_OCR_5090_ScaleTo1_0800: DAILY 08:00 -07:00, SYSTEM/Highest/ServiceAccount, StartWhenAvailable, State=Ready, NextRunTime 2026-06-02 08:00 | OK
+[2026-06-02 06:07 PT] VERIFY | 3 workers + supervisor (39572) still running undisturbed after all changes | OK
+[2026-06-02 06:07 PT] DONE | Scale-to-1 at 0800 armed, session-independent, will NOT fire before 08:00, drops to exactly 1 worker gracefully | OK

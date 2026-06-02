@@ -2848,3 +2848,29 @@ Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
 [2026-06-02 02:52 PT] [1863] STAGE2-PREPROCESS | page 3/863 ok=3 fail=0 | OK
 [2026-06-02 02:54 PT] [1863] STAGE2-PREPROCESS | page 101/863 ok=101 fail=0 | OK
 [2026-06-02 02:55 PT] [1863] STAGE2-PREPROCESS | page 201/863 ok=201 fail=0 | OK
+[2026-06-02 04:52 PT] [1862] PIPELINE | === START: 1862_Statutes.pdf session=1862 === | OK
+[2026-06-02 04:52 PT] [1862] STAGE0 | Computing SHA256 of 1862_Statutes.pdf | OK
+[2026-06-02 04:52 PT] [1862] STAGE0 | SHA256=aaabde19ba6da8e1bc8a51e66618403d549c9986177de2dba8880d020ff8b2bf (10ms) | OK
+[2026-06-02 04:52 PT] [1862] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 04:52 PT] [1862] STAGE0 | PDF opened: 660 pages | OK
+[2026-06-02 04:52 PT] [1862] STAGE1-RENDER | Rendering 660 pages at 300 DPI | OK
+[2026-06-02 04:52 PT] [1862] STAGE1-RENDER | Render done: 660 pages in 0.0s (0.00s/page) | OK
+[2026-06-02 04:52 PT] [1862] STAGE2-PREPROCESS | Preprocessing 660 pages (v2 grayscale track) | OK
+[2026-06-02 04:52 PT] [1862] STAGE2-PREPROCESS | Preprocess done: 660 OK / 0 FAIL in 0.0s | OK
+[2026-06-02 04:52 PT] [1862] STAGE3-CLASSIFY | Detecting body start page via ink density | OK
+[2026-06-02 04:52 PT] [1862] STAGE3-CLASSIFY | Body start detected at 0-indexed page 2 (PDF page 3) | OK
+[2026-06-02 04:52 PT] [1862] STAGE3-CLASSIFY | Classification done in 12.2s: body=652 front_matter=2 index=2 empty=4 | OK
+[2026-06-02 04:52 PT] [1862] STAGE4-OCR | Loading docTR model (GPU) | OK
+[2026-06-02 04:57 PT] [1862] PIPELINE | === START: 1862_Statutes.pdf session=1862 === | OK
+[2026-06-02 04:57 PT] [1862] STAGE0 | Computing SHA256 of 1862_Statutes.pdf | OK
+[2026-06-02 04:57 PT] [1862] STAGE0 | SHA256=aaabde19ba6da8e1bc8a51e66618403d549c9986177de2dba8880d020ff8b2bf (11ms) | OK
+[2026-06-02 04:57 PT] [1862] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 04:57 PT] [1862] STAGE0 | PDF opened: 660 pages | OK
+[2026-06-02 04:57 PT] [1862] STAGE1-RENDER | Rendering 660 pages at 300 DPI | OK
+[2026-06-02 04:57 PT] [1862] STAGE1-RENDER | Render done: 660 pages in 0.0s (0.00s/page) | OK
+[2026-06-02 04:57 PT] [1862] STAGE2-PREPROCESS | Preprocessing 660 pages (v2 grayscale track) | OK
+[2026-06-02 04:57 PT] [1862] STAGE2-PREPROCESS | Preprocess done: 660 OK / 0 FAIL in 0.0s | OK
+[2026-06-02 04:57 PT] [1862] STAGE3-CLASSIFY | Detecting body start page via ink density | OK
+[2026-06-02 04:57 PT] [1862] STAGE3-CLASSIFY | Body start detected at 0-indexed page 2 (PDF page 3) | OK
+[2026-06-02 04:57 PT] [1862] STAGE3-CLASSIFY | Classification done in 11.2s: body=652 front_matter=2 index=2 empty=4 | OK
+[2026-06-02 04:57 PT] [1862] STAGE4-OCR | Loading docTR model (GPU) | OK
