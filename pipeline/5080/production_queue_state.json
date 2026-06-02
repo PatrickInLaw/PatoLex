@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-06-02",
+  "note": "Forward/chronological shared OCR queue for the 5090 (and 5080) workers. Workers claim the lowest-year pending volume. Idempotent via per-volume OCR_COMPLETE.marker. 1850-1861 already banked+ingested, excluded.",
+  "volumes": [
+    { "label": "1862",    "year": 1862, "status": "pending" },
+    { "label": "1863",    "year": 1863, "status": "pending" },
+    { "label": "1863-64", "year": 1864, "status": "pending" },
+    { "label": "1865-66", "year": 1865, "status": "pending" },
+    { "label": "1867-68", "year": 1867, "status": "pending" },
+    { "label": "1869-70", "year": 1869, "status": "pending" },
+    { "label": "1871-72", "year": 1871, "status": "pending" },
+    { "label": "1873-74", "year": 1873, "status": "pending" },
+    { "label": "1875-76", "year": 1875, "status": "pending" }
+  ]
+}

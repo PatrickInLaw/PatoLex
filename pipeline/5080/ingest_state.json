@@ -1,0 +1,45 @@
+{
+  "created_at": "2026-06-02T06:14:00",
+  "note": "Watcher ingest state. 1862+1863 ingested via verified end-to-end test before task registration; reconcile-on-startup will confirm against DB anyway.",
+  "volumes": {
+    "1862": {
+      "ocr_fetched": true,
+      "ingested": true,
+      "ingested_at": "2026-06-02T06:13:00"
+    },
+    "1863": {
+      "ocr_fetched": true,
+      "ingested": true,
+      "ingested_at": "2026-06-02T06:13:00"
+    },
+    "1863-64": {
+      "ocr_fetched": true,
+      "ingested": true,
+      "ingested_at": "2026-06-02T06:23:00"
+    },
+    "1865-66": {
+      "ocr_fetched": false,
+      "ingested": false
+    },
+    "1867-68": {
+      "ocr_fetched": false,
+      "ingested": false
+    },
+    "1869-70": {
+      "ocr_fetched": false,
+      "ingested": false
+    },
+    "1871-72": {
+      "ocr_fetched": false,
+      "ingested": false
+    },
+    "1873-74": {
+      "ocr_fetched": false,
+      "ingested": false
+    },
+    "1875-76": {
+      "ocr_fetched": false,
+      "ingested": false
+    }
+  }
+}

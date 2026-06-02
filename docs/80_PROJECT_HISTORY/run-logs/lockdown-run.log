@@ -1,0 +1,20 @@
+[2026-06-02 START] LOCKDOWN | Boot-resilience + version-control of OCR/ingest pipeline | OK
+[2026-06-02] PHASE 0 | Recon | OK
+  - Local box = 5080 (PKS_2025_ALIEN). Tasks: PatoLex_Ingest_5080, PatoLex_OCR_5080, PatoLex_OCR_5080_Backoff_0800
+  - 5090 = remote SSH patolex@100.70.54.56 (PK_Alien_5090). Postgres-x64-16 on 5080 = Running, Automatic (Gap 5 SATISFIED)
+[2026-06-02] PHASE 1 | Script analysis | OK
+  - queue_claim.py/queue_worker.py: STALE_SECONDS=1800 reclaim ALREADY in claim_next (runs on first claim post-reboot). Gap 4 SATISFIED.
+  - ocr_only resumable from checkpoint; supervisors self-relaunch + block (Task-Scheduler-owned).
+  - ingest_watcher.py reconcile-on-startup + idempotent ingest => SYSTEM re-register resumes cleanly. Gap 2 resume-safety SATISFIED.
+[2026-06-02] PHASE 2 | Task edits | PARTIAL
+  - 5090 PatoLex_OCR_5090: ADDED ONSTART (MSFT_TaskBootTrigger, 60s delay) + battery cleared; SYSTEM/Highest kept; State=Running, workers 37116/28492/39104 ALIVE. Gaps 1+3 (5090) DONE.
+  - 5090 ScaleTo1_0800: battery already clear; kept daily-only (ONSTART would wrongly throttle to 1 after reboot). Gap 6 handled.
+  - 5080 Ingest/OCR/Backoff: BLOCKED on elevation. Session=Medium IL; schtasks /change /ru SYSTEM=Access denied; RunAs UAC cancelled.
+    Wrote idempotent helper pipeline/5080/_lockdown_apply_5080.ps1 (+scratch copy). Gaps 1/2/3/6 (5080) PENDING ONE elevated run.
+[2026-06-02] PHASE 3 | Version control | OK
+  - Copied 14 5080 scripts -> pipeline/5080/ ; scp'd 10 5090 scripts -> pipeline/5090/ ; all set read-only.
+  - Added pipeline/README.md (boot-resilience + layout). Helper script versioned.
+[2026-06-02] PHASE 4 | Non-disruption verify | OK
+  - 5080 PIDs 18128/50996/20676/32656 ALIVE; 5090 workers x3 ALIVE; Postgres Running/Automatic.
+  - Live in_progress heartbeats fresh (23-57s); DB enactment=2541 (advancing). Pipeline NOT disrupted.
+[2026-06-02 END] LOCKDOWN | 5090 boot-resilient; 5080 needs 1 elevated command; scripts version-controlled | OK

@@ -17,3 +17,24 @@
 [2026-06-02 04:53 PT] STAGE6-INGEST | 1861: DB TOTALS source_document=20 enactment=2091 provision=2091 change_event=2091 | OK
 [2026-06-02 04:53 PT] INGEST | === ingest_from_ocr.py done === | OK
 [2026-06-02 04:58 PT] 5080-STALL | 1862 on 5080 HUNG at 'Loading docTR model' (2 attempts, incl HF_HUB_OFFLINE=1): GPU 677MB/0-2%, python CPU frozen at 12s/88MB -- hard block at docTR ocr_predictor load, NOT network (offline didn't fix). Avoiding thrash (CLAUDE rule). DECISION: abandon 5080 OCR stream; route ALL remaining volumes through proven 5090. 5080 stays DB/ingest box. 1862 re-queued to 5090 after current batch. | WARN
+[2026-06-02 06:12 PT] INGEST | === ingest_from_ocr.py start: 1862 === | OK
+[2026-06-02 06:12 PT] STAGE5-PARSE | 1862: confident=116 flagged=6 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 06:12 PT] STAGE6-INGEST | 1862: updated skeleton source_document id=13 | OK
+[2026-06-02 06:12 PT] STAGE6-INGEST | 1862: purged prior enactments=24 | ingesting 116 confident acts | OK
+[2026-06-02 06:13 PT] STAGE6-INGEST | 1862: enactments=116 provisions=116 change_events=116 errors=0 | OK
+[2026-06-02 06:13 PT] STAGE6-INGEST | 1862: DB TOTALS source_document=20 enactment=2183 provision=2183 change_event=2183 | OK
+[2026-06-02 06:13 PT] INGEST | === ingest_from_ocr.py done === | OK
+[2026-06-02 06:13 PT] INGEST | === ingest_from_ocr.py start: 1863 === | OK
+[2026-06-02 06:13 PT] STAGE5-PARSE | 1863: confident=158 flagged=10 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 06:13 PT] STAGE6-INGEST | 1863: updated skeleton source_document id=14 | OK
+[2026-06-02 06:13 PT] STAGE6-INGEST | 1863: purged prior enactments=17 | ingesting 158 confident acts | OK
+[2026-06-02 06:13 PT] STAGE6-INGEST | 1863: enactments=158 provisions=158 change_events=158 errors=0 | OK
+[2026-06-02 06:13 PT] STAGE6-INGEST | 1863: DB TOTALS source_document=20 enactment=2324 provision=2324 change_event=2324 | OK
+[2026-06-02 06:13 PT] INGEST | === ingest_from_ocr.py done === | OK
+[2026-06-02 06:20 PT] INGEST | === ingest_from_ocr.py start: 1863-64 === | OK
+[2026-06-02 06:20 PT] STAGE5-PARSE | 1863-64: confident=238 flagged=4 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 06:20 PT] STAGE6-INGEST | 1863-64: updated skeleton source_document id=15 | OK
+[2026-06-02 06:20 PT] STAGE6-INGEST | 1863-64: purged prior enactments=21 | ingesting 238 confident acts | OK
+[2026-06-02 06:20 PT] STAGE6-INGEST | 1863-64: enactments=238 provisions=238 change_events=238 errors=0 | OK
+[2026-06-02 06:20 PT] STAGE6-INGEST | 1863-64: DB TOTALS source_document=20 enactment=2541 provision=2541 change_event=2541 | OK
+[2026-06-02 06:20 PT] INGEST | === ingest_from_ocr.py done === | OK

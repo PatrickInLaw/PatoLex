@@ -1,0 +1,82 @@
+{
+  "created_at": "2026-06-02",
+  "note": "Forward/chronological shared OCR queue for the 5090 (and 5080) workers. Workers claim the lowest-year pending volume. Idempotent via per-volume OCR_COMPLETE.marker. 1850-1861 already banked+ingested, excluded.",
+  "volumes": [
+    {
+      "label": "1862",
+      "year": 1862,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T05:27:17",
+      "heartbeat_epoch": 1780405818.1429532,
+      "heartbeat_at": "2026-06-02T06:10:18",
+      "done_at": "2026-06-02T06:11:00"
+    },
+    {
+      "label": "1863",
+      "year": 1863,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T05:27:20",
+      "heartbeat_epoch": 1780405401.0266151,
+      "heartbeat_at": "2026-06-02T06:03:21",
+      "done_at": "2026-06-02T06:03:34"
+    },
+    {
+      "label": "1863-64",
+      "year": 1864,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T05:27:23",
+      "heartbeat_epoch": 1780405764.136985,
+      "heartbeat_at": "2026-06-02T06:09:24",
+      "done_at": "2026-06-02T06:10:08"
+    },
+    {
+      "label": "1865-66",
+      "year": 1865,
+      "status": "in_progress",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T06:03:34",
+      "heartbeat_epoch": 1780407755.4458096,
+      "heartbeat_at": "2026-06-02T06:42:35"
+    },
+    {
+      "label": "1867-68",
+      "year": 1867,
+      "status": "in_progress",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T06:10:08",
+      "heartbeat_epoch": 1780407789.1587682,
+      "heartbeat_at": "2026-06-02T06:43:09"
+    },
+    {
+      "label": "1869-70",
+      "year": 1869,
+      "status": "in_progress",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T06:11:00",
+      "heartbeat_epoch": 1780407781.2285938,
+      "heartbeat_at": "2026-06-02T06:43:01"
+    },
+    {
+      "label": "1871-72",
+      "year": 1871,
+      "status": "in_progress",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T06:31:16",
+      "heartbeat_epoch": 1780407744.7046056,
+      "heartbeat_at": "2026-06-02T06:42:24"
+    },
+    {
+      "label": "1873-74",
+      "year": 1873,
+      "status": "pending"
+    },
+    {
+      "label": "1875-76",
+      "year": 1875,
+      "status": "pending"
+    }
+  ]
+}

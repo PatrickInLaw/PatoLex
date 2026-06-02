@@ -1,0 +1,11 @@
+[2026-06-02 06:50 PT] SETUP | Read ocr_only_5090.py + ocr_only_5080.py; per-page seconds + per-volume OCR-loop p/min already logged | OK
+[2026-06-02 06:51 PT] DATA | Pulled production_queue_state.json from 5090 (read-only type) | OK
+[2026-06-02 06:52 PT] DATA | DB source_document.page_count = total PDF pages; body counts from STAGE3-CLASSIFY log lines | OK
+[2026-06-02 06:53 PT] HW | 5090 box CPU = Intel Core Ultra 9 285K; 5080 box (this local box) CPU = Intel Core Ultra 7 265F, GPU RTX 5080 | OK
+[2026-06-02 06:55 PT] DATA | Parsed 5090 log via findstr (STAGE3 body=, STAGE4 OCR done) + local 5080 log | OK
+[2026-06-02 06:58 PT] SCRIPT | Wrote pipeline/benchmark_throughput.py (read-only queue+DB+logs -> pp/min table) | OK
+[2026-06-02 07:00 PT] VERIFY | 5090 3-worker aggregate = 2138 body / 43.7 min = 48.9 pp/min (matches hand-calc ~48.6) | OK
+[2026-06-02 07:01 PT] VERIFY | 5090 1-worker (1861): 723 body, 04:09-04:50 = 41 min wall = 17.6 pp/min e2e (matches hand-calc) | OK
+[2026-06-02 07:03 PT] FINDING | per-page timing AVAILABLE (page_ocr_results.json seconds + log OCR-loop p/min); volume-level wall used for cross-config | OK
+[2026-06-02 07:05 PT] REPORT | Wrote docs/80_PROJECT_HISTORY/THROUGHPUT_BENCHMARK.md | OK
+[2026-06-02 07:06 PT] RECOMMEND | Add VOLUME-summary one-liner to on-disk worker scripts for FUTURE volumes (no worker restart) | OK
