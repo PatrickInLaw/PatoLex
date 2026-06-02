@@ -209,6 +209,13 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 
 **Modified:** `docs/20_ROADMAP/ROADMAP.md` (historical-first re-sequence), `docs/30_SYSTEM_DESIGN/ARCHITECTURE.md`, `README.md`, `CLAUDE.md`.
 
+**Phase B (consensus + capture-all-signals + canonical re-ingest):**
+- New pipeline: `pipeline/consensus.py` (+ `pipeline/test_consensus.py`, 9/9), `pipeline/ingest_clean.py`, `pipeline/ab_compare.py`, `pipeline/benchmark_throughput.py`; harvested box scripts under `pipeline/5080/`, `pipeline/5090/`; `pipeline/.gitignore`.
+- Schema: `src/lib/db/schema/change-event.ts` (`confident`/`confidence`/`ocrProvenance` + unique index), `src/lib/db/schema/source-document.ts` (`ocrStats`). Migrations `drizzle/0003_tiresome_selene.sql` (columns) + `drizzle/0004_clever_proteus.sql` (unique index) + `drizzle/dedup_precheck.sql`; `drizzle/meta/_journal.json` + `0003/0004_snapshot.json`. **Applied to local DB** (journal 0000-0004).
+- Docs: `PHASE_B_PLAN.md`, `AB_CONSENSUS_VS_SINGLE.md`, `THROUGHPUT_BENCHMARK.md`, `HANS_AUDIT_PIPELINE_{2,3,4}_2026-06-02.md`, `VERSION_B_REINGEST_COMPLETE_2026-06-02.md`; run-logs `cleanstop`, `phaseb-fix3`.
+- **DB state changed (version-B):** 4262 change_events re-ingested as multi-engine consensus + all signals; stale `source_document` id=1 purged. Outside-repo artifacts: `PatoLex-backups\patolex_pre_reingest_2026-06-02.dump` (pre-write backup), `production-1850\sha256.txt` (written), `PatoLex-scratch\purge_id1_stale_1850.sql` (one-off).
+- Env: installed `psycopg[binary]` 3.3.4 into Python 3.12 (the commit-path DB driver).
+
 ---
 
 ## Decisions Made
@@ -231,18 +238,24 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 16. **Build order corrected:** 1850-71 pre-code first → 1872 as a recodification event → 1873-75 amendments.
 17. **Current goal: full coverage 1850-1875** (quarter-century test of pre-code + codification + forward amendments). CA regs deferred (baseline-plus-forward).
 18. **Accuracy architecture VALIDATED (directional):** committed text = consensus of faithful classical engines; **VLMs (qwen/GOT) are flagging vectors only, never committed** — they break the shared glyph floor classical consensus can't. Cascade on the hardest 1850 session-law page: single 12.7% → 4-classical consensus 4.4% → +VLM flagging **0.50% = legal-grade**. Next: dissent-filter to shrink the queue + 10+ gold pages to firm.
+19. **Stop OCR at 1875** (Patrick). 1850-1875 single-engine = A/B **version-A**; the multi-engine consensus pass = **version-B**. No OCR extended past 1875 this session.
+20. **Committed text = token-aligned multi-engine consensus (version-B), adopted** over single-engine Tesseract: confounder-free gold-token error 4.63%→2.92% (net +124 fixed), duplication metric at/below the single-engine floor. The 3-engine OCR was already paid for, so consensus is a near-free re-derivation. VLM-flagging deferred to Phase C (D1).
+21. **Capture ALL signals** (Patrick: "there's no sense generating them and not using them"). `change_event.confident`/`confidence`/`ocr_provenance` (jsonb, full per-token disagreement) + `source_document.ocr_stats` + UNIQUE(`source_document_id`,`in_act_order`). Migrations **0003** (columns) + **0004** (unique index) — schema now at 0000-0004.
+22. **The fixed re-ingest REPLACES version-A in the DB** (purge+reinsert per volume, one txn, fail-loud); version-A preserved in banked outputs + the A/B report, not as a parallel DB. Canonical act key = `(source_document_id, in_act_order)`, stable within a parse run; source_document resolved by `content_sha256` (fail-loud on ambiguity).
+23. **Data pipeline gets Hans twice — taken to FOUR passes** here (pass 3 caught the silent-no-op catastrophe). Back up the DB before any system-of-record write (Patrick); the re-ingest is idempotent + reversible from the backup.
 
 ---
 
 ## Open Items at Close
 
-- **THE PIVOT — human gold review.** Drafts staged (Tesseract-seeded) at `PatoLex-scratch/ocr-bakeoff/gold-draft/INDEX.md` (12 pre-code + 5 Penal pages; CCP pages to add). Patrick reviews/corrects + keys a couple → first real human gold. It (1) ranks the 4 faithful engines on real accuracy and (2) decides whether marginal-note preprocessing is needed.
-- **Enable OpenSSH on the 5090** (`Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0`, admin) + power on/SSH the 3060 → then the **overnight distributed multi-engine run** (4 faithful engines on a large representative sample across 5080/5090/3060) for robust comparison + disagreement-mapping.
-- **Marginal-note / column segmentation preprocessing** — the likely main accuracy lever (early-page disagreement ~0.63 traces to two-column marginal notes bleeding into body text).
-- **Then the production OCR** (chosen engine + preprocessing) → **full 1850-1875 build**: forward from 1850-blank, session laws primary, 1872 codification as a recodification event, 1873-75 amendments, validate vs the Index.
+- **version-B (consensus) is the system of record for 1850-1875** — 4262 acts, all signals captured, verified (see `VERSION_B_REINGEST_COMPLETE_2026-06-02.md`). Single-engine version-A preserved in banked per-page outputs + `AB_CONSENSUS_VS_SINGLE.md`. Both GPUs idle, OCR/ingest tasks disabled (campaign parked at 1875).
+- **Phase C (next major work):** qwen VLM-flagging targeting the persisted `ocr_provenance.disagreement.low_confidence_tokens` + the crowd-correction wiki (open-source launch with text + source image + correction path, random-teleport review, attribution/leaderboard). A/B-2 = consensus vs +VLM+crowd (the real cost trade).
+- **Materialize the `provision_version` read model** (date-ordered replay from change_events) when the timeline/serving layer is built — currently 0 by design (event log is the source of truth; neither ingest path writes the read model).
+- **Re-verify the `lineage_edge` purge** (added in Hans pass 4) when 1872 recodification edges actually land.
+- **Determinism for 1876+ OCR** (if/when the campaign resumes past 1875): pin identical docTR config + torch determinism flags on both boxes (Hans F3/F4) + a deterministic RUNBOOK + single orchestration entry. Banked 1850-1875 already exists; this is for future eras only.
 - **1872 code text** for the codification event: Political = Springer IA (Google); Penal/Civil/CCP = commercial Crocker Google scans → our OCR (Springer originals undigitized).
-- Gate D DDL is **implemented + live**; the **certified corpus is NOT ingested** — only the labeled 1,069-act benchmark sample.
 - (Deferred) confirm 1989/1991 PUBINFO LAW_SECTION_TBL; 1937-53 recodification disposition tables; pre-1873 repeal scope.
+- (Housekeeping) the one-off `PatoLex-scratch\purge_id1_stale_1850.sql` + the DB backup `PatoLex-backups\patolex_pre_reingest_2026-06-02.dump` live outside the repo.
 
 ---
 
