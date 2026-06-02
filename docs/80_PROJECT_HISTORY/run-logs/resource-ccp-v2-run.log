@@ -1,0 +1,13 @@
+[2026-06-01 17:00 PT] START | CCP 1872 baseline sourcing -- find clean non-Google annotated edition | OK
+[2026-06-01 17:05 PT] SEARCH | IA search for non-Google CCP annotated editions; found 3 clean UC candidates (1906 Deering/Brann/Sims): codeofcivilproce00cali, codeofcivilproce00calirich, 16942295 | OK
+[2026-06-01 17:10 PT] VERIFY | codeofcivilproce00cali confirmed: UC Libraries SRLF_UCLA, Canon 5D scan, ABBYY OCR, no Google involvement. Title page: Bancroft-Whitney 1906. | OK
+[2026-06-01 17:15 PT] DOWNLOAD | ccp_deering1906_ocr.txt downloaded (2.5MB, 2,507,310 chars). Annotation format confirmed: En. March 11, 1872. / Am'd. 1880, 59; ... | OK
+[2026-06-01 17:20 PT] PARSE | Wrote parse_ccp_deering1906_v2.py; strategy: regex for §/S/5/9/fi/s variants + 1-8 spaces + sec num. Limit 2-2104 (CCP range). En. annotation drives is_1872_baseline. | OK
+[2026-06-01 17:30 PT] PARSE | v1: 1372 sections is_1872 due to OCR variant 'March' spelled as Liarch/Marcli/MarcL/Maxch etc. Fixed regex to handle variants + 'March 11. 1872' (period). | WARN
+[2026-06-01 17:35 PT] PARSE | Final output: 1688 sections, range 2-2104. is_1872_baseline=True: 1416. Pure 1872 (unamended): 709. 1872+amended: 687. Stubs (repealed): 30. Post-1872: 272. No-hist (all post-1872): 152. | OK
+[2026-06-01 17:40 PT] SPOT | §2: correct "takes effect at twelve o'clock" + is_1872=True. §3: correct. §307: "One form of civil action" + is_1872=True. §1000: correct + Am'd 1873-4/1880. §2103: correct. §100: stub/repealed is_1872=True correct. §2104: post-1872 (En. 1873-4) is_1872=False correct. | OK
+[2026-06-01 17:42 PT] GAP | 415 of 2103 range missing. Verified: §§ 80-81 = 'No such sections' (Deering explicitly notes). Most gaps are legitimate CCP numbering holes; ~20/100 sampled are OCR failures (§ symbol unrecognized). | WARN
+[2026-06-01 17:45 PT] OUTPUT | Written: C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-codes-1872\ccp_1872_PURE_v2_sections.json (final, 1688 sections) | OK
+[2026-06-01 17:47 PT] REGISTRY | Registered ccp_deering1906_ocr.txt as source_document id=11; SHA-256=dd46749b1480f03a1dcf4a8ec4bfde95e1f0054892dc1fd5c319fcbd9f9279f7; edition_year=1906 VERIFIED from title page; corpus=code_civil_procedure; coverage 1872-1906; clean_channel=true | OK
+[2026-06-01 17:50 PT] QUALITY | Noisy text (OCR garbage chars): 164/1688 (9.7%). Mostly OCR artifacts in citations/case refs, not statutory text. Comparison: old Google-scan = 252/324 noisy (77.8%) -> 5.2x improvement in noise ratio. | OK
+[2026-06-01 17:55 PT] DONE | CCP clean source found (codeofcivilproce00cali, UC Libraries UCLA, 1906 Deering). Supersedes Google-scan v1 (324 secs/252 noisy). 1688 sections, 1416 is_1872_baseline=True. | OK

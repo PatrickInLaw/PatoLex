@@ -1,0 +1,57 @@
+[2026-06-01 16:41 PT] OK | MAIN | === PatoLex Full-Coverage Pre-Code Pipeline START ===
+[2026-06-01 16:41 PT] OK | MAIN | DPI=250 | ensemble_rate=0.05 | low_conf_threshold=60 | disagreement_threshold=0.15
+[2026-06-01 16:41 PT] OK | MAIN | Running 1 specified volumes: ['1852']
+[2026-06-01 16:41 PT] OK | MAIN | Ollama/qwen2.5vl: AVAILABLE
+[2026-06-01 16:41 PT] OK | VOL-1852 | === Processing 1852 ===
+[2026-06-01 16:41 PT] OK | VOL-1852 | Starting full OCR: 288 pages at 250 DPI
+[2026-06-01 16:43 PT] OK | VOL-1852 |   Tesseract: 50/288 pages | 1.8s/pg | conf=83
+[2026-06-01 16:44 PT] OK | VOL-1852 |   Tesseract: 100/288 pages | 1.7s/pg | conf=85
+[2026-06-01 16:45 PT] OK | VOL-1852 |   Tesseract: 150/288 pages | 1.7s/pg | conf=86
+[2026-06-01 16:47 PT] OK | VOL-1852 |   Tesseract: 200/288 pages | 1.7s/pg | conf=81
+[2026-06-01 16:48 PT] OK | VOL-1852 |   Tesseract: 250/288 pages | 1.6s/pg | conf=84
+[2026-06-01 16:49 PT] OK | VOL-1852 | Tesseract complete: 288 pages | 1.6s/pg mean | mean_conf=85
+[2026-06-01 16:49 PT] OK | VOL-1852 | Ensemble: 14 sample + 2 low-conf = 16 pages for qwen2.5vl
+[2026-06-01 16:50 PT] OK | VOL-1852 | Ensemble complete: 16 pages | 5.9s/pg
+[2026-06-01 16:50 PT] OK | VOL-1852 | Parsed 165 acts
+[2026-06-01 16:50 PT] OK | VOL-1852 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1852.json
+[2026-06-01 16:50 PT] OK | BENCH | 1852 | pages=288/288 | acts=165 | tess_sec_pg=1.6 | qwen_pages=16 | qwen_sec_pg=6.0 | mean_disagree=0.336 | pct_flagged=5.5% | quality=GOOD | ollama=YES | wall=547s | status=DONE
+[2026-06-01 16:50 PT] OK | MAIN | === FINAL SUMMARY ===
+[2026-06-01 16:50 PT] OK | MAIN | Wall clock: 0.15h (547s)
+[2026-06-01 16:50 PT] OK | MAIN | Total volumes: 1
+[2026-06-01 16:50 PT] OK | MAIN | Total pages OCR'd: 288
+[2026-06-01 16:50 PT] OK | MAIN | Total acts: 165 (prior partial: 963)
+[2026-06-01 16:50 PT] OK | MAIN | Ollama ensemble: ACTIVE
+[2026-06-01 16:50 PT] OK | MAIN | --- Per-volume table ---
+[2026-06-01 16:50 PT] OK | MAIN | Year              Pages   Acts Tess s/pg  Qwen N  Disagree  %Flag Status
+[2026-06-01 16:50 PT] OK | MAIN | 1852            288/288    165       1.6      16     0.337    5.5% DONE
+[2026-06-01 16:50 PT] OK | MAIN | Total: 288 pages | 165 acts
+[2026-06-01 16:50 PT] OK | MAIN | === PatoLex Full-Coverage Pre-Code Pipeline END ===
+[2026-06-01 16:54 PT] OK | MAIN | === PatoLex Full-Coverage Pre-Code Pipeline START ===
+[2026-06-01 16:54 PT] OK | MAIN | DPI=250 | ensemble_rate=0.05 | low_conf_threshold=60 | disagreement_threshold=0.45
+[2026-06-01 16:54 PT] OK | MAIN | Running 1 specified volumes: ['1852']
+[2026-06-01 16:54 PT] OK | MAIN | Ollama/qwen2.5vl: AVAILABLE
+[2026-06-01 16:54 PT] OK | VOL-1852 | === Processing 1852 ===
+[2026-06-01 16:54 PT] OK | VOL-1852 | OCR cache present but trust missing — rebuilding trust via ensemble
+[2026-06-01 16:54 PT] OK | VOL-1852 | Ensemble: 14 sample + 2 low-conf = 16 pages for qwen2.5vl
+[2026-06-01 16:55 PT] OK | VOL-1852 | Ensemble complete: 16 pages | 5.1s/pg
+[2026-06-01 16:55 PT] OK | VOL-1852 | Parsed 165 acts
+[2026-06-01 16:55 PT] OK | VOL-1852 | Wrote C:\Users\PatrickKolasinski\PatoLex-scratch\gate-b-precode\acts_1852.json
+[2026-06-01 16:55 PT] OK | BENCH | 1852 | pages=288/288 | acts=165 | tess_sec_pg=0.0 | qwen_pages=16 | qwen_sec_pg=5.1 | mean_disagree=0.036 | pct_flagged=0.0% | quality=GOOD | ollama=YES | wall=82s | status=CACHED
+[2026-06-01 16:55 PT] OK | MAIN | === FINAL SUMMARY ===
+[2026-06-01 16:55 PT] OK | MAIN | Wall clock: 0.02h (82s)
+[2026-06-01 16:55 PT] OK | MAIN | Total volumes: 1
+[2026-06-01 16:55 PT] OK | MAIN | Total pages OCR'd: 288
+[2026-06-01 16:55 PT] OK | MAIN | Total acts: 165 (prior partial: 963)
+[2026-06-01 16:55 PT] OK | MAIN | Ollama ensemble: ACTIVE
+[2026-06-01 16:55 PT] OK | MAIN | --- Per-volume table ---
+[2026-06-01 16:55 PT] OK | MAIN | Year              Pages   Acts Tess s/pg  Qwen N  Disagree  %Flag Status
+[2026-06-01 16:55 PT] OK | MAIN | 1852            288/288    165       0.0      16     0.036    0.0% CACHED
+[2026-06-01 16:55 PT] OK | MAIN | Total: 288 pages | 165 acts
+[2026-06-01 16:55 PT] OK | MAIN | === PatoLex Full-Coverage Pre-Code Pipeline END ===
+[2026-06-01 16:56 PT] OK | MAIN | === PatoLex Full-Coverage Pre-Code Pipeline START ===
+[2026-06-01 16:56 PT] OK | MAIN | DPI=250 | ensemble_rate=0.05 | low_conf_threshold=60 | disagreement_threshold=0.45
+[2026-06-01 16:56 PT] OK | MAIN | Running all 19 volumes
+[2026-06-01 16:56 PT] OK | MAIN | Ollama/qwen2.5vl: AVAILABLE
+[2026-06-01 16:56 PT] OK | VOL-1850 | === Processing 1850 ===
+[2026-06-01 16:56 PT] OK | VOL-1850 | Starting full Tesseract OCR: 480 pages at 250 DPI
+[2026-06-01 16:57 PT] OK | VOL-1850 |   Tesseract: 50/480 pages | 2.0s/pg | conf=88
