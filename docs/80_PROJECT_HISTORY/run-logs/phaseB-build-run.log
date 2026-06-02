@@ -157,3 +157,82 @@
 [2026-06-02 08:42 PT] INGEST | === ingest_clean.py DRY-RUN: 1850 === | OK
 [2026-06-02 08:42 PT] INGEST-DRYRUN | 1850: WOULD insert 97 acts (confident=97, date_unknown=0, chapter_ocr_substituted=0) | scan_quality=poor cer_est=0.078 pages_with_consensus=423 | acts_with_nonascii_text=95 (UTF-8 preserved) | OK
 [2026-06-02 08:42 PT] INGEST | === ingest_clean.py DRY-RUN done === | OK
+[2026-06-02 09:08 PT] INGEST | === ingest_clean.py DRY-RUN: 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1863-64, 1865-66, 1867-68, 1869-70, 1871-72, 1873-74, 1875-76 === | OK
+[2026-06-02 09:08 PT] INGEST-DRYRUN | 1850: WOULD insert 97 acts (confident=97, date_unknown=0, chapter_ocr_substituted=0) | scan_quality=poor cer_est=0.078 pages_with_consensus=423 | acts_with_nonascii_text=95 (UTF-8 preserved) | OK
+[2026-06-02 09:08 PT] INGEST-DRYRUN | 1851: WOULD insert 108 acts (confident=108, date_unknown=0, chapter_ocr_substituted=0) | scan_quality=fair cer_est=0.0674 pages_with_consensus=538 | acts_with_nonascii_text=107 (UTF-8 preserved) | OK
+[2026-06-02 09:08 PT] INGEST-DRYRUN | 1852: WOULD insert 114 acts (confident=91, date_unknown=0, chapter_ocr_substituted=23) | scan_quality=poor cer_est=0.0862 pages_with_consensus=284 | acts_with_nonascii_text=112 (UTF-8 preserved) | OK
+[2026-06-02 09:08 PT] INGEST-DRYRUN | 1853: WOULD insert 128 acts (confident=108, date_unknown=0, chapter_ocr_substituted=20) | scan_quality=poor cer_est=0.0731 pages_with_consensus=314 | acts_with_nonascii_text=111 (UTF-8 preserved) | OK
+[2026-06-02 09:08 PT] INGEST-DRYRUN | 1854: WOULD insert 81 acts (confident=66, date_unknown=0, chapter_ocr_substituted=15) | scan_quality=fair cer_est=0.0465 pages_with_consensus=222 | acts_with_nonascii_text=81 (UTF-8 preserved) | OK
+[2026-06-02 09:08 PT] INGEST-DRYRUN | 1855: WOULD insert 169 acts (confident=144, date_unknown=0, chapter_ocr_substituted=25) | scan_quality=fair cer_est=0.0322 pages_with_consensus=324 | acts_with_nonascii_text=135 (UTF-8 preserved) | OK
+[2026-06-02 09:08 PT] INGEST-DRYRUN | 1856: WOULD insert 107 acts (confident=95, date_unknown=0, chapter_ocr_substituted=12) | scan_quality=fair cer_est=0.0331 pages_with_consensus=237 | acts_with_nonascii_text=98 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1857: WOULD insert 224 acts (confident=184, date_unknown=0, chapter_ocr_substituted=40) | scan_quality=fair cer_est=0.0251 pages_with_consensus=390 | acts_with_nonascii_text=191 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST | === ingest_clean.py DRY-RUN: 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1863-64, 1865-66, 1867-68, 1869-70, 1871-72, 1873-74, 1875-76 === | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1850: WOULD insert 97 acts (confident=97, date_unknown=0, chapter_ocr_substituted=0) | scan_quality=poor cer_est=0.078 pages_with_consensus=423 | acts_with_nonascii_text=95 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1851: WOULD insert 108 acts (confident=108, date_unknown=0, chapter_ocr_substituted=0) | scan_quality=fair cer_est=0.0674 pages_with_consensus=538 | acts_with_nonascii_text=107 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1852: WOULD insert 114 acts (confident=91, date_unknown=0, chapter_ocr_substituted=23) | scan_quality=poor cer_est=0.0862 pages_with_consensus=284 | acts_with_nonascii_text=112 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1853: WOULD insert 128 acts (confident=108, date_unknown=0, chapter_ocr_substituted=20) | scan_quality=poor cer_est=0.0731 pages_with_consensus=314 | acts_with_nonascii_text=111 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1854: WOULD insert 81 acts (confident=66, date_unknown=0, chapter_ocr_substituted=15) | scan_quality=fair cer_est=0.0465 pages_with_consensus=222 | acts_with_nonascii_text=81 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1855: WOULD insert 169 acts (confident=144, date_unknown=0, chapter_ocr_substituted=25) | scan_quality=fair cer_est=0.0322 pages_with_consensus=324 | acts_with_nonascii_text=135 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1856: WOULD insert 107 acts (confident=95, date_unknown=0, chapter_ocr_substituted=12) | scan_quality=fair cer_est=0.0331 pages_with_consensus=237 | acts_with_nonascii_text=98 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1857: WOULD insert 224 acts (confident=184, date_unknown=0, chapter_ocr_substituted=40) | scan_quality=fair cer_est=0.0251 pages_with_consensus=390 | acts_with_nonascii_text=191 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1858: WOULD insert 224 acts (confident=189, date_unknown=0, chapter_ocr_substituted=35) | scan_quality=fair cer_est=0.0326 pages_with_consensus=380 | acts_with_nonascii_text=224 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1859: WOULD insert 189 acts (confident=136, date_unknown=0, chapter_ocr_substituted=53) | scan_quality=fair cer_est=0.0365 pages_with_consensus=419 | acts_with_nonascii_text=189 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1860: WOULD insert 128 acts (confident=93, date_unknown=0, chapter_ocr_substituted=35) | scan_quality=poor cer_est=0.1154 pages_with_consensus=449 | acts_with_nonascii_text=128 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1861: WOULD insert 253 acts (confident=204, date_unknown=0, chapter_ocr_substituted=49) | scan_quality=fair cer_est=0.0397 pages_with_consensus=723 | acts_with_nonascii_text=253 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1862: WOULD insert 116 acts (confident=67, date_unknown=0, chapter_ocr_substituted=49) | scan_quality=poor cer_est=0.1432 pages_with_consensus=651 | acts_with_nonascii_text=116 (UTF-8 preserved) | OK
+[2026-06-02 09:09 PT] INGEST-DRYRUN | 1863: WOULD insert 158 acts (confident=101, date_unknown=0, chapter_ocr_substituted=57) | scan_quality=poor cer_est=0.1237 pages_with_consensus=855 | acts_with_nonascii_text=158 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST-DRYRUN | 1863-64: WOULD insert 238 acts (confident=198, date_unknown=0, chapter_ocr_substituted=40) | scan_quality=fair cer_est=0.0314 pages_with_consensus=632 | acts_with_nonascii_text=238 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST-DRYRUN | 1865-66: WOULD insert 301 acts (confident=253, date_unknown=0, chapter_ocr_substituted=48) | scan_quality=fair cer_est=0.0427 pages_with_consensus=987 | acts_with_nonascii_text=301 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST-DRYRUN | 1867-68: WOULD insert 391 acts (confident=334, date_unknown=0, chapter_ocr_substituted=57) | scan_quality=fair cer_est=0.0329 pages_with_consensus=819 | acts_with_nonascii_text=269 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST-DRYRUN | 1869-70: WOULD insert 254 acts (confident=197, date_unknown=0, chapter_ocr_substituted=57) | scan_quality=poor cer_est=0.1164 pages_with_consensus=1013 | acts_with_nonascii_text=200 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST-DRYRUN | 1871-72: WOULD insert 372 acts (confident=282, date_unknown=0, chapter_ocr_substituted=90) | scan_quality=fair cer_est=0.0301 pages_with_consensus=1053 | acts_with_nonascii_text=310 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST-DRYRUN | 1873-74: WOULD insert 325 acts (confident=249, date_unknown=0, chapter_ocr_substituted=76) | scan_quality=fair cer_est=0.0362 pages_with_consensus=1075 | acts_with_nonascii_text=299 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST-DRYRUN | 1875-76: WOULD insert 285 acts (confident=228, date_unknown=0, chapter_ocr_substituted=57) | scan_quality=fair cer_est=0.0241 pages_with_consensus=1017 | acts_with_nonascii_text=284 (UTF-8 preserved) | OK
+[2026-06-02 09:10 PT] INGEST | === ingest_clean.py DRY-RUN done === | OK
+[2026-06-02 09:11 PT] INGEST | === ingest_clean.py COMMIT: 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1863-64, 1865-66, 1867-68, 1869-70, 1871-72, 1873-74, 1875-76 === | WARN
+[2026-06-02 09:11 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-02 09:11 PT] INGEST | === ingest_clean.py COMMIT: 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1863-64, 1865-66, 1867-68, 1869-70, 1871-72, 1873-74, 1875-76 === | WARN
+[2026-06-02 09:11 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1850: purged(prior_enactments)=97 inserted=97 | scan_quality=poor cer=0.078 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1850: banked consensus_output.json (423 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1851: purged(prior_enactments)=108 inserted=108 | scan_quality=fair cer=0.0674 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1851: banked consensus_output.json (538 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1852: purged(prior_enactments)=114 inserted=114 | scan_quality=poor cer=0.0862 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1852: banked consensus_output.json (284 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1853: purged(prior_enactments)=128 inserted=128 | scan_quality=poor cer=0.0731 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1853: banked consensus_output.json (314 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1854: purged(prior_enactments)=81 inserted=81 | scan_quality=fair cer=0.0465 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1854: banked consensus_output.json (222 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1855: purged(prior_enactments)=169 inserted=169 | scan_quality=fair cer=0.0322 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1855: banked consensus_output.json (324 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1856: purged(prior_enactments)=107 inserted=107 | scan_quality=fair cer=0.0331 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1856: banked consensus_output.json (237 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1857: purged(prior_enactments)=224 inserted=224 | scan_quality=fair cer=0.0251 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1857: banked consensus_output.json (390 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1858: purged(prior_enactments)=224 inserted=224 | scan_quality=fair cer=0.0326 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1858: banked consensus_output.json (380 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1859: purged(prior_enactments)=189 inserted=189 | scan_quality=fair cer=0.0365 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1859: banked consensus_output.json (419 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1860: purged(prior_enactments)=128 inserted=128 | scan_quality=poor cer=0.1154 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:12 PT] INGEST-CONSENSUS | 1860: banked consensus_output.json (449 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:12 PT] INGEST-COMMIT | 1861: purged(prior_enactments)=253 inserted=253 | scan_quality=fair cer=0.0397 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:13 PT] INGEST-CONSENSUS | 1861: banked consensus_output.json (723 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:13 PT] INGEST-COMMIT | 1862: purged(prior_enactments)=116 inserted=116 | scan_quality=poor cer=0.1432 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:13 PT] INGEST-CONSENSUS | 1862: banked consensus_output.json (651 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:13 PT] INGEST-COMMIT | 1863: purged(prior_enactments)=158 inserted=158 | scan_quality=poor cer=0.1237 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:13 PT] INGEST-CONSENSUS | 1863: banked consensus_output.json (855 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:13 PT] INGEST-COMMIT | 1863-64: purged(prior_enactments)=238 inserted=238 | scan_quality=fair cer=0.0314 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:13 PT] INGEST-CONSENSUS | 1863-64: banked consensus_output.json (632 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:13 PT] INGEST-COMMIT | 1865-66: purged(prior_enactments)=301 inserted=301 | scan_quality=fair cer=0.0427 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:13 PT] INGEST-CONSENSUS | 1865-66: banked consensus_output.json (987 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:13 PT] INGEST-COMMIT | 1867-68: purged(prior_enactments)=391 inserted=391 | scan_quality=fair cer=0.0329 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:13 PT] INGEST-CONSENSUS | 1867-68: banked consensus_output.json (819 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:14 PT] INGEST-COMMIT | 1869-70: purged(prior_enactments)=254 inserted=254 | scan_quality=poor cer=0.1164 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:14 PT] INGEST-CONSENSUS | 1869-70: banked consensus_output.json (1013 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:14 PT] INGEST-COMMIT | 1871-72: purged(prior_enactments)=372 inserted=372 | scan_quality=fair cer=0.0301 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:14 PT] INGEST-CONSENSUS | 1871-72: banked consensus_output.json (1053 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:14 PT] INGEST-COMMIT | 1873-74: purged(prior_enactments)=325 inserted=325 | scan_quality=fair cer=0.0362 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:14 PT] INGEST-CONSENSUS | 1873-74: banked consensus_output.json (1075 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:14 PT] INGEST-COMMIT | 1875-76: purged(prior_enactments)=285 inserted=285 | scan_quality=fair cer=0.0241 | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-02 09:14 PT] INGEST-CONSENSUS | 1875-76: banked consensus_output.json (1017 pages, low_conf_threshold=1.0) | OK
+[2026-06-02 09:14 PT] INGEST | === ingest_clean.py COMMIT done === | OK
