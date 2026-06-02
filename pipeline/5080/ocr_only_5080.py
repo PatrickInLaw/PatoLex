@@ -570,6 +570,12 @@ log("OCR5080", f"PEAK VRAM: allocated={peak_alloc_mb:.0f}MB reserved={peak_resv_
 log("OCR5080", f"=== OCR-ONLY COMPLETE: {SESSION_LABEL} | sha={computed_sha} | "
     f"body={len(body_pages)} total={total_pages} | output={existing_ocr_path} ===", "OK")
 
+# Self-documenting per-volume throughput summary (parsed by benchmark_throughput.py).
+# ocr_wall is the OCR-loop time (sum of per-page seconds); EXCLUDES render+preprocess.
+_vol_ppm = (len(body_pages) / (ocr_wall / 60.0)) if ocr_wall > 0 else 0.0
+log("VOLUME", f"{SESSION_LABEL} | {len(body_pages)} pages | {ocr_wall:.0f}s | "
+    f"{_vol_ppm:.1f} pages/min | card=5080 workers=1", "OK")
+
 print(f"\n=== {SESSION_LABEL} OCR-ONLY COMPLETE (5080) ===")
 print(f"Pages: {total_pages} total | {len(body_pages)} body OCR'd")
 print(f"Surya: {SURYA_AVAILABLE} | mean agreement: {conf_dist['mean_agreement']}")
