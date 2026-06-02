@@ -56,6 +56,12 @@ The Chief Clerk backbone is **653 PDFs, 1850-2008** (258 body volumes, 413,987 b
 ### Append more volumes to the campaign
 Add the volume entries (lowest-year-first ordering) to the shared `production_queue_state.json` as `pending`. Workers pick them up on the next claim cycle. To **resume past the current frontier** (1875 done; 1877-1910 OCRing as of 2026-06-02), enqueue the next image-only volumes through ~1993; **stop before the born-digital crossover (~1997)** — those go to `parse_born_digital.py`, not OCR.
 
+### Deferred OCR throughput optimizations (analyzed 2026-06-02, NOT implemented — logged per Patrick)
+The per-page loop in `ocr_only_5090.py` / `ocr_only_5080.py` runs the 3 engines **strictly in series** (Tesseract → docTR → Surya → consensus). Models load **once per volume** (resident — no per-page reload; the per-page `torch.cuda.empty_cache()` is leak cleanup, not a model unload). Two measured-potential speedups, deferred:
+- **CPU/GPU overlap (priority lever — safe on BOTH boxes):** Tesseract is CPU-only while docTR/Surya are GPU. Running Tesseract on a worker thread concurrent with the GPU engines (join before consensus) hides the ~0.9 s Tesseract behind GPU work → per-page ~2.6 s → ~1.7 s, roughly **1.3–1.5×**. Zero extra VRAM, no quality/determinism change; `pytesseract` shells out (releases the GIL) so threading genuinely overlaps.
+- **Surya page-batching (5090-only):** Surya is fed one image at a time (`surya_rec([img], ...)`, un-batched); batched on the 5090 it benchmarked ~0.70 s/page. Bigger lever, but raises peak VRAM → unsafe on the 16 GB 5080 (already ~saturated at one worker; the per-page hygiene exists because accumulating tensors OOM'd it).
+Implement + Hans + a before/after benchmark before trusting either. The running campaign is unaffected.
+
 ---
 
 ## 3. The canonical ingest chain (OCR text → DB system of record)
