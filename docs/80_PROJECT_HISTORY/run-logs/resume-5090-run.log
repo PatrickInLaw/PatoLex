@@ -38,3 +38,24 @@
 [2026-06-02 06:20 PT] STAGE6-INGEST | 1863-64: enactments=238 provisions=238 change_events=238 errors=0 | OK
 [2026-06-02 06:20 PT] STAGE6-INGEST | 1863-64: DB TOTALS source_document=20 enactment=2541 provision=2541 change_event=2541 | OK
 [2026-06-02 06:20 PT] INGEST | === ingest_from_ocr.py done === | OK
+[2026-06-02 07:06 PT] INGEST | === ingest_from_ocr.py start: 1867-68 === | OK
+[2026-06-02 07:06 PT] STAGE5-PARSE | 1867-68: confident=391 flagged=17 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 07:06 PT] STAGE6-INGEST | 1867-68: updated skeleton source_document id=17 | OK
+[2026-06-02 07:06 PT] STAGE6-INGEST | 1867-68: purged prior enactments=68 | ingesting 391 confident acts | OK
+[2026-06-02 07:07 PT] STAGE6-INGEST | 1867-68: enactments=391 provisions=391 change_events=391 errors=0 | OK
+[2026-06-02 07:07 PT] STAGE6-INGEST | 1867-68: DB TOTALS source_document=20 enactment=2864 provision=2864 change_event=2864 | OK
+[2026-06-02 07:07 PT] INGEST | === ingest_from_ocr.py done === | OK
+[2026-06-02 07:09 PT] INGEST | === ingest_from_ocr.py start: 1865-66 === | OK
+[2026-06-02 07:09 PT] STAGE5-PARSE | 1865-66: confident=301 flagged=14 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 07:09 PT] STAGE6-INGEST | 1865-66: updated skeleton source_document id=16 | OK
+[2026-06-02 07:09 PT] STAGE6-INGEST | 1865-66: purged prior enactments=16 | ingesting 301 confident acts | OK
+[2026-06-02 07:10 PT] STAGE6-INGEST | 1865-66: enactments=301 provisions=301 change_events=301 errors=0 | OK
+[2026-06-02 07:10 PT] STAGE6-INGEST | 1865-66: DB TOTALS source_document=20 enactment=3149 provision=3149 change_event=3149 | OK
+[2026-06-02 07:10 PT] INGEST | === ingest_from_ocr.py done === | OK
+[2026-06-02 07:20 PT] INGEST | === ingest_from_ocr.py start: 1869-70 === | OK
+[2026-06-02 07:20 PT] STAGE5-PARSE | 1869-70: confident=254 flagged=42 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 07:20 PT] STAGE6-INGEST | 1869-70: updated skeleton source_document id=18 | OK
+[2026-06-02 07:20 PT] STAGE6-INGEST | 1869-70: purged prior enactments=56 | ingesting 254 confident acts | OK
+[2026-06-02 07:21 PT] STAGE6-INGEST | 1869-70: enactments=254 provisions=254 change_events=254 errors=0 | OK
+[2026-06-02 07:21 PT] STAGE6-INGEST | 1869-70: DB TOTALS source_document=20 enactment=3347 provision=3347 change_event=3347 | OK
+[2026-06-02 07:21 PT] INGEST | === ingest_from_ocr.py done === | OK

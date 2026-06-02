@@ -25,3 +25,18 @@
 [2026-06-02 06:33 PT] DONE | DB years ingested: 1850-1864 (real source_documents, 2334 acts). Detached ingest loop RUNNING under Task Scheduler (svchost PID3380 -> supervisor PID18128 -> watcher PID50996), survives Claude/SSH/process death. DB will keep filling autonomously through 1875-76. Single DB writer; idempotent; faithful. No git commit. | OK
 [2026-06-02 06:38 PT] POLL | 1867-68: ssh marker check rc=124 ssh timeout | WARN
 [2026-06-02 06:41 PT] POLL | 1875-76: ssh marker check rc=124 ssh timeout | WARN
+[2026-06-02 07:05 PT] READY | 1867-68: OCR_COMPLETE.marker present on 5090 -- fetching | OK
+[2026-06-02 07:06 PT] FETCH | 1867-68: pulled OK (819 pages, sha 2a7d134a3138) -> C:\Users\PatrickKolasinski\PatoLex-scratch\production-1867-68\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 07:06 PT] INGEST | 1867-68: running ingest_from_ocr.py | OK
+[2026-06-02 07:07 PT] INGEST | 1867-68: DB confirmed. enactment total now 2864 | OK
+[2026-06-02 07:07 PT] WATCHER | Remaining to ingest: 1865-66, 1869-70, 1871-72, 1873-74, 1875-76 | enactment total=2864 | OK
+[2026-06-02 07:09 PT] READY | 1865-66: OCR_COMPLETE.marker present on 5090 -- fetching | OK
+[2026-06-02 07:09 PT] FETCH | 1865-66: pulled OK (987 pages, sha 0d4ea6ecbab9) -> C:\Users\PatrickKolasinski\PatoLex-scratch\production-1865-66\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 07:09 PT] INGEST | 1865-66: running ingest_from_ocr.py | OK
+[2026-06-02 07:10 PT] INGEST | 1865-66: DB confirmed. enactment total now 3149 | OK
+[2026-06-02 07:10 PT] WATCHER | Remaining to ingest: 1869-70, 1871-72, 1873-74, 1875-76 | enactment total=3149 | OK
+[2026-06-02 07:20 PT] READY | 1869-70: OCR_COMPLETE.marker present on 5090 -- fetching | OK
+[2026-06-02 07:20 PT] FETCH | 1869-70: pulled OK (1013 pages, sha bc9dec1300db) -> C:\Users\PatrickKolasinski\PatoLex-scratch\production-1869-70\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 07:20 PT] INGEST | 1869-70: running ingest_from_ocr.py | OK
+[2026-06-02 07:21 PT] INGEST | 1869-70: DB confirmed. enactment total now 3347 | OK
+[2026-06-02 07:21 PT] WATCHER | Remaining to ingest: 1871-72, 1873-74, 1875-76 | enactment total=3347 | OK
