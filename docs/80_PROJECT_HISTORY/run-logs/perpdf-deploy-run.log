@@ -1,0 +1,21 @@
+[2026-06-02 13:12 PT] DISCOVER | Read runbook + prepared-entries + all 4 repo scripts; computed repo SHA256 | OK
+[2026-06-02 13:12 PT] DISCOVER | Repo hashes: 5090/queue_worker=0CF4F85E..D943 ; 5090/queue_claim=AF343059..ED01 ; 5080/queue_worker_5080=447FFECF..2CA8 ; 5080/queue_claim=AF343059..ED01 (claim files byte-identical) | OK
+[2026-06-02 13:12 PT] DISCOVER | 5090 PatoLex_OCR_5090 task = powershell supervisor_5090.ps1 -Count 1, State=Running, RunAs SYSTEM | OK
+[2026-06-02 13:12 PT] DISCOVER | Supervisor respects STOP_WORKER.flag (no relaunch) + reads max_workers.txt each loop; STOP flag present on 5090; max_workers.txt=1 | OK
+[2026-06-02 13:12 PT] DISCOVER | 5080 PatoLex_OCR_5080 task = python queue_worker_5080.py 5080-1, State=Running; worker self-deletes STOP flag at startup | OK
+[2026-06-02 13:12 PT] DISCOVER | Restart mechanic = stop both Scheduled Tasks for definitive stop (no respawn churn); restart = remove STOP flags then start both tasks | OK
+[2026-06-02 13:12 PT] STATE | 5080 still in-flight on 1893_Statutes (worker 46240 + ocr_only 31148); STOP flag set but mid-volume | WARN
+[2026-06-02 13:12 PT] STATE | 5090 has DUPLICATE worker: TWO queue_worker.py 5090-1 (39552,21452) + TWO ocr_only_5090 on 1895 (12688,31256); both same volume, idempotent/resumable | WARN
+[2026-06-02 13:14 PT] STEP3 | scp 5090 queue_worker.py + queue_claim.py UP; copied 5080 queue_worker_5080.py + queue_claim.py locally | OK
+[2026-06-02 13:15 PT] STEP3 | SHA256 VERIFY all 4 on-box == repo (5090 worker 0cf4f85e, 5090 claim af343059, 5080 worker 447ffecf, 5080 claim af343059) | OK
+[2026-06-02 13:16 PT] STEP4 | Stopped both Scheduled Tasks (5090 terminated, 5080 Ready) | OK
+[2026-06-02 13:16 PT] STEP4 | Detached OCR children survived task stop; taskkill 5090 (39552,21452,12688,31256) + 5080 ocr_only (31148); checkpoint-resumable so no banked pages lost | OK
+[2026-06-02 13:16 PT] STEP4 | Confirmed ZERO python on both boxes; workers definitively stopped | OK
+[2026-06-02 13:17 PT] STEP4 | Backed up queue -> production_queue_state.json.bak-perpdf-20260602; queue_append.py drops pdf so used custom append_code_entries.py (lock + tmp + os.replace, preserves pdf) | OK
+[2026-06-02 13:17 PT] STEP4 | APPENDED all 5 Code labels; queue 27->32, valid JSON, DONE COUNT unchanged=17, each new label pending w/ pdf field | OK
+[2026-06-02 13:17 PT] STEP4 | Confirmed 5 Code PDFs staged on 5090 archive; 1893/1895 in_progress w/ stale HB (reclaimable, not corrupt), sort AFTER Code volumes | OK
+[2026-06-02 13:18 PT] STEP5 | Removed both STOP flags; max_workers.txt re-confirmed=1 (unchanged); started both Scheduled Tasks (5090 schtasks /run, 5080 Start-ScheduledTask) | OK
+[2026-06-02 13:18 PT] STEP6 | 5090 W5090-1 claimed 1873-74-code START OCR (1873-74_Code.pdf); 5080-1 claimed 1875-76-code START local OCR (1875-76_Code.pdf) -- lowest-year Code volumes first, pdf field threaded | OK
+[2026-06-02 13:18 PT] STEP6 | per-label dirs created: 5090 production-1873-74-code/ + 5080 production-1875-76-code/ (ocr_consensus,pages_raw,pages_prep_gray) -- distinct from any Statutes dir | OK
+[2026-06-02 13:18 PT] STEP6 | queue in_progress: 1873-74-code(5090-1),1875-76-code(5080-1),1893,1895; both GPUs allocated (5090 1852MiB, 5080 1581MiB, util bursty) | OK
+[2026-06-02 13:18 PT] DONE | Steps 3-6 complete; per-PDF fix proven live on both boxes; DB/ingest untouched, PatoLex_Ingest_5080 left disabled, backoff/scale tasks untouched | OK
