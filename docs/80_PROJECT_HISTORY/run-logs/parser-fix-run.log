@@ -2653,3 +2653,37 @@ LINE 1: INSERT INTO enactment (source_document_id, chapter, chapter_...
 [2026-06-02 03:01 PT] REINGEST | 1859: no confident acts found in fixed parse | WARN
 [2026-06-02 03:01 PT] REINGEST | 1860: no confident acts found in fixed parse | WARN
 [2026-06-02 03:01 PT] REINGEST | === re_ingest_fixed.py done === | OK
+[2026-06-02 03:32 PT] REINGEST | === re_ingest_fixed.py starting (schema-corrected) === | OK
+[2026-06-02 03:32 PT] REINGEST | Idempotent on (citation, source_document_id). Mirrors STAGE6 of production_pipeline.py. Safe to re-run. | OK
+[2026-06-02 03:32 PT] REINGEST | 1850: source_document id=20 | purged prior enactments=81 | ingesting 97 confident acts | OK
+[2026-06-02 03:32 PT] REINGEST | 1850: enactments=97 provisions=97 change_events=97 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:33 PT] REINGEST | === re_ingest_fixed.py starting (schema-corrected) === | OK
+[2026-06-02 03:33 PT] REINGEST | Idempotent on (citation, source_document_id). Mirrors STAGE6 of production_pipeline.py. Safe to re-run. | OK
+[2026-06-02 03:33 PT] REINGEST | 1850: source_document id=20 | purged prior enactments=97 | ingesting 97 confident acts | OK
+[2026-06-02 03:33 PT] REINGEST | 1850: enactments=97 provisions=97 change_events=97 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:33 PT] REINGEST | 1851: source_document id=2 | purged prior enactments=101 | ingesting 108 confident acts | OK
+[2026-06-02 03:34 PT] REINGEST | 1851: enactments=108 provisions=108 change_events=108 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:34 PT] REINGEST | 1852: source_document id=3 | purged prior enactments=177 | ingesting 114 confident acts | OK
+[2026-06-02 03:34 PT] REINGEST | 1852: enactments=114 provisions=114 change_events=114 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:34 PT] REINGEST | 1853: source_document id=4 | purged prior enactments=138 | ingesting 128 confident acts | OK
+[2026-06-02 03:35 PT] REINGEST | 1853: enactments=128 provisions=128 change_events=128 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:35 PT] REINGEST | 1854: source_document id=5 | purged prior enactments=99 | ingesting 81 confident acts | OK
+[2026-06-02 03:35 PT] REINGEST | 1854: enactments=81 provisions=81 change_events=81 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:35 PT] REINGEST | 1855: source_document id=6 | purged prior enactments=165 | ingesting 169 confident acts | OK
+[2026-06-02 03:35 PT] REINGEST | 1855: enactments=169 provisions=169 change_events=169 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:35 PT] REINGEST | 1856: source_document id=7 | purged prior enactments=128 | ingesting 107 confident acts | OK
+[2026-06-02 03:36 PT] REINGEST | 1856: enactments=107 provisions=107 change_events=107 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:36 PT] REINGEST | 1857: source_document id=8 | purged prior enactments=199 | ingesting 224 confident acts | OK
+[2026-06-02 03:37 PT] REINGEST | 1857: enactments=224 provisions=224 change_events=224 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:37 PT] REINGEST | 1858: source_document id=9 | purged prior enactments=55 | ingesting 224 confident acts | OK
+[2026-06-02 03:38 PT] REINGEST | 1858: enactments=224 provisions=224 change_events=224 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:38 PT] REINGEST | 1859: source_document id=10 | purged prior enactments=39 | ingesting 189 confident acts | OK
+[2026-06-02 03:38 PT] REINGEST | 1859: enactments=189 provisions=189 change_events=189 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:38 PT] REINGEST | 1860: source_document id=11 | purged prior enactments=27 | ingesting 128 confident acts | OK
+[2026-06-02 03:39 PT] REINGEST | 1860: enactments=128 provisions=128 change_events=128 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:39 PT] REINGEST | === re_ingest_fixed.py done === | OK
+[2026-06-02 03:40 PT] REINGEST | === re_ingest_fixed.py starting (schema-corrected) === | OK
+[2026-06-02 03:40 PT] REINGEST | Idempotent on (citation, source_document_id). Mirrors STAGE6 of production_pipeline.py. Safe to re-run. | OK
+[2026-06-02 03:40 PT] REINGEST | 1858: source_document id=9 | purged prior enactments=224 | ingesting 224 confident acts | OK
+[2026-06-02 03:41 PT] REINGEST | 1858: enactments=224 provisions=224 change_events=224 skipped(dup)=0 errors=0 | OK
+[2026-06-02 03:41 PT] REINGEST | === re_ingest_fixed.py done === | OK

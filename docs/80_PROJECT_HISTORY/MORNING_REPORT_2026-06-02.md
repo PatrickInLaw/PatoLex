@@ -30,14 +30,20 @@ Two big things got done: **(1) the OCR accuracy pipeline is validated to legal-g
 
 ## Structured DB (event-sourced schema, live Postgres)
 
-The statutory text lands in the DB as `enactment`/`provision`/`change_event` (+ `designation_history`), `trust_level='ocr_uncertain'`, source-page refs, forward-from-1850-blank. **This is partial** and was the messier part of the night:
+The statutory text lands in the DB as `enactment`/`provision`/`change_event` (+ `designation_history`), `trust_level='ocr_uncertain'`, source-page refs, forward-from-1850-blank.
 
-- Re-ingest added net-new acts (enactments 1419 → 1519+, finalizing). 
-- **Parser issue #1 (FIXED):** 1852+ volumes use `"APPROVED, May 1, 1852"` (comma) vs 1850/51 `"Passed …"` (no comma); the date regex missed it → 100+ acts/volume wrongly flagged. Fixed; recovery e.g. 1852 12→94, 1853 8→117 confident.
-- **Parser issue #2 (in-progress at report time):** 1858–1860 use an inline `"N.—An Act"` chapter format the regex doesn't match → 0 confident acts. A CPU-only parser-completeness pass over the banked OCR is running to recover these (no re-OCR).
-- **Known limitation:** ingest is idempotent on citation+source_document_id, and pre-existing low-quality SKELETON rows (from an earlier benchmark, content_sha256 NULL) share citations → some new better-quality acts were SKIPPED rather than replacing the old. **A clean re-ingest strategy (replace skeleton rows) is a follow-up.**
+**Structured acts now in the DB: 1,569 for 1850–1860** (`enactment = provision = change_event`, 1:1:1). DB totals **1,519 → 1,879 per table** (1,569 banked 1850–60 + 284 later-session 1861–72 stragglers from the live batch + 26 stale). Re-ingest idempotent, **0 errors**, idempotency re-verified (purge-and-reload a volume → no growth).
 
-**Honest bottom line on the DB:** the structured layer is a real but incomplete first pass; the *reliable* deliverable is the banked OCR text + confidence + images for 1850–1860, from which the structured layer can be regenerated cheaply once the parser + ingest-replacement are finished.
+Per-volume confident acts (1850–1860): 97 / 108 / 114 / 128 / 81 / 169 / 107 / 224 / 224 / 189 / 128.
+
+- **Parser issue #1 (FIXED):** 1852+ used `"APPROVED, May 1, 1852"` (comma) vs 1850/51 `"Passed …"` (no comma); the date regex missed it.
+- **Parser issue #2 (FIXED):** the chapter-header format — `CHAPTER <roman>.` on its own line (1850–57) and garbled inline `"Cuap. <roman>.—An Act"` with an em-dash (1858–60) — **plus a latent `AN_ACT_RE` missing `IGNORECASE`**, which was the real reason 1858–60 produced 0. Recovery: confident acts **844 → 1,569 (+725)**; **1858/1859/1860: 0 → 224/189/128**.
+- **Idempotency key changed** to `(source_document_id, in_act_order)` because OCR garbles chapter numbers so badly that distinct acts collapse onto one citation (e.g. 1854 OCR'd 21 chapters all as "XI") — citation-keyed dedup would silently drop them.
+- **Residual undercount is OCR-quality, not parser:** vs the "do enact as follows" ground truth, harder-OCR volumes under-recover (e.g. 1854 81/~153, 1858 224/~351) because OCR damaged the act headers/dates. Those acts are **flagged, not lost** — recoverable via better OCR or crowd/human review. Some `chapter_number` values are garbled (display-only, never used as a key).
+
+**Honest bottom line on the DB:** 1,569 structured acts for 1850–1860 are queryable now; the harder-scan volumes are partially covered (OCR header damage), and the full statutory text + per-token confidence + image refs are banked on disk for every page. The structured layer can be re-enriched cheaply (re-parse, no re-OCR) as OCR/parsing improve.
+
+**Cleanup item:** a stale duplicate 1850 `source_document` (id=1, 26 rows) remains (removal correctly blocked as out-of-scope/irreversible). To get a single clean 1850, run the 4 `psql` DELETEs recorded in `run-logs/parser-completeness-run.log` (set `PGPASSWORD=postgres`; psql at `C:\Program Files\PostgreSQL\16\bin\psql.exe`).
 
 ---
 

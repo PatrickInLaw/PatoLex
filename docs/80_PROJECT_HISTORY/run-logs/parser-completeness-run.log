@@ -1,0 +1,136 @@
+[2026-06-02 03:25 PT] REPARSE | === reparse.py ROUND2 starting -- chapter-format completeness fix === | OK
+[2026-06-02 03:25 PT] REPARSE | Handles: separate-line CHAPTER/AN ACT (1850-1857), inline garbled 'Cuap. <roman>.—An Act' (1858-1860), em-dash separators, garbled Chap prefixes & roman numerals; excludes front-matter TOC via enactment-marker gate. | OK
+[2026-06-02 03:25 PT] REPARSE | 1850: BEFORE confident=83 flagged=61 | AFTER confident=102 flagged=8 | delta_confident=+19 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1851: BEFORE confident=101 flagged=71 | AFTER confident=110 flagged=9 | delta_confident=+9 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1852: BEFORE confident=94 flagged=19 | AFTER confident=116 flagged=21 | delta_confident=+22 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1853: BEFORE confident=117 flagged=17 | AFTER confident=129 flagged=19 | delta_confident=+12 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1854: BEFORE confident=43 flagged=2 | AFTER confident=81 flagged=6 | delta_confident=+38 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1855: BEFORE confident=142 flagged=19 | AFTER confident=168 flagged=18 | delta_confident=+26 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1856: BEFORE confident=90 flagged=14 | AFTER confident=108 flagged=18 | delta_confident=+18 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1857: BEFORE confident=174 flagged=6 | AFTER confident=223 flagged=10 | delta_confident=+49 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1858: BEFORE confident=0 flagged=0 | AFTER confident=0 flagged=0 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1859: BEFORE confident=0 flagged=0 | AFTER confident=0 flagged=0 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1860: BEFORE confident=0 flagged=0 | AFTER confident=0 flagged=0 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | === SUMMARY (before->after confident) === | OK
+[2026-06-02 03:25 PT] REPARSE |   1850: confident 83 -> 102, flagged 61 -> 8 | OK
+[2026-06-02 03:25 PT] REPARSE |   1851: confident 101 -> 110, flagged 71 -> 9 | OK
+[2026-06-02 03:25 PT] REPARSE |   1852: confident 94 -> 116, flagged 19 -> 21 | OK
+[2026-06-02 03:25 PT] REPARSE |   1853: confident 117 -> 129, flagged 17 -> 19 | OK
+[2026-06-02 03:25 PT] REPARSE |   1854: confident 43 -> 81, flagged 2 -> 6 | OK
+[2026-06-02 03:25 PT] REPARSE |   1855: confident 142 -> 168, flagged 19 -> 18 | OK
+[2026-06-02 03:25 PT] REPARSE |   1856: confident 90 -> 108, flagged 14 -> 18 | OK
+[2026-06-02 03:25 PT] REPARSE |   1857: confident 174 -> 223, flagged 6 -> 10 | OK
+[2026-06-02 03:25 PT] REPARSE |   1858: confident 0 -> 0, flagged 0 -> 0 | OK
+[2026-06-02 03:25 PT] REPARSE |   1859: confident 0 -> 0, flagged 0 -> 0 | OK
+[2026-06-02 03:25 PT] REPARSE |   1860: confident 0 -> 0, flagged 0 -> 0 | OK
+[2026-06-02 03:25 PT] REPARSE | Output: parsed_acts_fixed.json per volume. Run re_ingest_fixed.py next. | OK
+[2026-06-02 03:25 PT] REPARSE | === reparse.py ROUND2 starting -- chapter-format completeness fix === | OK
+[2026-06-02 03:25 PT] REPARSE | Handles: separate-line CHAPTER/AN ACT (1850-1857), inline garbled 'Cuap. <roman>.—An Act' (1858-1860), em-dash separators, garbled Chap prefixes & roman numerals; excludes front-matter TOC via enactment-marker gate. | OK
+[2026-06-02 03:25 PT] REPARSE | 1850: BEFORE confident=102 flagged=8 | AFTER confident=102 flagged=8 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1851: BEFORE confident=110 flagged=9 | AFTER confident=110 flagged=19 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1852: BEFORE confident=116 flagged=21 | AFTER confident=118 flagged=174 | delta_confident=+2 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1853: BEFORE confident=129 flagged=19 | AFTER confident=129 flagged=182 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1854: BEFORE confident=81 flagged=6 | AFTER confident=81 flagged=41 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1855: BEFORE confident=168 flagged=18 | AFTER confident=178 flagged=18 | delta_confident=+10 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1856: BEFORE confident=108 flagged=18 | AFTER confident=108 flagged=19 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1857: BEFORE confident=223 flagged=10 | AFTER confident=230 flagged=10 | delta_confident=+7 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1858: BEFORE confident=0 flagged=0 | AFTER confident=225 flagged=20 | delta_confident=+225 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1859: BEFORE confident=0 flagged=0 | AFTER confident=191 flagged=12 | delta_confident=+191 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | 1860: BEFORE confident=0 flagged=0 | AFTER confident=135 flagged=41 | delta_confident=+135 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:25 PT] REPARSE | === SUMMARY (before->after confident) === | OK
+[2026-06-02 03:25 PT] REPARSE |   1850: confident 102 -> 102, flagged 8 -> 8 | OK
+[2026-06-02 03:25 PT] REPARSE |   1851: confident 110 -> 110, flagged 9 -> 19 | OK
+[2026-06-02 03:25 PT] REPARSE |   1852: confident 116 -> 118, flagged 21 -> 174 | OK
+[2026-06-02 03:25 PT] REPARSE |   1853: confident 129 -> 129, flagged 19 -> 182 | OK
+[2026-06-02 03:25 PT] REPARSE |   1854: confident 81 -> 81, flagged 6 -> 41 | OK
+[2026-06-02 03:25 PT] REPARSE |   1855: confident 168 -> 178, flagged 18 -> 18 | OK
+[2026-06-02 03:25 PT] REPARSE |   1856: confident 108 -> 108, flagged 18 -> 19 | OK
+[2026-06-02 03:25 PT] REPARSE |   1857: confident 223 -> 230, flagged 10 -> 10 | OK
+[2026-06-02 03:25 PT] REPARSE |   1858: confident 0 -> 225, flagged 0 -> 20 | OK
+[2026-06-02 03:25 PT] REPARSE |   1859: confident 0 -> 191, flagged 0 -> 12 | OK
+[2026-06-02 03:25 PT] REPARSE |   1860: confident 0 -> 135, flagged 0 -> 41 | OK
+[2026-06-02 03:25 PT] REPARSE | Output: parsed_acts_fixed.json per volume. Run re_ingest_fixed.py next. | OK
+[2026-06-02 03:26 PT] REPARSE | === reparse.py ROUND2 starting -- chapter-format completeness fix === | OK
+[2026-06-02 03:26 PT] REPARSE | Handles: separate-line CHAPTER/AN ACT (1850-1857), inline garbled 'Cuap. <roman>.—An Act' (1858-1860), em-dash separators, garbled Chap prefixes & roman numerals; excludes front-matter TOC via enactment-marker gate. | OK
+[2026-06-02 03:26 PT] REPARSE | 1850: BEFORE confident=102 flagged=8 | AFTER confident=102 flagged=8 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1851: BEFORE confident=110 flagged=19 | AFTER confident=110 flagged=19 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1852: BEFORE confident=118 flagged=174 | AFTER confident=118 flagged=174 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1853: BEFORE confident=129 flagged=182 | AFTER confident=129 flagged=182 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1854: BEFORE confident=81 flagged=41 | AFTER confident=81 flagged=41 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1855: BEFORE confident=178 flagged=18 | AFTER confident=178 flagged=18 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1856: BEFORE confident=108 flagged=19 | AFTER confident=108 flagged=19 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1857: BEFORE confident=230 flagged=10 | AFTER confident=230 flagged=10 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1858: BEFORE confident=225 flagged=20 | AFTER confident=225 flagged=20 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1859: BEFORE confident=191 flagged=12 | AFTER confident=191 flagged=12 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | 1860: BEFORE confident=135 flagged=41 | AFTER confident=135 flagged=41 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:26 PT] REPARSE | === SUMMARY (before->after confident) === | OK
+[2026-06-02 03:26 PT] REPARSE |   1850: confident 102 -> 102, flagged 8 -> 8 | OK
+[2026-06-02 03:26 PT] REPARSE |   1851: confident 110 -> 110, flagged 19 -> 19 | OK
+[2026-06-02 03:26 PT] REPARSE |   1852: confident 118 -> 118, flagged 174 -> 174 | OK
+[2026-06-02 03:26 PT] REPARSE |   1853: confident 129 -> 129, flagged 182 -> 182 | OK
+[2026-06-02 03:26 PT] REPARSE |   1854: confident 81 -> 81, flagged 41 -> 41 | OK
+[2026-06-02 03:26 PT] REPARSE |   1855: confident 178 -> 178, flagged 18 -> 18 | OK
+[2026-06-02 03:26 PT] REPARSE |   1856: confident 108 -> 108, flagged 19 -> 19 | OK
+[2026-06-02 03:26 PT] REPARSE |   1857: confident 230 -> 230, flagged 10 -> 10 | OK
+[2026-06-02 03:26 PT] REPARSE |   1858: confident 225 -> 225, flagged 20 -> 20 | OK
+[2026-06-02 03:26 PT] REPARSE |   1859: confident 191 -> 191, flagged 12 -> 12 | OK
+[2026-06-02 03:26 PT] REPARSE |   1860: confident 135 -> 135, flagged 41 -> 41 | OK
+[2026-06-02 03:26 PT] REPARSE | Output: parsed_acts_fixed.json per volume. Run re_ingest_fixed.py next. | OK
+[2026-06-02 03:28 PT] REPARSE | === reparse.py ROUND2 starting -- chapter-format completeness fix === | OK
+[2026-06-02 03:28 PT] REPARSE | Handles: separate-line CHAPTER/AN ACT (1850-1857), inline garbled 'Cuap. <roman>.—An Act' (1858-1860), em-dash separators, garbled Chap prefixes & roman numerals; excludes front-matter TOC via enactment-marker gate. | OK
+[2026-06-02 03:28 PT] REPARSE | 1850: BEFORE confident=102 flagged=8 | AFTER confident=97 flagged=10 | delta_confident=-5 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1851: BEFORE confident=110 flagged=19 | AFTER confident=108 flagged=10 | delta_confident=-2 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1852: BEFORE confident=118 flagged=174 | AFTER confident=115 flagged=21 | delta_confident=-3 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1853: BEFORE confident=129 flagged=182 | AFTER confident=128 flagged=18 | delta_confident=-1 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1854: BEFORE confident=81 flagged=41 | AFTER confident=81 flagged=6 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1855: BEFORE confident=178 flagged=18 | AFTER confident=169 flagged=18 | delta_confident=-9 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1856: BEFORE confident=108 flagged=19 | AFTER confident=107 flagged=19 | delta_confident=-1 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1857: BEFORE confident=230 flagged=10 | AFTER confident=224 flagged=11 | delta_confident=-6 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1858: BEFORE confident=225 flagged=20 | AFTER confident=225 flagged=20 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1859: BEFORE confident=191 flagged=12 | AFTER confident=191 flagged=11 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | 1860: BEFORE confident=135 flagged=41 | AFTER confident=129 flagged=39 | delta_confident=-6 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:28 PT] REPARSE | === SUMMARY (before->after confident) === | OK
+[2026-06-02 03:28 PT] REPARSE |   1850: confident 102 -> 97, flagged 8 -> 10 | OK
+[2026-06-02 03:28 PT] REPARSE |   1851: confident 110 -> 108, flagged 19 -> 10 | OK
+[2026-06-02 03:28 PT] REPARSE |   1852: confident 118 -> 115, flagged 174 -> 21 | OK
+[2026-06-02 03:28 PT] REPARSE |   1853: confident 129 -> 128, flagged 182 -> 18 | OK
+[2026-06-02 03:28 PT] REPARSE |   1854: confident 81 -> 81, flagged 41 -> 6 | OK
+[2026-06-02 03:28 PT] REPARSE |   1855: confident 178 -> 169, flagged 18 -> 18 | OK
+[2026-06-02 03:28 PT] REPARSE |   1856: confident 108 -> 107, flagged 19 -> 19 | OK
+[2026-06-02 03:28 PT] REPARSE |   1857: confident 230 -> 224, flagged 10 -> 11 | OK
+[2026-06-02 03:28 PT] REPARSE |   1858: confident 225 -> 225, flagged 20 -> 20 | OK
+[2026-06-02 03:28 PT] REPARSE |   1859: confident 191 -> 191, flagged 12 -> 11 | OK
+[2026-06-02 03:28 PT] REPARSE |   1860: confident 135 -> 129, flagged 41 -> 39 | OK
+[2026-06-02 03:28 PT] REPARSE | Output: parsed_acts_fixed.json per volume. Run re_ingest_fixed.py next. | OK
+[2026-06-02 03:31 PT] REPARSE | === reparse.py ROUND2 starting -- chapter-format completeness fix === | OK
+[2026-06-02 03:31 PT] REPARSE | Handles: separate-line CHAPTER/AN ACT (1850-1857), inline garbled 'Cuap. <roman>.—An Act' (1858-1860), em-dash separators, garbled Chap prefixes & roman numerals; excludes front-matter TOC via enactment-marker gate. | OK
+[2026-06-02 03:31 PT] REPARSE | 1850: BEFORE confident=97 flagged=10 | AFTER confident=97 flagged=10 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1851: BEFORE confident=108 flagged=10 | AFTER confident=108 flagged=10 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1852: BEFORE confident=115 flagged=21 | AFTER confident=114 flagged=21 | delta_confident=-1 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1853: BEFORE confident=128 flagged=18 | AFTER confident=128 flagged=18 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1854: BEFORE confident=81 flagged=6 | AFTER confident=81 flagged=6 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1855: BEFORE confident=169 flagged=18 | AFTER confident=169 flagged=18 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1856: BEFORE confident=107 flagged=19 | AFTER confident=107 flagged=19 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1857: BEFORE confident=224 flagged=11 | AFTER confident=224 flagged=11 | delta_confident=+0 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1858: BEFORE confident=225 flagged=20 | AFTER confident=224 flagged=20 | delta_confident=-1 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1859: BEFORE confident=191 flagged=11 | AFTER confident=189 flagged=10 | delta_confident=-2 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | 1860: BEFORE confident=129 flagged=39 | AFTER confident=128 flagged=39 | delta_confident=-1 | wrote parsed_acts_fixed.json | OK
+[2026-06-02 03:31 PT] REPARSE | === SUMMARY (before->after confident) === | OK
+[2026-06-02 03:31 PT] REPARSE |   1850: confident 97 -> 97, flagged 10 -> 10 | OK
+[2026-06-02 03:31 PT] REPARSE |   1851: confident 108 -> 108, flagged 10 -> 10 | OK
+[2026-06-02 03:31 PT] REPARSE |   1852: confident 115 -> 114, flagged 21 -> 21 | OK
+[2026-06-02 03:31 PT] REPARSE |   1853: confident 128 -> 128, flagged 18 -> 18 | OK
+[2026-06-02 03:31 PT] REPARSE |   1854: confident 81 -> 81, flagged 6 -> 6 | OK
+[2026-06-02 03:31 PT] REPARSE |   1855: confident 169 -> 169, flagged 18 -> 18 | OK
+[2026-06-02 03:31 PT] REPARSE |   1856: confident 107 -> 107, flagged 19 -> 19 | OK
+[2026-06-02 03:31 PT] REPARSE |   1857: confident 224 -> 224, flagged 11 -> 11 | OK
+[2026-06-02 03:31 PT] REPARSE |   1858: confident 225 -> 224, flagged 20 -> 20 | OK
+[2026-06-02 03:31 PT] REPARSE |   1859: confident 191 -> 189, flagged 11 -> 10 | OK
+[2026-06-02 03:31 PT] REPARSE |   1860: confident 129 -> 128, flagged 39 -> 39 | OK
+[2026-06-02 03:31 PT] REPARSE | Output: parsed_acts_fixed.json per volume. Run re_ingest_fixed.py next. | OK
+[2026-06-02 03:42 PT] FINAL | === parser-completeness session: FINAL SUMMARY === | OK
+[2026-06-02 03:42 PT] FINAL | Root cause: CHAP_RE only matched 'Chapter N.' at EOL or 'Chapter N. AN ACT' (space). Real corpus: (a) 1850-1857 put CHAPTER<roman> and AN ACT on SEPARATE lines with OCR noise; (b) 1858-1860 use inline 'Cuap.<roman>.<EMDASH U+2014>An Act' with garbled Chap prefix + garbled roman, plus a duplicate front-matter TOC. AN_ACT_RE also lacked re.I so lowercase 'Act' never matched -- the actual reason 1858-60 parsed 0. | OK
+[2026-06-02 03:42 PT] FINAL | Fixes (reparse.py): tolerant HEADER_RE; AN ACT allowed on header line OR next few lines; AN_ACT_RE case-insensitive; enactment-clause gate + header-line-inline-Approved guard to drop TOC; OCR-tolerant roman parse; ordinal-day token reject; chapter_int==0 flagged. | OK
+[2026-06-02 03:42 PT] FINAL | Confident BEFORE(comma-fix)->AFTER(completeness): 1850 83->97 | 1851 101->108 | 1852 94->114 | 1853 117->128 | 1854 43->81 | 1855 142->169 | 1856 90->107 | 1857 174->224 | 1858 0->224 | 1859 0->189 | 1860 0->128. Total 844->1569 (+725). | OK
+[2026-06-02 03:42 PT] FINAL | re_ingest_fixed.py: scoped purge+reload per source_document, idempotent on (source_document_id, in_act_order), 0 errors. Banked enactments: 1850 sd20=97, 1851 sd2=108, 1852 sd3=114, 1853 sd4=128, 1854 sd5=81, 1855 sd6=169, 1856 sd7=107, 1857 sd8=224, 1858 sd9=224, 1859 sd10=189, 1860 sd11=128 = 1569. enactment=provision=change_event (1:1:1). DB totals 1879 each (1569 banked + 284 later-session 1861-72 + 26 stale src=1). | OK
+[2026-06-02 03:42 PT] FINAL | OUTSTANDING: stale duplicate 1850 source_document_id=1 (26 live-batch rows) left in place (destructive delete denied as out-of-scope). Numeral OCR garble persists on some acts (1852 CCL=250, 1860 DXXXI=531) -- acts genuine, chapter_number is best-effort and NOT a key. Residual undercount vs do-enact ground truth (1854 81/153, 1858 224/351) is OCR-quality limited, not parser-format limited. | OK
