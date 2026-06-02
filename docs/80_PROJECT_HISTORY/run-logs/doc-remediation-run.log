@@ -1,0 +1,10 @@
+[2026-06-02 PT] START | Cold-start doc remediation: 4 tasks from COLD_START_DOC_AUDIT_2026-06-02 | OK
+[2026-06-02 PT] READ | Audit report, DATA_SOURCES_HISTORICAL, DATA_SOURCES, pipeline/README, HANDOFF_cc002_to_cc003, MODERN_STATUTE_FORMAT | OK
+[2026-06-02 PT] VERIFY | All cited pipeline scripts present: ingest_clean.py, ingest_from_ocr.py, parse_born_digital.py, ocr_only_5080/5090.py, queue_claim.py | OK
+[2026-06-02 PT] VERIFY | ingest_clean.py: __main__ guard present, sha256-keyed resolve, scoped purge, --commit+PATOLEX_ALLOW_COMMIT=1 gate, atomic per-volume | OK
+[2026-06-02 PT] VERIFY | ingest_from_ocr.py: NO __main__ guard (driver runs at top level ~494-507) -> import triggers DB ingest. Hazard confirmed. | OK
+[2026-06-02 PT] TASK1 | DATA_SOURCES_HISTORICAL.md: corrected §1 cell, added §1d THREE-TIER model + format eras + revision entry | OK
+[2026-06-02 PT] TASK2 | Created docs/60_OPERATIONS/BUILD_RUNBOOK.md (tiers, OCR queue/2-node/tasks, 0800-disable, canonical ingest chain, state, resume) | OK
+[2026-06-02 PT] TASK3 | pipeline/README.md: replaced abandoned boot-resilience section with determinism/idempotent-resume; stated canonical-vs-lossy ingest + __main__ hazard | OK
+[2026-06-02 PT] TASK4 | HANDOFF_cc002_to_cc003.md: appended dated 2026-06-02 update (1850-1875 built, three-tier, in-flight); preserved historical body | OK
+[2026-06-02 PT] DONE | Three-tier model + leginfo modern channel now stated in DESIGN docs (DATA_SOURCES_HISTORICAL §1d + BUILD_RUNBOOK §0), not just run-logs. Documentation only; no code/DB/task changes. | OK

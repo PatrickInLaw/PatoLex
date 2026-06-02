@@ -1,0 +1,34 @@
+[2026-06-02 forward-march-launch] PatoLex forward historical OCR campaign (1877-1910), OCR-ONLY
+
+[2026-06-02] STEP1 | Verify 18 local Statutes PDFs in chief-clerk-archive | OK
+  All 18 present: 1877-78(62.1MB) 1880(15.8) 1881(7.3) 1883-84(0.57) 1885-86(15.5)
+  1887(16.3) 1889(42.9) 1891(32.9) 1893(38.4) 1895(25.8) 1897(37.0) 1899(25.6)
+  1900-01(55.1) 1903(43.0) 1905(65.4) 1906-07(74.4) 1907-09(61.8) 1910-11(104.7)
+  NOTE: 1883-84_Statutes.pdf is a faithful copy of 1883-84_Statutes_1E.pdf (both 0.57MB).
+  Source genuinely small; the 1883-84 bulk lives in 1883-84_Code.pdf (out of scope, R9). WARN-flagged size.
+
+[2026-06-02] PRECHK | 5090 STOP_WORKER.flag ABSENT | OK
+
+[2026-06-02] STEP2 | scp 18 forward PDFs 5080 -> 5090 archive | OK
+  All 18 landed on 5090 with byte sizes matching source. 1883-84 pushed as plain name (593938 bytes).
+
+[2026-06-02] STEP3 | Deploy queue_append.py + append 18 labels | OK
+  Fixed BOM: queue JSON had UTF-8 BOM; append reads utf-8-sig, writes plain utf-8 (matches worker write fmt, fixes BOM).
+  APPENDED all 18. queue_check via plain utf-8: TOTAL=27, PENDING=18 (all 18 forward labels), +2 stale in_progress (auto-promote).
+
+[2026-06-02] STEP4 | 5090: max_workers.txt = 1 (OVERRIDE, not 3) | OK
+  Enabled + ran PatoLex_OCR_5090. Task state: Running. (5090_ScaleTo1_0800 Disabled, harmless.)
+
+[2026-06-02] STEP5 | 5080: removed STOP_5080_WORKER.flag (was 0800-graceful-stop) | OK
+  Enabled + ran PatoLex_OCR_5080 (queue_worker_5080.py 5080-1). Triggered.
+  CAUTION: PatoLex_OCR_5080_Backoff_0800 (daily 08:00, re-creates STOP flag) is DISABLED - left disabled for open-ended run.
+
+[2026-06-02] STEP6 | DISABLED ingest watcher: PatoLex_Ingest_5080 (runs ingest_supervisor.ps1 -> ingest_watcher.py) | OK
+  No DB writes / no ingest will occur for forward volumes.
+
+[2026-06-02] STEP7 | VERIFY launch | OK
+  Both tasks Running. Stale 1873-74/1875-76 auto-promoted to done. PENDING now 16.
+  CLAIMS: 5090-1 -> 1877-78 (in_progress), 5080-1 -> 1880 (in_progress) -- exactly as expected (lowest->5090, next->5080).
+  5090: production-1877-78 created; pages_raw filling (page_0000.png...), sha256.txt written. GPU 1806 MiB resident, util 0% (PDF-raster phase, CPU/IO-bound; GPU burst follows prep).
+  5080: production-1880 created (ocr_consensus/pages_raw/pages_prep_gray + sha256.txt). GPU 1450 MiB resident, util 0-2% (same raster phase).
+  LAUNCH SUCCESSFUL. Open-ended run; queue has 18 forward labels loaded, more can be appended via queue_append.py (idempotent).

@@ -9,3 +9,14 @@
 [2026-06-02 07:39 PT] PUSH | 1871-72: OCR outputs pushed to 5090 | OK
 [2026-06-02 07:39 PT] RUN | 1871-72: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-02 07:40 PT] WORKER | queue drained / no claimable volume -- exiting | OK
+[2026-06-02 10:55 PT] WORKER | === 5080 queue worker online (pid 46240, worker_id=5080-1) sharing 5090 queue 100.70.54.56 === | OK
+[2026-06-02 10:55 PT] RUN | 1880: START local OCR (1880_Statutes.pdf) on 5080 | OK
+[2026-06-02 11:14 PT] PUSH | 1880: OCR outputs pushed to 5090 | OK
+[2026-06-02 11:14 PT] RUN | 1880: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 11:14 PT] RUN | 1881: START local OCR (1881_Statutes.pdf) on 5080 | OK
+[2026-06-02 11:24 PT] PUSH | 1881: OCR outputs pushed to 5090 | OK
+[2026-06-02 11:24 PT] RUN | 1881: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 11:24 PT] RUN | 1883-84: START local OCR (1883-84_Statutes.pdf) on 5080 | OK
+[2026-06-02 11:26 PT] PUSH | 1883-84: OCR outputs pushed to 5090 | OK
+[2026-06-02 11:26 PT] RUN | 1883-84: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 11:26 PT] RUN | 1885-86: START local OCR (1885-86_Statutes.pdf) on 5080 | OK

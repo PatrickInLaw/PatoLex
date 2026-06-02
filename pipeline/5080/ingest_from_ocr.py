@@ -115,11 +115,28 @@ _MONTHS = (
     r"|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
 )
 _KW = r"(?:A[Pp]{1,3}[Rr]{1,3}[Oo]?[Vv]\w{0,6}|Pass(?:ed)?)"
+# Year broadened from the old 18[3-9]\d (1830-1899, which caused the
+# confirmed 1900 date-cliff) to 1850-2008+: (?:18|19|20)\d\d.
+_YEAR = r"((?:18|19|20)\d\d)"
 APPROVED_RE = re.compile(
     _KW + r"\s*[,.]?\s*" + r"(" + _MONTHS + r")"
     + r"\s+((?:[IilOo]?\d+|[IilOo])(?:st|nd|rd|th)?)"
-    + r"[,.]?\s*(18[3-9]\d)\b",
+    + r"[,.]?\s*" + _YEAR + r"\b",
     re.IGNORECASE,
+)
+# Modern born-digital / 1915+ approval language, e.g.
+#   "Approved by Governor February 28, 2008."
+#   "Filed with Secretary of State March 14, 2008."
+# The bracket/date frequently span a line break, so allow whitespace
+# (including newlines) between the keyword phrase and the date. This is a
+# DATE-RECOGNITION alternative only; it does not mutate any text.
+APPROVED_MODERN_RE = re.compile(
+    r"(?:Approved\s+by\s+(?:the\s+)?Governor"
+    r"|Filed\s+with\s+Secretary\s+of\s+State)"
+    r"\s+(" + _MONTHS + r")"
+    r"\s+(\d{1,2})"
+    r"\s*,?\s*" + _YEAR + r"\b",
+    re.IGNORECASE | re.DOTALL,
 )
 _MONTH_NORM = {
     "jan": "January", "feb": "February", "mar": "March", "apr": "April",
@@ -174,9 +191,24 @@ def normalize_month(month_str):
 
 
 def parse_act_date(text):
+    # Pre-1900 / OCR-fuzzy format first (preserves early-era behavior exactly).
     for m in APPROVED_RE.finditer(text):
         month_str = normalize_month(m.group(1))
         day_str = normalize_day(m.group(2))
+        year_raw = m.group(3)
+        try:
+            d = datetime.datetime.strptime(
+                month_str + " " + day_str + " " + year_raw, "%B %d %Y")
+            raw = re.sub(r"\s+", " ", m.group(0)).strip()
+            return d.strftime("%Y-%m-%d"), raw
+        except Exception:
+            continue
+    # Modern born-digital / 1915+ "Approved by Governor ..." / "Filed with
+    # Secretary of State ..." language (fallback; only reached when the early
+    # pattern finds nothing, so early-era results are unchanged).
+    for m in APPROVED_MODERN_RE.finditer(text):
+        month_str = normalize_month(m.group(1))
+        day_str = m.group(2)
         year_raw = m.group(3)
         try:
             d = datetime.datetime.strptime(

@@ -1,5 +1,7 @@
 # Handoff: cc002 → cc003
 
+> **2026-06-02 UPDATE APPENDED BELOW.** The body of this handoff (dated 2026-06-01) is preserved for history but its "first steps" are now DONE. **Read the `2026-06-02 update` section at the bottom first** — it reflects the completed 1850-1875 build, the three-tier corpus model, and the in-flight forward campaign.
+
 **From:** cc002 (Opus, orchestrator) · **Date:** 2026-06-01
 **Status update:** cc002 went further than planned and **already implemented + adversarially reviewed the Gate D DDL** (Drizzle, 7 tables, in `src/lib/db/` + `drizzle/`; `db:generate` + `typecheck` pass; NOT yet applied to a live DB). **Your likely first job:** stand up local PostgreSQL 16, apply the migration, then begin the historical build at the 1872 baseline.
 
@@ -72,3 +74,38 @@ Get the DDL reviewed before loading data at scale. Consider a "Hans review" (Cod
 - Confirm the 1937–1953 recodification acts contain old→new disposition tables.
 - WSL access discrepancy (low priority; off critical path — Windows Tesseract on clean scans is already legal-grade).
 - CA regs: confirm a clean non-Westlaw current-CCR baseline is obtainable (only when regs become near-term).
+
+---
+
+## 2026-06-02 update — current state (READ THIS FIRST)
+
+The 2026-06-01 body above is historical. The "concrete first steps" (stand up Postgres, apply DDL, seed 1872) are **all done.** Here is where the project actually is.
+
+### What is BUILT — the system of record
+- **DDL applied** to local PostgreSQL 16 on the 5080 (`postgres`/`postgres`@5432, DB `patolex`; migrations 0000-0004; 7 tables; `btree_gist`, GiST exclusions, `uuid_generate_v7()`, generated `fts_vector` all clean).
+- **1850-1875 OCR'd, banked, and ingested as version-B (multi-engine token consensus) — 4262 acts = the system of record.** Verified this session via the `ocr_provenance` / `consensus_method` columns. UTF-8 faithful; zero single-engine committed text. `provision_version` = 0 **by design** (materialization is a deferred sweep, not a failure).
+- **In flight:** 1877-1910 OCRing now. Modern-format parser fixes (`parse_born_digital.py`) are **in flight and NOT yet ingested.**
+
+### The THREE-TIER corpus model (key correction — was previously thought all-OCR)
+The Chief Clerk backbone is **653 PDFs, 1850-2008** (258 body vols, 413,987 body pages; counts in `PatoLex-scratch\corpus_page_counts.csv`). It is NOT uniformly image-only:
+- **(a) 1850 – ~1996** = image-only scans → **OCR** (the consensus pipeline).
+- **(b) ~1997 – 2008** = born-digital Chief Clerk PDFs with a clean text layer → **direct text extract, NO OCR** (`pipeline/5080/parse_born_digital.py`; verified on 2001 & 2008; 1995 still image-only; **crossover ~1997, exact volume TBD**).
+- **(c) 1989/1994 – present** = **leginfo PUBINFO** bulk data (born-digital CAML XML + `.dat`) → bulk import + **reconstruct point-in-time backward** from chaptered bill XML, validated against the current snapshot (POC floor ≈ Jan 1, 1994). Authoritative doc: `DATA_SOURCES.md`.
+
+**Consequence: the OCR campaign is bounded on the modern end at ~1993-94, NOT 2008.** Do not OCR the born-digital tail. Full model: `DATA_SOURCES_HISTORICAL.md` §1d.
+
+### Canonical vs. lossy ingest (do not run the wrong one)
+- **`pipeline/ingest_clean.py` = CANONICAL / system of record** — version-B consensus, sha256-keyed `source_document`, scoped purge-then-insert, atomic per volume, dry-run by default. Commit with `--commit` AND `PATOLEX_ALLOW_COMMIT=1` AND `PATOLEX_PG_DSN`.
+- **`pipeline/5080/ingest_from_ocr.py` = SUPERSEDED / LOSSY** — single-engine; its DB rows are replaced by `ingest_clean.py`. **Hazard: no `__main__` guard → importing it triggers a DB ingest.** `PatoLex_Ingest_5080` stays DISABLED.
+
+### Operational entry point (NEW — fills the missing runbook)
+- **`docs/60_OPERATIONS/BUILD_RUNBOOK.md`** — the deterministic build/orchestration doc: OCR queue + two GPU nodes (5090 strong / 5080 also valid, shared `production_queue_state.json`), scheduled tasks, **the 0800 backoff tasks that MUST stay disabled for open-ended runs**, the canonical ingest chain, format eras, and the resume procedure past 1875.
+
+### Real next steps (supersede the 2026-06-01 "first steps")
+1. Continue the OCR campaign past 1875 → ~1993 (stop at the born-digital crossover); ingest each finished volume via `ingest_clean.py --commit`.
+2. Switch ~1997-2008 to `parse_born_digital.py` (tier b); the modern era to the leginfo XML channel (tier c).
+3. Deferred: materialize `provision_version` when the serving layer is built; re-verify `lineage_edge` purge at the 1872 recodification; Phase C (VLM-flagging on persisted low-confidence tokens + crowd correction).
+4. Still owed: ~10-20 page **human-gold OCR audit** to certify the accuracy number (OpusGold is a frontier-model reference, not certified truth).
+
+### Doc map for a cold start (2026-06-02)
+`BUILD_RUNBOOK.md` (how to run it) · `DATA_SOURCES_HISTORICAL.md` §1d (three-tier corpus) · `DATA_SOURCES.md` (modern leginfo channel) · `MODERN_STATUTE_FORMAT_2026-06-02.md` (modern parser) · `pipeline/README.md` (canonical-vs-lossy ingest) · `COLD_START_DOC_AUDIT_2026-06-02.md` (the gap audit this update closes).

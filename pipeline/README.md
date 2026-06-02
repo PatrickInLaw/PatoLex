@@ -32,25 +32,64 @@ mistaken for the running originals.
   - `scale_to_one_5090.ps1` — 8AM daily scale-to-1 (daytime throttle)
   - register scripts, `launch_workers_5090.ps1`, `ocr_batch_5090.py`
 
-## Boot resilience (post-power-outage auto-resume)
+## Canonical vs. superseded ingest path (READ BEFORE INGESTING — system of record)
 
-After a power outage + reboot, the campaign resumes with no agent and no manual
-trigger because:
+There are **two** parse+ingest scripts. They are NOT interchangeable. Using the
+wrong one silently re-introduces lossy single-engine text and corrupts the
+system of record. This was the exact "green log over an untouched lie" trap a
+Hans audit caught (cc002, Phase 21 / Hans pass 3 C1).
 
-1. **PostgreSQL** service (5080) StartType = Automatic → DB back up on boot.
-2. **At-startup (ONSTART) triggers** fire the scheduled tasks:
-   - 5090 `PatoLex_OCR_5090` (SYSTEM) → `supervisor_5090.ps1` relaunches workers.
-   - 5080 `PatoLex_OCR_5080` + `PatoLex_Ingest_5080` (SYSTEM) → relaunch the
-     5080 worker + ingest watcher.
-3. **Stale-claim reclamation:** each relaunched OCR worker's first action is
-   `claim_next`, which reclaims any `in_progress` volume left by the crash
-   (stale heartbeat) back to claimable. Resumable OCR continues from checkpoint.
-4. **Ingest reconcile:** the watcher checks the DB on startup, marks already-
-   ingested volumes done, and resumes the chronological fill (idempotent ingest).
+- **`pipeline/ingest_clean.py` — CANONICAL. This is the system of record.**
+  Version-B, **multi-engine token-consensus** text (UTF-8 faithful), with a
+  **scoped purge-then-insert per `source_document`** inside one transaction. The
+  source_document is resolved by **`content_sha256`** (content identity, read
+  from `sha256.txt`), the within-run act key is **`(source_document_id,
+  in_act_order)`**, and the per-volume write is **atomic**. It is **DRY-RUN by
+  default** and refuses to write unless BOTH `--commit` is passed AND
+  `PATOLEX_ALLOW_COMMIT=1` is set (and it connects via `PATOLEX_PG_DSN`). It also
+  banks the per-token `consensus_output.json` (Phase C substrate) ONLY after a
+  successful commit. It has a proper `if __name__ == "__main__":` guard.
 
-The 8AM scale/backoff tasks keep their **daily** trigger only (no ONSTART) so a
-reboot does not throttle the campaign to one worker.
+- **`pipeline/5080/ingest_from_ocr.py` — SUPERSEDED / LOSSY. Do NOT treat its DB
+  output as final.** Version-A, **single-engine parse**. It is still used early
+  in the chain to create the `source_document` rows + run the parse, but its DB
+  rows are **replaced** by `ingest_clean.py`'s consensus output. Never serve or
+  trust its committed text as canonical.
+  - **HAZARD (open, should be fixed): `ingest_from_ocr.py` has NO
+    `if __name__ == "__main__":` guard.** Its driver code runs at module top
+    level (lines ~494-507), so **merely `import`ing the module triggers a DB
+    ingest** of whatever volumes default in. Do not import it from other scripts;
+    add a `__main__` guard before reusing any of its functions.
 
-> NOTE: the 5080 task edits (ONSTART trigger, SYSTEM principal, no-battery)
-> require an elevated run of `5080/_lockdown_apply_5080.ps1` if not yet applied —
-> see the lockdown run-log. The 5090 task is already boot-resilient.
+**Current system of record (2026-06-02):** version-B multi-engine consensus,
+**1850-1875, 4262 acts** (verified via the `ocr_provenance` / `consensus_method`
+columns). `provision_version` is 0 by design (materialization is a deferred
+sweep). The forward campaign (1877-1910) is OCRing now; modern-format parser
+fixes are in flight and **not yet ingested.**
+
+## Orchestration goal: determinism + idempotent resume (NOT boot-resilience)
+
+> Earlier drafts of this README described an ONSTART / SYSTEM-principal
+> "boot-resilience (post-power-outage auto-resume)" model. **That model was
+> dropped (cc002, Phase 20):** the build is a one-time, interactive/logged-in run
+> — Patrick explicitly decided open-ended auto-resume-on-reboot hardening is NOT
+> needed. Do not re-implement it. The properties we actually rely on are:
+
+1. **Idempotent resume.** Re-running a volume is safe: the shared atomic-claim
+   queue (`queue_claim.py`, lock-serialized) reclaims `in_progress`/`failed`
+   volumes whose heartbeat is older than `STALE_SECONDS` (1800s), and
+   `ocr_only_*.py` is **checkpoint-resumable** so banked pages are never re-done
+   or lost. `ingest_clean.py`'s scoped purge-then-insert makes re-ingest
+   idempotent at the volume grain.
+2. **Determinism.** Engine set and consensus method are pinned; the same volume
+   produces the same committed consensus text.
+3. **For an open-ended overnight run, the 0800 daytime backoff tasks
+   (`scale_to_one_5090.ps1` / the 8AM scale-to-1 throttle) must stay DISABLED**,
+   or the campaign throttles itself to one worker mid-run. Re-enable them only
+   when you want the daytime throttle back.
+4. **`PatoLex_Ingest_5080` (the lossy ingest watcher) stays DISABLED** until the
+   parser is fixed and Hans-reviewed — it runs the superseded version-A path
+   above and would write lossy rows.
+
+See `docs/60_OPERATIONS/BUILD_RUNBOOK.md` for the full operational command
+sequence.
