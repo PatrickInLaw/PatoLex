@@ -17,6 +17,29 @@
             "statusMessage": "Checking session/Codex..."
           }
         ]
+      },
+      {
+        "matcher": "PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/hooks/pre-bash-check.ps1\"",
+            "timeout": 30,
+            "statusMessage": "Checking session/Codex..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-hygiene-check.ps1\"",
+            "timeout": 30,
+            "statusMessage": "Checking session hygiene..."
+          }
+        ]
       }
     ]
   },

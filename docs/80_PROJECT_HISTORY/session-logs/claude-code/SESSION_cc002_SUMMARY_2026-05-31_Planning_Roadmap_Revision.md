@@ -231,7 +231,8 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - New: `pipeline/5080/parse_born_digital.py` (born-digital extractor prototype), `docs/60_OPERATIONS/BUILD_RUNBOOK.md`, `docs/80_PROJECT_HISTORY/COLD_START_DOC_AUDIT_2026-06-02.md`, `docs/80_PROJECT_HISTORY/MODERN_STATUTE_FORMAT_2026-06-02.md`; run-logs `forward-march-launch`, `modern-parser`, `doc-remediation`, `truth-excavation`. Pending (truth-excavation in flight): `TRUTH_BASELINE_2026-06-02.md`, `DOC_DELTA_MAP_2026-06-02.md`.
 - Memory (machine-local, not in repo): rewrote `patolex-production-ocr-state`, added `patolex-corpus-data-tiers`, updated `MEMORY.md` index.
 - Scratch (not in repo): `corpus_page_counts.csv` (413,987 body pages), `RUNBOOK_forward_1877_onward.md`.
-- **NOT committed (blocked, pending Patrick's go):** `.claude/settings.json` PowerShell-matcher hook fix.
+- **Hooks (Patrick authorized both):** `.claude/settings.json` — added a `PowerShell`-tool `PreToolUse` matcher running `pre-bash-check.ps1` (closes the commit/push session-log bypass) + a `Stop` hook; new `.claude/hooks/session-hygiene-check.ps1` (advisory ~25-min hygiene backstop, fires only on unlogged work). Finding: PATOAUDIO/kolalawdb share the same Bash-only gap, so the PowerShell matcher is an improvement to propagate, not a verbatim port.
+- **Truth-excavation COMPLETE** → `TRUTH_BASELINE_2026-06-02.md` + `DOC_DELTA_MAP_2026-06-02.md`. Verified: schema live (7 tables, migrations 0000-0004), 1850-1875 = 4262 version-B acts. New discrepancies for the rewrite: ARCHITECTURE.md + ROADMAP.md **actively wrong** (still modern-POC-first; ROADMAP says "no corpus ingested"); SCHEMA_DESIGN names a nonexistent `recodification` table (it's `lineage_edge`); **consensus is 3-engine (Tesseract+docTR+Surya), NOT 4** — every doc wrongly lists PaddleOCR as a consensus engine.
 
 ---
 

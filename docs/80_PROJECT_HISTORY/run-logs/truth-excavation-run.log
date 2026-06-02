@@ -1,0 +1,12 @@
+[2026-06-02 00:00 PT] START | Truth excavation begins — verifying reality vs docs across 7 dimensions | OK
+[2026-06-02 00:10 PT] PRIOR-WORK | Read COLD_START audit, MODERN_STATUTE_FORMAT, BUILD_RUNBOOK, DATA_SOURCES_HISTORICAL | OK
+[2026-06-02 00:20 PT] DB-COUNTS | source_document=21, enactment=4262, provision=4262, change_event=4262, designation_history=4262, provision_version=0, lineage_edge=0 | OK
+[2026-06-02 00:25 PT] DB-CONSENSUS | consensus_method: token_majority_3=4057, token_majority_2=205 (=4262). trust_level=ocr_uncertain all. confident t=3424 f=838. claimed_year span 1850-1875 (21 docs) | OK
+[2026-06-02 00:30 PT] CODE | ingest_clean.py HAS __main__ guard(1183), sha256-keyed(C3), dbl guard --commit+PATOLEX_ALLOW_COMMIT=1. ingest_from_ocr.py NO guard (driver lines 493-507). date-cliff (?:18|19|20)\d\d present | OK
+[2026-06-02 00:32 PT] CODE-CONSENSUS | consensus.py N_MAX_ENGINES=3 = Tesseract+docTR+Surya. PaddleOCR NOT in consensus code — DOCS SAY 4 CLASSICAL. DISCREPANCY | WARN
+[2026-06-02 00:35 PT] INFRA | Tasks on this box: PatoLex_OCR_5080=Running, PatoLex_Ingest_5080=Disabled, PatoLex_OCR_5080_Backoff_0800=Disabled. 5090 tasks not on this box. Hooks matcher=Bash only (not PowerShell) | OK
+[2026-06-02 00:40 PT] CORPUS | corpus_page_counts.csv=654 lines (653 PDFs+header), 1850_Statutes..2008_Vol5. Repo production_queue_state.json STALE (frozen 06:43, ends 1875-76; live queue on boxes only) | WARN
+[2026-06-02 00:45 PT] SCOPE | ARCHITECTURE.md ACTIVELY WRONG: leads with superseded modern-POC-1991/historical=Phase2 + C#/.NET8/Dapper pipeline. parse_born_digital.py = PROTOTYPE, no multi-vol rollup, no DB write | OK
+[2026-06-02 00:50 PT] DOCS | pipeline/README ACCURATE (1850-1875/4262/prov_ver=0/no-guard hazard/boot-resil dropped). ROADMAP ACTIVELY-WRONG (says no corpus ingested + Gate D not on live DB). No recodification table; no enacted_date col | OK
+[2026-06-02 00:55 PT] WRITE | TRUTH_BASELINE_2026-06-02.md + DOC_DELTA_MAP_2026-06-02.md written | OK
+[2026-06-02 01:00 PT] DONE | Truth excavation complete. 7 dimensions verified against DB+code+scheduler+FS | OK
