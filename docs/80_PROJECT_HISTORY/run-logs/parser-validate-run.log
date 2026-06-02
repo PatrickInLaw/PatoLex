@@ -1,0 +1,9 @@
+[2026-06-02 00:00 PT] START | Parser validation tasks A+B against banked OCR | OK
+[2026-06-02 00:05 PT] INVENTORY | Present fwd general-statutes: 1880,1881,1883-84,1885-86,1887,1889,1893; code: 1875-76-code. Absent locally: 1877-78,1877-78-code,1873-74-code,1885,1891,1895 | OK
+[2026-06-02 00:10 PT] TASK-A | Ran STAGE5 parse_volume (throwaway import, no DB, argv-guarded) over all present vols | OK
+[2026-06-02 00:12 PT] TASK-A | Found date-cliff: 19c ordinal 'Nd' (2d/3d/23d) not matched by APPROVED_RE day-group nor stripped by normalize_day | WARN
+[2026-06-02 00:20 PT] TASK-A | FIX applied to ingest_from_ocr.py: day ordinal alt -> (?:st|nd|rd|th|d); normalize_day strips trailing d. Verified no regression on standard ordinals/modern dates | OK
+[2026-06-02 00:25 PT] TASK-A | Post-fix: 1880 71%->85% (conf 77->93), 1881 85%->97% (conf 52->59); 1885-86/1887/1889/1893 unchanged 92-99%. Verdict: parser OK for 1877-1910 gen statutes | OK
+[2026-06-02 00:35 PT] TASK-B | Characterized 1875-76-code (120pp). Code-amendment acts: 'Chap N.-An Act to amend section(s) <spelled> of the <Code> Code' + per-Sec directives w/ 'said Code' anaphora. Existing parser: 68 conf/4 flagged but semantically wrong (mints act_sections) | OK
+[2026-06-02 00:40 PT] TASK-B | Design doc written: CODE_AMENDMENT_PARSE_DESIGN_2026-06-02.md (Method A: directive->change_event on 1872 baseline provision). 7 open questions incl 1872-baseline blocker | OK
+[2026-06-02 00:42 PT] DONE | Throwaway scripts removed. No DB writes, no ingest, no queue touched | OK

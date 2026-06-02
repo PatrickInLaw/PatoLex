@@ -31,3 +31,6 @@
 [2026-06-02 12:54 PT] RUN | 1893: START local OCR (1893_Statutes.pdf) on 5080 | OK
 [2026-06-02 13:16 PT] WORKER | === 5080 queue worker online (pid 49428, worker_id=5080-1) sharing 5090 queue 100.70.54.56 === | OK
 [2026-06-02 13:16 PT] RUN | 1875-76-code: START local OCR (1875-76_Code.pdf) on 5080 | OK
+[2026-06-02 13:25 PT] PUSH | 1875-76-code: OCR outputs pushed to 5090 | OK
+[2026-06-02 13:25 PT] RUN | 1875-76-code: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 13:25 PT] RUN | 1877-78-code: START local OCR (1877-78_Code.pdf) on 5080 | OK

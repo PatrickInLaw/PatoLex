@@ -120,7 +120,11 @@ _KW = r"(?:A[Pp]{1,3}[Rr]{1,3}[Oo]?[Vv]\w{0,6}|Pass(?:ed)?)"
 _YEAR = r"((?:18|19|20)\d\d)"
 APPROVED_RE = re.compile(
     _KW + r"\s*[,.]?\s*" + r"(" + _MONTHS + r")"
-    + r"\s+((?:[IilOo]?\d+|[IilOo])(?:st|nd|rd|th)?)"
+    # Day ordinal suffix allows bare "d" ("2d", "3d", "23d") -- the standard
+    # 19th-century legal-printing abbreviation for "nd"/"rd". Without it the
+    # 1877-1910 general statutes hit a date-cliff (many "Approved <Mon> Nd, YYYY"
+    # approval lines failed to parse). Confirmed against banked 1880/1885 OCR.
+    + r"\s+((?:[IilOo]?\d+|[IilOo])(?:st|nd|rd|th|d)?)"
     + r"[,.]?\s*" + _YEAR + r"\b",
     re.IGNORECASE,
 )
@@ -176,7 +180,8 @@ def parse_chapter_number(tok):
 
 def normalize_day(day_str):
     s = day_str.strip()
-    s = re.sub(r"(?i)(st|nd|rd|th)$", "", s)
+    # Strip ordinal suffix incl. bare "d" ("2d","3d","23d" -> "2","3","23").
+    s = re.sub(r"(?i)(st|nd|rd|th|d)$", "", s)
     if s.upper() in ("I", "L"):
         return "1"
     if s.upper() == "O":
