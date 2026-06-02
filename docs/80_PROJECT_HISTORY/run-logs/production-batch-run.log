@@ -686,3 +686,2165 @@
 [2026-06-02 02:04 PT] [1860] STAGE4-OCR | page 124 (121/449): engines=surya+doctr+tess agree=0.61 hi=False 2.9s | OK
 [2026-06-02 02:05 PT] [1860] STAGE4-OCR | page 144 (141/449): engines=surya+doctr+tess agree=0.64 hi=False 3.0s | OK
 [2026-06-02 02:06 PT] [1860] STAGE4-OCR | page 164 (161/449): engines=surya+doctr+tess agree=0.63 hi=False 3.1s | OK
+[2026-06-02 02:07 PT] [1860] STAGE4-OCR | page 184 (181/449): engines=surya+doctr+tess agree=0.61 hi=False 2.4s | OK
+[2026-06-02 02:08 PT] [1860] STAGE4-OCR | page 204 (201/449): engines=surya+doctr+tess agree=0.55 hi=False 2.1s | OK
+[2026-06-02 02:08 PT] [1860] STAGE4-OCR | page 224 (221/449): engines=surya+doctr+tess agree=0.65 hi=True 2.8s | OK
+[2026-06-02 02:09 PT] [1860] STAGE4-OCR | page 244 (241/449): engines=surya+doctr+tess agree=0.62 hi=False 3.0s | OK
+[2026-06-02 02:10 PT] [1860] STAGE4-OCR | page 264 (261/449): engines=surya+doctr+tess agree=0.54 hi=False 3.4s | OK
+[2026-06-02 02:11 PT] [1860] STAGE4-OCR | page 284 (281/449): engines=surya+doctr+tess agree=0.53 hi=False 2.6s | OK
+[2026-06-02 02:12 PT] [1860] STAGE4-OCR | page 304 (301/449): engines=surya+doctr+tess agree=0.55 hi=False 2.9s | OK
+[2026-06-02 02:13 PT] [1860] STAGE4-OCR | page 324 (321/449): engines=surya+doctr+tess agree=0.58 hi=False 2.8s | OK
+[2026-06-02 02:14 PT] [1860] STAGE4-OCR | page 344 (341/449): engines=surya+doctr+tess agree=0.59 hi=False 2.3s | OK
+[2026-06-02 02:14 PT] [1860] STAGE4-OCR | page 364 (361/449): engines=surya+doctr+tess agree=0.61 hi=False 2.3s | OK
+[2026-06-02 02:15 PT] [1860] STAGE4-OCR | page 384 (381/449): engines=surya+doctr+tess agree=0.57 hi=False 2.9s | OK
+[2026-06-02 02:16 PT] [1860] STAGE4-OCR | page 404 (401/449): engines=surya+doctr+tess agree=0.60 hi=False 2.8s | OK
+[2026-06-02 02:17 PT] [1860] STAGE4-OCR | page 424 (421/449): engines=surya+doctr+tess agree=0.58 hi=False 2.8s | OK
+[2026-06-02 02:18 PT] [1860] STAGE4-OCR | page 445 (441/449): engines=surya+doctr+tess agree=0.60 hi=False 2.1s | OK
+[2026-06-02 02:18 PT] [1860] STAGE4-OCR | OCR done: 449 pages in 1200.6s (2.67s/page) hi=75 lo=374 | OK
+[2026-06-02 02:18 PT] [1860] STAGE4-OCR | Confidence distribution: {'high_>=0.65': 75, 'medium_0.50_0.65': 335, 'low_<0.50': 39, 'mean_agreement': 0.5848, 'median_agreement': 0.6044} | OK
+[2026-06-02 02:18 PT] [1860] STAGE5-PARSE | Parsing acts from consensus OCR text | OK
+[2026-06-02 02:18 PT] [1860] STAGE5-PARSE | Parse done in 0.02s: confident=0 flagged_text_only=0 | OK
+[2026-06-02 02:18 PT] [1860] STAGE6-INGEST | Starting DB ingest (idempotent on content_sha256) | OK
+[2026-06-02 02:18 PT] [1860] STAGE6-INGEST | Updated skeleton source_document id=11 with real data | OK
+[2026-06-02 02:18 PT] [1860] STAGE6-INGEST | Ingesting 0 confident acts | OK
+[2026-06-02 02:18 PT] [1860] STAGE6-INGEST | Ingest done: enactments=0 provisions=0 change_events=0 skipped_dup=0 failed=0 | OK
+[2026-06-02 02:18 PT] [1860] STAGE6-INGEST | Final DB counts: source_document=20 enactment=1419 provision=1419 change_event=1419 | OK
+[2026-06-02 02:18 PT] [1860] REPORT | === VOLUME COMPLETE: 1860 === | OK
+[2026-06-02 02:18 PT] [1860] REPORT | PDF: 1860_Statutes.pdf | 453 pages | SHA256=fce8a0ff4ea0e9ffabeb44f04772bce00e423e58044588170d4b914a65571488 | OK
+[2026-06-02 02:18 PT] [1860] REPORT | Render: 20.8s | Preprocess: 376.9s | OCR: 1200.6s | Parse: 0.02s | TOTAL: 1598.3s (26.6 min) | OK
+[2026-06-02 02:18 PT] [1860] REPORT | OCR: 449 body pages | 2.67s/page | 22.4 p/min | Surya=True engines=surya+doctr+tesseract-5 | OK
+[2026-06-02 02:18 PT] [1860] REPORT | Confidence: {'high_>=0.65': 75, 'medium_0.50_0.65': 335, 'low_<0.50': 39, 'mean_agreement': 0.5848, 'median_agreement': 0.6044} | OK
+[2026-06-02 02:18 PT] [1860] REPORT | Acts: confident=0 flagged=0 | OK
+[2026-06-02 02:18 PT] [1860] REPORT | DB: src_doc_id=11 enactments=0 provisions=0 change_events=0 | OK
+[2026-06-02 02:18 PT] [1860] REPORT | OCR output: C:\Users\PatrickKolasinski\PatoLex-scratch\production-1860\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 02:18 PT] [1860] REPORT | === END: 1860 === | OK
+[2026-06-02 02:18 PT] [BATCH] BATCH | 1860: COMPLETED in 27.1 min (exit 0) | OK
+[2026-06-02 02:18 PT] [BATCH] BATCH | Starting 1861: 730 pages, ~40 min est | 1861_Statutes.pdf | OK
+[2026-06-02 02:18 PT] [1861] PIPELINE | === START: 1861_Statutes.pdf session=1861 === | OK
+[2026-06-02 02:18 PT] [1861] STAGE0 | Computing SHA256 of 1861_Statutes.pdf | OK
+[2026-06-02 02:18 PT] [1861] STAGE0 | SHA256=b1e0b56921b95d678b2d13fc907ae1cbd60d0075d67ea75bdd53a3b0775bf3fe (32ms) | OK
+[2026-06-02 02:18 PT] [1861] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 02:18 PT] [1861] STAGE0 | PDF opened: 730 pages | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | Rendering 730 pages at 300 DPI | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 1/730 | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 2/730 | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 3/730 | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 101/730 | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 201/730 | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 301/730 | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 401/730 | OK
+[2026-06-02 02:18 PT] [1861] STAGE1-RENDER | page 501/730 | OK
+[2026-06-02 02:19 PT] [1861] STAGE1-RENDER | page 601/730 | OK
+[2026-06-02 02:19 PT] [1861] STAGE1-RENDER | page 701/730 | OK
+[2026-06-02 02:19 PT] [1861] STAGE1-RENDER | Render done: 730 pages in 21.7s (0.03s/page) | OK
+[2026-06-02 02:19 PT] [1861] STAGE2-PREPROCESS | Preprocessing 730 pages (v2 grayscale track) | OK
+[2026-06-02 02:19 PT] [1861] STAGE2-PREPROCESS | page 1/730 ok=1 fail=0 | OK
+[2026-06-02 02:19 PT] [1861] STAGE2-PREPROCESS | page 2/730 ok=2 fail=0 | OK
+[2026-06-02 02:19 PT] [1861] STAGE2-PREPROCESS | page 3/730 ok=3 fail=0 | OK
+[2026-06-02 02:20 PT] [1861] STAGE2-PREPROCESS | page 101/730 ok=101 fail=0 | OK
+[2026-06-02 02:21 PT] [1861] STAGE2-PREPROCESS | page 201/730 ok=201 fail=0 | OK
+[2026-06-02 02:22 PT] [1861] STAGE2-PREPROCESS | page 301/730 ok=301 fail=0 | OK
+[2026-06-02 02:24 PT] [1861] STAGE2-PREPROCESS | page 401/730 ok=401 fail=0 | OK
+[2026-06-02 02:25 PT] [1861] STAGE2-PREPROCESS | page 501/730 ok=501 fail=0 | OK
+[2026-06-02 02:26 PT] [1861] STAGE2-PREPROCESS | page 601/730 ok=601 fail=0 | OK
+[2026-06-02 02:28 PT] [1861] STAGE2-PREPROCESS | page 701/730 ok=701 fail=0 | OK
+[2026-06-02 02:28 PT] [1861] STAGE2-PREPROCESS | Preprocess done: 730 OK / 0 FAIL in 565.7s | OK
+[2026-06-02 02:28 PT] [1861] STAGE3-CLASSIFY | Detecting body start page via ink density | OK
+[2026-06-02 02:28 PT] [1861] STAGE3-CLASSIFY | Body start detected at 0-indexed page 2 (PDF page 3) | OK
+[2026-06-02 02:28 PT] [1861] STAGE3-CLASSIFY | Classification done in 15.3s: body=723 front_matter=2 index=2 empty=3 | OK
+[2026-06-02 02:28 PT] [1861] STAGE4-OCR | Loading docTR model (GPU) | OK
+[2026-06-02 02:28 PT] [1861] STAGE4-OCR | docTR on GPU: NVIDIA GeForce RTX 5080 | OK
+[2026-06-02 02:28 PT] [1861] STAGE4-OCR | Surya (local) loaded OK | OK
+[2026-06-02 02:28 PT] [1861] STAGE4-OCR | Starting OCR consensus on 723 body pages (Surya=True) | OK
+[2026-06-02 02:29 PT] [1861] STAGE4-OCR | page 3 (1/723): engines=surya+doctr+tess agree=0.59 hi=False 5.1s | OK
+[2026-06-02 02:29 PT] [1861] STAGE4-OCR | page 4 (2/723): engines=surya+doctr+tess agree=0.63 hi=False 4.1s | OK
+[2026-06-02 02:29 PT] [1861] STAGE4-OCR | page 5 (3/723): engines=surya+doctr+tess agree=0.55 hi=False 4.8s | OK
+[2026-06-02 02:29 PT] [1861] STAGE4-OCR | page 6 (4/723): engines=surya+doctr+tess agree=0.53 hi=False 3.8s | OK
+[2026-06-02 02:29 PT] [1861] STAGE4-OCR | page 7 (5/723): engines=surya+doctr+tess agree=0.55 hi=False 3.7s | OK
+[2026-06-02 02:30 PT] [1861] STAGE4-OCR | page 23 (21/723): engines=surya+doctr+tess agree=0.58 hi=False 3.7s | OK
+[2026-06-02 02:31 PT] [1861] STAGE4-OCR | page 43 (41/723): engines=surya+doctr+tess agree=0.23 hi=False 3.6s | OK
+[2026-06-02 02:32 PT] [1861] STAGE4-OCR | page 63 (61/723): engines=surya+doctr+tess agree=0.82 hi=True 2.4s | OK
+[2026-06-02 02:32 PT] [BATCH] BATCH | 1861: FAILED (exit 3221225477) after 13.9 min -- continuing | FAIL
+[2026-06-02 02:32 PT] [BATCH] BATCH | Starting 1862: 660 pages, ~36 min est | 1862_Statutes.pdf | OK
+[2026-06-02 02:32 PT] [1862] PIPELINE | === START: 1862_Statutes.pdf session=1862 === | OK
+[2026-06-02 02:32 PT] [1862] STAGE0 | Computing SHA256 of 1862_Statutes.pdf | OK
+[2026-06-02 02:32 PT] [1862] STAGE0 | SHA256=aaabde19ba6da8e1bc8a51e66618403d549c9986177de2dba8880d020ff8b2bf (31ms) | OK
+[2026-06-02 02:32 PT] [1862] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 02:32 PT] [1862] STAGE0 | PDF opened: 660 pages | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | Rendering 660 pages at 300 DPI | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 1/660 | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 2/660 | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 3/660 | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 101/660 | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 201/660 | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 301/660 | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 401/660 | OK
+[2026-06-02 02:32 PT] [1862] STAGE1-RENDER | page 501/660 | OK
+[2026-06-02 02:33 PT] [1862] STAGE1-RENDER | page 601/660 | OK
+[2026-06-02 02:33 PT] [1862] STAGE1-RENDER | Render done: 660 pages in 28.7s (0.04s/page) | OK
+[2026-06-02 02:33 PT] [1862] STAGE2-PREPROCESS | Preprocessing 660 pages (v2 grayscale track) | OK
+[2026-06-02 02:33 PT] [1862] STAGE2-PREPROCESS | page 1/660 ok=1 fail=0 | OK
+[2026-06-02 02:33 PT] [1862] STAGE2-PREPROCESS | page 2/660 ok=2 fail=0 | OK
+[2026-06-02 02:33 PT] [1862] STAGE2-PREPROCESS | page 3/660 ok=3 fail=0 | OK
+[2026-06-02 02:34 PT] [1862] STAGE2-PREPROCESS | page 101/660 ok=101 fail=0 | OK
+[2026-06-02 02:35 PT] [1862] STAGE2-PREPROCESS | page 201/660 ok=201 fail=0 | OK
+[2026-06-02 02:37 PT] [1862] STAGE2-PREPROCESS | page 301/660 ok=301 fail=0 | OK
+[2026-06-02 02:38 PT] [1862] STAGE2-PREPROCESS | page 401/660 ok=401 fail=0 | OK
+[2026-06-02 02:39 PT] [1862] STAGE2-PREPROCESS | page 501/660 ok=501 fail=0 | OK
+[2026-06-02 02:41 PT] [1862] STAGE2-PREPROCESS | page 601/660 ok=601 fail=0 | OK
+[2026-06-02 02:42 PT] [1862] STAGE2-PREPROCESS | Preprocess done: 660 OK / 0 FAIL in 543.9s | OK
+[2026-06-02 02:42 PT] [1862] STAGE3-CLASSIFY | Detecting body start page via ink density | OK
+[2026-06-02 02:42 PT] [1862] STAGE3-CLASSIFY | Body start detected at 0-indexed page 2 (PDF page 3) | OK
+[2026-06-02 02:42 PT] [1862] STAGE3-CLASSIFY | Classification done in 15.8s: body=652 front_matter=2 index=2 empty=4 | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | Loading docTR model (GPU) | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | docTR on GPU: NVIDIA GeForce RTX 5080 | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | Surya (local) loaded OK | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | Starting OCR consensus on 652 body pages (Surya=True) | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | page 3 (1/652): engines=surya+doctr+tess agree=0.34 hi=False 5.4s | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | page 4 (2/652): engines=surya+doctr+tess agree=0.30 hi=False 5.3s | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | page 5 (3/652): engines=surya+doctr+tess agree=0.28 hi=False 4.0s | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | page 6 (4/652): engines=surya+doctr+tess agree=0.31 hi=False 3.8s | OK
+[2026-06-02 02:42 PT] [1862] STAGE4-OCR | page 7 (5/652): engines=surya+doctr+tess agree=0.33 hi=False 3.8s | OK
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 23 (21/652): engines=surya+doctr+tess agree=0.30 hi=False 4.1s | OK
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 31: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 32: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 32: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 33: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 33: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 34: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 34: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 35: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 35: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 37: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 37: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:44 PT] [1862] STAGE4-OCR | page 38: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 38: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 39: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 39: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 40: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 40: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 41: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 41: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 42: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 42: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 43: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 43: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 44: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 44: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 44 (41/652): engines=doctr+tess agree=0.00 hi=False 1.6s | OK
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 45: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 45: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 47: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 47: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 48: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 48: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 49: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 49: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 50: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 50: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 51: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 51: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 52: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 52: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 53: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 53: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 54: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 54: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 55: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 55: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 56: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 56: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 57: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 57: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 58: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 58: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 59: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 59: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 60: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 60: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 61: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 61: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 62: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 62: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 63: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 63: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 64: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 64: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 65: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 65: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 65 (61/652): engines=doctr+tess agree=0.00 hi=False 2.0s | OK
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 66: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 66: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 67: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 67: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 68: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 68: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 69: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 69: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 70: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:45 PT] [1862] STAGE4-OCR | page 70: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 71: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 71: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 72: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 72: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 73: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 73: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 74: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 74: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 75: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 75: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 76: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 76: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 77: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 77: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 78: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 78: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 79: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 79: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 80: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 80: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 81: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 81: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 82: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 82: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 83: Tesseract FAIL: (1, 'Error in pixCreateNoInit: pixdata_malloc fail for data Error in pixCreate: pixd not made Error in pixReadStreamPng: pix not made Error in pixReadStream: png: no pix returned Leptonica Error in pixRead: pix not read: C:\\Users\\PATRIC~1\\AppData\\Local\\Temp\\claude\\tess_zika2wmn_input.PNG Error during processing.') | FAIL
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 83: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 83: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 84: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 84: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 85: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 85: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 85 (81/652): engines=doctr+tess agree=0.00 hi=False 2.1s | OK
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 86: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 86: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 87: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 87: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 88: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 88: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 89: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 89: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 90: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 90: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 91: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 91: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 92: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 92: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 93: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 93: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 94: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 94: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 95: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:46 PT] [1862] STAGE4-OCR | page 95: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 96: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 96: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 97: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 97: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 98: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 98: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 99: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 99: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 100: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 100: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 101: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 101: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 102: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 102: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 103: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 103: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 104: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 104: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 105: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 105: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 105 (101/652): engines=doctr+tess agree=0.00 hi=False 2.2s | OK
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 106: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 106: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 107: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 107: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 108: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 108: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 109: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 109: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 110: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 110: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 111: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 111: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 112: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 112: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 113: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 113: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 114: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 114: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 115: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 115: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 116: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 116: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 117: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 117: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 118: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 118: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 119: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 119: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 120: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 120: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 121: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 121: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 122: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 122: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 123: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 123: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 124: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 124: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 125: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 125: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 125 (121/652): engines=doctr+tess agree=0.00 hi=False 2.0s | OK
+[2026-06-02 02:47 PT] [1862] STAGE4-OCR | page 126: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 126: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 127: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 127: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 128: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 128: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 129: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 129: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 130: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 130: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 131: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 131: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 132: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 132: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 133: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 133: Surya FAIL (using docTR+Tess):  | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 134: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 134: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 135: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 135: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 136: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 136: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 137: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 137: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 138: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 138: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 139: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 139: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 140: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 140: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 141: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 141: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 142: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 142: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 143: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 143: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 144: Tesseract FAIL: (1, 'Error in pixCreateNoInit: pixdata_malloc fail for data Error in pixCreate: pixd not made Error in pixReadStreamPng: pix not made Error in pixReadStream: png: no pix returned Leptonica Error in pixRead: pix not read: C:\\Users\\PATRIC~1\\AppData\\Local\\Temp\\claude\\tess_9svm5dr9_input.PNG Error during processing.') | FAIL
+[2026-06-02 02:48 PT] [1862] STAGE4-OCR | page 144: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 144: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 145: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 145: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 145 (141/652): engines=doctr+tess agree=0.00 hi=False 2.0s | OK
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 146: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 146: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 147: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 147: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 148: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 148: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 149: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 149: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 150: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 150: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 151: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 151: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 152: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 152: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 153: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 153: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 154: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 154: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 155: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 155: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 156: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 156: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 157: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 157: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 158: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 158: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 159: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 159: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 160: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 160: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 161: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 161: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 162: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 162: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 163: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 163: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 164: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 164: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 165: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 165: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 165 (161/652): engines=doctr+tess agree=0.00 hi=False 1.0s | OK
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 166: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 166: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 167: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 167: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 168: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 168: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 169: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 169: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 170: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:49 PT] [1862] STAGE4-OCR | page 170: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 171: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 171: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 172: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 172: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 173: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 173: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 174: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 174: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 175: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 175: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 176: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 176: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 177: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 177: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 178: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 178: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 179: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 179: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 180: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 180: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 181: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 181: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 182: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 182: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 183: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 183: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 184: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 184: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 185: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 185: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 185 (181/652): engines=doctr+tess agree=0.00 hi=False 1.9s | OK
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 186: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 186: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 187: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 187: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 188: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 188: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 189: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 189: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 190: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 190: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 191: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 191: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 192: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 192: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 193: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 193: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 194: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 194: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 195: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:50 PT] [1862] STAGE4-OCR | page 195: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 196: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 196: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 197: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 197: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 198: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 198: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 199: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 199: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 200: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 200: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 201: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 201: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 202: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 202: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 203: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 203: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 204: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 204: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 205: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 205: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 205 (201/652): engines=doctr+tess agree=0.00 hi=False 1.3s | OK
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 206: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 206: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 207: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 207: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 208: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 208: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 209: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 209: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 210: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 210: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 211: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 211: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 212: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 212: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 213: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 213: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 214: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 214: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 215: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 215: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 216: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 216: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 217: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 217: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 218: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 218: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 219: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 219: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 220: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 220: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 221: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 221: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 222: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 222: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 223: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 223: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 224: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 224: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 225: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 225: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 225 (221/652): engines=doctr+tess agree=0.00 hi=False 1.1s | OK
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 226: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 226: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 227: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 227: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 228: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 228: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 229: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 229: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 230: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 230: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 231: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 231: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 232: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 232: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 233: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 233: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 234: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 234: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 235: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 235: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 236: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 236: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 237: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 237: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 238: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 238: Surya FAIL (using docTR+Tess): Unable to allocate 33.0 MiB for an array with shape (1200, 1200, 3) and data type float64 | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 239: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 239: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 240: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 240: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 241: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 241: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 242: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:51 PT] [1862] STAGE4-OCR | page 242: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 243: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 243: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 244: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 244: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 245: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 245: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 245 (241/652): engines=doctr+tess agree=0.00 hi=False 1.4s | OK
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 246: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 246: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 247: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 247: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 248: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 248: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 249: docTR FAIL: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [1862] STAGE4-OCR | page 249: Surya FAIL (using docTR+Tess): CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ | WARN
+[2026-06-02 02:52 PT] [BATCH] BATCH | 1862: FAILED (exit 3221225477) after 19.6 min -- continuing | FAIL
+[2026-06-02 02:52 PT] [BATCH] BATCH | Starting 1863: 863 pages, ~47 min est | 1863_Statutes.pdf | OK
+[2026-06-02 02:52 PT] [1863] PIPELINE | === START: 1863_Statutes.pdf session=1863 === | OK
+[2026-06-02 02:52 PT] [1863] STAGE0 | Computing SHA256 of 1863_Statutes.pdf | OK
+[2026-06-02 02:52 PT] [1863] STAGE0 | SHA256=f1353cec952e53467f0efa15a2d95cb942140a29e54ecb1a30009bfe2076d1d9 (32ms) | OK
+[2026-06-02 02:52 PT] [1863] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 02:52 PT] [1863] STAGE0 | PDF opened: 863 pages | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | Rendering 863 pages at 300 DPI | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 1/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 2/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 3/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 101/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 201/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 301/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 401/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 501/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 601/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 701/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | page 801/863 | OK
+[2026-06-02 02:52 PT] [1863] STAGE1-RENDER | Render done: 863 pages in 38.7s (0.04s/page) | OK
+[2026-06-02 02:52 PT] [1863] STAGE2-PREPROCESS | Preprocessing 863 pages (v2 grayscale track) | OK
+[2026-06-02 02:52 PT] [1863] STAGE2-PREPROCESS | page 1/863 ok=1 fail=0 | OK
+[2026-06-02 02:52 PT] [1863] STAGE2-PREPROCESS | page 2/863 ok=2 fail=0 | OK
+[2026-06-02 02:52 PT] [1863] STAGE2-PREPROCESS | page 3/863 ok=3 fail=0 | OK
+[2026-06-02 02:54 PT] [1863] STAGE2-PREPROCESS | page 101/863 ok=101 fail=0 | OK
+[2026-06-02 02:55 PT] [1863] STAGE2-PREPROCESS | page 201/863 ok=201 fail=0 | OK
