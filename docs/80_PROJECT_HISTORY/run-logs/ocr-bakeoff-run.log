@@ -1,0 +1,35 @@
+[2026-06-01 17:00 PT] SETUP | Created bakeoff directory structure: ocr-bakeoff/{pages,out,gold-draft} | OK
+[2026-06-01 17:01 PT] SETUP | Verified: Tesseract 5 at AppData/Local/Tesseract-OCR/tesseract.exe | OK
+[2026-06-01 17:01 PT] SETUP | Verified: Python 3.12.10, PyMuPDF 1.27.2.3, torch 2.11.0+cu128, CUDA True (RTX 5080) | OK
+[2026-06-01 17:01 PT] SETUP | Verified: transformers 4.57.6, surya-ocr 0.13.0 already installed | OK
+[2026-06-01 17:01 PT] SETUP | Verified: HF cache has tiiuae/Falcon-OCR and ucaslcl/GOT-OCR2_0 | OK
+[2026-06-01 17:02 PT] SETUP | 5090 Ollama HTTP reachable at http://100.70.54.56:11434; qwen2.5vl:32b confirmed present | OK
+
+[2026-06-01 17:05 PT] STEP1 | Rendered 12 pre-code sample pages @ 300 DPI into ocr-bakeoff/pages/ | OK
+[2026-06-01 17:05 PT] STEP1 | Page selection: 2 pages each from 1850, 1852, 1858, 1861, 1867-68, 1871-72 — body statutory text, not TOC/index | OK
+[2026-06-01 17:06 PT] STEP1 | Copied 5 code-era test pages (1872 Penal Code, 1903 Deering) from gate-b-historical/ocr_testset | OK
+[2026-06-01 17:06 PT] STEP1 | Copied 2 gold ground truth files: gt_1872_sec187_murder.txt, gt_1903_sec211_robbery.txt | OK
+[2026-06-01 17:06 PT] STEP1 | Total pages in bakeoff: 17 (12 pre-code, 5 code-era; 2 with human gold) | OK
+
+[2026-06-01 17:10 PT] STEP2 | ENGINE: Tesseract 5 — ran on all 17 pages; avg 0.9s/page; all 17 OK | OK
+[2026-06-01 17:12 PT] STEP2 | ENGINE: Surya 0.13.0 — INSTALL FAIL (settings.py missing DISABLE_TQDM + ENABLE_CUDNN_ATTENTION; recognition loader KeyError: 'encoder' — transformers 4.57.6 incompatibility; model config broken) | FAIL
+[2026-06-01 17:15 PT] STEP2 | ENGINE: PaddleOCR 3.6.0 (--user install) — INFERENCE FAIL (oneDNN PIR executor error: ConvertPirAttribute2RuntimeAttribute; Windows CPU path broken in 3.x; not overridable via env flags) | FAIL
+[2026-06-01 17:18 PT] STEP2 | ENGINE: Falcon-OCR (tiiuae/Falcon-OCR) — INSTALL FAIL on Windows (hard import of `triton` in modeling_falcon_ocr.py; triton is Linux-only; no Windows wheel available) | FAIL
+[2026-06-01 17:25 PT] STEP2 | ENGINE: GOT-OCR 2.0 (ucaslcl/GOT-OCR2_0) — LOAD OK after installing tiktoken + verovio + accelerate; INFERENCE FAIL (DynamicCache.seen_tokens AttributeError — API removed in transformers 4.x; model written for older transformers) | FAIL
+[2026-06-01 17:30 PT] STEP2 | ENGINE: olmOCR (AllenAI, olmocr 0.4.27) — INSTALLED but NOT RUN; requires vLLM server + S3 workspace; designed for Linux cluster pipeline; not usable as single-image inference on Windows | SKIP
+[2026-06-01 17:35 PT] STEP2 | ENGINE: qwen2.5vl:32b via 5090 Ollama HTTP — RUNNING; 5 code-era pages completed by report time; ~110s/page; pre-code pages in progress in background | PARTIAL-OK
+
+[2026-06-01 17:45 PT] STEP3 | Wrote 12 draft transcription review packages to ocr-bakeoff/gold-draft/ | OK
+[2026-06-01 17:45 PT] STEP3 | Draft source: Tesseract (best engine with complete coverage at report time); Qwen drafts for pre-code will be updated when background job completes | WARN
+[2026-06-01 17:45 PT] STEP3 | Draft index written to ocr-bakeoff/gold-draft/INDEX.md | OK
+
+[2026-06-01 17:50 PT] STEP4 | CER vs gold: tesseract/1872_sec187=35.4%, tesseract/1903_sec211=39.5% | OK
+[2026-06-01 17:50 PT] STEP4 | CER vs gold: qwen25vl/1872_sec187=32.5%, qwen25vl/1903_sec211=41.1% | OK
+[2026-06-01 17:50 PT] STEP4 | NOTE: High CER values are partially an artifact of gold formatting conventions (marginal labels in brackets) vs. plain text outputs; also Qwen modernizes spelling (e.g. 'kidnapping' vs correct historical 'kidnaping') | WARN
+[2026-06-01 17:50 PT] STEP4 | Inter-engine agreement (Tesseract vs Qwen): 0.879-0.955 on code-era pages (5 pages) | OK
+[2026-06-01 17:55 PT] STEP4 | Provisional ranking written to ocr-bakeoff/BAKEOFF_PROVISIONAL.md | OK
+[2026-06-01 17:55 PT] STEP4 | Run log written to docs/80_PROJECT_HISTORY/run-logs/ocr-bakeoff-run.log | OK
+
+[2026-06-01 18:00 PT] PENDING | Qwen background run in progress; ~12 pre-code pages + 2 code-era pages remaining; expect completion ~60-90 min from start | WARN
+[2026-06-01 18:00 PT] PENDING | Gold drafts should be re-run (write_gold_drafts.py) after Qwen completes to upgrade pre-code drafts from Tesseract to Qwen baseline | WARN
+[2026-06-01 18:00 PT] PENDING | Human gold review required tomorrow before any engine can be declared winner | WARN
