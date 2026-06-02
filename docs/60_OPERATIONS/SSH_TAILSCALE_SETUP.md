@@ -4,6 +4,14 @@ Purpose: let Claude Code sessions (and operators) drive the GPU boxes (5080 / 50
 
 > **Hard-won lesson (2026-06-02):** do **NOT** restrict access by binding `sshd` to the Tailscale IP via `ListenAddress`. On Windows, sshd fails to start ("Failed to start service") because it can't bind a listener to Tailscale's wintun adapter IP at boot. **Enforce Tailscale-only at the FIREWALL instead** (`RemoteAddress 100.64.0.0/10`). sshd listens on `0.0.0.0`; the firewall drops every connection that isn't from a tailnet peer. Same security, and it actually starts. Hit on both the 5090 and 5080.
 
+> **Second hard-won lesson (2026-06-02): Azure AD-joined boxes need a LOCAL account for SSH.** The boxes are Entra/Azure-AD-joined (`azuread\patrickkolasinski`). The sshd **service runs as LocalSystem**, which **cannot build a logon token for an Azure AD account** — sshd logs `get_passwd: lookup_sid() failed: 1332` and the client gets `Connection reset` after a clean key exchange. (Running `sshd -d` foreground in the user's own session works, which masks the problem — but the service won't.) **Fix: create a dedicated LOCAL admin account and SSH as that:**
+> ```powershell
+> $pw = Read-Host -AsSecureString 'Password for local patolex account'
+> New-LocalUser -Name 'patolex' -Password $pw -FullName 'PatoLex Compute' -PasswordNeverExpires
+> Add-LocalGroupMember -Group 'Administrators' -Member 'patolex'
+> ```
+> Since `patolex` is a local admin, the key already in `administrators_authorized_keys` works for it — connect as `ssh -i <key> patolex@<tailscale-ip>`. (Verified working on the 5090: returns `PK_Alien_5090`.)
+
 ## 1. Install + enable + restrict (Admin PowerShell on the target box)
 
 ```powershell
