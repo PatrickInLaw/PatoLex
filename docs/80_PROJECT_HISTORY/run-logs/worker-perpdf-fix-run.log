@@ -1,0 +1,13 @@
+[2026-06-02 START] PHASE 0 | Begin per-PDF worker fix (build+prepare only, no deploy) | OK
+[2026-06-02] PHASE 1 | Verified on-box scripts == repo snapshots via SHA256 (5090 worker+claim, 5080 worker+claim all identical) | OK
+[2026-06-02] PHASE 2 | Edited pipeline/5090/queue_worker.py: added pdf_name_for(); claim_next returns (label, pdf_name); run_volume(worker_id,label,pdf_name) uses ARCHIVE/pdf_name; main unpacks tuple | OK
+[2026-06-02] PHASE 2 | Edited pipeline/5090/queue_claim.py: added pdf_name_for(); op_claim prints 'CLAIMED <label> <pdf>'; header doc updated | OK
+[2026-06-02] PHASE 2 | Edited pipeline/5080/queue_claim.py: same as 5090 (byte-identical mirror, deployed TO the 5090) | OK
+[2026-06-02] PHASE 2 | Edited pipeline/5080/queue_worker_5080.py: claim_next parses two-token CLAIMED (legacy/un-upgraded fallback to <label>_Statutes.pdf); returns (label,pdf_name); run_volume uses pdf_name; main unpacks | OK
+[2026-06-02] PHASE 3 | py_compile all four edited scripts | OK
+[2026-06-02] PHASE 3 | Logic test: pdf_name_for legacy->_Statutes.pdf, code->explicit pdf on both boxes; 5080 parse handles new/legacy/old-5090 forms | OK
+[2026-06-02] PHASE 4 | PRECONDITION: 5090 archive has NO Code PDFs (only _Statutes.pdf) -> all five Code PDFs MUST scp UP from 5080. 5080 archive HAS all five. | WARN
+[2026-06-02] PHASE 4 | PRECONDITION: LEGISLATURE_MAP (ingest_from_ocr.py + ingest_clean.py) lacks new Code labels -> ingest would skip. Flagged in runbook; ingest frozen, NOT touched. | WARN
+[2026-06-02] PHASE 5 | Wrote prepared queue entries: docs/60_OPERATIONS/prepared-code-queue-entries-2026-06-02.json | OK
+[2026-06-02] PHASE 5 | Wrote deploy runbook: docs/60_OPERATIONS/DEPLOY_RUNBOOK_perpdf_fix_2026-06-02.md | OK
+[2026-06-02 END] DONE | Build+prepare complete. No deploy, no GPU box change, no live queue change, no DB/ingest. | OK

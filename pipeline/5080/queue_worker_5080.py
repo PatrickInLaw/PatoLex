@@ -143,12 +143,20 @@ def scp_push(local_path, remote_rel, timeout=SCP_TIMEOUT):
 
 
 def claim_next(worker_id):
+    """Claim via the 5090's queue_claim.py. Returns (label, pdf_name) or None.
+    The 5090 now prints 'CLAIMED <label> <pdf>'. Backward-compatible: if the
+    5090 still prints the legacy 'CLAIMED <label>' (no pdf token), we fall back
+    to the '<label>_Statutes.pdf' convention so an un-upgraded 5090 still works."""
     rc, out, err = ssh_claim_op("claim", worker_id)
     if rc != 0:
         log("CLAIM", "claim rc=" + str(rc) + " " + err[:140], "WARN")
         return None
     if out.startswith("CLAIMED "):
-        return out.split(" ", 1)[1].strip()
+        rest = out.split(" ", 1)[1].strip()
+        parts = rest.split(None, 1)
+        label = parts[0]
+        pdf_name = parts[1].strip() if len(parts) > 1 else (label + "_Statutes.pdf")
+        return label, pdf_name
     return None
 
 
@@ -184,8 +192,8 @@ def push_outputs(label):
     return ok
 
 
-def run_volume(worker_id, label):
-    pdf = ARCHIVE / (label + "_Statutes.pdf")
+def run_volume(worker_id, label, pdf_name):
+    pdf = ARCHIVE / pdf_name
     if not pdf.exists():
         log("RUN", label + ": local PDF MISSING " + str(pdf), "FAIL")
         mark_fail(worker_id, label)
@@ -242,8 +250,8 @@ def main():
         if STOP_FLAG.exists():
             log("WORKER", "STOP flag present between volumes -- graceful exit", "OK")
             return
-        label = claim_next(worker_id)
-        if label is None:
+        claimed = claim_next(worker_id)
+        if claimed is None:
             idle += 1
             if idle >= 3:
                 log("WORKER", "queue drained / no claimable volume -- exiting", "OK")
@@ -251,7 +259,8 @@ def main():
             time.sleep(15)
             continue
         idle = 0
-        run_volume(worker_id, label)
+        label, pdf_name = claimed
+        run_volume(worker_id, label, pdf_name)
 
 
 if __name__ == "__main__":

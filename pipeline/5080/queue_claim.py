@@ -8,7 +8,7 @@ workers AND the remote 5080 worker -- are serialized against each other.
 
 This script is deployed to the 5090 and invoked one operation per SSH call:
 
-  python queue_claim.py claim     <worker_id>          -> prints "CLAIMED <label>" or "NONE"
+  python queue_claim.py claim     <worker_id>          -> prints "CLAIMED <label> <pdf>" or "NONE"
   python queue_claim.py heartbeat <worker_id> <label>  -> prints "OK"
   python queue_claim.py done      <worker_id> <label>  -> prints "OK"  (writes marker too)
   python queue_claim.py fail      <worker_id> <label>  -> prints "OK"  (reclaimable)
@@ -83,6 +83,12 @@ def marker_path(label):
     return SCRATCH / ("production-" + label) / "OCR_COMPLETE.marker"
 
 
+def pdf_name_for(v):
+    """Resolve the PDF filename for a work-item. Backward-compatible:
+    an entry with no explicit 'pdf' falls back to '<label>_Statutes.pdf'."""
+    return v.get("pdf") or (v["label"] + "_Statutes.pdf")
+
+
 def op_claim(worker_id):
     acquire_lock()
     try:
@@ -109,7 +115,11 @@ def op_claim(worker_id):
                 v["heartbeat_epoch"] = nowt
                 v["heartbeat_at"] = now_iso()
                 write_queue(state)
-                print("CLAIMED " + label)
+                # Emit the resolved PDF filename as a second token so the
+                # remote (5080) worker OCRs the correct body PDF. Legacy
+                # entries (no 'pdf') yield '<label>_Statutes.pdf' -- a 5080
+                # worker that ignores the extra token still behaves as before.
+                print("CLAIMED " + label + " " + pdf_name_for(v))
                 return
         write_queue(state)
         print("NONE")

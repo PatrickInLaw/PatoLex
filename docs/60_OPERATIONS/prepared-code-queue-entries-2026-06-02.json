@@ -1,0 +1,11 @@
+{
+  "_note": "PREPARED queue work-items for the post-1872 Code/amendment stream. DO NOT auto-apply. Append these objects to the 'volumes' array of the LIVE production_queue_state.json on the 5090 (C:\\Users\\patolex\\PatoLex-scratch\\production_queue_state.json) ONLY AFTER the corrected worker+claim scripts are deployed to BOTH boxes and the Code PDFs are staged on BOTH archives. Each item has a DISTINCT label (drives production-<label>/, OCR_COMPLETE.marker, sha256, and its own source_document) and an explicit 'pdf'. Priority order = array order (forward queue claims lowest-year first; identical years are claimed in array order). REQUIRES LEGISLATURE_MAP entries before ingest (ingest is frozen now -- flag, do not run).",
+  "_append_to": "volumes",
+  "entries": [
+    { "label": "1883-84-regular", "pdf": "1883-84_Code.pdf", "year": 1883, "status": "pending" },
+    { "label": "1873-74-code",    "pdf": "1873-74_Code.pdf", "year": 1873, "status": "pending" },
+    { "label": "1875-76-code",    "pdf": "1875-76_Code.pdf", "year": 1875, "status": "pending" },
+    { "label": "1877-78-code",    "pdf": "1877-78_Code.pdf", "year": 1877, "status": "pending" },
+    { "label": "1880-code",       "pdf": "1880_Code.pdf",    "year": 1880, "status": "pending" }
+  ]
+}

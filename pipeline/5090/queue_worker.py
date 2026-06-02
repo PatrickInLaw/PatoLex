@@ -121,9 +121,18 @@ def marker_path(label):
     return SCRATCH / f"production-{label}" / "OCR_COMPLETE.marker"
 
 
+def pdf_name_for(v):
+    """Resolve the PDF filename for a work-item. Backward-compatible:
+    an entry with no explicit 'pdf' falls back to the legacy
+    '<label>_Statutes.pdf' convention -- existing entries are unchanged.
+    A Code/amendments volume (or any non-Statutes body PDF) sets 'pdf'
+    explicitly and keeps its own distinct 'label'."""
+    return v.get("pdf") or (v["label"] + "_Statutes.pdf")
+
+
 def claim_next(worker_id):
     """Atomically claim the lowest-year pending/reclaimable volume.
-    Returns the label or None if nothing claimable.
+    Returns (label, pdf_name) or None if nothing claimable.
     'held' volumes are never claimable."""
     acquire_lock()
     try:
@@ -156,7 +165,7 @@ def claim_next(worker_id):
                 v["heartbeat_epoch"] = nowt
                 v["heartbeat_at"] = now_iso()
                 write_queue(state)
-                return label
+                return label, pdf_name_for(v)
         write_queue(state)  # persist any marker-driven 'done' promotions
         return None
     finally:
@@ -193,8 +202,8 @@ def heartbeat(label):
         release_lock()
 
 
-def run_volume(worker_id, label):
-    pdf = ARCHIVE / f"{label}_Statutes.pdf"
+def run_volume(worker_id, label, pdf_name):
+    pdf = ARCHIVE / pdf_name
     if not pdf.exists():
         log(worker_id, f"{label}: PDF MISSING {pdf}", "FAIL")
         update_status(label, "failed", {"error": "pdf_missing"})
@@ -241,12 +250,12 @@ def main():
             log(worker_id, "STOP_WORKER.flag present -- exiting gracefully between volumes", "OK")
             return
         try:
-            label = claim_next(worker_id)
+            claimed = claim_next(worker_id)
         except Exception as e:
             log(worker_id, f"claim error: {e}", "WARN")
             time.sleep(5)
             continue
-        if label is None:
+        if claimed is None:
             idle += 1
             if idle >= 3:
                 log(worker_id, "queue drained -- no claimable volumes; exiting", "OK")
@@ -254,7 +263,8 @@ def main():
             time.sleep(10)
             continue
         idle = 0
-        run_volume(worker_id, label)
+        label, pdf_name = claimed
+        run_volume(worker_id, label, pdf_name)
 
 
 if __name__ == "__main__":
