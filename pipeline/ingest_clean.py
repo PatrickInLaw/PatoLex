@@ -679,6 +679,12 @@ SOURCE_DOC_UPDATE_SQL = (
 # designation_history, and only for THIS volume's designation namespace).
 #
 # Order matters (FK-safe, child-before-parent):
+#   0. lineage_edge       — edges this doc's enactments caused (FK → enactment.id,
+#                           provision.id); MUST precede the enactment/provision
+#                           deletes or those FKs block. Empty for enact-from-
+#                           nothing volumes (1850-1875 pre-code), but covered so
+#                           the purge's "ALL prior rows" claim is honest and a
+#                           future recodification re-ingest (1872+) does not block.
 #   1. provision_version  — read model rows produced from this doc's events
 #   2. designation_history — joined to provisions touched by this doc's events
 #   3. change_event       — this doc's events
@@ -686,6 +692,15 @@ SOURCE_DOC_UPDATE_SQL = (
 #   5. enactment          — this doc's enactments
 PURGE_COUNT_SQL = (
     "SELECT count(*) FROM enactment WHERE source_document_id = %s;"
+)
+# Edges are stamped with the enactment that caused them, so scoping by this
+# doc's enactments is correct + sufficient: any provision this volume created is
+# purged only when orphaned (no surviving event/designation references it), and
+# a surviving edge to it would keep it referenced -> not orphaned -> not deleted.
+PURGE_LINEAGE_EDGE_SQL = (
+    "DELETE FROM lineage_edge "
+    "WHERE enactment_id IN "
+    "      (SELECT id FROM enactment WHERE source_document_id = %s);"
 )
 PURGE_PROVISION_VERSION_SQL = (
     "DELETE FROM provision_version "
@@ -1038,6 +1053,7 @@ def _purge_source_document(cur, src_doc_id: int, session_label: str) -> int:
     """
     cur.execute(PURGE_COUNT_SQL, (src_doc_id,))
     purge_before = int(cur.fetchone()[0])
+    cur.execute(PURGE_LINEAGE_EDGE_SQL, (src_doc_id,))
     cur.execute(PURGE_PROVISION_VERSION_SQL, (src_doc_id, src_doc_id))
     cur.execute(PURGE_DESIGNATION_HISTORY_SQL, (src_doc_id,))
     cur.execute(PURGE_CHANGE_EVENT_SQL, (src_doc_id,))
