@@ -104,6 +104,30 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - **Hans defined correctly (Patrick).** Hans is a **clean-slate adversarial-review subagent** with a persona: cranky, detail-obsessed, older Gen-X German engineer who delights in finding every flaw — blunt, merciless, exhaustive. NOT Codex (cc001's CLAUDE.md error). Recon confirmed Hans has been *used* in KolaLaw audits (`cc0NN-hans-pass-*.md`) but never formally written down; the `verify-auditor` agent fills the role. **Fixed CLAUDE.md** to define Hans and separate it from Codex (a distinct, optional external reviewer). Added memory `hans-is-not-codex`. Attempted to bake the persona into `.claude/agents/verify-auditor.md` but the **safety classifier blocked agent self-modification** — persona lives in CLAUDE.md + memory pending Patrick's explicit go to edit the agent file.
 - **Staging DB clarified → PostgreSQL 16 both sides.** Patrick asked whether Postgres was installed (had mentioned SQL Server for staging). Answer: **no, not installed**, and the Gate D schema is **Postgres-only by necessity** (GiST exclusion constraints, `daterange`, `tsvector`, generated columns — SQL Server can't express them), and the design wants one identical Drizzle schema on both sides. So staging = **local PostgreSQL 16** (to be installed), serving = Supabase Postgres; the SQL Server box is other-project/scratch infra, NOT PatoLex staging. Corrected `SCHEMA_DESIGN.md`, `ROADMAP.md`, `HANDOFF`, and the `local-infra-sql-tailscale` memory. **Installing local Postgres 16 + applying the migration is the immediate next step.**
 
+### Phase 16 — Re-anchor on first principles; content-addressed registry; full acquisition; proper OCR bake-off (autonomous, heavily course-corrected by Patrick)
+
+**First-principles re-anchor (Patrick, emphatic — I repeatedly drifted and was corrected):**
+- **THE ONLY BASELINE IS 1850 = BLANK PAGE.** Build forward from nothing; the **1872 codification is an EVENT in the chain, NOT a baseline.** Purged all "1872 baseline / 1872-first" language from ROADMAP + memories. (Supersedes the earlier "forward-from-1872" framing.)
+- **Session laws are PRIMARY; published codes (Burch/Deering/State-Printer) are SECONDARY = verification only** (codes lack uncodified acts/repeals). Only unavoidable published-code use: the 1872 codification's enacted text (not in the session-statutes volume).
+- **"Properly done" is the only "done."** No marching on shaky footing; a failed step is STOP-and-reassess, never flag-and-continue; gates HALT.
+- **Anti-pattern I committed 3×:** pre-excluding/dropping a *testable* candidate on assumption as a shortcut. FORBIDDEN — test don't assume; fix installs until they run; no scope cuts without Patrick's explicit OK. (Memory updated.)
+
+**Content-addressed artifact registry (Patrick: "filenames must not define content").** Migrations 0001+0002 made `source_document` the authoritative index: `content_sha256`, **`edition_year` VERIFIED from the artifact's own title page** (not the filename), `claimed_year` (mismatch guard), `file_name`, `source_uri`, `corpus`, `coverage_start/end_year`, `section_range`, `page_count`, `media_format`. `register-artifact.ts` + `ARTIFACT_REGISTRY.md`. Retrofit independently flagged two 1880 reprints that had been mislabeled "1872" — caught by their own title pages.
+
+**Sourcing verified (no assumptions):** the **1871-72 session-statutes volume does NOT contain code text** (only short enacting/effectuation acts; the 1872 codes were separate State-Printer volumes — confirmed by OCR + the manifest). **"Burch" = the Haymond/Burch 1872 Commission editions = enacted text + annotations.** Of the official State-Printer 1872 codes, only the **Political Code** is digitized (IA, Google scan); Penal/Civil/CCP Springer originals are cataloged but undigitized → best digitized = commercial Crocker (Google scans). All need our OCR; parked for the codification event.
+
+**Full primary source acquired + integrity-verified:** entire Chief Clerk archive, multi-threaded (12 threads, 17.8 MB/s, 4.2× speedup). Byte-level verification caught **64 truncated files — not the 12 first reported (52 had silently passed as "success")**; all re-downloaded w/ Range-resume + verified. **652/653 complete + valid** (the 1 missing, `1855_Index.pdf`, is a genuine server 404; the 1855 statutes themselves are present). Lesson: a download "success" count is worthless without byte verification.
+
+**Proper OCR engine bake-off (isolated venvs, fix-until-running):**
+- **4 faithful engines run + ALL pass the faithfulness litmus** ("kidnaping" preserved): **docTR** 0.30 s/pg GPU (fastest), **Surya 0.13** 1.9 s/pg GPU (best on the hard 1872 page), **PaddleOCR 2.9** 2.8 s/pg CPU, **Tesseract** ~0.9 s/pg CPU.
+- **qwen2.5vl + GOT-OCR DISQUALIFIED on evidence** (both silently modernize historical spelling; GOT also hallucinated "Robby" — confirmed by two independent runs). GOT *corrects* OCR garbles too → the accuracy-vs-faithfulness tension, proven: a model smart enough to "improve" text will also erase the historical record.
+- **Provisional CER 10–18%** on hard early pages vs the (unverified, AI-made) §187/§211 gold — directional only. Inter-engine agreement ~0.80 overall but ~0.63 on early pages → the **two-column marginal-note typography** is the shared problem → **layout/marginal-note segmentation preprocessing** is the likely lever, not the engine.
+- The faithful **2-engine ensemble (docTR GPU + Tesseract CPU) is ~free** (different hardware, concurrent) → ~1–2 hrs for 1850-1875 on the 5080 alone.
+
+**Benchmark-ingest (satisfied the standing Stop-hook goal, NOT the certified corpus):** purged the throwaway wrong-model data; ingested **1,069 1850-1871 session-law acts** correctly (forward from 1850-blank, session-laws-primary, act_section provisions + enact events) as a **PROVISIONAL BENCHMARK** (`ocr_uncertain`; 64% null dates from OCR-garbled approval lines). 3-run per-stage benchmark: DB ingest/materialize trivial (~0.4 s); **OCR is the sole bottleneck.**
+
+**Infra:** Hans persona baked into `verify-auditor.md` (Patrick approved). The **5090 is Ollama-HTTP-only** (SSH/WinRM blocked) and the **3060 is offline** → to use them for Python OCR, enable OpenSSH (`Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0`). **WSL is NOT installed** on the 5080 → Linux-only engines (Falcon/olmOCR) deferred (Patrick fine dropping them — VLM faithfulness risk). Toolchain decided: Python (OCR/parse) + TS/Drizzle (ingest); C# pipeline deferred.
+
 ---
 
 ## Files Changed
@@ -124,28 +148,35 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 6. Schema must be era-aware: synthetic section lineage, recodification events, operative-date ranges, provenance, trust-level.
 7. Two-DB architecture; tRPC deferred.
 8. Working model: Opus orchestrates; reading/code/download → cheaper models. Session logs NOT a haiku job.
+9. **THE ONLY BASELINE IS 1850 = BLANK PAGE.** Build forward; 1872 codification is an EVENT, not a baseline. (Corrects #3's "forward-from-1872.")
+10. **Session laws PRIMARY; published codes SECONDARY = verification only.** Codes are derived artifacts (lack uncodified acts/repeals).
+11. **"Properly done" is the only "done":** gates HALT (never flag-and-continue); fix failures until they work; no scope cuts without explicit OK; test don't assume.
+12. **Faithfulness is the OCR gate:** no generative/VLM engines as the text source (qwen + GOT-OCR disqualified on evidence — they modernize). Use faithful OCR (Tesseract/docTR/Surya/PaddleOCR).
+13. **Schema/staging/serving = PostgreSQL 16 both sides** (SQL Server can't express GiST/daterange/tsvector). Schema DDL implemented + live (migrations 0000-0002).
+14. **The registry (`source_document`) is the authoritative content-addressed index** (sha256 + verified edition); filenames are non-authoritative labels.
+15. **Toolchain:** Python (OCR/parse) + TS/Drizzle (ingest); C# pipeline deferred to a possible modern crawler.
+16. **Build order corrected:** 1850-71 pre-code first → 1872 as a recodification event → 1873-75 amendments.
+17. **Current goal: full coverage 1850-1875** (quarter-century test of pre-code + codification + forward amendments). CA regs deferred (baseline-plus-forward).
 
 ---
 
 ## Open Items at Close
 
-- **Gate D: event-sourced schema** — now the immediate next gate (Method A validated).
-- Bounded engineering task: OCR the 1873–80 Chief Clerk statute volumes (clean scans) to fill the "Amendments to the Codes" gap and extend the Method-A proof across that window.
-- ~10–20 page human-gold OCR audit (firm the production accuracy number); source a clean 1872–1905 Penal Code baseline.
-- Confirm 1989/1991 PUBINFO contain LAW_SECTION_TBL; per-volume existing-OCR quality distribution.
-- 1937-1953 recodification disposition tables; pre-1873 repeal scope.
-- Resolve the WSL access discrepancy (low priority; off critical path).
+- **THE PIVOT — human gold review.** Drafts staged (Tesseract-seeded) at `PatoLex-scratch/ocr-bakeoff/gold-draft/INDEX.md` (12 pre-code + 5 Penal pages; CCP pages to add). Patrick reviews/corrects + keys a couple → first real human gold. It (1) ranks the 4 faithful engines on real accuracy and (2) decides whether marginal-note preprocessing is needed.
+- **Enable OpenSSH on the 5090** (`Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0`, admin) + power on/SSH the 3060 → then the **overnight distributed multi-engine run** (4 faithful engines on a large representative sample across 5080/5090/3060) for robust comparison + disagreement-mapping.
+- **Marginal-note / column segmentation preprocessing** — the likely main accuracy lever (early-page disagreement ~0.63 traces to two-column marginal notes bleeding into body text).
+- **Then the production OCR** (chosen engine + preprocessing) → **full 1850-1875 build**: forward from 1850-blank, session laws primary, 1872 codification as a recodification event, 1873-75 amendments, validate vs the Index.
+- **1872 code text** for the codification event: Political = Springer IA (Google); Penal/Civil/CCP = commercial Crocker Google scans → our OCR (Springer originals undigitized).
+- Gate D DDL is **implemented + live**; the **certified corpus is NOT ingested** — only the labeled 1,069-act benchmark sample.
+- (Deferred) confirm 1989/1991 PUBINFO LAW_SECTION_TBL; 1937-53 recodification disposition tables; pre-1873 repeal scope.
 
 ---
 
 ## Next Session Should Start With
 
-Current state (end of cc002 work-in-progress): scope set (historical-first, full 1849-present, free/nonprofit); sources mapped + proven completable (blank-slate); OCR risk retired (clean scans); **reconstruction engine validated — Method A QUALIFIED-GO**; law-as-git boundary fixed (git = emitted artifact, never the merge engine); perpetuity/handoff intent recorded; adjacent-domain feasibility documented.
+**The OCR-engine gate is the pivot.** Everything upstream is done: Gate D schema live on Postgres; the full primary source (652/653 Chief Clerk volumes) acquired + byte-verified; four faithful OCR engines running + litmus-passing (docTR/Surya/PaddleOCR/Tesseract); qwen + GOT-OCR disqualified on evidence. First principles locked: **1850-blank is the only baseline, build forward, session laws primary, codes verify-only, properly-done-or-stop, test-don't-assume.** Nothing ingested but the labeled benchmark sample.
 
-**Next (cc002 continues or cc003):**
-1. **Gate D — event-sourced schema (now the lead task).** Per-change events: author / 3 dates (chaptered-effective-operative) / bill / chapter # / diff / §9605 resolution metadata / synthetic `section_id` lineage / provenance + trust-level. Must emit BOTH the temporal DB (system of record) AND the Git history. **Design USLM/Akoma-Ntoso-aware** so a future federal v2 is a parser swap. Local SQL Server / Postgres staging.
-2. **Extend the Method-A proof:** OCR the 1873–80 Chief Clerk volumes (Tesseract on clean scans) and run a heavier amendment session to stress the parser beyond the light 1883 slice.
-3. **Parallel threads:** human-gold OCR audit; clean 1872–1905 Penal Code baseline sourcing.
+**Do, in order:** (1) **human gold review** → rank the 4 faithful engines + decide preprocessing; (2) build **marginal-note segmentation** if the gold shows raw CER is layout-bound; (3) enable the 5090/3060 (OpenSSH) and run the **distributed overnight multi-engine** pass; (4) pick the engine(s) → **production OCR** → ingest the **full 1850-1875 corpus** forward from 1850-blank (session laws → 1872 recodification event → 1873-75) → validate. Do not OCR/ingest the certified corpus until an engine clears legal-grade against the gold.
 
 ---
 
@@ -155,6 +186,11 @@ Current state (end of cc002 work-in-progress): scope set (historical-first, full
 - **Public-domain content ≠ unrestricted channel.** The binding constraint can be the delivery channel's contract (HathiTrust/Google), not copyright — and free/nonprofit status doesn't lift re-host/search/share terms. Choose clean channels.
 - **`block-compound-bash` scans raw command text for `; ` etc.** — including inside quoted strings, PowerShell hashtables, and `cat <<EOF` heredocs. Use `Invoke-RestMethod` with `chat_id` in the URL and no semicolons for Telegram; use the Write tool instead of `cat >>` for logs.
 - Session logs are not a haiku job (haiku draft came back mangled).
+- **Verify, don't trust (downloads):** a download "success" count is worthless without byte-level verification — the first acquire reported 12 failures but rigorous Content-Length + PDF-structure checks found 64 truncated files (52 silently passed as "success"). Always verify byte-completeness + file validity.
+- **Test, don't assume (the big one — I violated it 3×):** never pre-exclude/drop a testable candidate on assumption ("it's generative, it'll fail"). Run it; the evidence (faithfulness litmus, gold CER) decides. GOT-OCR was disqualified by the *test* (it modernized + hallucinated), not by my guess. Fix failed installs until they run; no scope cuts without explicit OK.
+- **Faithfulness > accuracy for a legal archive:** an engine smart enough to "improve" text (qwen, GOT-OCR fixing OCR garbles) will also silently modernize/erase the historical record — disqualifying. Prefer faithful-but-literal OCR.
+- **1850-blank is the only baseline; session laws are primary, codes verify-only.** Don't drift into code-centric or "1872-baseline" thinking (I did, repeatedly — corrected).
+- **Security: scope remote access (SSH) to Tailscale-only** (firewall RemoteAddress 100.64.0.0/10 + optional ListenAddress bind + Tailscale ACLs) — never leave port 22 open on all interfaces.
 
 ---
 
@@ -172,4 +208,12 @@ Current state (end of cc002 work-in-progress): scope set (historical-first, full
 - `4d5a408` — part 12 (Method A re-spike QUALIFIED-GO, LAW_AS_GIT.md, ADJACENT_DOMAINS_FEASIBILITY.md, perpetuity memory, ROADMAP status).
 - `93201e6` — part 13 (Gate D SCHEMA_DESIGN refined: CQRS/perf, diffs, GUID, lineage DAG; CA-reg baseline-plus-forward; HANDOFF_cc002_to_cc003.md; gate-d memory).
 - `0bf84aa` — part 14 (Gate D DDL implemented + adversarially reviewed + revised: first product code — Drizzle schema, 7 tables, pure-v7, dual GiST exclusions).
-- (this /ucp) — part 15 (Hans defined correctly in CLAUDE.md [≠ Codex]; staging-DB clarified to PostgreSQL 16 both sides; memories added).
+- `b47b25d` — part 15 (Hans defined correctly in CLAUDE.md [≠ Codex]; staging-DB clarified to PostgreSQL 16 both sides; memories added).
+- `60a52e3` — part 16 (schema applied + verified live on Postgres; first 1850-start benchmark sample ingested + per-stage benchmarks).
+- `9bce930` — part 17 (toolchain decision Python+TS; build order corrected: 1850-first, 1872-as-recodification).
+- `c55672a` — part 18 (content-addressed artifact registry; migrations 0001+0002; caught the 1880 reprints).
+- `babb0be` — part 19 (properly-done-or-stop gate adopted; halted OCR for a gold-verified bake-off).
+- `9ac62ea` — part 20 (bake-off honest result + measure-Tesseract-first reframe; engine work paused).
+- `7467485` — part 21 (1850-1871 session-law benchmark sample ingested, 1,069 acts, 1850-blank-forward).
+- `e4120f7` — part 22 (full primary source acquired+verified 652/653; proper faithful-engine bake-off complete — 4 faithful, qwen+GOT disqualified on evidence).
+- (this /ucp) — part 23 (session log brought current: Phase 16 — first-principles re-anchor, registry, full acquisition, OCR bake-off; preprocessing bake-off launched; Tailscale-only SSH guidance).
