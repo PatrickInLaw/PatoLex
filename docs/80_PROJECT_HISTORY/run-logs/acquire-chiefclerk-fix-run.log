@@ -1,0 +1,477 @@
+[2026-06-01 00:00 PT] INIT | acquire-chiefclerk-fix run log created | OK
+[2026-06-01 18:49 PT] INIT | retry_incomplete.py starting | OK
+[2026-06-01 18:49 PT] INIT | Total entries: 653, failures: 65, 404s: 1, IncompleteRead: 64 | OK
+[2026-06-01 18:49 PT] 404CHECK | Checking 1855_Index.pdf at https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1855/1855_Index.pdf | OK
+[2026-06-01 18:49 PT] 404CHECK | 1855_Index.pdf: HEAD returned 404 | WARN
+[2026-06-01 18:49 PT] PROGRESS | File 1/64: 1859_Statutes.pdf | OK
+[2026-06-01 18:49 PT] RETRY | START 1859_Statutes.pdf | OK
+[2026-06-01 18:49 PT] HEAD | 1859_Statutes.pdf: Content-Length=22,201,350 | OK
+[2026-06-01 18:49 PT] EXISTING | 1859_Statutes.pdf: corrupt file present (22,201,350 bytes), removing | WARN
+[2026-06-01 18:49 PT] ATTEMPT | 1859_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:49 PT] VERIFIED | 1859_Statutes.pdf: OK (22,201,350 bytes, 427 pages) | OK
+[2026-06-01 18:49 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:49 PT] PROGRESS | File 2/64: 1863-64_Statutes.pdf | OK
+[2026-06-01 18:49 PT] RETRY | START 1863-64_Statutes.pdf | OK
+[2026-06-01 18:49 PT] HEAD | 1863-64_Statutes.pdf: Content-Length=35,642,680 | OK
+[2026-06-01 18:49 PT] EXISTING | 1863-64_Statutes.pdf: corrupt file present (35,642,680 bytes), removing | WARN
+[2026-06-01 18:49 PT] ATTEMPT | 1863-64_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:49 PT] VERIFIED | 1863-64_Statutes.pdf: OK (35,642,680 bytes, 644 pages) | OK
+[2026-06-01 18:49 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:49 PT] PROGRESS | File 3/64: 1885-86_Statutes.pdf | OK
+[2026-06-01 18:49 PT] RETRY | START 1885-86_Statutes.pdf | OK
+[2026-06-01 18:49 PT] HEAD | 1885-86_Statutes.pdf: Content-Length=16,227,954 | OK
+[2026-06-01 18:49 PT] EXISTING | 1885-86_Statutes.pdf: corrupt file present (16,227,954 bytes), removing | WARN
+[2026-06-01 18:49 PT] ATTEMPT | 1885-86_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:50 PT] VERIFIED | 1885-86_Statutes.pdf: OK (16,227,954 bytes, 294 pages) | OK
+[2026-06-01 18:50 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:50 PT] PROGRESS | File 4/64: 1871-72_Statutes.pdf | OK
+[2026-06-01 18:50 PT] RETRY | START 1871-72_Statutes.pdf | OK
+[2026-06-01 18:50 PT] HEAD | 1871-72_Statutes.pdf: Content-Length=58,930,741 | OK
+[2026-06-01 18:50 PT] EXISTING | 1871-72_Statutes.pdf: corrupt file present (58,930,741 bytes), removing | WARN
+[2026-06-01 18:50 PT] ATTEMPT | 1871-72_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:50 PT] VERIFIED | 1871-72_Statutes.pdf: OK (58,930,741 bytes, 1064 pages) | OK
+[2026-06-01 18:50 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:50 PT] PROGRESS | File 5/64: 1873-74_Statutes.pdf | OK
+[2026-06-01 18:50 PT] RETRY | START 1873-74_Statutes.pdf | OK
+[2026-06-01 18:50 PT] HEAD | 1873-74_Statutes.pdf: Content-Length=57,294,858 | OK
+[2026-06-01 18:50 PT] EXISTING | 1873-74_Statutes.pdf: corrupt file present (57,294,858 bytes), removing | WARN
+[2026-06-01 18:50 PT] ATTEMPT | 1873-74_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:50 PT] VERIFIED | 1873-74_Statutes.pdf: OK (57,294,858 bytes, 1086 pages) | OK
+[2026-06-01 18:50 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:50 PT] PROGRESS | File 6/64: 1893_Statutes.pdf | OK
+[2026-06-01 18:50 PT] RETRY | START 1893_Statutes.pdf | OK
+[2026-06-01 18:50 PT] HEAD | 1893_Statutes.pdf: Content-Length=40,254,197 | OK
+[2026-06-01 18:50 PT] ATTEMPT | 1893_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:50 PT] VERIFIED | 1893_Statutes.pdf: OK (40,254,197 bytes, 716 pages) | OK
+[2026-06-01 18:50 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:50 PT] PROGRESS | File 7/64: 1875-76_Statutes.pdf | OK
+[2026-06-01 18:50 PT] RETRY | START 1875-76_Statutes.pdf | OK
+[2026-06-01 18:50 PT] HEAD | 1875-76_Statutes.pdf: Content-Length=62,656,679 | OK
+[2026-06-01 18:50 PT] EXISTING | 1875-76_Statutes.pdf: corrupt file present (62,656,679 bytes), removing | WARN
+[2026-06-01 18:50 PT] ATTEMPT | 1875-76_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:51 PT] VERIFIED | 1875-76_Statutes.pdf: OK (62,656,679 bytes, 1025 pages) | OK
+[2026-06-01 18:51 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:51 PT] PROGRESS | File 8/64: 1871-72_Revised.pdf | OK
+[2026-06-01 18:51 PT] RETRY | START 1871-72_Revised.pdf | OK
+[2026-06-01 18:51 PT] HEAD | 1871-72_Revised.pdf: Content-Length=59,161,883 | OK
+[2026-06-01 18:51 PT] EXISTING | 1871-72_Revised.pdf: corrupt file present (59,161,883 bytes), removing | WARN
+[2026-06-01 18:51 PT] ATTEMPT | 1871-72_Revised.pdf attempt 1/5 | OK
+[2026-06-01 18:51 PT] VERIFIED | 1871-72_Revised.pdf: OK (59,161,883 bytes, 1066 pages) | OK
+[2026-06-01 18:51 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:51 PT] PROGRESS | File 9/64: 1895_Statutes.pdf | OK
+[2026-06-01 18:51 PT] RETRY | START 1895_Statutes.pdf | OK
+[2026-06-01 18:51 PT] HEAD | 1895_Statutes.pdf: Content-Length=27,038,297 | OK
+[2026-06-01 18:51 PT] EXISTING | 1895_Statutes.pdf: corrupt file present (27,038,297 bytes), removing | WARN
+[2026-06-01 18:51 PT] ATTEMPT | 1895_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:51 PT] VERIFIED | 1895_Statutes.pdf: OK (27,038,297 bytes, 508 pages) | OK
+[2026-06-01 18:51 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:51 PT] PROGRESS | File 10/64: 1897_Statutes.pdf | OK
+[2026-06-01 18:51 PT] RETRY | START 1897_Statutes.pdf | OK
+[2026-06-01 18:51 PT] HEAD | 1897_Statutes.pdf: Content-Length=38,756,719 | OK
+[2026-06-01 18:51 PT] EXISTING | 1897_Statutes.pdf: corrupt file present (38,756,719 bytes), removing | WARN
+[2026-06-01 18:51 PT] ATTEMPT | 1897_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:51 PT] VERIFIED | 1897_Statutes.pdf: OK (38,756,719 bytes, 708 pages) | OK
+[2026-06-01 18:51 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:51 PT] PROGRESS | File 11/64: 1900-01_Statutes.pdf | OK
+[2026-06-01 18:51 PT] RETRY | START 1900-01_Statutes.pdf | OK
+[2026-06-01 18:51 PT] HEAD | 1900-01_Statutes.pdf: Content-Length=57,821,516 | OK
+[2026-06-01 18:51 PT] EXISTING | 1900-01_Statutes.pdf: corrupt file present (57,821,516 bytes), removing | WARN
+[2026-06-01 18:51 PT] ATTEMPT | 1900-01_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:51 PT] VERIFIED | 1900-01_Statutes.pdf: OK (57,821,516 bytes, 1030 pages) | OK
+[2026-06-01 18:51 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:51 PT] PROGRESS | File 12/64: 1925_Vol1_Constitution.pdf | OK
+[2026-06-01 18:51 PT] RETRY | START 1925_Vol1_Constitution.pdf | OK
+[2026-06-01 18:51 PT] HEAD | 1925_Vol1_Constitution.pdf: Content-Length=6,011,298 | OK
+[2026-06-01 18:51 PT] EXISTING | 1925_Vol1_Constitution.pdf: corrupt file present (6,011,298 bytes), removing | WARN
+[2026-06-01 18:51 PT] ATTEMPT | 1925_Vol1_Constitution.pdf attempt 1/5 | OK
+[2026-06-01 18:51 PT] VERIFIED | 1925_Vol1_Constitution.pdf: OK (6,011,298 bytes, 73 pages) | OK
+[2026-06-01 18:51 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:51 PT] PROGRESS | File 13/64: 1907-09_Statutes.pdf | OK
+[2026-06-01 18:51 PT] RETRY | START 1907-09_Statutes.pdf | OK
+[2026-06-01 18:51 PT] HEAD | 1907-09_Statutes.pdf: Content-Length=64,807,595 | OK
+[2026-06-01 18:51 PT] EXISTING | 1907-09_Statutes.pdf: corrupt file present (64,807,595 bytes), removing | WARN
+[2026-06-01 18:51 PT] ATTEMPT | 1907-09_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:52 PT] VERIFIED | 1907-09_Statutes.pdf: OK (64,807,595 bytes, 1403 pages) | OK
+[2026-06-01 18:52 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:52 PT] PROGRESS | File 14/64: 1927_Vol1_Constitution.pdf | OK
+[2026-06-01 18:52 PT] RETRY | START 1927_Vol1_Constitution.pdf | OK
+[2026-06-01 18:52 PT] HEAD | 1927_Vol1_Constitution.pdf: Content-Length=5,496,783 | OK
+[2026-06-01 18:52 PT] EXISTING | 1927_Vol1_Constitution.pdf: corrupt file present (5,496,783 bytes), removing | WARN
+[2026-06-01 18:52 PT] ATTEMPT | 1927_Vol1_Constitution.pdf attempt 1/5 | OK
+[2026-06-01 18:52 PT] VERIFIED | 1927_Vol1_Constitution.pdf: OK (5,496,783 bytes, 76 pages) | OK
+[2026-06-01 18:52 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:52 PT] PROGRESS | File 15/64: 1913_Statutes.pdf | OK
+[2026-06-01 18:52 PT] RETRY | START 1913_Statutes.pdf | OK
+[2026-06-01 18:52 PT] HEAD | 1913_Statutes.pdf: Content-Length=94,721,975 | OK
+[2026-06-01 18:52 PT] ATTEMPT | 1913_Statutes.pdf attempt 1/5 | OK
+[2026-06-01 18:52 PT] VERIFIED | 1913_Statutes.pdf: OK (94,721,975 bytes, 1808 pages) | OK
+[2026-06-01 18:52 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:52 PT] PROGRESS | File 16/64: 1919_Vol1_Chapters.pdf | OK
+[2026-06-01 18:52 PT] RETRY | START 1919_Vol1_Chapters.pdf | OK
+[2026-06-01 18:52 PT] HEAD | 1919_Vol1_Chapters.pdf: Content-Length=90,392,602 | OK
+[2026-06-01 18:52 PT] ATTEMPT | 1919_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:53 PT] VERIFIED | 1919_Vol1_Chapters.pdf: OK (90,392,602 bytes, 1557 pages) | OK
+[2026-06-01 18:53 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:53 PT] PROGRESS | File 17/64: 1921_Vol1_Chapters.pdf | OK
+[2026-06-01 18:53 PT] RETRY | START 1921_Vol1_Chapters.pdf | OK
+[2026-06-01 18:53 PT] HEAD | 1921_Vol1_Chapters.pdf: Content-Length=118,976,114 | OK
+[2026-06-01 18:53 PT] EXISTING | 1921_Vol1_Chapters.pdf: corrupt file present (118,976,114 bytes), removing | WARN
+[2026-06-01 18:53 PT] ATTEMPT | 1921_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:53 PT] VERIFIED | 1921_Vol1_Chapters.pdf: OK (118,976,114 bytes, 2270 pages) | OK
+[2026-06-01 18:53 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:53 PT] PROGRESS | File 18/64: 1925_Vol1_Chapters.pdf | OK
+[2026-06-01 18:53 PT] RETRY | START 1925_Vol1_Chapters.pdf | OK
+[2026-06-01 18:53 PT] HEAD | 1925_Vol1_Chapters.pdf: Content-Length=80,380,014 | OK
+[2026-06-01 18:53 PT] EXISTING | 1925_Vol1_Chapters.pdf: corrupt file present (80,380,014 bytes), removing | WARN
+[2026-06-01 18:53 PT] ATTEMPT | 1925_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:54 PT] VERIFIED | 1925_Vol1_Chapters.pdf: OK (80,380,014 bytes, 1423 pages) | OK
+[2026-06-01 18:54 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:54 PT] PROGRESS | File 19/64: 1933_Vol1_Chapters.pdf | OK
+[2026-06-01 18:54 PT] RETRY | START 1933_Vol1_Chapters.pdf | OK
+[2026-06-01 18:54 PT] HEAD | 1933_Vol1_Chapters.pdf: Content-Length=173,687,651 | OK
+[2026-06-01 18:54 PT] ATTEMPT | 1933_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:54 PT] DOWNLOAD | 1933_Vol1_Chapters.pdf attempt 1 FAILED: write error: ('Connection broken: IncompleteRead(7430366 bytes read, 166257285 more expected)', IncompleteRead(7430366 bytes read, 166257285 more expected)) | FAIL
+[2026-06-01 18:54 PT] BACKOFF | Waiting 10s before retry | OK
+[2026-06-01 18:54 PT] ATTEMPT | 1933_Vol1_Chapters.pdf attempt 2/5 | OK
+[2026-06-01 18:54 PT] DOWNLOAD | 1933_Vol1_Chapters.pdf attempt 2 FAILED: write error: ('Connection broken: IncompleteRead(17936149 bytes read, 148411470 more expected)', IncompleteRead(17936149 bytes read, 148411470 more expected)) | FAIL
+[2026-06-01 18:54 PT] BACKOFF | Waiting 20s before retry | OK
+[2026-06-01 18:54 PT] ATTEMPT | 1933_Vol1_Chapters.pdf attempt 3/5 | OK
+[2026-06-01 18:55 PT] VERIFIED | 1933_Vol1_Chapters.pdf: OK (173,687,651 bytes, 3270 pages) | OK
+[2026-06-01 18:55 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:55 PT] PROGRESS | File 20/64: 1923_Vol1_Chapters.pdf | OK
+[2026-06-01 18:55 PT] RETRY | START 1923_Vol1_Chapters.pdf | OK
+[2026-06-01 18:55 PT] HEAD | 1923_Vol1_Chapters.pdf: Content-Length=96,061,291 | OK
+[2026-06-01 18:55 PT] EXISTING | 1923_Vol1_Chapters.pdf: corrupt file present (96,061,291 bytes), removing | WARN
+[2026-06-01 18:55 PT] ATTEMPT | 1923_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:55 PT] VERIFIED | 1923_Vol1_Chapters.pdf: OK (96,061,291 bytes, 1689 pages) | OK
+[2026-06-01 18:55 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:55 PT] PROGRESS | File 21/64: 1927_Vol1_Chapters.pdf | OK
+[2026-06-01 18:55 PT] RETRY | START 1927_Vol1_Chapters.pdf | OK
+[2026-06-01 18:55 PT] HEAD | 1927_Vol1_Chapters.pdf: Content-Length=131,880,253 | OK
+[2026-06-01 18:55 PT] EXISTING | 1927_Vol1_Chapters.pdf: corrupt file present (131,880,253 bytes), removing | WARN
+[2026-06-01 18:55 PT] ATTEMPT | 1927_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:56 PT] VERIFIED | 1927_Vol1_Chapters.pdf: OK (131,880,253 bytes, 2399 pages) | OK
+[2026-06-01 18:56 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:56 PT] PROGRESS | File 22/64: 1935_Vol1_Chapters.pdf | OK
+[2026-06-01 18:56 PT] RETRY | START 1935_Vol1_Chapters.pdf | OK
+[2026-06-01 18:56 PT] HEAD | 1935_Vol1_Chapters.pdf: Content-Length=140,431,972 | OK
+[2026-06-01 18:56 PT] EXISTING | 1935_Vol1_Chapters.pdf: corrupt file present (140,431,972 bytes), removing | WARN
+[2026-06-01 18:56 PT] ATTEMPT | 1935_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:56 PT] VERIFIED | 1935_Vol1_Chapters.pdf: OK (140,431,972 bytes, 2679 pages) | OK
+[2026-06-01 18:56 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:56 PT] PROGRESS | File 23/64: 1929_Vol1_29Chapters.pdf | OK
+[2026-06-01 18:56 PT] RETRY | START 1929_Vol1_29Chapters.pdf | OK
+[2026-06-01 18:56 PT] HEAD | 1929_Vol1_29Chapters.pdf: Content-Length=123,210,955 | OK
+[2026-06-01 18:56 PT] EXISTING | 1929_Vol1_29Chapters.pdf: corrupt file present (123,210,955 bytes), removing | WARN
+[2026-06-01 18:56 PT] ATTEMPT | 1929_Vol1_29Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:56 PT] DOWNLOAD | 1929_Vol1_29Chapters.pdf attempt 1 FAILED: write error: ('Connection broken: IncompleteRead(6678931 bytes read, 116532024 more expected)', IncompleteRead(6678931 bytes read, 116532024 more expected)) | FAIL
+[2026-06-01 18:56 PT] BACKOFF | Waiting 10s before retry | OK
+[2026-06-01 18:56 PT] ATTEMPT | 1929_Vol1_29Chapters.pdf attempt 2/5 | OK
+[2026-06-01 18:56 PT] DOWNLOAD | 1929_Vol1_29Chapters.pdf attempt 2 FAILED: write error: ('Connection broken: IncompleteRead(35467790 bytes read, 81451709 more expected)', IncompleteRead(35467790 bytes read, 81451709 more expected)) | FAIL
+[2026-06-01 18:56 PT] BACKOFF | Waiting 20s before retry | OK
+[2026-06-01 18:57 PT] ATTEMPT | 1929_Vol1_29Chapters.pdf attempt 3/5 | OK
+[2026-06-01 18:57 PT] DOWNLOAD | 1929_Vol1_29Chapters.pdf attempt 3 FAILED: write error: ('Connection broken: IncompleteRead(4310006 bytes read, 78006485 more expected)', IncompleteRead(4310006 bytes read, 78006485 more expected)) | FAIL
+[2026-06-01 18:57 PT] BACKOFF | Waiting 40s before retry | OK
+[2026-06-01 18:57 PT] ATTEMPT | 1929_Vol1_29Chapters.pdf attempt 4/5 | OK
+[2026-06-01 18:58 PT] VERIFIED | 1929_Vol1_29Chapters.pdf: OK (123,210,955 bytes, 2276 pages) | OK
+[2026-06-01 18:58 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:58 PT] PROGRESS | File 24/64: 1945_Vol1_Chapters.pdf | OK
+[2026-06-01 18:58 PT] RETRY | START 1945_Vol1_Chapters.pdf | OK
+[2026-06-01 18:58 PT] HEAD | 1945_Vol1_Chapters.pdf: Content-Length=146,031,240 | OK
+[2026-06-01 18:58 PT] ATTEMPT | 1945_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:58 PT] VERIFIED | 1945_Vol1_Chapters.pdf: OK (146,031,240 bytes, 2868 pages) | OK
+[2026-06-01 18:58 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:58 PT] PROGRESS | File 25/64: 1955_Vol2_Chapters.pdf | OK
+[2026-06-01 18:58 PT] RETRY | START 1955_Vol2_Chapters.pdf | OK
+[2026-06-01 18:58 PT] HEAD | 1955_Vol2_Chapters.pdf: Content-Length=110,706,879 | OK
+[2026-06-01 18:58 PT] EXISTING | 1955_Vol2_Chapters.pdf: corrupt file present (110,706,879 bytes), removing | WARN
+[2026-06-01 18:58 PT] ATTEMPT | 1955_Vol2_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:59 PT] VERIFIED | 1955_Vol2_Chapters.pdf: OK (110,706,879 bytes, 2134 pages) | OK
+[2026-06-01 18:59 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:59 PT] PROGRESS | File 26/64: 1951_Vol2_Chapters.pdf | OK
+[2026-06-01 18:59 PT] RETRY | START 1951_Vol2_Chapters.pdf | OK
+[2026-06-01 18:59 PT] HEAD | 1951_Vol2_Chapters.pdf: Content-Length=103,543,223 | OK
+[2026-06-01 18:59 PT] EXISTING | 1951_Vol2_Chapters.pdf: corrupt file present (103,543,223 bytes), removing | WARN
+[2026-06-01 18:59 PT] ATTEMPT | 1951_Vol2_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 18:59 PT] VERIFIED | 1951_Vol2_Chapters.pdf: OK (103,543,223 bytes, 2024 pages) | OK
+[2026-06-01 18:59 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 18:59 PT] PROGRESS | File 27/64: 1957_Vol1_57Chapters.pdf | OK
+[2026-06-01 18:59 PT] RETRY | START 1957_Vol1_57Chapters.pdf | OK
+[2026-06-01 18:59 PT] HEAD | 1957_Vol1_57Chapters.pdf: Content-Length=107,245,150 | OK
+[2026-06-01 18:59 PT] EXISTING | 1957_Vol1_57Chapters.pdf: corrupt file present (107,245,150 bytes), removing | WARN
+[2026-06-01 18:59 PT] ATTEMPT | 1957_Vol1_57Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:00 PT] VERIFIED | 1957_Vol1_57Chapters.pdf: OK (107,245,150 bytes, 2191 pages) | OK
+[2026-06-01 19:00 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:00 PT] PROGRESS | File 28/64: 1949_Vol1_Chapters.pdf | OK
+[2026-06-01 19:00 PT] RETRY | START 1949_Vol1_Chapters.pdf | OK
+[2026-06-01 19:00 PT] HEAD | 1949_Vol1_Chapters.pdf: Content-Length=173,376,777 | OK
+[2026-06-01 19:00 PT] EXISTING | 1949_Vol1_Chapters.pdf: corrupt file present (173,376,777 bytes), removing | WARN
+[2026-06-01 19:00 PT] ATTEMPT | 1949_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:00 PT] VERIFIED | 1949_Vol1_Chapters.pdf: OK (173,376,777 bytes, 3423 pages) | OK
+[2026-06-01 19:00 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:00 PT] PROGRESS | File 29/64: 1970_Vol2_StatRecord.pdf | OK
+[2026-06-01 19:00 PT] RETRY | START 1970_Vol2_StatRecord.pdf | OK
+[2026-06-01 19:00 PT] HEAD | 1970_Vol2_StatRecord.pdf: Content-Length=7,693,964 | OK
+[2026-06-01 19:00 PT] EXISTING | 1970_Vol2_StatRecord.pdf: corrupt file present (7,693,964 bytes), removing | WARN
+[2026-06-01 19:00 PT] ATTEMPT | 1970_Vol2_StatRecord.pdf attempt 1/5 | OK
+[2026-06-01 19:00 PT] VERIFIED | 1970_Vol2_StatRecord.pdf: OK (7,693,964 bytes, 178 pages) | OK
+[2026-06-01 19:00 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:00 PT] PROGRESS | File 30/64: 1969_Vol2_Summary.pdf | OK
+[2026-06-01 19:00 PT] RETRY | START 1969_Vol2_Summary.pdf | OK
+[2026-06-01 19:00 PT] HEAD | 1969_Vol2_Summary.pdf: Content-Length=15,261,868 | OK
+[2026-06-01 19:00 PT] EXISTING | 1969_Vol2_Summary.pdf: corrupt file present (15,261,868 bytes), removing | WARN
+[2026-06-01 19:00 PT] ATTEMPT | 1969_Vol2_Summary.pdf attempt 1/5 | OK
+[2026-06-01 19:00 PT] VERIFIED | 1969_Vol2_Summary.pdf: OK (15,261,868 bytes, 285 pages) | OK
+[2026-06-01 19:00 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:00 PT] PROGRESS | File 31/64: 1968_Vol1_Chapters.pdf | OK
+[2026-06-01 19:00 PT] RETRY | START 1968_Vol1_Chapters.pdf | OK
+[2026-06-01 19:00 PT] HEAD | 1968_Vol1_Chapters.pdf: Content-Length=77,109,193 | OK
+[2026-06-01 19:00 PT] ATTEMPT | 1968_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:01 PT] VERIFIED | 1968_Vol1_Chapters.pdf: OK (77,109,193 bytes, 1648 pages) | OK
+[2026-06-01 19:01 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:01 PT] PROGRESS | File 32/64: 1969_Vol2_Chapters.pdf | OK
+[2026-06-01 19:01 PT] RETRY | START 1969_Vol2_Chapters.pdf | OK
+[2026-06-01 19:01 PT] HEAD | 1969_Vol2_Chapters.pdf: Content-Length=153,070,717 | OK
+[2026-06-01 19:01 PT] ATTEMPT | 1969_Vol2_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:01 PT] VERIFIED | 1969_Vol2_Chapters.pdf: OK (153,070,717 bytes, 2412 pages) | OK
+[2026-06-01 19:01 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:01 PT] PROGRESS | File 33/64: 1968_Vol2_Chapters.pdf | OK
+[2026-06-01 19:01 PT] RETRY | START 1968_Vol2_Chapters.pdf | OK
+[2026-06-01 19:01 PT] HEAD | 1968_Vol2_Chapters.pdf: Content-Length=80,222,147 | OK
+[2026-06-01 19:01 PT] EXISTING | 1968_Vol2_Chapters.pdf: corrupt file present (80,222,147 bytes), removing | WARN
+[2026-06-01 19:01 PT] ATTEMPT | 1968_Vol2_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:02 PT] VERIFIED | 1968_Vol2_Chapters.pdf: OK (80,222,147 bytes, 1682 pages) | OK
+[2026-06-01 19:02 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:02 PT] PROGRESS | File 34/64: 1970_Vol2_Chapters.pdf | OK
+[2026-06-01 19:02 PT] RETRY | START 1970_Vol2_Chapters.pdf | OK
+[2026-06-01 19:02 PT] HEAD | 1970_Vol2_Chapters.pdf: Content-Length=94,730,377 | OK
+[2026-06-01 19:02 PT] EXISTING | 1970_Vol2_Chapters.pdf: corrupt file present (94,730,377 bytes), removing | WARN
+[2026-06-01 19:02 PT] ATTEMPT | 1970_Vol2_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:02 PT] VERIFIED | 1970_Vol2_Chapters.pdf: OK (94,730,377 bytes, 1902 pages) | OK
+[2026-06-01 19:02 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:02 PT] PROGRESS | File 35/64: 1969_Vol1_Chapters.pdf | OK
+[2026-06-01 19:02 PT] RETRY | START 1969_Vol1_Chapters.pdf | OK
+[2026-06-01 19:02 PT] HEAD | 1969_Vol1_Chapters.pdf: Content-Length=104,897,116 | OK
+[2026-06-01 19:02 PT] EXISTING | 1969_Vol1_Chapters.pdf: corrupt file present (104,897,116 bytes), removing | WARN
+[2026-06-01 19:02 PT] ATTEMPT | 1969_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:03 PT] VERIFIED | 1969_Vol1_Chapters.pdf: OK (104,897,116 bytes, 2220 pages) | OK
+[2026-06-01 19:03 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:03 PT] PROGRESS | File 36/64: 1971_Vol2.pdf | OK
+[2026-06-01 19:03 PT] RETRY | START 1971_Vol2.pdf | OK
+[2026-06-01 19:03 PT] HEAD | 1971_Vol2.pdf: Content-Length=93,208,143 | OK
+[2026-06-01 19:03 PT] EXISTING | 1971_Vol2.pdf: corrupt file present (93,208,143 bytes), removing | WARN
+[2026-06-01 19:03 PT] ATTEMPT | 1971_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:03 PT] VERIFIED | 1971_Vol2.pdf: OK (93,208,143 bytes, 1887 pages) | OK
+[2026-06-01 19:03 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:03 PT] PROGRESS | File 37/64: 1971_Vol1_Chapters.pdf | OK
+[2026-06-01 19:03 PT] RETRY | START 1971_Vol1_Chapters.pdf | OK
+[2026-06-01 19:03 PT] HEAD | 1971_Vol1_Chapters.pdf: Content-Length=122,470,122 | OK
+[2026-06-01 19:03 PT] EXISTING | 1971_Vol1_Chapters.pdf: corrupt file present (122,470,122 bytes), removing | WARN
+[2026-06-01 19:03 PT] ATTEMPT | 1971_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:04 PT] VERIFIED | 1971_Vol1_Chapters.pdf: OK (122,470,122 bytes, 2592 pages) | OK
+[2026-06-01 19:04 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:04 PT] PROGRESS | File 38/64: 1975_Vol2_Chapters.pdf | OK
+[2026-06-01 19:04 PT] RETRY | START 1975_Vol2_Chapters.pdf | OK
+[2026-06-01 19:04 PT] HEAD | 1975_Vol2_Chapters.pdf: Content-Length=73,510,210 | OK
+[2026-06-01 19:04 PT] EXISTING | 1975_Vol2_Chapters.pdf: corrupt file present (73,510,210 bytes), removing | WARN
+[2026-06-01 19:04 PT] ATTEMPT | 1975_Vol2_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:04 PT] VERIFIED | 1975_Vol2_Chapters.pdf: OK (73,510,210 bytes, 1419 pages) | OK
+[2026-06-01 19:04 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:04 PT] PROGRESS | File 39/64: 1976_Vol2.pdf | OK
+[2026-06-01 19:04 PT] RETRY | START 1976_Vol2.pdf | OK
+[2026-06-01 19:04 PT] HEAD | 1976_Vol2.pdf: Content-Length=125,253,125 | OK
+[2026-06-01 19:04 PT] ATTEMPT | 1976_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:04 PT] VERIFIED | 1976_Vol2.pdf: OK (125,253,125 bytes, 2222 pages) | OK
+[2026-06-01 19:04 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:04 PT] PROGRESS | File 40/64: 1975_Vol1_Chapters.pdf | OK
+[2026-06-01 19:04 PT] RETRY | START 1975_Vol1_Chapters.pdf | OK
+[2026-06-01 19:04 PT] HEAD | 1975_Vol1_Chapters.pdf: Content-Length=132,172,469 | OK
+[2026-06-01 19:04 PT] EXISTING | 1975_Vol1_Chapters.pdf: corrupt file present (132,172,469 bytes), removing | WARN
+[2026-06-01 19:04 PT] ATTEMPT | 1975_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:05 PT] VERIFIED | 1975_Vol1_Chapters.pdf: OK (132,172,469 bytes, 2620 pages) | OK
+[2026-06-01 19:05 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:05 PT] PROGRESS | File 41/64: 1976_Vol3.pdf | OK
+[2026-06-01 19:05 PT] RETRY | START 1976_Vol3.pdf | OK
+[2026-06-01 19:05 PT] HEAD | 1976_Vol3.pdf: Content-Length=115,919,105 | OK
+[2026-06-01 19:05 PT] EXISTING | 1976_Vol3.pdf: corrupt file present (115,919,105 bytes), removing | WARN
+[2026-06-01 19:05 PT] ATTEMPT | 1976_Vol3.pdf attempt 1/5 | OK
+[2026-06-01 19:05 PT] VERIFIED | 1976_Vol3.pdf: OK (115,919,105 bytes, 2240 pages) | OK
+[2026-06-01 19:05 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:05 PT] PROGRESS | File 42/64: 1978_Vol1_Chapters.pdf | OK
+[2026-06-01 19:05 PT] RETRY | START 1978_Vol1_Chapters.pdf | OK
+[2026-06-01 19:05 PT] HEAD | 1978_Vol1_Chapters.pdf: Content-Length=98,007,538 | OK
+[2026-06-01 19:05 PT] EXISTING | 1978_Vol1_Chapters.pdf: corrupt file present (98,007,538 bytes), removing | WARN
+[2026-06-01 19:05 PT] ATTEMPT | 1978_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:06 PT] VERIFIED | 1978_Vol1_Chapters.pdf: OK (98,007,538 bytes, 1926 pages) | OK
+[2026-06-01 19:06 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:06 PT] PROGRESS | File 43/64: 1978_Vol3.pdf | OK
+[2026-06-01 19:06 PT] RETRY | START 1978_Vol3.pdf | OK
+[2026-06-01 19:06 PT] HEAD | 1978_Vol3.pdf: Content-Length=76,569,167 | OK
+[2026-06-01 19:06 PT] EXISTING | 1978_Vol3.pdf: corrupt file present (76,569,167 bytes), removing | WARN
+[2026-06-01 19:06 PT] ATTEMPT | 1978_Vol3.pdf attempt 1/5 | OK
+[2026-06-01 19:06 PT] VERIFIED | 1978_Vol3.pdf: OK (76,569,167 bytes, 1448 pages) | OK
+[2026-06-01 19:06 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:06 PT] PROGRESS | File 44/64: 1977_Vol2.pdf | OK
+[2026-06-01 19:06 PT] RETRY | START 1977_Vol2.pdf | OK
+[2026-06-01 19:06 PT] HEAD | 1977_Vol2.pdf: Content-Length=126,724,686 | OK
+[2026-06-01 19:06 PT] EXISTING | 1977_Vol2.pdf: corrupt file present (126,724,686 bytes), removing | WARN
+[2026-06-01 19:06 PT] ATTEMPT | 1977_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:07 PT] VERIFIED | 1977_Vol2.pdf: OK (126,724,686 bytes, 2434 pages) | OK
+[2026-06-01 19:07 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:07 PT] PROGRESS | File 45/64: 1982_Vol3.pdf | OK
+[2026-06-01 19:07 PT] RETRY | START 1982_Vol3.pdf | OK
+[2026-06-01 19:07 PT] HEAD | 1982_Vol3.pdf: Content-Length=87,448,087 | OK
+[2026-06-01 19:07 PT] ATTEMPT | 1982_Vol3.pdf attempt 1/5 | OK
+[2026-06-01 19:07 PT] DOWNLOAD | 1982_Vol3.pdf attempt 1 FAILED: write error: ('Connection broken: IncompleteRead(62588712 bytes read, 24859375 more expected)', IncompleteRead(62588712 bytes read, 24859375 more expected)) | FAIL
+[2026-06-01 19:07 PT] BACKOFF | Waiting 10s before retry | OK
+[2026-06-01 19:07 PT] ATTEMPT | 1982_Vol3.pdf attempt 2/5 | OK
+[2026-06-01 19:07 PT] DOWNLOAD | 1982_Vol3.pdf attempt 2 FAILED: write error: ('Connection broken: IncompleteRead(807751 bytes read, 24774352 more expected)', IncompleteRead(807751 bytes read, 24774352 more expected)) | FAIL
+[2026-06-01 19:07 PT] BACKOFF | Waiting 20s before retry | OK
+[2026-06-01 19:08 PT] ATTEMPT | 1982_Vol3.pdf attempt 3/5 | OK
+[2026-06-01 19:08 PT] VERIFIED | 1982_Vol3.pdf: OK (87,448,087 bytes, 1578 pages) | OK
+[2026-06-01 19:08 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:08 PT] PROGRESS | File 46/64: 1982_Vol2.pdf | OK
+[2026-06-01 19:08 PT] RETRY | START 1982_Vol2.pdf | OK
+[2026-06-01 19:08 PT] HEAD | 1982_Vol2.pdf: Content-Length=86,145,132 | OK
+[2026-06-01 19:08 PT] EXISTING | 1982_Vol2.pdf: corrupt file present (86,145,132 bytes), removing | WARN
+[2026-06-01 19:08 PT] ATTEMPT | 1982_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:08 PT] VERIFIED | 1982_Vol2.pdf: OK (86,145,132 bytes, 1526 pages) | OK
+[2026-06-01 19:08 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:08 PT] PROGRESS | File 47/64: 1983_Vol1_Chapters.pdf | OK
+[2026-06-01 19:08 PT] RETRY | START 1983_Vol1_Chapters.pdf | OK
+[2026-06-01 19:08 PT] HEAD | 1983_Vol1_Chapters.pdf: Content-Length=81,859,070 | OK
+[2026-06-01 19:08 PT] EXISTING | 1983_Vol1_Chapters.pdf: corrupt file present (81,859,070 bytes), removing | WARN
+[2026-06-01 19:08 PT] ATTEMPT | 1983_Vol1_Chapters.pdf attempt 1/5 | OK
+[2026-06-01 19:08 PT] VERIFIED | 1983_Vol1_Chapters.pdf: OK (81,859,070 bytes, 1602 pages) | OK
+[2026-06-01 19:08 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:08 PT] PROGRESS | File 48/64: 1983_Vol2.pdf | OK
+[2026-06-01 19:08 PT] RETRY | START 1983_Vol2.pdf | OK
+[2026-06-01 19:08 PT] HEAD | 1983_Vol2.pdf: Content-Length=97,163,533 | OK
+[2026-06-01 19:08 PT] EXISTING | 1983_Vol2.pdf: corrupt file present (97,163,533 bytes), removing | WARN
+[2026-06-01 19:08 PT] ATTEMPT | 1983_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:09 PT] VERIFIED | 1983_Vol2.pdf: OK (97,163,533 bytes, 1798 pages) | OK
+[2026-06-01 19:09 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:09 PT] PROGRESS | File 49/64: 1985_Vol4_Summary.pdf | OK
+[2026-06-01 19:09 PT] RETRY | START 1985_Vol4_Summary.pdf | OK
+[2026-06-01 19:09 PT] HEAD | 1985_Vol4_Summary.pdf: Content-Length=45,813,063 | OK
+[2026-06-01 19:09 PT] EXISTING | 1985_Vol4_Summary.pdf: corrupt file present (45,813,063 bytes), removing | WARN
+[2026-06-01 19:09 PT] ATTEMPT | 1985_Vol4_Summary.pdf attempt 1/5 | OK
+[2026-06-01 19:09 PT] VERIFIED | 1985_Vol4_Summary.pdf: OK (45,813,063 bytes, 735 pages) | OK
+[2026-06-01 19:09 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:09 PT] PROGRESS | File 50/64: 1983_Vol3.pdf | OK
+[2026-06-01 19:09 PT] RETRY | START 1983_Vol3.pdf | OK
+[2026-06-01 19:09 PT] HEAD | 1983_Vol3.pdf: Content-Length=93,546,715 | OK
+[2026-06-01 19:09 PT] EXISTING | 1983_Vol3.pdf: corrupt file present (93,546,715 bytes), removing | WARN
+[2026-06-01 19:09 PT] ATTEMPT | 1983_Vol3.pdf attempt 1/5 | OK
+[2026-06-01 19:09 PT] VERIFIED | 1983_Vol3.pdf: OK (93,546,715 bytes, 1750 pages) | OK
+[2026-06-01 19:09 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:09 PT] PROGRESS | File 51/64: 1985_Vol3.pdf | OK
+[2026-06-01 19:09 PT] RETRY | START 1985_Vol3.pdf | OK
+[2026-06-01 19:09 PT] HEAD | 1985_Vol3.pdf: Content-Length=112,493,838 | OK
+[2026-06-01 19:09 PT] EXISTING | 1985_Vol3.pdf: corrupt file present (112,493,838 bytes), removing | WARN
+[2026-06-01 19:09 PT] ATTEMPT | 1985_Vol3.pdf attempt 1/5 | OK
+[2026-06-01 19:10 PT] VERIFIED | 1985_Vol3.pdf: OK (112,493,838 bytes, 2142 pages) | OK
+[2026-06-01 19:10 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:10 PT] PROGRESS | File 52/64: 1991_Vol2.pdf | OK
+[2026-06-01 19:10 PT] RETRY | START 1991_Vol2.pdf | OK
+[2026-06-01 19:10 PT] HEAD | 1991_Vol2.pdf: Content-Length=112,510,672 | OK
+[2026-06-01 19:10 PT] ATTEMPT | 1991_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:10 PT] VERIFIED | 1991_Vol2.pdf: OK (112,510,672 bytes, 2144 pages) | OK
+[2026-06-01 19:10 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:10 PT] PROGRESS | File 53/64: 1992_Vol2.pdf | OK
+[2026-06-01 19:10 PT] RETRY | START 1992_Vol2.pdf | OK
+[2026-06-01 19:10 PT] HEAD | 1992_Vol2.pdf: Content-Length=127,736,770 | OK
+[2026-06-01 19:10 PT] EXISTING | 1992_Vol2.pdf: corrupt file present (127,736,770 bytes), removing | WARN
+[2026-06-01 19:10 PT] ATTEMPT | 1992_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:11 PT] VERIFIED | 1992_Vol2.pdf: OK (127,736,770 bytes, 2528 pages) | OK
+[2026-06-01 19:11 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:11 PT] PROGRESS | File 54/64: 1993_Vol5.pdf | OK
+[2026-06-01 19:11 PT] RETRY | START 1993_Vol5.pdf | OK
+[2026-06-01 19:11 PT] HEAD | 1993_Vol5.pdf: Content-Length=83,683,641 | OK
+[2026-06-01 19:11 PT] EXISTING | 1993_Vol5.pdf: corrupt file present (83,683,641 bytes), removing | WARN
+[2026-06-01 19:11 PT] ATTEMPT | 1993_Vol5.pdf attempt 1/5 | OK
+[2026-06-01 19:11 PT] VERIFIED | 1993_Vol5.pdf: OK (83,683,641 bytes, 1485 pages) | OK
+[2026-06-01 19:11 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:11 PT] PROGRESS | File 55/64: 1994_Vol5.pdf | OK
+[2026-06-01 19:11 PT] RETRY | START 1994_Vol5.pdf | OK
+[2026-06-01 19:11 PT] HEAD | 1994_Vol5.pdf: Content-Length=231,653,654 | OK
+[2026-06-01 19:11 PT] ATTEMPT | 1994_Vol5.pdf attempt 1/5 | OK
+[2026-06-01 19:12 PT] DOWNLOAD | 1994_Vol5.pdf attempt 1 FAILED: write error: ('Connection broken: IncompleteRead(79630943 bytes read, 152022711 more expected)', IncompleteRead(79630943 bytes read, 152022711 more expected)) | FAIL
+[2026-06-01 19:12 PT] BACKOFF | Waiting 10s before retry | OK
+[2026-06-01 19:12 PT] ATTEMPT | 1994_Vol5.pdf attempt 2/5 | OK
+[2026-06-01 19:12 PT] VERIFIED | 1994_Vol5.pdf: OK (231,653,654 bytes, 2153 pages) | OK
+[2026-06-01 19:12 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:12 PT] PROGRESS | File 56/64: 1996_Vol2.pdf | OK
+[2026-06-01 19:12 PT] RETRY | START 1996_Vol2.pdf | OK
+[2026-06-01 19:12 PT] HEAD | 1996_Vol2.pdf: Content-Length=6,377,092 | OK
+[2026-06-01 19:12 PT] EXISTING | 1996_Vol2.pdf: corrupt file present (6,377,092 bytes), removing | WARN
+[2026-06-01 19:12 PT] ATTEMPT | 1996_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:12 PT] VERIFIED | 1996_Vol2.pdf: OK (6,377,092 bytes, 1888 pages) | OK
+[2026-06-01 19:12 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:12 PT] PROGRESS | File 57/64: 1994_Vol1.pdf | OK
+[2026-06-01 19:12 PT] RETRY | START 1994_Vol1.pdf | OK
+[2026-06-01 19:12 PT] HEAD | 1994_Vol1.pdf: Content-Length=121,301,381 | OK
+[2026-06-01 19:12 PT] EXISTING | 1994_Vol1.pdf: corrupt file present (121,301,381 bytes), removing | WARN
+[2026-06-01 19:12 PT] ATTEMPT | 1994_Vol1.pdf attempt 1/5 | OK
+[2026-06-01 19:12 PT] DOWNLOAD | 1994_Vol1.pdf attempt 1 FAILED: write error: ('Connection broken: IncompleteRead(8788426 bytes read, 112512955 more expected)', IncompleteRead(8788426 bytes read, 112512955 more expected)) | FAIL
+[2026-06-01 19:12 PT] BACKOFF | Waiting 10s before retry | OK
+[2026-06-01 19:13 PT] ATTEMPT | 1994_Vol1.pdf attempt 2/5 | OK
+[2026-06-01 19:13 PT] VERIFIED | 1994_Vol1.pdf: OK (121,301,381 bytes, 2208 pages) | OK
+[2026-06-01 19:13 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:13 PT] PROGRESS | File 58/64: 1996_Vol5.pdf | OK
+[2026-06-01 19:13 PT] RETRY | START 1996_Vol5.pdf | OK
+[2026-06-01 19:13 PT] HEAD | 1996_Vol5.pdf: Content-Length=20,195,791 | OK
+[2026-06-01 19:13 PT] EXISTING | 1996_Vol5.pdf: corrupt file present (20,195,791 bytes), removing | WARN
+[2026-06-01 19:13 PT] ATTEMPT | 1996_Vol5.pdf attempt 1/5 | OK
+[2026-06-01 19:13 PT] VERIFIED | 1996_Vol5.pdf: OK (20,195,791 bytes, 1376 pages) | OK
+[2026-06-01 19:13 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:13 PT] PROGRESS | File 59/64: 1995_Vol4.pdf | OK
+[2026-06-01 19:13 PT] RETRY | START 1995_Vol4.pdf | OK
+[2026-06-01 19:13 PT] HEAD | 1995_Vol4.pdf: Content-Length=67,314,116 | OK
+[2026-06-01 19:13 PT] EXISTING | 1995_Vol4.pdf: corrupt file present (67,314,116 bytes), removing | WARN
+[2026-06-01 19:13 PT] ATTEMPT | 1995_Vol4.pdf attempt 1/5 | OK
+[2026-06-01 19:14 PT] VERIFIED | 1995_Vol4.pdf: OK (67,314,116 bytes, 1183 pages) | OK
+[2026-06-01 19:14 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:14 PT] PROGRESS | File 60/64: 1998_Vol6.pdf | OK
+[2026-06-01 19:14 PT] RETRY | START 1998_Vol6.pdf | OK
+[2026-06-01 19:14 PT] HEAD | 1998_Vol6.pdf: Content-Length=9,246,382 | OK
+[2026-06-01 19:14 PT] EXISTING | 1998_Vol6.pdf: corrupt file present (9,246,382 bytes), removing | WARN
+[2026-06-01 19:14 PT] ATTEMPT | 1998_Vol6.pdf attempt 1/5 | OK
+[2026-06-01 19:14 PT] VERIFIED | 1998_Vol6.pdf: OK (9,246,382 bytes, 2157 pages) | OK
+[2026-06-01 19:14 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:14 PT] PROGRESS | File 61/64: 1999_Vol2.pdf | OK
+[2026-06-01 19:14 PT] RETRY | START 1999_Vol2.pdf | OK
+[2026-06-01 19:14 PT] HEAD | 1999_Vol2.pdf: Content-Length=8,253,682 | OK
+[2026-06-01 19:14 PT] EXISTING | 1999_Vol2.pdf: corrupt file present (8,253,682 bytes), removing | WARN
+[2026-06-01 19:14 PT] ATTEMPT | 1999_Vol2.pdf attempt 1/5 | OK
+[2026-06-01 19:14 PT] VERIFIED | 1999_Vol2.pdf: OK (8,253,682 bytes, 2040 pages) | OK
+[2026-06-01 19:14 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:14 PT] PROGRESS | File 62/64: 1999_Vol1.pdf | OK
+[2026-06-01 19:14 PT] RETRY | START 1999_Vol1.pdf | OK
+[2026-06-01 19:14 PT] HEAD | 1999_Vol1.pdf: Content-Length=33,285,325 | OK
+[2026-06-01 19:14 PT] EXISTING | 1999_Vol1.pdf: corrupt file present (33,285,325 bytes), removing | WARN
+[2026-06-01 19:14 PT] ATTEMPT | 1999_Vol1.pdf attempt 1/5 | OK
+[2026-06-01 19:14 PT] VERIFIED | 1999_Vol1.pdf: OK (33,285,325 bytes, 1922 pages) | OK
+[2026-06-01 19:14 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:14 PT] PROGRESS | File 63/64: 1995_Vol5.pdf | OK
+[2026-06-01 19:14 PT] RETRY | START 1995_Vol5.pdf | OK
+[2026-06-01 19:14 PT] HEAD | 1995_Vol5.pdf: Content-Length=181,613,271 | OK
+[2026-06-01 19:14 PT] EXISTING | 1995_Vol5.pdf: corrupt file present (181,613,271 bytes), removing | WARN
+[2026-06-01 19:14 PT] ATTEMPT | 1995_Vol5.pdf attempt 1/5 | OK
+[2026-06-01 19:15 PT] VERIFIED | 1995_Vol5.pdf: OK (181,613,271 bytes, 2062 pages) | OK
+[2026-06-01 19:15 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:15 PT] PROGRESS | File 64/64: 1996_Vol1.pdf | OK
+[2026-06-01 19:15 PT] RETRY | START 1996_Vol1.pdf | OK
+[2026-06-01 19:15 PT] HEAD | 1996_Vol1.pdf: Content-Length=536,251,370 | OK
+[2026-06-01 19:15 PT] EXISTING | 1996_Vol1.pdf: corrupt file present (536,251,370 bytes), removing | WARN
+[2026-06-01 19:15 PT] ATTEMPT | 1996_Vol1.pdf attempt 1/5 | OK
+[2026-06-01 19:15 PT] DOWNLOAD | 1996_Vol1.pdf attempt 1 FAILED: write error: ('Connection broken: IncompleteRead(83886080 bytes read, 452365290 more expected)', IncompleteRead(83886080 bytes read, 452365290 more expected)) | FAIL
+[2026-06-01 19:15 PT] BACKOFF | Waiting 10s before retry | OK
+[2026-06-01 19:15 PT] ATTEMPT | 1996_Vol1.pdf attempt 2/5 | OK
+[2026-06-01 19:16 PT] DOWNLOAD | 1996_Vol1.pdf attempt 2 FAILED: write error: ('Connection broken: IncompleteRead(281441806 bytes read, 170923484 more expected)', IncompleteRead(281441806 bytes read, 170923484 more expected)) | FAIL
+[2026-06-01 19:16 PT] BACKOFF | Waiting 20s before retry | OK
+[2026-06-01 19:17 PT] ATTEMPT | 1996_Vol1.pdf attempt 3/5 | OK
+[2026-06-01 19:17 PT] VERIFIED | 1996_Vol1.pdf: OK (536,251,370 bytes, 1921 pages) | OK
+[2026-06-01 19:17 PT] MANIFEST | Manifest saved | OK
+[2026-06-01 19:17 PT] SUMMARY | Completed OK: 652, Confirmed 404 (absent): 1, Still failing: 0 | OK
+[2026-06-01 19:17 PT] DONE | retry_incomplete.py finished | OK

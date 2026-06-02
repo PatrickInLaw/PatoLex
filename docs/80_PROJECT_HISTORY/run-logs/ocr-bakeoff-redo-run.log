@@ -1,0 +1,14 @@
+[2026-06-01 18:30 PT] SETUP | Created ocr-engines root dir at C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-engines | OK
+[2026-06-01 18:35 PT] DOCTR-INSTALL | python -m venv doctr-venv; pip install python-doctr[torch]; pinned torch==2.7.0+cu128 (CUDA 12.8, RTX 5080) | OK
+[2026-06-01 18:36 PT] DOCTR-RUN | 17/17 pages; avg 0.30s/page GPU; FAITHFULNESS PASS (kidnaping preserved) | OK
+[2026-06-01 18:40 PT] PADDLE-INSTALL | python -m venv paddle2-venv; pip install paddlepaddle==2.6.2 paddleocr==2.9.1 (PaddleOCR 3.x blocked: oneDNN NotImplementedError on Windows) | OK
+[2026-06-01 18:48 PT] PADDLE-RUN | 17/17 pages; avg 2.8s/page CPU; FAITHFULNESS PASS (kidnaping preserved) | OK
+[2026-06-01 18:50 PT] SURYA-INSTALL | python -m venv surya013-venv; pip install surya-ocr==0.13.0 + transformers==4.45.2 + torch==2.7.0+cu128 (Surya 0.20.0 blocked: requires Docker for vllm backend) | OK
+[2026-06-01 19:00 PT] SURYA-RUN | 17/17 pages; avg 1.9s/page GPU; FAITHFULNESS PASS (kidnaping preserved) | OK
+[2026-06-01 19:05 PT] AGREEMENT | Token agreement (Jaccard) vs Tesseract computed for all 3 engines; saved to agreement_redo.json | OK
+[2026-06-01 19:05 PT] SKIPPED | PaddleOCR 3.x: NotImplementedError ConvertPirAttribute2RuntimeAttribute on Windows CPU (oneDNN bug). GPU paddle also failed import. Fallback to 2.9.1 successful. | WARN
+[2026-06-01 19:05 PT] SKIPPED | Surya 0.20.0: v0.20 rewrote as VLM backend, requires Docker/vllm to run. Fallback to 0.13.0 successful. | WARN
+[2026-06-01 19:20 PT] GOTOCR-RUN | GOT-OCR 2.0 tested on 1903_sec211_robbery: FAITHFULNESS FAIL -- produces "kidnapping" in some instances and "kidnaping" in others (inconsistent). Also hallucinated "Robby defined" for "Robbery defined". DISQUALIFIED: unreliable faithfulness for legal archive use. | WARN
+[2026-06-01 19:25 PT] SPOT-CHECK | CER vs partial GT (1903_sec211 + 1872_sec187): surya013 best on 1872 (CER=0.132), all 4 engines close on 1903 (Tesseract leads by tiny margin). Token-jaccard vs GT: doctr/surya best on 1872 (0.83, 0.87). | OK
+[2026-06-01 19:25 PT] SKIPPED | Falcon-OCR/olmOCR: confirmed Linux-only/triton/vLLM, needs WSL/Docker, deferred | INFO
+[2026-06-01 19:25 PT] COMPLETE | 3 faithful document-OCR engines running: doctr (0.3s/page GPU), surya013 (1.9s/page GPU), paddleocr2 (2.8s/page CPU). GOT-OCR 2.0: inconsistent faithfulness, disqualified. Gold scoring tomorrow. | OK

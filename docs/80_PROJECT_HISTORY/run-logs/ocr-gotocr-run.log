@@ -1,0 +1,13 @@
+[2026-06-01 00:00 PT] INIT | Starting GOT-OCR 2.0 bake-off run | OK
+[2026-06-01 00:00 PT] SURVEY | Found 17 pages, existing got_ocr dir has only _timing.json (all FAILed with DynamicCache.seen_tokens) | OK
+[2026-06-01 00:00 PT] PLAN | Will delete gotocr-venv and recreate clean; pin transformers to older version compatible with GOT-OCR | OK
+[2026-06-01 00:05 PT] DIAGNOSIS | Existing gotocr-venv has transformers==4.44.2 where seen_tokens is a deprecated property (still works). Previous run used system Python (4.57.6) where property was removed. Venv is reusable. | OK
+[2026-06-01 00:06 PT] TEST-LOAD | stepfun-ai/GOT-OCR2_0 loads in 7.0s with gotocr-venv | OK
+[2026-06-01 00:07 PT] TEST-INFER | Single page (1903_sec211_robbery) inferred in 12.2s. Output produced. | OK
+[2026-06-01 00:07 PT] FAITHFULNESS-PREVIEW | 1903_sec211_robbery: GOT outputs 'kidnapping' (double-p) for §207 text (MODERNIZED), 'Kidnaping' (single-p) for §208 heading body, 'kidnaping' for §209 heading -- MIXED | WARN
+[2026-06-01 00:08 PT] RUNNING | Starting full 17-page run with run_gotocr.py | OK
+[2026-06-01 00:45 PT] COMPLETE | All 17 pages OK. Timing: 9.96-37.47s/page, avg ~14.5s/page (excluding 37.5s outlier early_1850_p90). Model load: 5.8s. | OK
+[2026-06-01 00:46 PT] AGREEMENT | Jaccard vs Tesseract: early=0.680, mid=0.785, late=0.825, code=0.863, overall mean=0.786 | OK
+[2026-06-01 00:47 PT] FAITHFULNESS | 1903_sec211: GOT outputs 'kidnapping' (double-p) for §207 body text and §208 heading -- MODERNIZED. But 'kidnaping' (single-p) for §208 body and §209 heading (inconsistent). 1872_sec211: OCR artifact 'kidnappi~g' for the statute text. Verdict: MODERNIZES (unreliable) | WARN
+[2026-06-01 00:47 PT] AGREEMENT-SAVED | agreement_got_ocr.json saved to ocr-bakeoff/ | OK
+[2026-06-01 00:50 PT] FINAL | GOT-OCR bake-off complete. VERDICT: MODERNIZES. See final report in session log. | OK

@@ -1,0 +1,35 @@
+[2026-06-01 00:00 PT] SETUP | Run log created for Chief Clerk archive acquisition | OK
+[2026-06-01 00:00 PT] SETUP | Free disk space: 545.62 GB (need ~19-25 GB) | OK
+[2026-06-01 00:00 PT] SETUP | Manifest: 653 entries loaded from chief_clerk_statutes_manifest.csv | OK
+[2026-06-01 00:00 PT] SETUP | Target dir: C:\Users\PatrickKolasinski\PatoLex-scratch\chief-clerk-archive | OK
+[2026-06-01 00:00 PT] SETUP | Script: C:\Users\PatrickKolasinski\PatoLex-scratch\chief-clerk-download.py | OK
+[2026-06-01 00:00 PT] SETUP | Concurrency: 12 threads | OK
+[2026-06-02 01:30 PT] DOWNLOAD | === Chief Clerk archive download starting === | OK
+[2026-06-02 01:30 PT] DOWNLOAD | Manifest loaded — 653 URLs to process | OK
+[2026-06-02 01:30 PT] DOWNLOAD | FAIL [1855 Index] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1855/1855_Index.pdf -> HTTPError 404: Not Found | FAIL
+[2026-06-02 01:30 PT] DOWNLOAD | Progress 50/653 | 272.3 MB | 13.26 MB/s | OK
+[2026-06-02 01:30 PT] DOWNLOAD | Progress 100/653 | 736.5 MB | 15.76 MB/s | OK
+[2026-06-02 01:31 PT] DOWNLOAD | FAIL [1893 Statutes] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1893/1893.pdf -> IncompleteRead(5041857 bytes read, 35212340 more expected) | FAIL
+[2026-06-02 01:31 PT] DOWNLOAD | Progress 150/653 | 1279.2 MB | 16.02 MB/s | OK
+[2026-06-02 01:31 PT] DOWNLOAD | FAIL [1913 Statutes] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1913/1913.pdf -> IncompleteRead(5218869 bytes read, 89503106 more expected) | FAIL
+[2026-06-02 01:31 PT] DOWNLOAD | FAIL [1919 Vol1_Chapters] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1919/19Vol1_Chapters.pdf -> IncompleteRead(8570519 bytes read, 81822083 more expected) | FAIL
+[2026-06-02 01:32 PT] DOWNLOAD | Progress 200/653 | 1990.6 MB | 16.30 MB/s | OK
+[2026-06-02 01:32 PT] DOWNLOAD | FAIL [1933 Vol1_Chapters] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1933/33Vol1_Chapters.pdf -> IncompleteRead(3876153 bytes read, 169811498 more expected) | FAIL
+[2026-06-02 01:33 PT] DOWNLOAD | Progress 250/653 | 2962.3 MB | 16.22 MB/s | OK
+[2026-06-02 01:33 PT] DOWNLOAD | FAIL [1945 Vol1_Chapters] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1945/45Vol1_Chapters.pdf -> IncompleteRead(4517888 bytes read, 141513352 more expected) | FAIL
+[2026-06-02 01:34 PT] DOWNLOAD | Progress 300/653 | 4807.7 MB | 16.81 MB/s | OK
+[2026-06-02 01:36 PT] DOWNLOAD | Progress 350/653 | 6366.8 MB | 16.59 MB/s | OK
+[2026-06-02 01:36 PT] DOWNLOAD | FAIL [1968 Vol1_Chapters] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1968/68Vol1_Chapters.pdf -> IncompleteRead(7006347 bytes read, 70102846 more expected) | FAIL
+[2026-06-02 01:36 PT] DOWNLOAD | FAIL [1969 Vol2_Chapters] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1969/69Vol2_Chapters.pdf -> IncompleteRead(27444116 bytes read, 125626601 more expected) | FAIL
+[2026-06-02 01:37 PT] DOWNLOAD | Progress 400/653 | 7391.0 MB | 16.73 MB/s | OK
+[2026-06-02 01:38 PT] DOWNLOAD | FAIL [1976 Vol2] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1976/76Vol2.PDF -> IncompleteRead(42350912 bytes read, 82902213 more expected) | FAIL
+[2026-06-02 01:38 PT] DOWNLOAD | Progress 450/653 | 9140.6 MB | 17.66 MB/s | OK
+[2026-06-02 01:39 PT] DOWNLOAD | FAIL [1982 Vol3] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1982/82Vol3.PDF -> IncompleteRead(4714442 bytes read, 82733645 more expected) | FAIL
+[2026-06-02 01:40 PT] DOWNLOAD | Progress 500/653 | 10931.5 MB | 18.10 MB/s | OK
+[2026-06-02 01:41 PT] DOWNLOAD | Progress 550/653 | 13361.6 MB | 19.34 MB/s | OK
+[2026-06-02 01:41 PT] DOWNLOAD | FAIL [1991 Vol2] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1991/91Vol2.PDF -> IncompleteRead(2618985 bytes read, 109891687 more expected) | FAIL
+[2026-06-02 01:42 PT] DOWNLOAD | FAIL [1994 Vol5] https://clerk.assembly.ca.gov/sites/clerk.assembly.ca.gov/files/archive/Statutes/1994/1994_Vol_5.pdf -> IncompleteRead(4256060 bytes read, 227397594 more expected) | FAIL
+[2026-06-02 01:43 PT] DOWNLOAD | Progress 600/653 | 15764.3 MB | 19.31 MB/s | OK
+[2026-06-02 01:44 PT] DOWNLOAD | Progress 650/653 | 16646.7 MB | 19.61 MB/s | OK
+[2026-06-02 01:46 PT] DOWNLOAD | Progress 653/653 | 17523.7 MB | 17.80 MB/s | OK
+[2026-06-02 01:46 PT] DOWNLOAD | === COMPLETE === Total=653 | Downloaded=641 | Skipped=0 | Failed=12 | 17.113 GB | 17.80 MB/s @ 12 threads | Speedup vs 4.26 MB/s baseline = 4.2x | Wall clock 984s | OK
