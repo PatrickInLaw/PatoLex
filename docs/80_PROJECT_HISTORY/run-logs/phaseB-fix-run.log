@@ -1,0 +1,8 @@
+[2026-06-02 08:00 PT] START | Phase B Hans 2nd-pass fixes: S1-A spine corruption, S2-B volume txn, S2-C NULL cer, A/B duplication metric | OK
+[2026-06-02 08:05 PT] S1-A | Reproduced Hans case: docTR(W eights) chosen spine, committed phantom 'eights' | OK
+[2026-06-02 08:12 PT] S1-A | Fix: median-robust spine + spine-merge pass (collapse split when >=2 engines agree whole word). 6/6 unit tests pass, no phantom 'eights' | OK
+[2026-06-02 08:30 PT] S2-C | estimate_volume_quality([]) now returns (None,'unknown') not -1.0; plan ocr_cer_estimate=None -> SQL NULL (honors >=0 CHECK). Verified in-process, no DB. | OK
+[2026-06-02 08:35 PT] S2-B | commit_volume rewritten: ONE transaction for whole volume (all acts or none); single conn.commit() at end; any error -> full rollback + raise (F6 fail-the-volume). DEFERRED/no DB writes. | OK
+[2026-06-02 08:45 PT] A/B | Added duplication/garble metric (sliver-after-word, word-split, dup-adjacent). Detector catches Hans buggy output (OLD=1, FIXED=0). 7/7 unit tests pass. | OK
+[2026-06-02 08:50 PT] A/B | Re-run 17 pages. PRIMARY gold-token err A=4.63% B=2.92% (net +124 fixed). GARBLE: A=7 B_old(buggy)=15 B_fixed=4 (73% reduction). CER flipped A-better+0.59 -> B-better -0.35. Report marked CORRECTED RE-RUN, old labeled pre-S1A-fix. | OK
+[2026-06-02 08:52 PT] DONE | All 3 fixes + corrected A/B. ZERO DB writes, ZERO schema edits. S1-B/S2-A remain for schema decision. | OK

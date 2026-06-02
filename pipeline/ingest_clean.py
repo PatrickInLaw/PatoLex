@@ -9,10 +9,12 @@ WHAT CHANGED vs the old ingest (and WHY)
   F5  No more `safe_str` ASCII errors="replace" and no hand-escaped SQL string
       concat. Inserts are **psycopg parameterized** (`%s` placeholders), so §,
       long-s, em-dashes, accents survive verbatim — full UTF-8 committed text.
-  F6  Per-act work runs in ONE transaction (enactment + provision +
-      designation_history + change_event). Any failure -> rollback that act AND
-      **abort the whole volume** (raise). The volume is NEVER marked done on a
-      partial ingest, so a gap is always revisited, never silent.
+  F6  The WHOLE VOLUME runs in ONE transaction (every act's enactment +
+      provision + designation_history + change_event). Any failure -> rollback
+      the ENTIRE volume (all acts or none) + raise (Hans S2-B: the old per-act
+      commit left acts 0..N-1 durably committed on a mid-volume failure). The
+      volume is NEVER marked done on a partial ingest, so a gap is always
+      revisited, never silent.
   F7  ONE canonical physical-act key everywhere: (source_document_id,
       in_act_order). in_act_order is the 0-indexed ordinal position of the act
       in the parsed volume — it survives a garbled chapter number. Chapter
@@ -135,15 +137,21 @@ def chapter_was_ocr_substituted(chapter_raw: str, chapter_int: int) -> bool:
     return True  # contained chars only recoverable via substitution (e.g. 'Il','XXITI')
 
 
-def estimate_volume_quality(page_confidences: List[float]) -> Tuple[float, str]:
+def estimate_volume_quality(
+    page_confidences: List[float],
+) -> Tuple[Optional[float], str]:
     """
     Honest per-volume OCR quality estimate (Hans F8). Derives a CER proxy from
     the mean consensus per-token confidence: cer_proxy ~= 1 - mean_confidence.
     Buckets scan_quality. Returns (cer_proxy_rounded, scan_quality_bucket).
-    If no confidences available, returns (None-proxy as -1.0, 'unknown').
+
+    If no confidences are available, returns (None, 'unknown') — NOT -1.0
+    (Hans S2-C): ocr_cer_estimate carries a `>= 0` CHECK constraint, so an
+    "unknown" estimate MUST be committed as SQL NULL, never a sentinel that
+    would violate the constraint (or, worse, masquerade as a real CER).
     """
     if not page_confidences:
-        return -1.0, "unknown"
+        return None, "unknown"
     mean_conf = sum(page_confidences) / len(page_confidences)
     cer_proxy = round(max(0.0, 1.0 - mean_conf), 4)
     if cer_proxy <= 0.02:
@@ -254,7 +262,7 @@ def plan_volume(session_label: str) -> dict:
         "session_str": session_str,
         "legislature": legis_num,
         "scan_quality": scan_quality,
-        "ocr_cer_estimate": cer_proxy,            # -1.0 means unknown
+        "ocr_cer_estimate": cer_proxy,            # None means unknown -> SQL NULL (S2-C)
         "n_pages_with_consensus": len(page_confs),
         "acts": planned,
     }
@@ -438,49 +446,56 @@ def _resolve_source_document_id(cur, session_label: str) -> int:
 def commit_volume(session_label: str):
     """
     Transactional, fail-loud commit. NOT used in Phase B (no DB writes allowed).
-    Each act = one transaction; ANY error -> rollback + raise (volume FAILS, is
-    never marked done). UTF-8 preserved via parameter binding.
+
+    Hans S2-B FIX: the ENTIRE volume is ONE transaction (all acts or none).
+    The old code did `conn.commit()` per act, so a mid-volume failure left acts
+    0..N-1 durably committed even though F6 requires "fail the whole volume" —
+    a partial volume would then be silently half-present and (per F6) never
+    revisited cleanly. Now: a single transaction spans every act; ANY error ->
+    `conn.rollback()` discards the WHOLE volume + raise (volume FAILS, is NEVER
+    marked done). UTF-8 preserved via parameter binding.
+
+    Duplicate acts (already present by canonical key) are skipped WITHIN the same
+    transaction (no per-act rollback that would discard prior inserts).
     """
     plan = plan_volume(session_label)
     conn = _connect()
-    conn.autocommit = False  # explicit per-act transactions
+    conn.autocommit = False  # ONE explicit transaction for the whole volume
     inserted = skipped = 0
     try:
         with conn.cursor() as cur:
             src_doc_id = _resolve_source_document_id(cur, session_label)
-        for act in plan["acts"]:
-            try:
-                with conn.cursor() as cur:
-                    cur.execute(EXISTS_SQL, (src_doc_id, act.in_act_order))
-                    if cur.fetchone():
-                        conn.rollback()
-                        skipped += 1
-                        continue
-                    cur.execute(ENACTMENT_SQL, enactment_params(src_doc_id, plan, act))
-                    enact_id = cur.fetchone()[0]
-                    cur.execute(PROVISION_SQL, (act.designation,))
-                    prov_id = cur.fetchone()[0]
-                    cur.execute(DESIGNATION_SQL, (
-                        prov_id, f"Statutes of California {session_label}",
-                        act.section_number, act.designation,
-                        _daterange(act.operative_date),
-                    ))
-                    cur.execute(CHANGE_EVENT_SQL, (
-                        enact_id, prov_id, act.new_text, act.operative_date,
-                        act.in_act_order, act.trust_level, src_doc_id, act.page_ref,
-                    ))
-                conn.commit()          # commit THIS act only
+            for act in plan["acts"]:
+                cur.execute(EXISTS_SQL, (src_doc_id, act.in_act_order))
+                if cur.fetchone():
+                    skipped += 1
+                    continue  # already present; do NOT re-insert, do NOT rollback
+                cur.execute(ENACTMENT_SQL, enactment_params(src_doc_id, plan, act))
+                enact_id = cur.fetchone()[0]
+                cur.execute(PROVISION_SQL, (act.designation,))
+                prov_id = cur.fetchone()[0]
+                cur.execute(DESIGNATION_SQL, (
+                    prov_id, f"Statutes of California {session_label}",
+                    act.section_number, act.designation,
+                    _daterange(act.operative_date),
+                ))
+                cur.execute(CHANGE_EVENT_SQL, (
+                    enact_id, prov_id, act.new_text, act.operative_date,
+                    act.in_act_order, act.trust_level, src_doc_id, act.page_ref,
+                ))
                 inserted += 1
-            except Exception as e:
-                conn.rollback()
-                # FAIL THE VOLUME — never mark done on partial ingest (F6)
-                raise RuntimeError(
-                    f"{session_label}: act in_act_order={act.in_act_order} "
-                    f"FAILED ({str(e)[:200]}) — volume aborted, NOT marked done."
-                ) from e
+        conn.commit()  # COMMIT ONCE — all acts or none (S2-B / F6)
         log("INGEST-COMMIT",
-            f"{session_label}: inserted={inserted} skipped(dup)={skipped} | volume OK",
+            f"{session_label}: inserted={inserted} skipped(dup)={skipped} | "
+            f"volume committed atomically (single txn)",
             "OK")
+    except Exception as e:
+        conn.rollback()  # discard the ENTIRE volume — nothing durable on failure
+        # FAIL THE VOLUME — never mark done on partial ingest (F6/S2-B)
+        raise RuntimeError(
+            f"{session_label}: volume FAILED ({str(e)[:200]}) — entire volume "
+            f"rolled back (0 acts committed), NOT marked done."
+        ) from e
     finally:
         conn.close()
 

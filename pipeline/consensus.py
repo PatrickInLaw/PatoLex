@@ -26,12 +26,22 @@ Input: 2 or 3 engine strings for ONE page, each tagged with a stable engine id.
      that "The" and "the" are counted as agreeing while the committed surface
      stays faithful.
 
-2. PICK A REFERENCE SPINE (deterministic, no engine privileged by quality):
-   The spine is the engine with the **most tokens**; ties broken by the engine
-   id in a fixed priority order (tesseract < doctr < surya). The spine defines
-   the token positions of the page. (Using the longest stream as the spine
-   minimises dropped content; majority vote then corrects the spine's own
-   misreads token-by-token.)
+2. PICK A REFERENCE SPINE (deterministic, FRAGMENTATION-ROBUST — Hans S1-A):
+   The spine is the engine whose token count is CLOSEST TO THE MEDIAN token
+   count across engines (ties broken toward more content, then char length,
+   then fixed engine priority tesseract < doctr < surya). This is deliberately
+   NOT "the engine with the most tokens": OCR word-splitting ("Weights" ->
+   "W eights") inflates an engine's token count, so the old most-tokens rule
+   privileged the WORST-segmented engine and committed its fragments ("W",
+   "eights") as separate positions. The median is robust to a single
+   over-segmenter (far above median) or word-dropper (far below).
+
+   2b. SPINE-MERGE PASS (Hans S1-A): before alignment, any two ADJACENT spine
+   tokens whose casefold keys concatenate to a single token that >= 2 OTHER
+   engines carry as ONE whole word are collapsed into one faithful whole-word
+   token (surface taken verbatim from a real engine). This repairs any residual
+   word-split the chosen spine still carries, so no phantom fragment is
+   committed. Majority vote then corrects the spine's own misreads token-by-token.
 
 3. ALIGN EACH NON-SPINE ENGINE TO THE SPINE:
    difflib.SequenceMatcher(autojunk=False) on the casefold token lists gives
@@ -214,12 +224,106 @@ class ConsensusResult:
 # Core
 # --------------------------------------------------------------------------- #
 
+def _median(values: List[int]) -> float:
+    """Deterministic median of a small int list (no numpy)."""
+    s = sorted(values)
+    n = len(s)
+    if n == 0:
+        return 0.0
+    mid = n // 2
+    if n % 2:
+        return float(s[mid])
+    return (s[mid - 1] + s[mid]) / 2.0
+
+
 def _choose_spine(engine_tokens: Dict[str, List[str]]) -> str:
-    """Spine = most tokens; ties broken by fixed engine priority. Deterministic."""
+    """
+    Choose the reference spine by a FRAGMENTATION-ROBUST criterion (Hans S1-A).
+
+    The old rule ("engine with the MOST tokens") privileged the WORST-segmented
+    engine: OCR word-splitting ("Weights" -> "W eights") inflates an engine's
+    token count, so the engine that mangled words most became the spine and its
+    fragments ("W", "eights") got committed as separate positions.
+
+    The robust criterion:
+      1. Prefer the engine whose token count is CLOSEST to the MEDIAN token count
+         across engines (an over-segmenter sits far above the median; a
+         word-dropper sits far below — both are penalised). Distance ties are
+         broken toward the LARGER token count only as a last resort (we still
+         want to minimise dropped content), then by char length, then priority.
+    This is deterministic and never privileges a single mis-segmenting engine.
+    The downstream spine-merge pass (see build_consensus) additionally repairs
+    any residual split the chosen spine still carries.
+    """
+    engines = list(engine_tokens.keys())
+    counts = [len(engine_tokens[e]) for e in engines]
+    med = _median(counts)
     return min(
-        engine_tokens.keys(),
-        key=lambda e: (-len(engine_tokens[e]), _priority(e), e),
+        engines,
+        key=lambda e: (
+            abs(len(engine_tokens[e]) - med),  # closeness to median (robust)
+            -len(engine_tokens[e]),            # tie: prefer more content
+            -sum(len(t) for t in engine_tokens[e]),  # tie: more characters
+            _priority(e), e,                    # final deterministic tie-break
+        ),
     )
+
+
+def _merge_spine_splits(
+    spine_tokens: List[str],
+    engine_tokens: Dict[str, List[str]],
+    engine_key_sets: Dict[str, set],
+    spine_engine: str,
+) -> List[str]:
+    """
+    Collapse adjacent SPINE tokens that are an OCR word-split (Hans S1-A).
+
+    For each adjacent spine pair (i, i+1), if their casefold keys CONCATENATE to
+    a single token that >= 2 OTHER engines (engines other than the spine) carry
+    as ONE whole token, the spine split is spurious: merge the two spine
+    positions into one, using the concatenated surface FROM A REAL ENGINE that
+    has the whole word (faithful — never a synthesised join). Deterministic:
+    a single left-to-right pass, merged tokens are not re-examined.
+
+    `engine_key_sets[e]` is the set of vote_keys engine e has (whole-token keys).
+    Merging only fires when a non-spine MAJORITY (>=2) actually read the whole
+    word, so we never fabricate a join the engines do not support.
+    """
+    others = [e for e in engine_tokens if e != spine_engine]
+    if len(others) < 2:
+        return list(spine_tokens)  # need >=2 corroborating engines to merge
+
+    # Map whole-word key -> a faithful surface from some engine that has it.
+    # Prefer the spine_engine's own surface if it (somehow) also has the whole
+    # word; otherwise the highest-priority other engine that does.
+    def whole_word_surface(key: str) -> Optional[str]:
+        for e in sorted(engine_tokens, key=lambda x: (_priority(x), x)):
+            for tok in engine_tokens[e]:
+                if vote_key(tok) == key:
+                    return tok
+        return None
+
+    out: List[str] = []
+    i = 0
+    n = len(spine_tokens)
+    while i < n:
+        if i + 1 < n:
+            k1 = vote_key(spine_tokens[i])
+            k2 = vote_key(spine_tokens[i + 1])
+            if k1 and k2:
+                joined_key = k1 + k2
+                corroborating = sum(
+                    1 for e in others if joined_key in engine_key_sets[e]
+                )
+                if corroborating >= 2:
+                    surf = whole_word_surface(joined_key)
+                    if surf is not None:
+                        out.append(surf)   # faithful whole-word surface
+                        i += 2
+                        continue
+        out.append(spine_tokens[i])
+        i += 1
+    return out
 
 
 def _vote(
@@ -266,13 +370,20 @@ def _vote(
     return committed_surface, winning_key, n_agree, n_present, voters_ids
 
 
-def build_consensus(engine_texts: Dict[str, str]) -> ConsensusResult:
+def build_consensus(
+    engine_texts: Dict[str, str], _legacy_spine_no_merge: bool = False
+) -> ConsensusResult:
     """
     engine_texts: {engine_id: page_text}. Engine ids should be canonical
     ('tesseract','doctr','surya'); unknown ids work but sort last in tie-breaks.
     Empty / missing engines should simply be omitted by the caller.
 
     Returns a ConsensusResult. Handles 1, 2, or 3 engines.
+
+    _legacy_spine_no_merge: PRODUCTION MUST LEAVE THIS FALSE. It reproduces the
+      pre-S1A-fix behaviour (most-tokens spine, NO spine-merge pass) and exists
+      ONLY so the A/B harness (ab_compare.py) can measure the corruption the fix
+      removed. It is never used by the real pipeline.
     """
     # keep only engines with non-empty text, sorted for determinism
     engines = sorted(
@@ -296,11 +407,31 @@ def build_consensus(engine_texts: Dict[str, str]) -> ConsensusResult:
         text = " ".join(t.surface for t in toks)
         return ConsensusResult(text, toks, 1.0, 1.0, "single", engines, len(toks))
 
-    spine = _choose_spine(engine_tokens)
-    others = [e for e in engines if e != spine]
-    spine_keys = engine_keys[spine]
+    if _legacy_spine_no_merge:
+        # Pre-S1A-fix path (A/B measurement only): most-tokens spine, NO merge.
+        spine = min(
+            engine_tokens.keys(),
+            key=lambda e: (-len(engine_tokens[e]), _priority(e), e),
+        )
+        others = [e for e in engines if e != spine]
+        spine_tokens = list(engine_tokens[spine])
+        spine_keys = list(engine_keys[spine])
+    else:
+        spine = _choose_spine(engine_tokens)
+        others = [e for e in engines if e != spine]
 
-    # align each other engine to the spine
+        # ---- S1-A spine-merge: repair OCR word-splits the spine still carries --
+        # If the chosen spine split a word ("Weights" -> "W eights") but >=2 OTHER
+        # engines read the whole word, collapse those adjacent spine positions
+        # into one faithful whole-word token BEFORE alignment/voting, so no
+        # phantom fragment ("eights") can ever be committed.
+        engine_key_sets: Dict[str, set] = {e: set(engine_keys[e]) for e in engines}
+        spine_tokens = _merge_spine_splits(
+            engine_tokens[spine], engine_tokens, engine_key_sets, spine
+        )
+        spine_keys = [vote_key(t) for t in spine_tokens]
+
+    # align each other engine to the (de-fragmented) spine
     aligned_map: Dict[str, List[Optional[int]]] = {}
     insertions_map: Dict[str, Dict[int, List[int]]] = {}
     for e in others:
@@ -339,7 +470,7 @@ def build_consensus(engine_texts: Dict[str, str]) -> ConsensusResult:
                     )
                 )
 
-    for i, spine_surface in enumerate(engine_tokens[spine]):
+    for i, spine_surface in enumerate(spine_tokens):
         commit_insertions_before(i)
         candidates: List[Tuple[str, Optional[str]]] = [(spine, spine_surface)]
         for e in others:
@@ -358,7 +489,7 @@ def build_consensus(engine_texts: Dict[str, str]) -> ConsensusResult:
         committed.append(
             CommittedToken(surface, key, n_agree, n_present, conf, voters)
         )
-    commit_insertions_before(len(engine_tokens[spine]))  # trailing inserts
+    commit_insertions_before(len(spine_tokens))  # trailing inserts
 
     # aggregates
     if committed:

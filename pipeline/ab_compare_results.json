@@ -6,13 +6,16 @@
     "reference": "OpusGold (frontier-model independent transcription; NOT certified human truth)",
     "aggregate_cer": "char-weighted: sum(edit_dist)/sum(gold_chars) -- not mean of per-page CER",
     "levenshtein_library": "python-Levenshtein",
-    "fixed_regressed": "token-aligned to gold; fixed = A-wrong & B-right, regressed = B-wrong & A-right"
+    "fixed_regressed": "token-aligned to gold; fixed = A-wrong & B-right, regressed = B-wrong & A-right",
+    "duplication_garble_metric": "NEW (Hans 2nd pass): per page, counts the S1-A corruption class that the gold-token-error rate and windowed-CER both MISS \u2014 (1) word-splits: adjacent hypothesis tokens whose KEYS concatenate to a single whole gold token ('W eights' -> gold 'Weights') where a fragment is not itself a gold word (the phantom 'eights'/orphan 'W' signature); (2) adjacent duplicate tokens not justified by a gold double. Keyed on the gold vocabulary so legitimate gold repeats are not flagged. Reported for version-A, the OLD buggy consensus (pre-S1A-fix, most-tokens spine + no merge), and the FIXED consensus."
   },
   "caveats": [
     "OpusGold is an independent reference, not certified human truth; a 'fix' is relative to OpusGold and could in rare cases be a shared A+B agreement OpusGold disputes.",
     "Sliding-window alignment degrades on very high-CER pages; CER is directional there.",
     "Banked per-engine outputs were produced under the cross-box docTR/Surya config variance noted in Hans F3/F4; the consensus is derived from whatever was banked.",
-    "Small n per era; per-era numbers are directional, aggregate is the headline."
+    "Small n per era; per-era numbers are directional, aggregate is the headline.",
+    "The S1-A spine fix slightly changed the primary win margin vs the pre-S1A-fix run: net tokens fixed moved 132 -> 124 and gold-token error 2.81% -> 2.92% (the buggy spine occasionally split a token in a way that coincidentally matched gold; the faithful fix does not). version-B still net-wins clearly. The windowed CER, by contrast, IMPROVED from +0.59 (A better) to -0.35 (B better) because the merge pass removed the token re-ordering that previously shifted the scored window.",
+    "The duplication/garble metric is a heuristic keyed on the gold vocabulary; it targets the S1-A signature specifically and is not a general OCR-quality score. The 4 residual fixed-consensus garbles were inspected and are honest engine-level segmentation noise (majority word-splits / a dropped-token sliver / one duplicate), NOT the spine bug."
   ],
   "per_page": [
     {
@@ -28,16 +31,40 @@
       "gold_tokens": 383,
       "gold_chars": 2160,
       "version_a_cer_pct": 21.11,
-      "version_b_cer_pct": 21.16,
-      "cer_delta_pct": 0.05,
+      "version_b_cer_pct": 18.8,
+      "cer_delta_pct": -2.31,
       "version_a_edit_dist": 456,
-      "version_b_edit_dist": 457,
+      "version_b_edit_dist": 406,
       "a_wrong_tokens": 22,
-      "b_wrong_tokens": 22,
+      "b_wrong_tokens": 24,
       "tokens_fixed_by_consensus": 1,
-      "tokens_regressed_by_consensus": 1,
-      "consensus_page_confidence": 0.9484,
-      "consensus_token_agreement_ratio": 0.9596
+      "tokens_regressed_by_consensus": 3,
+      "consensus_page_confidence": 0.9462,
+      "consensus_token_agreement_ratio": 0.9673,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 0,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      }
     },
     {
       "page_id": "early_1852_p40",
@@ -52,16 +79,40 @@
       "gold_tokens": 381,
       "gold_chars": 2128,
       "version_a_cer_pct": 5.08,
-      "version_b_cer_pct": 4.56,
-      "cer_delta_pct": -0.52,
+      "version_b_cer_pct": 3.01,
+      "cer_delta_pct": -2.07,
       "version_a_edit_dist": 108,
-      "version_b_edit_dist": 97,
+      "version_b_edit_dist": 64,
       "a_wrong_tokens": 34,
-      "b_wrong_tokens": 15,
-      "tokens_fixed_by_consensus": 20,
-      "tokens_regressed_by_consensus": 1,
-      "consensus_page_confidence": 0.9324,
-      "consensus_token_agreement_ratio": 0.9094
+      "b_wrong_tokens": 16,
+      "tokens_fixed_by_consensus": 21,
+      "tokens_regressed_by_consensus": 3,
+      "consensus_page_confidence": 0.9301,
+      "consensus_token_agreement_ratio": 0.9447,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 0,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      }
     },
     {
       "page_id": "early_1852_p70",
@@ -76,16 +127,40 @@
       "gold_tokens": 586,
       "gold_chars": 3292,
       "version_a_cer_pct": 3.43,
-      "version_b_cer_pct": 3.68,
-      "cer_delta_pct": 0.25,
+      "version_b_cer_pct": 2.49,
+      "cer_delta_pct": -0.94,
       "version_a_edit_dist": 113,
-      "version_b_edit_dist": 121,
+      "version_b_edit_dist": 82,
       "a_wrong_tokens": 47,
       "b_wrong_tokens": 29,
-      "tokens_fixed_by_consensus": 19,
-      "tokens_regressed_by_consensus": 1,
-      "consensus_page_confidence": 0.959,
-      "consensus_token_agreement_ratio": 0.9628
+      "tokens_fixed_by_consensus": 20,
+      "tokens_regressed_by_consensus": 2,
+      "consensus_page_confidence": 0.9555,
+      "consensus_token_agreement_ratio": 0.976,
+      "garble_a": 1,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 2,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 1,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 2,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 2
+      }
     },
     {
       "page_id": "mid_1858_p50",
@@ -100,16 +175,40 @@
       "gold_tokens": 473,
       "gold_chars": 2704,
       "version_a_cer_pct": 14.13,
-      "version_b_cer_pct": 15.27,
-      "cer_delta_pct": 1.14,
+      "version_b_cer_pct": 14.61,
+      "cer_delta_pct": 0.48,
       "version_a_edit_dist": 382,
-      "version_b_edit_dist": 413,
+      "version_b_edit_dist": 395,
       "a_wrong_tokens": 15,
-      "b_wrong_tokens": 12,
-      "tokens_fixed_by_consensus": 4,
+      "b_wrong_tokens": 11,
+      "tokens_fixed_by_consensus": 5,
       "tokens_regressed_by_consensus": 1,
-      "consensus_page_confidence": 0.9743,
-      "consensus_token_agreement_ratio": 0.9745
+      "consensus_page_confidence": 0.9725,
+      "consensus_token_agreement_ratio": 0.9763,
+      "garble_a": 0,
+      "garble_b_fixed": 1,
+      "garble_b_old_buggy": 1,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 1,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 1,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      }
     },
     {
       "page_id": "mid_1858_p90",
@@ -124,16 +223,40 @@
       "gold_tokens": 243,
       "gold_chars": 1511,
       "version_a_cer_pct": 30.84,
-      "version_b_cer_pct": 30.84,
-      "cer_delta_pct": 0.0,
+      "version_b_cer_pct": 30.97,
+      "cer_delta_pct": 0.13,
       "version_a_edit_dist": 466,
-      "version_b_edit_dist": 466,
+      "version_b_edit_dist": 468,
       "a_wrong_tokens": 9,
-      "b_wrong_tokens": 8,
+      "b_wrong_tokens": 9,
       "tokens_fixed_by_consensus": 3,
-      "tokens_regressed_by_consensus": 2,
-      "consensus_page_confidence": 0.9677,
-      "consensus_token_agreement_ratio": 0.9785
+      "tokens_regressed_by_consensus": 3,
+      "consensus_page_confidence": 0.9684,
+      "consensus_token_agreement_ratio": 0.9808,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 0,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      }
     },
     {
       "page_id": "mid_1861_p80",
@@ -148,16 +271,40 @@
       "gold_tokens": 265,
       "gold_chars": 1513,
       "version_a_cer_pct": 13.88,
-      "version_b_cer_pct": 14.41,
-      "cer_delta_pct": 0.53,
+      "version_b_cer_pct": 13.81,
+      "cer_delta_pct": -0.07,
       "version_a_edit_dist": 210,
-      "version_b_edit_dist": 218,
+      "version_b_edit_dist": 209,
       "a_wrong_tokens": 7,
       "b_wrong_tokens": 2,
       "tokens_fixed_by_consensus": 5,
       "tokens_regressed_by_consensus": 0,
-      "consensus_page_confidence": 0.9776,
-      "consensus_token_agreement_ratio": 0.9769
+      "consensus_page_confidence": 0.9795,
+      "consensus_token_agreement_ratio": 0.9826,
+      "garble_a": 1,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 1,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 1,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      }
     },
     {
       "page_id": "mid_1861_p130",
@@ -172,16 +319,40 @@
       "gold_tokens": 564,
       "gold_chars": 3260,
       "version_a_cer_pct": 4.57,
-      "version_b_cer_pct": 5.67,
-      "cer_delta_pct": 1.1,
+      "version_b_cer_pct": 4.08,
+      "cer_delta_pct": -0.49,
       "version_a_edit_dist": 149,
-      "version_b_edit_dist": 185,
+      "version_b_edit_dist": 133,
       "a_wrong_tokens": 47,
-      "b_wrong_tokens": 31,
-      "tokens_fixed_by_consensus": 20,
-      "tokens_regressed_by_consensus": 4,
-      "consensus_page_confidence": 0.9725,
-      "consensus_token_agreement_ratio": 0.9679
+      "b_wrong_tokens": 29,
+      "tokens_fixed_by_consensus": 19,
+      "tokens_regressed_by_consensus": 1,
+      "consensus_page_confidence": 0.9712,
+      "consensus_token_agreement_ratio": 0.9819,
+      "garble_a": 2,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 4,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 2,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 2
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 4,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 4
+      }
     },
     {
       "page_id": "late_1867_68_p100",
@@ -196,16 +367,40 @@
       "gold_tokens": 357,
       "gold_chars": 2049,
       "version_a_cer_pct": 20.16,
-      "version_b_cer_pct": 20.89,
-      "cer_delta_pct": 0.73,
+      "version_b_cer_pct": 20.35,
+      "cer_delta_pct": 0.19,
       "version_a_edit_dist": 413,
-      "version_b_edit_dist": 428,
+      "version_b_edit_dist": 417,
       "a_wrong_tokens": 13,
       "b_wrong_tokens": 7,
       "tokens_fixed_by_consensus": 6,
       "tokens_regressed_by_consensus": 0,
-      "consensus_page_confidence": 0.9644,
-      "consensus_token_agreement_ratio": 0.969
+      "consensus_page_confidence": 0.9657,
+      "consensus_token_agreement_ratio": 0.9791,
+      "garble_a": 1,
+      "garble_b_fixed": 1,
+      "garble_b_old_buggy": 1,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 1,
+        "garble_total": 1
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 1,
+        "garble_total": 1
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 1,
+        "garble_total": 1
+      }
     },
     {
       "page_id": "late_1867_68_p160",
@@ -220,16 +415,40 @@
       "gold_tokens": 197,
       "gold_chars": 1109,
       "version_a_cer_pct": 64.83,
-      "version_b_cer_pct": 64.74,
-      "cer_delta_pct": -0.09,
+      "version_b_cer_pct": 64.56,
+      "cer_delta_pct": -0.27,
       "version_a_edit_dist": 719,
-      "version_b_edit_dist": 718,
+      "version_b_edit_dist": 716,
       "a_wrong_tokens": 13,
       "b_wrong_tokens": 3,
       "tokens_fixed_by_consensus": 10,
       "tokens_regressed_by_consensus": 0,
       "consensus_page_confidence": 0.9725,
-      "consensus_token_agreement_ratio": 0.9836
+      "consensus_token_agreement_ratio": 0.9863,
+      "garble_a": 1,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 1,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 1,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      }
     },
     {
       "page_id": "late_1871_72_p120",
@@ -244,16 +463,40 @@
       "gold_tokens": 583,
       "gold_chars": 3156,
       "version_a_cer_pct": 9.98,
-      "version_b_cer_pct": 10.9,
-      "cer_delta_pct": 0.92,
+      "version_b_cer_pct": 9.85,
+      "cer_delta_pct": -0.13,
       "version_a_edit_dist": 315,
-      "version_b_edit_dist": 344,
+      "version_b_edit_dist": 311,
       "a_wrong_tokens": 34,
-      "b_wrong_tokens": 21,
-      "tokens_fixed_by_consensus": 14,
-      "tokens_regressed_by_consensus": 1,
-      "consensus_page_confidence": 0.9768,
-      "consensus_token_agreement_ratio": 0.9777
+      "b_wrong_tokens": 22,
+      "tokens_fixed_by_consensus": 12,
+      "tokens_regressed_by_consensus": 0,
+      "consensus_page_confidence": 0.9762,
+      "consensus_token_agreement_ratio": 0.9792,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 1,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      }
     },
     {
       "page_id": "late_1871_72_p200",
@@ -268,16 +511,40 @@
       "gold_tokens": 594,
       "gold_chars": 3320,
       "version_a_cer_pct": 2.11,
-      "version_b_cer_pct": 2.38,
-      "cer_delta_pct": 0.27,
+      "version_b_cer_pct": 2.02,
+      "cer_delta_pct": -0.09,
       "version_a_edit_dist": 70,
-      "version_b_edit_dist": 79,
+      "version_b_edit_dist": 67,
       "a_wrong_tokens": 14,
-      "b_wrong_tokens": 4,
-      "tokens_fixed_by_consensus": 10,
+      "b_wrong_tokens": 5,
+      "tokens_fixed_by_consensus": 9,
       "tokens_regressed_by_consensus": 0,
       "consensus_page_confidence": 0.9865,
-      "consensus_token_agreement_ratio": 0.99
+      "consensus_token_agreement_ratio": 0.9933,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 0,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      }
     },
     {
       "page_id": "era1880_p076",
@@ -292,16 +559,40 @@
       "gold_tokens": 429,
       "gold_chars": 2385,
       "version_a_cer_pct": 2.47,
-      "version_b_cer_pct": 2.22,
-      "cer_delta_pct": -0.25,
+      "version_b_cer_pct": 2.1,
+      "cer_delta_pct": -0.37,
       "version_a_edit_dist": 59,
-      "version_b_edit_dist": 53,
+      "version_b_edit_dist": 50,
       "a_wrong_tokens": 9,
       "b_wrong_tokens": 5,
       "tokens_fixed_by_consensus": 4,
       "tokens_regressed_by_consensus": 0,
       "consensus_page_confidence": 0.9871,
-      "consensus_token_agreement_ratio": 0.9833
+      "consensus_token_agreement_ratio": 0.9916,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 0,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      }
     },
     {
       "page_id": "era1880_p096",
@@ -316,16 +607,40 @@
       "gold_tokens": 472,
       "gold_chars": 2943,
       "version_a_cer_pct": 1.09,
-      "version_b_cer_pct": 2.24,
-      "cer_delta_pct": 1.15,
+      "version_b_cer_pct": 1.12,
+      "cer_delta_pct": 0.03,
       "version_a_edit_dist": 32,
-      "version_b_edit_dist": 66,
+      "version_b_edit_dist": 33,
       "a_wrong_tokens": 22,
-      "b_wrong_tokens": 9,
-      "tokens_fixed_by_consensus": 13,
+      "b_wrong_tokens": 14,
+      "tokens_fixed_by_consensus": 8,
       "tokens_regressed_by_consensus": 0,
-      "consensus_page_confidence": 0.9754,
-      "consensus_token_agreement_ratio": 0.9684
+      "consensus_page_confidence": 0.9745,
+      "consensus_token_agreement_ratio": 0.9682,
+      "garble_a": 0,
+      "garble_b_fixed": 1,
+      "garble_b_old_buggy": 1,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      }
     },
     {
       "page_id": "era1889_p199",
@@ -340,16 +655,40 @@
       "gold_tokens": 414,
       "gold_chars": 2318,
       "version_a_cer_pct": 2.76,
-      "version_b_cer_pct": 3.58,
-      "cer_delta_pct": 0.82,
+      "version_b_cer_pct": 2.85,
+      "cer_delta_pct": 0.09,
       "version_a_edit_dist": 64,
-      "version_b_edit_dist": 83,
+      "version_b_edit_dist": 66,
       "a_wrong_tokens": 6,
       "b_wrong_tokens": 3,
       "tokens_fixed_by_consensus": 3,
       "tokens_regressed_by_consensus": 0,
-      "consensus_page_confidence": 0.9853,
-      "consensus_token_agreement_ratio": 0.9856
+      "consensus_page_confidence": 0.9852,
+      "consensus_token_agreement_ratio": 0.9896,
+      "garble_a": 1,
+      "garble_b_fixed": 1,
+      "garble_b_old_buggy": 1,
+      "garble_a_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 1,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 1
+      }
     },
     {
       "page_id": "era1889_p219",
@@ -364,16 +703,40 @@
       "gold_tokens": 525,
       "gold_chars": 3003,
       "version_a_cer_pct": 2.06,
-      "version_b_cer_pct": 2.03,
-      "cer_delta_pct": -0.03,
+      "version_b_cer_pct": 1.96,
+      "cer_delta_pct": -0.1,
       "version_a_edit_dist": 62,
-      "version_b_edit_dist": 61,
+      "version_b_edit_dist": 59,
       "a_wrong_tokens": 8,
-      "b_wrong_tokens": 4,
-      "tokens_fixed_by_consensus": 4,
+      "b_wrong_tokens": 5,
+      "tokens_fixed_by_consensus": 3,
       "tokens_regressed_by_consensus": 0,
       "consensus_page_confidence": 0.9962,
-      "consensus_token_agreement_ratio": 0.9962
+      "consensus_token_agreement_ratio": 0.9981,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 0,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      }
     },
     {
       "page_id": "era1899_p142",
@@ -388,16 +751,40 @@
       "gold_tokens": 378,
       "gold_chars": 2136,
       "version_a_cer_pct": 13.76,
-      "version_b_cer_pct": 13.9,
-      "cer_delta_pct": 0.14,
+      "version_b_cer_pct": 13.67,
+      "cer_delta_pct": -0.09,
       "version_a_edit_dist": 294,
-      "version_b_edit_dist": 297,
+      "version_b_edit_dist": 292,
       "a_wrong_tokens": 28,
       "b_wrong_tokens": 26,
       "tokens_fixed_by_consensus": 3,
       "tokens_regressed_by_consensus": 1,
-      "consensus_page_confidence": 0.9793,
-      "consensus_token_agreement_ratio": 0.9912
+      "consensus_page_confidence": 0.98,
+      "consensus_token_agreement_ratio": 0.9978,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 2,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 2,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 2
+      }
     },
     {
       "page_id": "era1899_p162",
@@ -412,16 +799,40 @@
       "gold_tokens": 412,
       "gold_chars": 2374,
       "version_a_cer_pct": 0.93,
-      "version_b_cer_pct": 3.79,
-      "cer_delta_pct": 2.86,
+      "version_b_cer_pct": 0.84,
+      "cer_delta_pct": -0.09,
       "version_a_edit_dist": 22,
-      "version_b_edit_dist": 90,
+      "version_b_edit_dist": 20,
       "a_wrong_tokens": 8,
-      "b_wrong_tokens": 3,
-      "tokens_fixed_by_consensus": 5,
+      "b_wrong_tokens": 2,
+      "tokens_fixed_by_consensus": 6,
       "tokens_regressed_by_consensus": 0,
-      "consensus_page_confidence": 0.991,
-      "consensus_token_agreement_ratio": 0.9825
+      "consensus_page_confidence": 0.9894,
+      "consensus_token_agreement_ratio": 0.998,
+      "garble_a": 0,
+      "garble_b_fixed": 0,
+      "garble_b_old_buggy": 0,
+      "garble_a_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_fixed_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      },
+      "garble_b_old_buggy_detail": {
+        "sliver_after_word": 0,
+        "word_splits": 0,
+        "orphan_initial": 0,
+        "dup_adjacent": 0,
+        "garble_total": 0
+      }
     }
   ],
   "per_era": {
@@ -430,84 +841,102 @@
       "gold_chars": 2160,
       "gold_tokens": 383,
       "version_a_token_err_pct": 5.74,
-      "version_b_token_err_pct": 5.74,
-      "token_err_delta_pct": 0.0,
+      "version_b_token_err_pct": 6.27,
+      "token_err_delta_pct": 0.52,
       "version_a_cer_pct": 21.11,
-      "version_b_cer_pct": 21.16,
-      "cer_delta_pct": 0.05,
+      "version_b_cer_pct": 18.8,
+      "cer_delta_pct": -2.31,
       "tokens_fixed_by_consensus": 1,
-      "tokens_regressed_by_consensus": 1,
-      "net_tokens_fixed": 0
+      "tokens_regressed_by_consensus": 3,
+      "net_tokens_fixed": -2,
+      "garble_a": 0,
+      "garble_b_old_buggy": 0,
+      "garble_b_fixed": 0
     },
     "1852-59": {
       "n_pages": 4,
       "gold_chars": 9635,
       "gold_tokens": 1683,
       "version_a_token_err_pct": 6.24,
-      "version_b_token_err_pct": 3.8,
-      "token_err_delta_pct": -2.44,
+      "version_b_token_err_pct": 3.86,
+      "token_err_delta_pct": -2.38,
       "version_a_cer_pct": 11.09,
-      "version_b_cer_pct": 11.39,
-      "cer_delta_pct": 0.29,
-      "tokens_fixed_by_consensus": 46,
-      "tokens_regressed_by_consensus": 5,
-      "net_tokens_fixed": 41
+      "version_b_cer_pct": 10.47,
+      "cer_delta_pct": -0.62,
+      "tokens_fixed_by_consensus": 49,
+      "tokens_regressed_by_consensus": 9,
+      "net_tokens_fixed": 40,
+      "garble_a": 1,
+      "garble_b_old_buggy": 3,
+      "garble_b_fixed": 1
     },
     "1860-69": {
       "n_pages": 4,
       "gold_chars": 7931,
       "gold_tokens": 1383,
       "version_a_token_err_pct": 5.78,
-      "version_b_token_err_pct": 3.11,
-      "token_err_delta_pct": -2.68,
+      "version_b_token_err_pct": 2.96,
+      "token_err_delta_pct": -2.82,
       "version_a_cer_pct": 18.8,
-      "version_b_cer_pct": 19.53,
-      "cer_delta_pct": 0.73,
-      "tokens_fixed_by_consensus": 41,
-      "tokens_regressed_by_consensus": 4,
-      "net_tokens_fixed": 37
+      "version_b_cer_pct": 18.6,
+      "cer_delta_pct": -0.2,
+      "tokens_fixed_by_consensus": 40,
+      "tokens_regressed_by_consensus": 1,
+      "net_tokens_fixed": 39,
+      "garble_a": 5,
+      "garble_b_old_buggy": 7,
+      "garble_b_fixed": 1
     },
     "1870-75": {
       "n_pages": 2,
       "gold_chars": 6476,
       "gold_tokens": 1177,
       "version_a_token_err_pct": 4.08,
-      "version_b_token_err_pct": 2.12,
-      "token_err_delta_pct": -1.95,
+      "version_b_token_err_pct": 2.29,
+      "token_err_delta_pct": -1.78,
       "version_a_cer_pct": 5.95,
-      "version_b_cer_pct": 6.53,
-      "cer_delta_pct": 0.59,
-      "tokens_fixed_by_consensus": 24,
-      "tokens_regressed_by_consensus": 1,
-      "net_tokens_fixed": 23
+      "version_b_cer_pct": 5.84,
+      "cer_delta_pct": -0.11,
+      "tokens_fixed_by_consensus": 21,
+      "tokens_regressed_by_consensus": 0,
+      "net_tokens_fixed": 21,
+      "garble_a": 0,
+      "garble_b_old_buggy": 1,
+      "garble_b_fixed": 0
     },
     "1880s": {
       "n_pages": 4,
       "gold_chars": 10649,
       "gold_tokens": 1840,
       "version_a_token_err_pct": 2.45,
-      "version_b_token_err_pct": 1.14,
-      "token_err_delta_pct": -1.3,
+      "version_b_token_err_pct": 1.47,
+      "token_err_delta_pct": -0.98,
       "version_a_cer_pct": 2.04,
-      "version_b_cer_pct": 2.47,
-      "cer_delta_pct": 0.43,
-      "tokens_fixed_by_consensus": 24,
+      "version_b_cer_pct": 1.95,
+      "cer_delta_pct": -0.08,
+      "tokens_fixed_by_consensus": 18,
       "tokens_regressed_by_consensus": 0,
-      "net_tokens_fixed": 24
+      "net_tokens_fixed": 18,
+      "garble_a": 1,
+      "garble_b_old_buggy": 2,
+      "garble_b_fixed": 2
     },
     "1890s": {
       "n_pages": 2,
       "gold_chars": 4510,
       "gold_tokens": 790,
       "version_a_token_err_pct": 4.56,
-      "version_b_token_err_pct": 3.67,
-      "token_err_delta_pct": -0.89,
+      "version_b_token_err_pct": 3.54,
+      "token_err_delta_pct": -1.01,
       "version_a_cer_pct": 7.01,
-      "version_b_cer_pct": 8.58,
-      "cer_delta_pct": 1.57,
-      "tokens_fixed_by_consensus": 8,
+      "version_b_cer_pct": 6.92,
+      "cer_delta_pct": -0.09,
+      "tokens_fixed_by_consensus": 9,
       "tokens_regressed_by_consensus": 1,
-      "net_tokens_fixed": 7
+      "net_tokens_fixed": 8,
+      "garble_a": 0,
+      "garble_b_old_buggy": 2,
+      "garble_b_fixed": 0
     }
   },
   "aggregate": {
@@ -515,13 +944,16 @@
     "gold_chars": 41361,
     "gold_tokens": 7256,
     "version_a_token_err_pct": 4.63,
-    "version_b_token_err_pct": 2.81,
-    "token_err_delta_pct": -1.82,
+    "version_b_token_err_pct": 2.92,
+    "token_err_delta_pct": -1.71,
     "version_a_cer_pct": 9.51,
-    "version_b_cer_pct": 10.1,
-    "cer_delta_pct": 0.59,
-    "tokens_fixed_by_consensus": 144,
-    "tokens_regressed_by_consensus": 12,
-    "net_tokens_fixed": 132
+    "version_b_cer_pct": 9.16,
+    "cer_delta_pct": -0.35,
+    "tokens_fixed_by_consensus": 138,
+    "tokens_regressed_by_consensus": 14,
+    "net_tokens_fixed": 124,
+    "garble_a": 7,
+    "garble_b_old_buggy": 15,
+    "garble_b_fixed": 4
   }
 }
