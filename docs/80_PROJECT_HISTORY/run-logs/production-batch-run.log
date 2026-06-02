@@ -263,3 +263,181 @@
 [2026-06-01 23:58 PT] [1854] STAGE4-OCR | page 85 (81/222): engines=surya+doctr+tess agree=0.47 hi=False 3.5s | OK
 [2026-06-01 23:59 PT] [1854] STAGE4-OCR | page 105 (101/222): engines=surya+doctr+tess agree=0.74 hi=True 3.0s | OK
 [2026-06-02 00:00 PT] [1854] STAGE4-OCR | page 125 (121/222): engines=surya+doctr+tess agree=0.81 hi=True 3.2s | OK
+[2026-06-02 00:01 PT] [1854] STAGE4-OCR | page 145 (141/222): engines=surya+doctr+tess agree=0.83 hi=True 2.7s | OK
+[2026-06-02 00:02 PT] [1854] STAGE4-OCR | page 165 (161/222): engines=surya+doctr+tess agree=0.66 hi=True 2.7s | OK
+[2026-06-02 00:03 PT] [1854] STAGE4-OCR | page 185 (181/222): engines=surya+doctr+tess agree=0.84 hi=True 3.2s | OK
+[2026-06-02 00:04 PT] [1854] STAGE4-OCR | page 205 (201/222): engines=surya+doctr+tess agree=0.69 hi=True 2.0s | OK
+[2026-06-02 00:05 PT] [1854] STAGE4-OCR | page 229 (221/222): engines=surya+doctr+tess agree=0.67 hi=True 2.2s | OK
+[2026-06-02 00:05 PT] [1854] STAGE4-OCR | OCR done: 222 pages in 666.9s (3.00s/page) hi=189 lo=33 | OK
+[2026-06-02 00:05 PT] [1854] STAGE4-OCR | Confidence distribution: {'high_>=0.65': 189, 'medium_0.50_0.65': 30, 'low_<0.50': 3, 'mean_agreement': 0.7213, 'median_agreement': 0.7264} | OK
+[2026-06-02 00:05 PT] [1854] STAGE5-PARSE | Parsing acts from consensus OCR text | OK
+[2026-06-02 00:05 PT] [1854] STAGE5-PARSE | Parse done in 0.02s: confident=42 flagged_text_only=3 | OK
+[2026-06-02 00:05 PT] [1854] STAGE6-INGEST | Starting DB ingest (idempotent on content_sha256) | OK
+[2026-06-02 00:05 PT] [1854] STAGE6-INGEST | Updated skeleton source_document id=5 with real data | OK
+[2026-06-02 00:05 PT] [1854] STAGE6-INGEST | Ingesting 42 confident acts | OK
+[2026-06-02 00:05 PT] [1854] STAGE6-INGEST | Ingest done: enactments=7 provisions=7 change_events=7 skipped_dup=35 failed=0 | OK
+[2026-06-02 00:05 PT] [1854] STAGE6-INGEST | Flagged text-only acts (NOT ingested as structured): 3 | WARN
+[2026-06-02 00:05 PT] [1854] STAGE6-INGEST | Final DB counts: source_document=20 enactment=1245 provision=1245 change_event=1245 | OK
+[2026-06-02 00:05 PT] [1854] REPORT | === VOLUME COMPLETE: 1854 === | OK
+[2026-06-02 00:05 PT] [1854] REPORT | PDF: 1854_Statutes.pdf | 230 pages | SHA256=0a865551c0a9f0efd79eead1f04eea465b4661344c401a6367c7cc1e82840d32 | OK
+[2026-06-02 00:05 PT] [1854] REPORT | Render: 10.0s | Preprocess: 180.1s | OCR: 666.9s | Parse: 0.02s | TOTAL: 857.0s (14.3 min) | OK
+[2026-06-02 00:05 PT] [1854] REPORT | OCR: 222 body pages | 3.00s/page | 20.0 p/min | Surya=True engines=surya+doctr+tesseract-5 | OK
+[2026-06-02 00:05 PT] [1854] REPORT | Confidence: {'high_>=0.65': 189, 'medium_0.50_0.65': 30, 'low_<0.50': 3, 'mean_agreement': 0.7213, 'median_agreement': 0.7264} | OK
+[2026-06-02 00:05 PT] [1854] REPORT | Acts: confident=42 flagged=3 | OK
+[2026-06-02 00:05 PT] [1854] REPORT | DB: src_doc_id=5 enactments=7 provisions=7 change_events=7 | OK
+[2026-06-02 00:05 PT] [1854] REPORT | OCR output: C:\Users\PatrickKolasinski\PatoLex-scratch\production-1854\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 00:05 PT] [1854] REPORT | === END: 1854 === | OK
+[2026-06-02 00:05 PT] [BATCH] BATCH | 1854: COMPLETED in 14.6 min (exit 0) | OK
+[2026-06-02 00:05 PT] [BATCH] BATCH | Starting 1855: 324 pages, ~18 min est | 1855_Statutes.pdf | OK
+[2026-06-02 00:05 PT] [1855] PIPELINE | === START: 1855_Statutes.pdf session=1855 === | OK
+[2026-06-02 00:05 PT] [1855] STAGE0 | Computing SHA256 of 1855_Statutes.pdf | OK
+[2026-06-02 00:05 PT] [1855] STAGE0 | SHA256=1eebeb28bf7746862d15c02977bf7d806346fdba2f482d3cbad3d6c539a21b27 (2ms) | OK
+[2026-06-02 00:05 PT] [1855] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 00:05 PT] [1855] STAGE0 | PDF opened: 324 pages | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | Rendering 324 pages at 300 DPI | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | page 1/324 | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | page 2/324 | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | page 3/324 | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | page 101/324 | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | page 201/324 | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | page 301/324 | OK
+[2026-06-02 00:05 PT] [1855] STAGE1-RENDER | Render done: 324 pages in 14.0s (0.04s/page) | OK
+[2026-06-02 00:05 PT] [1855] STAGE2-PREPROCESS | Preprocessing 324 pages (v2 grayscale track) | OK
+[2026-06-02 00:05 PT] [1855] STAGE2-PREPROCESS | page 1/324 ok=1 fail=0 | OK
+[2026-06-02 00:05 PT] [1855] STAGE2-PREPROCESS | page 2/324 ok=2 fail=0 | OK
+[2026-06-02 00:05 PT] [1855] STAGE2-PREPROCESS | page 3/324 ok=3 fail=0 | OK
+[2026-06-02 00:07 PT] [1855] STAGE2-PREPROCESS | page 101/324 ok=101 fail=0 | OK
+[2026-06-02 00:08 PT] [1855] STAGE2-PREPROCESS | page 201/324 ok=201 fail=0 | OK
+[2026-06-02 00:09 PT] [1855] STAGE2-PREPROCESS | page 301/324 ok=301 fail=0 | OK
+[2026-06-02 00:10 PT] [1855] STAGE2-PREPROCESS | Preprocess done: 324 OK / 0 FAIL in 259.6s | OK
+[2026-06-02 00:10 PT] [1855] STAGE3-CLASSIFY | Detecting body start page via ink density | OK
+[2026-06-02 00:10 PT] [1855] STAGE3-CLASSIFY | Body start detected at 0-indexed page 0 (PDF page 1) | OK
+[2026-06-02 00:10 PT] [1855] STAGE3-CLASSIFY | Classification done in 8.7s: body=324 front_matter=0 index=0 empty=0 | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | Loading docTR model (GPU) | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | docTR on GPU: NVIDIA GeForce RTX 5080 | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | Surya (local) loaded OK | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | Starting OCR consensus on 324 body pages (Surya=True) | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | page 1 (1/324): engines=surya+doctr+tess agree=0.76 hi=True 3.5s | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | page 2 (2/324): engines=surya+doctr+tess agree=0.60 hi=False 4.4s | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | page 3 (3/324): engines=surya+doctr+tess agree=0.55 hi=False 4.1s | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | page 4 (4/324): engines=surya+doctr+tess agree=0.58 hi=False 3.9s | OK
+[2026-06-02 00:10 PT] [1855] STAGE4-OCR | page 5 (5/324): engines=surya+doctr+tess agree=0.53 hi=False 4.1s | OK
+[2026-06-02 00:11 PT] [1855] STAGE4-OCR | page 21 (21/324): engines=surya+doctr+tess agree=0.84 hi=True 1.6s | OK
+[2026-06-02 00:12 PT] [1855] STAGE4-OCR | page 41 (41/324): engines=surya+doctr+tess agree=0.85 hi=True 3.1s | OK
+[2026-06-02 00:13 PT] [1855] STAGE4-OCR | page 61 (61/324): engines=surya+doctr+tess agree=0.83 hi=True 2.9s | OK
+[2026-06-02 00:14 PT] [1855] STAGE4-OCR | page 81 (81/324): engines=surya+doctr+tess agree=0.85 hi=True 2.3s | OK
+[2026-06-02 00:14 PT] [1855] STAGE4-OCR | page 101 (101/324): engines=surya+doctr+tess agree=0.87 hi=True 2.6s | OK
+[2026-06-02 00:15 PT] [1855] STAGE4-OCR | page 121 (121/324): engines=surya+doctr+tess agree=0.85 hi=True 2.4s | OK
+[2026-06-02 00:16 PT] [1855] STAGE4-OCR | page 141 (141/324): engines=surya+doctr+tess agree=0.72 hi=True 2.4s | OK
+[2026-06-02 00:17 PT] [1855] STAGE4-OCR | page 161 (161/324): engines=surya+doctr+tess agree=0.79 hi=True 2.1s | OK
+[2026-06-02 00:18 PT] [1855] STAGE4-OCR | page 181 (181/324): engines=surya+doctr+tess agree=0.87 hi=True 3.0s | OK
+[2026-06-02 00:19 PT] [1855] STAGE4-OCR | page 201 (201/324): engines=surya+doctr+tess agree=0.83 hi=True 2.1s | OK
+[2026-06-02 00:20 PT] [1855] STAGE4-OCR | page 221 (221/324): engines=surya+doctr+tess agree=0.74 hi=True 2.0s | OK
+[2026-06-02 00:20 PT] [1855] STAGE4-OCR | page 241 (241/324): engines=surya+doctr+tess agree=0.85 hi=True 2.3s | OK
+[2026-06-02 00:21 PT] [1855] STAGE4-OCR | page 261 (261/324): engines=surya+doctr+tess agree=0.80 hi=True 3.4s | OK
+[2026-06-02 00:22 PT] [1855] STAGE4-OCR | page 281 (281/324): engines=surya+doctr+tess agree=0.81 hi=True 1.6s | OK
+[2026-06-02 00:23 PT] [1855] STAGE4-OCR | page 301 (301/324): engines=surya+doctr+tess agree=0.81 hi=True 2.7s | OK
+[2026-06-02 00:24 PT] [1855] STAGE4-OCR | page 321 (321/324): engines=surya+doctr+tess agree=0.82 hi=True 1.8s | OK
+[2026-06-02 00:24 PT] [1855] STAGE4-OCR | OCR done: 324 pages in 850.7s (2.63s/page) hi=302 lo=22 | OK
+[2026-06-02 00:24 PT] [1855] STAGE4-OCR | Confidence distribution: {'high_>=0.65': 302, 'medium_0.50_0.65': 19, 'low_<0.50': 3, 'mean_agreement': 0.8072, 'median_agreement': 0.8248} | OK
+[2026-06-02 00:24 PT] [1855] STAGE5-PARSE | Parsing acts from consensus OCR text | OK
+[2026-06-02 00:24 PT] [1855] STAGE5-PARSE | Parse done in 0.02s: confident=137 flagged_text_only=24 | OK
+[2026-06-02 00:24 PT] [1855] STAGE6-INGEST | Starting DB ingest (idempotent on content_sha256) | OK
+[2026-06-02 00:24 PT] [1855] STAGE6-INGEST | Updated skeleton source_document id=6 with real data | OK
+[2026-06-02 00:24 PT] [1855] STAGE6-INGEST | Ingesting 137 confident acts | OK
+[2026-06-02 00:24 PT] [1855] STAGE6-INGEST | Ingest done: enactments=73 provisions=73 change_events=73 skipped_dup=64 failed=0 | OK
+[2026-06-02 00:24 PT] [1855] STAGE6-INGEST | Flagged text-only acts (NOT ingested as structured): 24 | WARN
+[2026-06-02 00:24 PT] [1855] STAGE6-INGEST | Final DB counts: source_document=20 enactment=1318 provision=1318 change_event=1318 | OK
+[2026-06-02 00:24 PT] [1855] REPORT | === VOLUME COMPLETE: 1855 === | OK
+[2026-06-02 00:24 PT] [1855] REPORT | PDF: 1855_Statutes.pdf | 324 pages | SHA256=1eebeb28bf7746862d15c02977bf7d806346fdba2f482d3cbad3d6c539a21b27 | OK
+[2026-06-02 00:24 PT] [1855] REPORT | Render: 14.0s | Preprocess: 259.6s | OCR: 850.7s | Parse: 0.02s | TOTAL: 1124.4s (18.7 min) | OK
+[2026-06-02 00:24 PT] [1855] REPORT | OCR: 324 body pages | 2.63s/page | 22.9 p/min | Surya=True engines=surya+doctr+tesseract-5 | OK
+[2026-06-02 00:24 PT] [1855] REPORT | Confidence: {'high_>=0.65': 302, 'medium_0.50_0.65': 19, 'low_<0.50': 3, 'mean_agreement': 0.8072, 'median_agreement': 0.8248} | OK
+[2026-06-02 00:24 PT] [1855] REPORT | Acts: confident=137 flagged=24 | OK
+[2026-06-02 00:24 PT] [1855] REPORT | DB: src_doc_id=6 enactments=73 provisions=73 change_events=73 | OK
+[2026-06-02 00:24 PT] [1855] REPORT | OCR output: C:\Users\PatrickKolasinski\PatoLex-scratch\production-1855\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 00:24 PT] [1855] REPORT | === END: 1855 === | OK
+[2026-06-02 00:24 PT] [BATCH] BATCH | 1855: COMPLETED in 19.4 min (exit 0) | OK
+[2026-06-02 00:24 PT] [BATCH] BATCH | Starting 1856: 239 pages, ~13 min est | 1856_Statutes.pdf | OK
+[2026-06-02 00:24 PT] [1856] PIPELINE | === START: 1856_Statutes.pdf session=1856 === | OK
+[2026-06-02 00:24 PT] [1856] STAGE0 | Computing SHA256 of 1856_Statutes.pdf | OK
+[2026-06-02 00:24 PT] [1856] STAGE0 | SHA256=ed49e9c673bb95f6a546e88b1c315c5712ad433567126b075ecf20524c51efb2 (16ms) | OK
+[2026-06-02 00:24 PT] [1856] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 00:24 PT] [1856] STAGE0 | PDF opened: 239 pages | OK
+[2026-06-02 00:24 PT] [1856] STAGE1-RENDER | Rendering 239 pages at 300 DPI | OK
+[2026-06-02 00:24 PT] [1856] STAGE1-RENDER | page 1/239 | OK
+[2026-06-02 00:24 PT] [1856] STAGE1-RENDER | page 2/239 | OK
+[2026-06-02 00:24 PT] [1856] STAGE1-RENDER | page 3/239 | OK
+[2026-06-02 00:25 PT] [1856] STAGE1-RENDER | page 101/239 | OK
+[2026-06-02 00:25 PT] [1856] STAGE1-RENDER | page 201/239 | OK
+[2026-06-02 00:25 PT] [1856] STAGE1-RENDER | Render done: 239 pages in 10.6s (0.04s/page) | OK
+[2026-06-02 00:25 PT] [1856] STAGE2-PREPROCESS | Preprocessing 239 pages (v2 grayscale track) | OK
+[2026-06-02 00:25 PT] [1856] STAGE2-PREPROCESS | page 1/239 ok=1 fail=0 | OK
+[2026-06-02 00:25 PT] [1856] STAGE2-PREPROCESS | page 2/239 ok=2 fail=0 | OK
+[2026-06-02 00:25 PT] [1856] STAGE2-PREPROCESS | page 3/239 ok=3 fail=0 | OK
+[2026-06-02 00:26 PT] [1856] STAGE2-PREPROCESS | page 101/239 ok=101 fail=0 | OK
+[2026-06-02 00:27 PT] [1856] STAGE2-PREPROCESS | page 201/239 ok=201 fail=0 | OK
+[2026-06-02 00:28 PT] [1856] STAGE2-PREPROCESS | Preprocess done: 239 OK / 0 FAIL in 197.3s | OK
+[2026-06-02 00:28 PT] [1856] STAGE3-CLASSIFY | Detecting body start page via ink density | OK
+[2026-06-02 00:28 PT] [1856] STAGE3-CLASSIFY | Body start detected at 0-indexed page 0 (PDF page 1) | OK
+[2026-06-02 00:28 PT] [1856] STAGE3-CLASSIFY | Classification done in 7.2s: body=237 front_matter=0 index=1 empty=1 | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | Loading docTR model (GPU) | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | docTR on GPU: NVIDIA GeForce RTX 5080 | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | Surya (local) loaded OK | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | Starting OCR consensus on 237 body pages (Surya=True) | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | page 1 (1/237): engines=surya+doctr+tess agree=0.55 hi=False 2.6s | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | page 2 (2/237): engines=surya+doctr+tess agree=0.65 hi=False 3.2s | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | page 3 (3/237): engines=surya+doctr+tess agree=0.65 hi=False 4.2s | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | page 4 (4/237): engines=surya+doctr+tess agree=0.67 hi=True 4.1s | OK
+[2026-06-02 00:28 PT] [1856] STAGE4-OCR | page 5 (5/237): engines=surya+doctr+tess agree=0.66 hi=True 4.2s | OK
+[2026-06-02 00:29 PT] [1856] STAGE4-OCR | page 22 (21/237): engines=surya+doctr+tess agree=0.78 hi=True 2.1s | OK
+[2026-06-02 00:30 PT] [1856] STAGE4-OCR | page 42 (41/237): engines=surya+doctr+tess agree=0.82 hi=True 1.7s | OK
+[2026-06-02 00:31 PT] [1856] STAGE4-OCR | page 62 (61/237): engines=surya+doctr+tess agree=0.81 hi=True 3.1s | OK
+[2026-06-02 00:32 PT] [1856] STAGE4-OCR | page 82 (81/237): engines=surya+doctr+tess agree=0.82 hi=True 1.9s | OK
+[2026-06-02 00:32 PT] [1856] STAGE4-OCR | page 102 (101/237): engines=surya+doctr+tess agree=0.78 hi=True 1.9s | OK
+[2026-06-02 00:33 PT] [1856] STAGE4-OCR | page 122 (121/237): engines=surya+doctr+tess agree=0.81 hi=True 3.2s | OK
+[2026-06-02 00:34 PT] [1856] STAGE4-OCR | page 142 (141/237): engines=surya+doctr+tess agree=0.88 hi=True 2.9s | OK
+[2026-06-02 00:35 PT] [1856] STAGE4-OCR | page 162 (161/237): engines=surya+doctr+tess agree=0.89 hi=True 2.6s | OK
+[2026-06-02 00:36 PT] [1856] STAGE4-OCR | page 182 (181/237): engines=surya+doctr+tess agree=0.82 hi=True 2.9s | OK
+[2026-06-02 00:37 PT] [1856] STAGE4-OCR | page 202 (201/237): engines=surya+doctr+tess agree=0.85 hi=True 3.0s | OK
+[2026-06-02 00:38 PT] [1856] STAGE4-OCR | page 222 (221/237): engines=surya+doctr+tess agree=0.82 hi=True 1.9s | OK
+[2026-06-02 00:38 PT] [1856] STAGE4-OCR | OCR done: 237 pages in 615.6s (2.60s/page) hi=220 lo=17 | OK
+[2026-06-02 00:38 PT] [1856] STAGE4-OCR | Confidence distribution: {'high_>=0.65': 220, 'medium_0.50_0.65': 16, 'low_<0.50': 1, 'mean_agreement': 0.803, 'median_agreement': 0.822} | OK
+[2026-06-02 00:38 PT] [1856] STAGE5-PARSE | Parsing acts from consensus OCR text | OK
+[2026-06-02 00:38 PT] [1856] STAGE5-PARSE | Parse done in 0.03s: confident=16 flagged_text_only=88 | OK
+[2026-06-02 00:38 PT] [1856] STAGE6-INGEST | Starting DB ingest (idempotent on content_sha256) | OK
+[2026-06-02 00:38 PT] [1856] STAGE6-INGEST | Updated skeleton source_document id=7 with real data | OK
+[2026-06-02 00:38 PT] [1856] STAGE6-INGEST | Ingesting 16 confident acts | OK
+[2026-06-02 00:38 PT] [1856] STAGE6-INGEST | Ingest done: enactments=4 provisions=4 change_events=4 skipped_dup=12 failed=0 | OK
+[2026-06-02 00:38 PT] [1856] STAGE6-INGEST | Flagged text-only acts (NOT ingested as structured): 88 | WARN
+[2026-06-02 00:38 PT] [1856] STAGE6-INGEST | Final DB counts: source_document=20 enactment=1322 provision=1322 change_event=1322 | OK
+[2026-06-02 00:38 PT] [1856] REPORT | === VOLUME COMPLETE: 1856 === | OK
+[2026-06-02 00:38 PT] [1856] REPORT | PDF: 1856_Statutes.pdf | 239 pages | SHA256=ed49e9c673bb95f6a546e88b1c315c5712ad433567126b075ecf20524c51efb2 | OK
+[2026-06-02 00:38 PT] [1856] REPORT | Render: 10.6s | Preprocess: 197.3s | OCR: 615.6s | Parse: 0.03s | TOTAL: 823.5s (13.7 min) | OK
+[2026-06-02 00:38 PT] [1856] REPORT | OCR: 237 body pages | 2.60s/page | 23.1 p/min | Surya=True engines=surya+doctr+tesseract-5 | OK
+[2026-06-02 00:38 PT] [1856] REPORT | Confidence: {'high_>=0.65': 220, 'medium_0.50_0.65': 16, 'low_<0.50': 1, 'mean_agreement': 0.803, 'median_agreement': 0.822} | OK
+[2026-06-02 00:38 PT] [1856] REPORT | Acts: confident=16 flagged=88 | OK
+[2026-06-02 00:38 PT] [1856] REPORT | DB: src_doc_id=7 enactments=4 provisions=4 change_events=4 | OK
+[2026-06-02 00:38 PT] [1856] REPORT | OCR output: C:\Users\PatrickKolasinski\PatoLex-scratch\production-1856\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 00:38 PT] [1856] REPORT | === END: 1856 === | OK
+[2026-06-02 00:38 PT] [BATCH] BATCH | 1856: COMPLETED in 14.0 min (exit 0) | OK
+[2026-06-02 00:38 PT] [BATCH] BATCH | Starting 1857: 394 pages, ~22 min est | 1857_Statutes.pdf | OK
+[2026-06-02 00:38 PT] [1857] PIPELINE | === START: 1857_Statutes.pdf session=1857 === | OK
+[2026-06-02 00:38 PT] [1857] STAGE0 | Computing SHA256 of 1857_Statutes.pdf | OK
+[2026-06-02 00:38 PT] [1857] STAGE0 | SHA256=99f4b8a41d7ec8457cf669b1ccb95ed0e2fdfc9acdd9026400e5fc65df401f2b (0ms) | OK
+[2026-06-02 00:38 PT] [1857] STAGE0 | No production row with this SHA256 -- proceeding | OK
+[2026-06-02 00:38 PT] [1857] STAGE0 | PDF opened: 394 pages | OK
+[2026-06-02 00:38 PT] [1857] STAGE1-RENDER | Rendering 394 pages at 300 DPI | OK
+[2026-06-02 00:38 PT] [1857] STAGE1-RENDER | page 1/394 | OK
+[2026-06-02 00:38 PT] [1857] STAGE1-RENDER | page 2/394 | OK
+[2026-06-02 00:38 PT] [1857] STAGE1-RENDER | page 3/394 | OK
+[2026-06-02 00:39 PT] [1857] STAGE1-RENDER | page 101/394 | OK
+[2026-06-02 00:39 PT] [1857] STAGE1-RENDER | page 201/394 | OK
+[2026-06-02 00:39 PT] [1857] STAGE1-RENDER | page 301/394 | OK
+[2026-06-02 00:39 PT] [1857] STAGE1-RENDER | Render done: 394 pages in 17.5s (0.04s/page) | OK
+[2026-06-02 00:39 PT] [1857] STAGE2-PREPROCESS | Preprocessing 394 pages (v2 grayscale track) | OK
+[2026-06-02 00:39 PT] [1857] STAGE2-PREPROCESS | page 1/394 ok=1 fail=0 | OK
+[2026-06-02 00:39 PT] [1857] STAGE2-PREPROCESS | page 2/394 ok=2 fail=0 | OK
+[2026-06-02 00:39 PT] [1857] STAGE2-PREPROCESS | page 3/394 ok=3 fail=0 | OK
+[2026-06-02 00:40 PT] [1857] STAGE2-PREPROCESS | page 101/394 ok=101 fail=0 | OK
+[2026-06-02 00:41 PT] [1857] STAGE2-PREPROCESS | page 201/394 ok=201 fail=0 | OK
