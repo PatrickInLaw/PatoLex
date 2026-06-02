@@ -1,0 +1,7 @@
+[2026-06-02 16:27 PT] INIT | mode=DRY-RUN box=PKs_2025_Alien/PatrickKolasinski scratch=C:\Users\PatrickKolasinski\PatoLex-scratch dest=patolex@100.113.254.6:D:\PatoLex-archive | OK
+[2026-06-02 16:27 PT] DONE | DRY-RUN complete (0 eligible) | OK
+[2026-06-02 16:27 PT] BUILD | pipeline/archive_images.py created (rolling archiver, DRY-RUN default) | OK
+[2026-06-02 16:27 PT] DRYRUN-5080 | box=PKs_2025_Alien/PatrickKolasinski (5080-role/local scratch): 0 eligible (no markers on this box -- it is the ingest box; image dirs present but uncompleted-here) | OK
+[2026-06-02 16:27 PT] DRYRUN-5090 | box=PK_Alien_5090/patolex via SSH: 14 eligible volumes, 21821 files, 17.5 GB reclaimable. Eligible: 1862,1863,1863-64,1865-66,1867-68,1869-70,1873-74,1873-74-code,1875-76,1877-78,1883-84-regular,1891,1895,1899 | OK
+[2026-06-02 16:27 PT] SAFETY | NO --commit run. Delete/verify path (tar->scp->sha256-match+filecount+bytes->rmtree) requires a Hans (verify-auditor) review before any real archive run. | WARN
+[2026-06-02 16:27 PT] DONE | Build + dry-run round complete; nothing transferred or deleted | OK

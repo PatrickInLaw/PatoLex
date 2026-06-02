@@ -1,0 +1,10 @@
+[2026-06-02 00:00 PT] PLAN | Queue 1913-1975 image-only BODY session-law volumes onto LIVE 5090 queue; stage PDFs to 5090. No DB/ingest. | OK
+[2026-06-02 00:00 PT] STEP1 | CSV is_body=TRUE & 1913<=year<=1975 -> 74 files, 126502 pages, labels unique (no dupes). | OK
+[2026-06-02 00:00 PT] STEP2 | All 74 PDFs present in local 5080 chief-clerk-archive; 0 missing; total 6,440,626,014 bytes (~6.44 GB). | OK
+[2026-06-02 00:00 PT] SNAPSHOT | LIVE 5090 queue BEFORE: 32 volumes (27 done, 4 in_progress, 1 pending), 5 with pdf, 0 dup labels. 5090 archive has only <=1910-11 + some Code; none of the 74 present -> all need staging. | OK
+[2026-06-02 00:01 PT] STEP3 | Staging 74 body PDFs to 5090 via scp (background bi767nrwr), per-file size-verified, idempotent skip-if-size-match. | OK
+[2026-06-02 00:30 PT] RECONCILE | Resumed abandoned job. 74 derived (unique labels, all local). Remote archive has 49/74 matching; 25 need staging (24 absent + 1965_Vol1_64Chapters truncated 6.0MB/39.4MB from dead bg scp). Staging synchronously. | OK
+[2026-06-02 00:45 PT] STAGE | Synchronous scp complete. 49/74 already present (size-matched); 25 newly staged + per-file size-verified (incl. re-staging truncated 1965_Vol1_64Chapters). Final remote re-list: 74/74 present, 0 mismatched. | OK
+[2026-06-02 00:46 PT] APPEND | Ran append_body_entries.py on 5090 under queue lock (atomic, idempotent by label). APPENDED_COUNT=74, queue TOTAL 32 -> 106. | OK
+[2026-06-02 00:47 PT] VERIFY | queue_after.json parses as valid JSON. AFTER status: 27 done / 4 in_progress / 75 pending. PENDING_DELTA=+74. All 74 new entries present with correct pdf+year+status=pending. No dup labels. Prior 27 done unchanged; 4 in_progress changed ONLY in live-worker heartbeat fields (epoch/at) -- no status/label/year/worker_id/claimed_at/pdf touched by append. Saved append_body_entries.py to pipeline/5090/. | OK
+[2026-06-02 00:47 PT] DONE | Job complete: 74/74 staged+verified on 5090, 74 appended to live queue, existing entries intact. | OK

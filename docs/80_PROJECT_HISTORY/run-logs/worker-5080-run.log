@@ -40,3 +40,12 @@
 [2026-06-02 13:58 PT] PUSH | 1880-code: OCR outputs pushed to 5090 | OK
 [2026-06-02 13:58 PT] RUN | 1880-code: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-02 13:58 PT] RUN | 1893: START local OCR (1893_Statutes.pdf) on 5080 | OK
+[2026-06-02 14:26 PT] PUSH | 1893: OCR outputs pushed to 5090 | OK
+[2026-06-02 14:26 PT] RUN | 1893: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 14:26 PT] RUN | 1897: START local OCR (1897_Statutes.pdf) on 5080 | OK
+[2026-06-02 15:11 PT] PUSH | 1897: OCR outputs pushed to 5090 | OK
+[2026-06-02 15:11 PT] RUN | 1897: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 15:11 PT] RUN | 1903: START local OCR (1903_Statutes.pdf) on 5080 | OK
+[2026-06-02 16:04 PT] PUSH | 1903: OCR outputs pushed to 5090 | OK
+[2026-06-02 16:04 PT] RUN | 1903: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 16:04 PT] RUN | 1910-11: START local OCR (1910-11_Statutes.pdf) on 5080 | OK
