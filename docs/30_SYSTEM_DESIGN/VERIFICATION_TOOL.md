@@ -9,7 +9,7 @@ Accuracy comes from **automated multi-engine disagreement detection** + **cheap,
 
 ## Multi-vector ensemble (decided cc002)
 Run multiple OCR engines per page and treat them as independent vectors:
-- **Faithful engines = the text source.** Tesseract / docTR / Surya / PaddleOCR — literal transcription; one of these (per the gold ranking) provides the committed text.
+- **Faithful engines = the text source.** Literal transcription (no modernizing). *Original candidate pool: Tesseract / docTR / Surya / PaddleOCR.* **As built (2026-06-02): the production committed text is a token-majority CONSENSUS of 3 engines — Tesseract + docTR + Surya** (`pipeline/consensus.py`, `N_MAX_ENGINES=3`), not a single gold-ranked winner. **PaddleOCR was dropped (Windows-box install/runtime failures) and is NOT a consensus voter.**
 - **VLM engines = disagreement vectors ONLY.** qwen2.5vl (on the 5090 via Ollama), GOT-OCR, etc. They modernize/editorialize, so their output is **NEVER committed as text** — but they're valuable *because* they're "smart": where a VLM diverges from the faithful engines it often flags a real faithful-OCR error (e.g. GOT "treagzon"→"treason"). More independent vectors → better error detection.
 - **Word-level alignment:** align all engines' outputs token-by-token. Where engines **agree** (consensus) → auto-accept, `trust_level = derived`/`consensus`. Where they **disagree** → emit a **review item** (no text is committed there until a human resolves it).
 

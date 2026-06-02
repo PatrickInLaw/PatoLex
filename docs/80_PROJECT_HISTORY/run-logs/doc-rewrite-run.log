@@ -1,0 +1,19 @@
+[2026-06-02 00:00 PT] START | Wholesale doc rewrite to TRUTH_BASELINE_2026-06-02 | OK
+[2026-06-02 00:00 PT] READ | TRUTH_BASELINE + DOC_DELTA_MAP ingested | OK
+[2026-06-02 00:05 PT] READ | Target docs read: ARCHITECTURE, ROADMAP, SCHEMA_DESIGN, CHANGELOG, CLAUDE.md, DATA_SOURCES, HANDOFF, BUILD_RUNBOOK, pipeline/README, session-hygiene hook | OK
+[2026-06-02 00:05 PT] PLAN | Order: ARCHITECTURE (T1) -> ROADMAP (T1) -> CLAUDE.md (rules) -> SCHEMA_DESIGN -> CHANGELOG -> DATA_SOURCES -> HANDOFF(current) -> BUILD_RUNBOOK 3-engine fix | OK
+[2026-06-02 00:15 PT] DONE | ARCHITECTURE.md: historical-first scope, Python+TS active stack / C# deferred, 3-engine consensus, conceptual-model superseded note, BUILD_RUNBOOK xref, rev-history | OK
+[2026-06-02 00:25 PT] DONE | ROADMAP.md: Current Status rewrite (schema live, 4262 acts, 3-engine, 0-by-design), Gate C->Done, Gate D->Live, Gate E->In progress, rev-history | OK
+[2026-06-02 00:35 PT] DONE | CLAUDE.md: scope historical-first, pipeline-stack note, ADDED Hygiene Cadence rule + Findings-in-durable-docs rule, rev-history. No MANDATORY rule weakened | OK
+[2026-06-02 00:45 PT] DONE | SCHEMA_DESIGN.md: as-built columns, no enacted_date, lineage_edge=recodification (no first-class table), provision_version/lineage_edge 0-by-design, 3-engine, build-order note, status+rev-history | OK
+[2026-06-02 00:52 PT] DONE | CHANGELOG.md: appended 2026-06-01 + 2026-06-02 entries (1850-1875 build, schema live, 3-engine, three-tier, forward campaign, doc rewrite) | OK
+[2026-06-02 00:55 PT] DONE | BUILD_RUNBOOK.md §2: 4->3 engine fix, PaddleOCR-not-voter, rev-history | OK
+[2026-06-02 00:58 PT] DONE | pipeline/README.md: added 3-engine / PaddleOCR-not-voter clarification | OK
+[2026-06-02 01:02 PT] DONE | DATA_SOURCES.md (modern): scope note = tier (c) built SECOND, POC-floor clarified, rev-history | OK
+[2026-06-02 01:08 PT] DONE | OCR_ACCURACY_VALIDATION.md: as-built 3-engine note (bake-off measured 4, prod=3, Paddle dropped), table row annotated, accuracy NOT human-gold-certified, rev-history | OK
+[2026-06-02 01:10 PT] DONE | VERIFICATION_TOOL.md: faithful-engine line -> as-built 3-engine consensus, Paddle not a voter | OK
+[2026-06-02 01:13 PT] DONE | DATA_SOURCES_HISTORICAL.md: recodification via lineage_edge (no first-class table), enacted_date->chaptered/effective/operative, rev-history | OK
+[2026-06-02 01:15 PT] CHECK | HANDOFF 2026-06-02 update already current (schema live, 1850-1875, three-tier, forward); no engine-count error; left as-is | OK
+[2026-06-02 01:18 PT] VERIFY | Grep confirms no live "Phase 2 historical / 1991-POC" framing in ARCHITECTURE/ROADMAP (only labeled-obsolete + rev-history); 3-engine fix applied everywhere it appeared in core/load-bearing docs | OK
+[2026-06-02 01:20 PT] FINDINGS | Durable-doc note: 3-engine consensus, lineage_edge recodification, no enacted_date, 0-by-design read models now recorded in ARCHITECTURE/ROADMAP/SCHEMA_DESIGN (durable), not just here | OK
+[2026-06-02 01:20 PT] COMPLETE | Doc rewrite complete; changes left staged-ready (NOT committed) | OK

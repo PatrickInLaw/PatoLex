@@ -20,3 +20,6 @@
 [2026-06-02 11:26 PT] PUSH | 1883-84: OCR outputs pushed to 5090 | OK
 [2026-06-02 11:26 PT] RUN | 1883-84: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-02 11:26 PT] RUN | 1885-86: START local OCR (1885-86_Statutes.pdf) on 5080 | OK
+[2026-06-02 11:44 PT] PUSH | 1885-86: OCR outputs pushed to 5090 | OK
+[2026-06-02 11:44 PT] RUN | 1885-86: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 11:44 PT] RUN | 1887: START local OCR (1887_Statutes.pdf) on 5080 | OK

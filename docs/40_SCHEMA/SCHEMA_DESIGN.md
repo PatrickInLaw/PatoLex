@@ -1,6 +1,6 @@
 # Gate D — Schema Design (Event-Sourced, Domain-Neutral, Temporal)
 
-**Status:** Design decision (cc002, 2026-06-01). The container the reconstructed corpus is written into. Implementation (Drizzle DDL) follows this design.
+**Status:** Design decision (cc002, 2026-06-01); **DDL implemented and LIVE on local PostgreSQL 16 (migrations 0000-0004, 7 tables, 4262 acts ingested for 1850-1875) — reconciled to as-built 2026-06-02.** The container the reconstructed corpus is written into.
 **Depends on:** Method A (validated, QUALIFIED-GO). **Feeds:** Gate E scale-out, the web app (Gate H), and the Git emitter (`LAW_AS_GIT.md`).
 **Related:** `ROADMAP.md`, `DATA_SOURCES_HISTORICAL.md`, `LAW_AS_GIT.md`, `ADJACENT_DOMAINS_FEASIBILITY.md`.
 
@@ -20,8 +20,12 @@
 ### `source_document` — provenance
 Every artifact we ingest. `id`, `type` (session_law | bill | annotated_edition | scan | regulatory_action | official_xml), `citation`, `jurisdiction`, `source_channel` (IA id / Chief Clerk URL / leginfo / OLRC), `scan_quality`, `ocr_engine`, `ocr_cer_estimate`, `trust_level`, `retrieved_at`. Clean-channel flag (per the licensing analysis — IA-non-goog / CA-gov only for served text).
 
+**As built (live migrations 0000-0004):** the table also carries `content_sha256` (content identity — the ingest key `ingest_clean.py` resolves a volume by), `ocr_stats` (jsonb), plus corpus-positioning columns `corpus`, `edition_year`, `claimed_year`, `coverage_start_year`, `coverage_end_year`, `section_range`, `page_count`, `media_format`, `file_name`, `source_uri`, `verification_note`, `clean_channel`.
+
 ### `enactment` — the "commit"
-One act with legal force. `id`, `source_document_id`, `citation` (e.g. `Stats. 1883 ch. 38`), `jurisdiction`, `session`/`legislature`, **`chapter_number`** (the §9605 ordering key), **three dates** — `chaptered_date`, `effective_date`, `operative_date` (all nullable, era-aware), `title`, `kind` (statute | recodification | regulatory_action). Maps 1:1 to a Git commit.
+One act with legal force. `id`, `source_document_id`, `citation` (e.g. `Stats. 1883 ch. 38`), `jurisdiction`, `session`/`legislature`, **`chapter_number`** (the §9605 ordering key), **three dates** — `chaptered_date`, `effective_date`, `operative_date` (all nullable, era-aware), `title`, `bill_number`, `kind` (statute | recodification | regulatory_action). Maps 1:1 to a Git commit.
+
+> **As-built note:** the three date columns are `chaptered_date` / `effective_date` / `operative_date`. **There is NO `enacted_date` column** — any older prose referencing one is wrong; use the chaptered/effective/operative trio (point-in-time queries key on `operative_date`).
 
 ### `provision` — the addressable unit (domain-neutral, the lineage anchor)
 The thing with identity across time. **Synthetic, surface-independent identity** that survives renumbering/recodification — this is the single most important concept in the schema (it's what makes "this is the same section even though it was renumbered in 1943" expressible).
@@ -34,7 +38,9 @@ The thing with identity across time. **Synthetic, surface-independent identity**
 `provision_id` → (`code`, `section_number`, `label`, `valid_range`). Because the *displayed* citation changes (renumbering) while the `provision_id` does not. Handles the §634-game-law-vs-plumbing collision the Method-A spike surfaced.
 
 ### `change_event` — the heart (append-only)
-One enactment's effect on one provision. `id`, `enactment_id`, `provision_id`, **`action`** (enact | amend | repeal | add | renumber | recodify | reserve), **`new_text`** (full replacement — CA restates the *entire* section, so each event carries the whole new text, not a patch), `operative_date`, **`sequence`** (global order = operative_date, then `chapter_number`, then in-act order — the tiebreak chain that resolves §9605), **resolution metadata** (`supersedes` / `superseded_by` / `double_jointed_with` / `chaptered_out` flag), `diff_from_prior` (see below), `source_document_id` + `page_ref` (provenance), `trust_level`.
+One enactment's effect on one provision. `id`, `enactment_id`, `provision_id`, **`action`** (enact | amend | repeal | add | renumber | recodify | reserve), **`new_text`** (full replacement — CA restates the *entire* section, so each event carries the whole new text, not a patch), `operative_date`, **in-act order / sequence** (global order = operative_date, then `chapter_number`, then in-act order — the tiebreak chain that resolves §9605), **resolution metadata** (`supersedes_id` / `superseded_by_id` / `double_jointed_with_id` / `chaptered_out` flag), `diff_from_prior` (jsonb; see below), `source_document_id` + `page_ref` (provenance), `trust_level`.
+
+> **As-built capture-all-signals columns (live):** `change_event` also carries **`confident`** (bool), **`confidence`** (real), and **`ocr_provenance`** (jsonb) — the per-act OCR consensus signals. `ocr_provenance->>'consensus_method'` records the **3-engine** vote (`token_majority_3` / `token_majority_2` / `single`) from `pipeline/consensus.py` (`N_MAX_ENGINES=3`: Tesseract + docTR + Surya). PaddleOCR is **not** a consensus voter. As of the 1850-1875 build: 4057 acts `token_majority_3`, 205 `token_majority_2`, zero single-engine committed; `confident` = t on 3424 / f on 838.
 
 ### Diffs & redline (derived — canonical text is always the whole section)
 We **capture word-level diffs**, but always *derived from* two stored whole-section texts — never the reverse (preserving "selection, not replay"). Two surfaces:
@@ -66,7 +72,9 @@ What Git's rename detection *cannot* infer, and the genuinely hard modeling prob
 
 ## Read models, CQRS & query performance (not the system of record)
 
-The event log is the write side; **end-user queries never replay it.** Two materialized read models, both regenerable from the log at any time:
+The event log is the write side; **end-user queries never replay it.** Two materialized read models, both regenerable from the log at any time.
+
+> **As-built state (2026-06-02):** `provision_version` currently has **0 rows BY DESIGN** — it is a materialized projection built at build/publish time, and that sweep has not yet been run (the system of record is the `change_event` log, which holds the 1850-1875 corpus). Likewise `lineage_edge` is **0 by design** — the 1872 recodification edges are not yet materialized. Empty ≠ broken for either table.
 
 - **`provision_version` (materialized) — the web UI's read side.** For each provision, the **fully resolved text valid over a `[valid_from, valid_to)` `daterange`**, built once (at build/publish time) by folding `change_event`s in `sequence` order and applying §9605. Served with a **GiST exclusion constraint** (no overlapping ranges per provision) + **tsvector** FTS. A point-in-time query is then a single indexed lookup, **zero replay, any date:** `SELECT text FROM provision_version WHERE provision_id = ? AND as_of <@ valid_range`.
 - **Git history — the second read side.** Walk `enactment`s in `(operative_date, chapter_number)` order → one commit each, touching the files for its `change_event`s; `lineage_edge`s → file moves; trailers carry `chaptered_date`/`effective_date`/`chapter_number`/`bill`/`trust_level`/chapter-out notes. `git checkout @{date}` is Git's own precomputed point-in-time index.
@@ -79,7 +87,7 @@ The event log is the write side; **end-user queries never replay it.** Two mater
 
 ## Era-awareness (CA statutes)
 
-- **Pre-1872 (blank-slate start):** `unit_type = act_section`; provisions addressed by act + section. There is no code numbering yet — it is *created* by the 1872 codification, modeled as a set of `lineage_edge`s mapping act_sections → code_sections. (This is also why build order starts at 1872, not 1850 — see ROADMAP sequencing note.)
+- **Pre-1872 (blank-slate start):** `unit_type = act_section`; provisions addressed by act + section. There is no code numbering yet — it is *created* by the 1872 codification, modeled as a set of `lineage_edge`s mapping act_sections → code_sections. (The live build runs **forward from 1850** — 1850-1875 is already ingested — with the 1872 codification modeled as a recodification *event* in the chain, not an enact-from-nothing baseline; see ROADMAP sequencing note.)
 - **1872–1993:** code_sections, forward via Method A `change_event`s.
 - **Operative vs. effective vs. chaptered:** store all three; **point-in-time queries key on `operative_date`** (Gov. Code §9600 modern 90-day default; era-specific rules for the 1849 vs. 1879 constitutions). Effective ≠ operative is a correctness trap we model explicitly.
 - **`trust_level`** per event/version: `official_xml` > `human_verified` > `derived` > `ocr_uncertain`. Drives the disagreement-flagging + spot-audit QA model (no line-by-line review).
@@ -107,3 +115,12 @@ The full event model lives in **local PostgreSQL 16** (build/ETL/reconstruction/
 - `lineage_edge`: recursive-CTE "full history of a provision" query; the split primary-successor identity-inheritance rule in ETL.
 - `sequence` representation that's stable under late-arriving events (re-fold vs. incremental).
 - Exact USLM element mapping table (defer until a federal extension is real, but keep names compatible).
+
+---
+
+## Revision History
+
+| Date | Change |
+|------|--------|
+| 2026-06-01 | cc002: Initial Gate D schema design (event-sourced + CQRS, domain-neutral, lineage-edge recodification, USLM-aware). |
+| 2026-06-02 | cc002 (doc rewrite): Reconciled to the as-built live schema. Added the as-built column inventories (`source_document.content_sha256`/`ocr_stats`/corpus-positioning; `change_event.confident`/`confidence`/`ocr_provenance`). Confirmed recodification is the **`lineage_edge`** table (no first-class `recodification` table) and the date columns are **chaptered/effective/operative (no `enacted_date`)**. Noted `provision_version` and `lineage_edge` are **0 by design**. Recorded consensus = **3 engines (Tesseract+docTR+Surya), PaddleOCR not a voter**. Corrected the era-awareness build-order note to the live 1850-forward reality. |

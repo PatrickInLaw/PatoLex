@@ -4,6 +4,8 @@
 
 This document is the authoritative record of *what California legislative data actually exists* and *how PatoLex reconstructs point-in-time statute text from it*. It drives the schema (Gate C) and pipeline (Gate D).
 
+> **Scope note (2026-06-02):** this doc covers the **modern channel** — leginfo PUBINFO bulk data (tier (c) of the three-tier corpus model, ~1989/1994–present). PatoLex is built **historical-first**: the modern era is the **SECOND** build, after the historical session-law corpus (1850-forward, already underway and live for 1850-1875). The "POC floor" language below predates the historical-first reversal and refers specifically to the modern tier's earliest reliable reconstruction year (~Jan 1 1994); it is NOT the project's overall starting point or a "modern-first POC." See `ROADMAP.md` and `DATA_SOURCES_HISTORICAL.md` §1d.
+
 ---
 
 ## 1. The Source: leginfo PUBINFO bulk data
@@ -75,3 +77,4 @@ Full subagent reports (data inventory + methodology, with all column lists, samp
 | Date | Change |
 |------|--------|
 | 2026-05-31 | cc002: Gate B reconnaissance. Confirmed bulk source; found law tables are current-only (no historical snapshots); strategy = amendment-application validated against current snapshot; POC floor Jan 1 1994; legal-correctness rules and remaining unknowns documented. |
+| 2026-06-02 | cc002 (doc rewrite): Added scope note clarifying this is the **modern tier (c), built SECOND** under the historical-first plan — the "POC floor ~1994" is the modern channel's earliest reconstruction year, not a modern-first POC or the project's overall start. |

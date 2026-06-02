@@ -1,6 +1,8 @@
 # OCR Accuracy Validation — the path to legal-grade
 
-**Status:** cc002, 2026-06-01. **Directional** result on a small human-gold set (1 full session-law page + 5 short code pages). Establishes that the multi-vector ensemble architecture (`VERIFICATION_TOOL.md`) reaches legal-grade on the *hardest* material (faded 1850 session-law); the numbers need 10+ session-law gold pages to firm.
+**Status:** cc002, 2026-06-01. **Directional** result on a small human-gold set (1 full session-law page + 5 short code pages). Establishes that the multi-vector ensemble architecture (`VERIFICATION_TOOL.md`) reaches legal-grade on the *hardest* material (faded 1850 session-law); the numbers need 10+ session-law gold pages to firm. **The ~0.5% / ~1.5% accuracy figures here are directional and NOT yet human-gold certified** (a ~10-20 page human-gold audit is still owed).
+
+> **As-built note (2026-06-02): production consensus is 3 engines, not 4.** This page records the original engine **bake-off**, which *measured* four classical engines including PaddleOCR. The **production consensus committed to the DB uses 3 engines — Tesseract + docTR + Surya** (`pipeline/consensus.py`, `N_MAX_ENGINES=3`; method tags `token_majority_3` / `token_majority_2`). **PaddleOCR is NOT a production consensus voter** (it failed to run reliably on the Windows OCR boxes — see the bake-off run logs — and is not in `consensus.py`). The 4-engine numbers below are the bake-off measurement, not the as-built voter set; the 1850-1875 corpus was committed via the 3-engine consensus (4057 `token_majority_3` + 205 `token_majority_2`, zero 4-engine acts in the DB).
 
 ## The question
 
@@ -11,7 +13,7 @@ Can OCR of California's earliest, faded session-law scans (the primary source) r
 | Stage | Silent-error rate | Review queue | Notes |
 |---|---|---|---|
 | Best single engine (Surya 0.13, v2-grayscale) | 12.71% CER | — | |
-| **4 classical engines, consensus** (Surya + Tesseract + docTR + PaddleOCR) | **4.36%** | 16.1% | ~3× better than single |
+| **classical-engine consensus** (bake-off measured 4: Surya + Tesseract + docTR + PaddleOCR; **production = 3, PaddleOCR dropped** — see as-built note) | **4.36%** | 16.1% | ~3× better than single |
 | **+ qwen2.5-VL + GOT-OCR as flagging vectors** | **0.50%** ✅ | 32.9% | legal-grade |
 
 ## Why it works — independent vs shared failures
@@ -38,3 +40,12 @@ The "kidnaping" litmus is confirmed against Patrick's hand-keyed gold: the **187
 ## Throughput (for the production run)
 
 5090 vs 5080 benchmark (warmup-discarded, batched): **Surya batched on the 5090 = 0.70 s/page** (the 5080's 16 GB OOMs on Surya batching; the 5090's 32 GB is required). docTR ~0.23 s/page on either. Production split: **Surya batched / 5090 + docTR / 5080 + Tesseract / spare CPU**, VLM vectors (qwen via Ollama / GOT) on the 5090. Corpus-scale OCR is tractable at these rates.
+
+---
+
+## Revision History
+
+| Date | Change |
+|------|--------|
+| 2026-06-01 | cc002: Directional OCR accuracy cascade (single → consensus → +VLM flagging) on the small human-gold set. |
+| 2026-06-02 | cc002 (doc rewrite): Added as-built note — **production consensus = 3 engines (Tesseract+docTR+Surya), PaddleOCR dropped/not a voter** (the 4-engine numbers are the bake-off measurement, not the as-built voter set). Flagged the ~0.5%/~1.5% figures as directional, **not yet human-gold certified**. |

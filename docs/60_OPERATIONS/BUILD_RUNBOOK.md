@@ -46,7 +46,7 @@ The Chief Clerk backbone is **653 PDFs, 1850-2008** (258 body volumes, 413,987 b
 
 **Queue model:** a shared atomic-claim queue on the 5090 (`production_queue_state.json`). `pipeline/5090/queue_claim.py` is the lock-serialized claim engine. A worker claims the lowest-year `pending` volume, OCRs it, banks pages. **Stale-claim recovery:** an `in_progress`/`failed` volume whose heartbeat is older than `STALE_SECONDS` (1800 s) is reclaimable on the next claim cycle. `ocr_only_*.py` is **checkpoint-resumable** — banked pages are never re-OCR'd, so a reclaimed or restarted volume continues where it left off.
 
-**Engines:** 4 classical (Surya + docTR + Tesseract + PaddleOCR) → token-majority **consensus = the committed text**; qwen2.5vl (+GOT) run as **flagging vectors only, never committed** (they modernize spelling). See `OCR_ACCURACY_VALIDATION.md`.
+**Engines:** **3 consensus engines (Tesseract + docTR + Surya)** → token-majority **consensus = the committed text** (`pipeline/consensus.py`, `N_MAX_ENGINES=3`; method tags `token_majority_3` / `token_majority_2` / `single`). qwen2.5vl (+GOT) run as **flagging vectors only, never committed** (they modernize spelling). **PaddleOCR is NOT a consensus voter** (older prose listed 4 classical engines incl. PaddleOCR — the code and the live DB use 3). See `OCR_ACCURACY_VALIDATION.md`.
 
 ### Start / stop
 - **Start (interactive overnight run):** ensure both scheduled tasks (`PatoLex_OCR_5090`, `PatoLex_OCR_5080`) are enabled and running; the supervisors launch workers. Worker count on the 5090 is set via `max_workers.txt`.
@@ -109,3 +109,4 @@ Full rationale: `pipeline/README.md` → "Canonical vs. superseded ingest path."
 | Date | Change |
 |------|--------|
 | 2026-06-02 | cc002: Created. Captured three-tier corpus + per-tier method, OCR queue/two-node/scheduled-task mechanics, the 0800 backoff-disable rule, the canonical `ingest_clean.py --commit` chain (sha256-keyed, scoped-purge, atomic) vs the superseded lossy `ingest_from_ocr.py`, format eras, and current state (1850-1875 version-B / 1877-1910 OCRing / modern parser un-ingested). |
+| 2026-06-02 | cc002 (doc rewrite): Corrected §2 engine count to **3 consensus engines (Tesseract+docTR+Surya), PaddleOCR not a voter** (was "4 classical incl. PaddleOCR"), matching `consensus.py` (`N_MAX_ENGINES=3`) and the live DB. |

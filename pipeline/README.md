@@ -67,6 +67,14 @@ columns). `provision_version` is 0 by design (materialization is a deferred
 sweep). The forward campaign (1877-1910) is OCRing now; modern-format parser
 fixes are in flight and **not yet ingested.**
 
+**Consensus engine count — 3, not 4.** `pipeline/consensus.py` uses
+`N_MAX_ENGINES=3`: **Tesseract + docTR + Surya** (token majority →
+`token_majority_3` / `token_majority_2` / `single`). qwen2.5vl / GOT run as
+disagreement-flagging vectors only and are never committed as text.
+**PaddleOCR is NOT a consensus voter**, despite older prose that listed "4
+classical engines incl. PaddleOCR." The live DB confirms the code (4057
+`token_majority_3` + 205 `token_majority_2`, zero 4-engine acts).
+
 ## Orchestration goal: determinism + idempotent resume (NOT boot-resilience)
 
 > Earlier drafts of this README described an ONSTART / SYSTEM-principal
