@@ -1,0 +1,10 @@
+[2026-06-02 cleanstop] PHASE: START | Clean stop of OCR+ingest workers on 5080+5090, version-A complete @1875 | OK
+[2026-06-02 cleanstop] BASELINE | DB enactment count=4288; 5080 GPU ~1433MiB/14%; 5090 GPU 1806MiB/0% | OK
+[2026-06-02 cleanstop] 5090 | schtasks PatoLex_OCR_5090 End+Disable; PatoLex_OCR_5090_ScaleTo1_0800 Disable | OK
+[2026-06-02 cleanstop] 5090 | taskkill queue_worker pids 35156+20080 (+child 18452) /T; supervisor parent 19184 gone | OK
+[2026-06-02 cleanstop] 5090 | Verify: 0 python procs, 0 pipeline procs; GPU 0%/1806MiB/13.7W idle | OK
+[2026-06-02 cleanstop] 5080 | schtasks PatoLex_OCR_5080 End+Disable; Ingest_5080 End+Disable; Backoff_0800 Disable | OK
+[2026-06-02 cleanstop] 5080 | taskkill ingest_watcher pid 50996 (+child 35336) /T | OK
+[2026-06-02 cleanstop] 5080 | Verify: 0 python procs; only benign edge/notepad++/tail follower remain; GPU 10%/1399MiB idle | OK
+[2026-06-02 cleanstop] VERIFY | DB enactment count=4288 UNCHANGED; banked OCR intact 5080 (1850-1875-76, 21 files) + 5090 (1861-1875-76, 10 files) | OK
+[2026-06-02 cleanstop] PHASE: DONE | Both boxes idle, no stray PatoLex python, data+OCR untouched, no git commit | OK
