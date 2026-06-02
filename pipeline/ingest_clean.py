@@ -76,6 +76,15 @@ SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
 REPO = Path(r"C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex")
 LOG_FILE = REPO / "docs" / "80_PROJECT_HISTORY" / "run-logs" / "phaseB-build-run.log"
 
+# Banked per-token consensus artifact name (Phase C disagreement / review
+# substrate). Written ALONGSIDE page_ocr_results.json, under ocr_consensus/.
+CONSENSUS_OUTPUT_NAME = "consensus_output.json"
+
+# A page is bucketed by its consensus page_confidence (mean per-token confidence,
+# weighted by engines present). Thresholds are honest, not tuned to flatter.
+PAGE_HIGH_CONF = 0.98   # confidence >  this -> "high"
+PAGE_MED_CONF = 0.93    # confidence >  this (and <= HIGH) -> "med"; else "low"
+
 # session_label -> (session_str, legislature_ordinal). Superset of both old maps.
 LEGISLATURE_MAP = {
     "1850": ("1849-1850", "1st"), "1851": ("1851", "2nd"), "1852": ("1852", "3rd"),
@@ -183,6 +192,181 @@ class PlannedAct:
     trust_level: str                  # always 'ocr_uncertain' for this corpus
     designation: str
     section_number: str
+    # --- capture-ALL-signals: per-act OCR consensus signal (Phase C substrate) -
+    confidence: Optional[float]       # agreement ratio in [0,1] or None (-> NULL)
+    ocr_provenance: dict              # full jsonb provenance written to change_event
+
+
+def _page_index(page_rec: dict, fallback_key) -> Optional[str]:
+    """Normalized 1-indexed page-number string for a page_ocr_results record.
+
+    page_ocr_results.json is keyed by page number; records also carry
+    'page_1indexed'. We key our consensus cache by the STRING page number so an
+    act's source_page (also a string) maps directly with no int/str ambiguity.
+    """
+    pi = page_rec.get("page_1indexed", fallback_key)
+    if pi is None:
+        return None
+    return str(pi)
+
+
+def build_page_consensus(session_label: str) -> dict:
+    """
+    Build the per-page token consensus for a volume ONCE (with per-engine
+    candidates captured) and assemble the banked consensus_output.json payload +
+    the per-volume distribution stats. Reads only banked artifacts; no DB.
+
+    Returns a dict:
+      {
+        "by_page": { page_str: ConsensusResult-as-dict-with-low-conf-summary },
+        "page_confs": [float, ...],           # for quality estimate
+        "stats": { mean/median/high/med/low/engines/n_pages },
+        "output_payload": { ... }             # what gets written to consensus_output.json
+        "output_path": Path | None
+      }
+    """
+    scratch = SCRATCH_ROOT / ("production-" + session_label)
+    ocr_path = scratch / "ocr_consensus" / "page_ocr_results.json"
+    out_path = scratch / "ocr_consensus" / CONSENSUS_OUTPUT_NAME
+    by_page: dict = {}
+    page_confs: List[float] = []
+    engines_seen: set = set()
+    pages_payload: dict = {}
+
+    if not ocr_path.exists():
+        return {
+            "by_page": {}, "page_confs": [], "stats": _empty_stats(),
+            "output_payload": None, "output_path": None,
+        }
+
+    sys.path.insert(0, str(REPO / "pipeline"))
+    from consensus import (  # noqa: E402
+        consensus_from_page_record, LOW_CONFIDENCE_THRESHOLD,
+    )
+
+    raw = json.loads(ocr_path.read_text(encoding="utf-8"))
+    for k, page in raw.items():
+        res = consensus_from_page_record(page, capture_candidates=True)
+        if not res.n_tokens:
+            continue
+        page_key = _page_index(page, k)
+        page_confs.append(res.page_confidence)
+        engines_seen.update(res.engines_used)
+
+        # --- low-confidence (Phase C review) tokens for THIS page -------------
+        low_tokens = []
+        for t in res.tokens:
+            if t.confidence < LOW_CONFIDENCE_THRESHOLD:
+                low_tokens.append({
+                    "surface": t.surface,
+                    "confidence": t.confidence,
+                    "n_agree": t.n_agree,
+                    "n_present": t.n_present,
+                    "candidates": t.candidates or [],
+                })
+
+        # banked per-token record (FULL token stream + the low-conf disagreement)
+        pages_payload[page_key] = {
+            "page_confidence": res.page_confidence,
+            "token_agreement_ratio": res.token_agreement_ratio,
+            "method": res.method,
+            "engines_used": res.engines_used,
+            "n_tokens": res.n_tokens,
+            "tokens": [
+                {
+                    "surface": t.surface,
+                    "confidence": t.confidence,
+                    "n_agree": t.n_agree,
+                    "n_present": t.n_present,
+                    "candidates": t.candidates or [],
+                }
+                for t in res.tokens
+            ],
+            "low_confidence_token_count": len(low_tokens),
+        }
+        # compact per-page handle the act provenance step uses (avoid re-walking
+        # the full token list per act)
+        by_page[page_key] = {
+            "page_confidence": res.page_confidence,
+            "token_agreement_ratio": res.token_agreement_ratio,
+            "method": res.method,
+            "engines_used": res.engines_used,
+            "low_confidence_tokens": low_tokens,
+        }
+
+    stats = _distribution_stats(page_confs, sorted(engines_seen))
+    output_payload = {
+        "session_label": session_label,
+        "consensus_module": "consensus.py token_majority (S1-A/S1-B)",
+        "low_confidence_threshold": float(
+            __import__("consensus").LOW_CONFIDENCE_THRESHOLD
+        ),
+        "n_pages": len(pages_payload),
+        "stats": stats,
+        "pages": pages_payload,
+    }
+    return {
+        "by_page": by_page,
+        "page_confs": page_confs,
+        "stats": stats,
+        "output_payload": output_payload,
+        "output_path": out_path,
+    }
+
+
+def _empty_stats() -> dict:
+    return {
+        "mean_agreement": None, "median_agreement": None,
+        "high_count": 0, "med_count": 0, "low_count": 0,
+        "engines": [], "n_pages": 0,
+    }
+
+
+def _distribution_stats(page_confs: List[float], engines: List[str]) -> dict:
+    if not page_confs:
+        return {**_empty_stats(), "engines": engines}
+    s = sorted(page_confs)
+    n = len(s)
+    mid = n // 2
+    median = s[mid] if n % 2 else (s[mid - 1] + s[mid]) / 2.0
+    high = sum(1 for c in page_confs if c > PAGE_HIGH_CONF)
+    med = sum(1 for c in page_confs if PAGE_MED_CONF < c <= PAGE_HIGH_CONF)
+    low = sum(1 for c in page_confs if c <= PAGE_MED_CONF)
+    return {
+        "mean_agreement": round(sum(page_confs) / n, 4),
+        "median_agreement": round(median, 4),
+        "high_count": high, "med_count": med, "low_count": low,
+        "engines": engines, "n_pages": n,
+    }
+
+
+def bank_consensus_output(plan: dict) -> Optional[str]:
+    """
+    Persist the per-token consensus_output.json (Phase C substrate) ALONGSIDE
+    page_ocr_results.json. No DB. Idempotent: overwrites with the freshly-derived
+    deterministic payload. Returns the written path (or None if no consensus).
+
+    This is what makes the Phase C disagreement/review queue a QUERY over
+    persisted data: source_document.ocr_stats.consensus_output_path points here,
+    and each change_event.ocr_provenance.disagreement summarizes the per-act slice.
+    """
+    payload = plan.get("consensus_output_payload")
+    path_str = plan.get("consensus_output_path")
+    if not payload or not path_str:
+        log("INGEST-CONSENSUS",
+            f"{plan['session_label']}: no consensus payload to bank "
+            f"(no page_ocr_results / no tokens)", "WARN")
+        return None
+    out_path = Path(path_str)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    log("INGEST-CONSENSUS",
+        f"{plan['session_label']}: banked {out_path.name} "
+        f"({payload['n_pages']} pages, "
+        f"low_conf_threshold={payload['low_confidence_threshold']})", "OK")
+    return str(out_path)
 
 
 def plan_volume(session_label: str) -> dict:
@@ -190,8 +374,13 @@ def plan_volume(session_label: str) -> dict:
     Build the full set of PlannedActs for a volume from banked artifacts.
     Reads:
       parsed_acts_fixed.json  (confident_acts)  -- required
-      ocr_consensus/page_ocr_results.json       -- optional, for quality est.
+      ocr_consensus/page_ocr_results.json       -- optional, drives ALL signals
     Does NOT touch the DB. Returns a plan dict.
+
+    capture-ALL-signals: the per-page token consensus is built ONCE (with
+    per-engine candidates), banked as consensus_output.json, summarized into
+    per-volume ocr_stats, and joined per-act (by source_page) into the act's
+    ocr_provenance + confidence. Nothing computed is discarded (Patrick).
     """
     scratch = SCRATCH_ROOT / ("production-" + session_label)
     acts_path = scratch / "parsed_acts_fixed.json"
@@ -206,26 +395,33 @@ def plan_volume(session_label: str) -> dict:
         session_label, (session_label, session_label)
     )
 
-    # ---- per-volume quality estimate from consensus confidence (Hans F8) -----
-    page_confs: List[float] = []
-    ocr_path = scratch / "ocr_consensus" / "page_ocr_results.json"
-    if ocr_path.exists():
-        try:
-            # Re-derive token consensus confidence per page using consensus.py so
-            # the quality estimate reflects the REAL (token-aligned) confidence,
-            # not the old bag-of-words ratio. Lazy import to keep this optional.
-            sys.path.insert(0, str(REPO / "pipeline"))
-            from consensus import consensus_from_page_record  # noqa: E402
-            raw = json.loads(ocr_path.read_text(encoding="utf-8"))
-            for _k, page in raw.items():
-                res = consensus_from_page_record(page)
-                if res.n_tokens:
-                    page_confs.append(res.page_confidence)
-        except Exception as e:  # never fatal — quality est. is best-effort
-            log("INGEST-PLAN",
-                f"{session_label}: consensus quality est. skipped ({str(e)[:80]})",
-                "WARN")
+    # ---- per-page consensus (once) + bank consensus_output.json + stats ------
+    consensus = {"by_page": {}, "page_confs": [], "stats": _empty_stats(),
+                 "output_payload": None, "output_path": None}
+    try:
+        consensus = build_page_consensus(session_label)
+    except Exception as e:  # never fatal — signals are best-effort, ingest still runs
+        log("INGEST-PLAN",
+            f"{session_label}: consensus build skipped ({str(e)[:80]})", "WARN")
+
+    page_confs = consensus["page_confs"]
+    by_page = consensus["by_page"]
+    stats = consensus["stats"]
     cer_proxy, scan_quality = estimate_volume_quality(page_confs)
+
+    consensus_output_path = (
+        str(consensus["output_path"]) if consensus["output_path"] else None
+    )
+    ocr_stats = {
+        "mean_agreement": stats["mean_agreement"],
+        "median_agreement": stats["median_agreement"],
+        "high_count": stats["high_count"],
+        "med_count": stats["med_count"],
+        "low_count": stats["low_count"],
+        "engines": stats["engines"],
+        "n_pages": stats["n_pages"],
+        "consensus_output_path": consensus_output_path,
+    }
 
     planned: List[PlannedAct] = []
     for idx, act in enumerate(confident_acts):
@@ -240,6 +436,45 @@ def plan_volume(session_label: str) -> dict:
         designation = citation
         confident = (not date_unknown) and (not chap_subst) and chapter_int > 0
 
+        # ---- join the act to its source page's consensus signal --------------
+        src_page = str(act.get("source_page", "")).strip()
+        page_ref = "p. " + (src_page if src_page else "0")
+        pc = by_page.get(src_page)
+        if pc is not None:
+            agreement = pc["page_confidence"]
+            engines = pc["engines_used"]
+            method = pc["method"]
+            low_toks = pc["low_confidence_tokens"]
+        else:
+            # no consensus for this page -> honest NULLs, not a fabricated 1.0
+            agreement = None
+            engines = []
+            method = None
+            low_toks = []
+
+        # page-level n_agree/n_present proxy (engines that produced this page):
+        n_present = len(engines) if engines else None
+        n_agree = None  # per-act agreement is page_confidence; per-token in payload
+
+        ocr_provenance = {
+            "engines": engines,
+            "consensus_method": method,
+            "agreement": agreement,
+            "chapter_raw": chapter_raw,
+            "chapter_ocr_substituted": chap_subst,
+            "date_unknown": date_unknown,
+            "page_ref": page_ref,
+            "n_agree": n_agree,
+            "n_present": n_present,
+            "disagreement": {
+                "low_confidence_token_count": len(low_toks),
+                # cap the inline list so a pathological page can't bloat the row;
+                # the FULL per-token stream lives in consensus_output.json, which
+                # this provenance references via source_document.ocr_stats.
+                "low_confidence_tokens": low_toks[:50],
+            },
+        }
+
         planned.append(PlannedAct(
             in_act_order=idx,
             chapter_int=chapter_int,
@@ -251,10 +486,12 @@ def plan_volume(session_label: str) -> dict:
             chapter_ocr_substituted=chap_subst,
             confident=confident,
             new_text=act.get("text", "") or "",     # FULL UTF-8, no truncation-mangling
-            page_ref="p. " + str(act.get("source_page", 0)),
+            page_ref=page_ref,
             trust_level="ocr_uncertain",
             designation=designation,
             section_number=str(chapter_int),
+            confidence=agreement,                    # None -> SQL NULL (S2-C convention)
+            ocr_provenance=ocr_provenance,
         ))
 
     return {
@@ -264,6 +501,9 @@ def plan_volume(session_label: str) -> dict:
         "scan_quality": scan_quality,
         "ocr_cer_estimate": cer_proxy,            # None means unknown -> SQL NULL (S2-C)
         "n_pages_with_consensus": len(page_confs),
+        "ocr_stats": ocr_stats,
+        "consensus_output_payload": consensus["output_payload"],
+        "consensus_output_path": consensus_output_path,
         "acts": planned,
     }
 
@@ -292,8 +532,21 @@ DESIGNATION_SQL = (
 CHANGE_EVENT_SQL = (
     "INSERT INTO change_event "
     "(enactment_id, provision_id, action, new_text, operative_date, in_act_order, "
-    " chaptered_out, trust_level, source_document_id, page_ref) "
-    "VALUES (%s, %s, 'enact', %s, %s, %s, false, %s, %s, %s) RETURNING id;"
+    " chaptered_out, trust_level, source_document_id, page_ref, "
+    " confident, confidence, ocr_provenance) "
+    "VALUES (%s, %s, 'enact', %s, %s, %s, false, %s, %s, %s, %s, %s, %s) "
+    # S2-A canonical key: idempotent re-ingest. Requires the UNIQUE index
+    # uq_change_event_src_doc_in_act_order to exist (apply per migration plan).
+    "ON CONFLICT (source_document_id, in_act_order) DO NOTHING "
+    "RETURNING id;"
+)
+# Per-volume source_document quality signals (capture-ALL-signals). Writes the
+# REAL scan_quality + ocr_cer_estimate (NULL if unknown — never -1.0/hardcoded)
+# + the ocr_stats jsonb. Targets the resolved production source_document row.
+SOURCE_DOC_UPDATE_SQL = (
+    "UPDATE source_document "
+    "SET scan_quality = %s, ocr_cer_estimate = %s, ocr_stats = %s "
+    "WHERE id = %s;"
 )
 # Canonical dedup check on (source_document_id, in_act_order):
 EXISTS_SQL = (
@@ -333,12 +586,18 @@ def build_param_plan(src_doc_id, plan) -> List[dict]:
             ),
             "change_event": (
                 None, None, act.new_text, act.operative_date, act.in_act_order,
-                act.trust_level, src_doc_id,  # page_ref appended at commit
+                act.trust_level, src_doc_id, act.page_ref,
+                act.confident, act.confidence,
+                act.ocr_provenance,  # wrapped as Jsonb at commit time
             ),
             "flags": {
                 "confident": act.confident,
+                "confidence": act.confidence,
                 "date_unknown": act.date_unknown,
                 "chapter_ocr_substituted": act.chapter_ocr_substituted,
+                "low_confidence_token_count":
+                    act.ocr_provenance.get("disagreement", {})
+                    .get("low_confidence_token_count", 0),
             },
         })
     return rows
@@ -380,6 +639,50 @@ def dry_run(session_label: str):
           f"(from {plan['n_pages_with_consensus']} consensus pages)")
     print(f"  acts w/ non-ASCII text: {n_nonascii} (e.g. §, em-dash preserved verbatim)")
 
+    # ---- WOULD-WRITE: source_document per-volume signal row -------------------
+    st = plan["ocr_stats"]
+    print("\n  --- source_document UPDATE (per-volume signals; WOULD write) ---")
+    print(f"    scan_quality      : {plan['scan_quality']!r}")
+    print(f"    ocr_cer_estimate  : {plan['ocr_cer_estimate']!r} "
+          f"(None -> SQL NULL, never -1.0/hardcoded)")
+    print(f"    ocr_stats (jsonb) : mean_agreement={st['mean_agreement']} "
+          f"median_agreement={st['median_agreement']} "
+          f"high/med/low={st['high_count']}/{st['med_count']}/{st['low_count']} "
+          f"engines={st['engines']} n_pages={st['n_pages']}")
+    print(f"    ocr_stats.consensus_output_path: {st['consensus_output_path']!r}")
+
+    # ---- WOULD-BANK: consensus_output.json (no write in dry-run) --------------
+    payload = plan.get("consensus_output_payload")
+    print("\n  --- consensus_output.json (Phase C substrate; WOULD bank, NOT written in dry-run) ---")
+    if payload:
+        n_low_pages = sum(
+            1 for p in payload["pages"].values()
+            if p["low_confidence_token_count"] > 0
+        )
+        total_low = sum(
+            p["low_confidence_token_count"] for p in payload["pages"].values()
+        )
+        print(f"    path              : {plan['consensus_output_path']}")
+        print(f"    pages             : {payload['n_pages']} "
+              f"(low_conf_threshold={payload['low_confidence_threshold']})")
+        print(f"    pages w/ low-conf : {n_low_pages}  total low-conf tokens: {total_low}")
+        # show one sample low-confidence token (the crowd-correction unit)
+        sample_low = None
+        for p in payload["pages"].values():
+            for t in p["tokens"]:
+                if t["confidence"] < payload["low_confidence_threshold"]:
+                    sample_low = t
+                    break
+            if sample_low:
+                break
+        if sample_low:
+            print(f"    sample low-conf token: surface={sample_low['surface']!r} "
+                  f"conf={sample_low['confidence']} "
+                  f"n_agree/n_present={sample_low['n_agree']}/{sample_low['n_present']}")
+            print(f"      disagreeing candidates: {sample_low['candidates']}")
+    else:
+        print("    (no consensus payload — no page_ocr_results.json / no tokens)")
+
     print("\n  --- SAMPLE ROWS (first 3 acts; parameters shown, values bound, never concatenated) ---")
     for act in acts[:3]:
         print(f"\n  act in_act_order={act.in_act_order} citation={act.citation!r} "
@@ -394,6 +697,20 @@ def dry_run(session_label: str):
         print(f"    change_event new_text[:120]: {snippet!r}")
         print(f"    change_event operative_date: {act.operative_date!r} "
               f"(NULL = unknown, never fabricated)")
+        print(f"    change_event confident     : {act.confident}")
+        print(f"    change_event confidence    : {act.confidence!r} "
+              f"(real 0-1, None -> SQL NULL)")
+        prov = act.ocr_provenance
+        print(f"    change_event ocr_provenance: engines={prov['engines']} "
+              f"method={prov['consensus_method']!r} agreement={prov['agreement']} "
+              f"chapter_raw={prov['chapter_raw']!r} "
+              f"chapter_ocr_substituted={prov['chapter_ocr_substituted']} "
+              f"date_unknown={prov['date_unknown']} "
+              f"n_agree/n_present={prov['n_agree']}/{prov['n_present']}")
+        dis = prov["disagreement"]
+        print(f"      disagreement: low_confidence_token_count="
+              f"{dis['low_confidence_token_count']} "
+              f"(inline list capped at 50; full stream in consensus_output.json)")
 
     # show a flagged example if any
     flagged = [a for a in acts if not a.confident]
@@ -459,6 +776,12 @@ def commit_volume(session_label: str):
     transaction (no per-act rollback that would discard prior inserts).
     """
     plan = plan_volume(session_label)
+    # Bank the per-token consensus_output.json FIRST (no DB; the Phase C
+    # substrate is durable even if the DB commit is later deferred/rolled back).
+    bank_consensus_output(plan)
+
+    from psycopg.types.json import Jsonb  # jsonb param wrapper (commit-path only)
+
     conn = _connect()
     conn.autocommit = False  # ONE explicit transaction for the whole volume
     inserted = skipped = 0
@@ -482,11 +805,26 @@ def commit_volume(session_label: str):
                 cur.execute(CHANGE_EVENT_SQL, (
                     enact_id, prov_id, act.new_text, act.operative_date,
                     act.in_act_order, act.trust_level, src_doc_id, act.page_ref,
+                    act.confident, act.confidence, Jsonb(act.ocr_provenance),
                 ))
-                inserted += 1
+                # ON CONFLICT DO NOTHING -> RETURNING is empty on a concurrent dup;
+                # that means the act was inserted by someone else after our EXISTS
+                # check. Treat as skipped (do NOT roll back the volume).
+                if cur.fetchone() is None:
+                    skipped += 1
+                else:
+                    inserted += 1
+            # ---- per-volume source_document signals (real, computed) ----------
+            cur.execute(SOURCE_DOC_UPDATE_SQL, (
+                plan["scan_quality"],
+                plan["ocr_cer_estimate"],          # None -> SQL NULL (S2-C)
+                Jsonb(plan["ocr_stats"]),
+                src_doc_id,
+            ))
         conn.commit()  # COMMIT ONCE — all acts or none (S2-B / F6)
         log("INGEST-COMMIT",
             f"{session_label}: inserted={inserted} skipped(dup)={skipped} | "
+            f"scan_quality={plan['scan_quality']} cer={plan['ocr_cer_estimate']} | "
             f"volume committed atomically (single txn)",
             "OK")
     except Exception as e:

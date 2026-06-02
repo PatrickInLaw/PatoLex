@@ -148,3 +148,6 @@
 [2026-06-02 08:07 PT] PHASEB-AB | results JSON -> C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex\pipeline\ab_compare_results.json | OK
 [2026-06-02 08:07 PT] PHASEB-AB | report -> C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex\docs\80_PROJECT_HISTORY\AB_CONSENSUS_VS_SINGLE.md | OK
 [2026-06-02 08:07 PT] PHASEB-AB | END A/B | OK
+[2026-06-02 08:17 PT] INGEST | === ingest_clean.py DRY-RUN: 1858 === | OK
+[2026-06-02 08:17 PT] INGEST-DRYRUN | 1858: WOULD insert 224 acts (confident=189, date_unknown=0, chapter_ocr_substituted=35) | scan_quality=fair cer_est=0.0326 pages_with_consensus=380 | acts_with_nonascii_text=224 (UTF-8 preserved) | OK
+[2026-06-02 08:17 PT] INGEST | === ingest_clean.py DRY-RUN done === | OK

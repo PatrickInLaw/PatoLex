@@ -51,7 +51,9 @@ import {
   integer,
   jsonb,
   pgTable,
+  real,
   text,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { changeActionEnum, trustLevelEnum } from "./enums.js";
 import { enactment } from "./enactment.js";
@@ -158,6 +160,52 @@ export const changeEvent = pgTable(
 
     /** Trust level of this event's text. */
     trustLevel: trustLevelEnum("trust_level").notNull(),
+
+    /**
+     * Capture-ALL-signals (Patrick's confirmed S1-B + full signal capture).
+     * confident — false if ANY uncertainty flag fired for this act
+     * (date_unknown, chapter required an OCR substitution, or chapter_int <= 0).
+     * Mirrors the ingest-side `confident` decision so a reader can filter the
+     * uncertain tail without re-deriving it. Defaults to false (honest: an
+     * unscored legacy row is NOT asserted confident). Nullable-safe via default.
+     */
+    confident: boolean("confident").notNull().default(false),
+
+    /**
+     * Agreement ratio for this act in [0,1] — the consensus agreement signal
+     * that backs `confident`. Derived from the per-token consensus on the act's
+     * source page(s) (mean token confidence / page_agreement_ratio). NULL when
+     * no consensus was available (never a sentinel — see ocr_cer_estimate S2-C
+     * convention). `real` (float4) matches the 0–1 ratio domain.
+     */
+    confidence: real("confidence"),
+
+    /**
+     * Full per-act OCR provenance (Patrick: "no sense generating them and not
+     * using them"). JSONB so the disagreement / review queue for Phase C
+     * (VLM-flagging + crowd correction) is a QUERY over persisted data, never a
+     * re-derivation. Shape (written by ingest_clean.py):
+     *   {
+     *     engines: string[],            // engines present for this act's page(s)
+     *     consensus_method: string,     // "token_majority_3" | ... | "single"
+     *     agreement: number|null,       // same value as `confidence`
+     *     chapter_raw: string,          // the raw parsed chapter numeral
+     *     chapter_ocr_substituted: bool,// F11: chapter needed OCR substitution
+     *     date_unknown: bool,           // F13: no real date parsed -> NULL date
+     *     page_ref: string,             // "p. NN"
+     *     n_agree: number|null,         // agreeing engines (page-level proxy)
+     *     n_present: number|null,       // engines present (page-level proxy)
+     *     disagreement: {               // Phase C substrate (per-act summary)
+     *       low_confidence_token_count: number,
+     *       low_confidence_tokens: Array<{
+     *         surface: string, confidence: number,
+     *         n_agree: number, n_present: number,
+     *         candidates: Array<{ engine: string, token: string }>
+     *       }>
+     *     }
+     *   }
+     */
+    ocrProvenance: jsonb("ocr_provenance"),
   },
   (t) => [
     /**
@@ -169,5 +217,23 @@ export const changeEvent = pgTable(
 
     /** FK support index. */
     index("idx_change_event_enactment_id").on(t.enactmentId),
+
+    /**
+     * CANONICAL ACT KEY (Hans S2-A). The physical-act identity is
+     * (source_document_id, in_act_order): the 0-indexed ordinal of the act in
+     * the parsed volume, scoped to its source document. UNIQUE so the clean
+     * re-ingest's `ON CONFLICT (source_document_id, in_act_order) DO NOTHING`
+     * is idempotent and a volume can never durably double-insert the same act.
+     *
+     * APPLY ORDER (see migration note): this UNIQUE index must be created ONLY
+     * AFTER the clean re-ingest purges per source_document, OR after verifying
+     * no existing rows share a (source_document_id, in_act_order) pair —
+     * version-A data may have written non-unique pairs. The nullable column
+     * adds above are safe to apply anytime; this index is NOT.
+     */
+    uniqueIndex("uq_change_event_src_doc_in_act_order").on(
+      t.sourceDocumentId,
+      t.inActOrder
+    ),
   ]
 );

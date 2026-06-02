@@ -13,6 +13,7 @@ import {
   boolean,
   doublePrecision,
   integer,
+  jsonb,
   pgTable,
   text,
   timestamp,
@@ -173,6 +174,27 @@ export const sourceDocument = pgTable("source_document", {
    * Nullable — fill in when known.
    */
   mediaFormat: text("media_format"),
+
+  /**
+   * Per-volume OCR consensus statistics (capture-ALL-signals). JSONB so the
+   * volume-level quality picture and the pointer to the banked per-token
+   * consensus output are persisted, not recomputed. `scan_quality` and
+   * `ocr_cer_estimate` columns above hold the headline derived values; this
+   * field holds the supporting distribution + provenance. Shape (written by
+   * ingest_clean.py):
+   *   {
+   *     mean_agreement: number|null,    // mean per-page consensus confidence
+   *     median_agreement: number|null,  // median per-page consensus confidence
+   *     high_count: number,             // pages with confidence > 0.98
+   *     med_count: number,              // pages with 0.93 < confidence <= 0.98
+   *     low_count: number,              // pages with confidence <= 0.93
+   *     engines: string[],              // union of engines seen across pages
+   *     n_pages: number,                // pages with usable consensus
+   *     consensus_output_path: string   // banked consensus_output.json (Phase C
+   *                                     // per-token disagreement substrate)
+   *   }
+   */
+  ocrStats: jsonb("ocr_stats"),
 }, (table) => [
   uniqueIndex("uq_source_document_content_sha256")
     .on(table.contentSha256)

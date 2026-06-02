@@ -203,6 +203,13 @@ class CommittedToken:
     n_present: int          # engines with a (non-GAP) token at this position
     confidence: float       # n_agree / n_present
     voters: List[str]       # engine ids that voted for the winning key (sorted)
+    # Phase C substrate (capture-ALL-signals): the per-engine candidate tokens
+    # at this position — what EACH present engine actually read here, including
+    # the DISAGREEING reads. Populated ONLY when build_consensus(...,
+    # capture_candidates=True); left None otherwise so the default ConsensusResult
+    # / to_dict() output is byte-identical to the pre-capture behaviour (the live
+    # pipeline path is unchanged). Each entry: {"engine": str, "token": str}.
+    candidates: Optional[List[Dict[str, str]]] = None
 
 
 @dataclass
@@ -371,7 +378,9 @@ def _vote(
 
 
 def build_consensus(
-    engine_texts: Dict[str, str], _legacy_spine_no_merge: bool = False
+    engine_texts: Dict[str, str],
+    _legacy_spine_no_merge: bool = False,
+    capture_candidates: bool = False,
 ) -> ConsensusResult:
     """
     engine_texts: {engine_id: page_text}. Engine ids should be canonical
@@ -402,7 +411,11 @@ def build_consensus(
     if len(engines) == 1:
         e = engines[0]
         toks = [
-            CommittedToken(t, vote_key(t), 1, 1, 1.0, [e]) for t in engine_tokens[e]
+            CommittedToken(
+                t, vote_key(t), 1, 1, 1.0, [e],
+                candidates=([{"engine": e, "token": t}] if capture_candidates else None),
+            )
+            for t in engine_tokens[e]
         ]
         text = " ".join(t.surface for t in toks)
         return ConsensusResult(text, toks, 1.0, 1.0, "single", engines, len(toks))
@@ -462,11 +475,19 @@ def build_consensus(
             if len(voters) >= 2:  # >=2 engines independently inserted it -> commit
                 voters_sorted = sorted(voters, key=lambda ev: (_priority(ev[0]), ev[0]))
                 surface = voters_sorted[0][1]
+                cands = None
+                if capture_candidates:
+                    # the inserting engines' surfaces at this position (sorted)
+                    cands = [
+                        {"engine": e, "token": s}
+                        for e, s in sorted(voters, key=lambda ev: (_priority(ev[0]), ev[0]))
+                    ]
                 committed.append(
                     CommittedToken(
                         surface, k, len(voters), n_engines,
                         round(len(voters) / n_engines, 4),
                         sorted(e for e, _ in voters),
+                        candidates=cands,
                     )
                 )
 
@@ -486,8 +507,17 @@ def build_consensus(
             n_present = 1
             voters = [spine]
         conf = round(n_agree / n_present, 4) if n_present else 0.0
+        cands = None
+        if capture_candidates:
+            # what EACH engine read at this spine position (incl. disagreements);
+            # GAP -> token null. Sorted by engine priority for determinism.
+            cands = [
+                {"engine": e, "token": (t if t is not GAP and t is not None else None)}
+                for e, t in sorted(candidates, key=lambda ev: (_priority(ev[0]), ev[0]))
+            ]
         committed.append(
-            CommittedToken(surface, key, n_agree, n_present, conf, voters)
+            CommittedToken(surface, key, n_agree, n_present, conf, voters,
+                           candidates=cands)
         )
     commit_insertions_before(len(spine_tokens))  # trailing inserts
 
@@ -517,10 +547,23 @@ def build_consensus(
     )
 
 
-def consensus_from_page_record(page: dict) -> ConsensusResult:
+# A committed token is "low confidence" (a Phase C review candidate) when fewer
+# engines agreed on it than the page's engines would allow at full agreement —
+# i.e. confidence < 1.0 OR not every present engine was even present. We expose
+# the threshold as a module constant so ingest and the review queue agree.
+LOW_CONFIDENCE_THRESHOLD = 1.0  # confidence < this  -> flagged for review
+
+
+def consensus_from_page_record(
+    page: dict, capture_candidates: bool = False
+) -> ConsensusResult:
     """
     Adapter for a page_ocr_results.json record. Pulls tess_text/doctr_text/
     surya_text (any may be missing/empty) and builds the consensus.
+
+    capture_candidates: when True, each CommittedToken carries the per-engine
+    candidate reads (the Phase C disagreement substrate). Left False for the
+    quality-estimate-only callers so their output is unchanged.
     """
     texts = {}
     if page.get("tess_text"):
@@ -529,7 +572,7 @@ def consensus_from_page_record(page: dict) -> ConsensusResult:
         texts["doctr"] = page["doctr_text"]
     if page.get("surya_text"):
         texts["surya"] = page["surya_text"]
-    return build_consensus(texts)
+    return build_consensus(texts, capture_candidates=capture_candidates)
 
 
 if __name__ == "__main__":

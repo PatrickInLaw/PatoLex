@@ -45,3 +45,13 @@
 [2026-06-02 07:40 PT] INGEST | 1871-72: running ingest_from_ocr.py | OK
 [2026-06-02 07:41 PT] INGEST | 1871-72: DB confirmed. enactment total now 3678 | OK
 [2026-06-02 07:41 PT] WATCHER | Remaining to ingest: 1873-74, 1875-76 | enactment total=3678 | OK
+[2026-06-02 08:09 PT] READY | 1873-74: OCR_COMPLETE.marker present on 5090 -- fetching | OK
+[2026-06-02 08:09 PT] FETCH | 1873-74: pulled OK (1075 pages, sha 4bb2389ea760) -> C:\Users\PatrickKolasinski\PatoLex-scratch\production-1873-74\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 08:09 PT] INGEST | 1873-74: running ingest_from_ocr.py | OK
+[2026-06-02 08:11 PT] INGEST | 1873-74: DB confirmed. enactment total now 4003 | OK
+[2026-06-02 08:11 PT] WATCHER | Remaining to ingest: 1875-76 | enactment total=4003 | OK
+[2026-06-02 08:17 PT] READY | 1875-76: OCR_COMPLETE.marker present on 5090 -- fetching | OK
+[2026-06-02 08:17 PT] FETCH | 1875-76: pulled OK (1017 pages, sha 81aa4f2c727d) -> C:\Users\PatrickKolasinski\PatoLex-scratch\production-1875-76\ocr_consensus\page_ocr_results.json | OK
+[2026-06-02 08:17 PT] INGEST | 1875-76: running ingest_from_ocr.py | OK
+[2026-06-02 08:18 PT] INGEST | 1875-76: DB confirmed. enactment total now 4288 | OK
+[2026-06-02 08:18 PT] WATCHER | ALL queued volumes ingested. enactment total=4288. Idling for late completions. | OK
