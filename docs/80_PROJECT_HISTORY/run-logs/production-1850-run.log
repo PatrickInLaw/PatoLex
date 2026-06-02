@@ -49,3 +49,49 @@
 [2026-06-01 22:22 PT] STAGE4-OCR | page 59 (5/423): agree=0.65 hi=False 1.6s | OK
 [2026-06-01 22:22 PT] STAGE4-OCR | page 75 (21/423): agree=0.76 hi=True 1.3s | OK
 [2026-06-01 22:23 PT] STAGE4-OCR | page 95 (41/423): agree=0.52 hi=False 1.2s | OK
+[2026-06-01 22:24 PT] STAGE4-OCR | page 115 (61/423): agree=0.60 hi=False 1.8s | OK
+[2026-06-01 22:24 PT] STAGE4-OCR | page 135 (81/423): agree=0.82 hi=True 1.8s | OK
+[2026-06-01 22:25 PT] STAGE4-OCR | page 155 (101/423): agree=0.56 hi=False 1.6s | OK
+[2026-06-01 22:25 PT] STAGE4-OCR | page 175 (121/423): agree=0.50 hi=False 1.8s | OK
+[2026-06-01 22:26 PT] STAGE4-OCR | page 195 (141/423): agree=0.50 hi=False 1.8s | OK
+[2026-06-01 22:26 PT] STAGE4-OCR | page 215 (161/423): agree=0.50 hi=False 1.3s | OK
+[2026-06-01 22:27 PT] STAGE4-OCR | page 235 (181/423): agree=0.82 hi=True 1.7s | OK
+[2026-06-01 22:27 PT] STAGE4-OCR | page 255 (201/423): agree=0.83 hi=True 1.8s | OK
+[2026-06-01 22:28 PT] STAGE4-OCR | page 275 (221/423): agree=0.59 hi=False 1.7s | OK
+[2026-06-01 22:29 PT] STAGE4-OCR | page 295 (241/423): agree=0.80 hi=True 1.3s | OK
+[2026-06-01 22:29 PT] STAGE4-OCR | page 315 (261/423): agree=0.54 hi=False 1.8s | OK
+[2026-06-01 22:30 PT] STAGE4-OCR | page 335 (281/423): agree=0.53 hi=False 1.7s | OK
+[2026-06-01 22:30 PT] STAGE4-OCR | page 355 (301/423): agree=0.54 hi=False 1.8s | OK
+[2026-06-01 22:31 PT] STAGE4-OCR | page 375 (321/423): agree=0.54 hi=False 1.7s | OK
+[2026-06-01 22:31 PT] STAGE4-OCR | page 395 (341/423): agree=0.43 hi=False 1.7s | OK
+[2026-06-01 22:32 PT] STAGE4-OCR | page 415 (361/423): agree=0.58 hi=False 1.8s | OK
+[2026-06-01 22:33 PT] STAGE4-OCR | page 435 (381/423): agree=0.56 hi=False 1.6s | OK
+[2026-06-01 22:33 PT] STAGE4-OCR | page 455 (401/423): agree=0.59 hi=False 1.8s | OK
+[2026-06-01 22:34 PT] STAGE4-OCR | page 476 (421/423): agree=0.77 hi=True 0.8s | OK
+[2026-06-01 22:34 PT] STAGE4-OCR | OCR done: 423 pages in 703.0s (1.66s/page avg) high=40 low=383 | OK
+[2026-06-01 22:34 PT] STAGE4-OCR | Confidence distribution: {'high_confidence_>=0.70': 41, 'medium_0.50_to_0.70': 317, 'low_<0.50': 65, 'mean_agreement': 0.5835, 'median_agreement': 0.5758} | OK
+[2026-06-01 22:34 PT] STAGE5-PARSE | Parsing acts from consensus OCR text | OK
+[2026-06-01 22:34 PT] STAGE5-PARSE | Parse done in 0.06s: confident=82 flagged-text-only=8 | OK
+[2026-06-01 22:34 PT] STAGE6-INGEST | Starting DB ingest (idempotent on content_sha256) | OK
+[2026-06-01 22:34 PT] STAGE6-INGEST | source_document insert FAIL: psql error: ERROR:  invalid byte sequence for encoding "UTF8": 0x97 | FAIL
+[2026-06-01 22:35 PT] STAGE6-INGEST | Stage 6 ingest starting (encoding-fixed re-run) | OK
+[2026-06-01 22:35 PT] STAGE6-INGEST | source_document insert FAIL: invalid literal for int() with base 10: '20\nINSERT 0 1' | FAIL
+[2026-06-01 22:35 PT] STAGE6-INGEST | Stage 6 ingest starting (encoding-fixed re-run) | OK
+[2026-06-01 22:35 PT] STAGE6-INGEST | source_document already exists with this SHA256: id=20 | OK
+[2026-06-01 22:35 PT] STAGE6-INGEST | Loaded 82 confident acts + 8 flagged acts | OK
+[2026-06-01 22:36 PT] STAGE6-INGEST | Structured ingest done: enactments=79 provisions=79 change_events=79 skipped_dup=3 failed=0 | OK
+[2026-06-01 22:36 PT] STAGE6-INGEST | Flagged text-only acts (NOT ingested as structured): 8 chaps=['27', '58', '59', '112', '114', '136', '141', '144'] | WARN
+[2026-06-01 22:36 PT] STAGE6-INGEST | Final DB counts: source_document=20 enactment=1148 provision=1148 change_event=1148 | OK
+[2026-06-01 22:36 PT] REPORT | === PRODUCTION 1850 RUN FINAL REPORT === | OK
+[2026-06-01 22:36 PT] REPORT | Volume: Statutes of California, First Session 1850 | 480 pages | SHA256=9ccbe75c7b0c26dfb70528cbd07447423e71b0f576f6c723af094f7be322017b | OK
+[2026-06-01 22:36 PT] REPORT | STAGE1 render: 480 pages in 31.8s (0.07s/page) at 300 DPI | OK
+[2026-06-01 22:36 PT] REPORT | STAGE2 preprocess: 480 OK / 0 FAIL in 628.5s (1.31s/page) | OK
+[2026-06-01 22:36 PT] REPORT | STAGE3 classify: body=423 front_matter=54 index=1 empty=2 | OK
+[2026-06-01 22:36 PT] REPORT | STAGE4 OCR: 423 body pages in 703.0s (1.66s/page) docTR+Tesseract consensus | OK
+[2026-06-01 22:36 PT] REPORT | STAGE4 confidence: {'high_confidence_>=0.70': 41, 'medium_0.50_to_0.70': 317, 'low_<0.50': 65, 'mean_agreement': 0.5835} | OK
+[2026-06-01 22:36 PT] REPORT | STAGE5 parse: confident_acts=82 flagged_text_only=8 | OK
+[2026-06-01 22:36 PT] REPORT | STAGE6 ingest: src_doc_id=20 enactments=79 provisions=79 change_events=79 skipped_dup=3 | OK
+[2026-06-01 22:36 PT] REPORT | Throughput (OCR only): 36.1 body-pages/min | OK
+[2026-06-01 22:36 PT] REPORT | Extrapolated per-volume: render=32s + preprocess=629s + OCR=~703s = ~22 min/volume for a 480-page volume | OK
+[2026-06-01 22:36 PT] REPORT | Note: 1850 is the LARGEST volume in the 1849-1875 corpus. Later volumes shorter; plan for ~15-20 min/volume. | OK
+[2026-06-01 22:36 PT] REPORT | === END === | OK
