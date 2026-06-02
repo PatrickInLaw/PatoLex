@@ -374,9 +374,108 @@ operative date when those change events are ingested. (Also noted in Assumptions
 
 ---
 
+## 1850–1871 Pre-Code Session-Law Sample Ingest (PROVISIONAL BENCHMARK)
+
+**PROVISIONAL BENCHMARK — for pipeline timing / ETA estimation only. NOT the certified corpus.**
+
+- **Date:** 2026-06-01
+- **Script:** `scripts/ingest/precode-ingest-benchmark.ts`
+- **Model:** 1850-blank-forward, session-laws as primary source. No 1872-enact-from-nothing.
+- **trust_level:** `ocr_uncertain` throughout (Tesseract OCR, unverified against gold standard)
+- **Coverage:** Partial — 1,069 acts across 19 session-law volumes, 1850–1871/72
+- **Empty-text acts flagged:** 0 (all acts have text in the parsed JSON; see caveat on OCR quality)
+- **Null operative_date acts:** 682 of 1,069 (63.8%) — OCR artifacts in `approved_date` field made exact date parsing impossible; these stored as `[null, null)` dateranges in `provision_version`
+
+### Per-Stage Benchmark (Average of 3 Runs)
+
+Tables were `TRUNCATE ... RESTART IDENTITY CASCADE` between runs (purge stage included in timing).  
+Batch strategy: `jsonb_to_recordset`, batch size 200 rows per round-trip.
+
+| Stage | Rows | Avg Wall ms | ms/unit | Notes |
+|-------|------|-------------|---------|-------|
+| purge | — | 73.9 | — | TRUNCATE all data tables RESTART IDENTITY CASCADE |
+| register-sources | 19 | 2.6 | 0.14 | One source_document per session year, single batch |
+| ingest-enactments | 1,069 | 20.2 | 0.019 | One enactment per act; batch=200 |
+| ingest-provisions | 2,138 | 32.8 | 0.015 | 1,069 provision (act_section) + 1,069 designation_history; batch=200 |
+| ingest-change-events | 1,069 | 59.3 | 0.055 | One `enact` event per act, trust_level='ocr_uncertain'; batch=200 |
+| materialize | 1,069 | 234.4 | 0.219 | Single SQL CTE + LEAD() fold over all acts |
+| **TOTAL (incl. purge)** | | **423.6** | | |
+
+**Per-run totals:** 466 ms, 386 ms, 419 ms. Std dev: 33 ms.
+
+**Note on materialize:** 234 ms for 1,069 rows = 0.22 ms/row. At 682 null operative_date acts the CTE uses `NULLS FIRST` ordering — dates appear as `(,)` open-interval dateranges. No GiST exclusion constraint violations.
+
+### Final DB State (After Run 3)
+
+| Table | Rows |
+|-------|------|
+| source_document | 19 |
+| enactment | 1,069 |
+| provision (act_section) | 1,069 |
+| designation_history | 1,069 |
+| change_event | 1,069 |
+| provision_version | 1,069 |
+| lineage_edge | 0 |
+
+### Acts Ingested by Session Year
+
+| Session Year | Legislature | Acts |
+|-------------|-------------|------|
+| 1850 | 1st | 26 |
+| 1851 | 2nd | 13 |
+| 1852 | 3rd | 165 |
+| 1853 | 4th | 82 |
+| 1854 | 5th | 92 |
+| 1855 | 6th | 90 |
+| 1856 | 7th | 97 |
+| 1857 | 8th | 99 |
+| 1858 | 9th | 55 |
+| 1859 | 10th | 39 |
+| 1860 | 11th | 27 |
+| 1861 | 12th | 41 |
+| 1862 | 13th | 24 |
+| 1863 | 14th | 17 |
+| 1863–64 | 15th | 21 |
+| 1865–66 | 16th | 16 |
+| 1867–68 | 17th | 68 |
+| 1869–70 | 18th | 56 |
+| 1871–72 | 19th | 41 |
+| **TOTAL** | | **1,069** |
+
+### ETA Extrapolation
+
+**INGEST IS NOT THE BOTTLENECK — OCR IS.**
+
+From the measured 0.019 ms/act ingest rate:
+
+| Corpus estimate | Acts | Projected ingest time |
+|----------------|------|----------------------|
+| Low estimate | 3,000 acts | ~0.06 s |
+| High estimate | 5,000 acts | ~0.09 s |
+
+The full pre-code corpus of ~3,000–5,000 acts (ESTIMATE — not fully inventoried) would ingest in **under 1 second** at measured rates. The materialize CTE adds ~0.22 ms/act; at 5,000 acts that is ~1.1 seconds. Ingest + materialize for the entire pre-code corpus: **well under 5 seconds**.
+
+The dominant costs are:
+1. **OCR:** ~1.1 sec/page (Tesseract 5, CPU). Pre-code session-law volumes: ~50–150 pages/volume × ~140 volumes = ~7,000–21,000 pages → ~2–6 hours single-thread, well under 1 hour parallelized.
+2. **Parse (rule-based extraction of act metadata):** ~5–30 ms/act directive. At 5,000 acts this is negligible compared to OCR.
+3. **DB ingest + materialize:** negligible (sub-5-second for the full pre-code corpus).
+
+### Caveats and Honest Limitations
+
+1. **PROVISIONAL data only.** This benchmark uses parsed JSON from a prior OCR spike with no gold-verification. Do not use these rows as authoritative historical law.
+2. **682 null operative dates (63.8%)** — `approved_date` field OCR quality is poor. Many acts show artifacts like "January 80" (impossible day). The parser correctly returns null rather than fabricating a date. Real ingest must apply more robust date extraction or manual review.
+3. **Empty-text check passed (0 empty acts)** — all 1,069 acts have non-empty text strings in the source JSON. However, text quality varies; some acts appear to contain index/table-of-contents OCR rather than act body text (artifact of the original Chief Clerk scan parsing).
+4. **Partial corpus coverage** — the 19 volumes cover 1850–1871/72 but not all sessions uniformly. Some volumes (1851: 13 acts; 1865–66: 16 acts) appear to have low act counts suggesting incomplete parsing of those source PDFs.
+5. **Single granularity** — each act is one `act_section` provision. Section-within-act decomposition is deferred to the certified build.
+6. **No lineage edges** — lineage from pre-code acts to 1872 codes is not established in this benchmark run. That requires the certified parse pass.
+7. **GiST exclusion constraint behavior** — no overlapping dateranges were flagged. However, 682 acts have null operative_date producing `(,)` open-interval ranges; multiple such rows for different provisions are non-overlapping (different provision_id), so no constraint violation. This is correct behavior.
+
+---
+
 ## Revision History
 
 | Date | Change |
 |------|--------|
 | 2026-06-01 | cc003: Initial benchmark from 1872 baseline + 1883 amendments (3 runs) |
 | 2026-06-01 | cc003: 1850 pre-code act ingestion — first act_section + lineage_edge exercise |
+| 2026-06-01 | cc003: 1850–1871 pre-code session-law provisional benchmark (1,069 acts, 3 runs, corrected model) |

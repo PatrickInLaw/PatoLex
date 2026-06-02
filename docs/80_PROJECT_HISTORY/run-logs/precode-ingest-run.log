@@ -1,0 +1,18 @@
+[2026-06-01 00:00 PT] INIT | precode-ingest-benchmark.ts created; starting 1850-1871 provisional benchmark run | OK
+[2026-06-01 18:12 PT] INIT | precode-ingest-benchmark started | OK
+[2026-06-01 18:12 PT] LOAD | 1069 acts loaded; 0 empty-text acts | OK
+[2026-06-01 18:12 PT] PRE-RUN-1 | Starting run | OK
+[2026-06-01 18:12 PT] FAIL | PostgresError: date/time field value out of range: "1852-01-80" | FAIL
+[2026-06-01 18:12 PT] INIT | precode-ingest-benchmark started | OK
+[2026-06-01 18:12 PT] LOAD | 1069 acts loaded; 0 empty-text acts | OK
+[2026-06-01 18:12 PT] PRE-RUN-1 | Starting run | OK
+[2026-06-01 18:12 PT] RUN-1 | enactments=1069 provisions=1069 changeEvents=1069 provVersions=1069 totalMs=466 | OK
+[2026-06-01 18:12 PT] PRE-RUN-2 | Starting run | OK
+[2026-06-01 18:12 PT] RUN-2 | enactments=1069 provisions=1069 changeEvents=1069 provVersions=1069 totalMs=386 | OK
+[2026-06-01 18:12 PT] PRE-RUN-3 | Starting run | OK
+[2026-06-01 18:12 PT] RUN-3 | enactments=1069 provisions=1069 changeEvents=1069 provVersions=1069 totalMs=419 | OK
+[2026-06-01 18:12 PT] COMPLETE | Done. 1069 acts. Avg total 424ms over 3 runs. DB left in run-3 state. | OK
+[2026-06-01 18:12 PT] NOTE | date-parse bug fixed mid-run: "January 80" OCR artifact (ch.17 1852) rejected; day clamped to null | WARN
+[2026-06-01 18:12 PT] NOTE | 682 of 1069 acts have null operative_date (63.8%); stored as (,) open-interval dateranges | WARN
+[2026-06-01 18:12 PT] VERIFY | DB final state: source_document=19 enactment=1069 provision=1069 designation_history=1069 change_event=1069 provision_version=1069 lineage_edge=0 | OK
+[2026-06-01 18:12 PT] DOCS | PIPELINE_BENCHMARKS.md updated with provisional benchmark section | OK
