@@ -1,0 +1,6 @@
+[2026-06-01 00:00 PT] INIT | Task: Install faithful OCR engines (Surya/PaddleOCR/docTR/GOT-OCR) via WSL for bake-off | FAIL
+[2026-06-01 00:00 PT] CHECK | wsl --status -> exit 50: "The Windows Subsystem for Linux is not installed." | FAIL
+[2026-06-01 00:00 PT] CHECK | wsl -l -v -> same error | FAIL
+[2026-06-01 00:00 PT] CHECK | wsl echo ok -> exit 1: same error | FAIL
+[2026-06-01 00:00 PT] CHECK | wsl.exe --version -> exit 1: same error | FAIL
+[2026-06-01 00:00 PT] BLOCKER | WSL is not installed on this machine. All four verification commands confirm it. Task cannot proceed. Stopping per instructions. | FAIL

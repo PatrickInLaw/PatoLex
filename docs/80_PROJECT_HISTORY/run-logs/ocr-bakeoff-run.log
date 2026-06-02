@@ -30,6 +30,11 @@
 [2026-06-01 17:55 PT] STEP4 | Provisional ranking written to ocr-bakeoff/BAKEOFF_PROVISIONAL.md | OK
 [2026-06-01 17:55 PT] STEP4 | Run log written to docs/80_PROJECT_HISTORY/run-logs/ocr-bakeoff-run.log | OK
 
-[2026-06-01 18:00 PT] PENDING | Qwen background run in progress; ~12 pre-code pages + 2 code-era pages remaining; expect completion ~60-90 min from start | WARN
-[2026-06-01 18:00 PT] PENDING | Gold drafts should be re-run (write_gold_drafts.py) after Qwen completes to upgrade pre-code drafts from Tesseract to Qwen baseline | WARN
-[2026-06-01 18:00 PT] PENDING | Human gold review required tomorrow before any engine can be declared winner | WARN
+[2026-06-01 19:30 PT] COMPLETE | Qwen background run finished all 17/17 pages; exit code 0; avg 65.2s/page | OK
+[2026-06-01 19:30 PT] COMPLETE | All 12 pre-code gold drafts updated to use Qwen output (write_gold_drafts.py re-run) | OK
+[2026-06-01 19:30 PT] FINAL | Inter-engine agreement data: 17 page pairs computed; range 0.779-0.955 | OK
+[2026-06-01 19:30 PT] FINAL | Lowest agreement: early_1850_p60 (0.779) — oldest/hardest material; highest: 1903_sec211_robbery (0.955) | OK
+[2026-06-01 19:30 PT] FINAL | CONFIRMED Qwen spelling modernization: 'kidnaping' (1903 CA statutory) → 'kidnapping' in Qwen output; legal transcription error | WARN
+[2026-06-01 19:30 PT] FINAL | Qwen timing: 65.2s/page avg (range ~50-120s depending on image size) | OK
+[2026-06-01 19:30 PT] FINAL | BAKEOFF_PROVISIONAL.md updated with all final data | OK
+[2026-06-01 19:30 PT] PENDING | Human gold review required before any engine declared winner | WARN
