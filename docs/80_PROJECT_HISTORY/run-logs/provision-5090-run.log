@@ -1,0 +1,7 @@
+[2026-06-01 20:10 PT] INIT | Starting 5090 provisioning run | OK
+[2026-06-01 20:10 PT] RECON | SSH confirmed: hostname=PK_Alien_5090, GPU=RTX 5090, CUDA driver=13.0, CUDA toolkit=13.2 | OK
+[2026-06-01 20:10 PT] RECON | No Python in SSH PATH. No Tesseract installed. Winget found at C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_1.28.240.0_x64__8wekyb3d8bbwe\winget.exe | OK
+[2026-06-01 20:10 PT] RECON | SSH PATH has: CUDA 13.2 bin, MPI, Azure CLI, dotnet, Git, Node.js, GitHub CLI, SQL Server tools, Tailscale, Docker | OK
+[2026-06-01 20:10 PT] PLAN | Phase 1: Install Python 3.12. Phase 2: Install Tesseract 5. Phase 3: docTR venv. Phase 4: Surya venv. Phase 5: PaddleOCR venv. Phase 6: SCP sample pages. Phase 7: Run bakeoff per engine. | OK
+[2026-06-01 20:11 PT] PYTHON | winget access denied in SSH (no Desktop session). Fallback: downloaded python-3.12.10-amd64.exe directly, ran silent user install. | OK
+[2026-06-01 20:12 PT] PYTHON | Python 3.12.10 installed at C:\Users\patolex\AppData\Local\Programs\Python\Python312\python.exe | OK

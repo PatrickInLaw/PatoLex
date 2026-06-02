@@ -1,0 +1,18 @@
+[2026-06-01 20:09 PT] PREPROCESSv2 | Starting tuned preprocessing pipeline (v2) on all bakeoff pages | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | 1872_body_marginal_p21: deskew=0.0° margin=right w=1484->1074 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | 1872_sec187_murder: deskew=0.0° no-margin w=1484->1484 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | 1872_sec211_robbery: deskew=0.0° no-margin w=1484->1484 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | 1903_sec187_murder: deskew=0.0° margin=right w=1455->1238 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | 1903_sec211_robbery: deskew=0.0° margin=right w=1455->1238 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | early_1850_p60: deskew=0.0° no-margin w=2400->2400 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | early_1850_p90: deskew=0.0° margin=right w=2400->1886 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | early_1852_p40: deskew=0.0° margin=right w=1575->1232 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | early_1852_p70: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | late_1867_68_p100: deskew=0.0° margin=right w=1575->1397 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | late_1867_68_p160: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 20:09 PT] PREPROCESSv2 | late_1871_72_p120: deskew=0.0° no-margin w=1575->1575 | OK
+[2026-06-01 20:10 PT] PREPROCESSv2 | late_1871_72_p200: deskew=0.0° margin=right w=1575->1298 | OK
+[2026-06-01 20:10 PT] PREPROCESSv2 | mid_1858_p50: deskew=0.0° margin=right w=1575->1235 | OK
+[2026-06-01 20:10 PT] PREPROCESSv2 | mid_1858_p90: deskew=0.0° margin=right w=1575->1269 | OK
+[2026-06-01 20:10 PT] PREPROCESSv2 | mid_1861_p130: deskew=0.0° margin=right w=1575->1305 | OK
+[2026-06-01 20:10 PT] PREPROCESSv2 | mid_1861_p80: deskew=0.0° margin=right w=1575->1368 | OK
