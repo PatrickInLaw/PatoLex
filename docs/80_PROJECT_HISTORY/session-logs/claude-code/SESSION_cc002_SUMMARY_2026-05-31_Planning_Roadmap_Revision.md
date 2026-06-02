@@ -128,6 +128,17 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 
 **Infra:** Hans persona baked into `verify-auditor.md` (Patrick approved). The **5090 is Ollama-HTTP-only** (SSH/WinRM blocked) and the **3060 is offline** → to use them for Python OCR, enable OpenSSH (`Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0`). **WSL is NOT installed** on the 5080 → Linux-only engines (Falcon/olmOCR) deferred (Patrick fine dropping them — VLM faithfulness risk). Toolchain decided: Python (OCR/parse) + TS/Drizzle (ingest); C# pipeline deferred.
 
+### Phase 17 — Gold-scored: accuracy architecture VALIDATED to legal-grade (autonomous; 2026-06-01)
+
+- **Partial human gold scored** (Patrick keyed `early_1850_p90` session-law + 5 short code pages). **Faithfulness VERIFIED against human gold:** the 1872 Penal page genuinely prints "kidnapping" (double-p), the 1903 code "kidnaping" (single-p); faithful engines reproduce each page exactly. (Resolves the litmus against true ground truth, not the earlier AI-made gold.)
+- **Single-engine ranking:** Surya 12.71% ≈ Tesseract 12.97% CER on the session-law page; docTR/Paddle behind. **Engine choice is not the bottleneck** — the faded page/typography is.
+- **The accuracy cascade, measured (→ `docs/30_SYSTEM_DESIGN/OCR_ACCURACY_VALIDATION.md`):**
+  - **4-classical-engine consensus → 4.36% silent error** (≈3× better than single), 16% review queue. Word-DROPS are engine-*independent* (consensus rescues them, 55–73%); GLYPH confusions (e→o antique typeface, §→8) are *SHARED* across all four = a ~6.5% hard floor voting can't escape.
+  - **+ qwen + GOT as FLAGGING vectors (never committed text) → 0.50% silent error = LEGAL-GRADE.** The VLMs break exactly the shared floor (37/39 floor errors caught; every e→o + § caught by both), because a different architecture doesn't share the classical glyph confusion. **This empirically validates Patrick's "VLMs as disagreement vectors only" design.**
+  - **Cost:** review queue ~doubles (16→33%) with ~80% VLM false-flags (modernization noise) → next optimization = a **dissent filter** that ignores known VLM-modernization patterns and flags only content-character disagreements.
+- **5090-vs-5080 benchmark (proper, warmup-discarded):** Surya batched on the 5090 = **0.70 s/page** (the 5080's 16 GB OOMs on Surya batching — the 5090's 32 GB is required; 6.4×). docTR ~0.23 s/page either box. Production split: Surya/5090 + docTR/5080 + Tesseract/CPU + VLM vectors (qwen/GOT)/5090. Found + patched a Surya 0.13 + OpenCV 4.13 `fillPoly` bug (PIL fallback) — note for fresh installs.
+- **Honest caveat:** the 0.50% rests on ONE strong session-law page → directional. 10+ session-law gold pages needed to firm the floor-break + false-flag rates.
+
 ---
 
 ## Files Changed
@@ -157,6 +168,7 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 15. **Toolchain:** Python (OCR/parse) + TS/Drizzle (ingest); C# pipeline deferred to a possible modern crawler.
 16. **Build order corrected:** 1850-71 pre-code first → 1872 as a recodification event → 1873-75 amendments.
 17. **Current goal: full coverage 1850-1875** (quarter-century test of pre-code + codification + forward amendments). CA regs deferred (baseline-plus-forward).
+18. **Accuracy architecture VALIDATED (directional):** committed text = consensus of faithful classical engines; **VLMs (qwen/GOT) are flagging vectors only, never committed** — they break the shared glyph floor classical consensus can't. Cascade on the hardest 1850 session-law page: single 12.7% → 4-classical consensus 4.4% → +VLM flagging **0.50% = legal-grade**. Next: dissent-filter to shrink the queue + 10+ gold pages to firm.
 
 ---
 

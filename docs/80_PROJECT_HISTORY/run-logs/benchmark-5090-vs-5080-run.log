@@ -1,0 +1,9 @@
+[2026-06-01 00:00 PT] SETUP    | Benchmark initiated: 4 engines x 2 machines, warmup-discarded, with batch for GPU engines | OK
+[2026-06-01 00:05 PT] HARDWARE | 5080: RTX 5080 16302 MB VRAM / Intel Ultra 7 265F 20-core; 5090: RTX 5090 32606 MB VRAM / Intel Ultra 9 285K 24-core | OK
+[2026-06-01 00:07 PT] PAGES    | SCP 17 preprocessed_v2 pages to 5090; verified count=17 on target | OK
+[2026-06-01 00:10 PT] TESSERACT| 5080: 0.872 s/page (n=16 warm); 5090: 0.773 s/page; 5090 speedup 1.13x (CPU, 285K > 265F) | OK
+[2026-06-01 00:25 PT] PADDLE   | 5080: 2.640 s/page; 5090: 1.860 s/page; 5090 speedup 1.42x (CPU, 285K >> 265F in rec path) | OK
+[2026-06-01 00:40 PT] DOCTR    | 5080 single: 0.257 s/page, batch: 0.228 s/page (VRAM peak 995 MB); 5090 single: 0.275 s/page, batch: 0.216 s/page (VRAM peak 995 MB). Both GPUs have massive headroom. 5080 marginally faster single (clock/PCIe variance). | OK
+[2026-06-01 01:00 PT] SURYA-BUG| Surya 0.13 crashes on early_1852_p70 with OpenCV 4.13 cv2.fillPoly UMat incompatibility. Fixed in surya/input/processing.py: replaced cv2.fillPoly with PIL ImageDraw.polygon + added degenerate-poly guard (zero-size crop returns 1x1 pad image). Applied fix to both venvs. | WARN
+[2026-06-01 01:10 PT] SURYA    | 5080 single: 1.345 s/page; 5080 BATCH: 4.468 s/page (16774 MB peak, OOM-thrash, batch 3.3x SLOWER than single). 5090 single: 1.102 s/page; 5090 BATCH: 0.701 s/page (16774 MB peak, 15.8 GB headroom, batch 1.6x faster than single). 5090 batch speedup vs 5080 batch: 6.37x. | OK
+[2026-06-01 01:15 PT] RESULTS  | Combined JSON written to ocr-bakeoff/benchmark_results_combined.json | OK

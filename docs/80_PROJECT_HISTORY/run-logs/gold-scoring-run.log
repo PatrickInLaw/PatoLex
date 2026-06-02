@@ -1,0 +1,12 @@
+[2026-06-01 09:00 PT] SETUP | Surveyed bakeoff directories — all 6 gold pages have v2-grayscale preprocessed images and all 4 engine outputs present | OK
+[2026-06-01 09:01 PT] SETUP | Installed python-Levenshtein in base Python 3.12 (pip install python-Levenshtein) | OK
+[2026-06-01 09:02 PT] SCORE | Wrote score_cer.py with sliding-window alignment: anchor on first 20 chars of gold, window sizes [gold_len, ×1.1, ×1.2, ×0.9], step=gold_len//20; fallback coarse search; fine refinement pass | OK
+[2026-06-01 09:03 PT] SCORE | Ran score_cer.py — computed CER for 4 engines × 6 gold pages | OK
+[2026-06-01 09:04 PT] SCORE | Investigated 1872_sec211_robbery inflated CER (~37%) — diagnosed as gold-alignment artifact: gold starts mid-sentence (~68 chars not in engine output) + apparatus insertion between §208 and §211; §211 robbery sentence itself scores ~1-2% | WARN
+[2026-06-01 09:05 PT] SCORE | Added analysis notes + 5-page means (excl. 1872_sec211) to gold_scoring_results.json | OK
+[2026-06-01 09:06 PT] RESULT | early_1850_p90 CER: surya013=12.71%, tesseract=12.97%, doctr=14.03%, paddleocr2=14.93% | OK
+[2026-06-01 09:06 PT] RESULT | All-6-page mean CER: tesseract=14.25%, surya013=14.44%, doctr=14.68%, paddleocr2=15.28% | OK
+[2026-06-01 09:06 PT] RESULT | 5-page mean (excl. 1872_sec211 artifact): tesseract=9.54%, surya013=9.88%, doctr=10.05%, paddleocr2=10.57% | OK
+[2026-06-01 09:06 PT] RESULT | Legal-grade (~1-2% CER) NOT cleared on session-law page — best is surya013 at 12.71% on early_1850_p90 | OK
+[2026-06-01 09:06 PT] RESULT | Faithfulness: 1872_sec211 → all engines output 'kidnapping' (correct for 1872 typesetting); 1903_sec211 → all engines output 'kidnaping' (correct single-p for 1903) | OK
+[2026-06-01 09:07 PT] OUTPUT | Saved gold_scoring_results.json to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\ | OK

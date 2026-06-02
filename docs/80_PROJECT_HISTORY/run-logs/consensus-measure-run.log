@@ -1,0 +1,30 @@
+[2026-06-02 21:24 PT] consensus-measure | START consensus measurement | OK
+[2026-06-02 21:24 PT] consensus-measure | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: early_1850_p90 | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1872_body_marginal_p21 | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1872_sec187_murder | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1872_sec211_robbery | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1903_sec187_murder | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1903_sec211_robbery | OK
+[2026-06-02 21:24 PT] consensus-measure | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\consensus_results.json | OK
+[2026-06-02 21:24 PT] consensus-measure | PRIMARY PAGE silent error rate: 4.36%, review queue: 16.11% | OK
+[2026-06-02 21:24 PT] consensus-measure | Legal grade: False | Verdict: DOES NOT pass legal-grade (silent error rate = 4.36%, valid-word residual = 1.39 | OK
+[2026-06-02 21:24 PT] consensus-measure | END consensus measurement | OK
+[2026-06-02 21:24 PT] consensus-measure | START consensus measurement | OK
+[2026-06-02 21:24 PT] consensus-measure | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: early_1850_p90 | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1872_body_marginal_p21 | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1872_sec187_murder | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1872_sec211_robbery | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1903_sec187_murder | OK
+[2026-06-02 21:24 PT] consensus-measure | Processing page: 1903_sec211_robbery | OK
+[2026-06-02 21:24 PT] consensus-measure | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\consensus_results.json | OK
+[2026-06-02 21:24 PT] consensus-measure | PRIMARY PAGE silent error rate: 4.36%, review queue: 16.11% | OK
+[2026-06-02 21:24 PT] consensus-measure | Legal grade: False | Verdict: DOES NOT pass legal-grade (silent error rate = 4.36%, valid-word residual = 1.58 | OK
+[2026-06-02 21:24 PT] consensus-measure | END consensus measurement | OK
+[2026-06-02 21:30 PT] consensus-measure | FINAL SUMMARY: primary page early_1850_p90 602 gold tokens | OK
+[2026-06-02 21:30 PT] consensus-measure | FINAL: best single-engine CER=12.71% (surya013) | OK
+[2026-06-02 21:30 PT] consensus-measure | FINAL: consensus auto-accept=83.9% review-queue=16.1% silent-error-rate=4.36% valid-word-residual=1.58% | WARN
+[2026-06-02 21:30 PT] consensus-measure | FINAL: 4-way shared errors = 39 tokens (6.48% of gold) -- hard floor not eliminated by consensus | WARN
+[2026-06-02 21:30 PT] consensus-measure | FINAL: legal-grade verdict = FAIL -- 4.36% silent error rate exceeds 1-2% threshold | WARN
+[2026-06-02 21:30 PT] consensus-measure | FINAL: ensemble gain confirmed -- single-engine 12.71% CER -> 4.36% silent rate (x3 reduction); rescue rates 55-73% confirm partial independence | OK

@@ -1,0 +1,23 @@
+[2026-06-02 21:31 PT] vlm-vector | START VLM-vector measurement | OK
+[2026-06-02 21:31 PT] vlm-vector | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: early_1850_p90 | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1872_body_marginal_p21 | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1872_sec187_murder | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1872_sec211_robbery | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1903_sec187_murder | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1903_sec211_robbery | OK
+[2026-06-02 21:31 PT] vlm-vector | START VLM-vector measurement | OK
+[2026-06-02 21:31 PT] vlm-vector | Levenshtein library: python-Levenshtein | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: early_1850_p90 | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1872_body_marginal_p21 | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1872_sec187_murder | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1872_sec211_robbery | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1903_sec187_murder | OK
+[2026-06-02 21:31 PT] vlm-vector | Processing page: 1903_sec211_robbery | OK
+[2026-06-02 21:31 PT] vlm-vector | Results saved to C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff\vlm_vector_results.json | OK
+[2026-06-02 21:31 PT] vlm-vector | PRIMARY: classical silent=4.36% VLM-aug silent=0.5% | OK
+[2026-06-02 21:31 PT] vlm-vector | PRIMARY: classical queue=16.11% VLM-aug queue=32.89% | OK
+[2026-06-02 21:31 PT] vlm-vector | Floor: 39 total, 10 dangerous, 8 broken by VLM | OK
+[2026-06-02 21:31 PT] vlm-vector | VLM false-flag rate: 80.2% | OK
+[2026-06-02 21:31 PT] vlm-vector | Legal grade (VLM-aug): True | VLM-AUGMENTED PASSES legal-grade threshold (silent error rate 0.5% <= 2%) | OK
+[2026-06-02 21:31 PT] vlm-vector | END VLM-vector measurement | OK
