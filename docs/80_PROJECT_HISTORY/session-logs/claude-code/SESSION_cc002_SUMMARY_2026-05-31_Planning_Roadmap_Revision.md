@@ -428,3 +428,11 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **Temp loggers:** discovered the thermal guardian logs only events, not continuous temps. Built `pipeline/temp_logger.ps1` (gated on OCR-active + size-capped) + `register_temp_logger.ps1`. Registered as SYSTEM tasks on BOTH boxes (Patrick ran the registrar elevated -- agent session can't register tasks; OS-elevation/UAC wall, distinct from Claude permissions). 5080 OCR had stopped ~07:41 at the session reset -> restarted. Durable findings -> `docs/80_PROJECT_HISTORY/lessons/LESSON_2026-06-03_ops_temp_logging_and_elevation.md`.
 
 - (this /ucp) -- part 30 (decoupled build code-complete + Hans x3 + durable temp loggers + auth recovery).
+
+## Phase 31 -- SQL-backed shared-pipeline design + Hans (2026-06-03)
+
+**Patrick's architecture (better than box-local Phase 1):** 3060 = file server (3 SMB shares inbox->midbox->outbox) + queue DB host; queue moves OUT of JSON-over-SSH into a real DB (`ocr_queue` in the project Postgres, `FOR UPDATE SKIP LOCKED` claims); idle CPUs on all boxes (incl 3060) prep into the shared midbox; any GPU (5080/5090) drains it. Design: `docs/30_SYSTEM_DESIGN/SQL_PIPELINE_DESIGN_2026-06-03.md`. Folds in the 1976-1999 add (100 chapters vols) via the seed.
+
+**Hans pass-1 (design):** sound skeleton + correct SQL claim, but NOT build-ready as drafted -- found: B1 failure-states strand/crash-loop (need ocr_failed + attempts + held dead-letter); B2 cross-box partial-file race on midbox (need tmp+atomic-rename + PREP_COMPLETE marker + decode-validate); S3 stale-reclaim double-write (need fencing token + self-abort); S4 unsafe cutover order (drain JSON FIRST, seed skips in-flight); S1 FALSE VRAM premise (5080/5090 caps are compute/CPU-prep, not VRAM -- 5090's 3-cap removed by decoupling, tune live); S5 ocr_only needs real 3-root refactor (OCR reads classification, doesn't re-run); S6 SMB 'Everyone' fails (guest disabled, SYSTEM=MACHINE$ -> dedicated patolexsvc account + cmdkey). All folded into the revised doc. Awaiting Patrick's review before build.
+
+- (this /ucp) -- part 31 (SQL-pipeline design + Hans pass-1 folded; pending Patrick review).
