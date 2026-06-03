@@ -1,8 +1,19 @@
-# Modern Chaptered-Statute Format (born-digital, 1997–2008+)
+# Modern Chaptered-Statute Format (born-digital, 2000–2008+)
 
 Date: 2026-06-02
 Source examined: `2008_Vol1.pdf` (1652 pp), cross-checked `2001_Vol1.pdf` (1718 pp).
-Both are born-digital (clean `fitz get_text()` text layer; no OCR needed).
+Both are born-digital with a **clean** `fitz get_text()` text layer; no OCR needed.
+
+**Clean-text boundary = 2000, NOT ~1997.** The 65 volumes covering **2000-2008**
+extract cleanly (8,291 chapters) via the productionized extractor
+`pipeline/5080/parse_born_digital_prod.py` (the prototype was
+`parse_born_digital.py`). The **1997, 1998, 1999** volumes (17 vols) ARE
+born-digital and DO have a text layer, but it is **garbled mojibake** — body set
+in broken subset fonts (`PSOwstdutch` etc.) with missing/broken ToUnicode CMap,
+so `get_text()` returns junk and 0 chapters extract. **1997-1999 therefore need
+OCR (or glyph re-mapping), like the image-only era** (`born-digital-3060-run.log`,
+2026-06-02). The chaptered-statute *format* described below still applies to
+1997-1999, but those years must be reached via OCR, not direct extraction.
 
 ## High-level layout of a year volume
 
@@ -103,7 +114,8 @@ The modern parser therefore must NOT depend on a bill marker.
 - Same, line-wrapped after "Filed with".
 - 2001 also shows a standalone `Filed with \nSecretary of State <Month> <day>, <year>.`
 
-Day is a bare integer (no `st/nd/rd/th`). Year is 4-digit (1997–2008+).
+Day is a bare integer (no `st/nd/rd/th`). Year is 4-digit (2000–2008+ for the
+cleanly extracted volumes; the same format also appears in 1997-1999, which need OCR).
 
 ## Confidence definition (modern)
 
@@ -113,14 +125,20 @@ A modern chapter is **confident** when it has all of:
 3. a parsed Approved-by-Governor date,
 4. the enact marker `do enact as follows`.
 
-## TODO for 1915–1996 (image-only, needs OCR)
+## TODO for 1915–1999 (needs OCR: image-only ≤1996 + garbled born-digital 1997-1999)
 
 - **Multi-volume roll-up**: chapter numbers run continuously across Vol1..VolN
   of a year. The parser must concatenate volumes in order and treat the year as
   one chapter stream (dedupe page footers `[ Ch. N ]`).
-- **OCR-fuzz tolerance**: for 1915–1996 the header/date/enact regexes need the
+- **OCR-fuzz tolerance**: for 1915–1999 the header/date/enact regexes need the
   same OCR-fuzzy treatment the pre-1900 parser uses (e.g. `CHAPTER` ↔
   `CIIAPTER`, `Approved` ↔ `Approvod`, ligature/`ﬁ`→`fi` normalization, OCR
   digit confusions in chapter numbers). Cannot be finalized until real
-  1915–1996 OCR consensus text is available to characterize the actual error
+  1915–1999 OCR consensus text is available to characterize the actual error
   modes.
+
+## Revision History
+
+| Date | Change |
+|------|--------|
+| 2026-06-02 | cc002 (boundary correction): Clean-text born-digital boundary corrected from ~1997 to **2000** per `born-digital-3060-run.log` — 2000-2008 (65 vols / 8,291 chapters) extract cleanly via `parse_born_digital_prod.py` (productionized; prototype was `parse_born_digital.py`), but 1997-1999 (17 vols) have garbled-mojibake text layers (broken subset fonts / missing ToUnicode CMap) and need OCR. Updated title, year ranges, and the 1915-1999 OCR TODO. |

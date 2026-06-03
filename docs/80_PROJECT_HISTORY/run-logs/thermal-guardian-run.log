@@ -1,0 +1,9 @@
+[2026-06-02 16:40 PT] INIT | Thermal guardian build started; telegram creds + supervisor inspected | OK
+[2026-06-02 16:43 PT] TEST | Local 5080 non-elevated TestCap -> Insufficient Permissions (expected; -pl needs admin) | WARN
+[2026-06-02 16:46 PT] DEPLOY | guardian + launch_5090 scp'd to 5090 scratch | OK
+[2026-06-02 16:47 PT] TEST | 5090 set+restore PROVEN via SSH: 575->460->575, power.limit read back at each step; card restored to 575 | OK
+[2026-06-02 16:47 PT] TEST | 5090 guardian -TestCap PASS (575->460->575 verified by script's own Set-PowerLimit) | OK
+[2026-06-02 16:47 PT] TEST | 5090 -TestAlert Telegram sent (direct bot API) | OK
+[2026-06-02 16:48 PT] DEPLOY | PatoLex_ThermalGuard_5090 created (SYSTEM/HIGHEST/ONSTART), started, RUNNING + writing CSV @10s, governor NORMAL | OK
+[2026-06-02 16:54 PT] TEST | 5080 -TestAlert via repo telegram.ps1 sent; 5080 -Once logger wrote CSV row OK | OK
+[2026-06-02 16:54 PT] BLOCK | 5080 scheduled-task registration (any principal/level) -> Access denied without elevation; UAC prompt CANCELED 3x in this env. 5080 GOVERNOR NOT YET INSTALLED. Installer staged: pipeline\thermal_guardian_install_5080.ps1 (run elevated once). | FAIL
