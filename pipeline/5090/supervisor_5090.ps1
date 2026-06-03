@@ -175,11 +175,19 @@ while ($true) {
         $w = $procs[$id]
         if ($w.Proc.HasExited) {
             Clear-DrainFlag $id
+            $code = $null
+            try { $code = $w.Proc.ExitCode } catch { }
             if ($w.Draining) {
                 Sup ("worker $id exited (drained)")
-            } else {
+            } elseif (($null -ne $code) -and ($code -ne 0)) {
+                # Only a non-zero exit is a real crash. Clean exits (exit 0) are
+                # queue-drain / transient-idle / global-STOP -- NOT crashes, so
+                # they must not trip the crash-frequency guard near end-of-campaign
+                # (Hans pass-2 regression fix).
                 $script:crashTimes.Add((Get-Date))
-                Sup ("worker $id exited UNEXPECTEDLY -- counted toward crash guard")
+                Sup ("worker $id exited UNEXPECTEDLY (exit $code) -- counted toward crash guard")
+            } else {
+                Sup ("worker $id exited cleanly (exit $code) -- drain/idle/stop, not a crash")
             }
             $procs.Remove($id)
         }
