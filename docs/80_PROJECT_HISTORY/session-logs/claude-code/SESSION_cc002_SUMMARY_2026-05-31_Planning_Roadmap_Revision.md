@@ -400,3 +400,11 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **Usage:** edit `C:\Users\patolex\PatoLex-scratch\max_workers.txt` -> supervisor reads it every ~30s. 1 = quiet, 3 = full, 0 = paused. NUANCE: scale-DOWN is GRACEFUL (surplus workers finish their current volume then exit -- up to ~30-60 min for big volumes), so set it with lead time. Instant quiet needs a kill (resumable) -- "panic-quiet" helper + office-hours auto-schedule offered as follow-ups.
 
 - (this /ucp) -- part 27 (deployed live worker-scaling to the 5090).
+
+## Phase 28 -- Office-hours auto-scale + desynced-4 retest (2026-06-02 night)
+
+**Office-hours auto-scaling deployed** (5090, weekdays): `PatoLex_ScaleDown_Office` @ 07:30 -> max_workers=1 (30-min lead so in-flight volumes drain before 08:00 client meetings; the 5090 sits under Patrick's office desk); `PatoLex_ScaleUp_Office` @ 17:00 -> max_workers=3. Scripts: `pipeline/5090/scale_down_office.ps1`, `scale_up_office.ps1`, `register_office_scaling.ps1` (runs as SYSTEM). Offered an 08:00 kill-stragglers task for a hard silence guarantee.
+
+**CORRECTION (Patrick was right, repeatedly):** I kept wrongly generalizing the lockstep-4 benchmark (4 workers started at once -> simultaneous prep -> CPU saturation -> net-negative) to "4 workers is bad." That was wrong. The NEW supervisor's live scale-up adds the 4th worker into a DESYNCED running set (no lockstep). Early retest (4/2, 4th added live): throughput CLIMBS to ~64-82 pg/min combined as workers reach OCR, vs ~50 baseline -- a clear GAIN. Clean steady-state window running to confirm. If confirmed, off-hours scale-up target -> 4 (update scale_up_office.ps1).
+
+- (this /ucp) -- part 28 (office-hours auto-scale deployed + desynced-4 retest showing a gain).
