@@ -1,0 +1,83 @@
+[2026-06-02 worker-benchmark] Task start: bump 3/1 -> 4/2, measure throughput, end on verified-producing config.
+Baseline 3/1 = ~50 pg/min (from completion history; NOT re-measured per instructions).
+
+PRE-BUMP STATE:
+- 5090: 3 workers alive (5090-1/2/3) on 1917/1913/1915; GPU 5.4GB momentary. max_workers.txt=3.
+- 5080: 1 worker (5080-1) on 1919 (page-prep phase, model not yet loaded). PID25656 = its ocr_only child (NOT a separate job).
+- No separate archiver on 5080; 5090 archiver already finished per brief.
+
+BASELINE PAGE COUNTS (banked, pre-bump):
+- 5090 TOTAL_OCR_PAGES=25880
+- 5080 TOTAL_OCR_PAGES=19670 (holds local copies of 1850-1860 + others)
+
+STEP1 5090 BUMP -> 4:
+[2026-06-02] ended PatoLex_OCR_5090 (OK), taskkill /F python /T -> 15 procs killed, clean slate (OK)
+[2026-06-02] GPU after kill = 1320 MiB / 0% (OK, cleared)
+[2026-06-02] pushed supervisor_5090.ps1 with Start-Sleep 75 stagger on BOTH launch sites (verified lines 77,131=75; line85 poll=30) (OK)
+[2026-06-02] set max_workers.txt=4 (verified) (OK)
+[2026-06-02] task runs supervisor -Count 1 BUT $initial=Get-MaxWorkers reads file=4 -> will launch 4 (OK)
+[2026-06-02] schtasks /run PatoLex_OCR_5090 -> launching 4 workers, 75s apart (~5min full load) (OK)
+[2026-06-02 18:32-18:36] ALL 4 workers launched staggered 75s: 5090-1@18:32:56, 5090-2@18:34:11, 5090-3@18:35:26, 5090-4@18:36:41 (OK)
+[2026-06-02 18:36] all 4 claimed FRESH big volumes 1921/1923/1925(/1927) (killed in-progress 1913/15/17 not yet stale -> skipped; banked+resumable, no loss) (OK)
+[2026-06-02 18:36-37] all 4 in STAGE1-RENDER/STAGE2-PREPROCESS (CPU-bound, GPU 0%) - e.g. 1927=2399pg, 1923 preproc 101/1689. OCR/GPU phase pending render completion (WARN: long prep delays steady-state)
+NOTE: 75s launch stagger spaces LAUNCH not model-load; all 4 will hit GPU OCR ~same time after prep. Zombies (prior hang cause) were cleared, so watching for clean simultaneous load.
+
+STEP1 5080 BUMP -> 2:
+[2026-06-02 18:38] launched 5080-2 (pid 46384) detached, worker_id=5080-2 (OK)
+[2026-06-02 18:39] 5080-2 claimed 1929-28ch (6pg), loaded Surya det3+rec2 on GPU CLEANLY, PEAK VRAM only ~1.08GB (NOT ~6GB - 5080 uses Surya, tiny footprint). No OOM. (OK)
+[2026-06-02 18:39] 5080-2 finished 1929-28ch (0 body pg), moved to 1929-29ch. 5080-1 still in preprocess on 1919. Both healthy. (OK)
+KEY FINDING: 5080 OCR model ~1GB VRAM each -> 16GB fits 2 workers trivially, 5080 is COMPUTE-bound not mem-bound. No OOM risk at 2.
+
+STEP2 MEASURE 4/2 (20-min window):
+[2026-06-02 18:41:34] T0 SNAPSHOT: 5090=25905 pg, 5080=19670 pg
+[2026-06-02 18:39-41] 5090 render fast (1927: 2399pg in 157s); all 4 in STAGE2-PREPROCESS on big 1920s vols (1921/23/25/27, ~1500-2400pg each). GPU oscillating 1.3-5.3GB (per-page hygiene). Both boxes PRODUCING (render+preproc advancing), no OOM, no hang.
+[2026-06-02 18:41] telemetry sampler started (30s cadence, both boxes GPU+CPU). T1 due ~19:02.
+NOTE: window captures real mixed prep+OCR steady-state (honest sustained rate; 1920s vols are prep-heavy).
+
+=== RESUMED SESSION (new agent) ===
+[2026-06-02 18:46] RESUME CHECK | 5090 GPU still 1320MiB/0% (NO OCR yet); page counts UNCHANGED since 18:41 (5090=25905, 5080=19670). Prior "T0 18:41" window is INVALID (no GPU OCR occurred during it). Discarding it. | WARN
+[2026-06-02 18:45] PHASE | All 4 5090 workers in LOCKSTEP STAGE2-PREPROCESS, GPU idle: W1 1921=601/2270, W2 1923=601/1689, W3 1925=501/1423, W4 1927=301/2399. Prep ~50pg/min each. 5080: 2 workers healthy. | OK
+[2026-06-02 18:46] PLAN | Will NOT set T0 until 5090 GPU sustained OCR (mem>8GB AND util>40%). Earliest prep-finish ~19:03 (W3/1925). Polling 60-90s. Hang guard armed (GPU<2GB & util0 & CPU idle >5min after prep = HUNG). | OK
+PHASE-SYNC OBSERVATION (preliminary): 4 workers claimed 4 fresh big vols simultaneously -> all preprocessing in lockstep -> GPU 100% STARVED during prep. Confirms phase-sync concern; whether 4th worker adds OCR throughput TBD once GPU phase begins.
+
+[2026-06-02 18:51] (orig agent) CONCUR with resumed-session note: 18:41 window INVALID (pure preprocess valley, GPU 0% both boxes, 0 OCR pages). Telemetry CONFIRMS: 18:41-18:51 5090 GPU 39-41C/0-3%util/CPU 78-94%; 5080 GPU 33-34C/0%util/CPU 60-75%. All 6 workers HEALTHY, no OOM/hang, temps cool. Waiting for STAGE4-OCR before real T0.
+[2026-06-02 18:48] TELEMETRY | Started 30s samplers on both boxes -> 5090 bench_5090_telemetry.csv (via backgrounded SSH), 5080 bench_5080_telemetry.csv (local). First samples: 5090 1320MiB/2%/40C/91%CPU; 5080 1006MiB/0%/33C/71%CPU. Both CPU-bound prep, GPUs starved. | OK
+[2026-06-02 18:49] MONITOR | Armed transition-watcher: emits OCR-PHASE-BEGIN when 5090 GPU mem>8GB, or HANG-CONFIRMED if (mem<2GB & util<5 & CPU<30) sustained 5min after prep. Waiting for GPU OCR phase (~19:03+). | OK
+[2026-06-02 18:56] FALSE-ALARM | Monitor emitted HANG-SUSPECT (GPU 1320MiB/0%, CPU 4%). Investigated: ALL 4 workers ADVANCING (W1 1921=1201/2270, W2 1923=1101/1689, W3 1925=1001/1423, W4 1927=801/2399; +600pg in 10min). NOT a hang. | OK
+FINDING (durable->lessons): Get-Counter '\Processor(_Total)\% Processor Time' single-sample reads transient near-0 values mid-preprocess (I/O waits between pages), giving FALSE hang signals. Authoritative liveness signal = worker-log page-count ADVANCEMENT, not CPU% and not GPU mem. Re-armed monitor to use worker-log fingerprint: HANG only if zero worker progress for 5min while GPU<2GB.
+[2026-06-02 18:57] MONITOR-V2 | Re-armed with fingerprint-based stall detection (bench_progress_5090.ps1). OCR-PHASE-BEGIN at GPU mem>8GB; HANG-CONFIRMED only on 5min flat worker fingerprint + GPU idle. | OK
+
+*** KEY FINDING - CPU CONTENTION AT 4 WORKERS (orig agent, 19:01) ***
+[2026-06-02 19:01] 5090 ocr-log STALLED at 18:53 for ~8min (no new 100-page checkpoint), but NOT hung: CPU=91.5%, 1925 pages_prep_gray grew 901->938 files (=+37 in ~8min). Preprocess throughput COLLAPSED ~10x: was ~50pg/min/worker (18:36-18:53), now ~5pg/min/worker.
+ROOT CAUSE: 4 workers ALL in CPU-bound preprocess simultaneously -> CPU saturated (~91%, 4-way split) -> per-worker prep throughput crashes. The 4th worker does NOT add capacity in the prep phase; it ADDS CPU contention that slows ALL workers. OCR(GPU) phase is being starved/delayed badly as a result.
+IMPLICATION: For prep-heavy 1920s volumes, 4 workers on the 5090 is likely NET-NEGATIVE during prep (CPU-bound). Whether the GPU OCR phase (once reached) recovers enough to justify 4 is the open question. Leaning toward REVERT to 3/1 if OCR phase doesn't show a clear win, since prep dominates these volumes.
+
+STEP3 DECISION: REVERT TO 3/1.
+[2026-06-02 19:05] VERDICT | 4/2 did NOT produce a measurable OCR rate. After 23+ min, 5090 GPU util stayed 0-3% (telemetry n=24, util peak 3% median 0%) - ZERO sustained OCR; 4 workers stuck in CPU-contended preprocess. Cannot report a 4/2 pg/min because no OCR pages were produced in any window. Per brief STEP3 (4/2 not clean) + guardrail (end on verified-producing config) -> REVERT. | OK
+[2026-06-02 19:04] REVERT 5090->3 | ended task, taskkill /F python /T (20 procs, clean), set max_workers.txt=3 (verified), GPU cleared to 1320MiB, restarted PatoLex_OCR_5090 (supervisor 75s stagger). In-progress 1921/23/25/27 left for stale-reclaim (resumable, no loss). | OK
+[2026-06-02 19:04] REVERT 5080->1 | killed 5080-2 (pid46384) + child 27088. Remaining: 5080-1 (pid49428)+child25656 on 1919. 1929-29ch left for stale-reclaim. | OK
+[2026-06-02 19:05] VERIFYING reverted 3/1 is producing (waiting ~3min for 3-worker launch+prep)...
+
+FINAL VERIFICATION - 3/1 PRODUCING (19:06):
+[2026-06-02 18:56-18:58] 5090: 3 workers launched staggered 75s (5090-1@18:56:22, 5090-2@18:57:37, 5090-3@18:58:52). Claimed fresh 1933/1935. (OK)
+[2026-06-02 18:59] 5090 reached STAGE4-OCR on 1935-34ch within ~3min of launch (body=41). GPU=4141MiB/13%/43C, OCRing page 2/41 (surya+doctr+tess agree=0.89, peakVRAM 5556MB). PAGES ADVANCING. (OK)
+[2026-06-02 18:59] 5080: 5080-1 (pid49428) reached STAGE4-OCR on 1919, page 21/1555 @ ~2.9s/pg (agree=0.76, peakVRAM 5132MB). PAGES ADVANCING. Removing 5080-2 freed CPU so 5080-1 prep finished -> OCR. (OK)
+CONTRAST: at 3 workers a 5090 worker hit GPU OCR in ~3min; at 4 workers NONE hit OCR in 23min. Confirms CPU-contention diagnosis decisively.
+
+================= FINAL REPORT =================
+FINAL CONFIG LEFT RUNNING: 3/1 (5090 max_workers=3 via Scheduled Task PatoLex_OCR_5090, supervisor 75s stagger; 5080 = 1 worker 5080-1 via PatoLex_OCR_5080). BOTH VERIFIED PRODUCING OCR (pages advancing on both at 19:06).
+
+4/2 pg/min: NOT MEASURABLE. 5090 at 4 workers never reached sustained GPU OCR in 23+ min - all 4 stuck in CPU-bound STAGE1-RENDER/STAGE2-PREPROCESS, GPU util 0-3% the entire time, ZERO OCR pages produced. No valid throughput window existed (page-count delta 18:41-19:01 ~= 0 net OCR on both boxes, prep-bound).
+
+ROOT CAUSE (durable finding): OCR pipeline has a heavy CPU-bound prep stage (render@300DPI + grayscale preprocess + classify) BEFORE the GPU OCR stage. When N workers all land on fresh volumes at once they preprocess in LOCKSTEP and saturate CPU. At 4 workers the 5090 CPU hit ~91-94% and per-worker prep throughput COLLAPSED ~10x (50->5 pg/min/worker), indefinitely starving the GPU. The 4th worker is NET-NEGATIVE on prep-heavy volumes (1920s multi-vol chapter PDFs, 1500-3270 pg each). 3 workers leaves enough CPU headroom that a worker reaches the GPU stage promptly.
+
+TELEMETRY (4/2 window, prep-phase only, n=24 samples 18:41-18:55, both boxes):
+- 5090: GPU temp peak 41C / med 40C; util peak 3% / med 0%; power peak 13.9W / med 13.6W; mem peak/med 1320MiB; CPU% peak 94.4 / med 88.7
+- 5080: GPU temp peak 34C / med 33C; util peak 0% / med 0%; power peak 23.4W / med 10.1W; mem peak/med 1006MiB; CPU% peak 76.1 / med 68.7
+  (GPUs idle entire window -> prep-phase numbers, NOT OCR-load numbers. No >80C, no OOM, no instability ever.)
+
+OOM/HANG: None. No OOM either box (5080 OCR model only ~1-5GB VRAM, 16GB ample). No true hang - prep kept advancing, just pathologically slow under contention. All worker bumps/kills/restarts clean (taskkill /F /T).
+
+RECOMMENDATION: Stay at 3/1. To measure a real 4/2 OCR rate you'd need to defeat prep lockstep (pre-render volumes, or separate CPU prep pool feeding a GPU OCR pool) or test on a box with more CPU cores. As-is, the 4th worker on the 5090 hurts.
+================================================
+

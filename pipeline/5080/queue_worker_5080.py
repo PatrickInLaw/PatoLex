@@ -250,6 +250,12 @@ def main():
         if STOP_FLAG.exists():
             log("WORKER", "STOP flag present between volumes -- graceful exit", "OK")
             return
+        # Per-worker scale-down (symmetric with the 5090 worker): drain just THIS
+        # worker if its per-worker stop flag is set. Read-only -- the creator
+        # owns the flag's lifecycle; do NOT unlink it here (Hans BLOCKER-2).
+        if (STOP_FLAG.parent / ("STOP_WORKER_" + worker_id + ".flag")).exists():
+            log("WORKER", "per-worker stop flag present -- scaled down, graceful exit between volumes", "OK")
+            return
         claimed = claim_next(worker_id)
         if claimed is None:
             idle += 1

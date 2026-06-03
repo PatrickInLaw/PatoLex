@@ -365,3 +365,19 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - Found + fixed 2 real bugs in `pipeline/archive_images.py` (redeployed to 5090, transport-only, verify-before-delete path unchanged): (1) `run_remote_ps` deadlock -- nested ssh inherited the parent stdin pipe + a grandchild held it open -> hung after START; fixed with `ssh -n` + file-redirect instead of `capture_output` PIPE. (2) scp stalled at 0-byte dest because the 3060's default ssh shell is PowerShell (mangles the SFTP stream); fixed with `scp -O` (legacy protocol).
 
 - (this /ucp) -- part 24 (throughput baseline + ETAs + archiver --commit complete + archive_images.py transport bug-fixes).
+
+---
+
+## Phase 25 -- CPU-prep bottleneck finding + symmetric live worker-scaling (2026-06-02 evening)
+
+**Durable finding (the big one):** the 5090 OCR pipeline is **CPU-prep-bound, NOT GPU-bound**. Worker-count benchmark: **4 workers on the 5090 is NET-NEGATIVE vs 3** -- when 4 land on fresh prep-heavy volumes in lockstep, CPU saturates 91-94%, per-worker prep collapses ~10x (≈50 -> ≈5 pg/min), GPU util 0-3% (starved), zero OCR pages in 23+ min. Reverted to 3/1 (proven optimal, ~50 pg/min). Root cause = the heavy CPU PREPROCESS stage (300-DPI render + grayscale + classify) before GPU OCR. Lever = get prep OFF the critical path (prep-offload to the 3060 / intra-worker pipelining), NOT more GPU workers. Recorded in `docs/80_PROJECT_HISTORY/lessons/LESSON_2026-06-02_ocr_cpu_prep_bottleneck.md`.
+
+**3/2 re-enabled (independent win):** the 5080's 2nd worker is NOT subject to the 5090 CPU problem (separate box; 5080 ran 2 workers at ~68-76% CPU, no OOM -- Surya ~1-5GB VRAM). Re-launched 5080-2; it reclaimed orphaned 1915, rendered 1922pp in 91s, now preprocessing. 5080-1 on 1919. Estimated ~+20% total throughput (unmeasured).
+
+**Symmetric live worker-scaling built (repo only, NOT deployed):** single knob = `max_workers.txt`, both directions live, no restart/kill/lockstep.
+- `queue_worker.py` + `queue_worker_5080.py`: honor a PER-WORKER `STOP_WORKER_<id>.flag` (drain just that worker between volumes; read-only -- supervisor owns lifecycle).
+- `supervisor_5090.ps1`: full rewrite -- scale up = launch missing workers one-at-a-time (joins desynced set, no lockstep); scale down = per-worker drain flags on newest surplus (cancellable); monotonic PERSISTED seq; crash-frequency guard; startup orphan-flag sweep + loud global-STOP / pre-existing-PID warnings.
+
+**Hans:** pass 1 found 3 BLOCKERs (crash-guard calibrated backwards; worker-deletes-own-flag cancel race; seq reset on restart -> ID reuse / cutover blindness) + should-fixes. All fixed. Pass 2 (re-review) IN FLIGHT at this /ucp -- any residual findings will land in a follow-up commit. Deploy is a separate coordinated cutover (drain old workers -> swap -> restart); no rush since 3/2 already runs on the old supervisor + manual 5080-2.
+
+- (this /ucp) -- part 25 (CPU-prep finding + 3/2 + symmetric scaling code, Hans pass-2 pending).

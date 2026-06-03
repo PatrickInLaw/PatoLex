@@ -21,15 +21,20 @@ Concurrency / safety:
     page is ever lost.
   - Stale claim: an 'in_progress' entry whose heartbeat is older than
     STALE_SECONDS is reclaimable (the worker died).
-  - 'held' volumes are NEVER claimable (used by the scale-down to fence off
-    pending work while surplus workers drain) -- they are not 'pending' and
-    not stale-reclaimable.
+  - 'held' volumes are NEVER claimable -- they are not 'pending' and not
+    stale-reclaimable. 'held' is set OUT-OF-BAND by an operator tool to fence
+    off volumes; the supervisor's per-worker scale-down does NOT set 'held'
+    (scale-down drains a worker via a per-worker stop flag, not by holding work).
 
-Graceful drain (cc003 scale-to-1 support):
-  - Between volumes (top of the claim loop) the worker checks for
-    STOP_WORKER.flag. If present it logs and exits 0 WITHOUT claiming a new
-    volume. Because the check is between volumes, an in-flight volume is
-    always allowed to finish + write its marker first -- never killed.
+Graceful drain:
+  - Between volumes (top of the claim loop) the worker checks two stop signals
+    and exits 0 WITHOUT claiming a new volume if either is set:
+      * STOP_WORKER.flag           -- GLOBAL: drains ALL workers (pause/stop).
+      * STOP_WORKER_<id>.flag      -- PER-WORKER: drains just THIS worker (the
+        supervisor writes it to scale down; the supervisor owns its lifecycle,
+        the worker only reads it).
+    Because both checks are between volumes, an in-flight volume is always
+    allowed to finish + write its marker first -- never killed.
 
 Heartbeat: while ocr_only runs, this worker bumps the entry's heartbeat
 every HEARTBEAT_SECONDS so live work is not mistaken for a dead claim.
@@ -248,6 +253,19 @@ def main():
         # run_volume) always finishes + checkpoints before we reach here.
         if STOP_FLAG.exists():
             log(worker_id, "STOP_WORKER.flag present -- exiting gracefully between volumes", "OK")
+            return
+        # Live, SELECTIVE scale-down: a per-worker stop flag (created by the
+        # supervisor when max_workers is lowered) drains just THIS worker after
+        # its current volume -- unlike the global STOP_WORKER.flag which stops
+        # all of them. Checked between volumes only, so an in-flight volume
+        # always finishes + checkpoints first (never killed mid-volume).
+        # The SUPERVISOR owns this flag's whole lifecycle (create / cancel-on-
+        # raise / clear-on-reap); the worker only READS it. We must NOT unlink
+        # it here -- a worker-side delete races the supervisor's cancel and can
+        # defeat a "raise max_workers to cancel the drain" (Hans BLOCKER-2).
+        wstop = SCRATCH / f"STOP_WORKER_{worker_id}.flag"
+        if wstop.exists():
+            log(worker_id, "per-worker stop flag present -- scaled down, exiting gracefully between volumes", "OK")
             return
         try:
             claimed = claim_next(worker_id)

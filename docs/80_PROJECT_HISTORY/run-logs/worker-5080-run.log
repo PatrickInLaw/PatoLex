@@ -49,3 +49,13 @@
 [2026-06-02 16:04 PT] PUSH | 1903: OCR outputs pushed to 5090 | OK
 [2026-06-02 16:04 PT] RUN | 1903: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-02 16:04 PT] RUN | 1910-11: START local OCR (1910-11_Statutes.pdf) on 5080 | OK
+[2026-06-02 18:28 PT] PUSH | 1910-11: OCR outputs pushed to 5090 | OK
+[2026-06-02 18:28 PT] RUN | 1910-11: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 18:28 PT] RUN | 1919-vol1-chapters: START local OCR (1919_Vol1_Chapters.pdf) on 5080 | OK
+[2026-06-02 18:38 PT] WORKER | === 5080 queue worker online (pid 46384, worker_id=5080-2) sharing 5090 queue 100.70.54.56 === | OK
+[2026-06-02 18:38 PT] RUN | 1929-vol1-28chapters: START local OCR (1929_Vol1_28Chapters.pdf) on 5080 | OK
+[2026-06-02 18:39 PT] PUSH | 1929-vol1-28chapters: OCR outputs pushed to 5090 | OK
+[2026-06-02 18:39 PT] RUN | 1929-vol1-28chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-02 18:39 PT] RUN | 1929-vol1-29chapters: START local OCR (1929_Vol1_29Chapters.pdf) on 5080 | OK
+[2026-06-02 19:19 PT] WORKER | === 5080 queue worker online (pid 44604, worker_id=5080-2) sharing 5090 queue 100.70.54.56 === | OK
+[2026-06-02 19:19 PT] RUN | 1915-vol1-chapters: START local OCR (1915_Vol1_Chapters.pdf) on 5080 | OK
