@@ -390,3 +390,13 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **Profiling launched (agent ae878e62)** to get the two deciding numbers before committing to a variant: M1 = per-stage time split (render/preprocess/classify/OCR) + Tesseract's CPU share within OCR (does prep-offload alone free the CPU, or must Tesseract move too?); M2 = real compress+ship cost of one prepped volume 5090<->3060 vs the prep time saved. Output -> `docs/80_PROJECT_HISTORY/run-logs/prep-offload-profile-run.log`. A proper design doc under docs/30_SYSTEM_DESIGN/ to follow once the numbers pick the variant.
 
 - (this /ucp) -- part 26 (prep-offload design recorded + profiling in flight).
+
+## Phase 27 -- Deployed A: live worker-scaling on the 5090 (2026-06-02 late)
+
+**Driver:** Patrick wants to dynamically scale the 5090 down during office hours (it sits under his desk; loud GPU cooler during client meetings is the problem).
+
+**Deployed** the symmetric-scaling supervisor + worker to the 5090 (sha256-verified identical). Cutover at a zero-waste moment (workers were in prep phase, nothing OCR'd to lose): scp new files -> end task + taskkill python -> restart task. New supervisor confirmed running (unique `seq-resume` log line), 3 workers up + producing, resuming orphaned volumes from banked prep (idempotent, no loss). `worker_seq.txt` now persists. Overall 3/2 (3x5090 + 2x5080).
+
+**Usage:** edit `C:\Users\patolex\PatoLex-scratch\max_workers.txt` -> supervisor reads it every ~30s. 1 = quiet, 3 = full, 0 = paused. NUANCE: scale-DOWN is GRACEFUL (surplus workers finish their current volume then exit -- up to ~30-60 min for big volumes), so set it with lead time. Instant quiet needs a kill (resumable) -- "panic-quiet" helper + office-hours auto-schedule offered as follow-ups.
+
+- (this /ucp) -- part 27 (deployed live worker-scaling to the 5090).

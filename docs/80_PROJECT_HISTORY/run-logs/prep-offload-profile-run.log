@@ -1,0 +1,116 @@
+# PatoLex prep-offload profiling run log
+
+Question: should CPU-bound render/preprocess (and possibly Tesseract) move OFF the
+5-series GPU boxes onto the 3060? Bounded measurement only — no infra changes;
+one transfer test, cleaned up.
+
+Boxes: 5090 = patolex@100.70.54.56 ; 3060 = patolex@100.113.254.6 (archive D:\PatoLex-archive)
+Source data: 5090 logs (ocr-5090-run.log, queue-worker.log) + ocr_only_5090.py + one live scp test.
+
+================================================================================
+[2026-06-02 ~19:10 PT] MEASUREMENT 1 -- per-stage time split (5 recent real-render volumes)
+================================================================================
+Per-volume STAGE wall-clock (from ocr-5090-run.log; 0.0s "resume" entries excluded).
+Note STAGE3-CLASSIFY logs no duration of its own; it runs in the same second as the
+STAGE2-PREPROCESS completion line (sub-second ink-density scan) -- folded into prep.
+
+vol         pages  STAGE1-RENDER  STAGE2-PREPROCESS   STAGE4-OCR (body)
+1877-78     1146    75.8s          1132.0s            3685.8s (3.19 s/pg)
+1900-01     1026    66.3s           918.4s            1791.6s (3.08 s/pg)  [hi=993 lo=33]
+1905        1123    68.8s          1077.3s            3383.0s (2.98 s/pg)
+1906-07     1410    87.5s          1415pg/  97.4s*    4266.2s (2.99 s/pg)  *prep partly pre-warmed
+1907-09     1397    85.9s          1403pg/  74.6s*    4092.1s (2.90 s/pg)  *prep partly pre-warmed
+
+Representative "cold" prep volumes (full preprocess, no pre-warm):
+1877-78 1153pg 1132.0s = 0.98 s/pg ; 1900-01 1030pg 918.4s = 0.89 s/pg ;
+1905 1126pg 1077.3s = 0.96 s/pg ; 1913 1808pg 1432.5s = 0.79 s/pg ; 1915 1922pg 1996.6s = 1.04 s/pg.
+
+MEDIANS (per-page, normalized; using cold-prep volumes):
+  STAGE1-RENDER       : ~0.06 s/page   (median vol total ~76s for ~1150 pages)
+  STAGE2-PREPROCESS   : ~0.95 s/page   (median vol total ~1080s for ~1150 pages)
+  STAGE3-CLASSIFY     : sub-second per volume (negligible; folded into prep)
+  STAGE4-OCR          : ~3.0  s/page   (median vol total ~3400s for ~1150 pages)
+
+PREP (render+preprocess+classify) : OCR ratio
+  per-page: (0.06 + 0.95) : 3.0  =  1.01 : 3.0  ~= 0.34 : 1   (prep ~25% of pipeline wall, OCR ~75%)
+  Preprocess alone is ~94% of prep cost; render ~6%; classify ~0%.
+
+--------------------------------------------------------------------------------
+OCR-stage structure (ocr_only_5090.py, STAGE4):
+  Three engines run PER PAGE, SERIALLY, in this order (lines 466-486):
+    1. Tesseract   (run_tesseract)  -- CPU engine (pytesseract, --oem 1 --psm 6)
+    2. docTR       (run_doctr)      -- GPU engine (model.cuda(), torch.inference_mode)
+    3. Surya       (run_surya)      -- GPU engine (Detection+Recognition predictors)
+  Then a token-set 2-of-3 consensus (CPU, cheap).
+  Timing: only the COMBINED per-page time is logged (ocr_timings, "seconds" per page).
+  There is NO per-engine timing in the log -- per-engine split is CODE-STRUCTURE estimate only.
+
+  Tesseract CPU-share estimate (from structure, not measured):
+    Tesseract on a ~300-DPI full page (--psm 6) typically runs ~0.8-1.5 s/page CPU.
+    docTR + Surya (two deep models, single-image/un-batched, GPU) dominate the ~3.0 s/page.
+    Rough split: Tesseract ~0.8-1.2s (CPU), docTR+Surya ~1.8-2.2s (GPU). => Tesseract is
+    on the order of ~30-40% of OCR-stage WALL time but it is CPU-side, so during OCR the
+    5090 CPU is NOT idle -- it carries Tesseract serially interleaved with the GPU engines.
+
+  LIVE CPU/GPU-during-OCR sampling: SKIPPED. At measurement time the 5090 was BETWEEN
+  volumes (nvidia-smi: util 0%, mem 6633 MiB) -- no worker in OCR phase (>8GB / >40%)
+  within the window, so per the brief this sub-step was skipped rather than waited on.
+
+================================================================================
+[2026-06-02 ~19:12 PT] MEASUREMENT 2 -- handoff cost (one real transfer test)
+================================================================================
+Representative completed volume: production-1907-09 (OCR DONE 17:56, not in active queue).
+  pages_prep_gray:   1403 files, 1,351,921,631 bytes = 1289.3 MB
+  page_classification.json: 14,479 bytes (negligible)
+
+ONE real test (tar+gzip on 5090 -> scp -O over Tailscale -> 3060 D:\PatoLex-archive):
+  COMPRESS (tar -czf): 37.1 s  -> 1,015,793,202 bytes = 968.7 MB  (only ~25% shrink;
+                       inputs are already-binarized grayscale PNGs, near-incompressible)
+  TRANSFER (scp -O, id_5090_to_3060 key, untrottled Tailscale): 16.7 s
+  EFFECTIVE THROUGHPUT: 968.7 MB / 16.7 s = ~58 MB/s  (~464 Mbit/s over Tailscale)
+  Integrity: byte-exact on 3060 (1,015,793,202 == source). SCP_EXIT=0.
+  CLEANUP: tarball deleted on BOTH 3060 and 5090; Test-Path=False both ends. No stray files.
+
+  Handoff total (compress 37.1s + transfer 16.7s) = ~53.8 s per ~1150-1400-page volume.
+  (If transfer of raw uncompressed dir at 58 MB/s instead: 1289 MB/58 = ~22s, NO 37s compress
+   -- i.e. skipping compression is FASTER end-to-end given near-incompressible PNGs: ~22s vs ~54s.)
+
+HANDOFF vs PREP-SAVED verdict:
+  Prep-stage time that offloading would REMOVE from the 5-series box, per volume (median):
+    render ~76s + preprocess ~1080s + classify ~0 = ~1156 s (~19 min) of 5090 CPU work.
+  Handoff cost to ship the prepped pages back: ~54s compressed (or ~22s raw).
+  => Handoff is CHEAP: ~5% of the prep time it offloads (or ~2% uncompressed).
+     The make-or-break number passes comfortably -- moving prep to the 3060 buys back
+     ~19 min/volume of 5-series time for ~1min of transfer.
+     CAVEAT: this is the cost to move PREPPED pages 3060->5090. A full role-split also
+     needs the SOURCE PDF on the 3060 (one-time, PDFs are tens of MB) -- also cheap.
+
+================================================================================
+DESIGN READ (which the numbers favor)
+================================================================================
+The pipeline is ~75% OCR (GPU-bound, ~3.0 s/pg) and ~25% prep (CPU-bound, ~1.0 s/pg,
+of which preprocessing is 94%). Handoff is ~1 min/volume vs ~19 min prep saved -- cheap.
+BUT prep currently runs INTERLEAVED with OCR across 3-4 concurrent workers, so the prep
+CPU cost is already partially hidden behind GPU OCR; the headline 25% is wall-time per
+volume in isolation, not necessarily idle GPU. The real contention is that Tesseract
+(a CPU engine, ~30-40% of OCR-stage wall, serial per page) competes with preprocess for
+the SAME CPU. That means **prep-offload alone does NOT free the 5-series CPU** -- Tesseract
+keeps the CPU busy throughout OCR.
+
+Favored design: a STAGED role-split, not a single lever.
+  1. Move render+preprocess+classify to the 3060 (CPU-cheap on GPU box, handoff trivial).
+     The 3060 preps ahead; 5090/5080 pull prepped pages and run GPU OCR. Frees ~19min/vol
+     of 5-series CPU AND removes preprocess<->Tesseract CPU contention during OCR.
+  2. Strongly consider ALSO moving Tesseract to the 3060 (or dropping it to a 2-of-2
+     docTR+Surya consensus on the GPU box) -- because Tesseract is the CPU load that
+     survives prep-offload. Tesseract on the 3060 can run while the 5090 does docTR+Surya,
+     then its text ships back with the prepped pages (text is tiny). This makes the
+     5-series boxes GPU-ONLY -- the cleanest win.
+  Intra-worker pipelining (overlap prep of vol N+1 with OCR of vol N on the same box)
+  is the weakest option: it leaves both prep AND Tesseract on the 5-series CPU and only
+  hides latency, not load.
+  RECOMMENDATION: full role-split (3060 = render+preprocess+classify+Tesseract; 5-series
+  = docTR+Surya GPU consensus only). Numbers support it; handoff cost is noise.
+  NOTE: the 3060's own throughput at ~1.0 s/pg prep + ~1.0 s/pg Tesseract = ~2 s/pg CPU
+  must keep up with two GPU boxes consuming ~3.0 s/pg EACH across 3-4 workers -- the 3060
+  may become the new bottleneck; size that before committing (out of scope for this run).
