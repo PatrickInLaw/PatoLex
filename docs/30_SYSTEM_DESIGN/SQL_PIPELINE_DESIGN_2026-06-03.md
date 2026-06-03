@@ -9,7 +9,7 @@ The redesign ships in **two clearly-separated steps**, NOT one monolith and NOT 
   - **The box-local prep-decouple build (commit `445bea1`: `prep_supervisor.ps1`, `cutover_decouple_migration.py`, the `--role`/`--stage` split in `queue_worker.py`/`ocr_only_5090.py`) is RETIRED — superseded, NOT deployed.** Its *role/stage-split design* is reused (folded into the SQL workers); its box-local JSON-coordination code is discarded.
   - Rationale (recorded so it isn't re-litigated): the hard, risky surface (cross-box SMB auth, the midbox partial-file race, the MSSQL lease/claim semantics) is all in Step 1 and is reviewed against one diff; the campaign keeps running on the JSON queue until a single quiesced cutover.
 
-- **STEP 2 — engine-decoupling (async per-engine passes).** Orthogonal to Step 1: split the single `consensus` pass into per-engine passes mapped to hardware (5090 = Surya farm; 5080/3060 = Tesseract/docTR). It rides the `stage` extension column the Step-1 schema already carries, so it is **additive — no migration of Step-1 rows, no re-architecture.** Deferred until Step 1 is proven and worker counts are re-measured GPU-fed. Do NOT build any Step-2 code during Step 1.
+- **STEP 2 — engine-decoupling (async per-engine passes).** Orthogonal to Step 1: split the single inline `ocr` pass into per-engine passes mapped to hardware (5090 = Surya farm; 5080/3060 = Tesseract/docTR). The **per-pass column-groups (`tess_/doctr_/surya_/consensus_`) are built into the Step-1 schema on day one** (R2.2), inert (`na`) until enabled per-row at seed — so Step 2 is **additive: no schema change, no migration, no re-architecture.** Only the per-engine + consensus-merge *worker code* (and the empirical engine→box mapping) is deferred, until Step 1 is proven and throughput is re-measured GPU-fed. Do NOT build any Step-2 worker code during Step 1.
 
 Cost accepted: `445bea1` is throwaway (the end-state shifted under it). The benefit — one cohesive, independently-verifiable lift with the risk concentrated and the campaign never dark — is worth it. See REVISION 2 for the authoritative Step-1 schema/claim/auth.
 
@@ -133,7 +133,7 @@ A `state_history(label, from_state, to_state, at, by)` insert on each transition
 
 # REVISION 2 — AUTHORITATIVE (MSSQL + reuse `patolex` account)
 
-**This section supersedes §1 (auth) and §2 (Postgres schema/claim) above.** Patrick's PM decisions (2026-06-03): queue lives in a **dedicated DB on the 3060's existing MSSQL**; **no new user** — reuse the existing `patolex` local account; **centralize PDFs on the 3060 inbox**; **engine-decoupling is Phase 2** but the schema carries the extension dimension now. Everything else above (§3 state machine, §4 store flow + barrier, §5 worker fencing, §6 cutover order, §7 ingest handoff, §8 observability) stands unchanged unless restated here.
+**This section supersedes §1 (auth), §2 (Postgres schema/claim), AND the §3 single-`state` machine above** — the per-pass columns (R2.2) replace the single lifecycle column. Patrick's PM decisions (2026-06-03): queue lives in a **dedicated DB on the 3060's existing MSSQL**; **no new user** — reuse the existing `patolex` local account; **centralize PDFs on the 3060 inbox**; **single wide row per volume, a column-group per pass, NO child/dependency table (KISS)**; the Step-2 engine passes are built into the schema now (inert) so engine-decoupling is additive. Everything else above (§4 store flow + barrier, §5 worker fencing, §6 cutover order, §7 ingest handoff, §8 observability) stands unless restated here.
 
 ## R2.1 Auth — reuse the existing `patolex` account (no new user)
 The 3060 already has a `patolex` local account (it is the SSH target and the 5090's worker account). We grant the three shares to **that** account and run the workers **as `patolex`** (a real interactive/service identity, never SYSTEM — SYSTEM authenticates as `MACHINE$` and cannot present `cmdkey`-stored user creds). This resolves S6 with zero new accounts.
@@ -156,102 +156,136 @@ cmdkey /add:<3060-tailscale-ip> /user:<3060HOST>\patolex /pass:<PATOLEX-PASS>
 ```
 **Run-as resolution (closes old Open #2):** workers run as `patolex`, NOT SYSTEM. If the office-hours / OCR Scheduled Tasks currently run as SYSTEM, they are re-registered to run as `patolex` (stored password, "Run whether user is logged on or not"). Confirm `patolex` exists on the 5080; if not, either create it there with the same name/pass or store the cred in the existing `PatrickKolasinski` context and run the 5080 workers as `PatrickKolasinski`. **This re-registration needs operator elevation (UAC)** — bundle it into the elevated 3060/5080 setup scripts.
 
-## R2.2 Schema — MSSQL DDL (lease/fencing + dead-letter + state_history + engine/pass extension)
-Dedicated DB on the 3060 MSSQL (e.g. `PatoLexQueue`). `NEWID()` lease tokens are the fencing primitive; `lease_expires_at` (absolute, server-clock) drives reclaim so we never compare a worker's clock to the row's.
+## R2.2 Schema — MSSQL DDL: ONE ROW PER VOLUME, ONE COLUMN-GROUP PER PASS (KISS, no child rows)
+Dedicated DB on the 3060 MSSQL (e.g. `PatoLexQueue`). **Decision (Patrick, 2026-06-03): single wide row per volume, a column-group per pass — NO child/dependency table.** "Is this volume's consensus ready?" is then a single-row predicate (`WHERE surya_state='done' AND ...`), never a cross-row join. The table is built **complete and final on day one** (cheaper than `ALTER`-ing a live queue later); the Step-2 passes sit inert (`state='na'`) until turned on per-row at seed time — zero schema change to enable Step 2.
+
+**Per-pass convention.** Every pass `P` carries the *identical* 8-column group, so the lease/claim/heartbeat code is written ONCE and parameterized by the prefix `P_`:
+`P_state` (`pending`|`working`|`done`|`failed`|`held`|`na`), `P_attempts`, `P_lease_token`, `P_lease_expires_at`, `P_claimed_by`, `P_heartbeat_at`, `P_done_at`, `P_error`. Per-pass output paths are derived (`outbox\<label>\<pass>\`), not stored — KISS.
 
 ```sql
--- run once against the dedicated DB (e.g. CREATE DATABASE PatoLexQueue; then USE it)
+-- run once against the dedicated DB (CREATE DATABASE PatoLexQueue; USE it)
 CREATE TABLE dbo.ocr_queue (
-  id              bigint IDENTITY(1,1) PRIMARY KEY,
-  label           nvarchar(200) NOT NULL UNIQUE,
-  pdf             nvarchar(500) NOT NULL,
-  yr              int           NOT NULL,                 -- NOT NULL: NULL sorts last and would never run
-  state           nvarchar(50)  NOT NULL DEFAULT 'pending',
-                  -- pending|prepping|prepped|ocring|done|ocr_failed|held
-  -- Phase-2 engine/pass extension dimension (unused in Phase 1; defaults make it inert):
-  stage           nvarchar(50)  NOT NULL DEFAULT 'consensus', -- consensus | tesseract | doctr | surya
-  attempts        int           NOT NULL DEFAULT 0,
-  lease_token     uniqueidentifier NULL,                 -- fencing token; rotated on each claim
-  lease_expires_at datetime2    NULL,                     -- absolute server-clock expiry
-  claimed_by      nvarchar(100) NULL,
-  claimed_at      datetime2     NULL,
-  heartbeat_at    datetime2     NULL,
-  done_at         datetime2     NULL,
-  error           nvarchar(max) NULL,
-  updated_at      datetime2     NOT NULL DEFAULT sysutcdatetime()
+  id    bigint IDENTITY(1,1) PRIMARY KEY,
+  label nvarchar(200) NOT NULL UNIQUE,
+  pdf   nvarchar(500) NOT NULL,
+  yr    int           NOT NULL,            -- NOT NULL: NULL sorts last, never runs
+
+  -- ===== PASS: prep (CPU render+preprocess+classify) — used in BOTH steps =====
+  prep_state  nvarchar(20) NOT NULL DEFAULT 'pending',
+  prep_attempts int NOT NULL DEFAULT 0,
+  prep_lease_token uniqueidentifier NULL, prep_lease_expires_at datetime2 NULL,
+  prep_claimed_by nvarchar(100) NULL, prep_heartbeat_at datetime2 NULL,
+  prep_done_at datetime2 NULL, prep_error nvarchar(max) NULL,
+
+  -- ===== PASS: ocr (STEP-1 coarse: all 3 engines + consensus inline, today's behavior) =====
+  ocr_state  nvarchar(20) NOT NULL DEFAULT 'pending',
+  ocr_attempts int NOT NULL DEFAULT 0,
+  ocr_lease_token uniqueidentifier NULL, ocr_lease_expires_at datetime2 NULL,
+  ocr_claimed_by nvarchar(100) NULL, ocr_heartbeat_at datetime2 NULL,
+  ocr_done_at datetime2 NULL, ocr_error nvarchar(max) NULL,
+
+  -- ===== STEP-2 PASSES — built now, inert ('na') until enabled per-row at seed =====
+  -- tesseract (CPU, 5080/3060)
+  tess_state nvarchar(20) NOT NULL DEFAULT 'na',
+  tess_attempts int NOT NULL DEFAULT 0,
+  tess_lease_token uniqueidentifier NULL, tess_lease_expires_at datetime2 NULL,
+  tess_claimed_by nvarchar(100) NULL, tess_heartbeat_at datetime2 NULL,
+  tess_done_at datetime2 NULL, tess_error nvarchar(max) NULL,
+  -- docTR (light GPU, 5080/3060)
+  doctr_state nvarchar(20) NOT NULL DEFAULT 'na',
+  doctr_attempts int NOT NULL DEFAULT 0,
+  doctr_lease_token uniqueidentifier NULL, doctr_lease_expires_at datetime2 NULL,
+  doctr_claimed_by nvarchar(100) NULL, doctr_heartbeat_at datetime2 NULL,
+  doctr_done_at datetime2 NULL, doctr_error nvarchar(max) NULL,
+  -- Surya (heavy GPU, 5090)
+  surya_state nvarchar(20) NOT NULL DEFAULT 'na',
+  surya_attempts int NOT NULL DEFAULT 0,
+  surya_lease_token uniqueidentifier NULL, surya_lease_expires_at datetime2 NULL,
+  surya_claimed_by nvarchar(100) NULL, surya_heartbeat_at datetime2 NULL,
+  surya_done_at datetime2 NULL, surya_error nvarchar(max) NULL,
+  -- consensus merge (reads the 3 engine outputs, produces 2-of-3 canonical text)
+  consensus_state nvarchar(20) NOT NULL DEFAULT 'na',
+  consensus_attempts int NOT NULL DEFAULT 0,
+  consensus_lease_token uniqueidentifier NULL, consensus_lease_expires_at datetime2 NULL,
+  consensus_claimed_by nvarchar(100) NULL, consensus_heartbeat_at datetime2 NULL,
+  consensus_done_at datetime2 NULL, consensus_error nvarchar(max) NULL,
+
+  -- experimental-VLM sandbox: throw N candidate disagreement-vector models at a page
+  -- WITHOUT touching the canonical row/consensus; promote a proven one to its own column-group later.
+  vlm_sandbox  nvarchar(max) NULL,         -- JSON: {model: {state,result_path,...}}
+
+  done_at    datetime2 NULL,               -- volume fully complete (mirrors OCR_COMPLETE marker)
+  updated_at datetime2 NOT NULL DEFAULT sysutcdatetime()
 );
-CREATE INDEX ix_ocr_queue_state_yr ON dbo.ocr_queue(state, yr, id);
+-- one filtered index per claimable pass keeps each role's claim scan tiny:
+CREATE INDEX ix_prep      ON dbo.ocr_queue(yr,id) WHERE prep_state='pending';
+CREATE INDEX ix_ocr       ON dbo.ocr_queue(yr,id) WHERE ocr_state='pending';
+CREATE INDEX ix_tess      ON dbo.ocr_queue(yr,id) WHERE tess_state='pending';
+CREATE INDEX ix_doctr     ON dbo.ocr_queue(yr,id) WHERE doctr_state='pending';
+CREATE INDEX ix_surya     ON dbo.ocr_queue(yr,id) WHERE surya_state='pending';
+CREATE INDEX ix_consensus ON dbo.ocr_queue(yr,id) WHERE consensus_state='pending';
 
 CREATE TABLE dbo.state_history (
-  id         bigint IDENTITY(1,1) PRIMARY KEY,
-  label      nvarchar(200) NOT NULL,
-  from_state varchar(20)   NULL,
-  to_state   varchar(20)   NOT NULL,
-  at         datetime2     NOT NULL DEFAULT sysutcdatetime(),
-  by_worker  nvarchar(100) NULL,
-  note       nvarchar(400) NULL
+  id        bigint IDENTITY(1,1) PRIMARY KEY,
+  label     nvarchar(200) NOT NULL,
+  pass      nvarchar(20)  NOT NULL,        -- prep|ocr|tess|doctr|surya|consensus
+  from_state nvarchar(20) NULL, to_state nvarchar(20) NOT NULL,
+  at        datetime2 NOT NULL DEFAULT sysutcdatetime(),
+  by_worker nvarchar(100) NULL, note nvarchar(400) NULL
 );
 CREATE INDEX ix_state_history_label ON dbo.state_history(label, at);
 ```
-**Phase-1 invariant:** every row carries `stage='consensus'` (the single end-to-end 2-of-3 pass we run today). The `stage` column is the *only* thing Phase 2 adds rows/values to (per-engine passes + a consensus-merge row), so Phase 2 is additive — no migration of Phase-1 rows. Keep `state` orthogonal to `stage`: `state` is the lifecycle, `stage` is which engine/pass.
+**Step-1 vs Step-2 per row (config flip at seed, not a schema change):**
+- **Step-1 row:** `prep_state='pending'`, `ocr_state='pending'`, all Step-2 passes `='na'`. The `ocr` pass runs all 3 engines + consensus inline (today's `ocr_only` behavior).
+- **Step-2 row:** `prep_state='pending'`, `ocr_state='na'`, `tess/doctr/surya='pending'`, `consensus='pending'` (gated by the claim predicate). Same table, same lease code, just which columns are live.
+
+A pass in state `na` is **never claimable** (every claim predicate matches only `state='pending'` or an expired-lease `working`/`failed`), so inert passes cost nothing. Adding a *vetted* new engine = one `ALTER TABLE ADD` of its 8-column group + a config entry; experimental VLMs go in `vlm_sandbox` JSON first and get promoted only when proven.
 
 ## R2.3 Atomic claim — MSSQL lease pattern (replaces `FOR UPDATE SKIP LOCKED`)
 MSSQL's skip-locked equivalent is the canonical Rusanu idiom: **`READPAST, UPDLOCK, ROWLOCK` on the INNER candidate-select only**, and **`UPDLOCK, ROWLOCK` (NO `READPAST`) on the OUTER target**. (Hans pass-2 BLOCKER-1: `READPAST` on the outer `FROM` both opens a double-claim window and causes silent no-op false-negatives when the row is already UPDLOCK'd — it must NOT be there.) Each claim rotates `lease_token` and sets an **absolute** `lease_expires_at`.
 
-**Prep-role claim:**
+**One generic claim, parameterized by the pass prefix `P_`** — written once, reused for every pass. The only thing that varies per pass is the predicate (`P` = the prefix, `@dur` = lease minutes). Shown for `prep`; `ocr`, `tess`, `doctr`, `surya` are identical with their own prefix:
 ```sql
 DECLARE @worker nvarchar(100) = ?, @lease uniqueidentifier = NEWID();
 UPDATE q
-   SET state='prepping',
-       lease_token=@lease, lease_expires_at = DATEADD(minute, 45, sysutcdatetime()),
-       claimed_by=@worker, claimed_at=sysutcdatetime(), heartbeat_at=sysutcdatetime()
-  OUTPUT inserted.id, inserted.label, inserted.pdf, inserted.lease_token
+   SET prep_state='working',
+       prep_lease_token=@lease, prep_lease_expires_at = DATEADD(minute, 45, sysutcdatetime()),
+       prep_claimed_by=@worker, prep_heartbeat_at=sysutcdatetime()
+  OUTPUT inserted.id, inserted.label, inserted.pdf, inserted.prep_lease_token
   FROM dbo.ocr_queue AS q WITH (UPDLOCK, ROWLOCK)              -- outer target: NO READPAST
  WHERE q.id = (
     SELECT TOP (1) q2.id
       FROM dbo.ocr_queue AS q2 WITH (READPAST, UPDLOCK, ROWLOCK)   -- inner candidate: READPAST skips claimed rows
-     WHERE q2.stage='consensus'
-       AND ( q2.state='pending'
-          OR (q2.state='prepping' AND q2.lease_expires_at < sysutcdatetime()) )  -- expired-lease reclaim
+     WHERE ( q2.prep_state='pending'
+          OR (q2.prep_state IN ('working','failed') AND q2.prep_lease_expires_at < sysutcdatetime()) )
      ORDER BY q2.yr, q2.id
  );
 ```
-**OCR-role claim** (reclaims expired `ocring` and backed-off `ocr_failed`):
-```sql
-DECLARE @worker nvarchar(100) = ?, @lease uniqueidentifier = NEWID();
-UPDATE q
-   SET state='ocring',
-       lease_token=@lease, lease_expires_at = DATEADD(minute, 45, sysutcdatetime()),
-       claimed_by=@worker, claimed_at=sysutcdatetime(), heartbeat_at=sysutcdatetime()
-  OUTPUT inserted.id, inserted.label, inserted.pdf, inserted.lease_token
-  FROM dbo.ocr_queue AS q WITH (UPDLOCK, ROWLOCK)              -- outer target: NO READPAST
- WHERE q.id = (
-    SELECT TOP (1) q2.id
-      FROM dbo.ocr_queue AS q2 WITH (READPAST, UPDLOCK, ROWLOCK)
-     WHERE q2.stage='consensus'
-       AND ( q2.state='prepped'
-          OR (q2.state IN ('ocring','ocr_failed') AND q2.lease_expires_at < sysutcdatetime()) )
-     ORDER BY q2.yr, q2.id
- );
-```
-**Buffer bound is enforced in the WORKER LOOP, NOT in the claim SQL** (Hans pass-2 BLOCKER-2): an in-claim correlated `(SELECT COUNT(*) ... state IN ('prepped','ocring'))` against the same table the outer UPDATE holds UPDLOCK on **deadlocks** under concurrent prep workers (A locks row X reads row Y; B locks row Y reads row X → err 1205) AND can overshoot under READ COMMITTED anyway. So before issuing the prep claim, the prep worker runs a **standalone** `SELECT COUNT(*) FROM dbo.ocr_queue WHERE state IN ('prepped','ocring')`; if `>= PREP_BUFFER_MAX` (3) it idles and does not claim. This is exactly what `queue_worker.py` does today in the caller. Bounded overshoot by ≤(#concurrent prep workers − 1) is accepted and documented; the buffer is a soft throttle, not a hard invariant.
+**Each pass gates on its predecessor — all single-row predicates, NO joins** (the KISS payoff):
+- **prep:** `prep_state='pending'` (or expired-lease reclaim). *(Buffer-bound — below.)*
+- **ocr (Step 1):** `ocr_state='pending' AND prep_state='done'`.
+- **tess / doctr / surya (Step 2):** e.g. `tess_state='pending' AND prep_state='done'`.
+- **consensus (Step 2):** `consensus_state='pending' AND tess_state='done' AND doctr_state='done' AND surya_state='done'` — readiness is a glance at the volume's own row, never a cross-row count.
 
-Both run with **autocommit ON** — set `pyodbc.connect(..., autocommit=True)` on the CONNECTION before first use (Hans pass-2 MINOR-10: pyodbc defaults to autocommit=False; a forgotten commit leaves the row `prepping` with no committer, invisible until lease expiry). If `OUTPUT` returns no row, the role idles (prep WAITs; OCR exits/WAITs per supervisor policy).
+**Prep buffer bound is enforced in the WORKER LOOP, NOT in the claim SQL** (Hans pass-2 BLOCKER-2): an in-claim correlated `COUNT(*)` against the same table the outer UPDATE holds UPDLOCK on **deadlocks** under concurrent prep workers (A locks row X reads row Y; B locks row Y reads row X → err 1205) and overshoots under READ COMMITTED anyway. So before the prep claim, the worker runs a **standalone** `SELECT COUNT(*) FROM dbo.ocr_queue WHERE ocr_state='working' OR (prep_state='done' AND ocr_state='pending')`; if `>= PREP_BUFFER_MAX` (3) it idles. Bounded overshoot by ≤(#prep workers − 1) accepted; the buffer is a soft throttle.
 
-**`attempts` increments on FAILURE ONLY, not on claim** (Hans pass-2 BLOCKER-3): incrementing on every (re)claim dead-letters a legitimately *slow* volume — a 25-min OCR exceeds a short lease, gets reclaimed, and 5 reclaims → `held` = a corpus gap from slowness, not failure. So (a) the lease is **45 min** (covers worst-case multi-hundred-page 300-DPI OCR with margin), and (b) `attempts = attempts + 1` is set by the **failure transition** (non-zero exit → `pending`/`ocr_failed`), never by the claim. The dead-letter guard (`attempts >= 5 → held`) therefore counts real failures only.
+All claims run with **autocommit ON** — `pyodbc.connect(..., autocommit=True)` on the CONNECTION before first use (Hans pass-2 MINOR-10: pyodbc defaults to autocommit=False; a forgotten commit leaves a row `working` with no committer, invisible until lease expiry). If `OUTPUT` returns no row, the role idles (prep WAITs on buffer; OCR/engines exit or WAIT per supervisor policy).
+
+**`P_attempts` increments on FAILURE ONLY, not on claim** (Hans pass-2 BLOCKER-3): incrementing on every (re)claim dead-letters a legitimately *slow* volume — a 25-min OCR exceeds a short lease, gets reclaimed, 5 reclaims → `held` = a corpus gap from slowness, not failure. So (a) the lease is **45 min** (covers worst-case multi-hundred-page 300-DPI OCR with margin), and (b) `P_attempts = P_attempts + 1` is set only by the **failure transition** (non-zero exit), never by the claim. The dead-letter guard (`P_attempts >= 5 → P_state='held'`) therefore counts real failures only.
 
 ## R2.4 Fencing + heartbeat + dead-letter (MSSQL)
 - **Heartbeat extends the lease ONLY if the token still matches** (the fence — a stale worker whose row was reclaimed cannot extend, so it learns it lost the row):
 ```sql
+-- P = the active pass prefix (prep/ocr/tess/doctr/surya/consensus):
 UPDATE dbo.ocr_queue
-   SET heartbeat_at = sysutcdatetime(),
-       lease_expires_at = DATEADD(minute, 20, sysutcdatetime())
- WHERE id = ? AND lease_token = ?;        -- @@ROWCOUNT = 0  =>  this worker was fenced; self-abort before any write
+   SET prep_heartbeat_at = sysutcdatetime(),
+       prep_lease_expires_at = DATEADD(minute, 45, sysutcdatetime())
+ WHERE id = ? AND prep_lease_token = ?;   -- @@ROWCOUNT = 0  =>  this worker was fenced; self-abort before any write
 ```
-The worker checks `@@ROWCOUNT`/affected-rows after each heartbeat; **0 ⇒ self-abort before writing any result to outbox** (resolves S3 stale-reclaim double-write).
+The worker checks `@@ROWCOUNT`/affected-rows after each heartbeat; **0 ⇒ self-abort before writing any result to outbox** (resolves S3 stale-reclaim double-write). (Heartbeat lease extension uses the SAME 45-min window as the claim — keep them equal.)
 - **DB-unreachable self-abort + clock skew (Hans pass-2 SERIOUS-8):** when the DB is unreachable the worker cannot ask whether its lease still holds, so it must decide on its LOCAL clock — which is NOT immune to cross-box skew the way the server-clock `lease_expires_at` is. Two mitigations, both required: (1) **NTP sync across all three boxes is a documented Step-1 prerequisite** (w32time against a common source); (2) the worker self-aborts at **50% of the lease window** of unreachable-DB time (≈22 min of a 45-min lease), not at 100% — a conservative margin that tolerates several minutes of skew before the server-side lease can expire and be reclaimed. Never run headless past that.
-- **Dead-letter (Hans pass-2 MINOR-11):** `attempts` is incremented only by the failure transitions (R2.3), and the SAME failure-transition statement routes `attempts >= 5 → held` atomically (`UPDATE ... SET state = CASE WHEN attempts+1 >= 5 THEN 'held' ELSE 'ocr_failed' END, attempts = attempts+1 WHERE id=? AND lease_token=?`). This avoids a separate pre-claim guard that could be skipped on exception. `held` is never auto-claimed (both claim predicates match only `pending`/`prepped` or expired-lease `prepping`/`ocring`/`ocr_failed`). Surface `held` in monitoring.
-- **Result-commit fence:** the worker writes its checkpoint to a `claimed_by`-scoped temp path, and the final `state='done'` (+ `done_at`) UPDATE is **also** guarded by `AND lease_token = ?` — so even a TOCTOU between the last heartbeat and the done-write cannot let a fenced worker mark done.
+- **Dead-letter (Hans pass-2 MINOR-11):** `P_attempts` is incremented only by the failure transition, and the SAME statement routes `>= 5 → held` atomically (`UPDATE ... SET prep_state = CASE WHEN prep_attempts+1 >= 5 THEN 'held' ELSE 'failed' END, prep_attempts = prep_attempts+1 WHERE id=? AND prep_lease_token=?`). This avoids a separate pre-claim guard that could be skipped on exception. `held` is never auto-claimed (claim predicates match only `pending` or an expired-lease `working`/`failed`). Surface `held` in monitoring.
+- **Result-commit fence:** the worker writes its output to a `P_claimed_by`-scoped temp path, and the final `P_state='done'` (+ `P_done_at`) UPDATE is **also** guarded by `AND P_lease_token = ?` — so even a TOCTOU between the last heartbeat and the done-write cannot let a fenced worker mark done.
 
 ## R2.5 What carries over unchanged
 - **§4 file-side barrier (B2):** still mandatory and DB-independent — prep writes to `pages_prep_gray.tmp/`, atomic dir-rename, `PREP_COMPLETE` marker last, *then* flips SQL to `prepped`; OCR requires SQL `prepped` **AND** marker present **AND** each PNG `cv2.imread`-decodes. The richer DB does not fix partial-file visibility on SMB.
@@ -278,5 +312,12 @@ SMB connections to `\\<3060>\patolex_*` then authenticate AS the 3060's `patolex
 
 **SEPARATE, OPTIONAL reliability item (NOT required, NOT account-related):** the 5080 task's `LogonType=Interactive` is **why the 5080 OCR dies on logoff/session-reset** (the 07:41 straggler in `LESSON_2026-06-03_ops...` §4). It is a pre-existing fragility, independent of the SQL rework, and the pipeline works without touching it. A clean fix wants a non-interactive ("run whether logged on or not") logon, which is fiddly for an Azure-AD account (must store its password) — so it is left as an explicit OPEN OPTIONAL for Patrick, not a Step-1 requirement. Do not create an account to solve it unless Patrick decides the reliability is worth it.
 
-## R2.6 Phase 2 (engine-decoupling) — extension point only, do NOT build yet
-When prep-decoupling is proven, Phase 2 splits the single `consensus` stage into per-engine passes that run on the hardware that fits them (5090 = Surya farm; 5080/3060 = Tesseract/docTR). The schema already supports it: insert per-engine rows (`stage IN ('tesseract','doctr','surya')`) keyed to the same `label`, plus a `consensus` row that becomes claimable once its N engine rows are `done`. The claim predicates gain `AND stage = @role_stage`; no Phase-1 row changes. Captured here so we design Phase 1 to not block it — nothing in Phase 1 is built against it.
+## R2.6 Step 2 (engine-decoupling) — schema built now, WORKER CODE deferred
+The **schema is built complete in Step 1** (R2.2) — the `tess_/doctr_/surya_/consensus_` column-groups exist on day one, inert (`na`). Enabling Step 2 is a **per-row config flip at seed** (set those to `pending`, set `ocr_state='na'`), NOT a schema change. The claim/lease/heartbeat code is already generic over the pass prefix (R2.3), so a per-engine worker is the same worker with a different prefix + the engine-gated predicate.
+
+**What is deferred to Step 2 is only the new CODE, and only because its value is unmeasurable until Step 1 is live:**
+1. A **single-engine OCR mode** in `ocr_only` (`--engine tesseract|doctr|surya`) that runs ONE engine and writes its raw per-engine output to `outbox\<label>\<engine>\`, instead of the all-3-inline `ocr` pass.
+2. A **consensus-merge step** that reads the three engine outputs off the outbox and produces the 2-of-3 canonical text — genuinely new code (today consensus is in-memory in one process; from three independently-written artifacts it must align page/token indices), with its own failure modes → its own Hans pass.
+3. The **engine→box mapping + worker counts** (5090=Surya, 5080/3060=Tess/docTR) — empirical, tuned live after Step 1, the schema is indifferent to it.
+
+Nothing in Step 1 is built against this; the schema simply doesn't block it. Experimental VLM disagreement-vectors live in `vlm_sandbox` (JSON) until one proves out and earns a promoted column-group.
