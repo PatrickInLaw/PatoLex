@@ -408,3 +408,13 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **CORRECTION (Patrick was right, repeatedly):** I kept wrongly generalizing the lockstep-4 benchmark (4 workers started at once -> simultaneous prep -> CPU saturation -> net-negative) to "4 workers is bad." That was wrong. The NEW supervisor's live scale-up adds the 4th worker into a DESYNCED running set (no lockstep). Early retest (4/2, 4th added live): throughput CLIMBS to ~64-82 pg/min combined as workers reach OCR, vs ~50 baseline -- a clear GAIN. Clean steady-state window running to confirm. If confirmed, off-hours scale-up target -> 4 (update scale_up_office.ps1).
 
 - (this /ucp) -- part 28 (office-hours auto-scale deployed + desynced-4 retest showing a gain).
+
+## Phase 29 -- Decoupled-prep build started + overnight autonomous mandate (2026-06-02 night)
+
+**Status snapshot:** queue = 106 volumes; 41 DONE (1862-1935, incl. code-amendment vols + 1915-1935 Chapters era); 5 in_progress (5080:1913-statutes; 5090:1927/1929/1931/1933); 60 pending (1935-1975). Config 3/1, producing.
+
+**Decoupled-prep Phase 1 (plan approved, `~/.claude/plans/graceful-wibbling-spark.md`):** implementation started. Key simplification vs the plan: the ocr_only split needs only a `prep` early-exit before STAGE4 (no risky 250-line re-indent) -- stages 1-2 already skip existing PNGs, so `ocr`/`all` runs are nearly free on a prepped volume (expensive STAGE2 preprocess is a no-op; only cheap re-classify + GPU OCR run). So prep workers offload the CPU-heavy preprocess; ocr workers consume the prepped buffer.
+
+**Overnight mandate (Patrick, going to bed):** work AUTONOMOUSLY to get the decoupled pipeline running + smooth overnight; implement (ocr_only --stage, queue_worker --role, prep_supervisor, supervisor touch-ups) + Hans x2 + controlled cutover + verify producing. Priority: keep the campaign producing smoothly through the night. Report progress in the morning. (Office-hours scale-down fires 07:30.)
+
+- (this /ucp) -- part 29 (status + decoupled-prep build underway, autonomous overnight).
