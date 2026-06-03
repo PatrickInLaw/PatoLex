@@ -28,3 +28,14 @@ The OCR campaign runs via box-local Scheduled Tasks, independent of the agent se
 producing through an overnight auth-block (41 -> 54 volumes). BUT the 5080 OCR worker stopped
 ~07:41 around a session reset (task left "Ready", not "Running") and had to be restarted via
 `schtasks /run PatoLex_OCR_5080`. Check BOTH boxes are actually `Running` after any session reset.
+
+**ROOT CAUSE (found 2026-06-03):** the `PatoLex_OCR_5080` task runs as `PatrickKolasinski` with
+**`LogonType=Interactive`** — so it only runs while that user is logged on and dies on logoff /
+session reset. That is the mechanism behind the "07:41 straggler," not bad luck. The 5080's
+interactive account is `azuread\patrickkolasinski` (Azure-AD; absent from `Get-LocalUser`), and
+**no local `patolex` account exists on the 5080** (unlike the 3060/5090). Fix (folded into the
+SQL-pipeline Step-1 setup): create a local `patolex` on the 5080 and re-register ALL 5080 PatoLex
+tasks to run as it with a **stored password / "run whether user is logged on or not"** (non-
+interactive) logon — which also enables `cmdkey` SMB auth that SYSTEM/interactive-only tasks can't
+use. Lesson: **a Scheduled Task with `LogonType=Interactive` is NOT a durable service** — it is
+session-coupled; durable box-local services need the password/S4U logon type.

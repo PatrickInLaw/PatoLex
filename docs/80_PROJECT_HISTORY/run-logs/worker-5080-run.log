@@ -79,3 +79,9 @@
 [2026-06-03 07:41 PT] RUN | 1951-vol1-50chapters: START local OCR (1951_Vol1_50Chapters.pdf) on 5080 | OK
 [2026-06-03 08:05 PT] WORKER | === 5080 queue worker online (pid 48436, worker_id=5080-1) sharing 5090 queue 100.70.54.56 === | OK
 [2026-06-03 08:05 PT] RUN | 1951-vol1-chapters: START local OCR (1951_Vol1_Chapters.pdf) on 5080 | OK
+[2026-06-03 10:48 PT] PUSH | 1951-vol1-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-03 10:48 PT] RUN | 1951-vol1-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-03 10:48 PT] RUN | 1953-vol1-52chapters: START local OCR (1953_Vol1_52Chapters.pdf) on 5080 | OK
+[2026-06-03 11:26 PT] PUSH | 1953-vol1-52chapters: OCR outputs pushed to 5090 | OK
+[2026-06-03 11:26 PT] RUN | 1953-vol1-52chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-03 11:26 PT] RUN | 1953-vol1-chapters: START local OCR (1953_Vol1_Chapters.pdf) on 5080 | OK

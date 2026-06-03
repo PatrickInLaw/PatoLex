@@ -460,3 +460,24 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **CONSTRAINTS/GOTCHAS:** GPU caps are compute/CPU-prep, NOT VRAM (tune live post-decouple). OCR pipeline is idempotent/resumable. SQL conn info in cloned `GitHub/PatoAudio`. 3060 reachable ONLY via the 5090 hop (`ssh 5090 -> ssh -i C:\Users\patolex\.ssh\id_5090_to_3060 patolex@100.113.254.6`), no direct local key. Task/share/DB-OS creation needs OS admin elevation (UAC wall) -> operator runs elevated registrars; the agent SSH session is NON-elevated. Commit messages must contain NO semicolons (block-compound-bash hook). PowerShell-over-SSH: avoid `$var` (local expansion) -- use EncodedCommand or literal paths.
 
 - (this /ucp) -- part 32 (MSSQL queue DB locked + full pre-compaction handoff).
+
+## Phase 33 -- SQL design REVISION 2 (MSSQL authoritative) + two-step scope + Hans pass-2 (2026-06-03 PM)
+
+**Design now build-ready (pending Patrick's read).** `docs/30_SYSTEM_DESIGN/SQL_PIPELINE_DESIGN_2026-06-03.md`:
+- **REVISION 2 written** = the authoritative MSSQL section (supersedes the Postgres §1/§2 draft): DDL (`ocr_queue` w/ `lease_token` uniqueidentifier + absolute `lease_expires_at` + attempts + state_history + a `stage` extension column for Phase 2), the MSSQL lease claim, the fencing heartbeat, dead-letter, and the auth model.
+- **TWO-STEP SCOPE documented** (Patrick decision): Step 1 = SQL shared pipeline WITH prep/OCR decoupling folded into one cohesive lift; the box-local `445bea1` build is RETIRED (design reused, JSON-coordination code discarded). Step 2 = engine-decoupling, additive on the `stage` column, deferred. Rationale recorded (risk concentrated in one cutover; campaign never dark).
+
+**Hans pass-2 (verify-auditor): verdict "NOT safe as written" -- 3 BLOCKERS + 5 SERIOUS, all fixed:**
+- B1: `READPAST` on the OUTER update -> double-claim window. FIX: READPAST on the inner candidate-select only (canonical Rusanu idiom); outer = UPDLOCK,ROWLOCK.
+- B2: buffer-bound `COUNT(*)` correlated subquery inside the claim -> guaranteed deadlock (err 1205) + overshoot. FIX: moved to a standalone pre-claim count in the worker loop; bounded overshoot accepted/documented.
+- B3: 20-min lease + `attempts++` on every reclaim -> slow volumes dead-lettered (corpus gap). FIX: lease -> 45 min; `attempts` increments on FAILURE only; dead-letter routed atomically in the failure transition.
+- S6 ocr_only 3-root refactor flagged highest-risk (local-test-first protocol); S7 in-flight checkpoints DON'T resume cross-box (documented re-OCR, ~0-5 vols); S8 DB-unreachable self-abort + clock skew (NTP prereq + self-abort at 50% of lease); S9 ingest handoff specified (runs on 3060 as PatrickKolasinski, two conn strings, local outbox read); plus pyodbc autocommit, nvarchar(50) widths, ODBC prereq, cv2 retry.
+
+**R2.8 RESOLVED by direct check on the 5080 (we are on the 5080):** NO new account needed (Patrick's constraint honored). No `patolex` local account exists here; interactive account is `azuread\patrickkolasinski`. Cross-box SMB only needs the account on the SERVER (3060 already has `patolex`); the 5080 stores that remote cred via `cmdkey` in the existing `PatrickKolasinski` profile (works because the task runs as a real user, not SYSTEM). MSSQL expected to use SQL-auth (confirm from PatoAudio). **Zero new accounts on any box.**
+- **BONUS FINDING (durable -> LESSON §4):** the 5080 task is `LogonType=Interactive` -> THAT is the root cause of the recurring 07:41 session-reset OCR deaths. A `LogonType=Interactive` Scheduled Task is NOT a durable service. Left as an OPTIONAL reliability item for Patrick (non-interactive logon for an Azure-AD account is fiddly; not required, not account-related).
+
+**Cleanup:** deleted the 3 untracked retired box-local files (`prep_supervisor.ps1`, `cutover_decouple_migration.py`, `CUTOVER_DECOUPLE_RUNBOOK.md`) -- superseded, not in git history, would mislead. Modified tracked files (supervisor_5090.ps1 deployed-scaling + retired role bits, queue_worker.py / ocr_only_5090.py retired split, archive_images.py fix) left as-is; SQL build rewrites the worker files anyway -- sort at cutover.
+
+**NEXT (on Patrick's go):** build Step 1 -- `queue_worker_sql.py` (pyodbc/MSSQL lease claim), `seed_ocr_queue.py` (port JSON queue + 1976-1999 add), `ocr_only` 3-root refactor, elevated 3060 setup script (shares+grant to `patolex`+firewall Tailnet-only + CREATE DATABASE/TABLE), Hans, supervised cutover (drain JSON first).
+
+- (this /ucp) -- part 33 (REVISION 2 + two-step scope + Hans pass-2 fixes + R2.8 no-new-account resolution).
