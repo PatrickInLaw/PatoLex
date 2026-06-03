@@ -93,8 +93,9 @@ def claim_next(cx, role: str, worker_id: str):
     """
     p = role
     gate = PASS[role]["gate"]
-    # NEWID() inline (NOT a DECLARE) -- a multi-statement DECLARE+UPDATE batch does NOT expose the
-    # OUTPUT result set to pyodbc .fetchone() (Hans BLOCKER-1). Single self-contained statement.
+    # NEWID() inline (NOT a DECLARE) -- a DECLARE+UPDATE batch interposes a result-producing
+    # statement that hides the OUTPUT set from pyodbc .fetchone() (Hans BLOCKER-1). SET NOCOUNT ON
+    # produces no result set, so the UPDATE's OUTPUT is the only/first set .fetchone() sees.
     sql = f"""
 SET NOCOUNT ON;
 UPDATE q
@@ -124,28 +125,37 @@ UPDATE q
 
 def prep_buffer_full(cx) -> bool:
     """Standalone count (NOT in the claim SQL -- avoids the cross-row deadlock, Hans BLOCKER-2).
-    Counts volumes already prepped-ahead of OCR; soft throttle, bounded overshoot accepted."""
+    Counts ONLY the WAITING buffer: volumes prepped but not yet claimed by OCR. NOT in-flight
+    'ocr_state=working' rows (Hans pass-2 MINOR-1: counting working rows makes prep idle exactly
+    when 3 OCR workers are busy -> the buffer drains -> OCR starves on finish = the lockstep we
+    are eliminating). Bounding the waiting buffer keeps OCR always fed without prepping infinitely
+    ahead; on-disk prepped pages = up to PREP_BUFFER_MAX waiting + the in-flight ones (bounded)."""
     n = cx.execute(
-        "SELECT COUNT(*) FROM dbo.ocr_queue "
-        "WHERE ocr_state='working' OR (prep_state='done' AND ocr_state='pending')"
+        "SELECT COUNT(*) FROM dbo.ocr_queue WHERE prep_state='done' AND ocr_state='pending'"
     ).fetchone()[0]
     return n >= PREP_BUFFER_MAX
 
 
 # --------------------------------------------------------------------------- lease / fence
 class Lease:
-    """Heartbeat + fence for one claimed row. self.lost becomes True if the worker is fenced
-    (token mismatch) or the DB is unreachable past the safety margin -> caller must self-abort."""
+    """Heartbeat + fence for one claimed row. `lost` becomes True if the worker is fenced
+    (token mismatch) or the DB is unreachable past the safety margin -> caller must self-abort.
+    `lost` is backed by a threading.Event so the cross-thread read needs no GIL assumption
+    (Hans pass-2 SERIOUS: a plain bool is unsafe under free-threaded Python)."""
 
     def __init__(self, cx_factory, role: str, row_id: int, token, worker_id: str):
         self._cx_factory = cx_factory
         self._p = role
         self._id = row_id
         self._token = token
-        self.lost = False
+        self._lost = threading.Event()
         self._stop = threading.Event()
         self._last_ok = time.monotonic()
         self._thread = threading.Thread(target=self._loop, daemon=True)
+
+    @property
+    def lost(self) -> bool:
+        return self._lost.is_set()
 
     def start(self):
         self._thread.start()
@@ -156,7 +166,7 @@ class Lease:
         # if the thread did not confirm a clean exit, we cannot trust its flag -> treat as lost
         # (Hans BLOCKER-2: join timeout must not let the main thread mark_done on an unconfirmed lease).
         if self._thread.is_alive():
-            self.lost = True
+            self._lost.set()
 
     def _loop(self):
         p = self._p
@@ -167,29 +177,36 @@ class Lease:
                f"WHERE id=? AND {p}_lease_token=?")
         # own short-lived connection so heartbeat never contends with the worker's main cursor
         hb_cx = None
-        while not self._stop.wait(HEARTBEAT_SEC):
-            try:
-                if hb_cx is None:
-                    hb_cx = self._cx_factory()
-                cur = hb_cx.execute(sql, self._id, self._token)
-                if cur.rowcount == 0:
-                    # fenced: our row was reclaimed by someone else.
-                    log("FENCE", f"{p} row {self._id} lease lost (token mismatch) -> abort", "WARN")
-                    self.lost = True
-                    return
-                self._last_ok = time.monotonic()
-            except pyodbc.Error as e:
-                # DB unreachable: decide on the LOCAL clock with a conservative margin (Hans SERIOUS-8).
-                if hb_cx is not None:
-                    try:
-                        hb_cx.close()
-                    except Exception:
-                        pass
-                hb_cx = None  # force reconnect next tick
-                if time.monotonic() - self._last_ok > LEASE_MIN * 60 * SELF_ABORT_FRAC:
-                    log("FENCE", f"{p} row {self._id} DB unreachable past safety margin -> abort: {str(e)[:80]}", "WARN")
-                    self.lost = True
-                    return
+        try:
+            while not self._stop.wait(HEARTBEAT_SEC):
+                try:
+                    if hb_cx is None:
+                        hb_cx = self._cx_factory()
+                    cur = hb_cx.execute(sql, self._id, self._token)
+                    if cur.rowcount == 0:
+                        # fenced: our row was reclaimed by someone else.
+                        log("FENCE", f"{p} row {self._id} lease lost (token mismatch) -> abort", "WARN")
+                        self._lost.set()
+                        return
+                    self._last_ok = time.monotonic()
+                except pyodbc.Error as e:
+                    # DB unreachable: decide on the LOCAL clock with a conservative margin (Hans SERIOUS-8).
+                    if hb_cx is not None:
+                        try:
+                            hb_cx.close()
+                        except Exception:
+                            pass
+                    hb_cx = None  # force reconnect next tick
+                    if time.monotonic() - self._last_ok > LEASE_MIN * 60 * SELF_ABORT_FRAC:
+                        log("FENCE", f"{p} row {self._id} DB unreachable past safety margin -> abort: {str(e)[:80]}", "WARN")
+                        self._lost.set()
+                        return
+        finally:
+            if hb_cx is not None:
+                try:
+                    hb_cx.close()        # NIT-2: don't leak the heartbeat connection on clean exit
+                except Exception:
+                    pass
 
 
 # --------------------------------------------------------------------------- transitions

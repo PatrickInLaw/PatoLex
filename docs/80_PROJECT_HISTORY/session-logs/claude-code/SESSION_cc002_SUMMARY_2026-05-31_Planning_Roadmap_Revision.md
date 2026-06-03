@@ -507,3 +507,18 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **STILL TO BUILD:** `seed_ocr_queue.py` (port 106-vol JSON + 1976-1999 add), `ocr_only_5090.py` 3-root refactor (--inbox/--midbox/--outbox/--label/--pdf/--stage{prep,ocr,consensus}/--engine + the PREP_COMPLETE-marker write & marker+cv2-decode barrier on the OCR side), elevated `setup_3060.ps1` (DB+shares+firewall), then **Hans x2** on schema+claim (material change since pass-2), then supervised cutover w/ Patrick.
 
 - (this /ucp) -- part 35 (Step-1 build started: schema.sql + queue_worker_sql.py; OCR at 67/106).
+
+## Phase 36 -- Hans x2 on the SQL core + all findings fixed (2026-06-03 PM)
+
+**Built the rest of the non-disruptive Step-1 artifacts:** `seed_ocr_queue.py`, `setup_3060.ps1` (elevated operator script). Then ran **Hans x2** (pipeline rule for schema/pipeline) on `pipeline/sql/` (schema + worker + seed + setup).
+
+**Hans pass-1 verdict: NOT safe -- 2 BLOCKERS + 6 SERIOUS, ALL FIXED:**
+- B1 (the big one): claim used `DECLARE @lease ... UPDATE ... OUTPUT` -- a multi-statement batch whose OUTPUT set pyodbc `.fetchone()` does NOT return -> claim would silently no-op forever. FIX: `SET NOCOUNT ON;` + inline `NEWID()`, single result-producing statement.
+- B2: `lease.stop()` `join(timeout)` could time out and let the main thread `mark_done` on an unconfirmed lease. FIX: 15s join + `if is_alive(): lost`.
+- S3 heartbeat leaked the old conn on reconnect (dead try/except) -> explicit close. S4 Step-2 roles silently burned attempts->held -> refused at startup. S5 `state_history.from_state` always NULL -> threaded true prior state via `deleted.<pass>_state` in OUTPUT. S6 seed crashed on a year-less label -> skip+warn. S7 setup firewall scoped ONE rule leaving 445 world-open -> scope whole FPS group + explicit Block-non-Tailnet. S8 setup used Windows auth contra R2.8 -> SqlUser/SqlPass params.
+
+**Hans pass-2 verdict: BLOCKER-1 and BLOCKER-2 fixes CONFIRMED CORRECT, claim mechanism sound.** Residuals fixed: SERIOUS (lost flag was a plain bool -> threading.Event, safe under free-threaded Python); MINOR-1 (buffer counted `ocr_state='working'` -> prep idled when OCR busy = lockstep starvation -> count ONLY the waiting buffer `prep_state='done' AND ocr_state='pending'`; design R2.3 corrected to match); NIT comment + NIT hb_cx leak-on-clean-exit. All files compile/parse clean.
+
+**Step-1 code status:** schema.sql + queue_worker_sql.py + seed_ocr_queue.py + setup_3060.ps1 are Hans-clean and ready. **STILL TO BUILD (own unit, needs Patrick + local test):** the `ocr_only_5090.py` 3-root refactor (--inbox/--midbox/--outbox/--label/--pdf/--stage + the PREP_COMPLETE-marker write & marker+cv2-decode barrier) -- the worker cannot run end-to-end until this lands. Then: confirm PatoAudio MSSQL conn (SQL-auth), operator runs setup_3060 elevated, supervised cutover (drain JSON first).
+
+- (this /ucp) -- part 36 (Hans x2 on SQL core, 2 blockers + 6 serious + residuals all fixed).
