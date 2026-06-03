@@ -81,3 +81,56 @@ OOM/HANG: None. No OOM either box (5080 OCR model only ~1-5GB VRAM, 16GB ample).
 RECOMMENDATION: Stay at 3/1. To measure a real 4/2 OCR rate you'd need to defeat prep lockstep (pre-render volumes, or separate CPU prep pool feeding a GPU OCR pool) or test on a box with more CPU cores. As-is, the 4th worker on the 5090 hurts.
 ================================================
 
+=== SECOND AGENT - REOPENED 19:46+ (orig report above stands as prep-phase evidence) ===
+[2026-06-02 19:50] STATE RECONCILE | Found system DRIFTED from orig agent's 3/1 revert. supervisor.log: after revert, supervisor RE-LAUNCHED at 18:56 (max_workers=3 -> 3 workers) then again 19:46:45 (3 workers, seq-resume). 5080-2 ALSO came back ~19:19. So actual live config on arrival = 3/2 (NOT 3/1, NOT the 4/2 the brief assumed). max_workers.txt read =3. | WARN
+[2026-06-02 19:49] OCR PHASE REACHED (finally) | 5090 W1 STAGE4-OCR on 1917 (page 101/1976, ~3s/pg, peakVRAM 6026MB). W2 1921 prep 1401/2270, W3 1923 prep 1301/1689. 5080-1 STAGE4-OCR on 1919 (1001/1555, ~3.2s/pg, peakVRAM=17086MB <- HIGH, near 16GB cap+shared), 5080-2 prep 1915 1801/1922. BOTH boxes now producing OCR. | OK
+FINDING: orig agent's "4/2 never reaches OCR in 23min" was true FOR THAT WINDOW but the prep valley DID eventually clear (~73min after launch) and workers desynced (supervisor restart + uneven volume sizes) -> GPU OCR began. The collapse is a long STARTUP TRANSIENT on prep-heavy 1920s vols, not a permanent deadlock.
+[2026-06-02 19:52] BUMP 5090 ->4 | Set max_workers.txt=4. Supervisor (pid41484, live) GRACEFULLY scaled up: '19:52:00 scale-up alive=3<max=4, 71 claimable, launching 1' -> launched 5090-4 pid16608. NO restart of existing 3 (clean graceful add). Now genuinely 4/2. | OK
+[2026-06-02 19:53:18] T0 (real 4/2 OCR window) | 5090=26821, 5080=20670, COMBINED=47491. Both boxes actively OCRing. W4 just launched (will prep fresh vol ~30min, re-adds CPU contention per orig finding). Measuring 12-15min. | OK
+[2026-06-02 19:57:00] SAMPLE1 (+3.7min) | 5090=26896 (+75), 5080=20770 (+100), COMBINED=47666 (+175) -> ~47 pg/min. | OK
+[2026-06-02 19:58:17] manual (+5.0min) | 5090=26921 (+100), 5080=20845 (+175), COMBINED=47766 (+275) -> ~55 pg/min. 5080 outproducing 5090 (5090 has only W1 OCRing, W2/W3/W4 on CPU prep). | OK
+[2026-06-02 19:56] W4 detail | New 5090-4 RESUMED 1925 (not fresh) - prep 1301/1423, ~120 left -> will reach OCR soon, LESS contention than a fresh 2400pg vol. | OK
+[2026-06-02 20:00] telemetry mid-window | 5090 GPU util 6-24%, power up to 160W, 45C, CPU 78-84% (mixed OCR+prep contention). 5080 GPU 5.5GB/16GB, util 25-50%, 43C, 140W. (5080 'peakVRAM 17GB' worker-reported = CUDA allocator reserved counter.) | OK
+[2026-06-02 20:01-20:07] WINDOW SAMPLES (combined OCR pages from T0=47491@19:53:18):
+  CONT1 20:01:32 (+8.2m) comb=48016 (+525) -> ~64 pg/min cumulative
+  CONT2 20:04:35 (+11.3m) comb=48266 (+775) -> ~69 pg/min; recent-interval ~82 pg/min
+  CONT3 20:07:38 (+14.3m) comb=48491 (+1000) -> ~70 pg/min; recent-interval ~74 pg/min
+  By 20:08 THREE 5090 workers OCRing concurrently (W1 1917, W2 1921, W3 1923) + 5080 both. STEADY-STATE ~70-74 pg/min combined.
+[2026-06-02 20:10] COUNTING ARTIFACT | CONT4 5080 raw total dropped (21195->20732->19036) because production-1910-11 json (27MB, mtime 18:28, NOT active) flipped from parsing=2234 to inprog-err=0 in the counter. Constant vol, transient parse fail -> 5080 RAW-TOTAL delta unreliable. 5090 total stayed clean+monotonic. | WARN
+*** OOM FINDING (5080, decisive) ***
+[2026-06-02 20:10-20:11] 5080-1 on 1919 STAGE4-OCR pages 1329/1330: 'Surya FAIL (docTR+Tess): CUDA out of memory, tried 700-728MiB, 15.92GiB total/8.3GiB free' -> Surya (PRIMARY engine) OOM-FALLBACK when BOTH 5080 workers OCR concurrently (5080-1 1919 + 5080-2 1915, peakVRAM 17386MB > 15.92GB cap). Graceful (WARN, ensemble continues docTR+Tess) but DEGRADED - loses the Surya disagreement-vector on those pages. | FAIL(quality)
+FINDING (durable->lessons): 5080 16GB CANNOT cleanly run 2 concurrent Surya OCR workers - VRAM contention forces Surya OOM fallback. 2nd 5080 worker DEGRADES OCR quality (drops Surya from ensemble), not merely throughput. 5080 = 1 OCR worker. (Earlier '~1GB each, fits 2 trivially' was measured in PREP/cold phase, NOT concurrent Surya OCR - corrected.)
+[2026-06-02 20:13] FINAL RATE (4/2) | 5090 4 workers: +775pg/19.5min = ~40 pg/min. 5080 2 workers (Surya OOM-degraded): ~30-32 pg/min. COMBINED ~70-72 pg/min vs 3/1 baseline ~50. Throughput up BUT: 5090 GPU util median only 8% (4th worker = CPU-prep contention, not GPU work) + 5080 2nd worker = Surya OOM quality loss. NOT a clean win. | WARN
+
+================= FINAL REPORT (second agent, 20:28) =================
+DECISION: REVERT to 3/1. Rationale: 4/2 combined ~70-72 pg/min DID exceed the ~50 pg/min 3/1 baseline, BUT it is NOT a clean config: (1) the 2nd 5080 worker causes Surya (primary OCR engine) CUDA-OOM fallback once both 5080 workers OCR concurrently (peakVRAM ~17GB > 15.92GB cap) -> ENSEMBLE QUALITY DEGRADATION on a quality-first project; (2) the 5090's 4th worker adds CPU-prep contention, not GPU work (GPU util median only 8%, peak 97% - bimodal phase-sync). Per brief ("end on a verified, safe, proven-producing config") quality degradation is disqualifying. Reverted.
+
+REVERT EXECUTION:
+[2026-06-02 20:10] 5090 max_workers.txt 4->3. Supervisor (pid41484) GRACEFUL scale-down: drained newest worker 5090-5. (Graceful = no full restart, no cold-load hang risk to the 3 keepers.)
+[2026-06-02 20:11] 5080 -> 1: killed 5080-2 tree (worker pid44604 + OCR child 31764) via Stop-Process -Force (taskkill timed out mid-CUDA; Stop-Process succeeded). 5080-1 (pid49428) UNAFFECTED, kept producing. 1915 banked+resumable.
+[2026-06-02 20:27] 5090-5 graceful drain would take ~2h (2399-pg vol in flight) -> force-killed tree (pid43036 + children) to land 3/1 promptly. Supervisor logged '20:27:02 worker 5090-5 exited (drained)' - recognized as drain, did NOT relaunch (alive=3=max), did NOT trip crash guard. 1925/1927 prep left as orphaned in_progress -> queue stale-reclaim recovers them (resumable, NO loss).
+
+FINAL CONFIG LEFT RUNNING (VERIFIED PRODUCING @ 20:27:40):
+- 5090 = 3 workers (alive pids 42780,46000,44488; supervisor pid41484 steady at max_workers=3). ALL THREE in STAGE4-OCR, pages ADVANCING: W1 1917 781/1976, W2 1921 421/2268, W3 1923 561/1687. GPU 11593MiB/59C. CPU 24% (contention gone). NO OOM, NO hang.
+- 5080 = 1 worker (5080-1 pid49428). Finished 1919 OCR, now on 1913-statutes STAGE2-PREPROCESS 101/1808 (advancing). GPU 795MiB/36C (idle in prep, normal). Producing. NO Surya OOM (single worker).
+
+4/2 MEASURED THROUGHPUT (the real number the prior window never got - prior agent killed 4/2 before OCR began):
+- COMBINED: ~70-72 pg/min (sustained, 3x 5090 + both 5080 workers OCRing concurrently, 19:53-20:08).
+- 5090 (4 workers): ~40 pg/min. 5080 (2 workers): ~30-32 pg/min.
+- vs proven 3/1 baseline ~50 pg/min: 4/2 is ~+40% raw throughput, but with the OOM quality cost.
+
+TELEMETRY (4/2 OCR window 19:53-20:13, n=29-30 samples/box):
+- 5090: GPU util peak 97% / MEDIAN 8%; temp peak 61C / med 50C; power peak 311W / med 134W; mem peak 18367MiB / med 6328MiB; CPU peak 88.6% / med 49%.
+- 5080: GPU util peak 99% / MEDIAN 19%; temp peak 61C / med 47C; power peak 187W / med 111W; mem peak 13128MiB / med 6052MiB; CPU peak 92.2% / med 59%.
+- Post-revert peak observed: 62C (5090, 3 workers). BOTH BOXES <80C throughout. No thermal issue ever.
+
+PHASE-SYNC / GPU-STARVATION ANSWER (the key question):
+YES, the workers phase-synchronize and starve the GPU - but it's a STARTUP TRANSIENT, not permanent. When N workers claim fresh volumes together they ALL enter CPU-bound STAGE1-RENDER+STAGE2-PREPROCESS in lockstep -> CPU saturates -> GPU sits idle (5090 GPU util MEDIAN 8% even across the 'OCR window' because 3 of 4 workers were still prepping most of the time). At 4 workers the lockstep prep is WORSE (orig agent measured per-worker prep collapse ~50->5 pg/min under 4-way CPU contention; GPU idle 0-3% for the first ~70 min). The 5080's 2 workers actually kept its GPU BUSIER (util median 19%) than the 5090's 4 workers kept the 5090 GPU (median 8%) - direct evidence the 5090's extra workers do NOT convert to GPU OCR; they convert to CPU-prep contention. Workers DO eventually desync (uneven volume sizes + supervisor restarts) and overlap their OCR phases, which is when the ~70 pg/min was observed. CONCLUSION: the 4th 5090 worker is net CPU-prep contention with little GPU benefit; the 2nd 5080 worker actively HARMS quality (Surya OOM). The pipeline is CPU-prep-bound at the front and the 5080 is VRAM-bound for concurrent Surya.
+
+HANG: NO true hang. One FALSE hang-suspect at 18:56 (CPU%-counter transient near-0 mid-prep) - corrected the monitor to use worker-log page-advancement as the authoritative liveness signal (see FINDING above). All bumps/kills/drains clean.
+
+RECOMMENDATION: Stay at 3/1 (current). To safely exploit more hardware: (a) NEVER run 2 concurrent Surya workers on the 16GB 5080 - it OOMs Surya; 1 is the ceiling there. (b) The 5090 (32GB) is GPU-underutilized but is gated by single-threaded-feeling CPU prep lockstep; a real 4-worker win needs decoupling CPU prep from GPU OCR (separate prep pool feeding a GPU OCR pool) or pre-rendering volumes, not just adding a worker. As-is the 4th 5090 worker and 2nd 5080 worker are not worth it.
+
+LEFTOVER ARTIFACTS (benign): telemetry CSVs bench_5090_telemetry*.csv / bench_5080_telemetry.csv + helper scripts (bench_sampler*, bench_poll*, bench_progress*, bench_stats*, bench_alive*) on both scratch dirs; samplers self-terminate at 90min. No DB/ingest/queue-content changes made (only worker counts + the killed workers' volumes left for stale-reclaim).
+=====================================================================
+

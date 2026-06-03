@@ -51,6 +51,22 @@ if len(sys.argv) < 3:
 PDF_PATH      = Path(sys.argv[1])
 SESSION_LABEL = sys.argv[2].strip()
 
+# Decoupled-pipeline stage selector: --stage {prep,ocr,all} (default all).
+#   prep = STAGES 0-3 (CPU render/preprocess/classify) then exit BEFORE any GPU
+#          model load -- the prep-ahead worker uses this.
+#   ocr  = run through STAGE4; on an already-prepped volume STAGES 1-2 skip
+#          existing PNGs (the expensive preprocess is a no-op), so only the cheap
+#          re-classify + GPU OCR actually run.
+#   all  = current behavior (legacy 2-arg invocation: 5080 + manual runs).
+STAGE = "all"
+if "--stage" in sys.argv:
+    _si = sys.argv.index("--stage")
+    if _si + 1 < len(sys.argv):
+        STAGE = sys.argv[_si + 1].strip().lower()
+if STAGE not in ("prep", "ocr", "all"):
+    print(f"ERROR: --stage must be prep|ocr|all, got {STAGE!r}")
+    sys.exit(1)
+
 if not PDF_PATH.exists():
     print(f"ERROR: PDF not found: {PDF_PATH}")
     sys.exit(1)
@@ -332,7 +348,9 @@ for pidx in body_candidates:
 
 log("STAGE3-CLASSIFY", f"body={len(body_pages)} front_matter={len(FRONT_MATTER_RANGE)} "
     f"index={len(index_pages)} empty={len(empty_pages)}", "OK")
-(SCRATCH / "page_classification.json").write_text(json.dumps({
+_cls = SCRATCH / "page_classification.json"
+_cls_tmp = _cls.with_suffix(".json.tmp")
+_cls_tmp.write_text(json.dumps({
     "body_start_idx": BODY_START_IDX,
     "front_matter": [p+1 for p in FRONT_MATTER_RANGE],
     "body": [p+1 for p in body_pages],
@@ -340,6 +358,12 @@ log("STAGE3-CLASSIFY", f"body={len(body_pages)} front_matter={len(FRONT_MATTER_R
     "empty": [p+1 for p in empty_pages],
     "median_body_density": median_density,
 }, indent=2), encoding="utf-8")
+_cls_tmp.replace(_cls)   # atomic publish -- a decoupled OCR worker reads this; never a partial file
+
+# Decoupled prep worker stops here: stages 0-3 done, no GPU touched.
+if STAGE == "prep":
+    log("PREP-DONE", "STAGES 0-3 complete (render/preprocess/classify) -- exiting before OCR", "OK")
+    sys.exit(0)
 
 # ---------------------------------------------------------------------------
 # STAGE 4: OCR -- Surya + docTR + Tesseract consensus (identical to pipeline)

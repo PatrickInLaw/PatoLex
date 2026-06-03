@@ -365,8 +365,10 @@ def gather_eligible(args, scratch: Path):
         marker = (vol_dir / "OCR_COMPLETE.marker").exists()
         status = qstatus.get(label, "")
         # "active" = anything claimed/working that is not done. Be conservative:
-        # only 'done' or 'pending' or absent are safe; 'in_progress'/'failed' are NOT.
-        in_flight = status in ("in_progress", "failed")
+        # only 'done' is safe (absent/pending lack a marker and are caught above).
+        # Includes the decoupled-pipeline statuses so the archiver never removes
+        # the raw/prep images of a volume still being prepped or OCR'd.
+        in_flight = status in ("in_progress", "failed", "prepping", "prepped", "ocring", "ocr_failed")
         dirs = image_dirs(vol_dir)
 
         reason = None

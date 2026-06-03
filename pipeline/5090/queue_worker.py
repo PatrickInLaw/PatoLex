@@ -65,6 +65,7 @@ STALE_SECONDS     = 1800   # 30 min with no heartbeat => reclaimable
 HEARTBEAT_SECONDS = 60
 LOCK_SPIN_SECONDS = 0.15
 LOCK_MAX_WAIT     = 120
+PREP_BUFFER_MAX   = 3      # prep workers stop claiming when this many volumes are prepped-but-not-yet-done (bounds disk)
 
 
 def now_iso():
@@ -135,44 +136,77 @@ def pdf_name_for(v):
     return v.get("pdf") or (v["label"] + "_Statutes.pdf")
 
 
-def claim_next(worker_id):
-    """Atomically claim the lowest-year pending/reclaimable volume.
-    Returns (label, pdf_name) or None if nothing claimable.
-    'held' volumes are never claimable."""
+def claim_next(worker_id, role):
+    """Atomically claim the lowest-year claimable volume for this ROLE.
+      role 'prep': claims 'pending' (+ stale 'prepping'); marks 'prepping'.
+                   Bounded by PREP_BUFFER_MAX so prep doesn't run too far ahead.
+      role 'ocr' : claims 'prepped' (+ stale 'ocring'/'failed'); marks 'ocring'.
+    Returns (label, pdf_name) or None. 'held' is never claimable. A worker
+    NEVER touches 'in_progress' (that status belongs to the coupled 5080 path)."""
     acquire_lock()
     try:
         state = read_queue()
         vols = state["volumes"]  # already chronological
         nowt = time.time()
+        # PREP buffer bound: count volumes already prepped-but-not-done; if at the
+        # cap, prep idles (still does marker promotions below, just doesn't claim).
+        under_buffer = True
+        if role == "prep":
+            ahead = sum(1 for v in vols if v.get("status") in ("prepped", "ocring"))
+            under_buffer = ahead < PREP_BUFFER_MAX
         for v in vols:
             label = v["label"]
-            # idempotent completion: marker on disk overrides
+            # idempotent completion: OCR marker on disk overrides
             if marker_path(label).exists():
                 if v["status"] != "done":
                     v["status"] = "done"
                     v["done_at"] = now_iso()
                 continue
-            if v["status"] == "done":
+            if v["status"] in ("done", "held"):
                 continue
-            if v["status"] == "held":
-                continue
-            claimable = v["status"] == "pending"
-            if v["status"] in ("in_progress", "failed"):
-                hb = v.get("heartbeat_epoch", 0)
-                if nowt - hb > STALE_SECONDS:
+            claimable = False
+            if role == "prep":
+                new_status = "prepping"
+                if v["status"] == "pending":
+                    claimable = under_buffer
+                elif v["status"] == "prepping":
+                    hb = v.get("heartbeat_epoch", 0)
+                    if nowt - hb > STALE_SECONDS:
+                        # recovering a dead prep replaces in-flight work, it does
+                        # NOT grow the buffer -- so it is NOT buffer-gated, else a
+                        # stale prepping could strand while the buffer is full.
+                        claimable = True
+                        log(worker_id, f"{label}: reclaiming stale prepping (age {int(nowt-hb)}s)", "WARN")
+            else:  # role == "ocr"
+                new_status = "ocring"
+                if v["status"] == "prepped":
                     claimable = True
-                    log(worker_id, f"{label}: reclaiming stale {v['status']} "
-                                   f"(age {int(nowt-hb)}s)", "WARN")
+                elif v["status"] in ("ocring", "ocr_failed", "failed"):
+                    # 'ocring'/'ocr_failed' are 5090-only; 'failed' is prep-less
+                    # 5080-origin (safe to re-prep+ocr here). The 5080 never
+                    # claims 'ocring'/'ocr_failed', so no checkpoint collision.
+                    hb = v.get("heartbeat_epoch", 0)
+                    if nowt - hb > STALE_SECONDS:
+                        claimable = True
+                        log(worker_id, f"{label}: reclaiming stale {v['status']} (age {int(nowt-hb)}s)", "WARN")
             if claimable:
-                v["status"] = "in_progress"
+                v["status"] = new_status
                 v["worker_id"] = worker_id
                 v["claimed_at"] = now_iso()
                 v["heartbeat_epoch"] = nowt
                 v["heartbeat_at"] = now_iso()
                 write_queue(state)
                 return label, pdf_name_for(v)
+        # Nothing claimable right now. Distinguish "WAIT" (pipeline still has
+        # work relevant to this role -- prep buffer full, or OCR waiting for prep
+        # to produce 'prepped') from None (no role-relevant work left at all, so
+        # the worker may exit). This prevents launch/idle-exit churn.
+        if role == "prep":
+            pipeline_work = any(v.get("status") in ("pending", "prepping") for v in vols)
+        else:
+            pipeline_work = any(v.get("status") in ("pending", "prepping", "prepped", "ocring", "ocr_failed", "failed") for v in vols)
         write_queue(state)  # persist any marker-driven 'done' promotions
-        return None
+        return "WAIT" if pipeline_work else None
     finally:
         release_lock()
 
@@ -198,7 +232,7 @@ def heartbeat(label):
     try:
         state = read_queue()
         for v in state["volumes"]:
-            if v["label"] == label and v["status"] == "in_progress":
+            if v["label"] == label and v["status"] in ("in_progress", "prepping", "ocring"):
                 v["heartbeat_epoch"] = time.time()
                 v["heartbeat_at"] = now_iso()
                 break
@@ -207,15 +241,17 @@ def heartbeat(label):
         release_lock()
 
 
-def run_volume(worker_id, label, pdf_name):
+def run_volume(worker_id, label, pdf_name, role):
     pdf = ARCHIVE / pdf_name
     if not pdf.exists():
         log(worker_id, f"{label}: PDF MISSING {pdf}", "FAIL")
-        update_status(label, "failed", {"error": "pdf_missing"})
+        # missing PDF: prep -> pending (re-claimable later), ocr -> failed
+        update_status(label, "pending" if role == "prep" else "failed", {"error": "pdf_missing"})
         return
-    log(worker_id, f"{label}: START OCR ({pdf.name})", "OK")
+    stage = "prep" if role == "prep" else "ocr"
+    log(worker_id, f"{label}: START {stage.upper()} ({pdf.name})", "OK")
 
-    proc = subprocess.Popen([PY, str(SCRIPT), str(pdf), label])
+    proc = subprocess.Popen([PY, str(SCRIPT), str(pdf), label, "--stage", stage])
 
     stop = threading.Event()
 
@@ -234,19 +270,40 @@ def run_volume(worker_id, label, pdf_name):
     stop.set()
 
     if rc == 0:
-        marker_path(label).parent.mkdir(parents=True, exist_ok=True)
-        marker_path(label).write_text(f"OCR complete {now_iso()} by W{worker_id}\n",
-                                      encoding="utf-8")
-        update_status(label, "done")
-        log(worker_id, f"{label}: OCR DONE (exit 0)", "OK")
+        if role == "prep":
+            update_status(label, "prepped")
+            log(worker_id, f"{label}: PREP DONE (exit 0)", "OK")
+        else:
+            marker_path(label).parent.mkdir(parents=True, exist_ok=True)
+            marker_path(label).write_text(f"OCR complete {now_iso()} by W{worker_id}\n",
+                                          encoding="utf-8")
+            update_status(label, "done")
+            log(worker_id, f"{label}: OCR DONE (exit 0)", "OK")
     else:
-        update_status(label, "failed", {"error": f"exit_{rc}"})
-        log(worker_id, f"{label}: OCR FAILED exit {rc} (reclaimable)", "FAIL")
+        # prep failure -> back to 'pending' (re-preppable); OCR failure -> 'failed'
+        # (prep artifacts remain on disk; re-claimable by an ocr worker).
+        if role == "prep":
+            update_status(label, "pending", {"error": f"prep_exit_{rc}"})
+            log(worker_id, f"{label}: PREP FAILED exit {rc} -> pending", "FAIL")
+        else:
+            # 'ocr_failed' (NOT 'failed') so the unchanged 5080 (which reclaims
+            # 'failed') can't poach a volume that has a 5090-side partial OCR
+            # checkpoint + prep on disk and clobber it via scp (Hans BLOCKER-1).
+            update_status(label, "ocr_failed", {"error": f"exit_{rc}"})
+            log(worker_id, f"{label}: OCR FAILED exit {rc} -> ocr_failed (5090-only reclaim)", "FAIL")
 
 
 def main():
     worker_id = sys.argv[1] if len(sys.argv) > 1 else str(os.getpid())
-    log(worker_id, f"=== queue worker online (pid {os.getpid()}) ===", "OK")
+    role = "ocr"
+    if "--role" in sys.argv:
+        _ri = sys.argv.index("--role")
+        if _ri + 1 < len(sys.argv):
+            role = sys.argv[_ri + 1].strip().lower()
+    if role not in ("prep", "ocr"):
+        log(worker_id, f"invalid --role {role!r} (must be prep|ocr)", "FAIL")
+        return
+    log(worker_id, f"=== queue worker online (pid {os.getpid()}) role={role} ===", "OK")
     idle = 0
     while True:
         # Graceful drain: between volumes only. An in-flight volume (inside
@@ -268,10 +325,16 @@ def main():
             log(worker_id, "per-worker stop flag present -- scaled down, exiting gracefully between volumes", "OK")
             return
         try:
-            claimed = claim_next(worker_id)
+            claimed = claim_next(worker_id, role)
         except Exception as e:
             log(worker_id, f"claim error: {e}", "WARN")
             time.sleep(5)
+            continue
+        if claimed == "WAIT":
+            # pipeline still has role-relevant work, just not claimable now
+            # (prep: buffer full; ocr: nothing prepped yet) -- wait, don't exit.
+            idle = 0
+            time.sleep(15)
             continue
         if claimed is None:
             idle += 1
@@ -282,7 +345,7 @@ def main():
             continue
         idle = 0
         label, pdf_name = claimed
-        run_volume(worker_id, label, pdf_name)
+        run_volume(worker_id, label, pdf_name, role)
 
 
 if __name__ == "__main__":

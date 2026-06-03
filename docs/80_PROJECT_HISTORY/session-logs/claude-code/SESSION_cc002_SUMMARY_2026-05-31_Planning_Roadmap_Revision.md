@@ -418,3 +418,13 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **Overnight mandate (Patrick, going to bed):** work AUTONOMOUSLY to get the decoupled pipeline running + smooth overnight; implement (ocr_only --stage, queue_worker --role, prep_supervisor, supervisor touch-ups) + Hans x2 + controlled cutover + verify producing. Priority: keep the campaign producing smoothly through the night. Report progress in the morning. (Office-hours scale-down fires 07:30.)
 
 - (this /ucp) -- part 29 (status + decoupled-prep build underway, autonomous overnight).
+
+## Phase 30 -- Decoupled build code-complete + Hans x3 + temp loggers + auth recovery (2026-06-03 AM)
+
+**Overnight reality:** the autonomous build STALLED on a PowerShell permission prompt (per-command auth, unapproved while Patrick slept) -- nothing deployed. BUT the OCR campaign runs via box Scheduled Tasks independent of the agent session, so it kept producing: DONE 41 -> 54 (through ~1948), now ~1951. Session reset fixed the auth.
+
+**Decoupled prep/OCR build (5090) -- CODE-COMPLETE + Hans x3, NOT deployed.** Files (uncommitted until now): `ocr_only_5090.py` (--stage prep|ocr|all + atomic classification write + prep early-exit), `queue_worker.py` (--role prep|ocr, role-based claim, prep buffer bound, WAIT-vs-exit, `ocr_failed` private status, heartbeat generalize), `prep_supervisor.ps1` (NEW, BelowNormal prep pool + liveness watchdog), `supervisor_5090.ps1` (--role ocr + glob namespacing), `cutover_decouple_migration.py` (NEW, one-time in_progress orphan reset), `archive_images.py` (status-set fix). Hans pass-1 found BLOCKER-1 (5080 poaches 5090 `failed` -> checkpoint collision/double-OCR) -> fixed with `ocr_failed`; pass-2 found the cutover migration was vapor + archiver unaware of new statuses -> both fixed; pass-3 = GO for a SUPERVISED cutover. Runbook: `docs/60_OPERATIONS/CUTOVER_DECOUPLE_RUNBOOK.md`. Design: `PREP_OFFLOAD_DESIGN_2026-06-02.md`. Deploy is gated on a supervised window (operator present) -- NOT unattended.
+
+**Temp loggers:** discovered the thermal guardian logs only events, not continuous temps. Built `pipeline/temp_logger.ps1` (gated on OCR-active + size-capped) + `register_temp_logger.ps1`. Registered as SYSTEM tasks on BOTH boxes (Patrick ran the registrar elevated -- agent session can't register tasks; OS-elevation/UAC wall, distinct from Claude permissions). 5080 OCR had stopped ~07:41 at the session reset -> restarted. Durable findings -> `docs/80_PROJECT_HISTORY/lessons/LESSON_2026-06-03_ops_temp_logging_and_elevation.md`.
+
+- (this /ucp) -- part 30 (decoupled build code-complete + Hans x3 + durable temp loggers + auth recovery).

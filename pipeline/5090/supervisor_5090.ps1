@@ -118,7 +118,7 @@ function Start-Worker {
     Clear-DrainFlag $id   # never start a worker that has a leftover stop flag
     $out = Join-Path $scratch ("worker{0}.out.log" -f $script:seq)
     $err = Join-Path $scratch ("worker{0}.err.log" -f $script:seq)
-    $p = Start-Process -FilePath $py -ArgumentList @($script, $id) `
+    $p = Start-Process -FilePath $py -ArgumentList @($script, $id, '--role', 'ocr') `
         -WindowStyle Hidden -RedirectStandardOutput $out -RedirectStandardError $err -PassThru
     Sup ("launched worker $id pid $($p.Id)")
     return @{ Proc = $p; Id = $id; Draining = $false }
@@ -136,7 +136,8 @@ $procs = @{}
 Sup "=== supervisor online (pid $PID) requested Count=$Count seq-resume=$($script:seq) ==="
 # Sweep orphaned PER-WORKER drain flags from a prior supervisor (the global
 # STOP_WORKER.flag is intentionally NOT swept -- that is an operator decision).
-Get-ChildItem (Join-Path $scratch 'STOP_WORKER_*.flag') -ErrorAction SilentlyContinue |
+# Namespaced to 5090- so we never sweep the prep supervisor's 5090p- flags.
+Get-ChildItem (Join-Path $scratch 'STOP_WORKER_5090-*.flag') -ErrorAction SilentlyContinue |
     ForEach-Object { Remove-Item $_.FullName -Force -ErrorAction SilentlyContinue; Sup ("swept orphan flag " + $_.Name) }
 # Warn loudly about a stale global STOP flag (would otherwise silently brick the campaign).
 if (Test-Path $stopFlag) {
