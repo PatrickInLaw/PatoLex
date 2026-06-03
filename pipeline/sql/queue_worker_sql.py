@@ -93,16 +93,18 @@ def claim_next(cx, role: str, worker_id: str):
     """
     p = role
     gate = PASS[role]["gate"]
+    # NEWID() inline (NOT a DECLARE) -- a multi-statement DECLARE+UPDATE batch does NOT expose the
+    # OUTPUT result set to pyodbc .fetchone() (Hans BLOCKER-1). Single self-contained statement.
     sql = f"""
-DECLARE @lease uniqueidentifier = NEWID();
+SET NOCOUNT ON;
 UPDATE q
    SET {p}_state='working',
-       {p}_lease_token=@lease,
+       {p}_lease_token=NEWID(),
        {p}_lease_expires_at = DATEADD(minute, {LEASE_MIN}, sysutcdatetime()),
        {p}_claimed_by=?,
        {p}_heartbeat_at=sysutcdatetime(),
        updated_at=sysutcdatetime()
-  OUTPUT inserted.id, inserted.label, inserted.pdf, inserted.yr, inserted.{p}_lease_token
+  OUTPUT inserted.id, inserted.label, inserted.pdf, inserted.yr, inserted.{p}_lease_token, deleted.{p}_state
   FROM dbo.ocr_queue AS q WITH (UPDLOCK, ROWLOCK)
  WHERE q.id = (
     SELECT TOP (1) q2.id
@@ -116,7 +118,8 @@ UPDATE q
     row = cx.execute(sql, worker_id).fetchone()
     if not row:
         return None
-    return {"id": row[0], "label": row[1], "pdf": row[2], "yr": row[3], "lease": row[4]}
+    return {"id": row[0], "label": row[1], "pdf": row[2], "yr": row[3],
+            "lease": row[4], "from": row[5]}
 
 
 def prep_buffer_full(cx) -> bool:
@@ -139,7 +142,6 @@ class Lease:
         self._p = role
         self._id = row_id
         self._token = token
-        self._worker = worker_id
         self.lost = False
         self._stop = threading.Event()
         self._last_ok = time.monotonic()
@@ -150,7 +152,11 @@ class Lease:
 
     def stop(self):
         self._stop.set()
-        self._thread.join(timeout=5)
+        self._thread.join(timeout=15)
+        # if the thread did not confirm a clean exit, we cannot trust its flag -> treat as lost
+        # (Hans BLOCKER-2: join timeout must not let the main thread mark_done on an unconfirmed lease).
+        if self._thread.is_alive():
+            self.lost = True
 
     def _loop(self):
         p = self._p
@@ -174,10 +180,12 @@ class Lease:
                 self._last_ok = time.monotonic()
             except pyodbc.Error as e:
                 # DB unreachable: decide on the LOCAL clock with a conservative margin (Hans SERIOUS-8).
-                try:
-                    hb_cx = None  # force reconnect next tick
-                except Exception:
-                    pass
+                if hb_cx is not None:
+                    try:
+                        hb_cx.close()
+                    except Exception:
+                        pass
+                hb_cx = None  # force reconnect next tick
                 if time.monotonic() - self._last_ok > LEASE_MIN * 60 * SELF_ABORT_FRAC:
                     log("FENCE", f"{p} row {self._id} DB unreachable past safety margin -> abort: {str(e)[:80]}", "WARN")
                     self.lost = True
@@ -188,6 +196,9 @@ class Lease:
 def mark_done(cx, role: str, row_id: int, token) -> bool:
     """Terminal success, fenced by token (Hans result-commit fence). Returns False if fenced."""
     p = role
+    # `done_at` (volume-complete) is set by whichever pass is terminal: 'ocr' for a Step-1 row,
+    # 'consensus' for a Step-2 row. Assumes a row is purely Step-1 OR Step-2, never a hybrid
+    # (the seed guarantees this) -- a hybrid row would set done_at prematurely (Hans MINOR-10).
     extra = ", done_at=sysutcdatetime()" if role in ("ocr", "consensus") else ""
     cur = cx.execute(
         f"UPDATE dbo.ocr_queue "
@@ -211,14 +222,17 @@ def mark_failed(cx, role: str, row_id: int, token, err: str) -> None:
     )
 
 
-def record_history(cx, label: str, role: str, to_state: str, worker_id: str, note: str = "") -> None:
+def record_history(cx, label: str, role: str, from_state: str, to_state: str,
+                   worker_id: str, note: str = "") -> None:
     try:
         cx.execute(
-            "INSERT INTO dbo.state_history(label, pass, to_state, by_worker, note) VALUES (?,?,?,?,?)",
-            label, role, to_state, worker_id, (note or "")[:390],
+            "INSERT INTO dbo.state_history(label, pass, from_state, to_state, by_worker, note) "
+            "VALUES (?,?,?,?,?,?)",
+            label, role, from_state, to_state, worker_id, (note or "")[:390],
         )
-    except pyodbc.Error:
-        pass  # observability only -- never fail the work over a history insert
+    except pyodbc.Error as e:
+        # observability only -- never fail the work over a history insert, but don't go silent (Hans MINOR-12)
+        log("HISTORY", f"state_history insert failed for {label}/{role}->{to_state}: {str(e)[:80]}", "WARN")
 
 
 # --------------------------------------------------------------------------- run one volume
@@ -228,10 +242,13 @@ def stage_args(role: str):
         return ["--stage", "prep"]
     if role == "ocr":
         return ["--stage", "ocr"]
-    if role in ("tess", "doctr", "surya"):
-        return ["--stage", "ocr", "--engine", {"tess": "tesseract"}.get(role, role)]
-    if role == "consensus":
-        return ["--stage", "consensus"]
+    # Step-2 passes are DEFERRED (R2.6): ocr_only_5090.py has no --engine/--stage consensus yet.
+    # Fail loud rather than crash the subprocess and silently burn attempts -> held (Hans SERIOUS-4).
+    if role in ("tess", "doctr", "surya", "consensus"):
+        raise NotImplementedError(
+            f"Step-2 role '{role}' not yet implemented in ocr_only_5090.py -- build the engine "
+            f"refactor before enabling Step-2 rows."
+        )
     raise ValueError(role)
 
 
@@ -261,6 +278,9 @@ def main():
     args = ap.parse_args()
 
     role = args.role
+    if role in ("tess", "doctr", "surya", "consensus"):
+        sys.stderr.write(f"role '{role}' is a Step-2 pass -- not yet implemented (R2.6). Refusing to start.\n")
+        sys.exit(2)
     roots = {"inbox": args.inbox, "midbox": args.midbox, "outbox": args.outbox, "script": args.script}
     stop_flag = Path(args.midbox).parent / f"STOP_WORKER_{args.worker_id}.flag"
 
@@ -284,7 +304,7 @@ def main():
             time.sleep(IDLE_SLEEP_SEC)
             continue
 
-        record_history(cx, row["label"], role, "working", args.worker_id)
+        record_history(cx, row["label"], role, row["from"], "working", args.worker_id)
         lease = Lease(connect, role, row["id"], row["lease"], args.worker_id)
         lease.start()
         try:
@@ -299,13 +319,13 @@ def main():
             log("RUN", f"{role} {row['label']} ABORTED (lease lost) -- not marking", "WARN")
         elif rc == 0:
             if mark_done(cx, role, row["id"], row["lease"]):
-                record_history(cx, row["label"], role, "done", args.worker_id)
+                record_history(cx, row["label"], role, "working", "done", args.worker_id)
                 log("RUN", f"{role} {row['label']} DONE", "OK")
             else:
                 log("RUN", f"{role} {row['label']} completed but lease lost at commit -- skipped", "WARN")
         else:
             mark_failed(cx, role, row["id"], row["lease"], tail)
-            record_history(cx, row["label"], role, "failed", args.worker_id, tail[:200])
+            record_history(cx, row["label"], role, "working", "failed", args.worker_id, tail[:200])
             log("RUN", f"{role} {row['label']} FAILED rc={rc}: {tail[:120]}", "FAIL")
 
         if args.once:

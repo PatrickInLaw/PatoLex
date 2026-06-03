@@ -81,12 +81,16 @@ def main():
     if args.queue_json:
         for v in load_json_volumes(Path(args.queue_json)):
             label = v["label"]
+            m = YEAR_RE.search(label)
+            yr = int(v.get("year") or (m.group(1) if m else 0) or 0)
+            if yr == 0:
+                print(f"  SKIP (no year in JSON entry or label): {label!r}", file=sys.stderr)
+                continue
             prep_s, ocr_s, set_done = map_status(v.get("status", "pending"))
             if v.get("status") in ("in_progress", "failed"):
                 requeued += 1
-            rows[label] = {"label": label, "yr": int(v.get("year") or YEAR_RE.search(label).group(1)),
-                           "pdf": pdf_name_for(v), "prep_state": prep_s, "ocr_state": ocr_s,
-                           "set_done": set_done}
+            rows[label] = {"label": label, "yr": yr, "pdf": pdf_name_for(v),
+                           "prep_state": prep_s, "ocr_state": ocr_s, "set_done": set_done}
 
     if args.inbox:
         for v in scan_inbox(Path(args.inbox)):

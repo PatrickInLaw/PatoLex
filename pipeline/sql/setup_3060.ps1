@@ -15,7 +15,10 @@ param(
     [string]$Root      = 'D:\PatoLex-pipeline',     # SSD or HDD -- either is fine
     [string]$Account   = "$env:COMPUTERNAME\patolex",
     [string]$Tailnet   = '100.64.0.0/10',
-    [string]$SqlServer = '.\SQLEXPRESS',            # adjust to the 3060's instance (see PatoAudio config)
+    [Parameter(Mandatory=$true)]
+    [string]$SqlServer,                             # the 3060's MSSQL instance (see PatoAudio config), e.g. '.\SQLEXPRESS' or '.'
+    [string]$SqlUser   = '',                         # SQL-auth login (R2.8: SQL auth expected). Empty => Windows (-E) auth.
+    [string]$SqlPass   = '',
     [string]$SchemaSql = (Join-Path $PSScriptRoot 'schema.sql')
 )
 
@@ -46,13 +49,36 @@ foreach ($s in 'inbox','midbox','outbox') {
 }
 
 # --- 3. firewall: SMB inbound from the Tailnet ONLY (never public) ---
-Set-NetFirewallRule -Name 'FPS-SMB-In-TCP' -Enabled True -RemoteAddress $Tailnet
-Write-Host "  firewall FPS-SMB-In-TCP scoped to $Tailnet"
+# Hans SERIOUS-7: scoping ONE rule leaves other SMB rules world-open, and Windows Firewall is
+# allow-wins for inbound. So scope the WHOLE File-and-Printer-Sharing group AND add an explicit
+# Block for 445 from non-Tailnet (Block overrides Allow), as defense-in-depth.
+try {
+    Get-NetFirewallRule -Group '@FirewallAPI.dll,-28502' -ErrorAction Stop |
+        Set-NetFirewallRule -RemoteAddress $Tailnet
+    Write-Host "  File-and-Printer-Sharing group scoped to $Tailnet"
+} catch {
+    Write-Warning "  could not scope the FPS group by GUID ($_). Falling back to FPS-SMB-In-TCP only -- VERIFY 445 is not otherwise open."
+    Set-NetFirewallRule -Name 'FPS-SMB-In-TCP' -Enabled True -RemoteAddress $Tailnet
+}
+if (-not (Get-NetFirewallRule -Name 'BlockSMB-NonTailnet' -ErrorAction SilentlyContinue)) {
+    New-NetFirewallRule -Name 'BlockSMB-NonTailnet' -DisplayName 'Block SMB 445 (non-Tailnet)' `
+        -Direction Inbound -Protocol TCP -LocalPort 445 -Action Block `
+        -RemoteAddress 'Any' -Enabled True | Out-Null
+}
+# the Block rule denies 445 broadly; the scoped allow-group permits ONLY the Tailnet. Net: 445 = Tailnet-only.
+Write-Host "  added Block-SMB-445-non-Tailnet (Block overrides Allow)"
 
 # --- 4. queue DB + tables (idempotent schema.sql) ---
+# Hans SERIOUS-8: R2.8 expects SQL auth. Use -U/-P if given, else fall back to Windows (-E).
+# Whichever account is used MUST have dbcreator/sysadmin (CREATE DATABASE) on the instance.
 if (-not (Test-Path $SchemaSql)) { throw "schema.sql not found at $SchemaSql" }
-& sqlcmd -S $SqlServer -E -b -i $SchemaSql
-if ($LASTEXITCODE -ne 0) { throw "sqlcmd failed applying $SchemaSql (exit $LASTEXITCODE)" }
+if ($SqlUser) {
+    & sqlcmd -S $SqlServer -U $SqlUser -P $SqlPass -b -i $SchemaSql
+} else {
+    Write-Warning "  no -SqlUser given -> using Windows auth (-E). Ensure this elevated user is sysadmin/dbcreator."
+    & sqlcmd -S $SqlServer -E -b -i $SchemaSql
+}
+if ($LASTEXITCODE -ne 0) { throw "sqlcmd failed applying $SchemaSql (exit $LASTEXITCODE) -- check CREATE DATABASE privilege" }
 Write-Host "  schema applied via $SqlServer"
 
 Write-Host "== done.  Next: on each worker box, store the patolex@3060 credential:"
