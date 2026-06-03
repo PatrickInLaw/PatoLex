@@ -235,17 +235,52 @@ def append_manifest_local(scratch: Path, row: dict) -> None:
 
 def ssh_base(args) -> list[str]:
     return [
-        "ssh", "-i", args.ssh_key,
+        # -n: never read stdin (don't let the nested ssh attach to a parent pipe).
+        "ssh", "-n", "-i", args.ssh_key,
         "-o", "BatchMode=yes", "-o", "ConnectTimeout=15",
         args.dest_host,
     ]
 
 
-def run_remote_ps(args, ps_script: str) -> subprocess.CompletedProcess:
-    """Run a PowerShell script on the 3060 via EncodedCommand (no quoting hell)."""
+class _RemoteResult:
+    """Minimal stand-in for CompletedProcess (returncode/stdout/stderr)."""
+    def __init__(self, returncode: int, stdout: str, stderr: str):
+        self.returncode = returncode
+        self.stdout = stdout
+        self.stderr = stderr
+
+
+def run_remote_ps(args, ps_script: str, timeout: int = 600) -> _RemoteResult:
+    """Run a PowerShell script on the 3060 via EncodedCommand (no quoting hell).
+
+    IMPORTANT: we redirect the child's stdout/stderr to TEMP FILES instead of
+    capture_output=True (PIPE). The 3060's default ssh shell is PowerShell, which
+    emits a large CLIXML progress blob on stderr and can leave a grandchild
+    holding the pipe write-end open -- so subprocess.run(capture_output=True)
+    deadlocks on communicate() waiting for an EOF that never comes, hanging the
+    whole archiver after "START". File redirection sidesteps the pipe entirely.
+    """
     enc = base64.b64encode(ps_script.encode("utf-16-le")).decode("ascii")
     cmd = ssh_base(args) + [f"powershell -NoProfile -EncodedCommand {enc}"]
-    return subprocess.run(cmd, capture_output=True, text=True)
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".out") as _o:
+        out_path = _o.name
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".err") as _e:
+        err_path = _e.name
+    try:
+        with open(out_path, "wb") as o, open(err_path, "wb") as e:
+            rc = subprocess.call(cmd, stdout=o, stderr=e,
+                                 stdin=subprocess.DEVNULL, timeout=timeout)
+        with open(out_path, "r", encoding="utf-8", errors="replace") as f:
+            out = f.read()
+        with open(err_path, "r", encoding="utf-8", errors="replace") as f:
+            err = f.read()
+        return _RemoteResult(rc, out, err)
+    finally:
+        for p in (out_path, err_path):
+            try:
+                os.unlink(p)
+            except OSError:
+                pass
 
 
 def remote_sha256(args, dest_file_win: str) -> str | None:
@@ -394,15 +429,19 @@ def archive_one(args, scratch: Path, e: dict) -> bool:
         local_sha = sha256_file(tar_path)
         log("ARCHIVE", f"{label}: tar built {gb(tar_path.stat().st_size)} GB sha={local_sha[:12]}", "OK")
 
-        # 3. scp with bandwidth throttle
+        # 3. scp with bandwidth throttle.
+        # -O forces the legacy SCP protocol. The 3060's default ssh shell is
+        # PowerShell, which mangles the modern SFTP-subsystem stream so the
+        # default scp stalls with a 0-byte file at the dest. -O transfers fine.
         scp_target = f"{args.dest_host}:{dest_file_win}"
         scp_cmd = [
-            "scp", "-i", args.ssh_key,
+            "scp", "-O", "-i", args.ssh_key,
             "-o", "BatchMode=yes", "-o", "ConnectTimeout=15",
             "-l", str(args.limit),
             str(tar_path), scp_target,
         ]
-        cp = subprocess.run(scp_cmd, capture_output=True, text=True)
+        cp = subprocess.run(scp_cmd, capture_output=True, text=True,
+                            stdin=subprocess.DEVNULL)
         if cp.returncode != 0:
             log("ARCHIVE", f"{label}: scp FAILED rc={cp.returncode} {cp.stderr.strip()[:200]}", "FAIL")
             return False

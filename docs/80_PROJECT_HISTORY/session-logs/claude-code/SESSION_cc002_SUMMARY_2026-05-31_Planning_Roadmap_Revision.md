@@ -347,3 +347,21 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 - `7467485` — part 21 (1850-1871 session-law benchmark sample ingested, 1,069 acts, 1850-blank-forward).
 - `e4120f7` — part 22 (full primary source acquired+verified 652/653; proper faithful-engine bake-off complete — 4 faithful, qwen+GOT disqualified on evidence).
 - (this /ucp) — part 23 (session log brought current: Phase 16 — first-principles re-anchor, registry, full acquisition, OCR bake-off; preprocessing bake-off launched; Tailscale-only SSH guidance).
+
+---
+
+## Phase 24 -- Throughput benchmarking + rolling archiver --commit (2026-06-02 evening)
+
+**Throughput / worker scaling:**
+- Measured the realized 3/1 (3 workers on 5090 + 1 on 5080) rate from completion history (no fresh window needed -- it had been running 3/1 for hours): ~50 pg/min de-noised (trailing windows 36-66 pg/min; long windows dragged down by earlier 1-worker/hung-restart periods, 60-min edge-inflated).
+- OCR-to-2000 goal denominator: 1913-1999 body = 304,384 pages + the pre-1913 tail (now just `1910-11`, 2,240 pages, in-flight on the 5080) = ~306,624 pages remaining.
+- ETAs to 2000: 1/1 ~6.7 days (@ ~31.6 pg/min documented); 3/1 ~4.3 days (@ ~50); 4/2 pending the live benchmark.
+- Campaign has rolled INTO the 1913+ multi-volume Chapters era (5090 on 1913-statutes / 1915-vol1-chapters / 1917-vol1-chapters).
+- Launched a focused 4/2 benchmark (bump 5090->4 + 5080->2, staggered/verified-load anti-hang, measure throughput + temps/power, leave on safe config). Result pending.
+
+**Rolling archiver --commit (agent, completed):**
+- Fresh 5090->3060 ed25519 key generated ON the 5090, authorized on the 3060 (no private key copied; no classifier block). Hop verified.
+- 15 volumes archived to 3060 `D:\PatoLex-archive` (~14.1 GB compressed, manifest 15 rows all verify_status=PASS, sha256 + file-count checked). 5090 C: freed +9 GB net (19.4 GB archived; OCR wrote ~10 GB concurrently -- archiver must run periodically to keep pace). Products (ocr_consensus/marker/sha256) intact locally; in-flight volumes untouched.
+- Found + fixed 2 real bugs in `pipeline/archive_images.py` (redeployed to 5090, transport-only, verify-before-delete path unchanged): (1) `run_remote_ps` deadlock -- nested ssh inherited the parent stdin pipe + a grandchild held it open -> hung after START; fixed with `ssh -n` + file-redirect instead of `capture_output` PIPE. (2) scp stalled at 0-byte dest because the 3060's default ssh shell is PowerShell (mangles the SFTP stream); fixed with `scp -O` (legacy protocol).
+
+- (this /ucp) -- part 24 (throughput baseline + ETAs + archiver --commit complete + archive_images.py transport bug-fixes).
