@@ -382,3 +382,11 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 
 - (this /ucp) -- part 25 (CPU-prep finding + 3/2 + symmetric scaling code, Hans pass-2 pending).
 - part 25b (Hans pass-2 resolved): BLOCKER-2 (flag race) + BLOCKER-3 (seq persistence) confirmed RESOLVED. BLOCKER-1 fix had a regression (crash-guard counted clean queue-drain/idle/global-STOP exits as crashes -> false end-of-campaign cooldown + lying log). Fixed per Hans: count a crash only when exit is NOT draining AND ExitCode != 0 (clean exits return 0). Scaling code now clean; deploy still a separate coordinated cutover. (Pre-existing low-pri notes from Hans: Remaining-Claimable over-counts 'failed' as claimable; $scratch assumed to exist -- both informational on the prod box.)
+
+## Phase 26 -- 3060 prep-offload design + profiling (2026-06-02 late)
+
+**Design laid out (proposal, pending measurement):** because the pipeline is CPU-prep-bound (Phase 25 finding), split the per-volume pipeline into roles -- the **3060 does CPU prep** (render + grayscale + classify, and possibly Tesseract the CPU OCR engine), the **5-series do GPU-only OCR** + consensus. Two-phase queue: `pending -> prepping -> prepped -> ocring -> done`; the 3060 runs ahead building a buffer of `prepped` volumes so the 5-series GPUs never wait. Expected win: frees the 5-series CPU (may make a 4th 5090 worker net-positive since it'd be GPU-bound, not CPU-starved) + uses the 3060's idle CPU/SSD. Key risk = the 3060->5-series data-movement cost for prepped pages. Simpler interim alternative = intra-worker pipelining (prep vol N+1 while OCR'ing vol N).
+
+**Profiling launched (agent ae878e62)** to get the two deciding numbers before committing to a variant: M1 = per-stage time split (render/preprocess/classify/OCR) + Tesseract's CPU share within OCR (does prep-offload alone free the CPU, or must Tesseract move too?); M2 = real compress+ship cost of one prepped volume 5090<->3060 vs the prep time saved. Output -> `docs/80_PROJECT_HISTORY/run-logs/prep-offload-profile-run.log`. A proper design doc under docs/30_SYSTEM_DESIGN/ to follow once the numbers pick the variant.
+
+- (this /ucp) -- part 26 (prep-offload design recorded + profiling in flight).
