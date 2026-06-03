@@ -493,3 +493,17 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **OCR status check (on the 5080):** 5080 actively OCR'ing, healthy -- on 1955-vol1-55chapters (1951->1953->1955 cleared today, ~30-40 min/vol). Could NOT pull live queue counts: this box has no SSH key to the 5090 (queue host, 100.70.54.56) and reaches the shared queue over SMB, not an interactive login. Get exact done/pending counts as first build step on the 5090.
 
 - (this /ucp) -- part 34 (single-row column-per-pass schema finalized + full Step-2 schema built-now).
+
+## Phase 35 -- Step 1 BUILD started (autonomous, no campaign disruption) (2026-06-03 PM)
+
+**Patrick said "let's do it" + is away from the machine.** Building the artifacts that DON'T touch the live JSON campaign and DON'T need elevation; the cutover + elevated 3060 setup + PatoAudio conn confirmation wait for him at the machine.
+
+**OCR status pulled (via the 5080->5090 SSH key `patolex_5090`, host 100.70.54.56):** 106-vol queue = **67 done / 2 in-progress / 37 pending (~63%)**. In-flight: 5080 `1955-vol1-55chapters`, 5090 `1955-vol2-chapters`. Pending spans **1957->1975** (Statutory Chapters, chronological). The 1976-1999 add (~100 vols) is NOT in the queue yet -- seeded at cutover. Queue statuses today: pending/in_progress/done/failed (JSON).
+
+**Built so far (new dir `pipeline/sql/`):**
+- `schema.sql` -- runnable `CREATE DATABASE PatoLexQueue` + `ocr_queue` (single row, column-group per pass; Step-2 passes inert `na`; 6 filtered indexes; `state_history` w/ `pass`; `vlm_sandbox` JSON). Idempotent.
+- `queue_worker_sql.py` -- the generic pyodbc lease worker. ONE claim parameterized by `--role` (prep|ocr|tess|doctr|surya|consensus); Rusanu skip-locked (READPAST inner only, UPDLOCK outer); per-pass lease+fence heartbeat thread (token-match else self-abort; DB-unreachable self-abort at 50% lease); attempts-on-failure-only + atomic `held`; prep buffer bound as a STANDALONE count (not in-claim); autocommit=True; conn from `PATOLEX_QUEUE_DSN` env (never hardcoded). Single-row gate predicates (consensus gates on tess/doctr/surya=done). py_compile clean.
+
+**STILL TO BUILD:** `seed_ocr_queue.py` (port 106-vol JSON + 1976-1999 add), `ocr_only_5090.py` 3-root refactor (--inbox/--midbox/--outbox/--label/--pdf/--stage{prep,ocr,consensus}/--engine + the PREP_COMPLETE-marker write & marker+cv2-decode barrier on the OCR side), elevated `setup_3060.ps1` (DB+shares+firewall), then **Hans x2** on schema+claim (material change since pass-2), then supervised cutover w/ Patrick.
+
+- (this /ucp) -- part 35 (Step-1 build started: schema.sql + queue_worker_sql.py; OCR at 67/106).
