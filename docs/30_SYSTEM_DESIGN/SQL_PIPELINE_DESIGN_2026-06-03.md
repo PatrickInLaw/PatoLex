@@ -2,6 +2,13 @@
 
 **Status:** DESIGN for review (2026-06-03, revised post-Hans-pass-1). Replaces JSON-over-SSH + box-local prep with a distributed pipeline. Nothing deployed; the JSON-queue campaign keeps running until cutover.
 
+## DECISIONS LOCKED (2026-06-03, Patrick)
+1. **Queue DB = a dedicated database on the 3060's MSSQL** (NOT the project Postgres). It's installed, configured, networked, and already used from all three computers (per the PatoAudio repo — conn info there). Reachability is therefore settled. The claim uses MSSQL `UPDATE ... WITH (READPAST, UPDLOCK, ROWLOCK) ... OUTPUT` (skip-locked semantics) instead of Postgres `FOR UPDATE SKIP LOCKED`.
+2. **Richer queue schema** (Patrick: "the first few issues are best resolved by a richer queue DB"): use a proper LEASE/FENCING model — `lease_token` + `lease_expires_at`, extended on each heartbeat; a worker writes results only if its token is still current; a row is reclaimable only after lease expiry. Plus `attempts` + a `held` dead-letter terminal, and a `state_history` audit table. This is the clean resolution of B1 (failure handling), S2 (buffer race, enforced in-claim) and S3 (stale-reclaim double-write) — replacing the ad-hoc fencing below.
+3. STILL SEPARATE (filesystem, not DB — a richer DB does NOT fix these): **B2 midbox partial-file barrier** (tmp-dir + atomic rename + `PREP_COMPLETE` marker + decode-validate) and **S6 SMB auth** (`patolexsvc` account + `cmdkey`). Keep both.
+**Remaining open for Patrick:** (a) worker run-as for SMB (`patolexsvc` stored-creds vs SYSTEM); (b) inbox = centralize PDFs on the 3060 vs point at the per-box archive.
+*(The §2 schema/claim below is written in Postgres syntax from the first draft — to be re-rendered in MSSQL + the lease model in the next revision, then re-Hans'd.)*
+
 ## Why
 The queue belongs in a DB. File-lock-over-SSH is fragile. A SQL work-queue gives atomic concurrent claims (`FOR UPDATE SKIP LOCKED`); a shared file store lets idle CPUs on every box preload one pool any GPU drains, so GPUs never wait on prep.
 

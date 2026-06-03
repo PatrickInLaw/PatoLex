@@ -436,3 +436,27 @@ cc001 was repo setup. cc002 reviewed it, sanity-checked the plan, and executed G
 **Hans pass-1 (design):** sound skeleton + correct SQL claim, but NOT build-ready as drafted -- found: B1 failure-states strand/crash-loop (need ocr_failed + attempts + held dead-letter); B2 cross-box partial-file race on midbox (need tmp+atomic-rename + PREP_COMPLETE marker + decode-validate); S3 stale-reclaim double-write (need fencing token + self-abort); S4 unsafe cutover order (drain JSON FIRST, seed skips in-flight); S1 FALSE VRAM premise (5080/5090 caps are compute/CPU-prep, not VRAM -- 5090's 3-cap removed by decoupling, tune live); S5 ocr_only needs real 3-root refactor (OCR reads classification, doesn't re-run); S6 SMB 'Everyone' fails (guest disabled, SYSTEM=MACHINE$ -> dedicated patolexsvc account + cmdkey). All folded into the revised doc. Awaiting Patrick's review before build.
 
 - (this /ucp) -- part 31 (SQL-pipeline design + Hans pass-1 folded; pending Patrick review).
+
+## Phase 32 -- HANDOFF / STATE BEFORE COMPACTION (2026-06-03, ~08:xx PT)
+
+**LIVE CAMPAIGN (do NOT disrupt without explicit go -- memory `confirm-before-disruptive-actions`):**
+- OCR runs via box Scheduled Tasks, independent of the agent session. ~54 volumes done (1862-~1948); 5090 + 5080 both OCR'ing. 5090 on 1949/draining; 5080 on 1951-vol1-chapters (restarted this AM after a session-reset stall).
+- Office-hours auto-scale WORKS: `PatoLex_ScaleDown_Office` 07:30 -> max_workers=1, `PatoLex_ScaleUp_Office` 17:00 -> 3 (5090). Graceful drain (finishes current volume). Drain-policy improvement noted (drain "first-to-finish" not "named newest") -- TODO in the supervisor rework.
+- Temp loggers: `PatoLex_TempLog` SYSTEM tasks on BOTH boxes, now GATED on OCR-active + size-capped (`pipeline/temp_logger.ps1`). The RUNNING instances still have the old always-on script until the tasks restart -- re-run `register_temp_logger.ps1` ELEVATED per box (or next reboot) to apply. Thermal guardian (5090) = power governor, logs EVENTS only (NOT a temp logger).
+
+**DECOUPLED BUILD (committed 445bea1) is SUPERSEDED** -- it was box-local Phase 1 (5090-only `--role`/`--stage`/prep_supervisor/cutover_decouple_migration). The SQL pipeline below REPLACES that plan. Do NOT cut over the box-local version.
+
+**CURRENT PLAN = SQL-backed shared pipeline** (`docs/30_SYSTEM_DESIGN/SQL_PIPELINE_DESIGN_2026-06-03.md`, see its "DECISIONS LOCKED" header):
+- 3060 = file server (3 SMB shares: inbox PDFs -> midbox prepped pages -> outbox results) + queue DB host.
+- Queue = dedicated DB on the **3060 MSSQL** (DECIDED -- installed/networked/used by all boxes; conn info in the cloned PatoAudio repo). Richer schema: LEASE/FENCING (lease_token + lease_expires, extend-on-heartbeat, fence-before-write) + attempts + `held` dead-letter + state_history. Claim = MSSQL `UPDATE ... WITH (READPAST,UPDLOCK,ROWLOCK) OUTPUT`.
+- Unified `queue_worker_sql.py --role prep|ocr` replaces queue_worker.py + queue_worker_5080.py + queue_claim.py (SSH/scp path deleted). Idle CPUs on all boxes (incl 3060) prep into the shared midbox; any GPU (5080x1 / 5090 tune-live, prep no longer contends) drains it.
+- File-side (separate from DB): B2 midbox barrier (tmp+atomic-rename + PREP_COMPLETE marker + decode-validate); S6 SMB auth (`patolexsvc` account on 3060 + `cmdkey`). `ocr_only_*` needs a real 3-root refactor (--inbox/--midbox/--outbox); OCR reads page_classification.json (doesn't re-run classify).
+- Seed migrates the 106-vol JSON queue (drain JSON to 0 FIRST, then seed skipping in-flight) AND appends the **1976-1999 chapters add** (100 vols / ~180k pages already cataloged on the 5080 master archive; 5090 has 910GB free).
+
+**OPEN DECISIONS FOR PATRICK:** (a) worker run-as for SMB (`patolexsvc` stored-creds vs SYSTEM -- SYSTEM can't use cmdkey); (b) inbox centralize-on-3060 vs point-at-archive.
+
+**NEXT STEPS:** 1) revise the design §2 to MSSQL + the lease model, re-render fully, 2) Hans pass-2 on the revised design, 3) on Patrick's go + the 2 open decisions: build (queue_worker_sql, seed_ocr_queue, ocr_only 3-root refactor, the ELEVATED 3060 setup script for shares+creds+DB), Hans, 4) supervised cutover (drain JSON first). 
+
+**CONSTRAINTS/GOTCHAS:** GPU caps are compute/CPU-prep, NOT VRAM (tune live post-decouple). OCR pipeline is idempotent/resumable. SQL conn info in cloned `GitHub/PatoAudio`. 3060 reachable ONLY via the 5090 hop (`ssh 5090 -> ssh -i C:\Users\patolex\.ssh\id_5090_to_3060 patolex@100.113.254.6`), no direct local key. Task/share/DB-OS creation needs OS admin elevation (UAC wall) -> operator runs elevated registrars; the agent SSH session is NON-elevated. Commit messages must contain NO semicolons (block-compound-bash hook). PowerShell-over-SSH: avoid `$var` (local expansion) -- use EncodedCommand or literal paths.
+
+- (this /ucp) -- part 32 (MSSQL queue DB locked + full pre-compaction handoff).
