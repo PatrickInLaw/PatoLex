@@ -254,16 +254,16 @@ def record_history(cx, label: str, role: str, from_state: str, to_state: str,
 
 # --------------------------------------------------------------------------- run one volume
 def stage_args(role: str):
-    """Map a pass to ocr_only_5090.py CLI flags. prep/ocr use --stage; engines use --engine."""
+    """Map a pass to ocr_only_sql.py CLI flags. prep/ocr use --stage; engines use --engine."""
     if role == "prep":
         return ["--stage", "prep"]
     if role == "ocr":
         return ["--stage", "ocr"]
-    # Step-2 passes are DEFERRED (R2.6): ocr_only_5090.py has no --engine/--stage consensus yet.
+    # Step-2 passes are DEFERRED (R2.6): ocr_only_sql.py has no --engine/--stage consensus yet.
     # Fail loud rather than crash the subprocess and silently burn attempts -> held (Hans SERIOUS-4).
     if role in ("tess", "doctr", "surya", "consensus"):
         raise NotImplementedError(
-            f"Step-2 role '{role}' not yet implemented in ocr_only_5090.py -- build the engine "
+            f"Step-2 role '{role}' not yet implemented in ocr_only_sql.py -- build the engine "
             f"refactor before enabling Step-2 rows."
         )
     raise ValueError(role)
@@ -290,7 +290,7 @@ def main():
     ap.add_argument("--inbox", required=True)
     ap.add_argument("--midbox", required=True)
     ap.add_argument("--outbox", required=True)
-    ap.add_argument("--script", required=True, help="path to ocr_only_5090.py (3-root build)")
+    ap.add_argument("--script", required=True, help="path to ocr_only_sql.py (3-root build)")
     ap.add_argument("--once", action="store_true", help="claim+run a single volume then exit (test mode)")
     args = ap.parse_args()
 

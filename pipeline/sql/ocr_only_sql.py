@@ -1,6 +1,6 @@
 """
-ocr_only_5090_sql.py -- SQL-pipeline replacement for ocr_only_5090.py.
-=======================================================================
+ocr_only_sql.py -- SQL-pipeline OCR script (runs on any box: 5090, 5080, etc.)
+================================================================================
 Accepts 3-root named args (--inbox/--midbox/--outbox) and --label/--pdf/--stage
 so the SQL queue worker can invoke it without hardcoded paths.
 
@@ -26,12 +26,12 @@ Preprocessing functions are at module level and MUST remain byte-for-byte identi
 the same functions in ocr_only_5090.py. Do not diverge from that file without syncing both.
 
 Usage (queue worker invocation):
-    python ocr_only_5090_sql.py --label <label> --pdf <pdf_path>
+    python ocr_only_sql.py --label <label> --pdf <pdf_path>
         --midbox <midbox_root> --outbox <outbox_root> [--inbox <inbox_root>]
         --stage prep|ocr|all
 
 Local testing (local paths, no UNC needed):
-    python ocr_only_5090_sql.py --label test_vol --pdf C:\\path\\to\\vol.pdf
+    python ocr_only_sql.py --label test_vol --pdf C:\\path\\to\\vol.pdf
         --midbox C:\\scratch --outbox C:\\outbox --stage all
 """
 

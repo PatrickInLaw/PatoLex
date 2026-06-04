@@ -1,6 +1,6 @@
 /* ===========================================================================
    PatoLex SQL OCR pipeline -- queue schema (Step 1, Step-2-ready)
-   Target: dedicated DB on PK_Alien_5090\SQLEXPRESS (100.70.54.56) -- the 5090's existing proven instance.
+   Target: dedicated DB on PK_XPS\SQLEXPRESS (100.113.254.6) -- the 3060 file server, co-located with SMB shares.
    Authoritative design: docs/30_SYSTEM_DESIGN/SQL_PIPELINE_DESIGN_2026-06-03.md (REVISION 2 / R2.2).
 
    MODEL: ONE row per volume, ONE column-group per pass (KISS -- no child/dependency table).
@@ -8,7 +8,7 @@
    The Step-2 engine passes (tess/doctr/surya/consensus) are built NOW but inert ('na')
    until enabled per-row at seed -> enabling Step 2 is a config flip, not a schema change.
 
-   Run from any box with sqlcmd access to the 5090 (operator). Idempotent: safe to re-run.
+   Run from any box with sqlcmd access to the 3060 (operator). Idempotent: safe to re-run.
    =========================================================================== */
 
 IF DB_ID('PatoLexQueue') IS NULL

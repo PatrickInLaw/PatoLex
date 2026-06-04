@@ -1,0 +1,1021 @@
+{
+  "created_at": "2026-06-02",
+  "note": "Forward/chronological shared OCR queue for the 5090 (and 5080) workers. Workers claim the lowest-year pending volume. Idempotent via per-volume OCR_COMPLETE.marker. 1850-1861 already banked+ingested, excluded.",
+  "volumes": [
+    {
+      "label": "1862",
+      "year": 1862,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T05:27:17",
+      "heartbeat_epoch": 1780405818.1429532,
+      "heartbeat_at": "2026-06-02T06:10:18",
+      "done_at": "2026-06-02T06:11:00"
+    },
+    {
+      "label": "1863",
+      "year": 1863,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T05:27:20",
+      "heartbeat_epoch": 1780405401.0266151,
+      "heartbeat_at": "2026-06-02T06:03:21",
+      "done_at": "2026-06-02T06:03:34"
+    },
+    {
+      "label": "1863-64",
+      "year": 1864,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T05:27:23",
+      "heartbeat_epoch": 1780405764.136985,
+      "heartbeat_at": "2026-06-02T06:09:24",
+      "done_at": "2026-06-02T06:10:08"
+    },
+    {
+      "label": "1865-66",
+      "year": 1865,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T06:03:34",
+      "heartbeat_epoch": 1780409315.8537414,
+      "heartbeat_at": "2026-06-02T07:08:35",
+      "done_at": "2026-06-02T07:09:21"
+    },
+    {
+      "label": "1867-68",
+      "year": 1867,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T06:10:08",
+      "heartbeat_epoch": 1780409049.5602894,
+      "heartbeat_at": "2026-06-02T07:04:09",
+      "done_at": "2026-06-02T07:05:06"
+    },
+    {
+      "label": "1869-70",
+      "year": 1869,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T06:11:00",
+      "heartbeat_epoch": 1780409881.8257763,
+      "heartbeat_at": "2026-06-02T07:18:01",
+      "done_at": "2026-06-02T07:18:53"
+    },
+    {
+      "label": "1871-72",
+      "year": 1871,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T06:31:16",
+      "heartbeat_epoch": 1780411146.5826886,
+      "heartbeat_at": "2026-06-02T07:39:06",
+      "done_at": "2026-06-02T07:39:41"
+    },
+    {
+      "label": "1873-74",
+      "year": 1873,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T07:05:06",
+      "heartbeat_epoch": 1780412347.2960856,
+      "heartbeat_at": "2026-06-02T07:59:07",
+      "done_at": "2026-06-02T10:54:10"
+    },
+    {
+      "label": "1873-74-code",
+      "pdf": "1873-74_Code.pdf",
+      "year": 1873,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T13:16:48",
+      "heartbeat_epoch": 1780432908.4610305,
+      "heartbeat_at": "2026-06-02T13:41:48",
+      "done_at": "2026-06-02T13:42:29"
+    },
+    {
+      "label": "1875-76",
+      "year": 1875,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T07:09:21",
+      "heartbeat_epoch": 1780412362.7253253,
+      "heartbeat_at": "2026-06-02T07:59:22",
+      "done_at": "2026-06-02T10:54:10"
+    },
+    {
+      "label": "1875-76-code",
+      "pdf": "1875-76_Code.pdf",
+      "year": 1875,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T13:16:51",
+      "heartbeat_epoch": 1780431898.0245264,
+      "heartbeat_at": "2026-06-02T13:24:58",
+      "done_at": "2026-06-02T13:25:38"
+    },
+    {
+      "label": "1877-78",
+      "year": 1877,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T10:54:10",
+      "heartbeat_epoch": 1780427771.967901,
+      "heartbeat_at": "2026-06-02T12:16:11",
+      "done_at": "2026-06-02T12:16:52"
+    },
+    {
+      "label": "1877-78-code",
+      "pdf": "1877-78_Code.pdf",
+      "year": 1877,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T13:25:39",
+      "heartbeat_epoch": 1780432364.5837438,
+      "heartbeat_at": "2026-06-02T13:32:44",
+      "done_at": "2026-06-02T13:33:48"
+    },
+    {
+      "label": "1880",
+      "year": 1880,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T10:55:15",
+      "heartbeat_epoch": 1780424070.6238372,
+      "heartbeat_at": "2026-06-02T11:14:30",
+      "done_at": "2026-06-02T11:14:49"
+    },
+    {
+      "label": "1880-code",
+      "pdf": "1880_Code.pdf",
+      "year": 1880,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T13:33:49",
+      "heartbeat_epoch": 1780433826.953353,
+      "heartbeat_at": "2026-06-02T13:57:06",
+      "done_at": "2026-06-02T13:58:02"
+    },
+    {
+      "label": "1881",
+      "year": 1881,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T11:14:50",
+      "heartbeat_epoch": 1780424637.3683715,
+      "heartbeat_at": "2026-06-02T11:23:57",
+      "done_at": "2026-06-02T11:24:56"
+    },
+    {
+      "label": "1883-84",
+      "year": 1883,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T11:24:57",
+      "heartbeat_epoch": 1780424758.3748293,
+      "heartbeat_at": "2026-06-02T11:25:58",
+      "done_at": "2026-06-02T11:26:04"
+    },
+    {
+      "label": "1883-84-regular",
+      "pdf": "1883-84_Code.pdf",
+      "year": 1883,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T13:42:29",
+      "heartbeat_epoch": 1780434810.3426893,
+      "heartbeat_at": "2026-06-02T14:13:30",
+      "done_at": "2026-06-02T14:13:47"
+    },
+    {
+      "label": "1885-86",
+      "year": 1885,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T11:26:05",
+      "heartbeat_epoch": 1780425858.9808798,
+      "heartbeat_at": "2026-06-02T11:44:18",
+      "done_at": "2026-06-02T11:44:58"
+    },
+    {
+      "label": "1887",
+      "year": 1887,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T11:44:59",
+      "heartbeat_epoch": 1780427053.5533166,
+      "heartbeat_at": "2026-06-02T12:04:13",
+      "done_at": "2026-06-02T12:05:05"
+    },
+    {
+      "label": "1889",
+      "year": 1889,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T12:05:06",
+      "heartbeat_epoch": 1780430023.0118341,
+      "heartbeat_at": "2026-06-02T12:53:43",
+      "done_at": "2026-06-02T12:54:28"
+    },
+    {
+      "label": "1891",
+      "year": 1891,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T12:16:52",
+      "heartbeat_epoch": 1780430093.6017413,
+      "heartbeat_at": "2026-06-02T12:54:53",
+      "done_at": "2026-06-02T12:55:31"
+    },
+    {
+      "label": "1893",
+      "year": 1893,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T13:58:02",
+      "heartbeat_epoch": 1780435523.7160895,
+      "heartbeat_at": "2026-06-02T14:25:23",
+      "done_at": "2026-06-02T14:26:29"
+    },
+    {
+      "label": "1895",
+      "year": 1895,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T14:13:47",
+      "heartbeat_epoch": 1780435667.7447155,
+      "heartbeat_at": "2026-06-02T14:27:47",
+      "done_at": "2026-06-02T14:28:05"
+    },
+    {
+      "label": "1897",
+      "year": 1897,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T14:26:29",
+      "heartbeat_epoch": 1780438263.3978705,
+      "heartbeat_at": "2026-06-02T15:11:03",
+      "done_at": "2026-06-02T15:11:53"
+    },
+    {
+      "label": "1899",
+      "year": 1899,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T14:28:05",
+      "heartbeat_epoch": 1780437726.4820588,
+      "heartbeat_at": "2026-06-02T15:02:06",
+      "done_at": "2026-06-02T15:03:05"
+    },
+    {
+      "label": "1900-01",
+      "year": 1900,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T16:14:55",
+      "heartbeat_epoch": 1780443896.3367171,
+      "heartbeat_at": "2026-06-02T16:44:56",
+      "done_at": "2026-06-02T16:45:30"
+    },
+    {
+      "label": "1903",
+      "year": 1903,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T15:11:54",
+      "heartbeat_epoch": 1780441445.2011147,
+      "heartbeat_at": "2026-06-02T16:04:05",
+      "done_at": "2026-06-02T16:04:38"
+    },
+    {
+      "label": "1905",
+      "year": 1905,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T16:14:58",
+      "heartbeat_epoch": 1780445519.9301686,
+      "heartbeat_at": "2026-06-02T17:11:59",
+      "done_at": "2026-06-02T17:12:21"
+    },
+    {
+      "label": "1906-07",
+      "year": 1906,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T16:15:01",
+      "heartbeat_epoch": 1780446543.2217479,
+      "heartbeat_at": "2026-06-02T17:29:03",
+      "done_at": "2026-06-02T17:29:08"
+    },
+    {
+      "label": "1907-09",
+      "year": 1907,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T16:45:30",
+      "heartbeat_epoch": 1780448132.0875573,
+      "heartbeat_at": "2026-06-02T17:55:32",
+      "done_at": "2026-06-02T17:56:11"
+    },
+    {
+      "label": "1910-11",
+      "year": 1910,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T16:04:39",
+      "heartbeat_epoch": 1780450052.0551934,
+      "heartbeat_at": "2026-06-02T18:27:32",
+      "done_at": "2026-06-02T18:28:27"
+    },
+    {
+      "label": "1913-statutes",
+      "pdf": "1913_Statutes.pdf",
+      "year": 1913,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T20:24:24",
+      "heartbeat_epoch": 1780468125.000555,
+      "heartbeat_at": "2026-06-02T23:28:45",
+      "done_at": "2026-06-02T23:29:32"
+    },
+    {
+      "label": "1915-vol1-chapters",
+      "pdf": "1915_Vol1_Chapters.pdf",
+      "year": 1915,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T21:23:08",
+      "heartbeat_epoch": 1780464789.5104318,
+      "heartbeat_at": "2026-06-02T22:33:09",
+      "done_at": "2026-06-02T22:33:11"
+    },
+    {
+      "label": "1917-vol1-chapters",
+      "pdf": "1917_Vol1_Chapters.pdf",
+      "year": 1917,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T19:46:45",
+      "heartbeat_epoch": 1780460687.1164892,
+      "heartbeat_at": "2026-06-02T21:24:47",
+      "done_at": "2026-06-02T21:25:08"
+    },
+    {
+      "label": "1919-vol1-chapters",
+      "pdf": "1919_Vol1_Chapters.pdf",
+      "year": 1919,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T18:28:28",
+      "heartbeat_epoch": 1780457042.2664747,
+      "heartbeat_at": "2026-06-02T20:24:02",
+      "done_at": "2026-06-02T20:24:23"
+    },
+    {
+      "label": "1921-vol1-chapters",
+      "pdf": "1921_Vol1_Chapters.pdf",
+      "year": 1921,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T19:47:30",
+      "heartbeat_epoch": 1780462473.0209966,
+      "heartbeat_at": "2026-06-02T21:54:33",
+      "done_at": "2026-06-02T21:55:01"
+    },
+    {
+      "label": "1923-vol1-chapters",
+      "pdf": "1923_Vol1_Chapters.pdf",
+      "year": 1923,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T19:48:15",
+      "heartbeat_epoch": 1780460536.7764251,
+      "heartbeat_at": "2026-06-02T21:22:16",
+      "done_at": "2026-06-02T21:23:08"
+    },
+    {
+      "label": "1925-vol1-chapters",
+      "pdf": "1925_Vol1_Chapters.pdf",
+      "year": 1925,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T21:25:08",
+      "heartbeat_epoch": 1780464970.334173,
+      "heartbeat_at": "2026-06-02T22:36:10",
+      "done_at": "2026-06-02T22:36:39"
+    },
+    {
+      "label": "1927-vol1-26chapters",
+      "pdf": "1927_Vol1_26Chapters.pdf",
+      "year": 1927,
+      "status": "done",
+      "worker_id": "5090-4",
+      "claimed_at": "2026-06-02T18:36:41",
+      "heartbeat_epoch": 1780450601.7621276,
+      "heartbeat_at": "2026-06-02T18:36:41",
+      "done_at": "2026-06-02T18:36:57"
+    },
+    {
+      "label": "1927-vol1-chapters",
+      "pdf": "1927_Vol1_Chapters.pdf",
+      "year": 1927,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T21:55:01",
+      "heartbeat_epoch": 1780469704.0315533,
+      "heartbeat_at": "2026-06-02T23:55:04",
+      "done_at": "2026-06-02T23:55:14"
+    },
+    {
+      "label": "1929-vol1-28chapters",
+      "pdf": "1929_Vol1_28Chapters.pdf",
+      "year": 1929,
+      "status": "done",
+      "worker_id": "5080-2",
+      "claimed_at": "2026-06-02T18:38:42",
+      "heartbeat_epoch": 1780450722.5219069,
+      "heartbeat_at": "2026-06-02T18:38:42",
+      "done_at": "2026-06-02T18:39:32"
+    },
+    {
+      "label": "1929-vol1-29chapters",
+      "pdf": "1929_Vol1_29Chapters.pdf",
+      "year": 1929,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T22:33:11",
+      "heartbeat_epoch": 1780473973.36981,
+      "heartbeat_at": "2026-06-03T01:06:13",
+      "done_at": "2026-06-03T01:07:09"
+    },
+    {
+      "label": "1931-vol1-chapters",
+      "pdf": "1931_Vol1_Chapters.pdf",
+      "year": 1931,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-02T22:36:39",
+      "heartbeat_epoch": 1780474301.9928117,
+      "heartbeat_at": "2026-06-03T01:11:41",
+      "done_at": "2026-06-03T01:12:27"
+    },
+    {
+      "label": "1933-vol1-chapters",
+      "pdf": "1933_Vol1_Chapters.pdf",
+      "year": 1933,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-02T23:29:33",
+      "heartbeat_epoch": 1780483312.8701448,
+      "heartbeat_at": "2026-06-03T03:41:52",
+      "done_at": "2026-06-03T03:42:39"
+    },
+    {
+      "label": "1935-vol1-34chapters",
+      "pdf": "1935_Vol1_34Chapters.pdf",
+      "year": 1935,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-02T18:58:52",
+      "heartbeat_epoch": 1780452112.8380234,
+      "heartbeat_at": "2026-06-02T19:01:52",
+      "done_at": "2026-06-02T19:02:04"
+    },
+    {
+      "label": "1935-vol1-chapters",
+      "pdf": "1935_Vol1_Chapters.pdf",
+      "year": 1935,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-02T23:55:14",
+      "heartbeat_epoch": 1780476978.791164,
+      "heartbeat_at": "2026-06-03T01:56:18",
+      "done_at": "2026-06-03T01:56:49"
+    },
+    {
+      "label": "1937-vol1-chapters",
+      "pdf": "1937_Vol1_Chapters.pdf",
+      "year": 1937,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-03T01:07:10",
+      "heartbeat_epoch": 1780486934.1999333,
+      "heartbeat_at": "2026-06-03T04:42:14",
+      "done_at": "2026-06-03T04:42:46"
+    },
+    {
+      "label": "1938-vol1-chapters",
+      "pdf": "1938_Vol1_Chapters.pdf",
+      "year": 1938,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T01:12:27",
+      "heartbeat_epoch": 1780475067.894387,
+      "heartbeat_at": "2026-06-03T01:24:27",
+      "done_at": "2026-06-03T01:25:07"
+    },
+    {
+      "label": "1939-vol1-chapters",
+      "pdf": "1939_Vol1_Chapters.pdf",
+      "year": 1939,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T01:25:07",
+      "heartbeat_epoch": 1780489032.2898393,
+      "heartbeat_at": "2026-06-03T05:17:12",
+      "done_at": "2026-06-03T05:17:19"
+    },
+    {
+      "label": "1941-vol1-41chapters",
+      "pdf": "1941_Vol1_41Chapters.pdf",
+      "year": 1941,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-03T01:56:49",
+      "heartbeat_epoch": 1780489732.1627953,
+      "heartbeat_at": "2026-06-03T05:28:52",
+      "done_at": "2026-06-03T05:29:34"
+    },
+    {
+      "label": "1943-vol1-42chapters",
+      "pdf": "1943_Vol1_42Chapters.pdf",
+      "year": 1943,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T03:42:40",
+      "heartbeat_epoch": 1780483725.0121956,
+      "heartbeat_at": "2026-06-03T03:48:45",
+      "done_at": "2026-06-03T03:49:16"
+    },
+    {
+      "label": "1943-vol1-chapters",
+      "pdf": "1943_Vol1_Chapters.pdf",
+      "year": 1943,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T03:49:17",
+      "heartbeat_epoch": 1780496182.5128205,
+      "heartbeat_at": "2026-06-03T07:16:22",
+      "done_at": "2026-06-03T07:17:05"
+    },
+    {
+      "label": "1945-vol1-chapters",
+      "pdf": "1945_Vol1_Chapters.pdf",
+      "year": 1945,
+      "status": "done",
+      "worker_id": "5090-3",
+      "claimed_at": "2026-06-03T04:42:46",
+      "heartbeat_epoch": 1780499151.004261,
+      "heartbeat_at": "2026-06-03T08:05:51",
+      "done_at": "2026-06-03T08:06:26"
+    },
+    {
+      "label": "1947-vol1-46chapters",
+      "pdf": "1947_Vol1_46Chapters.pdf",
+      "year": 1947,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T05:17:19",
+      "heartbeat_epoch": 1780490960.1209931,
+      "heartbeat_at": "2026-06-03T05:49:20",
+      "done_at": "2026-06-03T05:50:08"
+    },
+    {
+      "label": "1947-vol1-chapters",
+      "pdf": "1947_Vol1_Chapters.pdf",
+      "year": 1947,
+      "status": "done",
+      "worker_id": "5090-2",
+      "claimed_at": "2026-06-03T05:29:34",
+      "heartbeat_epoch": 1780503457.0154545,
+      "heartbeat_at": "2026-06-03T09:17:37",
+      "done_at": "2026-06-03T09:18:18"
+    },
+    {
+      "label": "1948-vol1-chapters",
+      "pdf": "1948_Vol1_Chapters.pdf",
+      "year": 1948,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T05:50:08",
+      "heartbeat_epoch": 1780492508.7700598,
+      "heartbeat_at": "2026-06-03T06:15:08",
+      "done_at": "2026-06-03T06:15:59"
+    },
+    {
+      "label": "1949-vol1-49chapters-prior",
+      "pdf": "1949_Vol1_49Chapters_prior.pdf",
+      "year": 1949,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T06:15:59",
+      "heartbeat_epoch": 1780493579.806991,
+      "heartbeat_at": "2026-06-03T06:32:59",
+      "done_at": "2026-06-03T06:33:00"
+    },
+    {
+      "label": "1949-vol1-chapters",
+      "pdf": "1949_Vol1_Chapters.pdf",
+      "year": 1949,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T06:33:01",
+      "heartbeat_epoch": 1780507204.0592756,
+      "heartbeat_at": "2026-06-03T10:20:04",
+      "done_at": "2026-06-03T10:20:34"
+    },
+    {
+      "label": "1950-vol1-chapters",
+      "pdf": "1950_Vol1_Chapters.pdf",
+      "year": 1950,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T07:17:06",
+      "heartbeat_epoch": 1780497686.5181558,
+      "heartbeat_at": "2026-06-03T07:41:26",
+      "done_at": "2026-06-03T07:41:52"
+    },
+    {
+      "label": "1951-vol1-50chapters",
+      "pdf": "1951_Vol1_50Chapters.pdf",
+      "year": 1951,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T10:20:34",
+      "heartbeat_epoch": 1780507654.52597,
+      "heartbeat_at": "2026-06-03T10:27:34",
+      "done_at": "2026-06-03T10:28:09"
+    },
+    {
+      "label": "1951-vol1-chapters",
+      "pdf": "1951_Vol1_Chapters.pdf",
+      "year": 1951,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T08:05:25",
+      "heartbeat_epoch": 1780508847.5882592,
+      "heartbeat_at": "2026-06-03T10:47:27",
+      "done_at": "2026-06-03T10:48:32"
+    },
+    {
+      "label": "1951-vol2-chapters",
+      "pdf": "1951_Vol2_Chapters.pdf",
+      "year": 1951,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T10:28:10",
+      "heartbeat_epoch": 1780515671.5283387,
+      "heartbeat_at": "2026-06-03T12:41:11",
+      "done_at": "2026-06-03T12:41:24"
+    },
+    {
+      "label": "1953-vol1-52chapters",
+      "pdf": "1953_Vol1_52Chapters.pdf",
+      "year": 1953,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T10:48:33",
+      "heartbeat_epoch": 1780511161.3805072,
+      "heartbeat_at": "2026-06-03T11:26:01",
+      "done_at": "2026-06-03T11:26:32"
+    },
+    {
+      "label": "1953-vol1-chapters",
+      "pdf": "1953_Vol1_Chapters.pdf",
+      "year": 1953,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T11:26:32",
+      "heartbeat_epoch": 1780518908.2707238,
+      "heartbeat_at": "2026-06-03T13:35:08",
+      "done_at": "2026-06-03T13:35:19"
+    },
+    {
+      "label": "1953-vol2-chapters",
+      "pdf": "1953_Vol2_Chapters.pdf",
+      "year": 1953,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T12:41:24",
+      "heartbeat_epoch": 1780523185.8817344,
+      "heartbeat_at": "2026-06-03T14:46:25",
+      "done_at": "2026-06-03T14:46:53"
+    },
+    {
+      "label": "1955-vol1-54chapters",
+      "pdf": "1955_Vol1_54Chapters.pdf",
+      "year": 1955,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T13:35:20",
+      "heartbeat_epoch": 1780520561.1489675,
+      "heartbeat_at": "2026-06-03T14:02:41",
+      "done_at": "2026-06-03T14:03:33"
+    },
+    {
+      "label": "1955-vol1-55chapters",
+      "pdf": "1955_Vol1_55Chapters.pdf",
+      "year": 1955,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T14:03:34",
+      "heartbeat_epoch": 1780528438.7379782,
+      "heartbeat_at": "2026-06-03T16:13:58",
+      "done_at": "2026-06-03T16:14:32"
+    },
+    {
+      "label": "1955-vol2-chapters",
+      "pdf": "1955_Vol2_Chapters.pdf",
+      "year": 1955,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T14:46:53",
+      "heartbeat_epoch": 1780532455.8945386,
+      "heartbeat_at": "2026-06-03T17:20:55",
+      "done_at": "2026-06-03T17:21:37"
+    },
+    {
+      "label": "1957-vol1-56chapters",
+      "pdf": "1957_Vol1_56Chapters.pdf",
+      "year": 1957,
+      "status": "done",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T16:14:33",
+      "heartbeat_epoch": 1780537664.315965,
+      "heartbeat_at": "2026-06-03T18:47:44",
+      "done_at": "2026-06-03T18:48:37"
+    },
+    {
+      "label": "1957-vol1-57chapters",
+      "pdf": "1957_Vol1_57Chapters.pdf",
+      "year": 1957,
+      "status": "done",
+      "worker_id": "5090-6",
+      "claimed_at": "2026-06-03T17:00:20",
+      "heartbeat_epoch": 1780540223.4100516,
+      "heartbeat_at": "2026-06-03T19:30:23",
+      "done_at": "2026-06-03T19:30:38"
+    },
+    {
+      "label": "1957-vol2-57chapters",
+      "pdf": "1957_Vol2_57Chapters.pdf",
+      "year": 1957,
+      "status": "done",
+      "worker_id": "5090-7",
+      "claimed_at": "2026-06-03T17:01:05",
+      "heartbeat_epoch": 1780539727.4577498,
+      "heartbeat_at": "2026-06-03T19:22:07",
+      "done_at": "2026-06-03T19:22:32"
+    },
+    {
+      "label": "1959-vol1-58chapters",
+      "pdf": "1959_Vol1_58Chapters.pdf",
+      "year": 1959,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T17:21:37",
+      "heartbeat_epoch": 1780534838.0494907,
+      "heartbeat_at": "2026-06-03T18:00:38",
+      "done_at": "2026-06-03T18:01:21"
+    },
+    {
+      "label": "1959-vol1-59chapters",
+      "pdf": "1959_Vol1_59Chapters.pdf",
+      "year": 1959,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T18:01:21",
+      "heartbeat_epoch": 1780544604.75927,
+      "heartbeat_at": "2026-06-03T20:43:24",
+      "done_at": "2026-06-03T20:43:57"
+    },
+    {
+      "label": "1959-vol2-chapters",
+      "pdf": "1959_Vol2_Chapters.pdf",
+      "year": 1959,
+      "status": "in_progress",
+      "worker_id": "5080-1",
+      "claimed_at": "2026-06-03T18:48:38",
+      "heartbeat_epoch": 1780549397.8663154,
+      "heartbeat_at": "2026-06-03T22:03:17"
+    },
+    {
+      "label": "1961-vol1-60chapters",
+      "pdf": "1961_Vol1_60Chapters.pdf",
+      "year": 1961,
+      "status": "done",
+      "worker_id": "5090-7",
+      "claimed_at": "2026-06-03T19:22:32",
+      "heartbeat_epoch": 1780541793.223392,
+      "heartbeat_at": "2026-06-03T19:56:33",
+      "done_at": "2026-06-03T19:57:05"
+    },
+    {
+      "label": "1961-vol1-61chapters",
+      "pdf": "1961_Vol1_61Chapters.pdf",
+      "year": 1961,
+      "status": "done",
+      "worker_id": "5090-6",
+      "claimed_at": "2026-06-03T19:30:38",
+      "heartbeat_epoch": 1780546660.5142093,
+      "heartbeat_at": "2026-06-03T21:17:40",
+      "done_at": "2026-06-03T21:18:08"
+    },
+    {
+      "label": "1961-vol2-chapters",
+      "pdf": "1961_Vol2_Chapters.pdf",
+      "year": 1961,
+      "status": "done",
+      "worker_id": "5090-7",
+      "claimed_at": "2026-06-03T19:57:05",
+      "heartbeat_epoch": 1780546626.8760445,
+      "heartbeat_at": "2026-06-03T21:17:06",
+      "done_at": "2026-06-03T21:17:30"
+    },
+    {
+      "label": "1963-vol1-62chapters",
+      "pdf": "1963_Vol1_62Chapters.pdf",
+      "year": 1963,
+      "status": "done",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T20:43:57",
+      "heartbeat_epoch": 1780546737.924677,
+      "heartbeat_at": "2026-06-03T21:18:57",
+      "done_at": "2026-06-03T21:19:41"
+    },
+    {
+      "label": "1963-vol1-63chapters",
+      "pdf": "1963_Vol1_63Chapters.pdf",
+      "year": 1963,
+      "status": "in_progress",
+      "worker_id": "5090-7",
+      "claimed_at": "2026-06-03T21:17:30",
+      "heartbeat_epoch": 1780549411.373942,
+      "heartbeat_at": "2026-06-03T22:03:31"
+    },
+    {
+      "label": "1963-vol2-chapters",
+      "pdf": "1963_Vol2_Chapters.pdf",
+      "year": 1963,
+      "status": "in_progress",
+      "worker_id": "5090-6",
+      "claimed_at": "2026-06-03T21:18:08",
+      "heartbeat_epoch": 1780549389.1899295,
+      "heartbeat_at": "2026-06-03T22:03:09"
+    },
+    {
+      "label": "1965-vol1-64chapters",
+      "pdf": "1965_Vol1_64Chapters.pdf",
+      "year": 1965,
+      "status": "in_progress",
+      "worker_id": "5090-1",
+      "claimed_at": "2026-06-03T21:19:41",
+      "heartbeat_epoch": 1780549421.7171469,
+      "heartbeat_at": "2026-06-03T22:03:41"
+    },
+    {
+      "label": "1965-vol1-65chapters",
+      "pdf": "1965_Vol1_65Chapters.pdf",
+      "year": 1965,
+      "status": "pending"
+    },
+    {
+      "label": "1965-vol2",
+      "pdf": "1965_Vol2.pdf",
+      "year": 1965,
+      "status": "pending"
+    },
+    {
+      "label": "1965-vol3-chapters",
+      "pdf": "1965_Vol3_Chapters.pdf",
+      "year": 1965,
+      "status": "pending"
+    },
+    {
+      "label": "1966-vol1-chapters",
+      "pdf": "1966_Vol1_Chapters.pdf",
+      "year": 1966,
+      "status": "pending"
+    },
+    {
+      "label": "1967-vol1-chapters",
+      "pdf": "1967_Vol1_Chapters.pdf",
+      "year": 1967,
+      "status": "pending"
+    },
+    {
+      "label": "1967-vol2",
+      "pdf": "1967_Vol2.pdf",
+      "year": 1967,
+      "status": "pending"
+    },
+    {
+      "label": "1967-vol3-chapters",
+      "pdf": "1967_Vol3_Chapters.pdf",
+      "year": 1967,
+      "status": "pending"
+    },
+    {
+      "label": "1968-vol1-chapters",
+      "pdf": "1968_Vol1_Chapters.pdf",
+      "year": 1968,
+      "status": "pending"
+    },
+    {
+      "label": "1968-vol2-chapters",
+      "pdf": "1968_Vol2_Chapters.pdf",
+      "year": 1968,
+      "status": "pending"
+    },
+    {
+      "label": "1969-vol1-chapters",
+      "pdf": "1969_Vol1_Chapters.pdf",
+      "year": 1969,
+      "status": "pending"
+    },
+    {
+      "label": "1969-vol2-chapters",
+      "pdf": "1969_Vol2_Chapters.pdf",
+      "year": 1969,
+      "status": "pending"
+    },
+    {
+      "label": "1970-vol1-chapters",
+      "pdf": "1970_Vol1_Chapters.pdf",
+      "year": 1970,
+      "status": "pending"
+    },
+    {
+      "label": "1970-vol2-chapters",
+      "pdf": "1970_Vol2_Chapters.pdf",
+      "year": 1970,
+      "status": "pending"
+    },
+    {
+      "label": "1971-vol1-chapters",
+      "pdf": "1971_Vol1_Chapters.pdf",
+      "year": 1971,
+      "status": "pending"
+    },
+    {
+      "label": "1971-vol2",
+      "pdf": "1971_Vol2.pdf",
+      "year": 1971,
+      "status": "pending"
+    },
+    {
+      "label": "1971-vol3-chapters",
+      "pdf": "1971_Vol3_Chapters.pdf",
+      "year": 1971,
+      "status": "pending"
+    },
+    {
+      "label": "1972-vol1-chapters",
+      "pdf": "1972_Vol1_Chapters.pdf",
+      "year": 1972,
+      "status": "pending"
+    },
+    {
+      "label": "1972-vol2-chapters",
+      "pdf": "1972_Vol2_Chapters.pdf",
+      "year": 1972,
+      "status": "pending"
+    },
+    {
+      "label": "1973-vol1-chapters",
+      "pdf": "1973_Vol1_Chapters.pdf",
+      "year": 1973,
+      "status": "pending"
+    },
+    {
+      "label": "1973-vol2-chapters",
+      "pdf": "1973_Vol2_Chapters.pdf",
+      "year": 1973,
+      "status": "pending"
+    },
+    {
+      "label": "1974-vol1-chapters",
+      "pdf": "1974_Vol1_Chapters.pdf",
+      "year": 1974,
+      "status": "pending"
+    },
+    {
+      "label": "1974-vol2-chapters",
+      "pdf": "1974_Vol2_Chapters.pdf",
+      "year": 1974,
+      "status": "pending"
+    },
+    {
+      "label": "1975-vol1-chapters",
+      "pdf": "1975_Vol1_Chapters.pdf",
+      "year": 1975,
+      "status": "pending"
+    },
+    {
+      "label": "1975-vol2-chapters",
+      "pdf": "1975_Vol2_Chapters.pdf",
+      "year": 1975,
+      "status": "pending"
+    }
+  ]
+}
