@@ -99,7 +99,23 @@ Started background SCP transfer of 104 PDFs (8.2 GB) from 5080 archive → 5090 
 python C:\Users\patolex\PatoLex-scratch\queue_extend_manifest.py C:\Users\patolex\PatoLex-scratch\manifest_1976_2000.json
 ```
 
-**Note:** 1996 Vol2–5 (5–19 MB) and all 1997–2000 volumes (4–33 MB) are suspiciously small — likely born-digital PDFs, not scanned images. The project data tier boundary is ~1993–94 for OCR. 1996 Vol1 (511 MB) and Vol6 (192 MB) are clearly scanned. 1996 Vol2–5 and 1997–2000 may produce garbage OCR; evaluate when reached.
+**Update (2026-06-04):** PyMuPDF page counts confirmed via agent — 1996–2000 volumes are 1176–2157 pages each (NOT tiny stubs). The small file sizes reflect efficient compression, not born-digital content. OCR will run normally on them.
+
+Transfer and queue extension completed: SCP finished 104/104 OK at 22:46 PT. `queue_extend_manifest.py` ran on 5090: 104 entries appended, 0 skipped. Live queue now 210 volumes (1862–2000).
+
+### 10. ETA analysis and projection correction (2026-06-04 morning)
+
+Initial ETA projections (22:48 PT June 3) used file-size estimates for page counts and incorrectly dismissed prep overhead as negligible. Both were wrong:
+
+- **Prep overhead is ~38% of total per-page time** (confirmed: 1971-vol3 preprocess = 392 pages in 399.9s = 1.02s/page; render ~0.6s/page; OCR 2.83s/page → prep/total = 1.72/4.55 = 38%)
+- **1996–2000 page counts via PyMuPDF**: 1176–2157 pages/volume (not the ~100–650 guessed from 4–33MB file sizes)
+
+Corrected model: 13.2 effective pages/min per worker (vs wrong 21.2). Combined 4 workers = 3,168 pages/hour.
+
+Actual progress at 5:30 AM June 4: **93–94 volumes done** (projected ~100 — off by ~7%). Year coverage was accurate (projected through 1971–72, actual in_progress on 1971 volumes).
+
+Total remaining (real PyMuPDF counts): **~210,000 pages across 116 volumes**
+Corrected full completion estimate: **~Saturday June 7, 6 AM PT**
 
 ---
 
@@ -107,27 +123,23 @@ python C:\Users\patolex\PatoLex-scratch\queue_extend_manifest.py C:\Users\patole
 
 | Item | Priority |
 |------|----------|
-| SCP transfer 104 PDFs 5080→5090 finishing in background — run queue_extend_manifest.py once done | HIGH |
-| Patrick runs SMB share setup on the 3060 (elevated) | HIGH |
+| SQL cutover: Patrick runs SMB share setup on the 3060 (elevated) | HIGH |
 | Stop JSON workers on 5090 (set max_workers=0) and 5080 (write STOP_5080_WORKER.flag) | HIGH |
 | Seed `PatoLexQueue` for real (seed_ocr_queue.py, not dry-run) | HIGH |
 | Start prep supervisor on 5090 | HIGH |
-| Start OCR workers on 5090 and 5080 | HIGH |
+| Start OCR workers on 5090 and 5080 (SQL pipeline) | HIGH |
 | Drop `PatoLexQueue` from 5090 (needs 5090 sa password — not in secrets file) | MEDIUM |
 | Update ingest process to wait for `OUTBOX_COMPLETE` marker | MEDIUM |
-| Evaluate 1996 Vol2-5 and 1997-2000 as born-digital (not OCR-able) when reached | LOW |
 
 ---
 
 ## Next Session Should Start With
 
-1. Verify SCP transfer completed (`scp_transfer_1976_2000.log` ends with TRANSFER COMPLETE)
-2. Run on 5090: `python queue_extend_manifest.py manifest_1976_2000.json` — adds 104 volumes
-3. Patrick runs SMB share setup elevated on the 3060
-4. Store 3060 SMB credentials on the 5090 (`cmdkey /add:100.113.254.6 /user:... /pass:...`) and 5080
-5. Stop JSON workers (5090: write `0` to `max_workers.txt` via SSH; 5080: write `STOP_5080_WORKER.flag`)
-6. Seed SQL queue for real: `$env:PATOLEX_QUEUE_DSN = ...; python seed_ocr_queue.py --queue-json pipeline/sql/live_queue_snapshot.json`
-7. Start prep workers on 5090; start OCR workers on 5090 and 5080
+1. Patrick runs SMB share setup elevated on the 3060
+2. Store 3060 SMB credentials on the 5090 (`cmdkey /add:100.113.254.6 /user:... /pass:...`) and 5080
+3. Stop JSON workers (5090: write `0` to `max_workers.txt` via SSH; 5080: write `STOP_5080_WORKER.flag`)
+4. Seed SQL queue for real: `$env:PATOLEX_QUEUE_DSN = ...; python seed_ocr_queue.py --queue-json pipeline/sql/live_queue_snapshot.json`
+5. Start prep workers on 5090; start OCR workers on 5090 and 5080
 
 ---
 
@@ -139,3 +151,6 @@ python C:\Users\patolex\PatoLex-scratch\queue_extend_manifest.py C:\Users\patole
 - `shutil.copy2` + `tmp.replace(dest)` on UNC can fail with `OSError` if the destination is locked; always retry.
 - Always check BOTH the stale repo JSON and the live queue on the worker box — they diverge immediately after any commit.
 - Script names should be generic when the script is box-agnostic. Machine-specific names imply machine-specific behavior that isn't there.
+- For ETA projections: use a haiku subagent to get actual PyMuPDF page counts — never derive page counts from file size. File size is unreliable (varies by era, compression, DPI). One `fitz.open().page_count` call is exact.
+- Prep overhead is ~38% of per-page wall time in the coupled pipeline (render ~0.6s + preprocess ~1.0s per page vs OCR 2.83s). Treating it as negligible produces a 46% throughput overestimate. Patrick's rule of thumb ("1/3 of processing time") is confirmed accurate.
+- Always delegate investigation tasks (counting, file listing, log tailing, page counts) to haiku-worker subagents. Running them inline wastes Opus context and produces guesses instead of ground truth.

@@ -129,3 +129,7 @@
 [2026-06-03 22:25 PT] STATE | SQL cutover deferred. 3/1 JSON config confirmed running: 5090 has 3 workers (currently ~1965), 5080 has 1 worker (1959-vol2-chapters, page 1121/2812, VRAM clean). Session closed. | OK
 [2026-06-03 22:37 PT] QUEUE-EXT | Built manifest_1976_2000.json (104 entries, 1976-2000, 8.2GB) + queue_extend_manifest.py | OK
 [2026-06-03 22:37 PT] QUEUE-EXT | SCP transfer 104 PDFs (8.2GB) from 5080→5090 archive started in background | OK
+[2026-06-03 22:47 PT] QUEUE-EXT | SCP transfer complete (104/104 OK, 8.2GB). queue_extend_manifest.py: 104 appended, 0 skipped | OK
+[2026-06-03 22:47 PT] QUEUE-EXT | Live queue now 210 volumes (1862-2000), 127 pending, 79 done, 4 in_progress | OK
+[2026-06-04 06:38 PT] ETA | Corrected ETA with real PyMuPDF counts + 1/3 prep overhead: ~210k pages, 3168 p/hr, done ~Sat Jun 7 6 AM PT | OK
+[2026-06-04 06:38 PT] SESSION | Session log updated with corrections, lessons added | OK

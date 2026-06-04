@@ -97,3 +97,12 @@
 [2026-06-03 18:48 PT] PUSH | 1957-vol1-56chapters: OCR outputs pushed to 5090 | OK
 [2026-06-03 18:48 PT] RUN | 1957-vol1-56chapters: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-03 18:48 PT] RUN | 1959-vol2-chapters: START local OCR (1959_Vol2_Chapters.pdf) on 5080 | OK
+[2026-06-03 23:34 PT] PUSH | 1959-vol2-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-03 23:34 PT] RUN | 1959-vol2-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-03 23:34 PT] RUN | 1966-vol1-chapters: START local OCR (1966_Vol1_Chapters.pdf) on 5080 | OK
+[2026-06-04 00:57 PT] PUSH | 1966-vol1-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-04 00:57 PT] RUN | 1966-vol1-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 00:57 PT] RUN | 1967-vol2: START local OCR (1967_Vol2.pdf) on 5080 | OK
+[2026-06-04 03:04 PT] PUSH | 1967-vol2: OCR outputs pushed to 5090 | OK
+[2026-06-04 03:04 PT] RUN | 1967-vol2: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 03:04 PT] RUN | 1969-vol2-chapters: START local OCR (1969_Vol2_Chapters.pdf) on 5080 | OK
