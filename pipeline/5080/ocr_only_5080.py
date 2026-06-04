@@ -104,6 +104,61 @@ total_pages = doc.page_count
 log("STAGE0", f"PDF opened: {total_pages} pages", "OK")
 
 # ---------------------------------------------------------------------------
+# STAGE 0.5: Digital-native probe — PDF with native text layer skips render/OCR.
+# See ocr_only_5090.py STAGE 0.5 comment block for full design rationale.
+# Keep this block in sync with ocr_only_5090.py and pipeline/sql/ocr_only_sql.py.
+# ---------------------------------------------------------------------------
+_probe_n = min(20, total_pages)
+_probe_idx = [int(total_pages * i / _probe_n) for i in range(_probe_n)]
+_image_pages = sum(1 for i in _probe_idx if len(doc[i].get_images()) > 0)
+_avg_chars = sum(len(doc[i].get_text("text").strip()) for i in _probe_idx) / max(_probe_n, 1)
+DIGITAL_NATIVE = (_image_pages / max(_probe_n, 1)) < 0.2 and _avg_chars >= 200
+log("STAGE0-PROBE",
+    f"image_pages={_image_pages}/{_probe_n} avg_chars={_avg_chars:.0f} DIGITAL_NATIVE={DIGITAL_NATIVE}",
+    "OK")
+
+if DIGITAL_NATIVE:
+    log("BORN-DIGITAL", "PDF has native text layer -- skipping render/preprocess/OCR", "OK")
+    _body_pgs, _empty_pgs, _page_texts = [], [], {}
+    for _pidx in range(total_pages):
+        _txt = doc[_pidx].get_text("text")
+        _page_texts[_pidx] = _txt
+        (_body_pgs if len(_txt.strip()) >= 50 else _empty_pgs).append(_pidx)
+    _cls_tmp = (SCRATCH / "page_classification.json").with_suffix(".json.tmp")
+    _cls_tmp.write_text(json.dumps({
+        "body_start_idx": _body_pgs[0] if _body_pgs else 0,
+        "total_pages": total_pages,
+        "front_matter": [],
+        "body": [p + 1 for p in _body_pgs],
+        "index": [],
+        "empty": [p + 1 for p in _empty_pgs],
+        "median_body_density": 1.0,
+    }, indent=2), encoding="utf-8")
+    _cls_tmp.replace(SCRATCH / "page_classification.json")
+    doc.close()
+    _t0 = time.time()
+    _bd_results = {
+        _pidx: {
+            "page_1indexed": _pidx + 1,
+            "tess_text": "", "doctr_text": "", "surya_text": "",
+            "consensus_text": _page_texts[_pidx],
+            "agreement_ratio": 1.0,
+            "high_confidence": True,
+            "engines_used": "pdf_text_extract",
+            "seconds": 0.0,
+            "img_path": "",
+        }
+        for _pidx in _body_pgs
+    }
+    (OCR_OUT_DIR / "page_ocr_results.json").write_text(
+        json.dumps(_bd_results, indent=2), encoding="utf-8"
+    )
+    log("BORN-DIGITAL",
+        f"body={len(_body_pgs)} empty={len(_empty_pgs)} wrote {len(_bd_results)} page records "
+        f"in {time.time() - _t0:.1f}s", "OK")
+    sys.exit(0)
+
+# ---------------------------------------------------------------------------
 # STAGE 1: Render at 300 DPI (grayscale)
 # ---------------------------------------------------------------------------
 log("STAGE1-RENDER", f"Rendering {total_pages} pages at {PRODUCTION_DPI} DPI", "OK")

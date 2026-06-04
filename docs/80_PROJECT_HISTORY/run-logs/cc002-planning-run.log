@@ -133,3 +133,9 @@
 [2026-06-03 22:47 PT] QUEUE-EXT | Live queue now 210 volumes (1862-2000), 127 pending, 79 done, 4 in_progress | OK
 [2026-06-04 06:38 PT] ETA | Corrected ETA with real PyMuPDF counts + 1/3 prep overhead: ~210k pages, 3168 p/hr, done ~Sat Jun 7 6 AM PT | OK
 [2026-06-04 06:38 PT] SESSION | Session log updated with corrections, lessons added | OK
+[2026-06-04 14:00 PT] DESIGN | Born-digital hybrid: analyzed ocr_only_5090.py, parse_born_digital_prod.py, reparse.py, ingest_clean.py, consensus.py. Decision: STAGE 0.5 detection + page_ocr_results.json fast-path (reparse.py consumes consensus_text unchanged) | OK
+[2026-06-04 14:30 PT] CODE | STAGE 0.5 added to ocr_only_5090.py: dual-discriminant detection (image_ratio<0.2 AND avg_chars>=200), born-digital fast-path writes classification+ocr_results, sys.exit(0) | OK
+[2026-06-04 14:45 PT] HANS1 | Pass-1: B1 (confidence=NULL, no consensus substrate -- acknowledged, design limitation), S1 (char-count false-positive on OCR-layered scans -- fixed), S2 (S2 engine-field trap documented), S3 (TOC bleed noted) | WARN
+[2026-06-04 15:00 PT] CODE | S1 fixed: detection now image_ratio+char_count dual discriminant. S4 fixed: div-by-zero guarded. | OK
+[2026-06-04 15:15 PT] HANS2 | Pass-2: S4 found (div-by-zero, fixed), B2 found (fix missing from 5080.py + sql). Synced STAGE 0.5 to ocr_only_5080.py. ocr_only_sql.py deferred (SQL pipeline not deployed). | WARN
+[2026-06-04 15:30 PT] SESSION | Session log written: SESSION_cc002_SUMMARY_2026-06-04_Born_Digital_Hybrid.md | OK
