@@ -80,3 +80,15 @@
 [2026-06-02 08:18 PT] STAGE6-INGEST | 1875-76: enactments=285 provisions=285 change_events=285 errors=0 | OK
 [2026-06-02 08:18 PT] STAGE6-INGEST | 1875-76: DB TOTALS source_document=22 enactment=4288 provision=4288 change_event=4288 | OK
 [2026-06-02 08:18 PT] INGEST | === ingest_from_ocr.py done === | OK
+[2026-06-05 17:00 PT] QUEUE-PREP | Stage 0.5 CPU pre-processing batch queued on 5090. Next corpus=1988-1991 volumes (modern-era born-digital PDFs). Started 9 prep jobs via ocr_only_5090.py --stage prep. | OK
+[2026-06-05 17:00 PT] BATCH-1 | 1988-vol4-chapters (1988_Vol4_Chapters.pdf) started PID=5204 | OK
+[2026-06-05 17:00 PT] BATCH-1 | 1989-vol3 (1989_Vol3.pdf) started PID=48288 | OK
+[2026-06-05 17:00 PT] BATCH-1 | 1990-vol1-chapters (1990_Vol1_Chapters.pdf) started PID=41044 | OK
+[2026-06-05 17:00 PT] BATCH-2 | 1990-vol2 (1990_Vol2.pdf) started PID=19780 | OK
+[2026-06-05 17:00 PT] BATCH-2 | 1990-vol3 (1990_Vol3.pdf) started PID=48024 | OK
+[2026-06-05 17:00 PT] BATCH-2 | 1990-vol4 (1990_Vol4.pdf) started PID=41008 | OK
+[2026-06-05 17:00 PT] BATCH-3 | 1991-vol1 (1991_Vol1.pdf) started PID=20316 | OK
+[2026-06-05 17:00 PT] BATCH-3 | 1991-vol2 (1991_Vol2.pdf) started PID=30968 | OK
+[2026-06-05 17:00 PT] BATCH-4 | 1994-vol4 (1994_Vol4.pdf) 2144pp started PID=27704 | OK
+[2026-06-05 17:00 PT] BATCH-4 | 1994-vol5 (1994_Vol5.pdf) 2144pp started PID=5072 | OK
+[2026-06-05 17:00 PT] STATUS | Python=system (C-Users-patolex-AppData-Local-Programs-Python-Python312-python.exe), no surya-venv needed for prep. Total python processes=12 (3 OCR workers + 9 prep jobs). | OK

@@ -106,3 +106,49 @@
 [2026-06-04 03:04 PT] PUSH | 1967-vol2: OCR outputs pushed to 5090 | OK
 [2026-06-04 03:04 PT] RUN | 1967-vol2: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-04 03:04 PT] RUN | 1969-vol2-chapters: START local OCR (1969_Vol2_Chapters.pdf) on 5080 | OK
+[2026-06-04 07:49 PT] PUSH | 1969-vol2-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-04 07:49 PT] RUN | 1969-vol2-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 07:49 PT] RUN | 1973-vol2-chapters: START local OCR (1973_Vol2_Chapters.pdf) on 5080 | OK
+[2026-06-04 10:39 PT] PUSH | 1973-vol2-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-04 10:39 PT] RUN | 1973-vol2-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 10:39 PT] RUN | 1976-vol1-chapters: START local OCR (1976_Vol1_Chapters.pdf) on 5080 | OK
+[2026-06-04 14:35 PT] PUSH | 1976-vol1-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-04 14:35 PT] RUN | 1976-vol1-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 14:35 PT] RUN | 1978-vol1-chapters: START local OCR (1978_Vol1_Chapters.pdf) on 5080 | OK
+[2026-06-04 16:33 PT] PUSH | 1978-vol1-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-04 16:33 PT] RUN | 1978-vol1-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 16:33 PT] RUN | 1979-vol2: START local OCR (1979_Vol2.pdf) on 5080 | OK
+[2026-06-04 18:25 PT] PUSH | 1979-vol2: OCR outputs pushed to 5090 | OK
+[2026-06-04 18:25 PT] RUN | 1979-vol2: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 18:25 PT] RUN | 1980-vol3: START local OCR (1980_Vol3.pdf) on 5080 | OK
+[2026-06-04 21:53 PT] PUSH | 1980-vol3: OCR outputs pushed to 5090 | OK
+[2026-06-04 21:53 PT] RUN | 1980-vol3: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-04 21:53 PT] RUN | 1982-vol3: START local OCR (1982_Vol3.pdf) on 5080 | OK
+[2026-06-05 00:59 PT] PUSH | 1982-vol3: OCR outputs pushed to 5090 | OK
+[2026-06-05 00:59 PT] RUN | 1982-vol3: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 00:59 PT] RUN | 1984-vol1-chapters: START local OCR (1984_Vol1_Chapters.pdf) on 5080 | OK
+[2026-06-05 04:42 PT] PUSH | 1984-vol1-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-05 04:43 PT] RUN | 1984-vol1-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 04:43 PT] RUN | 1986-vol3: START local OCR (1986_Vol3.pdf) on 5080 | OK
+[2026-06-05 06:37 PT] PUSH | 1986-vol3: OCR outputs pushed to 5090 | OK
+[2026-06-05 06:37 PT] RUN | 1986-vol3: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 06:37 PT] RUN | 1987-vol3: START local OCR (1987_Vol3.pdf) on 5080 | OK
+
+[2026-06-05 09:45 PT] TEST | STAGE 0.5 mojibake detection quality check | OK
+[2026-06-05 09:45 PT] FINDING | 1996-1999 Chief Clerk PDFs: MIXED fallback behavior detected
+[2026-06-05 09:45 PT] DETAIL | 1996_Vol2: ctrl_ratio=0.471 (>0.20 threshold) -> FALLBACK TRIGGERED
+[2026-06-05 09:45 PT] DETAIL | 1997_Vol1: ctrl_ratio=0.000 (<0.20 threshold) -> FALLBACK NOT TRIGGERED (mojibake present)
+[2026-06-05 09:45 PT] DETAIL | 1997_Vol2: ctrl_ratio=0.576 (>0.20 threshold) -> FALLBACK TRIGGERED
+[2026-06-05 09:45 PT] DETAIL | 1998_Vol1: ctrl_ratio=0.000 (<0.20 threshold) -> FALLBACK NOT TRIGGERED (mojibake present)
+[2026-06-05 09:45 PT] DETAIL | 1998_Vol2: ctrl_ratio=0.480 (>0.20 threshold) -> FALLBACK TRIGGERED
+[2026-06-05 09:45 PT] DETAIL | 1999_Vol1: ctrl_ratio=0.000 (<0.20 threshold) -> FALLBACK NOT TRIGGERED (mojibake present)
+[2026-06-05 09:45 PT] WARN | STAGE 0.5 quality check is INSUFFICIENT: control-char ratio misses mojibake-only files (1997_Vol1, 1998_Vol1, 1999_Vol1) where non_ascii_ratio is only 0.003-0.004
+[2026-06-05 09:45 PT] RECOMMENDATION | Use YEAR-BASED CUTOFF (<=1999) instead of ctrl_ratio heuristic for born-digital fallback determination
+[2026-06-05 10:15 PT] FIX | cc003: Added _vol_year >= 2000 to DIGITAL_NATIVE condition in ocr_only_5090.py + ocr_only_5080.py | OK
+[2026-06-05 10:15 PT] DEPLOY | cc003: ocr_only_5090.py SCP'd to 5090 scratch + verified (vol_year match confirmed) | OK
+[2026-06-05 10:15 PT] DEPLOY | cc003: ocr_only_5080.py copied to 5080 scratch + verified (vol_year match confirmed) | OK
+[2026-06-05 10:20 PT] ACQUIRE | cc003: leginfo PUBINFO 2017/2019/2021/2023 download resumed (resume_leginfo_pubinfo.py, 600s timeout, PID 53044) | OK
+[2026-06-05 10:20 PT] STATUS | Workers: 5090 in 1988 (3 OCR workers, 74% CPU), 5080 in 1987 (1 OCR + prep jobs) | OK
+[2026-06-05 08:42 PT] PUSH | 1987-vol3: OCR outputs pushed to 5090 | OK
+[2026-06-05 08:42 PT] RUN | 1987-vol3: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 08:42 PT] RUN | 1988-vol4-chapters: START local OCR (1988_Vol4_Chapters.pdf) on 5080 | OK

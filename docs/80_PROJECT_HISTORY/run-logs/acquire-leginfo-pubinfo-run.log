@@ -1,0 +1,48 @@
+[2026-06-05 07:53 PT] INIT | acquire_leginfo_pubinfo.py starting | OK
+[2026-06-05 07:53 PT] INIT | Scratch dir: C:\Users\PatrickKolasinski\PatoLex-scratch | OK
+[2026-06-05 07:53 PT] INIT | Target years: 14 (1991, 1995, 1997, 1999, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019, 2021, 2023) | OK
+[2026-06-05 07:53 PT] DOWNLOAD | Fetching pubinfo_1991.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_1991.zip | OK
+[2026-06-05 07:53 PT] DOWNLOAD | pubinfo_1991.zip downloaded: 13.8 MB | OK
+[2026-06-05 07:53 PT] EXTRACT | Extracting pubinfo_1991.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_1991 | OK
+[2026-06-05 07:53 PT] EXTRACT | pubinfo_1991 extracted successfully | OK
+[2026-06-05 07:53 PT] DOWNLOAD | Fetching pubinfo_1995.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_1995.zip | OK
+[2026-06-05 07:53 PT] DOWNLOAD | pubinfo_1995.zip downloaded: 82.5 MB | OK
+[2026-06-05 07:53 PT] EXTRACT | Extracting pubinfo_1995.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_1995 | OK
+[2026-06-05 07:53 PT] EXTRACT | pubinfo_1995 extracted successfully | OK
+[2026-06-05 07:53 PT] DOWNLOAD | Fetching pubinfo_1997.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_1997.zip | OK
+[2026-06-05 07:54 PT] DOWNLOAD | pubinfo_1997.zip downloaded: 87.1 MB | OK
+[2026-06-05 07:54 PT] EXTRACT | Extracting pubinfo_1997.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_1997 | OK
+[2026-06-05 07:54 PT] EXTRACT | pubinfo_1997 extracted successfully | OK
+[2026-06-05 07:54 PT] DOWNLOAD | Fetching pubinfo_1999.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_1999.zip | OK
+[2026-06-05 07:55 PT] DOWNLOAD | pubinfo_1999.zip downloaded: 220.9 MB | OK
+[2026-06-05 07:55 PT] EXTRACT | Extracting pubinfo_1999.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_1999 | OK
+[2026-06-05 07:55 PT] EXTRACT | pubinfo_1999 extracted successfully | OK
+[2026-06-05 07:55 PT] DOWNLOAD | Fetching pubinfo_2005.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_2005.zip | OK
+[2026-06-05 07:56 PT] DOWNLOAD | pubinfo_2005.zip downloaded: 212.1 MB | OK
+[2026-06-05 07:56 PT] EXTRACT | Extracting pubinfo_2005.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_2005 | OK
+[2026-06-05 07:57 PT] EXTRACT | pubinfo_2005 extracted successfully | OK
+[2026-06-05 07:57 PT] DOWNLOAD | Fetching pubinfo_2007.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_2007.zip | OK
+[2026-06-05 08:04 PT] DOWNLOAD | pubinfo_2007.zip downloaded: 339.5 MB | OK
+[2026-06-05 08:04 PT] EXTRACT | Extracting pubinfo_2007.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_2007 | OK
+[2026-06-05 08:05 PT] EXTRACT | pubinfo_2007 extracted successfully | OK
+[2026-06-05 08:05 PT] DOWNLOAD | Fetching pubinfo_2009.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_2009.zip | OK
+[2026-06-05 08:12 PT] DOWNLOAD | pubinfo_2009.zip downloaded: 339.1 MB | OK
+[2026-06-05 08:12 PT] EXTRACT | Extracting pubinfo_2009.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_2009 | OK
+[2026-06-05 08:12 PT] EXTRACT | pubinfo_2009 extracted successfully | OK
+[2026-06-05 08:12 PT] DOWNLOAD | Fetching pubinfo_2011.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_2011.zip | OK
+[2026-06-05 08:18 PT] DOWNLOAD | pubinfo_2011.zip downloaded: 487.7 MB | OK
+[2026-06-05 08:18 PT] EXTRACT | Extracting pubinfo_2011.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_2011 | OK
+[2026-06-05 08:19 PT] EXTRACT | pubinfo_2011 extracted successfully | OK
+[2026-06-05 08:19 PT] DOWNLOAD | Fetching pubinfo_2013.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_2013.zip | OK
+[2026-06-05 08:24 PT] DOWNLOAD | pubinfo_2013.zip downloaded: 491.0 MB | OK
+[2026-06-05 08:24 PT] EXTRACT | Extracting pubinfo_2013.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_2013 | OK
+[2026-06-05 08:26 PT] EXTRACT | pubinfo_2013 extracted successfully | OK
+[2026-06-05 08:26 PT] DOWNLOAD | Fetching pubinfo_2015.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_2015.zip | OK
+[2026-06-05 08:31 PT] DOWNLOAD | pubinfo_2015.zip downloaded: 861.8 MB | OK
+[2026-06-05 08:31 PT] EXTRACT | Extracting pubinfo_2015.zip to C:\Users\PatrickKolasinski\PatoLex-scratch\pubinfo_2015 | OK
+[2026-06-05 08:33 PT] EXTRACT | pubinfo_2015 extracted successfully | OK
+[2026-06-05 08:33 PT] DOWNLOAD | Fetching pubinfo_2017.zip from https://downloads.leginfo.legislature.ca.gov/pubinfo_2017.zip | OK
+[2026-06-05 08:39 PT] RESUME | Process 44168 hung on 2017 download (zero-byte zip, 600s timeout insufficient) | WARN
+[2026-06-05 08:40 PT] RESUME | Killed stalled process 44168, cleaned up partial pubinfo_2017.zip | OK
+[2026-06-05 08:40 PT] RESUME | Started resume_leginfo_pubinfo.py (PID 53044) with 600s timeout for years 2017, 2019, 2021, 2023 | OK
+[2026-06-05 08:40 PT] MONITOR | Download in progress -- monitor: C:\Users\PatrickKolasinski\PatoLex-scratch\leginfo-resume-run.log | OK

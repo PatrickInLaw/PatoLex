@@ -236,3 +236,6 @@
 [2026-06-02 09:14 PT] INGEST-COMMIT | 1875-76: purged(prior_enactments)=285 inserted=285 | scan_quality=fair cer=0.0241 | volume REPLACED atomically (single txn, purge+reinsert) | OK
 [2026-06-02 09:14 PT] INGEST-CONSENSUS | 1875-76: banked consensus_output.json (1017 pages, low_conf_threshold=1.0) | OK
 [2026-06-02 09:14 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 07:38 PT] INGEST | === ingest_clean.py DRY-RUN: smoke-real-1998-vol1 === | OK
+[2026-06-05 07:38 PT] INGEST-DRYRUN | smoke-real-1998-vol1: parsed_acts_fixed.json not found at C:\Users\PatrickKolasinski\PatoLex-scratch\production-smoke-real-1998-vol1\parsed_acts_fixed.json | WARN
+[2026-06-05 07:38 PT] INGEST | === ingest_clean.py DRY-RUN done === | OK

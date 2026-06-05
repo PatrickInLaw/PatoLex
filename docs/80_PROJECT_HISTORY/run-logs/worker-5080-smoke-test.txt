@@ -1,0 +1,94 @@
+SMOKE TEST: Born-Digital PDF Fast-Path (STAGE 0.5)
+=====================================================
+
+DATE: 2026-06-05
+TEST VOLUME: 1996_Vol2.pdf (6.4 MB, 1888 pages)
+OBJECTIVE: Verify STAGE 0.5 detects born-digital PDFs and extracts text correctly
+
+STEP 1: STAGE 0.5 DETECTION
+---------------------------
+Result: PASSED
+- DIGITAL_NATIVE=True correctly detected (0/20 image pages, avg_chars=2642)
+- Fast-path fired as expected
+- Execution time: 0.1s (1872 pages extracted in 0.1 seconds)
+- Output: page_ocr_results.json written with 1872 body pages
+
+STEP 2: OUTPUT STRUCTURE CHECK
+------------------------------
+Result: PARTIAL FAILURE
+- consensus_text field populated (pages 0-1: OK)
+- agreement_ratio=1.0 (correct for pdf_text_extract)
+- engines_used="pdf_text_extract" (correct)
+- tess_text, doctr_text, surya_text all empty strings (correct)
+
+CRITICAL: Pages 2+ show CORRUPTED TEXT
+  Sample page 10: control characters instead of readable text
+  Sample page 20: same garbage pattern
+  
+ROOT CAUSE: PDF uses font "PSOwstdutch" (custom/embedded)
+  fitz.get_text() cannot decode this font correctly
+
+STEP 3: REPARSE.PY TEST
+-----------------------
+Result: FAILED (0 acts found)
+- Parser looked for CHAPTER headers (1850-1860 pattern)
+- 1996 born-digital has ZERO "CHAPTER" keywords
+- Parser format mismatch: expects 1850-1860, got 1996 format
+
+CRITICAL BLOCKERS FOR BORN-DIGITAL TRANSITION
+==============================================
+
+BLOCKER-1: Text Extraction Encoding (SEVERITY: CRITICAL)
+  Problem: Custom fonts (PSOwstdutch) cause fitz to decode to control chars
+  Impact: consensus_text is corrupted for 1996_Vol2-like PDFs
+  Solution: Garbage-detection after extraction
+           - If >20% control chars, fall back to DIGITAL_NATIVE=False
+           - Trigger OCR path instead
+
+BLOCKER-2: Parser Format Mismatch (SEVERITY: CRITICAL)
+  Problem: reparse.py only understands 1850-1860 CHAPTER format
+           1996 uses completely different chapter structure
+  Impact: 0 acts parsed even if text were clean
+  Solution: Analyze 1996 format (likely AB/SB bill numbers)
+           Extend parser to handle modern format
+
+BLOCKER-3: Confidence Aggregation (SEVERITY: MEDIUM)
+  Problem: ingest_clean.py skips born-digital pages (empty OCR fields)
+           Acts get confidence=NULL (honest but inconsistent)
+  Solution: Extend consensus.py to handle pdf_text_extract field
+
+RECOMMENDATIONS (Priority Order)
+================================
+
+1. BLOCKER: Add garbage-detection to ocr_only_5080.py STAGE 0.5
+   - After extraction, scan text for control chars
+   - If >20%, set DIGITAL_NATIVE=False -> OCR path
+   - Risk: LOW, Value: HIGH
+
+2. BLOCKER: Analyze 1996 format and extend parser
+   - Manually inspect 1996_Vol2 chapters
+   - Identify chapter header pattern
+   - Add parser logic for modern format
+
+3. MEDIUM: Fix ingest_clean.py/consensus.py for born-digital
+   - Accept pdf_text_extract field in consensus logic
+   - Compute reasonable page_confidence
+
+CONCLUSION
+==========
+
+DIGITAL_NATIVE detection (STAGE 0.5) works correctly for distinguishing
+born-digital from image PDFs. However, two downstream components need fixes:
+
+1. Text extraction handles custom fonts poorly (not a Stage 0.5 issue,
+   but a fitz limitation we must work around)
+   
+2. The parser was written for 1850-1860 statute format, not 1996+
+   (expected, requires new code)
+
+The born-digital pipeline CAN work, but requires:
+- Garbage detection + OCR fallback
+- Parser extension for modern formats
+- Confidence handling for extracted text
+
+Current status: READY FOR TESTING after fixes above.

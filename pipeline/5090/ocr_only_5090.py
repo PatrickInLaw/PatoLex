@@ -106,7 +106,7 @@ total_pages = doc.page_count
 log("STAGE0", f"PDF opened: {total_pages} pages", "OK")
 
 # ---------------------------------------------------------------------------
-# STAGE 0.5: Digital-native probe — PDF with native text layer skips render/OCR.
+# STAGE 0.5: Digital-native probe â€” PDF with native text layer skips render/OCR.
 # Uses TWO discriminants to avoid false-positives on scanned PDFs that carry an
 # embedded OCR text layer (HathiTrust/IA JP2 derivatives routinely do):
 #   1. image_ratio: fraction of sampled pages with embedded images.  Scanned PDFs
@@ -117,16 +117,21 @@ log("STAGE0", f"PDF opened: {total_pages} pages", "OK")
 # NOTE (B1): born-digital pages write consensus_text=PDF-text with empty engine
 # fields. ingest_clean.py's consensus builder reads only the engine fields, so
 # these acts ingest with confidence=NULL and no banked consensus_output.json.
-# This is a known limitation for Phase C review — born-digital text is inherently
+# This is a known limitation for Phase C review â€” born-digital text is inherently
 # trustworthy, so NULL confidence is conservative/safe (not dangerously optimistic).
 # ---------------------------------------------------------------------------
 _probe_n = min(20, total_pages)
 _probe_idx = [int(total_pages * i / _probe_n) for i in range(_probe_n)]
 _image_pages = sum(1 for i in _probe_idx if len(doc[i].get_images()) > 0)
 _avg_chars = sum(len(doc[i].get_text("text").strip()) for i in _probe_idx) / max(_probe_n, 1)
-DIGITAL_NATIVE = (_image_pages / max(_probe_n, 1)) < 0.2 and _avg_chars >= 200
+# Year-based cutoff: 1997-1999 Chief Clerk PDFs have broken CMap fonts that
+# produce printable mojibake (ctrl_ratio ~0.0, not caught by the quality check).
+# Born-digital extraction is only valid for 2000+. See MODERN_STATUTE_FORMAT doc.
+_vol_year_m = re.match(r'(\d{4})', PDF_PATH.stem)
+_vol_year = int(_vol_year_m.group(1)) if _vol_year_m else 9999
+DIGITAL_NATIVE = (_image_pages / max(_probe_n, 1)) < 0.2 and _avg_chars >= 200 and _vol_year >= 2000
 log("STAGE0-PROBE",
-    f"image_pages={_image_pages}/{_probe_n} avg_chars={_avg_chars:.0f} DIGITAL_NATIVE={DIGITAL_NATIVE}",
+    f"image_pages={_image_pages}/{_probe_n} avg_chars={_avg_chars:.0f} vol_year={_vol_year} DIGITAL_NATIVE={DIGITAL_NATIVE}",
     "OK")
 
 if DIGITAL_NATIVE:
@@ -136,41 +141,58 @@ if DIGITAL_NATIVE:
         _txt = doc[_pidx].get_text("text")
         _page_texts[_pidx] = _txt
         (_body_pgs if len(_txt.strip()) >= 50 else _empty_pgs).append(_pidx)
-    _cls_tmp = (SCRATCH / "page_classification.json").with_suffix(".json.tmp")
-    _cls_tmp.write_text(json.dumps({
-        "body_start_idx": _body_pgs[0] if _body_pgs else 0,
-        "total_pages": total_pages,
-        "front_matter": [],
-        "body": [p + 1 for p in _body_pgs],
-        "index": [],
-        "empty": [p + 1 for p in _empty_pgs],
-        "median_body_density": 1.0,
-    }, indent=2), encoding="utf-8")
-    _cls_tmp.replace(SCRATCH / "page_classification.json")
-    log("BORN-DIGITAL", f"body={len(_body_pgs)} empty={len(_empty_pgs)} classified", "OK")
-    doc.close()
-    if STAGE == "prep":
-        log("PREP-DONE", "Born-digital prep complete -- exiting before OCR", "OK")
-        sys.exit(0)
-    _t0 = time.time()
-    _bd_results = {
-        _pidx: {
-            "page_1indexed": _pidx + 1,
-            "tess_text": "", "doctr_text": "", "surya_text": "",
-            "consensus_text": _page_texts[_pidx],
-            "agreement_ratio": 1.0,
-            "high_confidence": True,
-            "engines_used": "pdf_text_extract",
-            "seconds": 0.0,
-            "img_path": "",
+
+    # --- BLOCKER 1 FIX: Font-corruption quality check ---
+    # After extracting text layer, sample first few body pages and check for
+    # control characters (indicator of corrupt/garbled text layer like PSOwstdutch).
+    # If >20% are control chars, text layer is unusable -- fall back to OCR path.
+    _sample_pages = list(_body_pgs)[:min(5, len(_body_pgs))]
+    _sample_text = "".join(_page_texts[p] for p in _sample_pages)
+    _ctrl_chars = sum(1 for c in _sample_text if ord(c) < 32 and c not in '\n\t\r')
+    _ctrl_ratio = _ctrl_chars / max(len(_sample_text), 1)
+    if _ctrl_ratio > 0.20:
+        log("BORN-DIGITAL", f"Text layer corrupt (ctrl_ratio={_ctrl_ratio:.2f}) -- falling back to OCR path", "WARN")
+        DIGITAL_NATIVE = False
+        doc.close()
+        # Re-open doc and continue to normal render/OCR flow below
+        doc = fitz.open(str(PDF_PATH))
+    else:
+        # Text layer is clean, proceed with born-digital path
+        _cls_tmp = (SCRATCH / "page_classification.json").with_suffix(".json.tmp")
+        _cls_tmp.write_text(json.dumps({
+            "body_start_idx": _body_pgs[0] if _body_pgs else 0,
+            "total_pages": total_pages,
+            "front_matter": [],
+            "body": [p + 1 for p in _body_pgs],
+            "index": [],
+            "empty": [p + 1 for p in _empty_pgs],
+            "median_body_density": 1.0,
+        }, indent=2), encoding="utf-8")
+        _cls_tmp.replace(SCRATCH / "page_classification.json")
+        log("BORN-DIGITAL", f"body={len(_body_pgs)} empty={len(_empty_pgs)} classified", "OK")
+        doc.close()
+        if STAGE == "prep":
+            log("PREP-DONE", "Born-digital prep complete -- exiting before OCR", "OK")
+            sys.exit(0)
+        _t0 = time.time()
+        _bd_results = {
+            _pidx: {
+                "page_1indexed": _pidx + 1,
+                "tess_text": "", "doctr_text": "", "surya_text": "",
+                "consensus_text": _page_texts[_pidx],
+                "agreement_ratio": 1.0,
+                "high_confidence": True,
+                "engines_used": "pdf_text_extract",
+                "seconds": 0.0,
+                "img_path": "",
+            }
+            for _pidx in _body_pgs
         }
-        for _pidx in _body_pgs
-    }
-    (OCR_OUT_DIR / "page_ocr_results.json").write_text(
-        json.dumps(_bd_results, indent=2), encoding="utf-8"
-    )
-    log("BORN-DIGITAL", f"Wrote {len(_bd_results)} page records in {time.time() - _t0:.1f}s", "OK")
-    sys.exit(0)
+        (OCR_OUT_DIR / "page_ocr_results.json").write_text(
+            json.dumps(_bd_results, indent=2), encoding="utf-8"
+        )
+        log("BORN-DIGITAL", f"Wrote {len(_bd_results)} page records in {time.time() - _t0:.1f}s", "OK")
+        sys.exit(0)
 
 # ---------------------------------------------------------------------------
 # STAGE 1: Render at 300 DPI (grayscale)
