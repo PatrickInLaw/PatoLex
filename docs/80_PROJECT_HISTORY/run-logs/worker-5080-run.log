@@ -152,3 +152,43 @@
 [2026-06-05 08:42 PT] PUSH | 1987-vol3: OCR outputs pushed to 5090 | OK
 [2026-06-05 08:42 PT] RUN | 1987-vol3: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-05 08:42 PT] RUN | 1988-vol4-chapters: START local OCR (1988_Vol4_Chapters.pdf) on 5080 | OK
+[2026-06-05 09:15 PT] BORN_DIGITAL_SMOKE_TEST | Full parse chain (parse + prep) on 2000_Vol1 completed successfully | OK
+  Parse: 1752 pages, 71 chapters (71 confident), 4.7s
+  Prep: 71/71 acts included (0 filtered)
+  Output: C:/Users/PatrickKolasinski/PatoLex-scratch/production-2000_Vol1/parsed_acts_fixed.json
+  Status: End-to-end working, ingest_clean.py NOT run per scope
+[2026-06-05 09:35 PT] PUSH | 1988-vol4-chapters: OCR outputs pushed to 5090 | OK
+[2026-06-05 09:35 PT] RUN | 1988-vol4-chapters: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 09:35 PT] RUN | 1989-vol2: START local OCR (1989_Vol2.pdf) on 5080 | OK
+
+[2026-06-05 09:39 PT] GATE-F-SMOKE-TEST | URL-decode href regex fix validation | OK
+  - Parser executed successfully on 2005 pubinfo sample
+  - Total output: 8206 section action records
+  - All records have code_id populated (8206/8206)
+  - All records have section_num populated (8206/8206)
+  - Sample: CCP 1245.245 (add), CCP 1263.510 (amend), CCP 1263.615 (add)
+  - No errors or warnings in stderr
+  - Fixed: Unicode arrow character in print statement for Windows stdout compatibility
+
+[2026-06-05 (cc004) PT] GATE-F-ALL-YEARS | Full extraction run on all 14 pubinfo dirs | OK
+  - Initial run: 1991/1995/1997/1999 produced 0 actions -- xlink:label absent in pre-2005 format
+  - Root cause: label filter `if 'LAW_SECTION' not in label.upper()` filtered all sections when label=''
+  - Fix: changed to `if label and 'LAW_SECTION' not in label.upper()` (skip filter when label absent)
+  - After fix -- all 14 years working:
+    1991: 12,256 | 1995: 12,989 | 1997: 11,736 | 1999: 11,736
+    2005:  8,206 | 2007:  7,445 | 2009:  8,603 | 2011: 11,268
+    2013:  9,501 | 2015:  9,290 | 2017:  9,265 | 2019:  7,023
+    2021: 11,286 | 2023:  8,607
+  - Grand total: ~139,211 section actions
+  - Output: C:\Users\PatrickKolasinski\PatoLex-scratch\gate_f_out\ (14 JSONL files)
+
+[2026-06-05 (cc004) PT] SCRIPTS-COMPLETE | New pipeline scripts written and tested | OK
+  - pipeline/gate_f/ingest_gate_f.py: Gate F DB ingest (psycopg3, dry-run + commit)
+  - pipeline/register_source_document.py: fills source_document registration gap
+  - Both scripts use psycopg (v3) matching installed library
+
+[2026-06-05 (cc004) PT] DB-CONNECTIVITY | Supabase host IPv6-only, Python psycopg cannot resolve | WARN
+  - db.nqigiiyurwlmruexircz.supabase.co has AAAA record only (no A record)
+  - Python getaddrinfo fails: [Errno 11004] -- Windows machine IPv6 routing issue
+  - DB INGEST NOT YET RUN -- scripts are ready, awaiting DB connectivity fix
+  - To fix: either enable IPv6 routing on this machine OR update DATABASE_URL to Supabase pooler.supabase.com endpoint

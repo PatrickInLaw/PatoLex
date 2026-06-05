@@ -232,10 +232,12 @@ def parse_lob(lob_path, bill_version_id, action_date_str, urgency_str):
 
         for action_line in action_lines:
             # Only process LAW_SECTION actions (not STATUTE, UNCODIFIED, etc.)
+            # Pre-2005 archives lack the xlink:label attribute entirely; when
+            # absent we skip this filter and let _parse_href() be the gate.
             label = action_line.get(
                 '{http://www.w3.org/1999/xlink}label', ''
             ) or action_line.get('label', '')
-            if 'LAW_SECTION' not in label.upper():
+            if label and 'LAW_SECTION' not in label.upper():
                 continue
 
             action_attr = action_line.get('action', '')

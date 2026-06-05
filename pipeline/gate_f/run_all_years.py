@@ -42,7 +42,7 @@ def main():
 
     print(f"Found {len(candidates)} pubinfo directories: "
           f"{', '.join(d.name for d in candidates)}")
-    print(f"Output → {out_dir}\n")
+    print(f"Output -> {out_dir}\n")
 
     total_actions = 0
     errors = []

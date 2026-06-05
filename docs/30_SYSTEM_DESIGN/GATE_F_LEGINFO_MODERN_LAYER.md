@@ -145,3 +145,37 @@ Once Gate F structural extraction is implemented:
 - Overlapping range with Tier (a) OCR (1976–~1996) provides cross-validation opportunity
 
 Gate F does NOT block the 1850–1996 OCR campaign currently underway. It should be implemented in parallel once the OCR workers clear 2000.
+
+---
+
+## Implementation Status (cc004, 2026-06-05)
+
+### Extraction: COMPLETE
+`parse_bill_versions.py` + `run_all_years.py` are working. Full extraction run on all 14 available pubinfo years produced **139,211 section actions** total:
+
+| Year | Actions | Year | Actions |
+|------|---------|------|---------|
+| 1991 | 12,256 | 2011 | 11,268 |
+| 1995 | 12,989 | 2013 | 9,501 |
+| 1997 | 11,736 | 2015 | 9,290 |
+| 1999 | 11,736 | 2017 | 9,265 |
+| 2005 | 8,206 | 2019 | 7,023 |
+| 2007 | 7,445 | 2021 | 11,286 |
+| 2009 | 8,603 | 2023 | 8,607 |
+
+Output location: `C:\Users\PatrickKolasinski\PatoLex-scratch\gate_f_out\gate_f_YYYY_actions.jsonl`
+
+### Pre-2005 Format Difference (RESOLVED)
+The 1991–1999 PUBINFO archives use an earlier CAML XML format where `<caml:ActionLine>` elements **do not have the `xlink:label` attribute**. The 2005+ format has `xlink:label="fractionType: LAW_SECTION"`. The parser initially filtered out all 1991–1999 sections because `label.upper()` of an empty string doesn't contain "LAW_SECTION".
+
+**Fix** (`parse_bill_versions.py`): changed `if 'LAW_SECTION' not in label.upper()` to `if label and 'LAW_SECTION' not in label.upper()`. When `label` is absent/empty, the filter is skipped and the href parsing alone determines validity.
+
+The href format is identical across all years — URL-encoded XPointer (`urn:caml:codes:VEH:caml#xpointer(%2F%2F...)`) — so no second code path was needed.
+
+### Ingest: READY (DB connectivity required)
+`ingest_gate_f.py` is written and ready. To ingest all extracted data:
+```powershell
+$env:DATABASE_URL = "<direct-url-from-secrets>"
+python pipeline\gate_f\ingest_gate_f.py C:\Users\PatrickKolasinski\PatoLex-scratch\gate_f_out --commit
+```
+DB connectivity from the local machine currently fails due to IPv6-only DNS resolution for `db.nqigiiyurwlmruexircz.supabase.co`. Fix: update `DATABASE_URL` to use the Supabase `*.pooler.supabase.com` endpoint (which has IPv4).
