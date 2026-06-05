@@ -123,6 +123,7 @@ python pipeline\ingest_clean.py <label> --commit
 |---|---|
 | `pipeline/gate_f/ingest_gate_f.py` | NEW — Gate F DB ingest script |
 | `pipeline/register_source_document.py` | NEW — source_document registration |
+| `pipeline/batch_ingest_born_digital.py` | NEW — batch runner for 2000-2008 Chief Clerk PDFs |
 | `pipeline/gate_f/parse_bill_versions.py` | label filter fix for pre-2005 archives |
 | `pipeline/gate_f/run_all_years.py` | Unicode arrow fix for Windows |
 | `docs/30_SYSTEM_DESIGN/GATE_F_LEGINFO_MODERN_LAYER.md` | Implementation status + format finding |
