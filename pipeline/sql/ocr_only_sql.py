@@ -314,6 +314,118 @@ if STAGE in ("prep", "all"):
     total_pages = doc.page_count
     log("STAGE0", f"PDF opened: {total_pages} pages", "OK")
 
+    # ---------------------------------------------------------------------------
+    # STAGE 0.5: Digital-native probe -- same logic as ocr_only_5090.py / 5080.py.
+    # SQL additions: writes PREP_COMPLETE marker (required for the --stage ocr
+    # barrier); for --stage all, publishes to outbox inline (no GPU needed).
+    # Keep in sync with ocr_only_5090.py, ocr_only_5080.py.
+    # ---------------------------------------------------------------------------
+    _probe_n = min(20, total_pages)
+    _probe_idx = [int(total_pages * i / _probe_n) for i in range(_probe_n)]
+    _image_pages = sum(1 for i in _probe_idx if len(doc[i].get_images()) > 0)
+    _avg_chars = sum(len(doc[i].get_text("text").strip()) for i in _probe_idx) / max(_probe_n, 1)
+    _vol_year_m = re.match(r'(\d{4})', PDF_PATH.stem)
+    _vol_year = int(_vol_year_m.group(1)) if _vol_year_m else 9999
+    DIGITAL_NATIVE = (_image_pages / max(_probe_n, 1)) < 0.2 and _avg_chars >= 200 and _vol_year >= 2000
+    log("STAGE0-PROBE",
+        f"image_pages={_image_pages}/{_probe_n} avg_chars={_avg_chars:.0f} vol_year={_vol_year} DIGITAL_NATIVE={DIGITAL_NATIVE}",
+        "OK")
+
+    if DIGITAL_NATIVE:
+        log("BORN-DIGITAL", "PDF has native text layer -- skipping render/preprocess/OCR", "OK")
+        _body_pgs, _empty_pgs, _page_texts = [], [], {}
+        for _pidx in range(total_pages):
+            _txt = doc[_pidx].get_text("text")
+            _page_texts[_pidx] = _txt
+            (_body_pgs if len(_txt.strip()) >= 50 else _empty_pgs).append(_pidx)
+
+        _sample_pages = list(_body_pgs)[:min(5, len(_body_pgs))]
+        _sample_text = "".join(_page_texts[p] for p in _sample_pages)
+        _ctrl_chars = sum(1 for c in _sample_text if ord(c) < 32 and c not in '\n\t\r')
+        _ctrl_ratio = _ctrl_chars / max(len(_sample_text), 1)
+        if _ctrl_ratio > 0.20:
+            log("BORN-DIGITAL", f"Text layer corrupt (ctrl_ratio={_ctrl_ratio:.2f}) -- falling back to OCR path", "WARN")
+            DIGITAL_NATIVE = False
+            doc.close()
+            doc = fitz.open(str(PDF_PATH))
+        else:
+            _cls_tmp = (SCRATCH / "page_classification.json").with_suffix(".json.tmp")
+            _cls_tmp.write_text(json.dumps({
+                "body_start_idx": _body_pgs[0] if _body_pgs else 0,
+                "total_pages": total_pages,
+                "front_matter": [],
+                "body": [p + 1 for p in _body_pgs],
+                "index": [],
+                "empty": [p + 1 for p in _empty_pgs],
+                "median_body_density": 1.0,
+                "born_digital": True,
+            }, indent=2), encoding="utf-8")
+            _cls_tmp.replace(SCRATCH / "page_classification.json")
+            log("BORN-DIGITAL", f"body={len(_body_pgs)} empty={len(_empty_pgs)} classified", "OK")
+
+            _prep_tmp = PREP_MARKER.with_suffix(".tmp")
+            _prep_tmp.write_text(datetime.datetime.utcnow().isoformat(), encoding="utf-8")
+            _prep_tmp.replace(PREP_MARKER)
+
+            OCR_OUT_DIR.mkdir(parents=True, exist_ok=True)
+            _bd_ocr_path = OCR_OUT_DIR / "page_ocr_results.json"
+            _t0 = time.time()
+            _bd_results = {
+                _pidx: {
+                    "page_1indexed": _pidx + 1,
+                    "tess_text": "", "doctr_text": "", "surya_text": "",
+                    "consensus_text": _page_texts[_pidx],
+                    "agreement_ratio": 1.0,
+                    "high_confidence": True,
+                    "engines_used": "pdf_text_extract",
+                    "seconds": 0.0,
+                    "img_path": "",
+                }
+                for _pidx in _body_pgs
+            }
+            _bd_ocr_path.write_text(json.dumps(_bd_results, indent=2), encoding="utf-8")
+            doc.close()
+            log("BORN-DIGITAL",
+                f"body={len(_body_pgs)} empty={len(_empty_pgs)} wrote {len(_bd_results)} page records "
+                f"in {time.time() - _t0:.1f}s", "OK")
+
+            if STAGE == "prep":
+                log("PREP-DONE", "Born-digital prep complete -- exiting before OCR", "OK")
+                sys.exit(0)
+
+            # STAGE=="all": publish to outbox inline (no GPU touch needed)
+            OUTBOX_VOL.mkdir(parents=True, exist_ok=True)
+            _bd_fail = False
+            for _src, _dname in [(_bd_ocr_path, "page_ocr_results.json"),
+                                  (SCRATCH / "page_classification.json", "page_classification.json")]:
+                _dest = OUTBOX_VOL / _dname
+                _tmp = _dest.with_suffix(".tmp")
+                _ok = False
+                for _r in range(3):
+                    try:
+                        shutil.copy2(str(_src), str(_tmp))
+                        _tmp.replace(_dest)
+                        log("OUTBOX", f"published {_dname} -> {_dest}", "OK")
+                        _ok = True
+                        break
+                    except OSError as _e:
+                        if _r == 2:
+                            log("OUTBOX", f"failed to publish {_dname} after 3 tries: {_e}", "FAIL")
+                        else:
+                            time.sleep(5)
+                if not _ok:
+                    _bd_fail = True
+            if _bd_fail:
+                log("OUTBOX", "born-digital outbox publish failed -- exiting rc=1", "FAIL")
+                sys.exit(1)
+            _bd_marker = OUTBOX_VOL / "OUTBOX_COMPLETE"
+            _bd_marker_tmp = _bd_marker.with_suffix(".tmp")
+            _bd_marker_tmp.write_text(datetime.datetime.utcnow().isoformat(), encoding="utf-8")
+            _bd_marker_tmp.replace(_bd_marker)
+            log("OUTBOX", f"OUTBOX_COMPLETE written -> {_bd_marker}", "OK")
+            log("BORN-DIGITAL", f"=== BORN-DIGITAL COMPLETE (all stage): {SESSION_LABEL} ===", "OK")
+            sys.exit(0)
+
     # STAGE 1: Render at 300 DPI (grayscale).
     log("STAGE1-RENDER", f"Rendering {total_pages} pages at {PRODUCTION_DPI} DPI", "OK")
     t_render = time.time()
@@ -443,6 +555,52 @@ if STAGE == "ocr":
 
     log("STAGE3-SKIP", f"Loaded classification: {len(body_pages)} body pages, "
         f"total_pages={total_pages} sha={computed_sha[:12]}... (prep already ran)", "OK")
+
+    # Born-digital sentinel: born_digital=True in page_classification.json means
+    # born-digital prep wrote page_ocr_results.json directly. Skip GPU.
+    # If the flag is set but the OCR file is missing, prep crashed mid-write --
+    # exit rc=1 so the worker marks the job failed rather than silently publishing
+    # empty results.
+    if _cls_data.get("born_digital"):
+        _bd_ocr_path = OCR_OUT_DIR / "page_ocr_results.json"
+        if not _bd_ocr_path.exists():
+            log("BORN-DIGITAL",
+                f"born_digital=True in classification but {_bd_ocr_path} absent -- prep incomplete",
+                "FAIL")
+            sys.exit(1)
+        if _bd_ocr_path.exists():
+            log("BORN-DIGITAL", "Sentinel born_digital=True + page_ocr_results.json present -- skipping GPU", "OK")
+            OUTBOX_VOL.mkdir(parents=True, exist_ok=True)
+            _bd_fail = False
+            for _src, _dname in [(_bd_ocr_path, "page_ocr_results.json"),
+                                  (_cls_path, "page_classification.json")]:
+                _dest = OUTBOX_VOL / _dname
+                _tmp = _dest.with_suffix(".tmp")
+                _ok = False
+                for _r in range(3):
+                    try:
+                        shutil.copy2(str(_src), str(_tmp))
+                        _tmp.replace(_dest)
+                        log("OUTBOX", f"published {_dname} -> {_dest}", "OK")
+                        _ok = True
+                        break
+                    except OSError as _e:
+                        if _r == 2:
+                            log("OUTBOX", f"failed to publish {_dname} after 3 tries: {_e}", "FAIL")
+                        else:
+                            time.sleep(5)
+                if not _ok:
+                    _bd_fail = True
+            if _bd_fail:
+                log("OUTBOX", "born-digital outbox publish failed -- exiting rc=1", "FAIL")
+                sys.exit(1)
+            _bd_marker = OUTBOX_VOL / "OUTBOX_COMPLETE"
+            _bd_marker_tmp = _bd_marker.with_suffix(".tmp")
+            _bd_marker_tmp.write_text(datetime.datetime.utcnow().isoformat(), encoding="utf-8")
+            _bd_marker_tmp.replace(_bd_marker)
+            log("OUTBOX", f"OUTBOX_COMPLETE written -> {_bd_marker}", "OK")
+            log("BORN-DIGITAL", f"=== BORN-DIGITAL COMPLETE (ocr stage): {SESSION_LABEL} ===", "OK")
+            sys.exit(0)
 
 # ---------------------------------------------------------------------------
 # STAGE 4: OCR -- Surya + docTR + Tesseract consensus (identical to ocr_only_5090.py).

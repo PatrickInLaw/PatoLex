@@ -167,6 +167,7 @@ if DIGITAL_NATIVE:
             "index": [],
             "empty": [p + 1 for p in _empty_pgs],
             "median_body_density": 1.0,
+            "born_digital": True,
         }, indent=2), encoding="utf-8")
         _cls_tmp.replace(SCRATCH / "page_classification.json")
         log("BORN-DIGITAL", f"body={len(_body_pgs)} empty={len(_empty_pgs)} classified", "OK")
