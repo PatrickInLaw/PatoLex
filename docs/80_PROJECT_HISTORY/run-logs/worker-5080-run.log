@@ -187,8 +187,16 @@
   - pipeline/register_source_document.py: fills source_document registration gap
   - Both scripts use psycopg (v3) matching installed library
 
-[2026-06-05 (cc004) PT] DB-CONNECTIVITY | Supabase host IPv6-only, Python psycopg cannot resolve | WARN
-  - db.nqigiiyurwlmruexircz.supabase.co has AAAA record only (no A record)
-  - Python getaddrinfo fails: [Errno 11004] -- Windows machine IPv6 routing issue
-  - DB INGEST NOT YET RUN -- scripts are ready, awaiting DB connectivity fix
-  - To fix: either enable IPv6 routing on this machine OR update DATABASE_URL to Supabase pooler.supabase.com endpoint
+[2026-06-05 (cc004) PT] DB-CONNECTIVITY | Scripts were targeting Supabase (DATABASE_URL) instead of local PG (patolex@localhost:5432) | FIXED
+  - Root cause: ingest_gate_f.py + register_source_document.py used DATABASE_URL; all other scripts use PATOLEX_PG_DSN -> localhost fallback
+  - Fix: both scripts updated to PATOLEX_PG_DSN -> PGHOST/PGPORT/PGDATABASE/PGUSER/PGPASSWORD fallback (matches ingest_clean.py pattern)
+
+[2026-06-05 (cc004) PT] INGEST | Gate F -- 139,211 section actions, 14 years (1991-2023) | OK
+  - 22,780 chapters (enactments), 71,566 new provisions, 8,833 repeals
+  - 0 failures across all 14 JSONL files
+
+[2026-06-05 (cc004) PT] INGEST | Born-digital batch -- 48 volumes (2000_Vol1 through 2008_Vol5) | OK
+  - All 48 source_document rows registered; all volumes ingested via ingest_clean.py --commit
+  - 0 failures
+
+[2026-06-05 (cc004) PT] DB-STATE | Final counts: source_document=69, enactment=35332, provision=84118, change_event=151763 | OK

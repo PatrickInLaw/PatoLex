@@ -160,12 +160,17 @@ def register(session_label: str, pdf_path: Path, vol_type: str, dry_run: bool) -
         print(f"  [DRY RUN] Would INSERT source_document for sha={sha[:16]}...")
         return -1
 
-    dsn = os.environ.get('PATOLEX_PG_DSN') or os.environ.get('DATABASE_URL')
-    if not dsn:
-        print("ERROR: set PATOLEX_PG_DSN or DATABASE_URL before running", file=sys.stderr)
-        sys.exit(1)
-
-    conn = psycopg.connect(dsn)
+    dsn = os.environ.get('PATOLEX_PG_DSN')
+    if dsn:
+        conn = psycopg.connect(dsn)
+    else:
+        conn = psycopg.connect(
+            host=os.environ.get('PGHOST', 'localhost'),
+            port=os.environ.get('PGPORT', '5432'),
+            dbname=os.environ.get('PGDATABASE', 'patolex'),
+            user=os.environ.get('PGUSER', 'postgres'),
+            password=os.environ.get('PGPASSWORD', ''),
+        )
     try:
         cur = conn.cursor()
         cur.execute(INSERT_SQL, (

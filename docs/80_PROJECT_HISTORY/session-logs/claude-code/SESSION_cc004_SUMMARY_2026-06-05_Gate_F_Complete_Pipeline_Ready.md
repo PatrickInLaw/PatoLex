@@ -45,52 +45,37 @@ Confirmed full schema for: `enactment`, `provision`, `designation_history`, `cha
 
 ---
 
-## Blocking Issue: DB Connectivity
+## DB Connectivity — RESOLVED
 
-The Supabase host (`db.nqigiiyurwlmruexircz.supabase.co`) resolves to IPv6 only (no A record). Python's `getaddrinfo` fails with Errno 11004 on this Windows machine. **No actual DB ingest was run.**
-
-**Fix options:**
-1. Update `DATABASE_URL` in `PatoLex-secrets.env` to use the Supabase **Transaction Pooler** URL (format: `postgresql://postgres.nqigiiyurwlmruexircz:pw@aws-0-us-east-X.pooler.supabase.com:6543/postgres`) — available from Supabase dashboard → Project Settings → Database → Connection String → Transaction Pooler. This has IPv4.
-2. Alternatively: enable IPv6 routing on the local Windows machine.
+Root cause: scripts were targeting Supabase (`DATABASE_URL`) instead of the local PostgreSQL 16 (`patolex` db, localhost:5432). Fixed both `ingest_gate_f.py` and `register_source_document.py` to use the same `PATOLEX_PG_DSN` → localhost fallback pattern as `ingest_clean.py`. Connection uses `PGPASSWORD` from `.env.local`.
 
 ---
 
-## Full Pipeline Runbook (when DB is accessible)
+## Ingest Results (COMPLETED cc004 continuation)
 
-### A. Gate F ingest (139K section actions, all years):
-```powershell
-$env:DATABASE_URL = "<direct-or-pooler-url>"
-python pipeline\gate_f\ingest_gate_f.py `
-    C:\Users\PatrickKolasinski\PatoLex-scratch\gate_f_out `
-    --commit
+### Gate F — DONE
+```
+139,211 change events ingested
+22,780 chapters (enactments)
+71,566 provisions new / 67,645 existing
+8,833 provisions repealed
+14 JSONL files (1991–2023), 0 failures
 ```
 
-### B. Born-digital session law ingest (2000–2008 Chief Clerk PDFs):
-```powershell
-# Step 1: Register source_document + write sha256.txt
-python pipeline\register_source_document.py 2000_Vol1 `
-    C:\Users\PatrickKolasinski\PatoLex-scratch\chief-clerk-archive\2000_Vol1.pdf `
-    --type born_digital
-
-# Step 2: Ingest acts
-$env:PATOLEX_PG_DSN = "<direct-url>"
-$env:PATOLEX_ALLOW_COMMIT = "1"
-python pipeline\ingest_clean.py 2000_Vol1 --commit
-
-# Repeat for all 2000–2008 volumes (2000_Vol1 through 2008_Vol5)
+### Born-Digital — DONE
+```
+48 volumes (2000_Vol1 through 2008_Vol5), 0 failures
+All 48 source_document rows registered (sha256.txt written)
+Acts ingested via ingest_clean.py --commit per volume
 ```
 
-### C. OCR-path ingest (1876–1999, each volume when workers complete):
-```powershell
-# sha256.txt already written by ocr_only_5090.py
-# Step 1: Register source_document
-python pipeline\register_source_document.py <label> <pdf_path>
-
-# Step 2: Ingest
-$env:PATOLEX_PG_DSN = "<direct-url>"
-$env:PATOLEX_ALLOW_COMMIT = "1"
-python pipeline\ingest_clean.py <label> --commit
-```
+### Final DB state (localhost patolex):
+| Table | Rows |
+|---|---|
+| source_document | 69 |
+| enactment | 35,332 |
+| provision | 84,118 |
+| change_event | 151,763 |
 
 ---
 
@@ -99,13 +84,12 @@ python pipeline\ingest_clean.py <label> --commit
 | Year Range | Path | Script Chain | Status |
 |---|---|---|---|
 | 1850–1875 | OCR consensus | Done (in DB) | COMPLETE |
-| 1876–1996 | OCR via workers | ocr_only→register→ingest_clean | SCRIPTS READY; workers running |
-| 1997–1999 | OCR (forced, mojibake) | same as 1876–1996 | SCRIPTS READY |
-| 2000–2008 | Born-digital | parse_born_digital→prep→register→ingest_clean | SCRIPTS READY; DB blocked |
-| 1991–2023 | Gate F PUBINFO | parse_bill_versions→ingest_gate_f | EXTRACTED; DB blocked |
+| 1876–1999 | OCR via workers | ocr_only→register→ingest_clean | SCRIPTS READY; workers running |
+| 2000–2008 | Born-digital | parse_born_digital→prep→register→ingest_clean | **COMPLETE — 48 volumes in DB** |
+| 1991–2023 | Gate F PUBINFO | parse_bill_versions→ingest_gate_f | **COMPLETE — 139K actions in DB** |
 | 2024–2026 | Gate F (pubinfo_2025) | same | pubinfo_2025 not yet acquired |
 
-**Architecturally complete.** All scripts exist. Ingest blocked by DB connectivity only.
+**All available data ingested.** OCR workers continue forward from 1876; volumes land automatically as they complete.
 
 ---
 

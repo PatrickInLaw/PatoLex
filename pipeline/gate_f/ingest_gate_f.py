@@ -230,10 +230,17 @@ def ingest_file(jsonl_path: Path, cur, commit: bool, stats: dict) -> int:
 # ---------------------------------------------------------------------------
 
 def run(paths: list, commit: bool, years_filter: set | None):
-    dsn = os.environ.get('DATABASE_URL') or os.environ.get('DIRECT_URL')
-    if not dsn:
-        print("ERROR: set DATABASE_URL (direct port 5432) before running", file=sys.stderr)
-        sys.exit(1)
+    dsn = os.environ.get('PATOLEX_PG_DSN')
+    if dsn:
+        conn = psycopg.connect(dsn)
+    else:
+        conn = psycopg.connect(
+            host=os.environ.get('PGHOST', 'localhost'),
+            port=os.environ.get('PGPORT', '5432'),
+            dbname=os.environ.get('PGDATABASE', 'patolex'),
+            user=os.environ.get('PGUSER', 'postgres'),
+            password=os.environ.get('PGPASSWORD', ''),
+        )
 
     # Collect JSONL files
     jsonl_files = []
@@ -270,7 +277,6 @@ def run(paths: list, commit: bool, years_filter: set | None):
         'provisions_repealed': 0,
     }
 
-    conn = psycopg.connect(dsn)
     try:
         cur = conn.cursor()
         for jf in jsonl_files:
