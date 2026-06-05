@@ -55,7 +55,7 @@ INSERT INTO source_document (
     page_count, media_format
 ) VALUES (
     'session_law',
-    %s, 'CA', 'clerk.assembly.ca.gov', NULL,
+    %s, 'CA', %s, NULL,
     %s, %s, %s,
     %s, NOW(), TRUE,
     %s, %s, %s, %s,
@@ -99,7 +99,7 @@ def _parse_year(session_label: str) -> int:
     return int(m.group(1)) if m else 0
 
 
-def _citation(session_label: str, vol_type: str) -> str:
+def _citation(session_label: str) -> str:
     """Build a human-readable citation string."""
     year = _parse_year(session_label)
     if '_Vol' in session_label:
@@ -136,21 +136,23 @@ def register(session_label: str, pdf_path: Path, vol_type: str, dry_run: bool) -
             print(f"  [DRY RUN] Would write {sha_path}")
 
     year = _parse_year(session_label)
-    citation = _citation(session_label, vol_type)
+    citation = _citation(session_label)
     pages = _page_count(pdf_path)
 
     if vol_type == 'born_digital':
-        scan_quality  = None
-        ocr_engine    = None
-        cer_estimate  = None
-        trust_level   = 'derived'
-        note          = 'Born-digital PDF; text extracted via PyMuPDF fitz.get_text()'
+        scan_quality   = None
+        ocr_engine     = None
+        cer_estimate   = None
+        trust_level    = 'official_xml'   # primary source: CA Chief Clerk official PDF
+        source_channel = 'clerk.assembly.ca.gov'
+        note           = 'Born-digital PDF; text extracted via PyMuPDF fitz.get_text()'
     else:
-        scan_quality  = 'good'
-        ocr_engine    = 'surya+doctr+tesseract-5'
-        cer_estimate  = None      # ingest_clean.py will UPDATE this with computed value
-        trust_level   = 'ocr_uncertain'
-        note          = 'OCR consensus (Surya + docTR + Tesseract 5); quality updated at ingest'
+        scan_quality   = 'good'
+        ocr_engine     = 'surya+doctr+tesseract-5'
+        cer_estimate   = None      # ingest_clean.py will UPDATE this with computed value
+        trust_level    = 'ocr_uncertain'
+        source_channel = 'archive.org'   # Internet Archive scans
+        note           = 'OCR consensus (Surya + docTR + Tesseract 5); quality updated at ingest'
 
     print(f"  citation={citation!r}  year={year}  pages={pages}  trust={trust_level}")
 
@@ -167,7 +169,7 @@ def register(session_label: str, pdf_path: Path, vol_type: str, dry_run: bool) -
     try:
         cur = conn.cursor()
         cur.execute(INSERT_SQL, (
-            citation,
+            citation, source_channel,
             scan_quality, ocr_engine, cer_estimate,
             trust_level,
             sha,

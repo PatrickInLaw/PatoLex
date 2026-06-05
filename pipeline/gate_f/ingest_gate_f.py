@@ -67,7 +67,7 @@ DESIG_CHECK = """
     LIMIT 1
 """
 
-# daterange literal built in Python; cast required because psycopg2 sends it as text
+# Cast to daterange required because psycopg3 sends Python str as text by default.
 DESIG_INSERT = """
     INSERT INTO designation_history (provision_id, code, section_number, label, valid_range)
     VALUES (%s, %s, %s, %s, %s::daterange)
@@ -138,10 +138,21 @@ def ingest_file(jsonl_path: Path, cur, commit: bool, stats: dict) -> int:
         cur.execute(ENACTMENT_SELECT, (citation,))
         row = cur.fetchone()
         if row:
-            # Chapter already ingested — skip to preserve idempotency
-            stats['chapters_skipped'] += 1
-            processed += len(recs)
-            continue
+            # Enactment exists — check for partial-commit crash (enactment committed
+            # but change_events not). If change_events present, skip. If absent,
+            # delete and re-ingest to close the gap.
+            cur.execute(
+                "SELECT COUNT(*) FROM change_event WHERE enactment_id = %s",
+                (row[0],)
+            )
+            ce_count = cur.fetchone()[0]
+            if ce_count > 0:
+                stats['chapters_skipped'] += 1
+                processed += len(recs)
+                continue
+            # Partial commit — purge orphan enactment and fall through to re-insert
+            if commit:
+                cur.execute("DELETE FROM enactment WHERE id = %s", (row[0],))
 
         stats['chapters_new'] += 1
 
@@ -166,7 +177,8 @@ def ingest_file(jsonl_path: Path, cur, commit: bool, stats: dict) -> int:
             action      = rec['action']   # 'amend' | 'add' | 'repeal'
             new_text    = rec.get('new_text') or ''
             op_date     = rec.get('operative_date')
-            order_0     = rec['bill_section_order'] - 1   # schema is 0-based
+            # bill_section_order is 1-based in JSONL; schema expects 0-based
+            order_0     = rec.get('bill_section_order', 1) - 1
 
             desig = _designation(code_id, section_num)
 
@@ -194,6 +206,10 @@ def ingest_file(jsonl_path: Path, cur, commit: bool, stats: dict) -> int:
                     stats['designations_new'] += 1
 
             # --- change_event ---
+            # source_document_id intentionally NULL: Gate F derives from structured
+            # CAML XML, not a registered scan/source_document. The unique index on
+            # (source_document_id, in_act_order) does not fire on NULLs, so
+            # double-ingest prevention relies on the enactment-level skip above.
             stats['change_events'] += 1
             if commit and enactment_id is not None and provision_id is not None:
                 cur.execute(CHANGE_EVENT_INSERT, (
@@ -259,17 +275,18 @@ def run(paths: list, commit: bool, years_filter: set | None):
         cur = conn.cursor()
         for jf in jsonl_files:
             print(f"  {jf.name} ...", end=' ', flush=True)
-            n = ingest_file(jf, cur, commit, stats)
-            print(f"{n} records")
+            try:
+                n = ingest_file(jf, cur, commit, stats)
+                if commit:
+                    conn.commit()   # commit per file — one file failure doesn't roll back others
+                print(f"{n} records")
+            except Exception as exc:
+                conn.rollback()
+                print(f"FAILED: {exc}", file=sys.stderr)
+                raise
 
-        if commit:
-            conn.commit()
-            print("\nCommitted.")
-        else:
+        if not commit:
             conn.rollback()
-    except Exception:
-        conn.rollback()
-        raise
     finally:
         conn.close()
 
