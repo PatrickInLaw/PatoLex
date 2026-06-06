@@ -296,3 +296,5 @@ C:\Windows\System32\OpenSSH\scp.exe: Connection closed
 [2026-06-06 00:44 PT] CLAIM | claim rc=255 ssh: connect to host 100.70.54.56 port 22: Connection timed out | WARN
 [2026-06-06 00:45 PT] CLAIM | claim rc=255 ssh: connect to host 100.70.54.56 port 22: Connection timed out | WARN
 [2026-06-06 00:45 PT] WORKER | queue drained / no claimable volume -- exiting | OK
+[2026-06-06 08:19 PT] WORKER | === 5080 queue worker online (pid 3084, worker_id=5080-1) sharing 5090 queue 100.70.54.56 === | OK
+[2026-06-06 08:19 PT] RUN | 1994-vol5: START local OCR (1994_Vol5.pdf) on 5080 | OK
