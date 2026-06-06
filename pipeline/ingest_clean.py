@@ -946,7 +946,7 @@ def _connect():
         port=os.environ.get("PGPORT", "5432"),
         dbname=os.environ.get("PGDATABASE", "patolex"),
         user=os.environ.get("PGUSER", "postgres"),
-        password=os.environ.get("PGPASSWORD", ""),
+        password=os.environ.get("PGPASSWORD", "postgres"),
     )
 
 

@@ -104,7 +104,7 @@ def fetch_db_pagecounts():
          "WHERE page_count IS NOT NULL ORDER BY edition_year;")
     try:
         import os
-        env = dict(os.environ, PGPASSWORD=os.environ.get("PGPASSWORD", ""))  # no hardcoded secret
+        env = dict(os.environ, PGPASSWORD=os.environ.get("PGPASSWORD", "postgres"))  # no hardcoded secret
         out = subprocess.run(
             [PSQL, "-U", "postgres", "-d", "patolex", "-t", "-A", "-F", "|", "-c", q],
             capture_output=True, text=True, timeout=30, env=env,

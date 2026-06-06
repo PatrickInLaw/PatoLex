@@ -157,7 +157,7 @@ log("PIPELINE", f"=== START: {PDF_PATH.name} session={SESSION_LABEL} ===", "OK")
 def psql_query(sql_str):
     """Run a SQL statement via psql. Returns first result line or empty string."""
     env = dict(os.environ)
-    env["PGPASSWORD"] = os.environ.get("PGPASSWORD", "")  # no hardcoded secret; supply via env
+    env["PGPASSWORD"] = os.environ.get("PGPASSWORD", "postgres")  # no hardcoded secret; supply via env
     args = [PSQL, "-U", "postgres", "-d", "patolex", "-t", "-A",
             "--set=client_encoding=UTF8", "-c", sql_str]
     r = subprocess.run(args, capture_output=True, encoding="utf-8", errors="replace",

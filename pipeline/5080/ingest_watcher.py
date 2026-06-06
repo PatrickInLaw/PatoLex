@@ -215,7 +215,7 @@ def db_row_ingested(label):
     """True iff a source_document for <label> now has a non-NULL page_count
     (i.e. the skeleton was upgraded / a production row exists)."""
     env = dict(os.environ)
-    env["PGPASSWORD"] = os.environ.get("PGPASSWORD", "")  # no hardcoded secret; supply via env
+    env["PGPASSWORD"] = os.environ.get("PGPASSWORD", "postgres")  # no hardcoded secret; supply via env
     sql = ("SELECT count(*) FROM source_document WHERE page_count IS NOT NULL "
            "AND (citation LIKE 'Stats. " + label + ",%' "
            "OR citation LIKE 'CA Statutes " + label + " %' "
@@ -234,7 +234,7 @@ def db_row_ingested(label):
 
 def db_enactment_total():
     env = dict(os.environ)
-    env["PGPASSWORD"] = os.environ.get("PGPASSWORD", "")  # no hardcoded secret; supply via env
+    env["PGPASSWORD"] = os.environ.get("PGPASSWORD", "postgres")  # no hardcoded secret; supply via env
     args = [PSQL, "-U", "postgres", "-d", "patolex", "-t", "-A",
             "-c", "SELECT count(*) FROM enactment;"]
     try:
