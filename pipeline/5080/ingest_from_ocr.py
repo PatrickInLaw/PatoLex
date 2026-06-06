@@ -62,7 +62,8 @@ def log(phase, description, status="OK"):
 
 def psql_query(sql_str, retries=3):
     env = dict(os.environ)
-    env["PGPASSWORD"] = "postgres"
+    # PGPASSWORD must be supplied via the environment (no hardcoded secret).
+    env["PGPASSWORD"] = os.environ.get("PGPASSWORD", "")
     args = [PSQL, "-U", "postgres", "-d", "patolex", "-t", "-A",
             "--set=client_encoding=UTF8", "-c", sql_str]
     for attempt in range(retries):

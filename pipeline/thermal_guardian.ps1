@@ -53,7 +53,7 @@ param(
 
     # --- Alerting ---
     [string]$TelegramScript = "",    # path to telegram.ps1 if present (5080/repo); else direct API
-    [string]$BotToken       = "8132154225:AAES0aP7B2Vmwykfu6VDtZqLHLSGHiwpRpw",
+    [string]$BotToken       = "",    # resolved from Credential Manager (key PatoClaudeBotToken) if empty; see below
     [string]$ChatId         = "8525048490",
 
     # --- Test / utility modes ---
@@ -63,6 +63,25 @@ param(
 )
 
 $ErrorActionPreference = 'Continue'
+
+# --------------------------------------------------------------------------
+# Resolve Telegram bot token from Windows Credential Manager (key PatoClaudeBotToken)
+# when not supplied explicitly. Falls back to env var PATOCLAUDE_BOT_TOKEN for
+# SYSTEM/Scheduled-Task contexts where the CredStore profile path is unavailable.
+# Direct-API alerting (no $TelegramScript) requires a resolved token.
+# --------------------------------------------------------------------------
+if ([string]::IsNullOrWhiteSpace($BotToken)) {
+    $credStore = Join-Path $env:USERPROFILE ".claude\scripts\CredStore.ps1"
+    if (Test-Path $credStore) {
+        try {
+            . $credStore
+            $BotToken = Get-CredSecret -Target PatoClaudeBotToken
+        } catch { }
+    }
+    if ([string]::IsNullOrWhiteSpace($BotToken) -and $env:PATOCLAUDE_BOT_TOKEN) {
+        $BotToken = $env:PATOCLAUDE_BOT_TOKEN
+    }
+}
 
 # --------------------------------------------------------------------------
 # Helpers

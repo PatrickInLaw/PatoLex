@@ -3,7 +3,9 @@
 Bidirectional Telegram communication via @PatoClaude_bot.
 
 ## Bot Credentials
-- Bot token: `8132154225:AAES0aP7B2Vmwykfu6VDtZqLHLSGHiwpRpw`
+- Bot token: stored in Windows Credential Manager under key `PatoClaudeBotToken` (never hardcode it). Fetch with:
+  `powershell -NoProfile -Command ". \"$env:USERPROFILE\.claude\scripts\CredStore.ps1\"; Get-CredSecret -Target PatoClaudeBotToken"`
+  The `.claude/scripts/telegram.ps1` helper resolves it automatically -- prefer that helper over raw curl.
 - Chat ID: `8525048490`
 
 ## Modes
@@ -38,17 +40,24 @@ Usage: `/telegram-chat monitor <initial status message>`
 ## Implementation Notes
 
 All calls use curl with `--data-urlencode` for sending and the getUpdates API for receiving.
+The bot token must be read at runtime from Credential Manager (key `PatoClaudeBotToken`) -- never inline it.
+
+First resolve the token (PowerShell):
+```powershell
+. "$env:USERPROFILE\.claude\scripts\CredStore.ps1"
+$BOT = Get-CredSecret -Target PatoClaudeBotToken
+```
 
 ### Send a message:
 ```bash
-curl -s -X POST "https://api.telegram.org/bot8132154225:AAES0aP7B2Vmwykfu6VDtZqLHLSGHiwpRpw/sendMessage" \
+curl -s -X POST "https://api.telegram.org/bot${BOT}/sendMessage" \
   --data-urlencode "chat_id=8525048490" \
   --data-urlencode "text=<message>" 2>&1 | head -5
 ```
 
 ### Check for messages:
 ```bash
-curl -s "https://api.telegram.org/bot8132154225:AAES0aP7B2Vmwykfu6VDtZqLHLSGHiwpRpw/getUpdates?offset=-5&limit=5" 2>&1 | head -20
+curl -s "https://api.telegram.org/bot${BOT}/getUpdates?offset=-5&limit=5" 2>&1 | head -20
 ```
 
 ### Standard Ramp Timing

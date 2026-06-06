@@ -14,7 +14,11 @@ You run in the background while the main session works.
 
 ## Bot Credentials
 
-- Bot token: `8132154225:AAES0aP7B2Vmwykfu6VDtZqLHLSGHiwpRpw`
+- Bot token: stored in Windows Credential Manager under key `PatoClaudeBotToken` (never hardcode it). Resolve at runtime:
+  ```powershell
+  . "$env:USERPROFILE\.claude\scripts\CredStore.ps1"
+  $BOT = Get-CredSecret -Target PatoClaudeBotToken
+  ```
 - Patrick's Chat ID: `8525048490`
 
 ## Polling Protocol
@@ -29,7 +33,7 @@ Use the **standard ramp timing**:
 ## How to Check
 
 ```bash
-curl -s "https://api.telegram.org/bot8132154225:AAES0aP7B2Vmwykfu6VDtZqLHLSGHiwpRpw/getUpdates" | python3 -c "
+curl -s "https://api.telegram.org/bot${BOT}/getUpdates" | python3 -c "
 import sys, json
 data = json.load(sys.stdin)
 msgs = [u['message'] for u in data.get('result', []) if 'message' in u and not u['message'].get('from', {}).get('is_bot', True)]

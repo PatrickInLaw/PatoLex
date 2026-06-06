@@ -43,7 +43,7 @@ Per-volume confident acts (1850–1860): 97 / 108 / 114 / 128 / 81 / 169 / 107 /
 
 **Honest bottom line on the DB:** 1,569 structured acts for 1850–1860 are queryable now; the harder-scan volumes are partially covered (OCR header damage), and the full statutory text + per-token confidence + image refs are banked on disk for every page. The structured layer can be re-enriched cheaply (re-parse, no re-OCR) as OCR/parsing improve.
 
-**Cleanup item:** a stale duplicate 1850 `source_document` (id=1, 26 rows) remains (removal correctly blocked as out-of-scope/irreversible). To get a single clean 1850, run the 4 `psql` DELETEs recorded in `run-logs/parser-completeness-run.log` (set `PGPASSWORD=postgres`; psql at `C:\Program Files\PostgreSQL\16\bin\psql.exe`).
+**Cleanup item:** a stale duplicate 1850 `source_document` (id=1, 26 rows) remains (removal correctly blocked as out-of-scope/irreversible). To get a single clean 1850, run the 4 `psql` DELETEs recorded in `run-logs/parser-completeness-run.log` (set `PGPASSWORD=<REDACTED>` from your environment; psql at `C:\Program Files\PostgreSQL\16\bin\psql.exe`).
 
 ---
 

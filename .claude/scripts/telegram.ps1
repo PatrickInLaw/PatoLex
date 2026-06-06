@@ -19,7 +19,12 @@ param(
 $ErrorActionPreference = "Stop"
 
 # @PatoClaude_bot (shared across Patrick's repos -- replace if using a different bot)
-$botToken = "8132154225:AAES0aP7B2Vmwykfu6VDtZqLHLSGHiwpRpw"
+# Token is stored in Windows Credential Manager under key PatoClaudeBotToken.
+. "$env:USERPROFILE\.claude\scripts\CredStore.ps1"
+$botToken = Get-CredSecret -Target PatoClaudeBotToken
+if ([string]::IsNullOrWhiteSpace($botToken)) {
+    throw "Telegram bot token not found in Credential Manager (key: PatoClaudeBotToken)."
+}
 $chatId = "8525048490"
 $apiBase = "https://api.telegram.org/bot$botToken"
 
