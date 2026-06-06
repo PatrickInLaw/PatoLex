@@ -26,7 +26,9 @@
 
 6. **Clarified prep/GPU decoupling semantics.** Decoupled prep does NOT make per-volume prep faster (~20 min stays ~20 min). The benefit is purely time-overlap: CPU preps volume N+1 while GPU OCRs volume N. Wall-clock savings come from that overlap, not from accelerating any individual step.
 
-**Queue state at session close:** 169 done / 37 pending / 4 in-progress / 0 failed (of 210 total). ETA ~June 6 evening–early June 7 (depending on per-volume timing).
+**Queue state at first close (June 5 ~21:00 PT):** 169 done / 37 pending / 4 in-progress / 0 failed (of 210 total).
+
+**5090 went offline at ~00:42 PT June 6 — all OCR stopped.** 1993-vol3 OCR completed successfully on the 5080 GPU but the SCP push to 5090 timed out. Worker marked it "reclaimable" (left as in_progress in queue), attempted three more claim SSHs, all timed out, and exited at 00:45 PT with "queue drained / no claimable volume." 5090 TCP/22 confirmed closed at 4:42am June 6. Root cause unknown (sleep/crash/Tailscale loss). No OCR has run since 00:45 PT. Both workers idle. ETA pushed to ~midnight June 7 once 5090 is restored.
 
 ---
 
@@ -61,7 +63,9 @@
 |------|----------|
 | Update run_prep_runner.bat to `--parallel 16 --ramp-delay 30` before next prep_runner restart | Medium |
 | Investigate queue worker subprocess monitoring bug (root cause of cascade) — may need a fix in ocr_only_5080.py or the schtask wrapper | High (before next large batch) |
-| Monitor OCR queue draining — 37 pending, ETA June 6 evening | Ongoing |
+| **BLOCKED: 5090 offline since 00:42 PT June 6** — needs physical check (wake/restart/Tailscale); 5080 worker has exited | URGENT |
+| Once 5090 is back: restart prep_runner, verify 5080 schtask fires, manually mark 1993-vol3 done or let worker reclaim | High |
+| Monitor OCR queue draining — ~41 volumes left, ETA ~midnight June 7 once 5090 restored | Ongoing |
 | Acquire pubinfo_2025 for 2025-2026 Gate F coverage gap | Medium |
 | Run provision_version materialization batch at publish time | At publish |
 
@@ -69,9 +73,10 @@
 
 ## Next Session Should Start With
 
-1. Check queue state: `python qs_tmp.py` on 5090 (or equivalent) — confirm all volumes done/0 failed
-2. Check for any new cascade failures (watch for failed > 0)
-3. Update run_prep_runner.bat to `--parallel 16 --ramp-delay 30` if restarting prep runner
+1. **Restore 5090** — physically wake/restart; confirm Tailscale is up; SSH test from 5080
+2. Once SSH restored: check queue state, restart prep_runner with `--parallel 16 --ramp-delay 30`, verify 5080 schtask auto-fires
+3. Manually mark 1993-vol3 done on queue (OCR output is on 5080 scratch; SCP it over, then update queue JSON)
+4. Check for any new cascade failures (watch for failed > 0) after workers resume
 
 ---
 
@@ -79,4 +84,5 @@
 
 - **Queue worker subprocess monitoring bug is a known risk.** The schtask wrapper can lose track of its child OCR subprocess, marking it "failed" while the subprocess continues as an orphan. If this happens while the orphan still has GPU models loaded, a new worker starting on the same device can OOM. Mitigation: disable the schtask task until the orphan completes, then re-enable and reset failed statuses.
 - **bat file overrides script defaults.** When a .bat passes `--parallel N`, the script-level `PARALLEL = X` default is irrelevant. Always verify the bat file's arguments match intent before running — don't assume the script default is what's running.
+- **5090 availability is the single point of failure for both workers.** The 5080 worker depends on 5090 for queue claims (SSH) and result delivery (SCP). If 5090 goes offline, the 5080 worker exhausts retries and exits. Consider adding a local queue fallback or health-check restart logic in a future session.
 - **Decoupled prep = overlap, not speed.** Prep itself takes the same time (CPU-bound, ~20 min/volume). The savings are purely from running CPU prep concurrently with GPU OCR for a different volume. If GPU is idle, adding more prep workers doesn't help — it's the GPU step that determines throughput.

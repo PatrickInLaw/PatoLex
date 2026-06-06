@@ -282,3 +282,17 @@
 [2026-06-05 20:44 PT] PUSH | 1992-vol2: OCR outputs pushed to 5090 | OK
 [2026-06-05 20:44 PT] RUN | 1992-vol2: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-05 20:44 PT] RUN | 1993-vol3: START local OCR (1993_Vol3.pdf) on 5080 | OK
+[2026-06-06 00:42 PT] SCP | push FAIL production-1993-vol3/sha256.txt: ssh: connect to host 100.70.54.56 port 22: Connection timed out
+C:\Windows\System32\OpenSSH\scp.exe: Connection closed
+ | WARN
+[2026-06-06 00:43 PT] SCP | push FAIL production-1993-vol3/page_classification.json: ssh: connect to host 100.70.54.56 port 22: Connection timed out
+C:\Windows\System32\OpenSSH\scp.exe: Connection closed
+ | WARN
+[2026-06-06 00:43 PT] SCP | push FAIL production-1993-vol3/ocr_consensus/page_ocr_results.json: ssh: connect to host 100.70.54.56 port 22: Connection timed out
+C:\Windows\System32\OpenSSH\scp.exe: Connection closed
+ | WARN
+[2026-06-06 00:44 PT] RUN | 1993-vol3: OCR ok but push/mark failed -> left reclaimable | WARN
+[2026-06-06 00:44 PT] CLAIM | claim rc=255 ssh: connect to host 100.70.54.56 port 22: Connection timed out | WARN
+[2026-06-06 00:44 PT] CLAIM | claim rc=255 ssh: connect to host 100.70.54.56 port 22: Connection timed out | WARN
+[2026-06-06 00:45 PT] CLAIM | claim rc=255 ssh: connect to host 100.70.54.56 port 22: Connection timed out | WARN
+[2026-06-06 00:45 PT] WORKER | queue drained / no claimable volume -- exiting | OK
