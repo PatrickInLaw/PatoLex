@@ -199,4 +199,86 @@
   - All 48 source_document rows registered; all volumes ingested via ingest_clean.py --commit
   - 0 failures
 
-[2026-06-05 (cc004) PT] DB-STATE | Final counts: source_document=69, enactment=35332, provision=84118, change_event=151763 | OK
+[2026-06-05 (cc004) PT] DB-STATE | Final counts: source_document=69, enactment=35332, provision=84118, change_event=151763 | OK[2026-06-05 11:49 PT] PUSH | 1989-vol2: OCR outputs pushed to 5090 | OK
+[2026-06-05 11:49 PT] RUN | 1989-vol2: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 11:49 PT] RUN | 1990-vol4: START local OCR (1990_Vol4.pdf) on 5080 | OK
+[2026-06-05 13:32 PT] RUN | 1990-vol4: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:32 PT] RUN | 1991-vol2: START local OCR (1991_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:38 PT] RUN | 1991-vol2: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:38 PT] RUN | 1991-vol3: START local OCR (1991_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:39 PT] RUN | 1991-vol3: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:39 PT] RUN | 1992-vol1-statutes: START local OCR (1992_Vol1_Statutes.pdf) on 5080 | OK
+[2026-06-05 13:39 PT] RUN | 1992-vol1-statutes: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:39 PT] RUN | 1992-vol2: START local OCR (1992_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:39 PT] RUN | 1992-vol2: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:39 PT] RUN | 1992-vol3: START local OCR (1992_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:39 PT] RUN | 1992-vol3: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:39 PT] RUN | 1992-vol4: START local OCR (1992_Vol4.pdf) on 5080 | OK
+[2026-06-05 13:40 PT] RUN | 1992-vol4: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:40 PT] RUN | 1993-vol1: START local OCR (1993_Vol1.pdf) on 5080 | OK
+[2026-06-05 13:40 PT] RUN | 1993-vol1: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:40 PT] RUN | 1993-vol2: START local OCR (1993_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:40 PT] RUN | 1993-vol2: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:40 PT] RUN | 1993-vol3: START local OCR (1993_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:41 PT] RUN | 1993-vol3: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:41 PT] RUN | 1993-vol4: START local OCR (1993_Vol4.pdf) on 5080 | OK
+[2026-06-05 13:41 PT] RUN | 1993-vol4: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:41 PT] RUN | 1993-vol5: START local OCR (1993_Vol5.pdf) on 5080 | OK
+[2026-06-05 13:42 PT] RUN | 1993-vol5: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:42 PT] RUN | 1994-vol1: START local OCR (1994_Vol1.pdf) on 5080 | OK
+[2026-06-05 13:42 PT] RUN | 1994-vol1: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:42 PT] RUN | 1994-vol2: START local OCR (1994_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:42 PT] RUN | 1994-vol2: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:42 PT] RUN | 1994-vol3: START local OCR (1994_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:42 PT] RUN | 1994-vol3: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:42 PT] RUN | 1994-vol4: START local OCR (1994_Vol4.pdf) on 5080 | OK
+[2026-06-05 13:43 PT] RUN | 1994-vol4: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:43 PT] RUN | 1994-vol5: START local OCR (1994_Vol5.pdf) on 5080 | OK
+[2026-06-05 13:43 PT] RUN | 1994-vol5: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:43 PT] RUN | 1995-vol1: START local OCR (1995_Vol1.pdf) on 5080 | OK
+[2026-06-05 13:43 PT] RUN | 1995-vol1: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:43 PT] RUN | 1995-vol2: START local OCR (1995_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:43 PT] RUN | 1995-vol2: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:43 PT] RUN | 1995-vol3: START local OCR (1995_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:44 PT] RUN | 1995-vol3: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:44 PT] RUN | 1995-vol4: START local OCR (1995_Vol4.pdf) on 5080 | OK
+[2026-06-05 13:44 PT] RUN | 1995-vol4: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:44 PT] RUN | 1995-vol5: START local OCR (1995_Vol5.pdf) on 5080 | OK
+[2026-06-05 13:44 PT] RUN | 1995-vol5: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:44 PT] RUN | 1996-vol1: START local OCR (1996_Vol1.pdf) on 5080 | OK
+[2026-06-05 13:44 PT] RUN | 1996-vol1: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:44 PT] RUN | 1996-vol2: START local OCR (1996_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:45 PT] RUN | 1996-vol2: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:45 PT] RUN | 1996-vol3: START local OCR (1996_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:45 PT] RUN | 1996-vol3: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:45 PT] RUN | 1996-vol4: START local OCR (1996_Vol4.pdf) on 5080 | OK
+[2026-06-05 13:46 PT] RUN | 1996-vol4: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:46 PT] RUN | 1996-vol5: START local OCR (1996_Vol5.pdf) on 5080 | OK
+[2026-06-05 13:46 PT] RUN | 1996-vol5: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:46 PT] RUN | 1996-vol6: START local OCR (1996_Vol6.pdf) on 5080 | OK
+[2026-06-05 13:46 PT] RUN | 1996-vol6: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:46 PT] RUN | 1997-vol1: START local OCR (1997_Vol1.pdf) on 5080 | OK
+[2026-06-05 13:46 PT] RUN | 1997-vol1: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:46 PT] RUN | 1997-vol2: START local OCR (1997_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:47 PT] RUN | 1997-vol2: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:47 PT] RUN | 1997-vol3: START local OCR (1997_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:47 PT] RUN | 1997-vol3: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:47 PT] RUN | 1997-vol4: START local OCR (1997_Vol4.pdf) on 5080 | OK
+[2026-06-05 13:47 PT] RUN | 1997-vol4: OCR FAILED exit 3221225477 (reclaimable) | FAIL
+[2026-06-05 13:47 PT] RUN | 1997-vol5: START local OCR (1997_Vol5.pdf) on 5080 | OK
+[2026-06-05 13:47 PT] RUN | 1997-vol5: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:47 PT] RUN | 1997-vol6: START local OCR (1997_Vol6.pdf) on 5080 | OK
+[2026-06-05 13:48 PT] RUN | 1997-vol6: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:48 PT] RUN | 1998-vol1: START local OCR (1998_Vol1.pdf) on 5080 | OK
+[2026-06-05 13:48 PT] RUN | 1998-vol1: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:48 PT] RUN | 1998-vol2: START local OCR (1998_Vol2.pdf) on 5080 | OK
+[2026-06-05 13:48 PT] RUN | 1998-vol2: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:48 PT] RUN | 1998-vol3: START local OCR (1998_Vol3.pdf) on 5080 | OK
+[2026-06-05 13:48 PT] RUN | 1998-vol3: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-05 13:48 PT] RUN | 1998-vol4: START local OCR (1998_Vol4.pdf) on 5080 | OK
+[2026-06-05 17:13 PT] PUSH | 1998-vol4: OCR outputs pushed to 5090 | OK
+[2026-06-05 17:13 PT] RUN | 1998-vol4: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 17:13 PT] RUN | 1992-vol2: START local OCR (1992_Vol2.pdf) on 5080 | OK
+[2026-06-05 20:44 PT] PUSH | 1992-vol2: OCR outputs pushed to 5090 | OK
+[2026-06-05 20:44 PT] RUN | 1992-vol2: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-05 20:44 PT] RUN | 1993-vol3: START local OCR (1993_Vol3.pdf) on 5080 | OK

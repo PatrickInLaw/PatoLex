@@ -239,3 +239,243 @@
 [2026-06-05 07:38 PT] INGEST | === ingest_clean.py DRY-RUN: smoke-real-1998-vol1 === | OK
 [2026-06-05 07:38 PT] INGEST-DRYRUN | smoke-real-1998-vol1: parsed_acts_fixed.json not found at C:\Users\PatrickKolasinski\PatoLex-scratch\production-smoke-real-1998-vol1\parsed_acts_fixed.json | WARN
 [2026-06-05 07:38 PT] INGEST | === ingest_clean.py DRY-RUN done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2000_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2000_Vol1: purged(prior_enactments)=0 inserted=71 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2000_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2000_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2000_Vol2: purged(prior_enactments)=0 inserted=295 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2000_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2000_Vol3 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2000_Vol3: purged(prior_enactments)=0 inserted=346 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2000_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2000_Vol4 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2000_Vol4: purged(prior_enactments)=0 inserted=161 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2000_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2000_Vol5 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2000_Vol5: purged(prior_enactments)=0 inserted=200 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2000_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2000_Vol6 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2000_Vol6: purged(prior_enactments)=0 inserted=19 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2000_Vol6: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2001_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2001_Vol1: purged(prior_enactments)=0 inserted=138 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2001_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2001_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2001_Vol2: purged(prior_enactments)=0 inserted=227 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2001_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2001_Vol3 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2001_Vol3: purged(prior_enactments)=0 inserted=340 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2001_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2001_Vol4 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2001_Vol4: purged(prior_enactments)=0 inserted=225 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2001_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2001_Vol5 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2001_Vol5: purged(prior_enactments)=0 inserted=49 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2001_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2002_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2002_Vol1: purged(prior_enactments)=0 inserted=314 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2002_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2002_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2002_Vol2: purged(prior_enactments)=0 inserted=198 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2002_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2002_Vol3 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2002_Vol3: purged(prior_enactments)=0 inserted=250 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2002_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2002_Vol4 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2002_Vol4: purged(prior_enactments)=0 inserted=222 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2002_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2002_Vol5 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2002_Vol5: purged(prior_enactments)=0 inserted=186 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2002_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2002_Vol6 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2002_Vol6: purged(prior_enactments)=0 inserted=5 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2002_Vol6: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2003_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2003_Vol1: purged(prior_enactments)=0 inserted=170 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2003_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2003_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2003_Vol2: purged(prior_enactments)=0 inserted=301 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2003_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2003_Vol3 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2003_Vol3: purged(prior_enactments)=0 inserted=192 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2003_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2003_Vol4 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2003_Vol4: purged(prior_enactments)=0 inserted=246 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2003_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2003_Vol5 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2003_Vol5: purged(prior_enactments)=0 inserted=16 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2003_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2004_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2004_Vol1: purged(prior_enactments)=0 inserted=177 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2004_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2004_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2004_Vol2: purged(prior_enactments)=0 inserted=31 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2004_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2004_Vol3 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2004_Vol3: purged(prior_enactments)=0 inserted=302 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2004_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2004_Vol4 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2004_Vol4: purged(prior_enactments)=0 inserted=238 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2004_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2004_Vol5 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2004_Vol5: purged(prior_enactments)=0 inserted=206 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2004_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2004_Vol6 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2004_Vol6: purged(prior_enactments)=0 inserted=2 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2004_Vol6: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2005_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2005_Vol1: purged(prior_enactments)=0 inserted=77 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2005_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2005_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2005_Vol2: purged(prior_enactments)=0 inserted=349 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2005_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2005_Vol3 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2005_Vol3: purged(prior_enactments)=0 inserted=271 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2005_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2005_Vol4 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2005_Vol4: purged(prior_enactments)=0 inserted=32 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2005_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2006_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2006_Vol1: purged(prior_enactments)=0 inserted=47 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2006_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2006_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2006_Vol2: purged(prior_enactments)=0 inserted=314 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2006_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2006_Vol3 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2006_Vol3: purged(prior_enactments)=0 inserted=177 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2006_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2006_Vol4 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2006_Vol4: purged(prior_enactments)=0 inserted=234 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2006_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2006_Vol5 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2006_Vol5: purged(prior_enactments)=0 inserted=138 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2006_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2006_Vol6 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2006_Vol6: purged(prior_enactments)=0 inserted=0 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2006_Vol6: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2007_Vol1 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2007_Vol1: purged(prior_enactments)=0 inserted=170 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2007_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT: 2007_Vol2 === | WARN
+[2026-06-05 11:03 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:03 PT] INGEST-COMMIT | 2007_Vol2: purged(prior_enactments)=0 inserted=107 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:03 PT] INGEST-CONSENSUS | 2007_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:03 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2007_Vol3 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2007_Vol3: purged(prior_enactments)=0 inserted=293 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2007_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2007_Vol4 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2007_Vol4: purged(prior_enactments)=0 inserted=180 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2007_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2007_Vol5 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2007_Vol5: purged(prior_enactments)=0 inserted=0 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2007_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2008_Vol1 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2008_Vol1: purged(prior_enactments)=0 inserted=227 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2008_Vol1: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2008_Vol2 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2008_Vol2: purged(prior_enactments)=0 inserted=122 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2008_Vol2: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2008_Vol3 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2008_Vol3: purged(prior_enactments)=0 inserted=235 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2008_Vol3: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2008_Vol4 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2008_Vol4: purged(prior_enactments)=0 inserted=181 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2008_Vol4: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT: 2008_Vol5 === | WARN
+[2026-06-05 11:04 PT] INGEST | --commit requested. Phase B forbids DB writes; refusing unless PATOLEX_ALLOW_COMMIT=1 is explicitly set. | WARN
+[2026-06-05 11:04 PT] INGEST-COMMIT | 2008_Vol5: purged(prior_enactments)=0 inserted=9 | scan_quality=unknown cer=None | volume REPLACED atomically (single txn, purge+reinsert) | OK
+[2026-06-05 11:04 PT] INGEST-CONSENSUS | 2008_Vol5: no consensus payload to bank (no page_ocr_results / no tokens) | WARN
+[2026-06-05 11:04 PT] INGEST | === ingest_clean.py COMMIT done === | OK
