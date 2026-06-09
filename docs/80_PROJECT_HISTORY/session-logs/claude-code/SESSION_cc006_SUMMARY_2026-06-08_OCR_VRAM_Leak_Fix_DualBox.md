@@ -209,6 +209,11 @@ byte-diff WILL mismatch; the diff must exclude/normalize non-deterministic colum
   workers finishes the last handful safely. (Did NOT auto-change worker count — standing
   confirm-before-scaling rule; awaiting Patrick's go.)
 - Monitor exited on detection; **relaunch `monitor_5090.ps1` when the box is back up.**
+- **5080 worker kept OCRing locally ~3 h after the 5090 died** (it only needs the 5090 to claim/push):
+  it **finished `1998-vol6` at 04:42** but couldn't scp the results up (5090 unreachable) → results are
+  **complete + stranded on the 5080** (`production-1998-vol6/ocr_consensus/`), queue still shows it
+  not-done, then the 5080 worker exited (claims rc=255). **MORNING: push the 5080's `1998-vol6`
+  outputs up + mark done — do NOT re-OCR it.** Both boxes now idle until the 5090 is power-cycled.
 
 ### Roadmap updated this session
 - `ROADMAP.md` Current-Status + Gate F row corrected (Gate F largely built; DB = 35,332 acts).
