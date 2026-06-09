@@ -129,3 +129,46 @@ Ran tasks #1/#2/#3 (two parallel Sonnet subagents + a direct write) and then acq
 - **Fill the 1876–1993 historical OCR ingest** (the actual hole).
 - **Define OCR↔Gate-F arbitration** for the overlap years (Gate F authoritative; OCR = seam oracle).
 - **Fix `acquire_leginfo_pubinfo.py`** stale `MISSING_YEARS` assumption.
+
+---
+
+## Continuation #3 — 2026-06-08 ~23:25 PT (ingestion plan + worklist + DB-over-Tailscale)
+
+### Ingestion runs on the 5090, DB on the 5080 (corrected — I overcomplicated this)
+- **The patolex DB lives on the 5080** (this box, local Postgres). **Ingestion *runs* on the 5090**
+  (64 GB CPU) and **connects to the 5080 DB over Tailscale.** Not two DBs — one DB, remote client.
+- **5080 Tailscale IP = `100.108.42.91`.** **Verified: 5090 → `100.108.42.91:5432` TCP reachable**
+  (`TcpTestSucceeded=True`) — so listen_addresses + Windows firewall already allow it. Remaining for
+  tomorrow: a `pg_hba.conf` entry for the 5090 (100.70.54.56) → patolex + creds. 5090 ingest env:
+  `PGHOST=100.108.42.91 PGPORT=5432 PGDATABASE=patolex PGUSER=postgres PGPASSWORD=…`.
+
+### Patrick's ingestion strategy (tomorrow AM, Opus-supervised, never automatic)
+**Back up DB → purge ingested data → re-ingest ALL chronologically (1850→present) → diff vs backup.**
+A mismatch ⇒ something broke. **CAVEAT I flagged:** the current DB is missing 1877–1990, so a full
+re-ingest is a **SUPERSET** of the backup, not a byte-match — frame the diff as "every backup row
+reappears unchanged + overlap identical," not strict equality. **Also flagged for Hans:**
+`uuid_generate_v7()` `public_id`s and `retrieved_at` timestamps regenerate per ingest → a naive
+byte-diff WILL mismatch; the diff must exclude/normalize non-deterministic columns.
+
+### Ingest worklist drafted → `docs/60_OPERATIONS/INGEST_WORKLIST_2026-06-09.md`
+- **Already ingested (verified live):** OCR 1850–1876 (dense), 2000–2008 (dense, born-digital),
+  Gate F 1991–2024 (22,780, `official_xml`).
+- **Phase 1 = OCR ingest of the real gap 1877–1990** (un-ingested; the DB has only strays there).
+  Caveats: exclude 1862–1876 (re-OCR dupes of already-ingested years); **dedup variant labels**
+  (`1927-vol1-26chapters` vs `-chapters`, `1929-…-28/29chapters`, etc.); confirm `ingest_clean.py`
+  dedup key.
+- **Phase 2 = Gate F ingest of the 5 staged sessions** (1989/1993/2001/2003/2025) → gap-free 1989→2026.
+- **Overlap 1991–2000 (OCR ⟂ Gate F): Gate F is authoritative** (Patrick — settled); OCR = seam oracle.
+- **Gate F JSONL staged on the 5090** (`gate_f_out/`, 51,834 actions, 5 files).
+
+### Stray rows flagged + under investigation
+- Anomalous `source_document`-linked enactments scattered 1877–1999 (1–8/yr; e.g. 1993:1) **shouldn't
+  exist** — Patrick wants the root cause. **Sonnet forensic launched** (read-only) to trace origin
+  (mis-dated vs partial-ingest vs test) + whether any hold real data before purge.
+
+### Running overnight (read-only / no DB writes)
+- OCR campaign → **ETA ~4:30–6:00 AM** (14 vols, ~26k pages, 4 workers); crash/heat monitor on the 5080.
+- **Hans** verifying the worklist; **forensic** tracing the stray rows. Verdicts to be folded in.
+
+### Roadmap updated this session
+- `ROADMAP.md` Current-Status + Gate F row corrected (Gate F largely built; DB = 35,332 acts).
