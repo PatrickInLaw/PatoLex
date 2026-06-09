@@ -22,6 +22,43 @@ expected net-new. A strict "perfect match" only holds if you re-ingest *exactly*
 This doc = the chronological plan + exact what-to-ingest / skip / dedup, for Hans to verify
 against DB + OCR-output reality.
 
+## ⚠ HANS AUDIT — BLOCKERS & CORRECTIONS (resolve BEFORE the ingest runs)
+Hans adversarially verified this worklist against the live DB + 5090 queue. Real blockers found:
+
+**BLOCKERS (break the ingest / the diff as written):**
+1. **No `source_document` registrations exist for the 1877–1990 volumes.** `ingest_clean.py` resolves
+   by `content_sha256` (from each volume's `sha256.txt`); with no registration it **FAILS LOUD** on
+   the first volume ("no source_document with content_sha256 … refusing to ingest"). **Phase 1 needs
+   a source_document REGISTRATION step first** — missing from the plan. (Source_document table = 69
+   rows, all 1851–2008.)
+2. **`ingest_clean.py` `LEGISLATURE_MAP` ends at 1875-76.** Every session 1877–1990 would be committed
+   with `legislature = "1877-78"` (the label) instead of the correct ordinal — **silent data
+   corruption** (wrong value, no error). **Extend the map to 1990 before ingest.**
+3. **Dedup variants span 1927–1965, not 4 years.** 15+ years have competing `vol1` scans, several with
+   TWO numbered-chapter variants (1955 `54chapters` vs `55chapters`; 1957 `56` vs `57`; 1959/1961/
+   1963/1965 likewise; 1965 has 4 done variants). **No resolution protocol exists** → operator
+   improvises 15+ choices → silent double-ingest / wrong scan. **Define a canonical-pick rule per
+   (year,vol) before ingest.** NOTE: `1863` vs `1863-64` are DIFFERENT sessions (13th vs 15th Leg) —
+   NOT dedup candidates, keep both. `1941-vol1-41chapters` has no `-chapters` sibling — verify.
+4. **The "perfect-match" diff is broken by auto-increment ids.** `enactment.id` / `change_event.id` /
+   `provision.id` are bigint sequences → every row gets a NEW id after purge+reinsert → a naive
+   pg_dump byte-diff flags the ENTIRE corpus as changed. **Diff by LOGICAL key (citation +
+   in_act_order), not file/id.** Also normalize `retrieved_at`, JSONB key order in `ocr_provenance` /
+   `ocr_stats`, sequence state, and `public_id` (uuid_v7).
+
+**FACTUAL CORRECTIONS to this doc:**
+- "69 source_documents" → **67** have enactments; **2 are orphaned** registrations (identify them —
+  could collide with the new registration step).
+- "Gate F 1991–2024" → **2025 is ALREADY in the DB** (836 enactments, null source_document). So the
+  staged 2025 Gate F JSONL may be a **dup/no-op** — verify before re-ingesting 2025 in Phase D.
+- "185 done volumes" → **186**.
+- "~1862→2000 done" → **1997 is 3/6, 1998 is 1/6, 1999 is 0/5, 2000 held** — OCR 1997–2000 is
+  INCOMPLETE; Phase 1 is clean only through ~1996.
+- `trust_level='official_xml'` lives on **`change_event`**, not `enactment`.
+- **Pre-1850 rows (5):** 1831–1836 retroactive-dated acts in real sessions (e.g. `Stats. 1861 ch.277`
+  dated 1831-05-02) — will appear in the backup/diff; acknowledge, don't "fix".
+- "no citation collision" (2000–2008 dual layer) — **UNVERIFIED** by Hans; run the collision check.
+
 ## A. Already ingested — DO NOT re-ingest (verified via live DB, 2026-06-08)
 - **OCR session laws 1850–1876** — dense `source_document`-linked enactments (90–395/yr); 69 source_documents.
 - **2000–2008** — dense OCR-linked enactments (725–1,171/yr) = the born-digital Chief Clerk extracts already loaded.

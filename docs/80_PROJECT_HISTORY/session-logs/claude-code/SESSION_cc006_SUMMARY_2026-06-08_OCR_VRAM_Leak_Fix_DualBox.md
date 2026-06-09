@@ -180,5 +180,20 @@ byte-diff WILL mismatch; the diff must exclude/normalize non-deterministic colum
 - OCR campaign → **ETA ~4:30–6:00 AM** (14 vols, ~26k pages, 4 workers); crash/heat monitor on the 5080.
 - **Hans** verifying the worklist; **forensic** tracing the stray rows. Verdicts to be folded in.
 
+### Hans verdict on the worklist (done) — found REAL blockers (now in worklist §"HANS AUDIT")
+- **BLOCKER 1:** no `source_document` registrations exist for the 1877–1990 volumes → `ingest_clean.py`
+  fails loud on volume #1 (resolves by `content_sha256`). **Plan needs a registration step.**
+- **BLOCKER 2:** `ingest_clean.py` `LEGISLATURE_MAP` ends at 1875-76 → 1877–1990 silently committed with
+  `legislature="1877-78"` (wrong ordinal). **Extend the map.**
+- **BLOCKER 3:** dedup variants span **1927–1965** (15+ yrs, some with two numbered-chapter vol1
+  variants, e.g. 1955 54 vs 55chapters), no resolution protocol — my "etc." hid the scale. `1863` vs
+  `1863-64` are DIFFERENT sessions (keep both, not dupes).
+- **BLOCKER 4 (kills the diff):** `enactment/change_event/provision.id` are auto-increment → every row
+  re-id'd on purge+reinsert → naive byte-diff shows ALL changed. **Diff by logical key (citation +
+  in_act_order)**, normalize retrieved_at / JSONB order / sequences / uuid_v7.
+- Corrections: 67 (not 69) source_docs have enactments (2 orphaned); **2025 Gate F already in DB**
+  (836 rows — staged 2025 may be a no-op); 186 (not 185) done; OCR 1997–2000 INCOMPLETE; 5 pre-1850
+  retroactive rows unflagged. Full list in `INGEST_WORKLIST_2026-06-09.md` §HANS AUDIT.
+
 ### Roadmap updated this session
 - `ROADMAP.md` Current-Status + Gate F row corrected (Gate F largely built; DB = 35,332 acts).
