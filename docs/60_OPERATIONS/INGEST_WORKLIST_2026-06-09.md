@@ -1,5 +1,19 @@
 # Ingestion Worklist — post-OCR pass (drafted cc006, 2026-06-08; to be Hans-verified)
 
+> **STATUS UPDATE 2026-06-09 ~07:30 — OCR CAMPAIGN IS COMPLETE & VERIFIED.**
+> The 5090 finished all OCR ~**05:13 AM 2026-06-09** (the "01:28 crash" was a `monitor_5090.ps1`
+> false alarm — an SSH-poll drop, not a real crash; the box kept writing output until 05:13, proven
+> by `page_ocr_results.json` mtimes). Queue: `done=198, pending=0, in_progress=1 (1998-vol6), held=6`.
+> Output verified REAL by sampling 9 vols 1995–1999 (1341–2199 pages each, genuine text). **No OCR
+> remains; do NOT re-OCR anything.** Two pre-ingest items:
+> 1. **1998-vol6** OCR is complete on the **5080** (`production-1998-vol6/ocr_consensus/`, 27 MB,
+>    pages 10→2156) — flip its queue flag to `done` and ensure the ingest can reach it (it lives on
+>    the 5080, the other done outputs live on the 5090). Do NOT re-OCR.
+> 2. **Missing-years gap audit:** queue years span 1862–2000 with gaps (mostly legit biennial
+>    non-sessions). Suspicious — verify against the CA session calendar before declaring corpus
+>    complete: **both 1901 & 1902, both 1908 & 1909, and the 1950s–60s cluster** (1952/54/56/58/60/62/64).
+> Full detail in `SESSION_cc006_..._DualBox.md` → "CORRECTION (CONTINUATION #4)".
+
 **Operator note:** ingestion runs **on the 5090** (64 GB beasty CPU; ingest is light work) and
 connects to the **patolex PostgreSQL DB on the 5080** over Tailscale (`PGHOST=100.108.42.91`). It
 is **supervised (Opus + Patrick), run tomorrow AM, never automatically.**

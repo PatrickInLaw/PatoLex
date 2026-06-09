@@ -436,3 +436,7 @@ C:\Windows\System32\OpenSSH\scp.exe: Connection closed
 [2026-06-09 04:44 PT] CLAIM | claim rc=255 ssh: connect to host 100.70.54.56 port 22: Connection timed out | WARN
 [2026-06-09 04:44 PT] CLAIM | claim rc=255 ssh: connect to host 100.70.54.56 port 22: Connection timed out | WARN
 [2026-06-09 04:44 PT] WORKER | queue drained / no claimable volume -- exiting | OK
+[2026-06-09 07:14 PT] WORKER-5080 | plan: 14 volume(s) to OCR, 0 skipped (min_ram=3.0GB python=Python) | OK
+[2026-06-09 07:14 PT] WORKER-5080 | START 1999-vol5 (1999_Vol5.pdf) | free RAM 6.5 GB | OK
+[2026-06-09 08:49 PT] WORKER-5080 | DONE  1999-vol5 in 94.6 min | rc=0 | OK
+[2026-06-09 08:49 PT] WORKER-5080 | START 1999-vol4 (1999_Vol4.pdf) | free RAM 4.8 GB | OK

@@ -217,3 +217,55 @@ byte-diff WILL mismatch; the diff must exclude/normalize non-deterministic colum
 
 ### Roadmap updated this session
 - `ROADMAP.md` Current-Status + Gate F row corrected (Gate F largely built; DB = 35,332 acts).
+
+---
+
+## CORRECTION (CONTINUATION #4) — 2026-06-09 ~07:30 AM — "01:28 CRASH" WAS A FALSE ALARM; OCR IS COMPLETE
+
+**The 01:28 "crash / VRAM hang / OCR not finished" conclusion above is WRONG. Do not act on it.**
+Evidence gathered this morning after the box was reset:
+
+1. **The 5090 did NOT crash at 01:28.** The `monitor_5090.ps1` script lost the **SSH connection** for 3
+   consecutive polls (01:26→01:28) and, by design ("box disappears = crash"), declared a crash and
+   exited. But the last GPU reading before the miss (01:24:56) was **healthy**: `50C, 100% util, 128 W,
+   31364 MiB` — fluctuating normally, NOT the hung signature (falling power + VRAM glued at ceiling).
+   The monitor cannot distinguish an SSH/network blip from a real crash. **It false-alarmed.**
+2. **The box kept OCRing for ~4 more hours.** Actual `page_ocr_results.json` write-times on the 5090
+   (`C:/Users/patolex/PatoLex-scratch/production-<label>/ocr_consensus/`):
+   `1998-vol1 @ 01:16, 1999-vol3 @ 02:56, 1999-vol1 @ 02:59, 1998-vol2 @ 03:06, 1997-vol6 @ 03:41,
+   1998-vol5 @ 04:22, 1999-vol4 @ 04:25, 1999-vol5 @ 05:13`. **Last volume finished ~05:13 AM** —
+   consistent with the ORIGINAL ~3:30 AM ETA (bulk) + tail, NOT the "~4:30–6:00 AM" revised guess.
+3. **The OCR output is REAL, not flag-flips.** Sampled 9 volumes (1995–1999): each has 1341–2199 pages,
+   15–25 MB, with genuine per-page text (sample 900–4350 chars). Verified via
+   `_verify_5090_output.py` / `_verify_5090_mtimes.py` (in `PatoLex-scratch`).
+
+**Queue state now (verified on 5090 `C:/Users/patolex/PatoLex-scratch/production_queue_state.json`):**
+`done=198, pending=0, in_progress=1 (1998-vol6), held=6 (2000-vol* born-digital dedup)` — 205 vols total.
+Year span **1862–2000**, 92 distinct years.
+
+**=> THE OCR CAMPAIGN IS COMPLETE. There is NOTHING to re-OCR. Do NOT relaunch OCR workers.**
+- I launched the 5080 reverse-worklist worker at 07:14, then **killed it immediately** when I found every
+  volume on it was already `done` on the 5090. It only processed the first few stage-0 steps of 1999-vol5
+  (no wasted full volume). The `_remainder_backward.txt` plan is **moot** (was premised on the false
+  "5090 only reached ~1996/97").
+
+### REMAINING ITEMS FOR THE SUPERVISED OPUS SESSION (in priority order)
+1. **1998-vol6 bookkeeping:** its OCR is **complete on the 5080**
+   (`C:/Users/PatrickKolasinski/PatoLex-scratch/production-1998-vol6/ocr_consensus/page_ocr_results.json`,
+   pages 10→2156, 27 MB). It is only still `in_progress` in the queue. **Flip it to `done` and make sure
+   its output is reachable by the ingest (it lives on the 5080, the other "done" outputs live on the
+   5090).** Do NOT re-OCR.
+2. **MISSING-YEARS gap audit (corpus completeness):** queue has NO volume for these years —
+   `1866,1868,1870,1872,1874,1876,1878,1879,1882,1884,1886,1888,1890,1892,1894,1896,1898,1901,1902,1904,
+   1908,1909,1911,1912,1914,1916,1918,1920,1922,1924,1926,1928,1930,1932,1934,1936,1940,1942,1944,1946,
+   1952,1954,1956,1958,1960,1962,1964`. 19th-c even-year gaps are almost certainly legit (biennial
+   sessions). **Suspicious (need a session-calendar check):** both 1901 AND 1902, both 1908 AND 1909,
+   and the 1950s–60s cluster. Confirm true non-sessions vs. un-acquired volumes BEFORE declaring the
+   corpus complete.
+3. **Ingest** is still the supervised job (Opus + Patrick, runs ON the 5090; **DB lives on the 5080**,
+   reached over Tailscale `100.108.42.91:5432`). **Do NOT ingest until the above is confirmed.** Honor
+   the 4 Hans blockers + date-parser-bug-first + stray-row review in `INGEST_WORKLIST_2026-06-09.md`.
+4. **Boxes idle now.** 5090 reset, GPU clean (36C, 0%, 1.4 GB). 5080 idle. No workers running.
+
+**Lesson for durable capture:** the SSH-poll monitor gives FALSE crash positives on network blips — a
+"DISAPPEARED" verdict must be cross-checked against output-file mtimes before concluding a real crash.
