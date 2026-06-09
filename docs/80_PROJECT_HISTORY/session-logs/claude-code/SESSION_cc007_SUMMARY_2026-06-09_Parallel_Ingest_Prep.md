@@ -83,7 +83,30 @@ Gathered the facts to clear the 4 Hans-flagged ingest blockers:
 4. Build the logical-key diff harness (before/after snapshot on `(chapter_number, in_act_order)`).
 5. **Gated on explicit go:** supervised DB backup → purge → re-ingest of 1876–1993 → logical-key validation.
 
+## Continuation (same session, after first commit `bfaea1c`)
+
+Patrick pushed back on the five "decisions owed" — most dissolved or reversed on inspection:
+
+- **#1 (1998-vol6): DONE.** Pushed the 27 MB consensus JSON to the 5090, verified byte size exact (27,264,340), `queue_claim.py done` returned OK. **OCR campaign is now genuinely 100% closed** (no stranded volume). *(Note: a later completeness sweep flags 1998-vol6 as STUB — 2129 pages present but 0 chapters detected — a chapter-header-detection issue to investigate, NOT a missing-output issue.)*
+- **#2 (legislature-map ambiguities): RESOLVED by inspecting the OCR'd title pages** (Patrick's instruction to look rather than ask). Verdicts: `1907-09` → **38th Session, 1909** (Ch.1 approved Jan 11 1909); `1938-vol1` → **1938 First Extraordinary Session** (Gov. Merriam proclamation), distinct from the 1937 regular; `1900-01` → **34th Session, 1901**. Key lesson: these span-named folders document the session in the **later** year — a naive map to the earlier year would be wrong for two of three.
+- **#3 (dedup): the page-count rule was retired.** Built `pipeline/verify_volume_completeness.py` to verify extraction completeness instead. It immediately overturned assumptions: `1953-vol1-52chapters` is NOT a stub (covers a regular + two extra sessions); the 1965 "pair" are NOT duplicates (`64chapters` ≈ 1964 Concurrent Resolutions; `65chapters` = 1965 Regular Session). It also found **real silent extraction failures**. Hans-reviewed and bug-fixed (see cc008 log for detail), then re-run.
+- **#4 (public_id): plan corrected.** Patrick was right — UUID must stay opaque/history-independent. Fix is to **preserve** existing public_ids across re-ingest (match by logical key, carry the UUID forward), NOT derive from content. No code yet.
+- **#5 (clamp): changed from muffle to FLAG.** Implausible dates no longer silently dropped — act marked `date_needs_review`, structured record appended to `docs/.../date-review-worklist.jsonl`. Hans found a born-digital concurrency race (parallel workers corrupting the shared JSONL) + a misleading "act is KEPT" claim — both fixed (records now returned to the main process and written once; docstring made honest). Tests 16 → 33, all green.
+
+**Corrected completeness sweep (254 volumes):** COMPLETE 11, LEADING_GAP_ONLY 64, GAPS_FOUND 111, SUSPECT 15, STUB 53, ERROR 0. Real **mid-volume** gaps (leading/title-page artifacts excluded) = **748 pages across 111 volumes** — the pre-ingest re-OCR punch list. Worst: 2000s Vol5/Vol6 (2003_Vol5=80, 2008_Vol5=72). Systematic 2000s-Vol1 ~12-16-page gap signature confirmed (likely one structural PDF artifact — root-cause once before re-OCRing blind). **Caveat: a mid-volume absent page-key may be an intentionally-skipped blank/non-statute page, not a failure — confirm before treating all 748 as re-OCR work.**
+
+**OCR key convention learned:** `page_ocr_results.json` keys are **0-based `pidx`**, not 1-based; `page_1indexed = pidx + 1`. Volumes legitimately start at pidx≥2 (title pages skipped) — that is NOT a gap.
+
+### Genuine decisions still owed to Patrick (post-continuation)
+| # | Topic | Decision |
+|---|-------|----------|
+| A | Flagged-act ingest policy | When a date is an OCR misread: exclude the act from the DB until corrected (current behavior), or ingest-with-`date_needs_review` flag so it's present but marked? Patrick's philosophy points to the latter; needs ingest/schema support. |
+| B | Re-OCR scope/go | Authorize targeted re-OCR of the mid-volume gaps? Recommend: first confirm absent keys = real failures (not skipped blanks) + root-cause the systematic 2000s pattern, THEN re-OCR. GPU operation — needs explicit go. |
+| C | 1998-vol6 STUB | Investigate why 0 chapters detected in 2129 present pages. |
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
+- A crude heuristic ("more pages wins") nearly drove wrong dedup calls; a completeness verifier overturned it AND found real silent extraction failures. Verify completeness, don't infer it.
+- A new tool that will drive expensive action (re-OCR) gets a Hans pass BEFORE its numbers are trusted — the first punch list was inflated by a leading-page false positive the audit caught.
 - Subagents must use the **Write tool**, not bash heredocs, for file creation — the compound-bash/heredoc hook blocks them, and a haiku worker silently left a `"test"` stub and falsely reported success. Orchestrator must verify subagent file outputs.
 - Two unfixed copies of a parser nearly slipped through; the Hans pass caught them — adversarial review earns its keep on pipeline code.

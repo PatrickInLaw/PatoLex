@@ -45,6 +45,30 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 import fitz  # PyMuPDF
 
 # ---------------------------------------------------------------------------
+# DATE REVIEW WORKLIST (same file as ingest_from_ocr.py uses)
+# ---------------------------------------------------------------------------
+DATE_REVIEW_WORKLIST = Path(
+    r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"
+    r"\docs\80_PROJECT_HISTORY\run-logs\date-review-worklist.jsonl"
+)
+
+
+def _append_date_review(record: dict):
+    """Append one JSON record to the date review worklist (JSONL, append-only).
+
+    MUST only be called from the MAIN process — not from inside a
+    ProcessPoolExecutor worker.  Worker subprocesses collect review records as
+    part of their return value (see process_one / parse_born_digital_volume) and
+    the main process calls this function once per record after collecting results.
+    Calling it concurrently from multiple subprocesses is NOT safe on Windows
+    (file appends are not atomic; writes interleave and corrupt the JSONL).
+    """
+    line = json.dumps(record, ensure_ascii=False) + "\n"
+    DATE_REVIEW_WORKLIST.parent.mkdir(parents=True, exist_ok=True)
+    with open(str(DATE_REVIEW_WORKLIST), "a", encoding="utf-8") as fh:
+        fh.write(line)
+
+# ---------------------------------------------------------------------------
 # INLINED helpers (byte-faithful copies of ingest_from_ocr.py definitions).
 # Keeping them here makes this script self-contained and DB-free.
 # ---------------------------------------------------------------------------
@@ -100,7 +124,7 @@ def normalize_month(month_str):
     return _MONTH_NORM.get(month_str.lower()[:3], month_str.capitalize())
 
 
-def parse_act_date(text, volume_year=None):
+def parse_act_date(text, volume_year=None, _rejected_out=None):
     """Return (iso_date_str, raw_match_str) or (None, "").
 
     volume_year -- the nominal calendar year of the source PDF (e.g. 1997 for
@@ -109,6 +133,16 @@ def parse_act_date(text, volume_year=None):
     is rejected rather than being committed as the act's approval date.
 
     YEAR_CLAMP_WINDOW = 3  (same constant as in ingest_from_ocr.py).
+
+    _rejected_out -- optional list.  When provided AND volume_year is set, each
+    out-of-window match (a date that was FOUND by a regex but whose year is
+    implausible) is appended as a dict {"raw": str, "parsed_year": int}.
+    "No match at all" is NOT appended — only implausible matches are.
+
+    Distinguishing "no date found" vs "date found but implausible":
+      * Return (None, "") with empty _rejected_out -> genuinely no date present.
+      * Return (None, "") with non-empty _rejected_out -> date(s) found but all
+        out-of-window; OCR-error suspect, not a legitimately dateless act.
 
     Order of attempt for born-digital volumes:
       1. APPROVED_MODERN_RE first ("Approved by Governor …" / "Filed with
@@ -129,6 +163,10 @@ def parse_act_date(text, volume_year=None):
             return True
         return abs(year_int - volume_year) <= YEAR_CLAMP_WINDOW
 
+    def _record_rejected(raw_str, year_int):
+        if _rejected_out is not None:
+            _rejected_out.append({"raw": raw_str, "parsed_year": year_int})
+
     # --- 1. Modern structured format first (Cluster-B fix) -------------------
     for m in APPROVED_MODERN_RE.finditer(text):
         month_str = normalize_month(m.group(1))
@@ -138,6 +176,7 @@ def parse_act_date(text, volume_year=None):
             d = datetime.datetime.strptime(
                 month_str + " " + day_str + " " + year_raw, "%B %d %Y")
             if not _year_ok(d.year):
+                _record_rejected(re.sub(r"\s+", " ", m.group(0)).strip(), d.year)
                 continue
             raw = re.sub(r"\s+", " ", m.group(0)).strip()
             return d.strftime("%Y-%m-%d"), raw
@@ -153,6 +192,7 @@ def parse_act_date(text, volume_year=None):
             d = datetime.datetime.strptime(
                 month_str + " " + day_str + " " + year_raw, "%B %d %Y")
             if not _year_ok(d.year):
+                _record_rejected(re.sub(r"\s+", " ", m.group(0)).strip(), d.year)
                 continue
             raw = re.sub(r"\s+", " ", m.group(0)).strip()
             return d.strftime("%Y-%m-%d"), raw
@@ -171,8 +211,24 @@ CHAP_HDR_RE = re.compile(r"^\s*CHAPTER\s+(\d+)\s*$")
 def parse_born_digital_volume(pdf_path):
     """Extract chaptered statutes from one born-digital Statutes volume.
 
-    Returns (acts, meta) where meta carries page_count and a born-digital
-    sanity flag (does the doc actually have a text layer?).
+    Returns (acts, meta, review_records) where:
+      - acts        list of act dicts (one per CHAPTER header found)
+      - meta        dict with page_count, total_text_chars, has_text_layer
+      - review_records  list of date-review worklist dicts for acts whose
+                        parsed date year was implausible (date_needs_review=True).
+
+    IMPORTANT: review_records are RETURNED to the caller rather than written
+    directly to the JSONL worklist file here.  This function runs inside a
+    ProcessPoolExecutor worker subprocess; concurrent file appends from multiple
+    workers are NOT atomic on Windows and corrupt the JSONL.  The main process
+    is responsible for calling _append_date_review() once per record after
+    collecting results from all futures.
+
+    NOTE on DB ingest: acts with date_needs_review=True are placed in the
+    acts_flagged bucket (confident=False) and EXCLUDED from DB ingest.  They
+    are retained in the JSON stage file under the act list so the parse output
+    is complete.  Whether flagged acts should instead be ingested with a flag
+    is a pending design decision (see DECISION PENDING comment in process_one).
     """
     doc = fitz.open(pdf_path)
     page_count = doc.page_count
@@ -194,6 +250,7 @@ def parse_born_digital_volume(pdf_path):
 
     starts = [i for i, (pi, ln) in enumerate(lines) if CHAP_HDR_RE.match(ln)]
     acts = []
+    review_records = []  # collected here; written by main process (concurrency fix)
     for k, si in enumerate(starts):
         ei = starts[k + 1] if k + 1 < len(starts) else len(lines)
         chap_num = int(CHAP_HDR_RE.match(lines[si][1]).group(1))
@@ -212,12 +269,52 @@ def parse_born_digital_volume(pdf_path):
                 title = re.sub(r"\s+", " ", " ".join(tparts)).strip()[:500]
                 break
 
-        iso_date, approved_str = parse_act_date(full, volume_year=volume_year)
+        # Parse the date ONCE; result is reused for both the confidence gate and
+        # the act record — avoids the double-parse that existed when is_confident_act
+        # re-ran parse_act_date independently.
+        rejected = []
+        iso_date, approved_str = parse_act_date(
+            full, volume_year=volume_year, _rejected_out=rejected)
+
+        # If a date was FOUND by a regex but the year is implausible, flag it.
+        # DECISION PENDING: flagged acts are currently excluded from DB ingest
+        # (confident=False); whether they should instead be ingested with a flag
+        # is an open product decision.  Do NOT change this routing until that
+        # decision is made.
+        date_needs_review = False
+        if iso_date is None and rejected:
+            date_needs_review = True
+            label = label_for(pdf_path)
+            citation = label + " ch." + str(chap_num)
+            for rej in rejected:
+                review_rec = {
+                    "timestamp_utc": datetime.datetime.utcnow().isoformat() + "Z",
+                    "session_label": label,
+                    "volume_year": volume_year,
+                    "raw_match": rej["raw"],
+                    "parsed_year": rej["parsed_year"],
+                    "year_delta": (
+                        abs(rej["parsed_year"] - volume_year) if volume_year else None
+                    ),
+                    "citation": citation,
+                    "source_page": start_page + 1,
+                    "in_act_order": k,
+                    "reason": "year_out_of_window",
+                }
+                # Collect for main-process write — do NOT call _append_date_review
+                # here (subprocess concurrency hazard on Windows).
+                review_records.append(review_rec)
+            # Do NOT print from the worker subprocess — output interleaves
+            # unpredictably under multiprocessing.  The main process prints a
+            # summary line for each flagged act after collecting results.
+
+        # Use iso_date / date_needs_review already computed above (no re-parse).
         confident = (
             chap_num > 0
             and bool(AN_ACT_RE.search(full))
             and bool(ENACT_MARKER_RE.search(full))
             and iso_date is not None
+            and not date_needs_review  # implausible-date acts are NOT confident
             and len(full) >= 100
         )
         acts.append({
@@ -227,6 +324,7 @@ def parse_born_digital_volume(pdf_path):
             "title": title,
             "approved_date": approved_str,
             "iso_date": iso_date,
+            "date_needs_review": date_needs_review,
             "text": re.sub(r"[ \t]+", " ", full)[:6000],
             "source_page": start_page + 1,
             "confident": confident,
@@ -236,7 +334,7 @@ def parse_born_digital_volume(pdf_path):
         "total_text_chars": total_chars,
         "has_text_layer": has_text_layer,
     }
-    return acts, meta
+    return acts, meta, review_records
 
 
 def label_for(pdf_path):
@@ -255,7 +353,19 @@ def vol_of(pdf_path):
 
 
 def process_one(args):
-    """Worker: parse one volume, write its per-volume JSON, return a summary."""
+    """Worker: parse one volume, write its per-volume JSON, return a summary.
+
+    IMPORTANT — date-review worklist writes are NOT performed here.
+    parse_born_digital_volume() returns review records as part of its result;
+    they are included in this dict under the key "review_records" and written
+    to the JSONL worklist by the MAIN process after collecting all futures.
+    This avoids concurrent file appends from multiple worker subprocesses, which
+    are NOT atomic on Windows and would corrupt the JSONL.
+
+    DECISION PENDING: acts with date_needs_review=True are excluded from DB
+    ingest (confident=False).  Whether they should be ingested-with-a-flag
+    instead is an open product decision.
+    """
     pdf_path, out_root = args
     label = label_for(pdf_path)
     t0 = time.time()
@@ -266,9 +376,10 @@ def process_one(args):
         "vol": vol_of(pdf_path),
         "ok": False,
         "error": None,
+        "review_records": [],  # populated on success; written by main process
     }
     try:
-        acts, meta = parse_born_digital_volume(pdf_path)
+        acts, meta, review_records = parse_born_digital_volume(pdf_path)
         out_dir = Path(out_root) / ("production-" + label)
         out_dir.mkdir(parents=True, exist_ok=True)
         out_path = out_dir / "born_digital_parsed.json"
@@ -298,6 +409,7 @@ def process_one(args):
             "chapter_max": payload["chapter_max"],
             "no_text_layer": not meta["has_text_layer"],
             "secs": round(time.time() - t0, 1),
+            "review_records": review_records,
         })
     except Exception as e:
         rec["error"] = repr(e) + "\n" + traceback.format_exc()
@@ -353,6 +465,23 @@ def main():
                       flush=True)
             else:
                 print("FAIL %-14s %s" % (r["label"], r["error"]), flush=True)
+
+    # Write date-review records from the MAIN process (concurrency fix: worker
+    # subprocesses returned records via their result dict; we write them here
+    # in a single-threaded context so file appends are safe and non-interleaving).
+    # Print DATE-REVIEW-FLAG summary lines here too (moved from worker to avoid
+    # interleaved output under multiprocessing).
+    for r in results:
+        for rev in r.get("review_records", []):
+            _append_date_review(rev)
+            print(
+                "DATE-REVIEW-FLAG  " + rev["citation"]
+                + "  page=" + str(rev["source_page"])
+                + "  implausible_year=" + str(rev["parsed_year"])
+                + "  volume_year=" + str(rev["volume_year"])
+                + "  -- worklist updated",
+                flush=True,
+            )
 
     results.sort(key=lambda r: (r.get("year", 0), r.get("vol", 0)))
 

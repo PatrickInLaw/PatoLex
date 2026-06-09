@@ -1,0 +1,18 @@
+[2026-06-09 00:00 PT] SETUP | cc008: Fix Hans audit findings in verify_volume_completeness.py | OK
+[2026-06-09 00:01 PT] INVESTIGATE | Sampled OCR JSON key format across 15+ volumes -- all top-level keys are numeric strings (0-based pidx, not 1-based page numbers) | OK
+[2026-06-09 00:02 PT] FINDING | OCR key convention: keys = pidx (0-based). page_1indexed = pidx+1. Most volumes start at pidx=2 (2 cover/title pages skipped). 1850 starts at pidx=54 (long front-matter). Some 2000s start at pidx=0. | OK
+[2026-06-09 00:03 PT] FIX | Bug 1: Added _numeric_keys_sorted() helper; all sorted(...int(x)...) calls now use it, skipping non-numeric keys safely | OK
+[2026-06-09 00:04 PT] FIX | Bug 1b: Wrapped load_volume() body in try/except; processing exceptions yield verdict=ERROR and sweep continues | OK
+[2026-06-09 00:04 PT] FIX | Bug 1c: Incremental report write after each volume -- crash mid-sweep preserves all prior results | OK
+[2026-06-09 00:05 PT] FIX | Bug 2: check_page_contiguity() now returns (leading_missing, mid_volume_missing) tuple. Leading = front-matter skips (pidx 0..min-1), not content gaps. Mid-volume = gaps strictly within min..max, the real re-OCR signal | OK
+[2026-06-09 00:06 PT] FIX | Bug 2b: New LEADING_GAP_ONLY verdict for volumes with leading-only gaps and zero mid-volume gaps. compute_verdict() only sets GAPS_FOUND for actual mid-volume missing keys. | OK
+[2026-06-09 00:07 PT] FIX | Bug 3: compute_verdict() primary_session selection now iterates ALL sessions: prefers REGULAR, then UNKNOWN, then first-found (no early break) | OK
+[2026-06-09 00:08 PT] FIX | Bug 4a: Module docstring corrected -- zero-density windows add a NOTE, not SUSPECT verdict | OK
+[2026-06-09 00:08 PT] FIX | Bug 4b: Removed duplicate compute_verdict() call in --all main loop. Verdict set once inside load_volume(). | OK
+[2026-06-09 00:09 PT] RUN | Full sweep --all: 275 dirs, 254 with OCR data, 0 errors, 0 crashes | OK
+[2026-06-09 00:10 PT] RESULTS | COMPLETE=11 LEADING_GAP_ONLY=64 GAPS_FOUND=111 SUSPECT=15 STUB=53 ERROR=0 | OK
+[2026-06-09 00:11 PT] RESULTS | Real mid-volume punch list: 748 total missing pidx pages. Pre-1915: 8 vols/22 pages. 1915+: 103 vols/726 pages. | OK
+[2026-06-09 00:12 PT] RESULTS | Systematic pattern confirmed: Vol1 (2000-2008) ~12-16 gaps each; Vol5/Vol6 large gaps (51-80) -- likely end-of-volume PDF boundary issue | OK
+[2026-06-09 00:13 PT] RESULTS | 1998-vol6: STUB (0 chapters found in 2129 pages + 18 mid-vol gaps). Separate from leading artifact. Needs investigation. | WARN
+[2026-06-09 00:14 PT] RESULTS | 1965-vol1-64chapters: GAPS_FOUND (9 mid-vol gaps, 848 pages, 148 chapters). 1965-vol1-65chapters: LEADING_GAP_ONLY (clean, 0 mid-vol gaps) | OK
+[2026-06-09 00:15 PT] REPORT | completeness-report.json written to docs/80_PROJECT_HISTORY/run-logs/ | OK

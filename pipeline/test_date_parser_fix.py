@@ -15,7 +15,17 @@ Two bug classes:
                June 2, 1913") instead of the real "Approved by Governor ..."
                bracket date.
 
-No DB, no network, no file I/O.  Run with:
+New behavior (flag-not-muffle):
+  When volume_year is set and a date IS found by a regex but its year is
+  outside the ±YEAR_CLAMP_WINDOW, parse_act_date() now records the rejected
+  candidate in the _rejected_out list (caller-supplied collector) instead of
+  silently discarding it.  This lets callers distinguish:
+    (None, "", empty _rejected_out)  -> genuinely no date present
+    (None, "", non-empty _rejected_out) -> date found but year implausible
+                                           (OCR-error suspect -> review worklist)
+
+No DB, no network, no file I/O (except where a test explicitly writes to a
+temp path to verify the review worklist mechanism).  Run with:
     python pipeline/test_date_parser_fix.py
 
 Exits 0 on all pass, non-zero on any failure.
@@ -23,6 +33,9 @@ Exits 0 on all pass, non-zero on any failure.
 
 import sys
 import os
+import json
+import tempfile
+import pathlib
 
 # Ensure pipeline/ is on the path so we can import the fixed modules
 _REPO = os.path.join(os.path.dirname(__file__), "..")
@@ -140,12 +153,21 @@ check(
 )
 
 # 2. With correct volume_year=1855: should REJECT the 1895 match (40 years off)
-#    and return None because no other match exists.
-iso, raw = _ingest.parse_act_date(_TEXT_1855_CORRUPTED, volume_year=1855)
+#    and return None because no other match exists.  Flag-not-muffle: the
+#    rejected candidate must appear in _rejected_out so callers can write a
+#    worklist record rather than silently swallowing the OCR error.
+rejected_a2 = []
+iso, raw = _ingest.parse_act_date(
+    _TEXT_1855_CORRUPTED, volume_year=1855, _rejected_out=rejected_a2)
 check(
     "A2: volume_year=1855 -> rejects corrupted year 1895 (40 yrs off) -> None",
     iso is None,
     f"got iso={iso!r}  (expected None)",
+)
+check(
+    "A2b: flag-not-muffle -- rejected_out has the 1895 candidate recorded",
+    len(rejected_a2) == 1 and rejected_a2[0]["parsed_year"] == 1895,
+    f"got rejected_out={rejected_a2!r}  (expected one entry with parsed_year=1895)",
 )
 
 # 3. Correctly-printed year in 1855 session should PASS.
@@ -181,6 +203,7 @@ check(
 )
 
 # 5. 1860 volume with OCR misread 1860->1880 (20 years off) -> should be rejected.
+#    Flag-not-muffle: _rejected_out must capture the 1880 candidate.
 _TEXT_1860_CORRUPTED = """\
 CHAPTER X.
 An Act concerning public schools.
@@ -188,11 +211,35 @@ The People of the State of California do enact as follows:
 Section 1. The common school fund is hereby established.
 [Approved April 10, 1880.]
 """
-iso, raw = _ingest.parse_act_date(_TEXT_1860_CORRUPTED, volume_year=1860)
+rejected_a5 = []
+iso, raw = _ingest.parse_act_date(
+    _TEXT_1860_CORRUPTED, volume_year=1860, _rejected_out=rejected_a5)
 check(
     "A5: volume_year=1860, corrupted year 1880 (20 yrs off) -> rejected -> None",
     iso is None,
     f"got iso={iso!r}  (expected None)",
+)
+check(
+    "A5b: flag-not-muffle -- rejected_out has the 1880 candidate recorded",
+    len(rejected_a5) == 1 and rejected_a5[0]["parsed_year"] == 1880,
+    f"got rejected_out={rejected_a5!r}  (expected one entry with parsed_year=1880)",
+)
+
+# 6. No date present at all (genuinely dateless act): _rejected_out must remain
+#    EMPTY so callers can distinguish "OCR error" from "legitimately no date".
+_TEXT_NO_DATE = """\
+CHAPTER XI.
+An Act granting lands to settlers.
+The People of the State of California do enact as follows:
+Section 1. Certain lands are hereby granted.
+"""
+rejected_a6 = []
+iso, raw = _ingest.parse_act_date(
+    _TEXT_NO_DATE, volume_year=1860, _rejected_out=rejected_a6)
+check(
+    "A6: genuinely no date in text -> returns None AND rejected_out is empty",
+    iso is None and len(rejected_a6) == 0,
+    f"got iso={iso!r}  rejected_out={rejected_a6!r}  (expected None and empty list)",
 )
 
 
@@ -240,17 +287,26 @@ check(
 # B3. Year clamp also blocks 1913 even if APPROVED_MODERN_RE found nothing:
 #     a hypothetical text with only the APPROVED_RE-style 1913 body date and
 #     NO "Approved by Governor" bracket.
+#     Flag-not-muffle: _rejected_out must capture 1913 so callers can flag this
+#     as an OCR-suspect rather than treating it as a legitimately dateless act.
 _TEXT_2000_BODY_ONLY = """\
 CHAPTER 43.
 An Act concerning historical measures.
 The people of the State of California do enact as follows:
 SECTION 1. The initiative measure approved June 2, 1913, is cited.
 """
-iso, raw = _ingest.parse_act_date(_TEXT_2000_BODY_ONLY, volume_year=2000)
+rejected_b3 = []
+iso, raw = _ingest.parse_act_date(
+    _TEXT_2000_BODY_ONLY, volume_year=2000, _rejected_out=rejected_b3)
 check(
     "B3: volume_year=2000, body has only 1913 date (no modern bracket) -> clamped, returns None",
     iso is None,
     f"got iso={iso!r}  (expected None — year 1913 is 87 yrs off from 2000)",
+)
+check(
+    "B3b: flag-not-muffle -- rejected_out has the 1913 body-date candidate recorded",
+    len(rejected_b3) == 1 and rejected_b3[0]["parsed_year"] == 1913,
+    f"got rejected_out={rejected_b3!r}  (expected one entry with parsed_year=1913)",
 )
 
 # B4. 2008 act with ONLY a modern bracket (normal case, no body noise) -> accepted.
@@ -363,14 +419,247 @@ check(
     f"got iso={iso!r}",
 )
 
-# year one beyond boundary (volume_year + 4): should be rejected
+# year one beyond boundary (volume_year + 4): should be rejected.
+# Flag-not-muffle: the 1859 candidate must appear in _rejected_out.
 _TEXT_EDGE_PLUS4 = "An Act.\nThe People of the State of California do enact as follows:\n[Approved May 5, 1859.]"
-iso, raw = _ingest.parse_act_date(_TEXT_EDGE_PLUS4, volume_year=1855)
+rejected_bound2 = []
+iso, raw = _ingest.parse_act_date(
+    _TEXT_EDGE_PLUS4, volume_year=1855, _rejected_out=rejected_bound2)
 check(
     "BOUND2: volume_year=1855, year=1859 (+4) -> rejected (outside boundary)",
     iso is None,
     f"got iso={iso!r}  (expected None)",
 )
+check(
+    "BOUND2b: flag-not-muffle -- rejected_out has the 1859 candidate",
+    len(rejected_bound2) == 1 and rejected_bound2[0]["parsed_year"] == 1859,
+    f"got rejected_out={rejected_bound2!r}",
+)
+
+
+# ---------------------------------------------------------------------------
+# WORKLIST FILE: verify _append_date_review writes a valid JSONL record
+# ---------------------------------------------------------------------------
+# This test patches DATE_REVIEW_WORKLIST to a temp path, calls _append_date_review
+# directly, and verifies the written record has the required fields.
+
+print("\n=== WORKLIST FILE: _append_date_review writes a valid JSONL record ===\n")
+
+import tempfile, pathlib as _pl
+
+_tmp_worklist = pathlib.Path(tempfile.mktemp(suffix=".jsonl"))
+# Monkey-patch the module-level path for the duration of this test.
+_orig_worklist = _ingest.DATE_REVIEW_WORKLIST
+_ingest.DATE_REVIEW_WORKLIST = _tmp_worklist
+try:
+    _sample_record = {
+        "timestamp_utc": "2026-06-09T00:00:00Z",
+        "session_label": "1860",
+        "volume_year": 1860,
+        "raw_match": "Approved April 10, 1880.",
+        "parsed_year": 1880,
+        "year_delta": 20,
+        "citation": "Stats. 1860 ch.10",
+        "source_page": 42,
+        "in_act_order": 9,
+        "reason": "year_out_of_window",
+    }
+    _ingest._append_date_review(_sample_record)
+    _written_lines = _tmp_worklist.read_text(encoding="utf-8").strip().splitlines()
+    _parsed_rec = json.loads(_written_lines[0])
+    check(
+        "WL1: _append_date_review writes exactly one JSONL line",
+        len(_written_lines) == 1,
+        f"got {len(_written_lines)} lines",
+    )
+    check(
+        "WL2: worklist record has required fields",
+        all(k in _parsed_rec for k in (
+            "timestamp_utc", "session_label", "volume_year",
+            "raw_match", "parsed_year", "year_delta",
+            "citation", "source_page", "in_act_order", "reason"
+        )),
+        f"missing fields in: {list(_parsed_rec.keys())}",
+    )
+    check(
+        "WL3: worklist record values are correct",
+        _parsed_rec["parsed_year"] == 1880
+        and _parsed_rec["session_label"] == "1860"
+        and _parsed_rec["reason"] == "year_out_of_window",
+        f"got {_parsed_rec!r}",
+    )
+    # Verify append semantics: a second write produces a second line.
+    _ingest._append_date_review(_sample_record)
+    _lines2 = _tmp_worklist.read_text(encoding="utf-8").strip().splitlines()
+    check(
+        "WL4: _append_date_review appends (does not overwrite) on second call",
+        len(_lines2) == 2,
+        f"got {len(_lines2)} lines after second write",
+    )
+finally:
+    _ingest.DATE_REVIEW_WORKLIST = _orig_worklist
+    if _tmp_worklist.exists():
+        _tmp_worklist.unlink()
+
+
+# ---------------------------------------------------------------------------
+# WORKLIST INTEGRATION: out-of-window parse_act_date hit writes to worklist
+# ---------------------------------------------------------------------------
+# This test verifies the end-to-end path: parse_act_date detects an out-of-window
+# date -> _rejected_out is populated -> caller (simulating flush_act behaviour)
+# writes to the worklist.
+
+print("\n=== WORKLIST INTEGRATION: out-of-window date -> worklist record ===\n")
+
+_tmp_wl2 = pathlib.Path(tempfile.mktemp(suffix=".jsonl"))
+_orig_wl2 = _ingest.DATE_REVIEW_WORKLIST
+_ingest.DATE_REVIEW_WORKLIST = _tmp_wl2
+try:
+    _rej2 = []
+    iso, raw = _ingest.parse_act_date(
+        _TEXT_1855_CORRUPTED, volume_year=1855, _rejected_out=_rej2)
+    # Simulate what flush_act does: write each rejected candidate to the worklist.
+    for _r in _rej2:
+        _ingest._append_date_review({
+            "timestamp_utc": "2026-06-09T00:00:00Z",
+            "session_label": "1855",
+            "volume_year": 1855,
+            "raw_match": _r["raw"],
+            "parsed_year": _r["parsed_year"],
+            "year_delta": abs(_r["parsed_year"] - 1855),
+            "citation": "Stats. 1855 ch.1",
+            "source_page": 1,
+            "in_act_order": 0,
+            "reason": "year_out_of_window",
+        })
+    _wi_lines = _tmp_wl2.read_text(encoding="utf-8").strip().splitlines() if _tmp_wl2.exists() else []
+    check(
+        "WI1: out-of-window date produces exactly one worklist record",
+        len(_wi_lines) == 1,
+        f"got {len(_wi_lines)} lines",
+    )
+    if _wi_lines:
+        _wi_rec = json.loads(_wi_lines[0])
+        check(
+            "WI2: worklist record year matches the rejected candidate (1895)",
+            _wi_rec["parsed_year"] == 1895 and _wi_rec["session_label"] == "1855",
+            f"got {_wi_rec!r}",
+        )
+finally:
+    _ingest.DATE_REVIEW_WORKLIST = _orig_wl2
+    if _tmp_wl2.exists():
+        _tmp_wl2.unlink()
+
+
+# ---------------------------------------------------------------------------
+# CONCURRENCY FIX: born-digital path returns review records (not write in worker)
+# ---------------------------------------------------------------------------
+# Verifies that parse_born_digital_volume() returns review records in the
+# third element of its return tuple, rather than writing directly to the JSONL
+# worklist file.  This is the fix for the multiprocessing concurrency race:
+# worker subprocesses must NOT write to the shared file; the main process does.
+#
+# Also verifies that calling _append_date_review() from the main process with
+# the returned records produces correct JSONL output.
+
+if _bd_available:
+    print("\n=== CONCURRENCY FIX: parse_born_digital_volume returns review records ===\n")
+
+    # Build a minimal mock PDF that has CHAPTER headers and an act with an
+    # implausible date.  We exercise parse_born_digital_volume directly by
+    # patching fitz.open to return a synthetic page sequence.
+
+    import types as _types_bd
+    import unittest.mock as _mock
+
+    # Synthetic volume text: one chapter with an implausible year (1913, volume
+    # is 2000) so date_needs_review will be True for that act.
+    _BD_SYNTHETIC_TEXT = (
+        "CHAPTER 1\n"
+        "An Act to test the concurrency fix.\n"
+        "The People of the State of California do enact as follows:\n"
+        "SECTION 1. This section is effective.\n"
+        "Approved June 2, 1913.\n"
+    )
+
+    class _FakePage:
+        def get_text(self):
+            return _BD_SYNTHETIC_TEXT
+
+    class _FakeDoc:
+        page_count = 1
+        def __getitem__(self, i):
+            return _FakePage()
+        def close(self):
+            pass
+
+    # Patch fitz.open and label_for/year_of so no real PDF is needed.
+    with _mock.patch.object(_bd.fitz, "open", return_value=_FakeDoc()):
+        with _mock.patch.object(_bd, "year_of", return_value=2000):
+            with _mock.patch.object(_bd, "label_for", return_value="2000_Vol1"):
+                _bd_acts, _bd_meta, _bd_review = _bd.parse_born_digital_volume(
+                    "dummy_2000_Vol1.pdf")
+
+    check(
+        "CONC1: parse_born_digital_volume returns a 3-tuple (acts, meta, review_records)",
+        isinstance(_bd_review, list),
+        f"third element type={type(_bd_review)!r}  (expected list)",
+    )
+    check(
+        "CONC2: implausible-date act produces at least one review record in returned list",
+        len(_bd_review) >= 1,
+        f"got {len(_bd_review)} review records (expected >= 1 for the 1913 date in a 2000 volume)",
+    )
+    if _bd_review:
+        _br = _bd_review[0]
+        check(
+            "CONC3: review record has required fields",
+            all(k in _br for k in (
+                "timestamp_utc", "session_label", "volume_year",
+                "raw_match", "parsed_year", "citation", "reason"
+            )),
+            f"missing fields in: {list(_br.keys())}",
+        )
+        check(
+            "CONC4: review record reason is year_out_of_window",
+            _br["reason"] == "year_out_of_window",
+            f"got reason={_br['reason']!r}",
+        )
+
+    # Verify that writing the returned records via _append_date_review (simulating
+    # the main process) produces valid JSONL.
+    _tmp_bd_wl = pathlib.Path(tempfile.mktemp(suffix=".jsonl"))
+    _orig_bd_wl = _bd.DATE_REVIEW_WORKLIST
+    _bd.DATE_REVIEW_WORKLIST = _tmp_bd_wl
+    try:
+        for _rev_rec in _bd_review:
+            _bd._append_date_review(_rev_rec)
+        _bd_wl_lines = (
+            _tmp_bd_wl.read_text(encoding="utf-8").strip().splitlines()
+            if _tmp_bd_wl.exists() else []
+        )
+        check(
+            "CONC5: main-process write of returned review records produces correct JSONL line count",
+            len(_bd_wl_lines) == len(_bd_review),
+            f"got {len(_bd_wl_lines)} JSONL lines, expected {len(_bd_review)}",
+        )
+        if _bd_wl_lines:
+            _bd_wl_rec = json.loads(_bd_wl_lines[0])
+            check(
+                "CONC6: JSONL record from main-process write is valid JSON with required fields",
+                all(k in _bd_wl_rec for k in (
+                    "timestamp_utc", "session_label", "citation", "reason"
+                )),
+                f"missing fields in: {list(_bd_wl_rec.keys())}",
+            )
+    finally:
+        _bd.DATE_REVIEW_WORKLIST = _orig_bd_wl
+        if _tmp_bd_wl.exists():
+            _tmp_bd_wl.unlink()
+
+else:
+    print("\n=== CONCURRENCY FIX tests -- SKIPPED (fitz/PyMuPDF not installed) ===\n")
+    print("  (Run on the 5080/5090 where fitz is installed to exercise CONC tests)")
 
 
 # ---------------------------------------------------------------------------

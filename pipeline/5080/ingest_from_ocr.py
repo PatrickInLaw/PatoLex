@@ -35,6 +35,32 @@ import datetime
 import subprocess
 from pathlib import Path
 
+# ---------------------------------------------------------------------------
+# DATE REVIEW WORKLIST
+# ---------------------------------------------------------------------------
+# When a parsed date's year falls OUTSIDE the ±YEAR_CLAMP_WINDOW, it is an
+# OCR-error suspect.  The act is NOT silently committed with a wrong date;
+# instead the match is appended here so a human can review and correct it.
+# Location: next to the existing run-logs so the same review workflow applies.
+DATE_REVIEW_WORKLIST = Path(
+    r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"
+    r"\docs\80_PROJECT_HISTORY\run-logs\date-review-worklist.jsonl"
+)
+
+
+def _append_date_review(record: dict):
+    """Append one JSON record (no trailing comma) to the date review worklist.
+
+    The file is append-only; each line is a standalone JSON object (JSONL).
+    Fields: session_label, volume_year, raw_match, parsed_year, chapter,
+            source_page, in_act_order, timestamp_utc.
+    Only call when a date WAS found by a regex but its year is implausible.
+    """
+    line = json.dumps(record, ensure_ascii=False) + "\n"
+    DATE_REVIEW_WORKLIST.parent.mkdir(parents=True, exist_ok=True)
+    with open(str(DATE_REVIEW_WORKLIST), "a", encoding="utf-8") as fh:
+        fh.write(line)
+
 SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
 LOG_FILE = Path(
     r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"
@@ -198,16 +224,15 @@ def normalize_month(month_str):
     return _MONTH_NORM.get(month_str.lower()[:3], month_str.capitalize())
 
 
-def parse_act_date(text, volume_year=None):
+def parse_act_date(text, volume_year=None, _rejected_out=None):
     """Return (iso_date_str, raw_match_str) or (None, "").
 
     volume_year -- the nominal calendar year of the source volume (e.g. 1855
     for the 1855 session, or 1863 for the "1863-64" session).  When supplied,
     any parsed year that falls OUTSIDE the window
         [volume_year - YEAR_CLAMP_WINDOW, volume_year + YEAR_CLAMP_WINDOW]
-    is REJECTED and the next regex match is tried instead of accepting a date
-    that is clearly a result of OCR digit corruption (Cluster-A bug) or body-
-    text date poisoning (Cluster-B bug).
+    is REJECTED as a likely OCR digit corruption (Cluster-A bug) or body-text
+    date poisoning (Cluster-B bug).
 
     YEAR_CLAMP_WINDOW = 3:
       * The entire documented Cluster-A set (28 rows) had parsed years 20–40
@@ -221,6 +246,17 @@ def parse_act_date(text, volume_year=None):
       * A future re-ingest that spans a session straddling a year boundary
         (e.g. a late-December approval in a session nominally labelled with the
         NEXT year) is within ±1 and therefore WITHIN the window — safe.
+
+    _rejected_out -- optional list.  When provided AND volume_year is set, each
+    out-of-window match (a date that was FOUND by a regex but whose year is
+    implausible) is appended as a dict {"raw": str, "parsed_year": int}.
+    "No match at all" is NOT appended — only implausible matches are.
+    Callers that don't need this can omit it (the default None is a no-op).
+
+    Distinguishing "no date found" vs "date found but implausible":
+      * Return (None, "") with empty _rejected_out -> genuinely no date present.
+      * Return (None, "") with non-empty _rejected_out -> date(s) found but all
+        out-of-window; this is an OCR-error suspect, not a legitimately dateless act.
     """
     # Clamp window size (years).  Change here to widen/tighten everywhere.
     YEAR_CLAMP_WINDOW = 3
@@ -229,6 +265,11 @@ def parse_act_date(text, volume_year=None):
         if volume_year is None:
             return True  # no context -> no check (legacy call-sites unaffected)
         return abs(year_int - volume_year) <= YEAR_CLAMP_WINDOW
+
+    def _record_rejected(raw_str, year_int):
+        """If caller passed a collector, record this out-of-window hit."""
+        if _rejected_out is not None:
+            _rejected_out.append({"raw": raw_str, "parsed_year": year_int})
 
     # Always try APPROVED_MODERN_RE ("Approved by Governor …" / "Filed with
     # Secretary of State …") FIRST, regardless of volume_year.  This pattern is
@@ -244,6 +285,7 @@ def parse_act_date(text, volume_year=None):
             d = datetime.datetime.strptime(
                 month_str + " " + day_str + " " + year_raw, "%B %d %Y")
             if not _year_ok(d.year):
+                _record_rejected(re.sub(r"\s+", " ", m.group(0)).strip(), d.year)
                 continue
             raw = re.sub(r"\s+", " ", m.group(0)).strip()
             return d.strftime("%Y-%m-%d"), raw
@@ -259,7 +301,9 @@ def parse_act_date(text, volume_year=None):
             d = datetime.datetime.strptime(
                 month_str + " " + day_str + " " + year_raw, "%B %d %Y")
             if not _year_ok(d.year):
-                continue  # Cluster-A: year out of range -> skip, try next match
+                # Cluster-A: year out of range -> record the rejection, try next match
+                _record_rejected(re.sub(r"\s+", " ", m.group(0)).strip(), d.year)
+                continue
             raw = re.sub(r"\s+", " ", m.group(0)).strip()
             return d.strftime("%Y-%m-%d"), raw
         except Exception:
@@ -301,7 +345,8 @@ def header_starts_act(lines, i):
 
 
 def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged,
-              page_ocr_results, volume_year=None):
+              page_ocr_results, volume_year=None, session_label=None,
+              in_act_order=None):
     if not buf:
         return
     full = "\n".join(buf).strip()
@@ -320,13 +365,69 @@ def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged,
             break
     if not title:
         title = re.sub(r"\s+", " ", buf[0]).strip()[:300] if buf else ""
-    iso_date, approved_str = parse_act_date(full, volume_year=volume_year)
+
+    # Collect implausible-date candidates via _rejected_out side-channel so we
+    # can distinguish "no date in text" (legitimately dateless) from "date found
+    # but year is out-of-window" (OCR corruption suspect).
+    rejected = []
+    iso_date, approved_str = parse_act_date(
+        full, volume_year=volume_year, _rejected_out=rejected)
+
+    # If the regex found a date but the year was implausible, flag it.
+    # Implausible-date acts are flagged to the review worklist and EXCLUDED from
+    # DB ingest pending date correction (they remain in the JSON stage file under
+    # flagged_acts).  Whether flagged acts should instead be ingested-with-a-flag
+    # is a pending design decision.
+    # DECISION PENDING: change the routing below (acts_parsed vs acts_flagged)
+    # only after that decision is made — do not silently alter ingest behavior.
+    date_needs_review = False
+    if iso_date is None and rejected:
+        date_needs_review = True
+        act_citation = (
+            ("Stats. " + session_label + " ch. " + str(chap_int))
+            if session_label else ("ch. " + str(chap_int))
+        )
+        for rej in rejected:
+            review_rec = {
+                "timestamp_utc": datetime.datetime.utcnow().isoformat() + "Z",
+                "session_label": session_label or "",
+                "volume_year": volume_year,
+                "raw_match": rej["raw"],
+                "parsed_year": rej["parsed_year"],
+                "year_delta": (
+                    abs(rej["parsed_year"] - volume_year) if volume_year else None
+                ),
+                "citation": act_citation,
+                "source_page": (start_page or 0) + 1,
+                "in_act_order": in_act_order,
+                "reason": "year_out_of_window",
+            }
+            _append_date_review(review_rec)
+        log(
+            "STAGE5-PARSE",
+            (session_label or "?") + " ch." + str(chap_int)
+            + " page=" + str((start_page or 0) + 1)
+            + ": date found but year implausible "
+            + str([r["parsed_year"] for r in rejected])
+            + " (volume_year=" + str(volume_year) + ")"
+            + " -- flagged for date review, EXCLUDED from DB ingest, worklist updated",
+            "WARN",
+        )
+
     body_text = re.sub(r"[ \t]+", " ", full)
-    confident = is_confident_act(full, volume_year=volume_year) and chap_int > 0
+    # NOTE: is_confident_act() re-runs parse_act_date() internally, so this is a
+    # double-parse.  The cost is negligible for the sequential OCR ingest path
+    # (no pool), but should be collapsed if this function is ever parallelised.
+    confident = (
+        is_confident_act(full, volume_year=volume_year)
+        and chap_int > 0
+        and not date_needs_review  # implausible-date acts are NOT confident
+    )
     act_rec = {
         "chapter": str(chap_int), "chapter_int": chap_int,
         "chapter_raw": chap_token, "title": title,
         "approved_date": approved_str, "iso_date": iso_date,
+        "date_needs_review": date_needs_review,
         "text": body_text[:6000], "source_page": (start_page or 0) + 1,
         "confident": confident,
         "page_agreement_ratio": page_ocr_results.get(start_page, {}).get("agreement_ratio", 0.0),
@@ -360,20 +461,24 @@ def parse_volume(session_label):
     acts_parsed, acts_flagged = [], []
     current_token = current_page = None
     current_buf = []
+    act_order = 0  # sequential counter within this volume (0-based)
     for i, (pidx, line) in enumerate(lines):
         is_hdr, token = header_starts_act(lines, i)
         if is_hdr:
             if current_token is not None:
                 flush_act(current_token, current_page, current_buf,
                           acts_parsed, acts_flagged, page_ocr_results,
-                          volume_year=volume_year)
+                          volume_year=volume_year, session_label=session_label,
+                          in_act_order=act_order)
+                act_order += 1
             current_token, current_page, current_buf = token, pidx, [line]
         elif current_token is not None:
             current_buf.append(line)
     if current_token is not None:
         flush_act(current_token, current_page, current_buf,
                   acts_parsed, acts_flagged, page_ocr_results,
-                  volume_year=volume_year)
+                  volume_year=volume_year, session_label=session_label,
+                  in_act_order=act_order)
     out_path.write_text(json.dumps(
         {"confident_acts": acts_parsed, "flagged_acts": acts_flagged}, indent=2),
         encoding="utf-8")
