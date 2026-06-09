@@ -195,5 +195,20 @@ byte-diff WILL mismatch; the diff must exclude/normalize non-deterministic colum
   (836 rows — staged 2025 may be a no-op); 186 (not 185) done; OCR 1997–2000 INCOMPLETE; 5 pre-1850
   retroactive rows unflagged. Full list in `INGEST_WORKLIST_2026-06-09.md` §HANS AUDIT.
 
+---
+
+## ⚠ 5090 CRASHED AGAIN — 2026-06-09 ~01:28 AM (VRAM hang at 3 workers; OCR NOT finished)
+- The monitor caught it: ran clean **8.4 h** (17:05→01:28), then **VRAM pinned ~31 GB** (near the
+  32 GB ceiling) with **util 100% but power + temp FALLING** (~120 W, 50 °C) for ~22 min = a **stuck/
+  hung GPU**, then a TDR. **NOT thermal** (peak 71 °C). Box is **hung/unreachable — needs a physical
+  power-cycle** (auto-startup supervisor will relaunch on reboot; OCR is checkpointed so it resumes).
+- **Cause:** the batch-pin fix bounded per-worker VRAM and turned ~13-min crashes into 8 h — but **3
+  workers can still coincidentally spike to ~31 GB on the densest volumes** and wedge the card.
+- **MORNING ACTION (do before it resumes):** drop to **2 workers** (each ~8 GB → ~16–24 GB, safe
+  headroom) OR tighten **`RECOGNITION_BATCH_SIZE=64`**. It was ~nearly done (on 1996–1999), so 2
+  workers finishes the last handful safely. (Did NOT auto-change worker count — standing
+  confirm-before-scaling rule; awaiting Patrick's go.)
+- Monitor exited on detection; **relaunch `monitor_5090.ps1` when the box is back up.**
+
 ### Roadmap updated this session
 - `ROADMAP.md` Current-Status + Gate F row corrected (Gate F largely built; DB = 35,332 acts).
