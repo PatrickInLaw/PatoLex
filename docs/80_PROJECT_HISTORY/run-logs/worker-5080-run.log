@@ -411,3 +411,6 @@ C:\Windows\System32\OpenSSH\scp.exe: Connection closed
 [2026-06-08 10:56 PT] WORKER-5080 | run complete: 47 volume(s) processed this session | OK
 [2026-06-08 20:39 PT] WORKER | === 5080 queue worker online (pid 32264, worker_id=5080-1) sharing 5090 queue 100.70.54.56 === | OK
 [2026-06-08 20:39 PT] RUN | 1996-vol5: START local OCR (1996_Vol5.pdf) on 5080 | OK
+[2026-06-08 21:38 PT] PUSH | 1996-vol5: OCR outputs pushed to 5090 | OK
+[2026-06-08 21:38 PT] RUN | 1996-vol5: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-08 21:38 PT] RUN | 1997-vol2: START local OCR (1997_Vol2.pdf) on 5080 | OK
