@@ -1,0 +1,89 @@
+# SESSION cc007 — Parallel Ingest Prep
+
+| Field | Value |
+|-------|-------|
+| Session | cc007 |
+| Date | 2026-06-09 |
+| Type | Orchestrator (Opus delegating to subagents) |
+| Status | **IN PROGRESS** — all work is LOCAL; nothing committed or pushed |
+| Goal | Clear the path to ingesting the 1876–1993 historical OCR backlog by running four prep streams in parallel |
+
+---
+
+## What Was Done
+
+Four independent streams were fanned out to subagents in parallel, then a fifth (Hans remediation) followed from the parser-fix review. All edits are local working-tree changes; no commit/push, no DB writes, no live-queue mutations.
+
+### 1. Ops diagnosis — 5090 + stranded 1998-vol6 (read-only)
+- Confirmed the RTX **5090 box is UP and idle** — the "01:28 2026-06-09 crash" was a **monitor false alarm** (SSH-poll blip; known `monitor_5090.ps1` failure mode). `nvidia-smi`: 37 °C, 0% util, 1.4 GB.
+- **No OCR workers running on either box** — consistent with the campaign being complete.
+- The stranded **1998-vol6** consensus payload (`page_ocr_results.json`, 27,264,340 B) is intact on the 5080 at `C:\Users\PatrickKolasinski\PatoLex-scratch\production-1998-vol6\ocr_consensus\`. Its queue entry on the 5090 (`production_queue_state.json`) is still `in_progress` (worker 5080-1); the remote `ocr_consensus\` dir is empty (payload never landed) and there is no `OCR_COMPLETE.marker`.
+- A **non-destructive recovery sequence** was prepared (scp the 27 MB file → verify byte size on 5090 → `queue_claim.py done 5080-1 1998-vol6`). **AWAITING Patrick's approval — not executed.** The ingest watcher is not running, so marking done will not auto-trigger ingest.
+
+### 2. Parser fix — chaptered_date bugs (local edits + Hans review + remediation)
+- Fixed both clusters: **Cluster-A** (OCR year-misread inside `[Approved … 18XX]` on 1850s–70s volumes) and **Cluster-B** (born-digital 2000–2008 body-text date poisoning).
+- Added a **±3-year clamp** keyed to the volume year and **modern-RE-first** ordering. The 51 affected rows hold correct text/citation and are fixed in place, **not purged**.
+- **Hans (verify-auditor) review** found 0 blockers, **4 SERIOUS**, 3 nitpicks. All remediated:
+  - S1: tombstoned the unfixed `parse_act_date` in `reparse.py` (`18[3-9]\d` would reproduce Cluster-A) → now `raise RuntimeError` + DO-NOT-USE header.
+  - S2: tombstoned the `parse_born_digital.py` prototype's parse path (`raise NotImplementedError`) — confirmed non-production.
+  - S3: added tests asserting both tombstones raise.
+  - S4: removed the unjustified `volume_year >= 1915` magic threshold — `APPROVED_MODERN_RE` is now tried first unconditionally (safe on 19th-c text because the pattern is highly specific).
+  - N1: guarded the `session_label` year extraction with a regex match.
+  - N2: wrapped the `ingest_from_ocr.py` main loop in `if __name__ == "__main__":` (import is now side-effect-free; no more spurious run-log writes from tests).
+  - N3: cross-referencing TODOs added for the duplicated `LEGISLATURE_MAP`.
+- **Tests: 16 passed / 0 failed** (`pipeline/test_date_parser_fix.py`).
+
+### 3. Ingest-blocker fact-gathering (read-only investigation)
+Gathered the facts to clear the 4 Hans-flagged ingest blockers:
+- **B1 (registration):** canonical step is `pipeline/register_source_document.py` (idempotent, `ON CONFLICT (content_sha256) DO NOTHING`). All 1877–1990 volumes already have `sha256.txt` on disk — ready to register in batch. Recommend registering only the dedup-winner per year (after B3).
+- **B2 (LEGISLATURE_MAP):** map in `ingest_clean.py` stops at `1875-76`; past it, `session`/`legislature` columns get the raw label (ugly, non-fatal). Gathered the authoritative CA Legislature session→year→ordinal mapping (22nd–57th ordinal era through 1948; **year-based, no ordinal, from 1949**) from Wikipedia, ready to paste. Several labels need a decision (see Decisions Owed).
+- **B3 (dedup variants):** enumerated all 14 variant pairs 1927–1965 — each pair has distinct SHA-256s (genuinely different files). Clear pattern: the lower-body-page variant is a stub/partial scan; the higher-body-page variant is the real volume. **The 1965 pair (847 vs 948 body pages) is too close to auto-resolve.**
+- **B4 (logical-key diff):** confirmed `enactment`/`change_event`/`provision` PKs are all bigint `IDENTITY` (every re-ingest re-IDs rows); `provision.public_id` is UUIDv7 but is also regenerated on re-ingest. Logical keys: `(source_document_id, chapter_number)` for enactment; `(source_document_id, in_act_order)` for change_event (already a unique index). Proposed a before/after snapshot diff on `(chapter_number, in_act_order)` to prove re-ingest preserved/improved data.
+
+### 4. Docs — ROADMAP de-stale
+- Rewrote `docs/20_ROADMAP/ROADMAP.md` Current Status + Gate E/F rows: OCR campaign COMPLETE; ~35,332 enactments (1850–2024), ~84,118 provisions, ~151,763 change_events in DB; Gate F modern layer (1991–2024, ~22,780 acts) largely built; real gap = **1876–1993 ingest**.
+- Flagged other stale docs for later cleanup: `BUILD_RUNBOOK.md` (§2/§5), `ARCHITECTURE.md` (Working Vision), `SCHEMA_DESIGN.md` (as-built figures).
+
+---
+
+## Files Changed (local, uncommitted)
+
+**Modified — pipeline:**
+- `pipeline/5080/ingest_from_ocr.py` — year clamp, modern-RE-first (unconditional), regex-guarded year extraction, `__main__` guard, TODO
+- `pipeline/5080/parse_born_digital_prod.py` — modern-RE-first + ±3 clamp fallback
+- `pipeline/5080/reparse.py` — tombstoned `parse_act_date` + DO-NOT-USE header + `__main__` guard
+- `pipeline/5080/parse_born_digital.py` — tombstoned prototype parse path
+- `pipeline/ingest_clean.py` — cross-reference TODO on `LEGISLATURE_MAP`
+
+**New:**
+- `pipeline/test_date_parser_fix.py` — 16 tests, all green
+
+**Modified — docs:**
+- `docs/20_ROADMAP/ROADMAP.md` — Current Status + gate rows + revision-history entry
+- `docs/80_PROJECT_HISTORY/session-logs/claude-code/SESSION_cc007_SUMMARY_2026-06-09_Parallel_Ingest_Prep.md` — this log
+
+---
+
+## Decisions Owed to Patrick
+
+| # | Topic | Decision |
+|---|-------|----------|
+| 1 | 1998-vol6 recovery | Approve the prepared scp + mark-done sequence? |
+| 2 | LEGISLATURE_MAP ambiguities | `1907-09` (37th/38th?), `1938-vol1` (52nd or special?), `1900-01` (33rd adjourned or 34th?) |
+| 3 | Dedup winners | Confirm "higher body-page count = real volume" rule; inspect the 1965 pair manually; disposition of losing scratch dirs |
+| 4 | `public_id` stabilization | Stabilize provision UUIDv7 across re-ingests before the future Git-emission pass? (not a DB blocker now) |
+| 5 | Clamp window | Keep ±3, or tighten to ±2 for the 1877–1990 re-ingest? |
+
+---
+
+## Next Session Should Start With
+1. Patrick's decisions on the table above (esp. 1998-vol6 recovery + dedup winners + legislature-map ambiguities).
+2. Extend `LEGISLATURE_MAP` (1877→1993) once ambiguities resolved.
+3. Build the registration batch for dedup-winner volumes (`register_source_document.py`).
+4. Build the logical-key diff harness (before/after snapshot on `(chapter_number, in_act_order)`).
+5. **Gated on explicit go:** supervised DB backup → purge → re-ingest of 1876–1993 → logical-key validation.
+
+## Lessons / Notes
+- `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
+- Subagents must use the **Write tool**, not bash heredocs, for file creation — the compound-bash/heredoc hook blocks them, and a haiku worker silently left a `"test"` stub and falsely reported success. Orchestrator must verify subagent file outputs.
+- Two unfixed copies of a parser nearly slipped through; the Hans pass caught them — adversarial review earns its keep on pipeline code.

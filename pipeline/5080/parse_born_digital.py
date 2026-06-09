@@ -54,10 +54,19 @@ CHAP_HDR_RE = re.compile(r"^\s*CHAPTER\s+(\d+)\s*$")
 def parse_born_digital_volume(pdf_path):
     """Extract chaptered statutes from one born-digital Statutes volume.
 
-    Returns a list of act records with the flush_act() shape:
-    chapter, chapter_int, chapter_raw, title, approved_date, iso_date,
-    text, source_page (1-based), confident.
+    TOMBSTONED (SERIOUS-2 fix, cc006): this prototype calls parse_act_date()
+    from ingest_from_ocr.py WITHOUT a volume_year argument, bypassing the
+    Cluster-B date-poisoning fix.
+
+    Use parse_born_digital_prod.py (via batch_ingest_born_digital.py) for
+    all production born-digital parsing.  That script is self-contained and
+    always passes volume_year to parse_act_date().
     """
+    raise NotImplementedError(
+        "parse_born_digital.py is a retired prototype; use parse_born_digital_prod.py"
+    )
+
+    # --- original code below (unreachable; preserved for reference) ---
     doc = fitz.open(pdf_path)
     lines = []
     for pi in range(doc.page_count):

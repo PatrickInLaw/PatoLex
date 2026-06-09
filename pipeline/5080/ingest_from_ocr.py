@@ -43,6 +43,8 @@ LOG_FILE = Path(
 PSQL = r"C:\Program Files\PostgreSQL\16\bin\psql.exe"
 
 # session_label -> (session_str, legislature_ordinal, start_year)
+# TODO: LEGISLATURE_MAP is duplicated in pipeline/ingest_clean.py.
+#       Consolidate into a shared module when the two pipelines are unified.
 LEGISLATURE_MAP = {
     "1861": ("1861", "12th"), "1862": ("1862", "13th"),
     "1863": ("1863", "14th"), "1863-64": ("1863-64 adjourned", "15th"),
@@ -196,22 +198,44 @@ def normalize_month(month_str):
     return _MONTH_NORM.get(month_str.lower()[:3], month_str.capitalize())
 
 
-def parse_act_date(text):
-    # Pre-1900 / OCR-fuzzy format first (preserves early-era behavior exactly).
-    for m in APPROVED_RE.finditer(text):
-        month_str = normalize_month(m.group(1))
-        day_str = normalize_day(m.group(2))
-        year_raw = m.group(3)
-        try:
-            d = datetime.datetime.strptime(
-                month_str + " " + day_str + " " + year_raw, "%B %d %Y")
-            raw = re.sub(r"\s+", " ", m.group(0)).strip()
-            return d.strftime("%Y-%m-%d"), raw
-        except Exception:
-            continue
-    # Modern born-digital / 1915+ "Approved by Governor ..." / "Filed with
-    # Secretary of State ..." language (fallback; only reached when the early
-    # pattern finds nothing, so early-era results are unchanged).
+def parse_act_date(text, volume_year=None):
+    """Return (iso_date_str, raw_match_str) or (None, "").
+
+    volume_year -- the nominal calendar year of the source volume (e.g. 1855
+    for the 1855 session, or 1863 for the "1863-64" session).  When supplied,
+    any parsed year that falls OUTSIDE the window
+        [volume_year - YEAR_CLAMP_WINDOW, volume_year + YEAR_CLAMP_WINDOW]
+    is REJECTED and the next regex match is tried instead of accepting a date
+    that is clearly a result of OCR digit corruption (Cluster-A bug) or body-
+    text date poisoning (Cluster-B bug).
+
+    YEAR_CLAMP_WINDOW = 3:
+      * The entire documented Cluster-A set (28 rows) had parsed years 20–40
+        years off (e.g. 1855→1895, 1860→1880).  A window of ±3 rejects all of
+        them while still accepting a correctly-read date for an act signed in
+        the year before or after the session nominal year (some sessions span
+        two calendar years, e.g. the 1863-64 adjourned session).
+      * Cluster-B dates were historical boilerplate years, typically 50-100
+        years before the source volume year (e.g. a 2000 volume containing a
+        1913 body reference).  ±3 rejects all of them.
+      * A future re-ingest that spans a session straddling a year boundary
+        (e.g. a late-December approval in a session nominally labelled with the
+        NEXT year) is within ±1 and therefore WITHIN the window — safe.
+    """
+    # Clamp window size (years).  Change here to widen/tighten everywhere.
+    YEAR_CLAMP_WINDOW = 3
+
+    def _year_ok(year_int):
+        if volume_year is None:
+            return True  # no context -> no check (legacy call-sites unaffected)
+        return abs(year_int - volume_year) <= YEAR_CLAMP_WINDOW
+
+    # Always try APPROVED_MODERN_RE ("Approved by Governor …" / "Filed with
+    # Secretary of State …") FIRST, regardless of volume_year.  This pattern is
+    # highly specific to the modern chaptered-statute footer format and will
+    # never match 19th-century "[Approved ... 18XX]" text, so it is universally
+    # safe.  Trying it first prevents the Cluster-B "date poisoning" bug on
+    # modern volumes without any era-conditional branching.  (SERIOUS-4 fix)
     for m in APPROVED_MODERN_RE.finditer(text):
         month_str = normalize_month(m.group(1))
         day_str = m.group(2)
@@ -219,10 +243,28 @@ def parse_act_date(text):
         try:
             d = datetime.datetime.strptime(
                 month_str + " " + day_str + " " + year_raw, "%B %d %Y")
+            if not _year_ok(d.year):
+                continue
             raw = re.sub(r"\s+", " ", m.group(0)).strip()
             return d.strftime("%Y-%m-%d"), raw
         except Exception:
             continue
+
+    # Pre-1900 / OCR-fuzzy format (all volumes; primary path for early era).
+    for m in APPROVED_RE.finditer(text):
+        month_str = normalize_month(m.group(1))
+        day_str = normalize_day(m.group(2))
+        year_raw = m.group(3)
+        try:
+            d = datetime.datetime.strptime(
+                month_str + " " + day_str + " " + year_raw, "%B %d %Y")
+            if not _year_ok(d.year):
+                continue  # Cluster-A: year out of range -> skip, try next match
+            raw = re.sub(r"\s+", " ", m.group(0)).strip()
+            return d.strftime("%Y-%m-%d"), raw
+        except Exception:
+            continue
+
     return None, ""
 
 
@@ -230,9 +272,9 @@ def has_enact_marker(full_text):
     return bool(ENACT_MARKER_RE.search(full_text))
 
 
-def is_confident_act(full_text):
+def is_confident_act(full_text, volume_year=None):
     has_an_act = bool(AN_ACT_RE.search(full_text))
-    has_date, _ = parse_act_date(full_text)
+    has_date, _ = parse_act_date(full_text, volume_year=volume_year)
     return has_an_act and has_date is not None and len(full_text.strip()) >= 100
 
 
@@ -258,7 +300,8 @@ def header_starts_act(lines, i):
     return False, None
 
 
-def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged, page_ocr_results):
+def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged,
+              page_ocr_results, volume_year=None):
     if not buf:
         return
     full = "\n".join(buf).strip()
@@ -277,9 +320,9 @@ def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged, page_ocr_r
             break
     if not title:
         title = re.sub(r"\s+", " ", buf[0]).strip()[:300] if buf else ""
-    iso_date, approved_str = parse_act_date(full)
+    iso_date, approved_str = parse_act_date(full, volume_year=volume_year)
     body_text = re.sub(r"[ \t]+", " ", full)
-    confident = is_confident_act(full) and chap_int > 0
+    confident = is_confident_act(full, volume_year=volume_year) and chap_int > 0
     act_rec = {
         "chapter": str(chap_int), "chapter_int": chap_int,
         "chapter_raw": chap_token, "title": title,
@@ -298,6 +341,16 @@ def parse_volume(session_label):
     if not ocr_path.exists():
         log("STAGE5-PARSE", session_label + ": OCR file missing: " + str(ocr_path), "FAIL")
         return None
+
+    # Derive the nominal calendar year from the session label for the year-
+    # sanity clamp.  Labels like "1863-64" yield 1863 (the opening year).
+    # (NITPICK-1) Guard against malformed labels with no leading 4-digit year.
+    _year_match = re.match(r'(\d{4})', session_label)
+    if not _year_match:
+        log("STAGE5-PARSE", session_label + ": cannot parse 4-digit year from label -- skipping", "FAIL")
+        return None
+    volume_year = int(_year_match.group(1))
+
     raw_ocr = json.loads(ocr_path.read_text(encoding="utf-8"))
     page_ocr_results = {int(k): v for k, v in raw_ocr.items()}
     lines = []
@@ -312,13 +365,15 @@ def parse_volume(session_label):
         if is_hdr:
             if current_token is not None:
                 flush_act(current_token, current_page, current_buf,
-                          acts_parsed, acts_flagged, page_ocr_results)
+                          acts_parsed, acts_flagged, page_ocr_results,
+                          volume_year=volume_year)
             current_token, current_page, current_buf = token, pidx, [line]
         elif current_token is not None:
             current_buf.append(line)
     if current_token is not None:
         flush_act(current_token, current_page, current_buf,
-                  acts_parsed, acts_flagged, page_ocr_results)
+                  acts_parsed, acts_flagged, page_ocr_results,
+                  volume_year=volume_year)
     out_path.write_text(json.dumps(
         {"confident_acts": acts_parsed, "flagged_acts": acts_flagged}, indent=2),
         encoding="utf-8")
@@ -338,7 +393,12 @@ def ingest_volume(session_label, parse_result):
     confident_acts = parse_result["confident"]
     total_pages = parse_result["page_count"]
     mean_agree = parse_result["mean_agreement"]
-    start_year = int(session_label.split("-")[0])
+    # (NITPICK-1) Guard against malformed labels.
+    _sy_match = re.match(r'(\d{4})', session_label)
+    if not _sy_match:
+        log("STAGE6-INGEST", session_label + ": cannot parse 4-digit year from label -- skipping", "FAIL")
+        return
+    start_year = int(_sy_match.group(1))
     session_str, legis_num = LEGISLATURE_MAP[session_label]
 
     sha_path = scratch / "sha256.txt"
@@ -496,18 +556,21 @@ def ingest_volume(session_label, parse_result):
 # ===========================================================================
 # MAIN
 # ===========================================================================
-if len(sys.argv) < 2:
-    print("Usage: python ingest_from_ocr.py <session_label> [<session_label> ...]")
-    sys.exit(1)
+# Guard: importing this module (e.g. by tests) must be side-effect-free.
+# All DB / file I/O below only runs when executed directly.  (NITPICK-2 fix)
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python ingest_from_ocr.py <session_label> [<session_label> ...]")
+        sys.exit(1)
 
-volumes = [a.strip() for a in sys.argv[1:]]
-log("INGEST", "=== ingest_from_ocr.py start: " + ", ".join(volumes) + " ===", "OK")
-for vol in volumes:
-    if vol not in LEGISLATURE_MAP:
-        log("INGEST", vol + ": not in LEGISLATURE_MAP -- skipping", "FAIL")
-        continue
-    pr = parse_volume(vol)
-    if pr is None:
-        continue
-    ingest_volume(vol, pr)
-log("INGEST", "=== ingest_from_ocr.py done ===", "OK")
+    volumes = [a.strip() for a in sys.argv[1:]]
+    log("INGEST", "=== ingest_from_ocr.py start: " + ", ".join(volumes) + " ===", "OK")
+    for vol in volumes:
+        if vol not in LEGISLATURE_MAP:
+            log("INGEST", vol + ": not in LEGISLATURE_MAP -- skipping", "FAIL")
+            continue
+        pr = parse_volume(vol)
+        if pr is None:
+            continue
+        ingest_volume(vol, pr)
+    log("INGEST", "=== ingest_from_ocr.py done ===", "OK")

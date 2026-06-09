@@ -100,18 +100,36 @@ def normalize_month(month_str):
     return _MONTH_NORM.get(month_str.lower()[:3], month_str.capitalize())
 
 
-def parse_act_date(text):
-    for m in APPROVED_RE.finditer(text):
-        month_str = normalize_month(m.group(1))
-        day_str = normalize_day(m.group(2))
-        year_raw = m.group(3)
-        try:
-            d = datetime.datetime.strptime(
-                month_str + " " + day_str + " " + year_raw, "%B %d %Y")
-            raw = re.sub(r"\s+", " ", m.group(0)).strip()
-            return d.strftime("%Y-%m-%d"), raw
-        except Exception:
-            continue
+def parse_act_date(text, volume_year=None):
+    """Return (iso_date_str, raw_match_str) or (None, "").
+
+    volume_year -- the nominal calendar year of the source PDF (e.g. 1997 for
+    "1997_Vol3.pdf").  When supplied, any parsed year outside the window
+        [volume_year - YEAR_CLAMP_WINDOW, volume_year + YEAR_CLAMP_WINDOW]
+    is rejected rather than being committed as the act's approval date.
+
+    YEAR_CLAMP_WINDOW = 3  (same constant as in ingest_from_ocr.py).
+
+    Order of attempt for born-digital volumes:
+      1. APPROVED_MODERN_RE first ("Approved by Governor …" / "Filed with
+         Secretary of State …") — the authoritative approval-date format in
+         all Chief Clerk chaptered-statute PDFs.  By trying this BEFORE the
+         permissive APPROVED_RE we prevent the Cluster-B "date poisoning" bug
+         where APPROVED_RE's finditer() grabs the FIRST match, which on
+         boilerplate-heavy acts (e.g. B&P §473.15) was a historical date
+         embedded in the act body (e.g. "initiative measure approved June 2,
+         1913") rather than the real approval date in the header bracket.
+      2. APPROVED_RE with year clamp as defence-in-depth fallback (handles
+         volumes with older formatting or where APPROVED_MODERN_RE finds nothing).
+    """
+    YEAR_CLAMP_WINDOW = 3
+
+    def _year_ok(year_int):
+        if volume_year is None:
+            return True
+        return abs(year_int - volume_year) <= YEAR_CLAMP_WINDOW
+
+    # --- 1. Modern structured format first (Cluster-B fix) -------------------
     for m in APPROVED_MODERN_RE.finditer(text):
         month_str = normalize_month(m.group(1))
         day_str = m.group(2)
@@ -119,10 +137,28 @@ def parse_act_date(text):
         try:
             d = datetime.datetime.strptime(
                 month_str + " " + day_str + " " + year_raw, "%B %d %Y")
+            if not _year_ok(d.year):
+                continue
             raw = re.sub(r"\s+", " ", m.group(0)).strip()
             return d.strftime("%Y-%m-%d"), raw
         except Exception:
             continue
+
+    # --- 2. Permissive OCR-fuzzy fallback with year clamp (Cluster-A / B defence)
+    for m in APPROVED_RE.finditer(text):
+        month_str = normalize_month(m.group(1))
+        day_str = normalize_day(m.group(2))
+        year_raw = m.group(3)
+        try:
+            d = datetime.datetime.strptime(
+                month_str + " " + day_str + " " + year_raw, "%B %d %Y")
+            if not _year_ok(d.year):
+                continue
+            raw = re.sub(r"\s+", " ", m.group(0)).strip()
+            return d.strftime("%Y-%m-%d"), raw
+        except Exception:
+            continue
+
     return None, ""
 
 
@@ -152,6 +188,10 @@ def parse_born_digital_volume(pdf_path):
     # born-digital sanity: a real text layer yields plenty of chars.
     has_text_layer = total_chars > 1000
 
+    # Derive the nominal volume year from the PDF filename for the year-sanity
+    # clamp passed to parse_act_date().  e.g. "1997_Vol3.pdf" -> 1997.
+    volume_year = year_of(pdf_path)
+
     starts = [i for i, (pi, ln) in enumerate(lines) if CHAP_HDR_RE.match(ln)]
     acts = []
     for k, si in enumerate(starts):
@@ -172,7 +212,7 @@ def parse_born_digital_volume(pdf_path):
                 title = re.sub(r"\s+", " ", " ".join(tparts)).strip()[:500]
                 break
 
-        iso_date, approved_str = parse_act_date(full)
+        iso_date, approved_str = parse_act_date(full, volume_year=volume_year)
         confident = (
             chap_num > 0
             and bool(AN_ACT_RE.search(full))

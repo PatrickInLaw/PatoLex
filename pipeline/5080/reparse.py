@@ -1,6 +1,18 @@
 """
 reparse.py — PatoLex parser fix + re-parse for 1850-1860 volumes
 =================================================================
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+DO NOT USE THIS SCRIPT FOR NEW PARSING.  It is ARCHIVED / UNSAFE.
+
+The local parse_act_date() in this file still uses the OLD, unfixed regex
+(APPROVED_RE captures only 18[3-9]\\d, no volume_year clamp) and will
+reproduce the Cluster-A year-misread bug (e.g. returning 1895 for an 1855
+volume) if invoked.
+
+Use ingest_from_ocr.py for all current and future parse + ingest work.
+That script contains the ROUND2 parser with all Cluster-A/B fixes applied.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 CPU-only, read-only on banked OCR. SAFE to run (batch is stopped).
 - Reads only:  production-{year}/ocr_consensus/page_ocr_results.json  (read-only)
 - Writes only: production-{year}/parsed_acts_fixed.json                (overwritten)
@@ -216,19 +228,14 @@ def normalize_month(month_str):
 
 
 def parse_act_date(text):
-    for m in APPROVED_RE.finditer(text):
-        month_str = normalize_month(m.group(1))
-        day_str = normalize_day(m.group(2))
-        year_raw = m.group(3)
-        try:
-            d = datetime.datetime.strptime(
-                month_str + " " + day_str + " " + year_raw, "%B %d %Y"
-            )
-            raw = re.sub(r"\s+", " ", m.group(0)).strip()
-            return d.strftime("%Y-%m-%d"), raw
-        except Exception:
-            continue
-    return None, ""
+    # TOMBSTONED (SERIOUS-1 fix, cc006): this function uses the OLD unfixed
+    # APPROVED_RE (18[3-9]\\d, no volume_year clamp) and will reproduce the
+    # Cluster-A year-misread bug.  Use ingest_from_ocr.py:parse_act_date()
+    # for all current and future work.
+    raise RuntimeError(
+        "reparse.py is archived/unsafe for date parsing (Cluster-A year-misread bug); "
+        "use ingest_from_ocr.py"
+    )
 
 
 def has_enact_marker(full_text):
@@ -401,29 +408,32 @@ def reparse_volume(session_label):
 
 
 # ---------------------------------------------------------------------------
-log_entry("REPARSE", "=== reparse.py ROUND2 starting -- chapter-format completeness fix ===", "OK")
-log_entry(
-    "REPARSE",
-    "Handles: separate-line CHAPTER/AN ACT (1850-1857), inline garbled "
-    "'Cuap. <roman>.—An Act' (1858-1860), em-dash separators, garbled "
-    "Chap prefixes & roman numerals; excludes front-matter TOC via "
-    "enactment-marker gate.",
-    "OK",
-)
-
-results = []
-for vol in VOLUMES:
-    r = reparse_volume(vol)
-    if r:
-        results.append(r)
-
-log_entry("REPARSE", "=== SUMMARY (before->after confident) ===", "OK")
-for r in results:
+# Guard: importing this ARCHIVED module must be side-effect-free (for tests).
+# The main reparse loop should never be run; use ingest_from_ocr.py instead.
+if __name__ == "__main__":
+    log_entry("REPARSE", "=== reparse.py ROUND2 starting -- chapter-format completeness fix ===", "OK")
     log_entry(
         "REPARSE",
-        "  " + r["volume"]
-        + ": confident " + str(r["before_confident"]) + " -> " + str(r["after_confident"])
-        + ", flagged " + str(r["before_flagged"]) + " -> " + str(r["after_flagged"]),
+        "Handles: separate-line CHAPTER/AN ACT (1850-1857), inline garbled "
+        "'Cuap. <roman>.—An Act' (1858-1860), em-dash separators, garbled "
+        "Chap prefixes & roman numerals; excludes front-matter TOC via "
+        "enactment-marker gate.",
         "OK",
     )
-log_entry("REPARSE", "Output: parsed_acts_fixed.json per volume. Run re_ingest_fixed.py next.", "OK")
+
+    results = []
+    for vol in VOLUMES:
+        r = reparse_volume(vol)
+        if r:
+            results.append(r)
+
+    log_entry("REPARSE", "=== SUMMARY (before->after confident) ===", "OK")
+    for r in results:
+        log_entry(
+            "REPARSE",
+            "  " + r["volume"]
+            + ": confident " + str(r["before_confident"]) + " -> " + str(r["after_confident"])
+            + ", flagged " + str(r["before_flagged"]) + " -> " + str(r["after_flagged"]),
+            "OK",
+        )
+    log_entry("REPARSE", "Output: parsed_acts_fixed.json per volume. Run re_ingest_fixed.py next.", "OK")

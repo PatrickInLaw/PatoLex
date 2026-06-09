@@ -106,6 +106,8 @@ PAGE_HIGH_CONF = 0.98   # confidence >  this -> "high"
 PAGE_MED_CONF = 0.93    # confidence >  this (and <= HIGH) -> "med"; else "low"
 
 # session_label -> (session_str, legislature_ordinal). Superset of both old maps.
+# TODO: LEGISLATURE_MAP is duplicated in pipeline/5080/ingest_from_ocr.py.
+#       Consolidate into a shared module when the two pipelines are unified.
 LEGISLATURE_MAP = {
     "1850": ("1849-1850", "1st"), "1851": ("1851", "2nd"), "1852": ("1852", "3rd"),
     "1853": ("1853", "4th"), "1854": ("1854", "5th"), "1855": ("1855", "6th"),
