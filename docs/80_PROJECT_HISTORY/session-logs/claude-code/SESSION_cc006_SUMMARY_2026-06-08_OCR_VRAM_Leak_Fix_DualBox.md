@@ -165,6 +165,16 @@ byte-diff WILL mismatch; the diff must exclude/normalize non-deterministic colum
 - Anomalous `source_document`-linked enactments scattered 1877–1999 (1–8/yr; e.g. 1993:1) **shouldn't
   exist** — Patrick wants the root cause. **Sonnet forensic launched** (read-only) to trace origin
   (mis-dated vs partial-ingest vs test) + whether any hold real data before purge.
+  - **FORENSIC RESULT (done):** the 51 strays are **NOT junk — a `chaptered_date` PARSER BUG.** All
+    51 are real acts with correct text/citation/session; only the date is wrong. (A) 28 rows: OCR
+    misread the year digit in `[Approved … 18XX]` on the 1855–1870 volumes; `parse_act_date()` in
+    `ingest_from_ocr.py` lacks a year sanity check. (B) 22 rows: in born-digital 2000–2008,
+    `APPROVED_RE` (before `APPROVED_MODERN_RE`) grabbed a historical date from the act *body* (B&P
+    §473.15 boilerplate poisoned 6 vols); bug in `parse_born_digital_prod.py`. (1) `2003_Vol1 ch.70`
+    date is actually correct (1993 act filed late in 2003); only its session label is wrong.
+    **DON'T purge — fix dates in place; FIX THE PARSER BEFORE re-ingest** (else it reproduces the
+    bug and the diff "matches the bug"); add a permanent ±N-year clamp. Detail in
+    `INGEST_WORKLIST_2026-06-09.md` §A.2.
 
 ### Running overnight (read-only / no DB writes)
 - OCR campaign → **ETA ~4:30–6:00 AM** (14 vols, ~26k pages, 4 workers); crash/heat monitor on the 5080.

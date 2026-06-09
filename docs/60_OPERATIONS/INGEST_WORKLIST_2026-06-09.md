@@ -40,6 +40,34 @@ hazard for the backup→re-ingest diff: they're in the backup but a clean re-ing
 the review is to understand how partial ingests happened (and confirm no good data is among them
 before purge).
 
+## A.2 STRAY ROOT CAUSE — forensic verdict (cc006): a `chaptered_date` PARSER BUG, not junk
+The "strays" are **51 REAL acts with correct text but a wrong `chaptered_date`** (two parser bugs +
+1 mislabel). **DO NOT PURGE them — fix the date in place. And FIX THE PARSER *BEFORE* the re-ingest:**
+a re-ingest with the current scripts **reproduces the same wrong dates**, so the backup-diff would
+"match the bug" instead of catching it. This is the single most important pre-ingest fix.
+
+- **Cluster A — 28 rows (DB years 1879–1895): OCR digit misread.** On the 1855–1870 OCR volumes the
+  year in `[Approved … 18XX]` was OCR-corrupted (1855→1895, 1860→1880, 1869→1879…). `parse_act_date()`
+  in `pipeline/5080/ingest_from_ocr.py` has **no session-year sanity check** → the corrupted but
+  valid year was committed. Acts/session/citation/text are correct; only the date is wrong.
+  **Fix:** clamp the parsed year to the source_document `coverage_start/end_year` (≈ session year).
+  Recoverable with targeted `UPDATE`s — no re-OCR.
+- **Cluster B — 22 rows (DB years 1895–1971): regex date-theft from body text.** In born-digital
+  2000–2008, the permissive `APPROVED_RE` runs BEFORE `APPROVED_MODERN_RE` and `finditer` grabs the
+  FIRST match — a **historical date reference in the act *body*** (e.g. "initiative measure approved
+  June 2, 1913" → a 2000 act dated 1913-06-02; the B&P §473.15 boilerplate identically poisoned 6
+  volumes). Bug in `parse_act_date()` in `pipeline/5080/parse_born_digital_prod.py`. **Fix:** use
+  `APPROVED_MODERN_RE` (the `[Approved by Governor …]` bracket) only, or add the same ±year clamp.
+  Correct date is already in the stored `new_text` — recoverable, no re-parse.
+- **Special case — 1 row:** `2003_Vol1 ch.70` date `1993-07-15` is CORRECT (a 1993 act *filed late*
+  in 2003); only the `citation`/`session` label (2003) is wrong (should be `Stats. 1993 ch.70`) — an
+  artifact of the per-volume session-labeling approach.
+
+**Implications for the backup→purge→re-ingest:** (1) **fix both `parse_act_date()` bugs first**;
+(2) add a **permanent ±N-year sanity clamp** in the shared date parser so OCR/body noise can never
+mis-date an act again; (3) the re-ingest will then yield CORRECTED dates that *differ* from the buggy
+backup for these 51 (+ the 6-volume boilerplate) — expected/good, not a diff failure.
+
 ## B. Phase 1 — OCR ingest (the real gap): **1877–1990**
 The 5090 campaign OCR'd ~1862→2000 (185 `done` volumes). The DB has only stray counts for
 1877–1999, so **1877–1990 is the un-ingested OCR-only span** (no Gate F before 1991). Ingest
