@@ -41,6 +41,15 @@ os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
 os.environ["USE_TORCH"]                = "1"
 os.environ["DOCTR_MULTIPROCESSING_DISABLE"] = "TRUE"
 
+# --- VRAM-RAMP FIX (leak diagnosis 2026-06-08) -------------------------------
+# Surya batch=None auto-sizes huge, per-page-VARIABLE batches -> CUDA allocator
+# fragmentation -> reserved VRAM ratchets up across a volume (the "leak") and
+# TDR-crashes multi-worker runs. A FIXED batch keeps it flat (proven: 60 OCRs of
+# one page = +0 MB growth at batch 32/128). Must precede any surya/torch import.
+os.environ.setdefault("RECOGNITION_BATCH_SIZE", "128")
+os.environ.setdefault("DETECTOR_BATCH_SIZE", "12")
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
 import re
 import json
 import time
@@ -64,6 +73,19 @@ if len(sys.argv) < 3:
 
 PDF_PATH      = Path(sys.argv[1])
 SESSION_LABEL = sys.argv[2].strip()
+
+# --stage gate (parity with ocr_only_5090.py). The 5080 is normally invoked with the
+# legacy 2-arg form (no --stage) => "all". This MUST be defined: the born-digital clean
+# text-layer branch references STAGE (`if STAGE == "prep"`), so a missing definition
+# NameError-crashes every 2000+ volume that has a usable text layer.
+STAGE = "all"
+if "--stage" in sys.argv:
+    _si = sys.argv.index("--stage")
+    if _si + 1 < len(sys.argv):
+        STAGE = sys.argv[_si + 1].strip().lower()
+if STAGE not in ("prep", "ocr", "all"):
+    print(f"ERROR: --stage must be prep|ocr|all, got {STAGE!r}")
+    sys.exit(1)
 
 if not PDF_PATH.exists():
     print(f"ERROR: PDF not found: {PDF_PATH}")
@@ -188,11 +210,19 @@ if DIGITAL_NATIVE:
 # ---------------------------------------------------------------------------
 # STAGE 1: Render at 300 DPI (grayscale)
 # ---------------------------------------------------------------------------
+# Prep-already-on-disk fast path: if every page is already preprocessed in
+# pages_prep_gray (rendered on another box and synced here, or a resumed run),
+# skip render+preprocess entirely. STAGE 3/4 read pages_prep_gray directly, and
+# pages_raw is only an input to STAGE 2, so it is never needed once prep is done.
+PREP_COMPLETE = len(list(PREP_GRAY_DIR.glob("page_*.png"))) >= total_pages
+if PREP_COMPLETE:
+    log("STAGE1-2-SKIP",
+        f"pages_prep_gray already complete ({total_pages} pages) -- skipping render+preprocess", "OK")
 log("STAGE1-RENDER", f"Rendering {total_pages} pages at {PRODUCTION_DPI} DPI", "OK")
 t_render = time.time()
 for pidx in range(total_pages):
     out_path = PAGES_DIR / f"page_{pidx:04d}.png"
-    if out_path.exists():
+    if PREP_COMPLETE or out_path.exists():
         continue
     page = doc[pidx]
     mat = fitz.Matrix(PRODUCTION_DPI / 72.0, PRODUCTION_DPI / 72.0)

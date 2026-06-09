@@ -27,6 +27,20 @@ Usage:
 
 import sys
 import os
+
+# --- VRAM-RAMP FIX (leak diagnosis 2026-06-08) -------------------------------
+# Surya's default batch sizing (batch=None) auto-picks HUGE, per-page-VARIABLE
+# batches on a 32GB card. Variable batch shapes fragment the CUDA caching
+# allocator, so reserved VRAM ratchets UP across a volume (4.7 -> 20.7 GB) and
+# TDR-crashes multi-worker runs -- regardless of page content (a SIMPLER table
+# page used 4x the VRAM of a dense prose page). PINNING the batch keeps it FLAT:
+# proven by isolation test -- 60 OCRs of one page = +0 MB growth at batch 32 AND
+# 128. Must be set BEFORE any surya/torch import (both happen in STAGE 4 below).
+os.environ.setdefault("RECOGNITION_BATCH_SIZE", "128")
+os.environ.setdefault("DETECTOR_BATCH_SIZE", "12")
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+# -----------------------------------------------------------------------------
+
 import re
 import json
 import time

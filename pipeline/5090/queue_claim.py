@@ -103,7 +103,14 @@ def op_claim(worker_id):
                 continue
             if v["status"] == "done":
                 continue
-            claimable = v["status"] == "pending"
+            # 'pending'  = not yet prepped (5080 will render+preprocess+OCR inline).
+            # 'prepped'  = the 5090 prep stage already rendered it AND its grayscale
+            #              pages are synced to the 5080 -> the 5080 OCRs from local
+            #              prep (skips render). Either way the 5080 marks it
+            #              'in_progress' (line below) -- a lane the 5090 decoupled
+            #              workers NEVER claim -- so both boxes stay serialized on the
+            #              shared lock with no double-processing.
+            claimable = v["status"] in ("pending", "prepped")
             if v["status"] in ("in_progress", "failed"):
                 hb = v.get("heartbeat_epoch", 0)
                 if nowt - hb > STALE_SECONDS:

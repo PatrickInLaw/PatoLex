@@ -298,3 +298,116 @@ C:\Windows\System32\OpenSSH\scp.exe: Connection closed
 [2026-06-06 00:45 PT] WORKER | queue drained / no claimable volume -- exiting | OK
 [2026-06-06 08:19 PT] WORKER | === 5080 queue worker online (pid 3084, worker_id=5080-1) sharing 5090 queue 100.70.54.56 === | OK
 [2026-06-06 08:19 PT] RUN | 1994-vol5: START local OCR (1994_Vol5.pdf) on 5080 | OK
+[2026-06-06 11:18 PT] RUN | 1994-vol5: OCR FAILED exit 1 (reclaimable) | FAIL
+[2026-06-06 11:18 PT] RUN | 1995-vol4: START local OCR (1995_Vol4.pdf) on 5080 | OK
+[2026-06-06 14:56 PT] WORKER-5080 | plan: 653 volume(s) to OCR, 0 skipped (min_ram=3.0GB python=surya-venv) | OK
+[2026-06-08 10:47 PT] WORKER-5080 | plan: 65 volume(s) to OCR, 0 skipped (min_ram=3.0GB python=surya-venv) | OK
+[2026-06-08 10:47 PT] WORKER-5080 | dry-run only -- nothing executed | OK
+[2026-06-08 10:49 PT] WORKER-5080 | plan: 6 volume(s) to OCR, 0 skipped (min_ram=2.0GB python=surya-venv) | OK
+[2026-06-08 10:49 PT] WORKER-5080 | START 2000_Vol1 (2000_Vol1.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:49 PT] WORKER-5080 | DONE  2000_Vol1 in 0.0 min | rc=1 | FAIL
+[2026-06-08 10:49 PT] WORKER-5080 | reached --max-volumes 1 -- stopping | OK
+[2026-06-08 10:49 PT] WORKER-5080 | run complete: 1 volume(s) processed this session | OK
+[2026-06-08 10:50 PT] WORKER-5080 | plan: 6 volume(s) to OCR, 0 skipped (min_ram=2.0GB python=Python) | OK
+[2026-06-08 10:50 PT] WORKER-5080 | START 2000_Vol1 (2000_Vol1.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:50 PT] WORKER-5080 | DONE  2000_Vol1 in 0.1 min | rc=0 | OK
+[2026-06-08 10:50 PT] WORKER-5080 | reached --max-volumes 1 -- stopping | OK
+[2026-06-08 10:50 PT] WORKER-5080 | run complete: 1 volume(s) processed this session | OK
+[2026-06-08 10:51 PT] WORKER-5080 | plan: 47 volume(s) to OCR, 1 skipped (min_ram=2.0GB python=Python) | OK
+[2026-06-08 10:51 PT] WORKER-5080 | START 2000_Vol2 (2000_Vol2.pdf) | free RAM 3.4 GB | OK
+[2026-06-08 10:51 PT] WORKER-5080 | DONE  2000_Vol2 in 0.0 min | rc=0 | OK
+[2026-06-08 10:51 PT] WORKER-5080 | START 2000_Vol3 (2000_Vol3.pdf) | free RAM 3.4 GB | OK
+[2026-06-08 10:51 PT] WORKER-5080 | DONE  2000_Vol3 in 0.0 min | rc=0 | OK
+[2026-06-08 10:51 PT] WORKER-5080 | START 2000_Vol4 (2000_Vol4.pdf) | free RAM 3.4 GB | OK
+[2026-06-08 10:51 PT] WORKER-5080 | DONE  2000_Vol4 in 0.0 min | rc=0 | OK
+[2026-06-08 10:51 PT] WORKER-5080 | START 2000_Vol5 (2000_Vol5.pdf) | free RAM 3.4 GB | OK
+[2026-06-08 10:51 PT] WORKER-5080 | DONE  2000_Vol5 in 0.0 min | rc=0 | OK
+[2026-06-08 10:51 PT] WORKER-5080 | START 2000_Vol6 (2000_Vol6.pdf) | free RAM 3.4 GB | OK
+[2026-06-08 10:51 PT] WORKER-5080 | DONE  2000_Vol6 in 0.0 min | rc=0 | OK
+[2026-06-08 10:51 PT] WORKER-5080 | START 2001_Vol1 (2001_Vol1.pdf) | free RAM 3.4 GB | OK
+[2026-06-08 10:52 PT] WORKER-5080 | DONE  2001_Vol1 in 0.7 min | rc=0 | OK
+[2026-06-08 10:52 PT] WORKER-5080 | START 2001_Vol2 (2001_Vol2.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:52 PT] WORKER-5080 | DONE  2001_Vol2 in 0.2 min | rc=0 | OK
+[2026-06-08 10:52 PT] WORKER-5080 | START 2001_Vol3 (2001_Vol3.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:52 PT] WORKER-5080 | DONE  2001_Vol3 in 0.1 min | rc=0 | OK
+[2026-06-08 10:52 PT] WORKER-5080 | START 2001_Vol4 (2001_Vol4.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2001_Vol4 in 0.2 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2001_Vol5 (2001_Vol5.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2001_Vol5 in 0.6 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2002_Vol1 (2002_Vol1.pdf) | free RAM 3.4 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2002_Vol1 in 0.1 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2002_Vol2 (2002_Vol2.pdf) | free RAM 3.5 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2002_Vol2 in 0.0 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2002_Vol3 (2002_Vol3.pdf) | free RAM 3.5 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2002_Vol3 in 0.1 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2002_Vol4 (2002_Vol4.pdf) | free RAM 3.5 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2002_Vol4 in 0.0 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2002_Vol5 (2002_Vol5.pdf) | free RAM 3.5 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2002_Vol5 in 0.0 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2002_Vol6 (2002_Vol6.pdf) | free RAM 3.5 GB | OK
+[2026-06-08 10:53 PT] WORKER-5080 | DONE  2002_Vol6 in 0.0 min | rc=0 | OK
+[2026-06-08 10:53 PT] WORKER-5080 | START 2003_Vol1 (2003_Vol1.pdf) | free RAM 3.5 GB | OK
+[2026-06-08 10:54 PT] WORKER-5080 | DONE  2003_Vol1 in 0.6 min | rc=0 | OK
+[2026-06-08 10:54 PT] WORKER-5080 | START 2003_Vol2 (2003_Vol2.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:54 PT] WORKER-5080 | DONE  2003_Vol2 in 0.1 min | rc=0 | OK
+[2026-06-08 10:54 PT] WORKER-5080 | START 2003_Vol3 (2003_Vol3.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:54 PT] WORKER-5080 | DONE  2003_Vol3 in 0.1 min | rc=0 | OK
+[2026-06-08 10:54 PT] WORKER-5080 | START 2003_Vol4 (2003_Vol4.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:54 PT] WORKER-5080 | DONE  2003_Vol4 in 0.1 min | rc=0 | OK
+[2026-06-08 10:54 PT] WORKER-5080 | START 2003_Vol5 (2003_Vol5.pdf) | free RAM 3.6 GB | OK
+[2026-06-08 10:55 PT] WORKER-5080 | DONE  2003_Vol5 in 1.0 min | rc=0 | OK
+[2026-06-08 10:55 PT] WORKER-5080 | START 2004_Vol1 (2004_Vol1.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2004_Vol1 in 0.4 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2004_Vol2 (2004_Vol2.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2004_Vol2 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2004_Vol3 (2004_Vol3.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2004_Vol3 in 0.1 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2004_Vol4 (2004_Vol4.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2004_Vol4 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2004_Vol5 (2004_Vol5.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2004_Vol5 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2004_Vol6 (2004_Vol6.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2004_Vol6 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2005_Vol1 (2005_Vol1.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2005_Vol1 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2005_Vol2 (2005_Vol2.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2005_Vol2 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2005_Vol3 (2005_Vol3.pdf) | free RAM 3.8 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2005_Vol3 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2005_Vol4 (2005_Vol4.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2005_Vol4 in 0.1 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2006_Vol1 (2006_Vol1.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2006_Vol1 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2006_Vol2 (2006_Vol2.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2006_Vol2 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2006_Vol3 (2006_Vol3.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2006_Vol3 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2006_Vol4 (2006_Vol4.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2006_Vol4 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2006_Vol5 (2006_Vol5.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2006_Vol5 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2006_Vol6 (2006_Vol6.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2006_Vol6 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2007_Vol1 (2007_Vol1.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2007_Vol1 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2007_Vol2 (2007_Vol2.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2007_Vol2 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2007_Vol3 (2007_Vol3.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2007_Vol3 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2007_Vol4 (2007_Vol4.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2007_Vol4 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2007_Vol5 (2007_Vol5.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2007_Vol5 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2008_Vol1 (2008_Vol1.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2008_Vol1 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2008_Vol2 (2008_Vol2.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2008_Vol2 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2008_Vol3 (2008_Vol3.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2008_Vol3 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2008_Vol4 (2008_Vol4.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2008_Vol4 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | START 2008_Vol5 (2008_Vol5.pdf) | free RAM 4.0 GB | OK
+[2026-06-08 10:56 PT] WORKER-5080 | DONE  2008_Vol5 in 0.0 min | rc=0 | OK
+[2026-06-08 10:56 PT] WORKER-5080 | run complete: 47 volume(s) processed this session | OK
+[2026-06-08 20:39 PT] WORKER | === 5080 queue worker online (pid 32264, worker_id=5080-1) sharing 5090 queue 100.70.54.56 === | OK
+[2026-06-08 20:39 PT] RUN | 1996-vol5: START local OCR (1996_Vol5.pdf) on 5080 | OK
