@@ -87,3 +87,45 @@
 - The VRAM "leak" was **Surya `batch=None` auto-sizing → allocator fragmentation**, NOT content, NOT a reference leak (proven: 60 OCRs of one page = +0 MB growth at fixed batch).
 - 5080 local **surya-venv lacks `fitz`** → use system Python312 for OCR there.
 - Crash monitor (`monitor_5090.ps1`) runs **on the 5080**, polling the 5090 over SSH, so it survives a 5090 crash (detects the SSH drop = crash).
+
+---
+
+## Continuation #2 — 2026-06-08 ~22:40 PT (DB inventory + Gate F discovery — ROADMAP-CORRECTING)
+
+Ran tasks #1/#2/#3 (two parallel Sonnet subagents + a direct write) and then acquired the leginfo gap. **Findings materially correct the ROADMAP's "Current Status."**
+
+### DB inventory (Sonnet subagent, live psql, read-only) — NOT "1850–1875 only"
+- **`enactment` = 35,332 rows, span 1850–2024** (provision 84,118; designation_history 84,118; change_event 151,763; source_document 69; **lineage_edge 0; provision_version 0** — materialize/recodification sweeps never run).
+- **Two layers:**
+  - **OCR-linked (has `source_document_id`): 12,552 acts, 1850–2008** — the scanned session-law pipeline. **1850–1875 dense (~3,946); 1876–1989 nearly EMPTY (1876–94 ≈ 320; 1895–1989 ≈ 39).** ← the real hole.
+  - **Gate F unlinked (`source_document_id IS NULL`): 22,780 acts, 1991–2024** — see next.
+
+### The "mystery" unlinked layer = the MODERN ERA, ALREADY RECONSTRUCTED (not stubs)
+- It is the **Gate F layer**: CA law **1991–2024 reconstructed from official leginfo CAML bill-XML**, written by `pipeline/gate_f/ingest_gate_f.py` (← `parse_bill_versions.py` parsing `pubinfo_YYYY/BILL_VERSION_TBL.dat`+`.lob` CAML).
+- **139,211 section-level change_events**, all `trust_level='official_xml'`, `confidence=1.0`, `confident=TRUE`, `new_text` populated (99.6%). Citations `CA {year} Ch. {n}` (one enactment per chapter; ~6 change_events each; amend 104k / add 26k / repeal 8.8k). `title` NULL by design ("unknown from CAML").
+- **14 sessions present: 1991-92, 1995-96, 1997-98, 1999-2000, 2005-06 … 2023-24.**
+- **Gate F GAPS: 1993-94, 2001-02, 2003-04 are entirely absent.** Ends at 2023-24 (Sep 2024).
+- **=> The ROADMAP is wrong:** Gate F ("Modern Layer") is listed **"Not started"** but is **largely DONE**. And "1850–1875 ingested (4262)" is badly stale — the DB holds 35,332 acts. **ROADMAP Current-Status + Gate F/E rows need rewriting.** (Flagged as open item, not yet done.)
+
+### Leginfo acquisition (task #3 → acquire) — modern source now COMPLETE & CURRENT
+- Subagent found `acquire_leginfo_pubinfo.py` had a **stale assumption** that 1989/1993/2001/2003/2025 were on disk — they were never downloaded. **Acquired all 5** (`acquire_missing_5.py`, scratch): pubinfo_2025 (930 MB, **LAW_SECTION_TBL=True** = current-law anchor), 1993 (69 MB), 1989 (16 MB), 2001 (214 MB), 2003 (194 MB).
+- **PUBINFO series now complete: all 19 biennial sessions 1989→2025.** Source: `https://downloads.leginfo.legislature.ca.gov/pubinfo_{YYYY}.zip`.
+- **The acquired archives map EXACTLY onto the Gate F gaps + current extension:** 1993/2001/2003 → fill the 3 missing Gate F sessions; **2025 → extend Gate F to current (2025-26)**; 1989 → earliest. So running `parse_bill_versions.py` + `ingest_gate_f.py` on these four makes the modern era **gap-free 1989→2026**.
+
+### Strategic reframe (the big takeaways)
+1. **The real un-built span is 1876–1993 historical** (~360 ingested acts), pure OCR territory (no XML pre-~1991). That is where OCR + ingest effort belongs.
+2. **The OCR campaign's 1994–2000 work is largely redundant for the *served corpus*** — Gate F already covers 1995–2000 with higher-quality official XML. **But it's the seam-validation oracle** (roadmap: "the seam is a correctness oracle — both directions must agree where they overlap"). Finishing it (≈done 3:30 AM) gives that oracle for free; for serving, **Gate F is authoritative**.
+3. **2005–2008 has BOTH OCR and Gate F** (2,818 overlapping year+chapter, no citation collision: OCR `Stats. YYYY_VolN ch.NNN` vs Gate F `CA YYYY Ch.N`). The query/publish layer must **arbitrate (Gate F wins)** — arbitration rule undefined.
+
+### Tasks done this block
+- #1 dedupe: 6× `2000-vol*` → `held` (canonical born-digital = 5080 `2000_Vol*`); lock-safe write.
+- #2 DB inventory (above).
+- #3 leginfo gap → acquired all 5 missing PUBINFO archives.
+- 1999-vol2/4 resume-prep finished (body=2037 / 1724; crash damage repaired).
+
+### Open items added
+- **REWRITE ROADMAP current-status** (Gate F is largely built, not "not started"; DB has 35,332 acts not 4,262).
+- **Run Gate F pipeline on the 4 new archives** (1993/2001/2003/2025[/1989]) → gap-free + current-through-2026 modern era. *(High value, data on disk, independent of OCR finishing.)*
+- **Fill the 1876–1993 historical OCR ingest** (the actual hole).
+- **Define OCR↔Gate-F arbitration** for the overlap years (Gate F authoritative; OCR = seam oracle).
+- **Fix `acquire_leginfo_pubinfo.py`** stale `MISSING_YEARS` assumption.

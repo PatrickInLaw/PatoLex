@@ -414,3 +414,6 @@ C:\Windows\System32\OpenSSH\scp.exe: Connection closed
 [2026-06-08 21:38 PT] PUSH | 1996-vol5: OCR outputs pushed to 5090 | OK
 [2026-06-08 21:38 PT] RUN | 1996-vol5: OCR DONE + pushed + marked done on 5090 | OK
 [2026-06-08 21:38 PT] RUN | 1997-vol2: START local OCR (1997_Vol2.pdf) on 5080 | OK
+[2026-06-08 22:38 PT] PUSH | 1997-vol2: OCR outputs pushed to 5090 | OK
+[2026-06-08 22:39 PT] RUN | 1997-vol2: OCR DONE + pushed + marked done on 5090 | OK
+[2026-06-08 22:39 PT] RUN | 1997-vol5: START local OCR (1997_Vol5.pdf) on 5080 | OK
