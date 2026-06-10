@@ -116,7 +116,16 @@ REPORT_PATH = REPO_ROOT / "docs" / "80_PROJECT_HISTORY" / "run-logs" / "complete
 # ── tunable thresholds ─────────────────────────────────────────────────────────
 MIN_CHAPTER_THRESHOLD = 5          # fewer than this = STUB
 GAP_RATE_THRESHOLD = 0.15          # >15% gaps in 1..max for single-session single-volume → GAPS_FOUND
-LOW_CONF_RATE_THRESHOLD = 0.15     # >15% low-confidence pages → SUSPECT
+# LOW_CONF thresholds — keyed off TRUE quality signals, not the old conflated metric:
+#   true_low_conf_rate : among GENUINE-MULTI-ENGINE pages (>=2 engines produced non-empty text),
+#                        the fraction the pipeline's own high_confidence flag marks False.
+#                        Uses the pipeline's era-appropriate bar (0.65 for 3-engine, 0.70 for
+#                        2-engine) — NOT a hardcoded 0.75.
+#   consensus_empty_rate: fraction of pages with empty consensus_text — the "no text" signal.
+# SUSPECT fires when true_low_conf_rate > 30% OR consensus_empty_rate > 5%.
+# single_engine_rate is a COVERAGE note (docTR/surya fell back to tess-only), NOT a quality fail.
+TRUE_LOW_CONF_THRESHOLD = 0.30     # >30% genuine-multi-engine low-conf pages → SUSPECT
+CONSENSUS_EMPTY_THRESHOLD = 0.05   # >5% pages with empty consensus_text → SUSPECT
 # Density window: flag if any window of this many BODY pages has zero chapters
 # (disabled for volumes with fewer than MIN_CHAPTERS_FOR_DENSITY_CHECK total chapters)
 DENSITY_WINDOW_PAGES = 75
@@ -182,8 +191,25 @@ class VolumeResult:
     total_pages: int = 0
     body_pages: int = 0
     front_matter_pages: int = 0
+    # ── LEGACY low-conf field (kept for backward reference only; NOT used for verdict) ──
     low_conf_pages: list[int] = field(default_factory=list)
-    low_conf_rate: float = 0.0
+    low_conf_rate: float = 0.0   # OLD conflated metric — do NOT use for verdict; kept for diff/audit
+    # ── NEW split quality / coverage fields ─────────────────────────────────────────────
+    # single_engine_pages: pages where only ONE engine produced non-empty text
+    #   (docTR/surya ran empty → tess-only fallback).  COVERAGE note, NOT a quality failure.
+    single_engine_pages: list[int] = field(default_factory=list)
+    single_engine_rate: float = 0.0
+    # genuine_multi_engine_pages: pages where >=2 engines produced non-empty text.
+    #   Only these have real cross-engine agreement to measure.
+    genuine_multi_engine_count: int = 0
+    # true_low_conf: among genuine-multi-engine pages only, those the pipeline's own
+    #   high_confidence flag marks False (era-appropriate 0.65/0.70 bars, NOT hardcoded 0.75).
+    true_low_conf_pages: list[int] = field(default_factory=list)
+    true_low_conf_rate: float = 0.0   # fraction of ALL pages that are genuine-multi AND low-conf
+    # consensus_empty: pages with empty consensus_text — the real "no text" signal.
+    consensus_empty_pages: list[int] = field(default_factory=list)
+    consensus_empty_rate: float = 0.0
+    # ─────────────────────────────────────────────────────────────────────────────────────
     leading_missing: list[int] = field(default_factory=list)        # pidx values skipped before OCR starts (front matter)
     missing_pages: list[int] = field(default_factory=list)          # OLD: mid-volume pidx values absent from OCR JSON (legacy contiguity check; kept for fallback/UNVERIFIED volumes)
     # ── classification-aware gap fields (new) ─────────────────────────────────
@@ -636,8 +662,31 @@ def compute_verdict(result: VolumeResult) -> str:
             + ", ".join(f"{s}-{e}" for s, e in result.zero_density_windows[:5])
         )
 
-    if result.low_conf_rate > LOW_CONF_RATE_THRESHOLD:
+    # ── Quality gate: TRUE low-confidence signal ─────────────────────────────
+    # Fire SUSPECT only on genuine quality problems — NOT on single-engine-fallback pages.
+    #   true_low_conf_rate: genuine-multi-engine pages that the pipeline's own
+    #     era-appropriate high_confidence flag marks as low-confidence.
+    #   consensus_empty_rate: pages with NO text at all.
+    # Single-engine pages (docTR/surya ran empty → tess-only) are a COVERAGE note
+    # and do NOT fire SUSPECT on their own.
+    if result.true_low_conf_rate > TRUE_LOW_CONF_THRESHOLD:
+        result.notes.append(
+            f"True low-conf rate {result.true_low_conf_rate*100:.1f}% "
+            f"(genuine multi-engine pages where pipeline high_confidence=False) "
+            f"exceeds {TRUE_LOW_CONF_THRESHOLD*100:.0f}% threshold."
+        )
         return "SUSPECT"
+    if result.consensus_empty_rate > CONSENSUS_EMPTY_THRESHOLD:
+        result.notes.append(
+            f"Consensus-empty rate {result.consensus_empty_rate*100:.1f}% "
+            f"(pages with no text at all) exceeds {CONSENSUS_EMPTY_THRESHOLD*100:.0f}% threshold."
+        )
+        return "SUSPECT"
+    if result.single_engine_rate > 0.10:
+        result.notes.append(
+            f"Single-engine fallback rate {result.single_engine_rate*100:.1f}% "
+            f"(docTR/surya ran empty; tess-only consensus) — COVERAGE note, not a quality failure."
+        )
 
     if result.outlier_chapters:
         result.notes.append(
@@ -723,17 +772,72 @@ def load_volume(scratch_dir: Path) -> Optional[VolumeResult]:
             result.body_pages = result.total_pages
             result.front_matter_pages = 0
 
-        # Low-confidence pages — skip non-numeric keys gracefully
-        low_conf = []
+        # ── Quality / coverage page classification ─────────────────────────────
+        # Classify each page by how many engines produced non-empty text output.
+        # NOTE: engines_used reflects which engines *attempted* the page, not which
+        # produced output — so we check the per-engine text fields directly.
+        #
+        # SINGLE-EFFECTIVE-ENGINE: only one engine produced non-empty text.
+        #   These are a COVERAGE note (docTR/surya ran empty → tess-only fallback),
+        #   NOT a quality failure.  Their agreement_ratio is mechanically 0.0 because
+        #   there is nothing to compare against.
+        #
+        # GENUINE-MULTI-ENGINE: >=2 engines produced non-empty text.  Only these
+        #   have real cross-engine agreement to measure.  We trust the pipeline's own
+        #   high_confidence flag (era-appropriate 0.65/0.70 bars) to identify low-conf
+        #   within this group — we do NOT re-threshold above the pipeline's own bar.
+        #
+        # CONSENSUS-EMPTY: pages where consensus_text itself is empty — the real
+        #   "no text" signal regardless of engine count.
+
+        low_conf_old = []       # legacy conflated metric (kept for audit/diff only)
+        single_engine = []
+        true_low_conf = []
+        consensus_empty = []
+        genuine_multi_count = 0
+
         for pg_str, entry in pages_data.items():
             if not pg_str.lstrip("-").isdigit():
                 continue
+            pidx = int(pg_str)
             agr = entry.get("agreement_ratio", 1.0)
             hc = entry.get("high_confidence", True)
+            tess_nonempty = bool((entry.get("tess_text") or "").strip())
+            doctr_nonempty = bool((entry.get("doctr_text") or "").strip())
+            surya_nonempty = bool((entry.get("surya_text") or "").strip())
+            consensus_nonempty = bool((entry.get("consensus_text") or "").strip())
+
+            # Legacy conflated metric (NOT used for verdict)
             if not hc or agr < 0.75:
-                low_conf.append(int(pg_str))
-        result.low_conf_pages = sorted(low_conf)
-        result.low_conf_rate = len(low_conf) / max(1, result.total_pages)
+                low_conf_old.append(pidx)
+
+            # Consensus empty
+            if not consensus_nonempty:
+                consensus_empty.append(pidx)
+
+            # Count non-empty engine outputs
+            non_empty_engines = sum([tess_nonempty, doctr_nonempty, surya_nonempty])
+
+            if non_empty_engines <= 1:
+                # Single effective engine — coverage note, not a quality fail
+                single_engine.append(pidx)
+            else:
+                # Genuine multi-engine: real agreement to measure
+                genuine_multi_count += 1
+                if not hc:
+                    # Pipeline's own era-appropriate threshold (0.65/0.70) says low-conf
+                    true_low_conf.append(pidx)
+
+        result.low_conf_pages = sorted(low_conf_old)
+        result.low_conf_rate = len(low_conf_old) / max(1, result.total_pages)
+
+        result.single_engine_pages = sorted(single_engine)
+        result.single_engine_rate = len(single_engine) / max(1, result.total_pages)
+        result.genuine_multi_engine_count = genuine_multi_count
+        result.true_low_conf_pages = sorted(true_low_conf)
+        result.true_low_conf_rate = len(true_low_conf) / max(1, result.total_pages)
+        result.consensus_empty_pages = sorted(consensus_empty)
+        result.consensus_empty_rate = len(consensus_empty) / max(1, result.total_pages)
 
         # Expected count from folder name
         result.expected_count = parse_expected_from_label(label)
@@ -836,9 +940,26 @@ def format_result(r: VolumeResult) -> str:
                 f"Leading (front-matter skipped): {len(r.leading_missing)} pidx values "
                 f"(pidx 0..{r.leading_missing[-1]}) — expected, not a content gap"
             )
+    # New split quality/coverage lines
     lines.append(
-        f"Low-conf pages: {len(r.low_conf_pages)} ({r.low_conf_rate*100:.1f}%)"
-        + (f"  — first few: {r.low_conf_pages[:10]}" if r.low_conf_pages else "")
+        f"Single-engine fallback: {len(r.single_engine_pages)} pages ({r.single_engine_rate*100:.1f}%) "
+        f"— docTR/surya ran empty, tess-only consensus; COVERAGE note, not a quality fail"
+    )
+    lines.append(
+        f"Genuine multi-engine pages: {r.genuine_multi_engine_count} "
+        f"({(r.genuine_multi_engine_count/max(1,r.total_pages))*100:.1f}%)"
+    )
+    lines.append(
+        f"TRUE low-conf (genuine multi-engine, pipeline high_conf=False): "
+        f"{len(r.true_low_conf_pages)} pages ({r.true_low_conf_rate*100:.1f}%)"
+        + (f"  — first few pidx: {r.true_low_conf_pages[:10]}" if r.true_low_conf_pages else "")
+    )
+    lines.append(
+        f"Consensus-empty pages (no text at all): {len(r.consensus_empty_pages)} ({r.consensus_empty_rate*100:.1f}%)"
+    )
+    lines.append(
+        f"[Legacy] Low-conf pages (old conflated metric, NOT used for verdict): "
+        f"{len(r.low_conf_pages)} ({r.low_conf_rate*100:.1f}%)"
     )
     if r.zero_density_windows:
         lines.append(f"Zero-density windows (no chapter headers; may be long single acts):")
@@ -887,6 +1008,15 @@ def result_to_dict(r: VolumeResult) -> dict:
         "mid_volume_missing_count": len(r.missing_pages),   # old contiguity check (UNVERIFIED only)
         "missing_pages": r.missing_pages[:50] if not r.classification_available else [],
         # ──────────────────────────────────────────────────────────────────────
+        # ── New split quality/coverage fields ─────────────────────────────────
+        "single_engine_count": len(r.single_engine_pages),
+        "single_engine_rate": round(r.single_engine_rate, 4),
+        "genuine_multi_engine_count": r.genuine_multi_engine_count,
+        "true_low_conf_count": len(r.true_low_conf_pages),
+        "true_low_conf_rate": round(r.true_low_conf_rate, 4),
+        "consensus_empty_count": len(r.consensus_empty_pages),
+        "consensus_empty_rate": round(r.consensus_empty_rate, 4),
+        # ── Legacy conflated metric (kept for audit/diff; NOT used for verdict) ─
         "low_conf_page_count": len(r.low_conf_pages),
         "low_conf_rate": round(r.low_conf_rate, 4),
         "zero_density_windows": [{"start": s, "end": e} for s, e in r.zero_density_windows],
@@ -957,8 +1087,8 @@ def main() -> None:
 
         # Print summary table
         print()
-        print(f"{'VOLUME':<40} {'VERDICT':<18} {'PAGES':>6} {'SESSIONS':>8} {'TOTAL_CH':>9} {'BODY_GAPS':>10} {'LOWCONF%':>9} {'CLS':>5}")
-        print("-" * 115)
+        print(f"{'VOLUME':<40} {'VERDICT':<18} {'PAGES':>6} {'SESSIONS':>8} {'TOTAL_CH':>9} {'BODY_GAPS':>10} {'SING_ENG%':>10} {'TRUE_LC%':>9} {'EMPTY%':>7} {'CLS':>5}")
+        print("-" * 130)
         for r in all_results:
             total_ch = sum(len(s.chapters_found) for s in r.sessions)
             # Show real body gaps if classification available, else old contiguity count
@@ -967,7 +1097,8 @@ def main() -> None:
             print(
                 f"{r.volume_label:<40} {r.verdict:<18} {r.total_pages:>6} "
                 f"{len(r.sessions):>8} {total_ch:>9} {gap_display:>10} "
-                f"{r.low_conf_rate*100:>8.1f}% {cls_flag:>5}"
+                f"{r.single_engine_rate*100:>9.1f}% {r.true_low_conf_rate*100:>8.1f}% "
+                f"{r.consensus_empty_rate*100:>6.1f}% {cls_flag:>5}"
             )
 
         # Print verdict counts
