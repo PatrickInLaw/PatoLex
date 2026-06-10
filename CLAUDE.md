@@ -8,7 +8,7 @@
 
 PatoLex is a public-facing web application that provides a searchable, point-in-time archive of California's statutory law — letting attorneys and legal researchers see exactly what a statute said on any given date. The target users are attorneys and legal researchers. The project is also a proof-of-concept for agentic coding and design at scale.
 
-**Scope (`docs/20_ROADMAP/ROADMAP.md` is the source of truth):** PatoLex is built **historical-first / risk-first** — the deliverable is full depth from **1850 (a blank page) to present**, and there is **no public launch until the full corpus is present and validated**. We build the hardest, least-certain segment (statutes reconstructed from scanned 19th-century session laws) FIRST. **This is underway:** the **1850–1875 segment is live** (4262 acts ingested into local PostgreSQL as version-B OCR consensus), with the OCR campaign extending forward. The modern era (1989/1994-forward, from California's structured bulk legislative data) is built SECOND. *(The older "modern-POC-1991-first, pre-1992 = Phase 2" framing was reversed on 2026-05-31 — do not follow it.)* The web stack is Next.js 15 + TypeScript (frontend) + Supabase PostgreSQL (database); deployment is Vercel (frontend) + Supabase (managed DB). The data pipeline runs on local machines (see the pipeline-stack note under Coding Conventions).
+**Scope (`docs/20_ROADMAP/ROADMAP.md` is the source of truth):** PatoLex is built **historical-first / risk-first** — the deliverable is full depth from **1850 (a blank page) to present**, and there is **no public launch until the full corpus is present and validated**. We build the hardest, least-certain segment (statutes reconstructed from scanned 19th-century session laws) FIRST. **This is underway:** the **1850–1875 segment is live** (4262 acts ingested into local PostgreSQL as version-B OCR consensus), with the OCR campaign extending forward. The modern era (1989/1994-forward, from California's structured bulk legislative data) is built SECOND. *(The older "modern-POC-1991-first, pre-1992 = Phase 2" framing was reversed on 2026-05-31 — do not follow it.)* The web stack is Next.js 15 + TypeScript (frontend). **The active database is LOCAL PostgreSQL 16 on the 5080 (`localhost:5432/patolex`) — that is where the corpus actually lives during the build (verified 2026-06-09 by direct query: 35,332 enactments).** A hosted production database + Vercel deployment is the *planned* public-serving step for eventual launch (Supabase was the original pick), **NOT the current data store — do not assume the data is in Supabase.** The data pipeline runs on local machines (see the pipeline-stack note under Coding Conventions).
 
 Default bias for new dependencies: **TypeScript-native** for the web layer; the active historical pipeline is **Python (OCR/parse) + TypeScript/Drizzle (ingest)** (see Coding Conventions). Microsoft-aligned where applicable.
 
@@ -171,7 +171,7 @@ For substantive `src/` or `pipeline/` changes, run a **Hans review** before push
 |----------|---------|
 | `docs/20_ROADMAP/ROADMAP.md` | Current status, what's next |
 | `docs/30_SYSTEM_DESIGN/ARCHITECTURE.md` | System architecture |
-| `docs/40_SCHEMA/` | Data models, schema, Supabase table definitions |
+| `docs/40_SCHEMA/` | Data models, schema, table definitions (local Postgres `patolex`) |
 | `docs/60_OPERATIONS/SETUP.md` | Environment setup, dependencies |
 | `docs/80_PROJECT_HISTORY/CHANGELOG.md` | Project history |
 | `docs/80_PROJECT_HISTORY/lessons/LESSONS_OVERVIEW.md` | Index of lessons learned |
@@ -197,7 +197,7 @@ For substantive `src/` or `pipeline/` changes, run a **Hans review** before push
 
 **Pipeline stack:** The **historical corpus build (cc002 decision) uses Python (OCR/parse — Tesseract 5 + qwen2.5vl ensemble, PyMuPDF) + TypeScript/Drizzle (ingest against the same schema)**. This is the proven, working toolchain for the one-time 1850-forward reconstruction. The originally-specified **C# (.NET 8 LTS) pipeline (AngleSharp, PdfPig, Tesseract.NET, Dapper) is DEFERRED** — reserved for an ongoing modern-era crawler/worker if/when wanted, not the historical ETL.
 
-**Database:** PostgreSQL 16 via Supabase. Connection pooling: use PgBouncer URL (port 6543) for serverless Vercel functions, direct URL (port 5432) for the data pipeline (Python/TypeScript).
+**Database (ACTIVE — read this carefully):** PostgreSQL 16 **running LOCALLY on the 5080**. The pipeline and the live corpus use **`localhost:5432/patolex`** (DSN in `.env.local` as `DATABASE_URL`, overridable via `PATOLEX_PG_DSN`). This local DB is the system of record during the build — **the data is NOT in Supabase.** A hosted/managed production DB (Supabase was the original pick) + Vercel deployment is a FUTURE public-serving step, not yet in use. If/when that happens, use a PgBouncer pooled URL (port 6543) for serverless functions and the direct URL (5432) for the pipeline. Until then, ignore Supabase for any data query — query `localhost:5432/patolex`.
 
 **Naming conventions (TypeScript):**
 - Files/folders: `kebab-case`
@@ -223,8 +223,8 @@ For substantive `src/` or `pipeline/` changes, run a **Hans review** before push
 **Environment / secrets:**
 - Never commit `.env.local` (gitignored)
 - Secrets file: `C:\Users\PatrickKolasinski\Documents\PatoLex-secrets.env` (outside repo)
-- Supabase: use `anon` key in client-side code only; `service_role` key in server-only routes
-- Connection strings: PgBouncer URL for Vercel, direct URL for pipeline
+- Active pipeline/data DB is **local Postgres** (`localhost:5432/patolex`, `DATABASE_URL` in `.env.local`) — no cloud creds needed for the build; query this for any corpus/DB question.
+- (Future hosted deployment ONLY) Supabase keys: `anon` client-side, `service_role` server-only; PgBouncer pooled URL for Vercel serverless, direct URL for the pipeline.
 
 ---
 
@@ -253,3 +253,4 @@ For substantive `src/` or `pipeline/` changes, run a **Hans review** before push
 | 2026-05-31 | cc001: Initial version from PatoLex template. Next.js 15 + TypeScript + tRPC + Supabase + C# pipeline. |
 | 2026-06-02 | cc002 (doc rewrite): Corrected "What PatoLex Is" to historical-first reality (1850-1875 live) and the active pipeline stack (Python OCR/parse + TS/Drizzle ingest; C#/.NET deferred). Added two MANDATORY rules — **Hygiene Cadence** (event-driven run/session-log updates on commit + work-unit + ~12 exchanges, with the ~25-min Stop-hook backstop; the session-log hook now covers BOTH the Bash and PowerShell tools, while the compound-bash block remains Bash-only) and **Findings Land in Durable Docs** (findings go in a design doc / lessons / memory, never only a prunable run/session log). No existing MANDATORY rule weakened. |
 | 2026-06-02 | cc002 (Hans pass on the rewrite): corrected a new overclaim — the **compound-bash block is Bash-tool-only**, NOT both tools (only the session-log hook covers both) — and three pre-existing CLAUDE.md errors the rewrite owned: the "must go through tRPC" rule → `src/server/` service layer, and stale "C# pipeline" references (the active pipeline is Python + TypeScript/Drizzle). |
+| 2026-06-09 | cc007: **Corrected the database location** — the active pipeline DB is **LOCAL PostgreSQL on the 5080 (`localhost:5432/patolex`)**, NOT Supabase. The prior "PostgreSQL 16 via Supabase" wording was wrong and caused an audit agent to query an unreachable Supabase host and nearly conclude the modern era wasn't ingested. Verified by direct query: 35,332 enactments (4,262 OCR 1850-1875 + 22,780 Gate F 1991-2024 + 8,290 born-digital 2000-2008). Supabase reframed as a *future* hosted-deployment target only. |

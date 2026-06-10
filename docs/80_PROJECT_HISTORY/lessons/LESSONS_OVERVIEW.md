@@ -16,7 +16,7 @@ These lessons came from the template's own setup history and apply to any new re
 
 ## PatoLex-Specific Lessons (cc001)
 
-- **Supabase: use port 6543 (PgBouncer) for Vercel, port 5432 (direct) for the C# pipeline.** Serverless functions exhaust the 60-connection limit on the direct URL. The pipeline is a long-running batch process and benefits from a persistent direct connection.
+- **Supabase port rule (applies to the future Supabase serving deployment, not the current build DB):** use port 6543 (PgBouncer) for Vercel serverless functions; port 5432 (direct) for any long-running pipeline process. Serverless functions exhaust the 60-connection limit on the direct URL. **Currently (2026-06-09): the active DB is local PostgreSQL 16 at `localhost:5432/patolex` — Supabase is a planned future serving deployment only.**
 - **`service_role` key must never appear in client-side code.** Use `anon` key for browser-facing calls; `service_role` only in Next.js Server Components / Route Handlers / tRPC procedures running server-side.
 - **Read the template FIRST, then build.** On cc001, the agent started building before fully reviewing the sample repo and had to stop and restart. Cost: extra time and context. Rule: always extract and read the full template before touching the new repo.
 - **Write tool requires Read first.** Claude Code's Write tool will refuse to overwrite a file it hasn't read this session. On large repo setups, batch-read target files before batch-writing, or accept the read-then-write sequence for each file.

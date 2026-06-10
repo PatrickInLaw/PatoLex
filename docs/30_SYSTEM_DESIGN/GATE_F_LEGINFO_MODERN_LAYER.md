@@ -172,10 +172,12 @@ The 1991–1999 PUBINFO archives use an earlier CAML XML format where `<caml:Act
 
 The href format is identical across all years — URL-encoded XPointer (`urn:caml:codes:VEH:caml#xpointer(%2F%2F...)`) — so no second code path was needed.
 
-### Ingest: READY (DB connectivity required)
-`ingest_gate_f.py` is written and ready. To ingest all extracted data:
+### Ingest: COMPLETE (cc004/cc006)
+`ingest_gate_f.py` has been run against the local PostgreSQL 16 DB. Gate F data (22,780 enactments / 139,211 change_events, 1991–2024) is live in `localhost:5432/patolex` on the 5080.
+
+To re-run or extend ingest:
 ```powershell
-$env:DATABASE_URL = "<direct-url-from-secrets>"
+$env:PATOLEX_PG_DSN = "postgresql://postgres:<password>@localhost:5432/patolex"
 python pipeline\gate_f\ingest_gate_f.py C:\Users\PatrickKolasinski\PatoLex-scratch\gate_f_out --commit
 ```
-DB connectivity from the local machine currently fails due to IPv6-only DNS resolution for `db.nqigiiyurwlmruexircz.supabase.co`. Fix: update `DATABASE_URL` to use the Supabase `*.pooler.supabase.com` endpoint (which has IPv4).
+> **Note:** Earlier versions of this doc showed `DATABASE_URL` pointing at Supabase (`db.nqigiiyurwlmruexircz.supabase.co`). That was wrong — the active DB is local. Both `ingest_gate_f.py` and `register_source_document.py` were fixed in cc004 to use `PATOLEX_PG_DSN` → `localhost:5432/patolex` (same pattern as `ingest_clean.py`).

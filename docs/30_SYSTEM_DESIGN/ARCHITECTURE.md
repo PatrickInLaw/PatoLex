@@ -16,13 +16,13 @@ PatoLex is a two-component system: a public-facing Next.js web application and a
 | Styling | Tailwind CSS + shadcn/ui | Professional UI suitable for legal research |
 | Data access | RSC + Server Actions over a transport-agnostic service layer | Server Components read via Drizzle directly; Server Actions / Route Handlers for interactive bits. **tRPC deferred** (private-by-design, TS-only); add only if client interactivity warrants it |
 | ORM | Drizzle ORM | Stays close to raw SQL; Patrick's SQL instincts transfer directly |
-| Database | PostgreSQL 16 via Supabase | FTS via tsvector, point-in-time versioning, RLS |
+| Database | PostgreSQL 16 (local, `localhost:5432/patolex` on the 5080) | FTS via tsvector, point-in-time versioning, RLS. **Active build DB is local — Supabase is a planned future public-serving deployment, not yet active.** |
 | Search (later) | Meilisearch or Typesense | Add when PG FTS UX hits its limits |
 | Data pipeline (historical build — ACTIVE) | Python (OCR/parse) + TypeScript/Drizzle (ingest) | OCR via **3-engine token-majority consensus (Tesseract + docTR + Surya)**, PyMuPDF for page handling; qwen2.5vl/GOT run as disagreement-flagging vectors only (never committed text). Canonical ingest = `pipeline/ingest_clean.py` against the same Drizzle schema. This is the proven toolchain for the one-time 1850-forward reconstruction. |
 | Data pipeline (C#/.NET) | **DEFERRED** | The originally-specified C# (.NET 8) pipeline (AngleSharp, PdfPig, Tesseract.NET, Dapper) is **not the active toolchain** — reserved for a possible ongoing modern-era crawler/worker if/when wanted, not the historical ETL. |
 | Build/staging DB | Local PostgreSQL 16 | Pipeline ETL, diffing, re-runs, ad-hoc + Claude Code analysis. Disposable. |
-| Serving DB | PostgreSQL 16 via Supabase | Public read layer. **Budget for Pro tier (~$25/mo)** -- free 500MB is insufficient for the corpus + tsvector indexes |
-| Deployment | Vercel (frontend) + Supabase (serving DB) | Pipeline runs locally; publishes finished data to Supabase |
+| Serving DB | PostgreSQL 16 via Supabase *(planned/future)* | Public read layer for the eventual public web app. **Not yet active — data lives in the local build DB.** Budget for Pro tier (~$25/mo) when this becomes active; free 500MB is insufficient for the corpus + tsvector indexes. |
+| Deployment | Vercel (frontend) + Supabase (serving DB) *(planned/future)* | Pipeline runs locally against the local build DB; a publish step will promote finished data to Supabase when the corpus is complete and validated. |
 
 ### API / Data Access Strategy
 
@@ -71,9 +71,9 @@ WHERE section_id = $1
 
 - All data is public domain (California state government output)
 - No authentication required for read access; RLS enforces read-only for anon key
-- Pipeline runs as a local batch process, staging into local Postgres, then publishing to Supabase
+- Pipeline runs as a local batch process against the local build DB (`localhost:5432/patolex` on the 5080); a publish step will promote finished data to Supabase (planned future serving DB) once the corpus is complete and validated
 - Reconstructed point-in-time text MUST be validated against a known-good source before public launch (Gate G); a "verify against official sources / not legal advice" disclaimer ships with launch
-- Supabase free tier (500MB) is insufficient even for the modern corpus + indexes -- plan for Pro
+- Supabase free tier (500MB) will be insufficient for the modern corpus + indexes when that serving DB is provisioned -- plan for Pro tier
 - Pre-~1996 session-law volumes are scanned images and must be OCR'd; serve text only from clean public-domain channels (Internet Archive non-Google + CA-gov). The ~1997–2008 Chief Clerk volumes are born-digital (direct text extract, no OCR), and 1989/1994-forward is structured XML — see the three-tier model in `DATA_SOURCES_HISTORICAL.md` §1d
 
 ---
