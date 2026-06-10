@@ -134,6 +134,21 @@ Patrick pushed back on the five "decisions owed" — most dissolved or reversed 
 - **Confirmed the corpus gap map:** the only large missing segment is **1876–1990 (image-OCR'd, not ingested)** — the historical-ingest work we've prepped (map + registration). 1991–1999 image-OCR overlaps Gate F (already in DB, authoritative), so it's cross-check-only. The 2000s "held" queue status = the born-digital tier, correctly fenced & ingested.
 - **Method note:** two subagent audits this session propagated errors by trusting the wrong source — one queried Supabase (wrong DB) and one reused the stale 5080 completeness report (wrongly listing 4 already-fixed volumes as truncated). Verify against the authoritative live source (the local DB; the 5090's live OCR output), not config/snapshots.
 
+### Continuation 5 — OCR 100% COMPLETE; 2000s verified
+
+- **OCR is COMPLETE across the whole corpus.** The image campaign finished **19:58 PT 2026-06-09** (`1994-vol1`, 2191 pages @ 22.5 p/min, was the last). The worker pool then drained and stopped. The 2 tiny extra-session volumes (`1927-vol1-26chapters`=1926, `1929-vol1-28chapters`=1928) were OCR'd **directly on the idle 5090 at 20:16** with the deployed classifier fix (short-volume path fired: "4 pages <= 12 -> body_start=0"). Output verified real: 1927 = Colorado River Compact / 46th Leg; 1929 = bank-franchise tax / 47th Leg. Both `done`, markers written.
+- **2000–2008 born-digital VERIFIED all good** (direct DB query): 48 vols, 8,290 acts, per-volume DB counts EXACTLY match extraction. The `2001_Vol5` / `2002_Vol3` "chapter-gap" flags are confirmed **false positives** (OCR heuristic misapplied to born-digital mid-range/resolution numbering). Only zero-act vols = `2006_Vol6`, `2007_Vol5` (resolution volumes, expected). No silent failures.
+- **Correction:** the 5090 has **~32 GB VRAM** (single RTX 5090), NOT 64 GB as cc006 notes stated.
+- **Mass-ingest plan recorded** (memory `mass-ingest-backup-compare-plan`): no ingest until ALL OCR+prep ready; then backup DB → single 1850–2026 pass → compare to backup for already-populated segments.
+
+**Remaining before the mass ingest is now DATA PREP, not OCR:**
+1. Parse the 1876–1999 OCR output into acts (with the fixed date parser) — produce `parsed_acts` for every volume. (1997–1999 fell back to OCR from garbled born-digital; they need OCR-path parsing.)
+2. Run the registration batch (140 keep / 8 exclude) → `source_document` rows.
+3. Decide the flagged-date-act policy (drop vs ingest-with-`date_needs_review`).
+4. Wire the digest/resolution/index exclusions (the 8 excludes) into the ingest.
+5. Fix the modern-layer integrity gap: 22,780 Gate F acts have NULL `source_document_id` — register/link Gate F source docs (the single-pass re-ingest can do this if the Gate F path registers source docs).
+6. Decide on SUSPECT-quality volumes (1852/1860–63 ~100% low-confidence) — re-OCR/human-verify or accept.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - The active DB is **local Postgres `localhost:5432/patolex`**, NOT Supabase — query it directly for any corpus/DB question; docs prior to cc007 misstated this.
