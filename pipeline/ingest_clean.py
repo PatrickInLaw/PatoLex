@@ -117,7 +117,296 @@ LEGISLATURE_MAP = {
     "1863-64": ("1863-64 adjourned", "15th"), "1865-66": ("1865-66", "16th"),
     "1867-68": ("1867-68", "17th"), "1869-70": ("1869-70", "18th"),
     "1871-72": ("1871-72", "19th"), "1873-74": ("1873-74", "20th"),
-    "1875-76": ("1875-76", "21st"),
+    "1873-74-code": ("1873-74", "20th"),
+    "1875-76": ("1875-76", "21st"), "1875-76-code": ("1875-76", "21st"),
+    # -----------------------------------------------------------------------
+    # 22nd–57th ordinal era (1877–1948)
+    # CRITICAL: keys are the EXACT production-folder labels (the part after
+    # "production-"). Every suffix variant of the same session maps to the
+    # same (session_str, legislature_ordinal). Resolved ambiguities noted.
+    # session_str format: "<year> Regular Session" for ordinary sessions;
+    # printed extraordinary-session name for special ones.
+    # -----------------------------------------------------------------------
+    # 22nd Legislature, 1877-78
+    "1877-78": ("1877 Regular Session", "22nd"), "1877-78-code": ("1877 Regular Session", "22nd"),
+    # 23rd Legislature, 1880
+    "1880": ("1880 Regular Session", "23rd"), "1880-code": ("1880 Regular Session", "23rd"),
+    # 24th Legislature, 1881
+    "1881": ("1881 Regular Session", "24th"),
+    # 25th Legislature, 1883-84
+    # "1883-84" = 1884 Extra Session (verified title page); "1883-84-regular" = 1883 regular session.
+    "1883-84": ("1884 Extra Session", "25th"), "1883-84-regular": ("1883 Regular Session", "25th"),
+    # 26th Legislature, 1885-86
+    "1885-86": ("1885 Regular Session", "26th"),
+    # 27th Legislature, 1887
+    "1887": ("1887 Regular Session", "27th"),
+    # 28th Legislature, 1889
+    "1889": ("1889 Regular Session", "28th"),
+    # 29th Legislature, 1891
+    "1891": ("1891 Regular Session", "29th"),
+    # 30th Legislature, 1893
+    "1893": ("1893 Regular Session", "30th"),
+    # 31st Legislature, 1895
+    "1895": ("1895 Regular Session", "31st"),
+    # 32nd Legislature, 1897
+    "1897": ("1897 Regular Session", "32nd"),
+    # 33rd Legislature, 1899
+    "1899": ("1899 Regular Session", "33rd"),
+    # 34th Legislature, 1901 — folder "1900-01" documents the 34th Session (resolved)
+    "1900-01": ("1901 Regular Session", "34th"),
+    # 35th Legislature, 1903
+    "1903": ("1903 Regular Session", "35th"),
+    # 36th Legislature = 1905. Folder "1906-07" documents the 37th Session, 1907
+    # (verified via title page: "SENATORS—THIRTY-SEVENTH SESSION, 1907"; span-label
+    # documents the LATER year, same pattern as 1907-09 -> 38th/1909).
+    "1905": ("1905 Regular Session", "36th"), "1906-07": ("1907 Regular Session", "37th"),
+    # 38th Legislature, 1909 — folder "1907-09" documents the 38th Session (resolved)
+    "1907-09": ("1909 Regular Session", "38th"),
+    # 39th Legislature, 1911
+    # NOTE: "1910-11" folder's session determined by year prefix (1910 = even →
+    # second half of 39th Legislature, 1911 session)
+    "1910-11": ("1911 Regular Session", "39th"),
+    # 40th Legislature, 1913
+    "1913-statutes": ("1913 Regular Session", "40th"),
+    # 41st Legislature, 1915
+    "1915-vol1-chapters": ("1915 Regular Session", "41st"),
+    # 42nd Legislature, 1917
+    "1917-vol1-chapters": ("1917 Regular Session", "42nd"),
+    # 43rd Legislature, 1919
+    "1919-vol1-chapters": ("1919 Regular Session", "43rd"),
+    # 44th Legislature, 1921
+    "1921-vol1-chapters": ("1921 Regular Session", "44th"),
+    # 45th Legislature, 1923
+    "1923-vol1-chapters": ("1923 Regular Session", "45th"),
+    # 46th Legislature, 1925
+    "1925-vol1-chapters": ("1925 Regular Session", "46th"),
+    # 47th Legislature, 1927
+    # "1927-vol1-26chapters" = 1926 Extra Session of the 46th Legislature (verified ADD).
+    "1927-vol1-chapters": ("1927 Regular Session", "47th"),
+    "1927-vol1-26chapters": ("1926 Extra Session", "46th"),
+    # 48th Legislature, 1929
+    # "1929-vol1-28chapters" = 1928 Extra Session of the 47th Legislature (verified ADD).
+    "1929-vol1-chapters": ("1929 Regular Session", "48th"),
+    "1929-vol1-28chapters": ("1928 Extra Session", "47th"),
+    "1929-vol1-29chapters": ("1929 Regular Session", "48th"),
+    # 49th Legislature, 1931
+    "1931-vol1-chapters": ("1931 Regular Session", "49th"),
+    # 50th Legislature, 1933
+    "1933-vol1-chapters": ("1933 Regular Session", "50th"),
+    # 51st Legislature, 1935
+    # "1935-vol1-34chapters" = 1934 Extra Session of the 50th Legislature (verified).
+    # "1935-vol1-chapters"   = 1935 Regular Session of the 51st Legislature (verified).
+    "1935-vol1-34chapters": ("1934 Extra Session", "50th"),
+    "1935-vol1-chapters": ("1935 Regular Session", "51st"),
+    # 52nd Legislature, 1937
+    "1937-vol1-chapters": ("1937 Regular Session", "52nd"),
+    # 1938 Extra Session of the 52nd Legislature (verified title page: "EXTRA SESSION
+    # OF THE FIFTY-SECOND LEGISLATURE", Gov. Merriam proclamation; distinct from 52nd regular 1937).
+    "1938-vol1-chapters": ("1938 Extra Session", "52nd"),
+    # 53rd Legislature, 1939
+    "1939-vol1-chapters": ("1939 Regular Session", "53rd"),
+    # 54th Legislature, 1941
+    # "1941-vol1-41chapters" = 1941 Regular Session of the 54th Legislature (the only 1941 vol).
+    # "1943-vol1-42chapters" = 1941 1st Extra Session of the 54th Legislature (mislabeled folder).
+    "1941-vol1-41chapters": ("1941 Regular Session", "54th"),
+    # 55th Legislature, 1943
+    # "1943-vol1-42chapters" contains the 1941 1st Extra Session (mislabeled folder — session is 1941/42).
+    "1943-vol1-42chapters": ("1941 1st Extra Session", "54th"),
+    "1943-vol1-chapters": ("1943 Regular Session", "55th"),
+    # 56th Legislature, 1945
+    "1945-vol1-chapters": ("1945 Regular Session", "56th"),
+    # 57th Legislature, 1947-48
+    # "1947-vol1-46chapters" = 1946 1st Extraordinary Session of the 56th Legislature (verified).
+    # "1947-vol1-chapters"   = 1947 Regular Session of the 57th Legislature (verified).
+    # "1948-vol1-chapters"   = 1948 Regular Session of the 57th Legislature (verified).
+    "1947-vol1-46chapters": ("1946 1st Extraordinary Session", "56th"),
+    "1947-vol1-chapters": ("1947 Regular Session", "57th"),
+    "1948-vol1-chapters": ("1948 Regular Session", "57th"),
+    # -----------------------------------------------------------------------
+    # Year-based era (1949-50 onward) — California abandoned ordinals.
+    # legislature field carries the 2-year term string, e.g. "1949-50".
+    # Even-year folders belong to the preceding odd-year-started term.
+    # session_str format: "<year> Regular Session" or "<year> [Nth] Extraordinary Session".
+    # -----------------------------------------------------------------------
+    # 1949-50 session
+    # "1949-vol1-49chapters-prior" = 1949 1st Extraordinary Session (verified).
+    # "1949-vol1-chapters"         = 1949 Regular Session (verified).
+    # "1950-vol1-chapters"         = 1950 Regular Session (verified).
+    "1949-vol1-49chapters-prior": ("1949 1st Extraordinary Session", "1949-50"),
+    "1949-vol1-chapters": ("1949 Regular Session", "1949-50"),
+    "1950-vol1-chapters": ("1950 Regular Session", "1949-50"),
+    # 1951-52 session
+    # "1951-vol1-50chapters" = 1950 3rd Extraordinary Session (verified).
+    # "1951-vol1-chapters"   = 1951 Regular Session (verified).
+    # "1951-vol2-chapters"   = 1951 Regular Session (verified).
+    "1951-vol1-50chapters": ("1950 3rd Extraordinary Session", "1949-50"),
+    "1951-vol1-chapters": ("1951 Regular Session", "1951-52"),
+    "1951-vol2-chapters": ("1951 Regular Session", "1951-52"),
+    # 1953-54 session
+    # "1953-vol1-52chapters" = 1952 Regular Session (verified, even-year → 1951-52 term).
+    # "1953-vol1-chapters"   = 1953 Regular Session (verified).
+    # "1953-vol2-chapters"   = 1953 Regular Session (verified).
+    "1953-vol1-52chapters": ("1952 Regular Session", "1951-52"),
+    "1953-vol1-chapters": ("1953 Regular Session", "1953-54"),
+    "1953-vol2-chapters": ("1953 Regular Session", "1953-54"),
+    # 1955-56 session
+    # "1955-vol1-54chapters" = 1954 Regular Session (verified, even-year → 1953-54 term).
+    # "1955-vol1-55chapters" = 1955 Regular Session (verified).
+    # "1955-vol1-chapters"   = 1955 Regular Session (verified).
+    # "1955-vol2-chapters"   = 1955 Regular Session (verified).
+    "1955-vol1-54chapters": ("1954 Regular Session", "1953-54"),
+    "1955-vol1-55chapters": ("1955 Regular Session", "1955-56"),
+    "1955-vol1-chapters": ("1955 Regular Session", "1955-56"),
+    "1955-vol2-chapters": ("1955 Regular Session", "1955-56"),
+    # 1957-58 session
+    # "1957-vol1-56chapters"  = 1956 Regular Session (verified, even-year → 1955-56 term).
+    # "1957-vol1-57chapters"  = 1957 Regular Session (verified).
+    # "1957-vol1-chapters"    = 1957 Regular Session (inferred — normalize).
+    # "1957-vol2-57chapters"  = 1957 Regular Session (verified).
+    "1957-vol1-56chapters": ("1956 Regular Session", "1955-56"),
+    "1957-vol1-57chapters": ("1957 Regular Session", "1957-58"),
+    "1957-vol1-chapters": ("1957 Regular Session", "1957-58"),
+    "1957-vol2-57chapters": ("1957 Regular Session", "1957-58"),
+    # 1959-60 session
+    # "1959-vol1-58chapters" = 1958 Regular Session (verified, even-year → 1957-58 term).
+    # "1959-vol1-59chapters" = 1959 Regular Session (verified).
+    # "1959-vol1-chapters"   = 1959 Regular Session (inferred — normalize).
+    # "1959-vol2-chapters"   = 1959 Regular Session (verified).
+    "1959-vol1-58chapters": ("1958 Regular Session", "1957-58"),
+    "1959-vol1-59chapters": ("1959 Regular Session", "1959-60"),
+    "1959-vol1-chapters": ("1959 Regular Session", "1959-60"),
+    "1959-vol2-chapters": ("1959 Regular Session", "1959-60"),
+    # 1961-62 session
+    # "1961-vol1-60chapters" = 1960 Regular Session (verified, even-year → 1959-60 term).
+    # "1961-vol1-61chapters" = 1961 Regular Session (verified).
+    # "1961-vol1-chapters"   = 1961 Regular Session (inferred — normalize).
+    # "1961-vol2-chapters"   = 1961 Regular Session (verified).
+    "1961-vol1-60chapters": ("1960 Regular Session", "1959-60"),
+    "1961-vol1-61chapters": ("1961 Regular Session", "1961-62"),
+    "1961-vol1-chapters": ("1961 Regular Session", "1961-62"),
+    "1961-vol2-chapters": ("1961 Regular Session", "1961-62"),
+    # 1963-64 session
+    # "1963-vol1-62chapters" = 1962 Regular Session (verified, even-year → 1961-62 term).
+    # "1963-vol1-63chapters" = 1963 Regular Session (verified).
+    # "1963-vol1-chapters"   = 1963 Regular Session (inferred — normalize).
+    # "1963-vol2-chapters"   = 1963 Regular Session (verified).
+    "1963-vol1-62chapters": ("1962 Regular Session", "1961-62"),
+    "1963-vol1-63chapters": ("1963 Regular Session", "1963-64"),
+    "1963-vol1-chapters": ("1963 Regular Session", "1963-64"),
+    "1963-vol2-chapters": ("1963 Regular Session", "1963-64"),
+    # 1965-66 session
+    "1965-vol1-chapters": ("1965 Regular Session", "1965-66"),
+    "1965-vol1-64chapters": ("1964 Regular Session", "1963-64"),
+    "1965-vol1-65chapters": ("1965 Regular Session", "1965-66"),
+    "1965-vol2": ("1965 Regular Session", "1965-66"),
+    "1965-vol3-chapters": ("1965 Regular Session", "1965-66"),
+    "1966-vol1-chapters": ("1966 Regular Session", "1965-66"),
+    # 1967-68 session
+    "1967-vol1-chapters": ("1967 Regular Session", "1967-68"),
+    "1967-vol2": ("1967 Regular Session", "1967-68"),
+    "1967-vol3-chapters": ("1967 Regular Session", "1967-68"),
+    "1968-vol1-chapters": ("1968 Regular Session", "1967-68"),
+    "1968-vol2-chapters": ("1968 Regular Session", "1967-68"),
+    # 1969-70 session
+    "1969-vol1-chapters": ("1969 Regular Session", "1969-70"),
+    "1969-vol2-chapters": ("1969 Regular Session", "1969-70"),
+    "1970-vol1-chapters": ("1970 Regular Session", "1969-70"),
+    "1970-vol2-chapters": ("1970 Regular Session", "1969-70"),
+    # 1971-72 session
+    "1971-vol1-chapters": ("1971 Regular Session", "1971-72"),
+    "1971-vol2": ("1971 Regular Session", "1971-72"),
+    "1971-vol3-chapters": ("1971 Regular Session", "1971-72"),
+    "1972-vol1-chapters": ("1972 Regular Session", "1971-72"),
+    "1972-vol2-chapters": ("1972 Regular Session", "1971-72"),
+    # 1973-74 session
+    "1973-vol1-chapters": ("1973 Regular Session", "1973-74"),
+    "1973-vol2-chapters": ("1973 Regular Session", "1973-74"),
+    "1974-vol1-chapters": ("1974 Regular Session", "1973-74"),
+    "1974-vol2-chapters": ("1974 Regular Session", "1973-74"),
+    # 1975-76 session
+    "1975-vol1-chapters": ("1975 Regular Session", "1975-76"),
+    "1975-vol2-chapters": ("1975 Regular Session", "1975-76"),
+    "1976-vol1-chapters": ("1976 Regular Session", "1975-76"),
+    "1976-vol2": ("1976 Regular Session", "1975-76"),
+    "1976-vol3": ("1976 Regular Session", "1975-76"),
+    # 1977-78 session
+    "1977-vol1-chapters": ("1977 Regular Session", "1977-78"),
+    "1977-vol2": ("1977 Regular Session", "1977-78"),
+    "1977-vol3-chapters": ("1977 Regular Session", "1977-78"),
+    "1978-vol1-chapters": ("1978 Regular Session", "1977-78"),
+    "1978-vol2": ("1978 Regular Session", "1977-78"),
+    "1978-vol3": ("1978 Regular Session", "1977-78"),
+    # 1979-80 session
+    "1979-vol1-chapters": ("1979 Regular Session", "1979-80"),
+    "1979-vol2": ("1979 Regular Session", "1979-80"),
+    "1979-vol3": ("1979 Regular Session", "1979-80"),
+    "1980-vol1-chapters": ("1980 Regular Session", "1979-80"),
+    "1980-vol2": ("1980 Regular Session", "1979-80"),
+    "1980-vol3": ("1980 Regular Session", "1979-80"),
+    # 1981-82 session
+    "1981-vol1-chapters": ("1981 Regular Session", "1981-82"),
+    "1981-vol2": ("1981 Regular Session", "1981-82"),
+    "1981-vol3": ("1981 Regular Session", "1981-82"),
+    "1982-vol1-chapters": ("1982 Regular Session", "1981-82"),
+    "1982-vol2": ("1982 Regular Session", "1981-82"),
+    "1982-vol3": ("1982 Regular Session", "1981-82"),
+    "1982-vol4": ("1982 Regular Session", "1981-82"),
+    "1982-vol5": ("1982 Regular Session", "1981-82"),
+    # 1983-84 session
+    "1983-vol1-chapters": ("1983 Regular Session", "1983-84"),
+    "1983-vol2": ("1983 Regular Session", "1983-84"),
+    "1983-vol3": ("1983 Regular Session", "1983-84"),
+    "1983-vol4-chapters": ("1983 Regular Session", "1983-84"),
+    "1984-vol1-chapters": ("1984 Regular Session", "1983-84"),
+    "1984-vol2": ("1984 Regular Session", "1983-84"),
+    "1984-vol3": ("1984 Regular Session", "1983-84"),
+    # 1985-86 session
+    "1985-vol1-chapters": ("1985 Regular Session", "1985-86"),
+    "1985-vol2": ("1985 Regular Session", "1985-86"),
+    "1985-vol3": ("1985 Regular Session", "1985-86"),
+    "1986-vol1-chapters": ("1986 Regular Session", "1985-86"),
+    "1986-vol2": ("1986 Regular Session", "1985-86"),
+    "1986-vol3": ("1986 Regular Session", "1985-86"),
+    # 1987-88 session
+    "1987-vol1-chapters": ("1987 Regular Session", "1987-88"),
+    "1987-vol2": ("1987 Regular Session", "1987-88"),
+    "1987-vol3": ("1987 Regular Session", "1987-88"),
+    "1987-vol4-chapters": ("1987 Regular Session", "1987-88"),
+    "1988-vol1-chapters": ("1988 Regular Session", "1987-88"),
+    "1988-vol2": ("1988 Regular Session", "1987-88"),
+    "1988-vol3": ("1988 Regular Session", "1987-88"),
+    "1988-vol4-chapters": ("1988 Regular Session", "1987-88"),
+    # 1989-90 session
+    "1989-vol1-chapters": ("1989 Regular Session", "1989-90"),
+    "1989-vol2": ("1989 Regular Session", "1989-90"),
+    "1989-vol3": ("1989 Regular Session", "1989-90"),
+    "1990-vol1-chapters": ("1990 Regular Session", "1989-90"),
+    "1990-vol2": ("1990 Regular Session", "1989-90"),
+    "1990-vol3": ("1990 Regular Session", "1989-90"),
+    "1990-vol4": ("1990 Regular Session", "1989-90"),
+    "1990-vol5-reg-session": ("1990 Regular Session", "1989-90"),
+    # 1989-90 First Extraordinary Session (verified via internal refs + Resolution Ch.1:
+    # "1989-90 First Extraordinary Session"; chapters approved Nov 1989, post-Loma Prieta).
+    "1990-vol5-firstextra": ("1989-90 1st Extra Session", "1989-90"),
+    # 1991-92 session
+    "1991-vol1": ("1991 Regular Session", "1991-92"),
+    "1991-vol2": ("1991 Regular Session", "1991-92"),
+    "1991-vol3": ("1991 Regular Session", "1991-92"),
+    "1992-vol1-statutes": ("1992 Regular Session", "1991-92"),
+    "1992-vol2": ("1992 Regular Session", "1991-92"),
+    "1992-vol3": ("1992 Regular Session", "1991-92"),
+    "1992-vol4": ("1992 Regular Session", "1991-92"),
+    # 1993-94 session (odd-year start vols + 1994 even-year mid-session vols)
+    "1993-vol1": ("1993 Regular Session", "1993-94"),
+    "1993-vol2": ("1993 Regular Session", "1993-94"),
+    "1993-vol3": ("1993 Regular Session", "1993-94"),
+    "1993-vol4": ("1993 Regular Session", "1993-94"),
+    "1993-vol5": ("1993 Regular Session", "1993-94"),
+    "1994-vol1": ("1994 Regular Session", "1993-94"),
+    "1994-vol2": ("1994 Regular Session", "1993-94"),
+    "1994-vol3": ("1994 Regular Session", "1993-94"),
+    "1994-vol4": ("1994 Regular Session", "1993-94"),
+    "1994-vol5": ("1994 Regular Session", "1993-94"),
 }
 
 # A "clean" chapter numeral required no OCR substitution to parse.
