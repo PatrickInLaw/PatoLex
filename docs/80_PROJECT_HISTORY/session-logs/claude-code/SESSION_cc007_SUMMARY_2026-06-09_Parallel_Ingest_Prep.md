@@ -138,7 +138,7 @@ Patrick pushed back on the five "decisions owed" — most dissolved or reversed 
 
 - **OCR is COMPLETE across the whole corpus.** The image campaign finished **19:58 PT 2026-06-09** (`1994-vol1`, 2191 pages @ 22.5 p/min, was the last). The worker pool then drained and stopped. The 2 tiny extra-session volumes (`1927-vol1-26chapters`=1926, `1929-vol1-28chapters`=1928) were OCR'd **directly on the idle 5090 at 20:16** with the deployed classifier fix (short-volume path fired: "4 pages <= 12 -> body_start=0"). Output verified real: 1927 = Colorado River Compact / 46th Leg; 1929 = bank-franchise tax / 47th Leg. Both `done`, markers written.
 - **2000–2008 born-digital VERIFIED all good** (direct DB query): 48 vols, 8,290 acts, per-volume DB counts EXACTLY match extraction. The `2001_Vol5` / `2002_Vol3` "chapter-gap" flags are confirmed **false positives** (OCR heuristic misapplied to born-digital mid-range/resolution numbering). Only zero-act vols = `2006_Vol6`, `2007_Vol5` (resolution volumes, expected). No silent failures.
-- **Correction:** the 5090 has **~32 GB VRAM** (single RTX 5090), NOT 64 GB as cc006 notes stated.
+- **5090 specs (corrected):** **64 GB system RAM + 32 GB VRAM** — cc006 was RIGHT. Earlier this session I wrongly called it a "64 GB-VRAM box" (conflated RAM with VRAM) and then mis-"corrected" cc006; the nvidia-smi reading of ~32 GB is VRAM, exactly matching cc006.
 - **Mass-ingest plan recorded** (memory `mass-ingest-backup-compare-plan`): no ingest until ALL OCR+prep ready; then backup DB → single 1850–2026 pass → compare to backup for already-populated segments.
 
 **Remaining before the mass ingest is now DATA PREP, not OCR:**
