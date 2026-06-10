@@ -4,12 +4,12 @@ verify_volume_completeness.py
 Checks OCR completeness for each production-* volume by:
   1. Parsing "CHAPTER N" headers from consensus_text
   2. Detecting session boundaries (Regular / Extraordinary sessions)
-  3. Checking page contiguity (gaps within the OCR key range = possible missing pages)
+  3. Checking page contiguity using page_classification.json (see gap logic below)
   4. Checking local chapter density (does chapter density drop to zero in any window,
      suggesting a block of missing pages?)
   5. Comparing found chapter sequence against the folder-encoded expected count
   6. Flagging low-confidence pages as suspect OCR spots
-  7. Emitting a per-volume verdict: COMPLETE / LEADING_GAP_ONLY / GAPS_FOUND / SUSPECT / STUB
+  7. Emitting a per-volume verdict: COMPLETE / LEADING_GAP_ONLY / GAPS_FOUND / SUSPECT / STUB / UNVERIFIED
 
 Usage:
     python verify_volume_completeness.py --label 1953-vol1-52chapters
@@ -24,20 +24,46 @@ Background / design notes:
     (pidx=0 = physical page 1). page_1indexed = pidx + 1.  Pages before the first
     OCR'd page (pidx < min_key) are intentionally skipped front matter — they are
     NOT content gaps. Most volumes start at pidx=2 (skipping 2 cover/title pages).
-    The contiguity check only counts gaps BETWEEN the minimum and maximum present key.
-  - Page-gap classification:
-      LEADING gap  : missing pidx values only below the first present key (front-matter
-                     skips). These do NOT indicate missing statute content.
-                     Reported as `leading_missing` and given a LEADING_GAP_ONLY verdict
-                     when no mid-volume gaps are found.
-      MID-VOLUME gap: missing pidx values between present keys (min_key < missing < max_key).
-                     These indicate genuinely absent OCR pages and drive re-OCR.
+
+  - Classification-aware gap detection (primary, when page_classification.json exists):
+      The OCR producer (ocr_only_5090.py) INTENTIONALLY skips pages it classifies as
+      empty (ink density < 0.003) or index pages — those pidx values are never written
+      to the OCR output BY DESIGN.  The old mid-volume contiguity check (gaps within
+      min_key..max_key) was a FALSE POSITIVE for those intentional skips.
+
+      REAL gap = a page classified as BODY that is absent from OCR output keys.
+      page_classification.json uses 1-indexed page numbers; OCR keys are 0-based pidx.
+      Convention: pidx = page_1indexed - 1.
+
+      page_classification.json schema:
+        body          : list[int]  — 1-indexed page numbers for body (statute) pages
+        front_matter  : list[int]  — 1-indexed page numbers for front matter
+        empty         : list[int]  — 1-indexed page numbers for intentionally-skipped empties
+        index         : list[int]  — 1-indexed page numbers for intentionally-skipped index pages
+        body_start_idx: int        — 0-based index of first body page
+        median_body_density: float
+        (optional) total_pages, low_density_threshold, born_digital
+
+      Gap categories:
+        body_gap_pages       : body pidx values absent from OCR output  → REAL gaps, drive re-OCR
+        classified_skip_pages: empty + index pidx values absent from OCR → EXPECTED, not gaps
+        leading_missing      : pidx values < min OCR key (front-matter)  → EXPECTED, not gaps
+
+      Verdict when classification IS available:
+        GAPS_FOUND      : body_gap_pages is non-empty (body pages missing from OCR)
+        LEADING_GAP_ONLY: no body gaps; only front-matter leading pages absent
+        COMPLETE        : no body gaps, passes all other checks
+
+      Verdict when classification is NOT available (fallback to old contiguity check):
+        UNVERIFIED      : classification file missing; old mid-volume contiguity result
+                          appended as an informational note but does NOT drive GAPS_FOUND
+
   - Chapter-number gap analysis is limited for multi-volume sets (e.g. 1953-vol1 +
     vol2 share the same session), because each volume covers a contiguous PAGE range
     not a contiguous CHAPTER range. The script reports chapter gaps but does NOT use
     them as the primary verdict signal for volumes with clearly non-sequential chapter
     distributions. Instead, it uses:
-      (a) page contiguity -- gaps within min..max of present keys?
+      (a) page contiguity (classification-aware) -- body pages missing from OCR?
       (b) chapter density -- no window of 75 body pages with zero chapters?
       (c) folder-name expected count vs lowest-session chapter count
   - Chapter numbering restarts within a volume for each extra session.
@@ -49,10 +75,12 @@ Background / design notes:
   - Verdict logic:
       STUB            : < MIN_CHAPTER_THRESHOLD chapters found total (empty/incomplete scan)
       SUSPECT         : high proportion of low-confidence pages (>15%)
-      LEADING_GAP_ONLY: only leading (pre-content) keys missing; no mid-volume gaps
-      GAPS_FOUND      : mid-volume gaps in OCR keys, OR folder-name expected count not met,
-                        OR significant sequential chapter-number gaps for single-session
-                        single-volume
+      UNVERIFIED      : page_classification.json missing; old contiguity check used,
+                        but result is informational only — not promoted to GAPS_FOUND
+      LEADING_GAP_ONLY: only leading (pre-content) keys missing; no body gaps
+      GAPS_FOUND      : body pages absent from OCR output (classification-aware), OR
+                        folder-name expected count not met, OR significant sequential
+                        chapter-number gaps for single-session single-volume
       COMPLETE        : passes all checks above
   NOTE: zero-density windows add a note but do NOT by themselves change the verdict
   (a very long single statute can span 100+ pages with no new chapter header).
@@ -157,7 +185,12 @@ class VolumeResult:
     low_conf_pages: list[int] = field(default_factory=list)
     low_conf_rate: float = 0.0
     leading_missing: list[int] = field(default_factory=list)        # pidx values skipped before OCR starts (front matter)
-    missing_pages: list[int] = field(default_factory=list)          # mid-volume pidx values absent from OCR JSON
+    missing_pages: list[int] = field(default_factory=list)          # OLD: mid-volume pidx values absent from OCR JSON (legacy contiguity check; kept for fallback/UNVERIFIED volumes)
+    # ── classification-aware gap fields (new) ─────────────────────────────────
+    classification_available: bool = False                           # True if page_classification.json was loaded
+    body_gap_pages: list[int] = field(default_factory=list)         # REAL gaps: body pidx absent from OCR output
+    classified_skip_pages: list[int] = field(default_factory=list)  # EXPECTED skips: empty+index pidx absent from OCR (not gaps)
+    # ─────────────────────────────────────────────────────────────────────────
     zero_density_windows: list[tuple[int,int]] = field(default_factory=list)  # (start, end) page ranges with no chapters
     sessions: list[SessionResult] = field(default_factory=list)
     expected_count: Optional[int] = None   # from folder name
@@ -416,6 +449,59 @@ def check_page_contiguity(pages_data: dict) -> tuple[list[int], list[int]]:
     return leading_missing, mid_missing
 
 
+def check_body_gaps(
+    pages_data: dict,
+    cls_path: Path,
+) -> tuple[bool, list[int], list[int], list[int]]:
+    """
+    Classification-aware gap detection.
+
+    A REAL extraction gap = a page classified as BODY that is absent from the OCR
+    output keys.  Empty and index pages are INTENTIONALLY skipped by the OCR producer
+    and must NOT be counted as gaps.
+
+    Convention:
+      - page_classification.json lists are 1-indexed (page_1indexed).
+      - OCR keys in page_ocr_results.json are 0-based pidx.
+      - Conversion: pidx = page_1indexed - 1
+
+    Args:
+        pages_data : the loaded page_ocr_results.json dict (keys are pidx strings)
+        cls_path   : path to page_classification.json
+
+    Returns:
+        (classification_available, body_gap_pidx, classified_skip_pidx, leading_missing_pidx)
+        classification_available : False if cls_path does not exist (caller uses fallback)
+        body_gap_pidx            : body pidx values absent from OCR output → REAL gaps
+        classified_skip_pidx     : empty+index pidx values absent from OCR  → expected skips
+        leading_missing_pidx     : front_matter pidx absent from OCR        → expected skips
+    """
+    if not cls_path.exists():
+        return False, [], [], []
+
+    with open(cls_path, encoding="utf-8") as f:
+        cls_data: dict = json.load(f)
+
+    ocr_keys: set[int] = {int(k) for k in pages_data.keys() if k.lstrip("-").isdigit()}
+
+    # All lists in page_classification.json are 1-indexed → convert to 0-based pidx
+    body_pidx:        set[int] = {p - 1 for p in cls_data.get("body", [])}
+    front_matter_pidx: set[int] = {p - 1 for p in cls_data.get("front_matter", [])}
+    empty_pidx:       set[int] = {p - 1 for p in cls_data.get("empty", [])}
+    index_pidx:       set[int] = {p - 1 for p in cls_data.get("index", [])}
+
+    # REAL gaps: body pages that should have been OCR'd but are absent
+    body_gap_pidx = sorted(body_pidx - ocr_keys)
+
+    # Expected skips: empty + index pages absent from OCR (intentional, not gaps)
+    classified_skip_pidx = sorted((empty_pidx | index_pidx) - ocr_keys)
+
+    # Leading: front-matter pages absent from OCR (also expected)
+    leading_missing_pidx = sorted(front_matter_pidx - ocr_keys)
+
+    return True, body_gap_pidx, classified_skip_pidx, leading_missing_pidx
+
+
 def check_chapter_density(
     chapter_sequence: list[tuple[int, int]],
     pages_data: dict,
@@ -496,20 +582,51 @@ def compute_verdict(result: VolumeResult) -> str:
     if total_chapters < MIN_CHAPTER_THRESHOLD:
         return "STUB"
 
-    # Mid-volume page contiguity failure = definite content gap problem
-    if result.missing_pages:
-        result.notes.append(
-            f"Mid-volume missing pidx keys in OCR output (re-OCR candidates): {result.missing_pages[:20]}"
-            + (f" (+{len(result.missing_pages)-20} more)" if len(result.missing_pages) > 20 else "")
-        )
-        return "GAPS_FOUND"
+    # ── Classification-aware gap detection ────────────────────────────────────
+    if result.classification_available:
+        # REAL gap: body pages absent from OCR output
+        if result.body_gap_pages:
+            result.notes.append(
+                f"BODY pages absent from OCR output (re-OCR candidates, {len(result.body_gap_pages)} pages): "
+                f"{result.body_gap_pages[:20]}"
+                + (f" (+{len(result.body_gap_pages)-20} more)" if len(result.body_gap_pages) > 20 else "")
+            )
+            return "GAPS_FOUND"
+        # Expected skips: classified empty/index absent from OCR — informational only
+        if result.classified_skip_pages:
+            result.notes.append(
+                f"Classified empty/index pages absent from OCR (expected, {len(result.classified_skip_pages)} pages) "
+                f"— intentional skips by OCR producer, not content gaps."
+            )
+        # Leading gap: front-matter pages before OCR start — not a content gap
+        if result.leading_missing:
+            result.notes.append(
+                f"Leading pidx values not OCR'd (front-matter skip, {len(result.leading_missing)} pages): "
+                f"expected, not a content gap"
+            )
+    else:
+        # Fallback: no classification data — use old contiguity check but mark UNVERIFIED
+        # Old mid-volume contiguity result is INFORMATIONAL only; does NOT drive GAPS_FOUND.
+        if result.missing_pages:
+            result.notes.append(
+                f"[UNVERIFIED — no page_classification.json] Old contiguity check found "
+                f"{len(result.missing_pages)} mid-volume missing pidx keys: {result.missing_pages[:20]}"
+                + (f" (+{len(result.missing_pages)-20} more)" if len(result.missing_pages) > 20 else "")
+                + f" — could be classified-empty skips; cannot distinguish without classification data."
+            )
+        if result.leading_missing:
+            result.notes.append(
+                f"Leading pidx values not OCR'd (front-matter skip, {len(result.leading_missing)} pages before "
+                f"pidx={result.leading_missing[-1]+1}): expected, not a content gap"
+            )
+        # Return UNVERIFIED early — skip further checks that assume clean contiguity
+        # (chapter-density and expected-count checks still run but verdict stays UNVERIFIED
+        # unless chapter count is clearly wrong, in which case GAPS_FOUND is appropriate)
+        # We let execution fall through to chapter-count checks; if those pass we return UNVERIFIED.
 
-    # Leading gap only: front-matter pages before OCR start — not a content gap
-    if result.leading_missing:
-        result.notes.append(
-            f"Leading pidx values not OCR'd (front-matter skip, {len(result.leading_missing)} pages before "
-            f"pidx={result.leading_missing[-1]+1}): expected, not a content gap"
-        )
+    # Leading gap only note (classification path already handled above; this covers
+    # the UNVERIFIED fallback path where leading_missing was noted above)
+    # (no duplicate note needed — already appended above in both branches)
 
     # Zero-density windows = possibly missing pages (informational; not always a GAPS_FOUND
     # because a very long single statute can span 100+ pages with no new chapter header)
@@ -564,8 +681,14 @@ def compute_verdict(result: VolumeResult) -> str:
             )
             return "GAPS_FOUND"
 
-    # No mid-volume gaps, no other failures. If only leading gaps (front-matter skip), say so.
-    if result.leading_missing and not result.missing_pages:
+    # Determine final affirmative verdict
+    if not result.classification_available:
+        # No classification data: all checks passed but we cannot confirm gap-cleanliness
+        return "UNVERIFIED"
+
+    # Classification-aware path: no body gaps found
+    # If only leading/front-matter pages are absent, say so explicitly
+    if result.leading_missing and not result.body_gap_pages:
         return "LEADING_GAP_ONLY"
 
     return "COMPLETE"
@@ -622,8 +745,19 @@ def load_volume(scratch_dir: Path) -> Optional[VolumeResult]:
             result.expected_count = result.frontmatter_expected
             result.expected_source = "front_matter"
 
-        # Page contiguity check — returns (leading_missing, mid_volume_missing)
+        # Classification-aware gap detection (primary path)
+        # Also run old contiguity check to populate leading_missing and missing_pages
+        # (missing_pages used as fallback for UNVERIFIED volumes; leading_missing used by both paths)
         result.leading_missing, result.missing_pages = check_page_contiguity(pages_data)
+
+        cls_available, body_gaps, cls_skips, cls_leading = check_body_gaps(pages_data, cls_path)
+        result.classification_available = cls_available
+        if cls_available:
+            result.body_gap_pages = body_gaps
+            result.classified_skip_pages = cls_skips
+            # Override leading_missing with classification-derived front-matter list
+            # (more accurate than the raw contiguity leading range)
+            result.leading_missing = cls_leading
 
         # Session boundaries
         result.session_boundaries = find_session_boundaries(pages_data)
@@ -669,18 +803,39 @@ def format_result(r: VolumeResult) -> str:
     lines.append(f"Volume : {r.volume_label}")
     lines.append(f"Verdict: {r.verdict}")
     lines.append(f"Pages  : total={r.total_pages}  body={r.body_pages}  front_matter={r.front_matter_pages}")
-    if r.leading_missing:
-        lines.append(
-            f"Leading (front-matter skipped): {len(r.leading_missing)} pidx values "
-            f"(pidx 0..{r.leading_missing[-1]}) — expected, not a content gap"
-        )
-    if r.missing_pages:
-        lines.append(
-            f"MID-VOLUME MISSING pidx keys in OCR JSON (re-OCR candidates): {r.missing_pages[:20]}"
-            + (f" (+{len(r.missing_pages)-20} more)" if len(r.missing_pages) > 20 else "")
-        )
+    lines.append(f"Classification data: {'YES' if r.classification_available else 'NO (UNVERIFIED fallback)'}")
+    if r.classification_available:
+        if r.body_gap_pages:
+            lines.append(
+                f"REAL BODY GAPS (re-OCR candidates, {len(r.body_gap_pages)} pages): {r.body_gap_pages[:20]}"
+                + (f" (+{len(r.body_gap_pages)-20} more)" if len(r.body_gap_pages) > 20 else "")
+            )
+        else:
+            lines.append(f"Body-page gaps: NONE (all body pages present in OCR output)")
+        if r.classified_skip_pages:
+            lines.append(
+                f"Classified skips absent from OCR (expected, {len(r.classified_skip_pages)} pages) "
+                f"— empty/index pages intentionally not OCR'd"
+            )
+        if r.leading_missing:
+            lines.append(
+                f"Front-matter absent from OCR ({len(r.leading_missing)} pages): expected, not a content gap"
+            )
     else:
-        lines.append(f"Mid-volume contiguity: OK (no gaps within OCR key range)")
+        # Fallback path: show old contiguity result but flag as unverified
+        if r.missing_pages:
+            lines.append(
+                f"[UNVERIFIED] Old contiguity check: {len(r.missing_pages)} mid-volume missing pidx keys "
+                f"(may be empty/index skips — no classification data to confirm): {r.missing_pages[:20]}"
+                + (f" (+{len(r.missing_pages)-20} more)" if len(r.missing_pages) > 20 else "")
+            )
+        else:
+            lines.append(f"[UNVERIFIED] Old contiguity check: OK (no gaps within OCR key range)")
+        if r.leading_missing:
+            lines.append(
+                f"Leading (front-matter skipped): {len(r.leading_missing)} pidx values "
+                f"(pidx 0..{r.leading_missing[-1]}) — expected, not a content gap"
+            )
     lines.append(
         f"Low-conf pages: {len(r.low_conf_pages)} ({r.low_conf_rate*100:.1f}%)"
         + (f"  — first few: {r.low_conf_pages[:10]}" if r.low_conf_pages else "")
@@ -722,9 +877,16 @@ def result_to_dict(r: VolumeResult) -> dict:
         "total_pages": r.total_pages,
         "body_pages": r.body_pages,
         "front_matter_pages": r.front_matter_pages,
-        "leading_missing_count": len(r.leading_missing),  # front-matter skips (not content gaps)
-        "mid_volume_missing_count": len(r.missing_pages),  # real content gaps
-        "missing_pages": r.missing_pages[:50],             # mid-volume missing pidx values
+        # ── Classification-aware gap fields (new) ──────────────────────────────
+        "classification_available": r.classification_available,
+        "body_gap_count": len(r.body_gap_pages),            # REAL gaps: body pages absent from OCR
+        "body_gap_pages": r.body_gap_pages[:50],            # pidx values of real gaps (capped at 50)
+        "classified_skip_count": len(r.classified_skip_pages),  # expected skips (empty+index)
+        # ── Legacy contiguity fields (kept for UNVERIFIED volumes / reference) ─
+        "leading_missing_count": len(r.leading_missing),    # front-matter skips (not content gaps)
+        "mid_volume_missing_count": len(r.missing_pages),   # old contiguity check (UNVERIFIED only)
+        "missing_pages": r.missing_pages[:50] if not r.classification_available else [],
+        # ──────────────────────────────────────────────────────────────────────
         "low_conf_page_count": len(r.low_conf_pages),
         "low_conf_rate": round(r.low_conf_rate, 4),
         "zero_density_windows": [{"start": s, "end": e} for s, e in r.zero_density_windows],
@@ -795,15 +957,17 @@ def main() -> None:
 
         # Print summary table
         print()
-        print(f"{'VOLUME':<40} {'VERDICT':<18} {'PAGES':>6} {'SESSIONS':>8} {'TOTAL_CH':>9} {'MID_GAPS':>9} {'LOWCONF%':>9}")
-        print("-" * 110)
+        print(f"{'VOLUME':<40} {'VERDICT':<18} {'PAGES':>6} {'SESSIONS':>8} {'TOTAL_CH':>9} {'BODY_GAPS':>10} {'LOWCONF%':>9} {'CLS':>5}")
+        print("-" * 115)
         for r in all_results:
             total_ch = sum(len(s.chapters_found) for s in r.sessions)
-            total_gaps = sum(len(s.gaps) for s in r.sessions)
+            # Show real body gaps if classification available, else old contiguity count
+            gap_display = len(r.body_gap_pages) if r.classification_available else len(r.missing_pages)
+            cls_flag = "Y" if r.classification_available else "N"
             print(
                 f"{r.volume_label:<40} {r.verdict:<18} {r.total_pages:>6} "
-                f"{len(r.sessions):>8} {total_ch:>9} {len(r.missing_pages):>9} "
-                f"{r.low_conf_rate*100:>8.1f}%"
+                f"{len(r.sessions):>8} {total_ch:>9} {gap_display:>10} "
+                f"{r.low_conf_rate*100:>8.1f}% {cls_flag:>5}"
             )
 
         # Print verdict counts
@@ -811,7 +975,7 @@ def main() -> None:
         from collections import Counter
         counts = Counter(r.verdict for r in all_results)
         print("Verdict summary:")
-        for v in ("COMPLETE", "LEADING_GAP_ONLY", "GAPS_FOUND", "SUSPECT", "STUB", "ERROR"):
+        for v in ("COMPLETE", "LEADING_GAP_ONLY", "GAPS_FOUND", "SUSPECT", "STUB", "UNVERIFIED", "ERROR"):
             print(f"  {v:<20} {counts.get(v, 0)}")
 
         # Final report write
