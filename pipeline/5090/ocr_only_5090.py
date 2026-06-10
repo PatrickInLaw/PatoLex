@@ -401,6 +401,22 @@ def ink_density(img_path):
     return float((img < 128).sum()) / (img.shape[0] * img.shape[1])
 
 def detect_body_start(total_pages, prep_dir):
+    # SHORT-VOLUME FAST PATH: extraordinary-session volumes (e.g. 1926/1928 extra
+    # sessions) can be as few as 4-6 pages. The density-scan approach needs at
+    # least ~10 pages in the mid-range window to produce a meaningful signal; on
+    # tiny volumes it yields an empty mid-list and falls through to the hardcoded
+    # fallback of 30, which exceeds total_pages and produces an empty body list.
+    # Fix: for volumes with <=12 pages, treat every page as body (body_start=0).
+    # This is correct because a tiny special-session volume has no separable front
+    # matter worth skipping -- the proclamation/chapter pages ARE the substance.
+    # Normal volumes (hundreds of pages) are never affected by this threshold.
+    SHORT_VOLUME_THRESHOLD = 12
+    if total_pages <= SHORT_VOLUME_THRESHOLD:
+        log("STAGE3-CLASSIFY",
+            f"Short volume detected ({total_pages} pages <= {SHORT_VOLUME_THRESHOLD}) "
+            f"-- treating all pages as body (body_start=0)", "WARN")
+        return 0
+
     densities = []
     for pidx in range(min(80, total_pages)):
         p = prep_dir / f"page_{pidx:04d}.png"
@@ -408,7 +424,12 @@ def detect_body_start(total_pages, prep_dir):
     mid = [densities[i] for i in range(min(10, len(densities)), min(40, len(densities)))
            if densities[i] > 0.005]
     if not mid:
-        return 30
+        # Fallback: no usable density signal. Clamp to avoid exceeding page count.
+        fallback = min(30, max(0, total_pages - 1))
+        log("STAGE3-CLASSIFY",
+            f"No mid-range density signal (mid empty) -- using clamped fallback body_start={fallback} "
+            f"(total_pages={total_pages})", "WARN")
+        return fallback
     med_d = float(np.median(mid))
     threshold = med_d * 0.30
     consecutive = 0
