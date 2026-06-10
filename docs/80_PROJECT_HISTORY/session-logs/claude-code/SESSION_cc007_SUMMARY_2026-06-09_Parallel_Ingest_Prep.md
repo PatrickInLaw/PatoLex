@@ -155,8 +155,22 @@ Patrick pushed back on the five "decisions owed" — most dissolved or reversed 
 - **PARSE COMPLETE (1850–1999):** ran the date-fixed `ingest_from_ocr.py:parse_volume` over **195 statute volumes on the 5080** (OCR already local) → `parsed_acts_fixed.json` each. **67,653 confident acts + 7,687 flagged (1,964 date-review-worklist entries).** 0 failures. Backed up the 70 prior `parsed_acts_fixed.json` first (`_parsed_acts_backup_20260609-204603`). 8 non-statute vols skipped (code/resolution/digest). Map-gate handled: `parse_volume` does NOT use LEGISLATURE_MAP (only the main-loop gate does), so the map in `ingest_from_ocr.py` was extended to mirror `ingest_clean.py` + a parse-only driver `run_parse_all.py` added. Detailed sub-log: SESSION_cc009.
 - **OPEN before mass ingest:** (a) **verify the ±3 date clamp isn't over-flagging legitimate dates** — flag rate is uneven (1933 ~22%, 1993 ~0.3%); over-flagging would drop real acts from "confident". (b) **~17 vols (1996–1999) have no local OCR** (on the 5090, unsynced) — sync + parse. (c) the 1926/1928 extra-session OCR is on the 5090, not synced — sync + parse. Hans pass owed on the `ingest_from_ocr.py` map extension + `run_parse_all.py`.
 
+### Continuation 7 — "100% low confidence" investigated: broken metric, not bad data
+
+**Finding (durable):** The `low_conf_rate` in `completeness-report.json` is a MISLEADING quality signal. Investigated the 23 volumes at >=50% low-confidence (incl. 1860/1862/1863/1869-70 at ~100%) by reading the actual consensus text. **NONE are garbage/unreadable.** Two distinct causes, both metric artifacts:
+- **Group A (modern 1935–1993, e.g. 1984-vol3, 1993-vol1, 1961-vol2):** docTR engine ran EMPTY, so `agreement_ratio` is mechanically 0.0 — but `consensus_text` is clean Tesseract output (pristine modern legislative English, verified by quoted samples). Complete false alarm. **Ready to ingest as-is.**
+- **Group B (19th-c 1850–1875 + early-20th 1907–1923):** all 3 engines ran but disagree on old typefaces (long-s, e↔c). The agreement ceiling for 1860s type is ~0.60–0.70, BELOW the 0.75 completeness threshold, so they flag ~100% even though text is legible. Text is **readable but NOISY** (e.g. `cnuct`→enact, `Snid`→Said) — legal substance (sections, dates, subjects, enactment formula) intact.
+- **Group C (genuine garbage): NONE found.**
+
+The 0.75 threshold was never calibrated per era/engine-count (3-engine high-conf threshold is 0.65, 2-engine is 0.70; the completeness checker double-counts). **No volume needs re-OCR on text-quality grounds.**
+
+**Decisions owed (quality bar):**
+1. **Recalibrate / fix the completeness verifier's low_conf metric** (per-era threshold; treat docTR-empty as not-a-quality-signal) so we have a TRUE quality gate, not a misleading one.
+2. **Quality bar for 19th-c (Group B) noisy text:** accept readable-noisy for launch, OR gate 1850–1875 (+1907–1923) through the planned human-verification pass (the captcha-style tool per [[ocr-verification-architecture]]) before finalizing. Modern Group A = proceed. Note: 1850–1875 are ALREADY ingested (4,262 acts) at this noise level.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
+- `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
 - The active DB is **local Postgres `localhost:5432/patolex`**, NOT Supabase — query it directly for any corpus/DB question; docs prior to cc007 misstated this.
 - The completeness verifier must run against the **authoritative 5090 OCR output**, not the 5080's local scratch — the two drift (the 5080 copy lagged a 06-08 re-OCR pass), causing false truncation reports.
 - A crude heuristic ("more pages wins") nearly drove wrong dedup calls; a completeness verifier overturned it AND found real silent extraction failures. Verify completeness, don't infer it.
