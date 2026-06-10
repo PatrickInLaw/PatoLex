@@ -40,3 +40,7 @@
 [2026-06-10 16:13 PT] MODEL gpt-oss:20b | START
 [2026-06-10 16:17 PT] MODEL gpt-oss:20b | recall=100% precision=61% acc=63% s/act=7.0 67k=130h | OK | OK
 [2026-06-10 16:17 PT] MODEL deepseek-r1:32b | START
+[2026-06-10 16:25 PT] MODEL deepseek-r1:32b | recall=100% precision=65% acc=69% s/act=12.3 67k=229h | OK | OK
+[2026-06-10 16:25 PT] MODEL nemotron-cascade-2:latest | START
+[2026-06-10 16:27 PT] MODEL nemotron-cascade-2:latest | recall=100% precision=62% acc=66% s/act=4.5 67k=84h | OK | OK
+[2026-06-10 16:27 PT] MODEL MATRIX BENCHMARK COMPLETE
