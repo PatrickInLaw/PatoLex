@@ -29,6 +29,7 @@ These lessons came from the template's own setup history and apply to any new re
 - **[LESSON_2026-06-03_ops_temp_logging_and_elevation.md](LESSON_2026-06-03_ops_temp_logging_and_elevation.md)** — ops temp logging + elevation.
 - **[LESSON_2026-06-05_stage05_mojibake_detection.md](LESSON_2026-06-05_stage05_mojibake_detection.md)** — born-digital STAGE 0.5 mojibake detection / OCR fallback.
 - **[LESSON_2026-06-06_prep_runner_ram_oom_5080.md](LESSON_2026-06-06_prep_runner_ram_oom_5080.md)** — `prep_runner.py --parallel 8/16` OOMs the 16 GB 5080 box (RAM, not VRAM); use the single-worker `run_worker_5080.py` with a RAM guard instead.
+- **[LESSON_2026-06-10_local_llm_garbage_detection.md](LESSON_2026-06-10_local_llm_garbage_detection.md)** — Local LLM garbage sweep: NO-GO. 7 models (7B-54B) all achieve 0% garbage recall. Root cause: API labels use legal-citation-precision threshold (corrupted section numbers = garbage even if prose is readable); local models calibrate to readability, not citation precision. Alternatives: deterministic Rule_E (R=44%), API haiku sweep (~$225 for 75K acts), or fine-tuning.
 
 ---
 
@@ -38,3 +39,4 @@ These lessons came from the template's own setup history and apply to any new re
 |------|--------|
 | 2026-05-31 | cc001: Initial version with inherited template lessons + PatoLex-specific lessons. |
 | 2026-06-06 | Added "Dated Lesson Files" index section (the dated LESSON_*.md files were previously unindexed); added the prep_runner RAM-OOM lesson. |
+| 2026-06-10 | Added local LLM garbage detection validation result (NO-GO, calibration gap). |

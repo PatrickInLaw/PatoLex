@@ -1,0 +1,42 @@
+[2026-06-10 15:41 PT] LOG INIT | model-matrix benchmark log created | OK
+[2026-06-10 15:42 PT] MODEL MATRIX BENCHMARK START
+[2026-06-10 15:42 PT] MODEL gemma3:27b | SKIPPED (pre-measured: recall=100% prec=87% s/act=1.73)
+[2026-06-10 15:42 PT] MODEL phi4-mini:latest | SKIPPED (pre-measured: recall=100% prec=60% s/act=0.80)
+[2026-06-10 15:42 PT] MODEL aya-expanse:8b | SKIPPED (pre-measured: recall=40% prec=100% s/act=0.53)
+[2026-06-10 15:42 PT] MODEL hf.co/bartowski/aya-expanse-32b-GGUF:Q4_K_M | START
+[2026-06-10 15:42 PT] MODEL hf.co/bartowski/aya-expanse-32b-GGUF:Q4_K_M | recall=95% precision=100% acc=97% s/act=1.5 67k=29h | OK | OK
+[2026-06-10 15:42 PT] MODEL hf.co/albertodelazzari/Saul-7B-Instruct-v1-Q8_0-GGUF:latest | START
+[2026-06-10 15:43 PT] MODEL hf.co/albertodelazzari/Saul-7B-Instruct-v1-Q8_0-GGUF:latest | recall=100% precision=59% acc=60% s/act=1.0 67k=19h | OK | OK
+[2026-06-10 15:43 PT] MODEL hf.co/mradermacher/SaulLM-54B-Instruct-GGUF:Q4_K_M | START
+[2026-06-10 15:49 PT] MODEL MATRIX BENCHMARK START
+[2026-06-10 15:49 PT] MODEL gemma3:27b | SKIPPED (pre-measured: recall=100% prec=87% s/act=1.73)
+[2026-06-10 15:49 PT] MODEL phi4-mini:latest | SKIPPED (pre-measured: recall=100% prec=60% s/act=0.80)
+[2026-06-10 15:49 PT] MODEL aya-expanse:8b | SKIPPED (pre-measured: recall=40% prec=100% s/act=0.53)
+[2026-06-10 15:49 PT] MODEL hf.co/bartowski/aya-expanse-32b-GGUF:Q4_K_M | START
+[2026-06-10 15:54 PT] MODEL MATRIX BENCHMARK START
+[2026-06-10 15:54 PT] MODEL gemma3:27b | SKIPPED (pre-measured: recall=100% prec=87% s/act=1.73)
+[2026-06-10 15:54 PT] MODEL phi4-mini:latest | SKIPPED (pre-measured: recall=100% prec=60% s/act=0.80)
+[2026-06-10 15:54 PT] MODEL aya-expanse:8b | SKIPPED (pre-measured: recall=40% prec=100% s/act=0.53)
+[2026-06-10 15:54 PT] MODEL hf.co/bartowski/aya-expanse-32b-GGUF:Q4_K_M | SKIPPED (pre-measured: recall=95% prec=100% s/act=1.54)
+[2026-06-10 15:54 PT] MODEL hf.co/albertodelazzari/Saul-7B-Instruct-v1-Q8_0-GGUF:latest | SKIPPED (pre-measured: recall=100% prec=59% s/act=1.00)
+[2026-06-10 15:54 PT] MODEL hf.co/mradermacher/SaulLM-54B-Instruct-GGUF:Q4_K_M | SKIPPED (pre-measured: recall=nan% prec=nan% s/act=14.00)
+[2026-06-10 15:54 PT] MODEL qwen3:32b | START
+[2026-06-10 16:07 PT] MODEL qwen3:32b | recall=95% precision=58% acc=57% s/act=21.9 67k=407h | OK | OK
+[2026-06-10 16:07 PT] MODEL qwen3.5:27b | START
+[2026-06-10 16:08 PT] MODEL MATRIX BENCHMARK START
+[2026-06-10 16:08 PT] MODEL gemma3:27b | SKIPPED (pre-measured: recall=100% prec=87% s/act=1.73)
+[2026-06-10 16:08 PT] MODEL phi4-mini:latest | SKIPPED (pre-measured: recall=100% prec=60% s/act=0.80)
+[2026-06-10 16:08 PT] MODEL aya-expanse:8b | SKIPPED (pre-measured: recall=40% prec=100% s/act=0.53)
+[2026-06-10 16:08 PT] MODEL hf.co/bartowski/aya-expanse-32b-GGUF:Q4_K_M | SKIPPED (pre-measured: recall=95% prec=100% s/act=1.54)
+[2026-06-10 16:08 PT] MODEL hf.co/albertodelazzari/Saul-7B-Instruct-v1-Q8_0-GGUF:latest | SKIPPED (pre-measured: recall=100% prec=59% s/act=1.00)
+[2026-06-10 16:08 PT] MODEL hf.co/mradermacher/SaulLM-54B-Instruct-GGUF:Q4_K_M | SKIPPED (pre-measured: recall=nan% prec=nan% s/act=14.00)
+[2026-06-10 16:08 PT] MODEL qwen3:32b | SKIPPED (pre-measured: recall=95% prec=58% s/act=21.88)
+[2026-06-10 16:08 PT] MODEL qwen3.5:27b | START
+[2026-06-10 16:10 PT] MODEL qwen3.5:27b | recall=100% precision=61% acc=63% s/act=2.9 67k=55h | OK | OK
+[2026-06-10 16:10 PT] MODEL qwen3.6:35b | START
+[2026-06-10 16:11 PT] MODEL qwen3.6:35b | recall=100% precision=61% acc=63% s/act=1.6 67k=29h | OK | OK
+[2026-06-10 16:11 PT] MODEL gemma4:31b | START
+[2026-06-10 16:13 PT] MODEL gemma4:31b | recall=100% precision=61% acc=63% s/act=3.7 67k=68h | OK | OK
+[2026-06-10 16:13 PT] MODEL gpt-oss:20b | START
+[2026-06-10 16:17 PT] MODEL gpt-oss:20b | recall=100% precision=61% acc=63% s/act=7.0 67k=130h | OK | OK
+[2026-06-10 16:17 PT] MODEL deepseek-r1:32b | START

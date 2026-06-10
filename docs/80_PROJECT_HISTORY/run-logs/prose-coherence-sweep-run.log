@@ -1,0 +1,79 @@
+[2026-06-10 14:03 PT] prose-coherence-sweep | Sweep started [SMOKE] model=gemma3:27b ollama=http://100.70.54.56:11434 | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep | Smoke test complete: 8 acts done | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep | Sweep complete: 8 acts scored, 0 errors, wall=0.00h | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep | === Per-Volume Score Summary === | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep |   1850: n=8 avg=3.62 [3:3 4:5] | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep | Sweep started [SMOKE] model=gemma3:27b ollama=http://100.70.54.56:11434 | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep | Smoke test complete: 8 acts done | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep | Sweep complete: 8 acts scored, 0 errors, wall=0.00h | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep | === Per-Volume Score Summary === | OK
+[2026-06-10 14:03 PT] prose-coherence-sweep |   1850: n=16 avg=3.62 [3:6 4:10] | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Sweep started [DRY-RUN] model=gemma3:27b ollama=http://100.70.54.56:11434 | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 1000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 1200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 1400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 1600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 1800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 2000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 2200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 2400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 2600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 2800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 3000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 3200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 3400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 3600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 3800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 4000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 4200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 4400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 4600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 4800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 5000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 5200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 5400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 5600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 5800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 6000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 6200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 6400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 6600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 6800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 7000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 7200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 7400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 7600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 7800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 8000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 8200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 8400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 8600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 8800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 9000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 9200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 9400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 9600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 9800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 10000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 10200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 10400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 10600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 10800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 11000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 11200 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 11400 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 11600 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 11800 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Progress: 12000 acts done, 0 errors, rate=0.00s/act, elapsed=0.0min | OK
+[2026-06-10 14:05 PT] prose-coherence-sweep | Sweep complete: 12100 acts scored, 0 errors, wall=0.00h | OK
+[2026-06-10 14:26 PT] prose-coherence-sweep | Sweep started [SMOKE] model=gemma3:27b ollama=http://100.70.54.56:11434 | OK
+[2026-06-10 14:29 PT] prose-coherence-sweep | Progress: 200 acts done, 0 errors, rate=1.00s/act, elapsed=3.6min | OK
+[2026-06-10 14:29 PT] prose-coherence-sweep | Smoke test complete: 200 acts done | OK
+[2026-06-10 14:29 PT] prose-coherence-sweep | Sweep complete: 200 acts scored, 0 errors, wall=0.06h | OK
+[2026-06-10 14:29 PT] prose-coherence-sweep | === Per-Volume Score Summary === | OK
+[2026-06-10 14:29 PT] prose-coherence-sweep |   1850: n=97 avg=3.51 [3:48 4:49] | OK
+[2026-06-10 14:29 PT] prose-coherence-sweep |   1851: n=103 avg=3.78 [3:23 4:80] | OK
