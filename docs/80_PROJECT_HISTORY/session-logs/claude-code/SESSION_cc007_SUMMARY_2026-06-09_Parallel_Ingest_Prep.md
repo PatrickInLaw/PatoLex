@@ -367,6 +367,12 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **86 still open = image-sourcing-bound** (83 no usable image + 3 wrong-page). All need the actual chapter-heading scan re-acquired; model capability is not the limit.
 - Finding recorded durably in `docs/30_SYSTEM_DESIGN/CORRECTION_AND_DISPLAY_LAYER.md` ("Layer-2 in practice"). NEXT (deferred to the single mass-ingest): apply `chapter_vision_final.tsv` as overlay tier=VISION; re-source the 86 heading pages.
 
+### Continuation 30 (2026-06-11) — "How is it possible we don't have the scans?" → we DO (corrected)
+
+- Root-caused the 86 "open" REVIEW cases. My earlier "missing / re-acquire" wording was WRONG. Truth: the per-volume OCR bundle (`production-*`) is **text-only** — `ocr_consensus/`, `parsed_acts_fixed.json`, `page_classification.json`, `sha256.txt`; the `pages_prep_gray` rasters are a **working intermediate purged after OCR** to reclaim disk. Early 1850–1875 volumes already cleaned → no cached page image.
+- **The source scans are intact** in `…\PatoLex-scratch\chief-clerk-archive\{vol}_Statutes.pdf` (verified: 1873-74=1086pp, 1869-70=1027pp, 1867-68=828pp). Any heading page is **re-renderable on demand with PyMuPDF**. So the 86 are a cheap local render + re-run of the Sonnet pass, NOT data loss or a model limit.
+- Corrected the durable doc (`CORRECTION_AND_DISPLAY_LAYER.md`, "Finding (root cause…)") and added memory `ocr-bundles-image-free-source-in-archive`. Diagnostics: `PatoLex-scratch\diag_missing.py` / `diag_5080.py` / `find_sources.py`.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

@@ -66,14 +66,25 @@ Sonnet-vision-at-scale:
 - **3 Sonnet-UNKNOWN** (1971-vol1 o1034, 1982-vol3 o72, 1999-vol4 o159): Claude read the
   staged images directly and confirmed they are **body-text pages, not chapter-heading
   pages** — the parse's `source_page` for these points one or more pages off the heading.
-  Not resolvable without re-acquiring the correct page; **same bucket as the 83 below**.
-- **83 with no usable staged image** + the 3 wrong-page = **86 still open**, all
-  **image-sourcing-bound** (need the actual chapter-heading scan), NOT a reasoning gap.
+- **86 still open** = 81 whose volume bundle has no cached page image + 3 wrong-page + 2
+  out-of-range. These are **render-from-PDF jobs, NOT lost scans** (see finding below).
 
-**Finding:** vision-on-scan is a *viable, validated* layer-2 source for the hard residual;
-the remaining limit is **image acquisition** (correct heading page), not model capability.
-When applied, these land as overlay tier **`VISION`** keyed by `(source_document_id,
-in_act_order)` (same key as the deterministic overlay), precedence above deterministic.
+**Finding (root cause of "missing" scans — corrected 2026-06-11):** the per-volume OCR
+output bundle **does NOT retain page images**. The pipeline renders the source PDF to a
+`pages_prep_gray` working intermediate, runs consensus OCR, banks only the *text* artifacts
+(`ocr_consensus/`, `parsed_acts_fixed.json`, `page_classification.json`, `sha256.txt`), then
+**purges the page rasters to reclaim disk**. Early-processed volumes (1850–1875) have already
+been cleaned, which is why their REVIEW heading pages couldn't be staged. **The source scans
+are intact** in the master archive `…\PatoLex-scratch\chief-clerk-archive\{vol}_Statutes.pdf`
+(verified: 1873-74 = 1086 pp, 1869-70 = 1027 pp, 1867-68 = 828 pp) — any heading page is
+**re-renderable on demand with PyMuPDF**. So the remaining limit is a cheap local render +
+re-run of the Sonnet-vision pass, **not** image loss or model capability. When applied, vision
+results land as overlay tier **`VISION`** keyed by `(source_document_id, in_act_order)` (same
+key as the deterministic overlay), precedence above deterministic.
+
+**Operational note:** `chief-clerk-archive\` is the durable source-of-record for the scanned
+historical volumes; per-volume `production-*` bundles are *derived text* and intentionally
+image-free. Never treat an absent `pages_prep_gray` as data loss — render from the archive PDF.
 
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
