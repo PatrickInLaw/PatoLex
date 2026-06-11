@@ -89,6 +89,10 @@ def _process_vol(path):
         #   REVIEW    everything else -- a fill that DISAGREES with OCR is genuinely
         #             ambiguous (parse gap vs OCR garble) and must NOT silently override
         #             a possibly-correct citation; also restarts/collisions/no-anchor.
+        #   OCR_PLAUSIBLE  fill disagrees, BUT the OCR-recovered numeral sits
+        #                  monotonically between the clean neighbours -> the printed
+        #                  numeral is readable+plausible; the disagreement was a parse
+        #                  gap. Accept the OCR value (no change, just un-flagged).
         ocr = vals[i]
         corrected = None; tier = "REVIEW"; reason = "no_anchor"
         if pi is not None and ni is not None:
@@ -101,18 +105,24 @@ def _process_vol(path):
                 cand = a + (i - pi)
                 if cand == ocr and cand < b:
                     corrected, tier, reason = cand, "CONFIRMED", f"fill_agrees({a})"
+                elif a < ocr < b:
+                    corrected, tier, reason = ocr, "OCR_PLAUSIBLE", f"ocr_fits({a}<{ocr}<{b})"
                 else:
                     tier, reason = "REVIEW", f"fill_disagrees(ocr={ocr},fill={cand})"
         elif pi is not None:
             cand = vals[pi] + (i - pi)
             if cand == ocr:
                 corrected, tier, reason = cand, "CONFIRMED", f"fill_agrees({vals[pi]})"
+            elif ocr > vals[pi]:
+                corrected, tier, reason = ocr, "OCR_PLAUSIBLE", f"ocr_after({vals[pi]}<{ocr})"
             else:
                 tier, reason = "REVIEW", f"fill_disagrees(ocr={ocr},fill={cand})"
         elif ni is not None:
             cand = vals[ni] - (ni - i)
             if cand > 0 and cand == ocr:
                 corrected, tier, reason = cand, "CONFIRMED", f"fill_agrees({vals[ni]})"
+            elif 0 < ocr < vals[ni]:
+                corrected, tier, reason = ocr, "OCR_PLAUSIBLE", f"ocr_before({ocr}<{vals[ni]})"
             else:
                 tier, reason = "REVIEW", f"fill_disagrees(ocr={ocr},fill={cand})"
         counts[tier] += 1
@@ -154,7 +164,8 @@ def main():
         rlog(f"  AUTO (bracket-verified -> fix/confirm) = {totals['AUTO']:,} ({100.0*totals['AUTO']/g:.1f}%)")
         rlog(f"     of which the chapter number was actually CHANGED (fixed) = {totals['value_changed']:,}")
         rlog(f"  CONFIRMED (fill agrees with OCR, no change) = {totals['CONFIRMED']:,} ({100.0*totals['CONFIRMED']/g:.1f}%)")
-        rlog(f"  REVIEW (ambiguous: fill disagrees / restart / no-anchor) = {totals['REVIEW']:,} ({100.0*totals['REVIEW']/g:.1f}%)")
+        rlog(f"  OCR_PLAUSIBLE (OCR value fits between clean neighbours -> accept) = {totals['OCR_PLAUSIBLE']:,} ({100.0*totals['OCR_PLAUSIBLE']/g:.1f}%)")
+        rlog(f"  REVIEW (irreducible: OCR implausible / restart / no-anchor) = {totals['REVIEW']:,} ({100.0*totals['REVIEW']/g:.1f}%)")
     rlog(f"DONE corrections -> {OUT}  wall={time.time()-t0:.0f}s")
 
 if __name__ == "__main__":

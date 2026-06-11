@@ -18,3 +18,14 @@
 [2026-06-11 10:55 PT]   CONFIRMED (fill agrees with OCR, no change) = 134 (11.1%) | OK
 [2026-06-11 10:55 PT]   REVIEW (ambiguous: fill disagrees / restart / no-anchor) = 602 (49.9%) | OK
 [2026-06-11 10:55 PT] DONE corrections -> C:\Users\patolex\PatoLex-scratch\_vocab\chapter_corrections.tsv  wall=0s | OK
+[2026-06-11 11:06 PT] START chapter_corrections (3-tier, from parsed_acts_fixed.json) | OK
+[2026-06-11 11:06 PT] 197 parsed volumes | OK
+[2026-06-11 11:06 PT] 197/197 vols | acts=76,691 garbled=1,206 | elapsed=0s | HEARTBEAT
+[2026-06-11 11:06 PT] ==== RESULT ==== | OK
+[2026-06-11 11:06 PT] acts total = 76,691  clean = 75,485  garbled = 1,206 | OK
+[2026-06-11 11:06 PT]   AUTO (bracket-verified -> fix/confirm) = 470 (39.0%) | OK
+[2026-06-11 11:06 PT]      of which the chapter number was actually CHANGED (fixed) = 293 | OK
+[2026-06-11 11:06 PT]   CONFIRMED (fill agrees with OCR, no change) = 134 (11.1%) | OK
+[2026-06-11 11:06 PT]   OCR_PLAUSIBLE (OCR value fits between clean neighbours -> accept) = 358 (29.7%) | OK
+[2026-06-11 11:06 PT]   REVIEW (irreducible: OCR implausible / restart / no-anchor) = 244 (20.2%) | OK
+[2026-06-11 11:06 PT] DONE corrections -> C:\Users\patolex\PatoLex-scratch\_vocab\chapter_corrections.tsv  wall=0s | OK
