@@ -237,6 +237,16 @@ Built `pipeline/correction_passes.py` to clean the vocab-diff garbage determinis
 - **Pass C extended to freq>=2** (`PASSC_MIN_FREQ` env): residual 0.5568% -> **0.4049%**, corrections 11,943 -> **71,189**, review tier 2,655 -> **23,601**, +201,062 occ recovered, wall 1145s. Quality: bulk good (OCR-variant->word), but a ~10-15% error tail of FRAGMENTS edit-1-matching a complete word (`ablished->abolished` is really *established*; `acility->ability` is *facility*). Corpus-freq dominance helps (account over mccourt) but can't tell fragment from typo. **Verdict: freq>=2 = reversible/advisory + search recall, NOT destructive auto-apply.**
 - **GAP owned:** Pass C never persisted the accepted corrections list (token->correction) — it computed them in-memory to derive the residual %, then discarded. Must add a corrections TSV before any apply. Also add a triage gate (don't TYPO-correct FRAGMENT/NAMELIKE tokens).
 
+### Continuation 15 (2026-06-11) — v8 correction_passes (persist + guards + gazetteer) + display-layer design
+
+Prepped the clean re-run (NOT yet run/committed-with-results):
+- **Persist corrections** — Pass C now writes `passC_corrections.tsv` (token->correction + freq + provenance). Fixes the gap where accepted corrections were computed in-memory and discarded.
+- **Pass A LBH guard** — `LBH_RE` now captures the full second word and only collapses a line-break hyphen if the join `is_known`; otherwise leaves text untouched. Stops manufacturing marginalia merges (`appropria-\ndollars -> appropriadollars`).
+- **Pass C fragment gate** — tokens that are a prefix/suffix of a LONGER common word (line-break pieces: `ablished`=established, `acility`=facility) routed to review instead of TYPO-corrected. Kills the ~10-15% fragment error tail.
+- **CA gazetteer** (`pipeline/ca_gazetteer.py`) — 58 counties (authoritative) + 159 cities + 61 features + 55 legislators (incl. the mangled ones: Karnette/Migden/Kaloogian/...) = 319 name-tokens, merged into the known-dictionary so real CA names stop being false-flagged and are protected from mis-correction. Import-verified on the 5090.
+- **Design doc** `docs/30_SYSTEM_DESIGN/CORRECTION_AND_DISPLAY_LAYER.md` — captures Patrick's layered display-layer architecture (immutable OCR + reversible overlays: deterministic -> model/vision -> community wiki, materialized display for the hot path) and the OPEN pre-ingestion decisions (anchor granularity, layer precedence, original-also-searchable, correction-axis vs point-in-time-axis).
+- v8 syntax-checked + on 5090; re-run (freq>=2) pending Patrick's go.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

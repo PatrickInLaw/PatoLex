@@ -21,7 +21,7 @@ REDESIGN v3:
 Writes run log to C:/Users/patolex/PatoLex-scratch/_vocab/correction-pass-run.log
 """
 
-import os, sys, json, re, glob, time, unicodedata
+import os, sys, json, re, glob, time, unicodedata, bisect
 from collections import defaultdict, Counter
 from datetime import datetime, timezone, timedelta
 import random
@@ -68,6 +68,14 @@ LEGAL_SUPPLEMENT = {
     "schoolbus","schoolbuses","winegrape","winegrapes","interindemnity","postclosure",
     "postconsumer","multicounty","trustline","disabilitant","disabilitants",
 }
+
+# --- CA proper-name supplement (counties/cities/features/legislators) ---
+# Stops real CA names being false-flagged and protects them from mis-correction.
+try:
+    from ca_gazetteer import CA_NAME_TOKENS
+    LEGAL_SUPPLEMENT |= CA_NAME_TOKENS
+except Exception as _e:
+    print(f"[WARN] ca_gazetteer not loaded: {_e}", file=sys.stderr)
 
 # Short stopwords that make short-piece splits legitimate (e.g. ofthe -> of+the)
 STOPWORDS = frozenset({"of","the","in","to","and","for","by","an","as","at","or","on"})
@@ -368,8 +376,11 @@ _W_HAS_WF = False
 _W_WF_FN = None
 _W_SPELL = None
 
-# Line-break-hyphen pattern (module-level so workers can use it under spawn)
-LBH_RE = re.compile(r'([A-Za-z\xc0-\xff]+)-[ \t]*\r?\n[ \t]*([A-Za-z\xc0-\xff])')
+# Line-break-hyphen pattern (module-level so workers can use it under spawn).
+# v8: captures the FULL second word so the join can be GUARDED (only collapse if the
+# result is a known word) -- otherwise marginalia/gutter-note text glued across a line
+# break manufactures garbage merges (appropria-\ndollars -> appropriadollars).
+LBH_RE = re.compile(r'([A-Za-z\xc0-\xff]+)-[ \t]*\r?\n[ \t]*([A-Za-z\xc0-\xff]+)')
 
 def _worker_is_known(tok):
     if tok in _W_WORD_SET:
@@ -412,8 +423,13 @@ def _scan_file(path):
 
     def _lbh_sub(m):
         joined = m.group(1) + m.group(2)
-        lbh[joined.lower()] += 1
-        return joined
+        # GUARD: only collapse the line-break hyphen if the join is a real word.
+        # Otherwise it's likely a margin/gutter-note word glued to a body word -- leave
+        # the original text untouched (don't manufacture a bad merge).
+        if _worker_is_known(joined.lower()):
+            lbh[joined.lower()] += 1
+            return joined
+        return m.group(0)
 
     for _pk, po in data.items():
         txt = (po.get("consensus_text") or "").strip()
@@ -683,7 +699,7 @@ def pass_c_correct(freq10_dict, spell, t0_global):
 # ================================================================
 def main():
     t0 = time.time()
-    rlog("START", f"correction_passes.py v7  FULLY-PARALLEL + SCORED(de-merge pieces is_common Zipf>={MIN_ZIPF}; PassC corpus-freq dominance>={CORR_DOMINANCE}; legal-supplement)  CPU-only")
+    rlog("START", f"correction_passes.py v8  +LBH-guard +PassC-fragment-gate +CA-gazetteer  (de-merge Zipf>={MIN_ZIPF}; PassC dominance>={CORR_DOMINANCE}; min_freq={PASSC_MIN_FREQ})  CPU-only")
 
     # -- Build dictionary --
     rlog("DICT", "Building union dictionary ...")
@@ -814,11 +830,39 @@ def main():
     freq10_occ_total = sum(freq10.values())
     rlog("PASS-C", f"min_freq={PASSC_MIN_FREQ}  freq_types={len(freq10):,}  freq_occ={freq10_occ_total:,}  PARALLEL candidate-gen + corpus-freq scoring across {n_workers} workers ...")
 
+    # FRAGMENT GATE (v8): a token that is a prefix/suffix of a LONGER common word is
+    # likely a line-break piece (ablished=established, acility=facility), NOT a typo --
+    # its coincidental edit-1 to a complete word would be a wrong "correction". Route
+    # such tokens to review instead of correcting. Common-word reference = wordfreq top-N.
+    try:
+        from wordfreq import top_n_list as _tnl
+        _frag_set = set(_tnl("en", 60000)) | set(LEGAL_SUPPLEMENT)
+    except Exception:
+        _frag_set = set(LEGAL_SUPPLEMENT)
+    _frag_sorted = sorted(_frag_set)
+    _frag_rev = sorted(w[::-1] for w in _frag_set)
+    def _is_fragment(tok):
+        if len(tok) < 4:
+            return False
+        i = bisect.bisect_left(_frag_sorted, tok)
+        if i < len(_frag_sorted):
+            w = _frag_sorted[i]
+            if len(w) > len(tok) and w.startswith(tok):
+                return True
+        r = tok[::-1]
+        j = bisect.bisect_left(_frag_rev, r)
+        if j < len(_frag_rev):
+            w = _frag_rev[j]
+            if len(w) > len(tok) and w.startswith(r):
+                return True
+        return False
+
     # PARALLEL Pass C (v7): workers generate edit-distance candidate SETS (slow);
     # the MAIN process scores them against the CORPUS frequency distribution
     # (baseline_freq) and accepts only confident corrections. Ambiguous calls are
     # captured to a review TSV instead of being silently mis-corrected.
     corrections = {}
+    accepted_reason = {}   # tok -> selection reason (provenance for the reversible layer)
     review_rows = []   # (tok, freq, best_guess, reason)
     if freq10 and n_workers > 1:
         toks = list(freq10)
@@ -830,8 +874,11 @@ def main():
         with ctx.Pool(processes=n_workers, initializer=_init_worker_full) as pool:
             for tok, cands in pool.imap_unordered(_passC_candidates, toks, chunksize=200):
                 corr, reason = _select_correction(tok, cands, baseline_freq)
-                if corr is not None:
+                if corr is not None and _is_fragment(tok):
+                    review_rows.append((tok, freq10[tok], f"fragment_gate({corr})"))
+                elif corr is not None:
                     corrections[tok] = corr
+                    accepted_reason[tok] = reason
                 else:
                     review_rows.append((tok, freq10[tok], reason))
                 done += 1
@@ -857,6 +904,18 @@ def main():
             rlog("PASS-C", f"review TSV: {len(review_rows):,} ambiguous/rejected -> {review_path}")
         except Exception as e:
             print(f"[WARN] passC_review write failed: {e}", file=sys.stderr)
+    # PERSIST the accepted corrections (the artifact to feed the reversible layer).
+    # token -> correction, with original frequency + selection provenance.
+    corr_path = os.path.join(OUT_DIR, "passC_corrections.tsv")
+    try:
+        with open(corr_path, "w", encoding="utf-8") as f:
+            f.write("token\tfreq\tcorrection\treason\n")
+            for tok, corr in sorted(corrections.items(), key=lambda kv: -freq10.get(kv[0], 0)):
+                f.write(f"{tok}\t{freq10.get(tok,0)}\t{corr}\t{accepted_reason.get(tok,'')}\n")
+        rlog("PASS-C", f"corrections TSV: {len(corrections):,} accepted -> {corr_path}")
+    except Exception as e:
+        print(f"[WARN] passC_corrections write failed: {e}", file=sys.stderr)
+
     corrected_occ = sum(freq10[tok] for tok in corrections)
 
     passC_freq = Counter(passB_freq)
