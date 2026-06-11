@@ -1,0 +1,17 @@
+# vocab-diff-run.log
+# Corpus-wide vocabulary diff runs (vocab_diff.py)
+# Format: [YYYY-MM-DD HH:MM PT] PHASE | description | OK/WARN/FAIL
+#
+# NOTE: Run 1 (2026-06-10) was executed BEFORE run-logging was added to the script.
+# Stats captured from the stdout log (C:\Users\patolex\PatoLex-scratch\_vocab\vocab_diff_run.log)
+# and retroactively written here per hygiene rules.
+
+[2026-06-10 05:31 PT] START | vocab_diff.py  scratch=C:\Users\patolex\PatoLex-scratch  out=C:\Users\patolex\PatoLex-scratch\_vocab  scope=205 production-* consensus JSON files  (run executed before logging added -- retroactive entry) | OK
+[2026-06-10 05:31 PT] SCAN | Found 205 consensus JSON files  scratch=C:\Users\patolex\PatoLex-scratch | OK
+[2026-06-10 05:31 PT] WARN | english-words alpha_2 list unavailable (pip package issue); fell back to legal-supplement only (76 words dict) -- effective dict size was 76, NOT the expected ~370k.  High bad-word count (572,629 of 572,703 unique) is a CONSEQUENCE of this: virtually all tokens failed dict-match.  Next run: fix english-words install or pass a custom --dict path. | WARN
+[2026-06-10 05:33 PT] PROGRESS | 100/205 files  59,533,358 tokens  43s elapsed | OK
+[2026-06-10 05:33 PT] PROGRESS | 200/205 files  130,220,493 tokens  94s elapsed | OK
+[2026-06-10 05:33 PT] SCAN-DONE | Processed 205 files in 96.7s  total_tokens=134,105,434  unique=572,703 | OK
+[2026-06-10 05:33 PT] DIFF | dict_size=76  good=74  bad_candidates=572,629 | WARN
+[2026-06-10 05:33 PT] OUTPUT | Written 572,629 bad-word rows to C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv  (31.5 MB) | OK
+[2026-06-10 05:33 PT] DONE | wall_time=102.5s  total_tokens=134,105,434  unique=572,703  dict_matched=74  bad_words=572,629  out=C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv | WARN
