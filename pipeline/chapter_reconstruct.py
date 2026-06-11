@@ -38,6 +38,15 @@ HEADER_RE = re.compile(
 )
 _ROMAN = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
 _ROMAN_OCR_SUBST = {"J": "I", "T": "I", "1": "I", "!": "I", "|": "I"}
+# A real act heading is followed shortly by an enactment marker -- this is
+# parse_volume's core act-validation test, applied here to filter TOC entries,
+# running page-heads, and stray "Chapter" mentions out of the heading sequence.
+ENACT_MARKER_RE = re.compile(
+    r"People\s+of\s+the\s+State\s+of\s+California"
+    r"|do\s+enact\s+as\s+follow",
+    re.I,
+)
+ENACT_LOOKAHEAD = 40   # lines after the heading to find the enact marker
 
 def parse_chapter_number(tok):
     raw = tok.strip().strip(".,;:")
@@ -106,17 +115,24 @@ def _scan_file(path):
         data = json.load(open(path, encoding="utf-8", errors="replace"))
     except Exception:
         return (vol, counts, samples)
-    # headings in reading order across the whole volume
-    headings = []   # (raw, ocr_val, clean)
+    # build the volume's lines in reading order, then find ACT headings (a heading
+    # followed by an enactment marker within ENACT_LOOKAHEAD lines -- filters TOC /
+    # running-heads / stray "Chapter" mentions, approximating parse_volume).
+    all_lines = []
     for pk in sorted(data.keys(), key=_page_key):
-        txt = (data[pk].get("consensus_text") or "")
-        for ln in txt.split("\n"):
-            m = HEADER_RE.match(ln)
-            if not m:
-                continue
-            raw = m.group(1)
-            val = parse_chapter_number(raw)
-            headings.append((raw, val, is_clean(raw, val)))
+        all_lines.extend((data[pk].get("consensus_text") or "").split("\n"))
+    headings = []   # (raw, ocr_val, clean)
+    for i, ln in enumerate(all_lines):
+        m = HEADER_RE.match(ln)
+        if not m:
+            continue
+        window = "\n".join(all_lines[i + 1:i + ENACT_LOOKAHEAD])
+        if not ENACT_MARKER_RE.search(window):
+            counts["headings_skipped_no_enact"] += 1
+            continue
+        raw = m.group(1)
+        val = parse_chapter_number(raw)
+        headings.append((raw, val, is_clean(raw, val)))
     n = len(headings)
     counts["headings"] += n
     cleans = [(i, headings[i][1]) for i in range(n) if headings[i][2] and headings[i][1] > 0]
