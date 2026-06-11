@@ -324,6 +324,16 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **HONEST RESULT:** 76,691 acts, 75,485 clean (98.4%), **1,206 garbled (1.57%)**; **AUTO 470 (of which 293 actual verified fixes)**, CONFIRMED 134, **REVIEW 602 (50% -- only 0.78% of all acts)**. AUTO samples verified correct (CLXXIITI ocr 174 -> 173; XI1->12). REVIEW = genuinely ambiguous (restart_or_decrease, collision, fill_disagrees).
 - **Limiting factor = parse completeness** (sequence gaps), not the reconstruction idea -> better act-detection would shrink REVIEW. NEXT options: improve act detection; or resolve REVIEW via image/context (vision) or by trusting the OCR-substitution value where plausible.
 
+### Continuation 25 (2026-06-11) — chapter review: OCR_PLAUSIBLE (358) + vision pass (honest limits)
+
+- **OCR_PLAUSIBLE tier resolved 358 of the 602 deterministically** (OCR value fits monotonically between clean neighbours -> accept; the disagreement was a parse gap). Review pile 602 -> 244 (0.32% of acts).
+- **Vision pass on the 244** (`run_chapter_vision.py`, qwen2.5vl, reads the source-page scan). HONEST OUTCOME -- vision is NOT a silver bullet here:
+  - **155 of 244 are in volumes WITHOUT page images on the 5090** (pre-1900 scans not present; only ~730 pre-1900 images on the box) -> can't vision them; need the source images sourced first.
+  - **qwen2.5vl:32b errors (HTTP 500); only :latest (7B) works**, and it read only **20 of 89** image-available cases (~22%) -- the print is too degraded; a 7B vision model is no better than the 3-engine consensus that already struggled.
+  - **The modern-volume REVIEW cases are NOT Roman garbles -- they're Arabic chapters with a stray OCR digit** (e.g. chapter 1138 read as "11382"); a parser/heading issue, and the sequence-fill is likely right (modern sequences are gap-free, so forward-fill is safe THERE).
+- **Net: 358/602 auto-resolved safely. The 244 remainder = a small, mixed human-review queue:** (a) old Roman garbles needing image-sourcing + human, (b) old garbles too degraded for the 7B vision model, (c) modern digit-errors recoverable by a per-volume (gap-free) forward-fill. Vision gave ~20 assistive readings (a few useful: 10d->105, XTIV->44).
+- Artifacts: `chapter_vision_results.tsv`. NOTE: only 1850-1875 + scattered later volumes have pages_prep_gray on the 5090 -- a real gap for any future image/vision work.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
