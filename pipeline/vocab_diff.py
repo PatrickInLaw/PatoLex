@@ -99,20 +99,48 @@ def parse_args():
 # Dictionary building
 # ---------------------------------------------------------------------------
 def build_dictionary():
-    """Return a set of lowercase English words from the broadest available source."""
+    """
+    Return (word_set, spell_checker_or_None) where word_set is the UNION of:
+      - pyspellchecker  (broad coverage, ~100k+ words with frequency data)
+      - nltk words corpus (~236k words, including rare/archaic/technical terms)
+      - wordfreq        (very broad coverage; any word with freq > 0 counts)
+      - LEGAL_SUPPLEMENT
+    A token is "known" if it appears in ANY of these sources.
+    Returns (word_set, spell_obj) so the caller can also do per-token freq lookups.
+    """
     word_set = set()
     source_desc = []
+    spell = None
 
-    # --- english-words (primary, ~370k words) ---
+    # --- pyspellchecker ---
     try:
-        from english_words import get_english_words_set
-        # alpha_2 = most common; web2 adds more rare words; keep both
-        w2 = get_english_words_set(['web2'], lower=True, alpha=True)
-        w_alpha2 = get_english_words_set(['alpha_2'], lower=True, alpha=True)
-        word_set |= w2 | w_alpha2
-        source_desc.append(f"english-words/web2+alpha_2 ({len(w2)+len(w_alpha2)} raw, {len(word_set)} after merge)")
+        from spellchecker import SpellChecker
+        spell = SpellChecker()
+        # spell.word_frequency contains all known words; iterate its keys
+        spell_words = set(spell.word_frequency.dictionary.keys())
+        word_set |= spell_words
+        source_desc.append(f"pyspellchecker ({len(spell_words):,})")
     except Exception as e:
-        print(f"[WARN] english-words not available: {e}", file=sys.stderr)
+        print(f"[WARN] pyspellchecker not available: {e}", file=sys.stderr)
+
+    # --- nltk words corpus (catches rare/archaic/technical real words) ---
+    try:
+        from nltk.corpus import words as nltk_words
+        nltk_set = set(w.lower() for w in nltk_words.words())
+        before = len(word_set)
+        word_set |= nltk_set
+        added = len(word_set) - before
+        source_desc.append(f"nltk-words ({len(nltk_set):,} raw, +{added:,} new)")
+        print(f"[DICT] nltk words corpus: {len(nltk_set):,} words loaded, {added:,} new after pyspellchecker union")
+    except LookupError:
+        print("[WARN] nltk 'words' corpus not downloaded; run: python -c \"import nltk; nltk.download('words')\"", file=sys.stderr)
+    except Exception as e:
+        print(f"[WARN] nltk words corpus not available: {e}", file=sys.stderr)
+
+    # --- wordfreq: add any token with nonzero frequency ---
+    # We cannot enumerate all wordfreq tokens, so this source is applied
+    # per-token in is_known_word() below.  Record it as a planned source.
+    source_desc.append("wordfreq (per-token, word_frequency > 0)")
 
     # --- /usr/share/dict/words (Unix fallback) ---
     for dict_path in ["/usr/share/dict/words", "/usr/dict/words"]:
@@ -122,7 +150,7 @@ def build_dictionary():
                     extras = {line.strip().lower() for line in f if line.strip().isalpha()}
                 before = len(word_set)
                 word_set |= extras
-                source_desc.append(f"{dict_path} (+{len(word_set)-before})")
+                source_desc.append(f"{dict_path} (+{len(word_set)-before:,})")
             except Exception as e:
                 print(f"[WARN] Could not read {dict_path}: {e}", file=sys.stderr)
 
@@ -131,11 +159,11 @@ def build_dictionary():
     source_desc.append(f"legal-supplement ({len(LEGAL_SUPPLEMENT)})")
 
     if not word_set:
-        raise RuntimeError("No dictionary available — install english-words (pip install english-words)")
+        raise RuntimeError("No dictionary available — install pyspellchecker (pip install pyspellchecker)")
 
-    print(f"[DICT] Total dictionary size: {len(word_set):,} words")
+    print(f"[DICT] Static dictionary size: {len(word_set):,} words (wordfreq adds more per-token)")
     print(f"[DICT] Sources: {'; '.join(source_desc)}")
-    return word_set
+    return word_set, spell
 
 
 # ---------------------------------------------------------------------------
@@ -255,30 +283,38 @@ def main():
             f"total_tokens={total_tokens:,}  unique={len(corpus_freq):,}")
 
     # -----------------------------------------------------------------------
-    # 3. Build dictionary
+    # 3. Build dictionary (union: pyspellchecker + wordfreq + legal supplement)
     # -----------------------------------------------------------------------
-    dictionary = build_dictionary()
+    dictionary, spell = build_dictionary()
 
-    # -----------------------------------------------------------------------
-    # 4. Diff: tokens NOT in dictionary = bad-word candidates
-    #    Keep ALL — do not filter on frequency
-    # -----------------------------------------------------------------------
     try:
         from wordfreq import word_frequency
         has_wordfreq = True
-        print("[DICT] wordfreq available for external frequency signal")
+        print("[DICT] wordfreq available (membership check + frequency signal)")
     except ImportError:
         has_wordfreq = False
-        print("[DICT] wordfreq not available; skipping external frequency")
+        print("[DICT] wordfreq not available; using static dictionary only")
 
+    def is_known(tok):
+        """True if token is in any source of the union dictionary."""
+        if tok in dictionary:
+            return True
+        # wordfreq per-token check: nonzero frequency = known word
+        if has_wordfreq and word_frequency(tok, "en") > 0:
+            return True
+        return False
+
+    # -----------------------------------------------------------------------
+    # 4. Diff: tokens NOT in the union dictionary = bad-word candidates
+    #    Keep ALL — do not filter on frequency
+    # -----------------------------------------------------------------------
     good = []
     bad  = []
     for tok, freq in corpus_freq.items():
-        # A token is "good" if it (or any hyphen-split component) is in the dict
-        # For the hyphenated check: the hyphenated token itself was already
-        # split into components during tokenisation and those appear separately
-        # in corpus_freq. So here we just check the token as-is.
-        if tok in dictionary:
+        # A token is "good" if it passes the union check.
+        # Hyphenated tokens were split into components during tokenisation
+        # and those appear separately in corpus_freq, so we just check as-is.
+        if is_known(tok):
             good.append(tok)
         else:
             bad.append(tok)

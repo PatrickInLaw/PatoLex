@@ -15,3 +15,37 @@
 [2026-06-10 05:33 PT] DIFF | dict_size=76  good=74  bad_candidates=572,629 | WARN
 [2026-06-10 05:33 PT] OUTPUT | Written 572,629 bad-word rows to C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv  (31.5 MB) | OK
 [2026-06-10 05:33 PT] DONE | wall_time=102.5s  total_tokens=134,105,434  unique=572,703  dict_matched=74  bad_words=572,629  out=C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv | WARN
+
+# --- Run 2 (2026-06-10) — union dict fix: pyspellchecker + wordfreq + legal-supplement ---
+# Script updated in repo (pipeline/vocab_diff.py) and re-deployed to 5090.
+# pyspellchecker installed on 5090 (pip install pyspellchecker 0.9.0).
+# Run executed synchronously on 5090 CPU (CUDA_VISIBLE_DEVICES='').
+[2026-06-10 12:25 PT] START | vocab_diff.py  scratch=C:\Users\patolex\PatoLex-scratch  out=C:\Users\patolex\PatoLex-scratch\_vocab  (run-2, union-dict fix) | OK
+[2026-06-10 12:25 PT] SCAN | Found 205 consensus JSON files  scratch=C:\Users\patolex\PatoLex-scratch | OK
+[2026-06-10 12:25 PT] PROGRESS | 20/205 files  5,814,117 tokens  2s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 40/205 files  17,494,332 tokens  11s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 60/205 files  33,846,069 tokens  23s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 80/205 files  46,152,071 tokens  31s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 100/205 files  59,533,358 tokens  41s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 120/205 files  73,572,813 tokens  51s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 140/205 files  87,003,712 tokens  60s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 160/205 files  100,458,035 tokens  69s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 180/205 files  116,969,045 tokens  81s elapsed | OK
+[2026-06-10 12:25 PT] PROGRESS | 200/205 files  130,220,493 tokens  91s elapsed | OK
+[2026-06-10 12:27 PT] SCAN-DONE | Processed 205 files in 93.5s  total_tokens=134,105,434  unique=572,703 | OK
+[2026-06-10 12:27 PT] DICT | Sources: pyspellchecker (160,572 words) + wordfreq (per-token) + legal-supplement (76).  Static dict size: 160,578 | OK
+[2026-06-10 12:27 PT] DIFF | dict_size=160,578 (static) + wordfreq per-token  good=102,063  bad_candidates=470,640 | OK
+[2026-06-10 12:27 PT] OUTPUT | Written 470,640 bad-word rows to C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv | OK
+[2026-06-10 12:27 PT] DONE | wall_time=101.9s  total_tokens=134,105,434  unique=572,703  dict_matched=102,063  bad_words=470,640  out=C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv | OK
+
+# --- Run 3 (2026-06-10) — add nltk words corpus to union dict ---
+# pipeline/vocab_diff.py updated: nltk.corpus.words added to build_dictionary() (defensive try/except).
+# nltk 3.9.4 installed on 5090 (pip install); words corpus downloaded (nltk.downloader).
+# Script re-deployed to 5090 via SCP.  Run executed synchronously on 5090 CPU (CUDA_VISIBLE_DEVICES='').
+[2026-06-10 14:00 PT] START | vocab_diff.py  scratch=C:\Users\patolex\PatoLex-scratch  out=C:\Users\patolex\PatoLex-scratch\_vocab  (run-3, +nltk words corpus) | OK
+[2026-06-10 14:00 PT] SCAN | Found 205 consensus JSON files  scratch=C:\Users\patolex\PatoLex-scratch | OK
+[2026-06-10 14:01 PT] SCAN-DONE | Processed 205 files in 85.6s  total_tokens=134,105,434  unique=572,703 | OK
+[2026-06-10 14:01 PT] DICT | Sources: pyspellchecker (160,572) + nltk-words (234,377 raw, +167,372 new after pyspellchecker union) + wordfreq (per-token) + legal-supplement (76).  Static dict size: 327,947 | OK
+[2026-06-10 14:01 PT] DIFF | dict_size=327,947 (static) + wordfreq per-token  good=104,415  bad_candidates=468,288 | OK
+[2026-06-10 14:01 PT] OUTPUT | Written 468,288 bad-word rows to C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv | OK
+[2026-06-10 14:01 PT] DONE | wall_time=93.4s  total_tokens=134,105,434  unique=572,703  dict_matched=104,415  bad_words=468,288  delta_vs_run2=-2,352  out=C:\Users\patolex\PatoLex-scratch\_vocab\bad_words.tsv | OK

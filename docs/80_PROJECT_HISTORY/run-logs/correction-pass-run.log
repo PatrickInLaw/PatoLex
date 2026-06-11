@@ -1,0 +1,400 @@
+[2026-06-10 18:34 PT] START | correction_passes.py  CUDA_VISIBLE_DEVICES=''  CPU-only | OK
+[2026-06-10 18:34 PT] DICT | Building union dictionary ... | OK
+[2026-06-10 18:34 PT] DICT | ready  static=327,947  wordfreq=True | OK
+[2026-06-10 18:34 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 18:34 PT] LOAD | pages=328,624  files=205  t=11s | OK
+[2026-06-10 18:35 PT] BASELINE | total=134,105,434  unique=572,703  bad_types=468,288  bad_occ=1,562,764  pct=1.1653% | OK
+[2026-06-10 18:41 PT] PASS-A | lbh_ops=853,625  adj_ops=15,316  bad_occ=1,346,308  pct=1.0171%  recovered=216,456 | OK
+[2026-06-10 18:41 PT] PASS-B | bad_types_for_demerge=483,268 | OK
+[2026-06-10 19:11 PT] START | correction_passes.py v2  CUDA_VISIBLE_DEVICES=''  CPU-only  heartbeat+bounded-PassB | OK
+[2026-06-10 19:11 PT] DICT | Building union dictionary ... | OK
+[2026-06-10 19:11 PT] DICT | ready  static=160,578  wordfreq=True | OK
+[2026-06-10 19:11 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 19:11 PT] LOAD | Loading 205 JSON files ... | OK
+[2026-06-10 19:11 PT] LOAD | 50/205 files | pages=54,083 | elapsed=2s | HEARTBEAT
+[2026-06-10 19:11 PT] LOAD | 100/205 files | pages=138,421 | elapsed=5s | HEARTBEAT
+[2026-06-10 19:11 PT] LOAD | 150/205 files | pages=226,596 | elapsed=9s | HEARTBEAT
+[2026-06-10 19:11 PT] LOAD | 200/205 files | pages=319,070 | elapsed=14s | HEARTBEAT
+[2026-06-10 19:11 PT] LOAD | pages=328,624  files=205  t=14s | OK
+[2026-06-10 19:11 PT] BASELINE | Tokenising corpus (with hyphen expansion) ... | OK
+[2026-06-10 19:11 PT] BASELINE | 25,000/328,624 pages | unique_so_far=191,261 | elapsed=7s | HEARTBEAT
+[2026-06-10 19:11 PT] BASELINE | 50,000/328,624 pages | unique_so_far=297,372 | elapsed=13s | HEARTBEAT
+[2026-06-10 19:11 PT] BASELINE | 75,000/328,624 pages | unique_so_far=371,824 | elapsed=19s | HEARTBEAT
+[2026-06-10 19:11 PT] BASELINE | 100,000/328,624 pages | unique_so_far=420,324 | elapsed=25s | HEARTBEAT
+[2026-06-10 19:11 PT] BASELINE | 125,000/328,624 pages | unique_so_far=441,605 | elapsed=30s | HEARTBEAT
+[2026-06-10 19:11 PT] BASELINE | 150,000/328,624 pages | unique_so_far=462,773 | elapsed=35s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | 175,000/328,624 pages | unique_so_far=481,060 | elapsed=40s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | 200,000/328,624 pages | unique_so_far=499,883 | elapsed=46s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | 225,000/328,624 pages | unique_so_far=517,790 | elapsed=51s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | 250,000/328,624 pages | unique_so_far=532,811 | elapsed=56s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | 275,000/328,624 pages | unique_so_far=551,376 | elapsed=62s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | 300,000/328,624 pages | unique_so_far=562,696 | elapsed=67s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | 325,000/328,624 pages | unique_so_far=571,903 | elapsed=72s | HEARTBEAT
+[2026-06-10 19:12 PT] BASELINE | total=134,105,434  unique=572,703  bad_types=470,640  bad_occ=1,603,863  pct=1.1960% | OK
+[2026-06-10 19:12 PT] PASS-A | Starting dehyphenation + adjacent-pair rejoin over 328,624 pages ... | OK
+[2026-06-10 19:12 PT] PASS-A | 9,431/328,624 pages | lbh_so_far=43,019 | adj_rejoins=1,537 | elapsed=15s | HEARTBEAT
+[2026-06-10 19:13 PT] PASS-A | 19,319/328,624 pages | lbh_so_far=85,216 | adj_rejoins=3,015 | elapsed=30s | HEARTBEAT
+[2026-06-10 19:13 PT] PASS-A | 25,000/328,624 pages | lbh_so_far=110,031 | adj_rejoins=3,723 | elapsed=39s | HEARTBEAT
+[2026-06-10 19:13 PT] PASS-A | 34,550/328,624 pages | lbh_so_far=152,947 | adj_rejoins=4,783 | elapsed=54s | HEARTBEAT
+[2026-06-10 19:13 PT] PASS-A | 44,160/328,624 pages | lbh_so_far=198,810 | adj_rejoins=5,494 | elapsed=69s | HEARTBEAT
+[2026-06-10 19:14 PT] PASS-A | 50,000/328,624 pages | lbh_so_far=227,072 | adj_rejoins=5,979 | elapsed=80s | HEARTBEAT
+[2026-06-10 19:14 PT] PASS-A | 59,087/328,624 pages | lbh_so_far=268,342 | adj_rejoins=6,765 | elapsed=95s | HEARTBEAT
+[2026-06-10 19:14 PT] PASS-A | 68,037/328,624 pages | lbh_so_far=310,051 | adj_rejoins=7,413 | elapsed=110s | HEARTBEAT
+[2026-06-10 19:14 PT] PASS-A | 75,000/328,624 pages | lbh_so_far=341,982 | adj_rejoins=7,954 | elapsed=121s | HEARTBEAT
+[2026-06-10 19:14 PT] PASS-A | 84,639/328,624 pages | lbh_so_far=394,290 | adj_rejoins=8,621 | elapsed=136s | HEARTBEAT
+[2026-06-10 19:15 PT] PASS-A | 94,712/328,624 pages | lbh_so_far=453,728 | adj_rejoins=9,129 | elapsed=151s | HEARTBEAT
+[2026-06-10 19:15 PT] PASS-A | 100,000/328,624 pages | lbh_so_far=484,101 | adj_rejoins=9,419 | elapsed=159s | HEARTBEAT
+[2026-06-10 19:15 PT] PASS-A | 111,304/328,624 pages | lbh_so_far=554,198 | adj_rejoins=9,938 | elapsed=174s | HEARTBEAT
+[2026-06-10 19:15 PT] PASS-A | 122,142/328,624 pages | lbh_so_far=628,790 | adj_rejoins=10,354 | elapsed=189s | HEARTBEAT
+[2026-06-10 19:15 PT] PASS-A | 125,000/328,624 pages | lbh_so_far=648,446 | adj_rejoins=10,471 | elapsed=192s | HEARTBEAT
+[2026-06-10 19:16 PT] PASS-A | 135,276/328,624 pages | lbh_so_far=715,565 | adj_rejoins=10,940 | elapsed=207s | HEARTBEAT
+[2026-06-10 19:16 PT] PASS-A | 146,216/328,624 pages | lbh_so_far=720,605 | adj_rejoins=11,102 | elapsed=222s | HEARTBEAT
+[2026-06-10 19:16 PT] PASS-A | 150,000/328,624 pages | lbh_so_far=721,913 | adj_rejoins=11,139 | elapsed=227s | HEARTBEAT
+[2026-06-10 19:16 PT] PASS-A | 160,768/328,624 pages | lbh_so_far=725,481 | adj_rejoins=11,327 | elapsed=242s | HEARTBEAT
+[2026-06-10 19:16 PT] PASS-A | 171,099/328,624 pages | lbh_so_far=729,721 | adj_rejoins=11,492 | elapsed=257s | HEARTBEAT
+[2026-06-10 19:17 PT] PASS-A | 175,000/328,624 pages | lbh_so_far=732,172 | adj_rejoins=11,595 | elapsed=263s | HEARTBEAT
+[2026-06-10 19:17 PT] PASS-A | 185,913/328,624 pages | lbh_so_far=739,537 | adj_rejoins=12,056 | elapsed=278s | HEARTBEAT
+[2026-06-10 19:17 PT] PASS-A | 196,508/328,624 pages | lbh_so_far=747,128 | adj_rejoins=12,411 | elapsed=293s | HEARTBEAT
+[2026-06-10 19:17 PT] PASS-A | 200,000/328,624 pages | lbh_so_far=748,816 | adj_rejoins=12,420 | elapsed=297s | HEARTBEAT
+[2026-06-10 19:17 PT] PASS-A | 211,227/328,624 pages | lbh_so_far=760,261 | adj_rejoins=12,865 | elapsed=312s | HEARTBEAT
+[2026-06-10 19:18 PT] PASS-A | 222,333/328,624 pages | lbh_so_far=771,115 | adj_rejoins=13,264 | elapsed=327s | HEARTBEAT
+[2026-06-10 19:18 PT] PASS-A | 225,000/328,624 pages | lbh_so_far=771,239 | adj_rejoins=13,277 | elapsed=331s | HEARTBEAT
+[2026-06-10 19:18 PT] PASS-A | 236,205/328,624 pages | lbh_so_far=783,232 | adj_rejoins=13,724 | elapsed=346s | HEARTBEAT
+[2026-06-10 19:18 PT] PASS-A | 247,439/328,624 pages | lbh_so_far=789,612 | adj_rejoins=14,099 | elapsed=361s | HEARTBEAT
+[2026-06-10 19:18 PT] PASS-A | 250,000/328,624 pages | lbh_so_far=789,747 | adj_rejoins=14,103 | elapsed=364s | HEARTBEAT
+[2026-06-10 19:19 PT] PASS-A | 260,261/328,624 pages | lbh_so_far=803,204 | adj_rejoins=14,545 | elapsed=379s | HEARTBEAT
+[2026-06-10 19:19 PT] PASS-A | 271,351/328,624 pages | lbh_so_far=813,115 | adj_rejoins=14,772 | elapsed=394s | HEARTBEAT
+[2026-06-10 19:19 PT] PASS-A | 275,000/328,624 pages | lbh_so_far=813,280 | adj_rejoins=14,776 | elapsed=399s | HEARTBEAT
+[2026-06-10 19:19 PT] PASS-A | 285,947/328,624 pages | lbh_so_far=822,605 | adj_rejoins=15,037 | elapsed=414s | HEARTBEAT
+[2026-06-10 19:19 PT] PASS-A | 298,522/328,624 pages | lbh_so_far=830,325 | adj_rejoins=15,300 | elapsed=429s | HEARTBEAT
+[2026-06-10 19:19 PT] PASS-A | 300,000/328,624 pages | lbh_so_far=831,548 | adj_rejoins=15,304 | elapsed=431s | HEARTBEAT
+[2026-06-10 19:20 PT] PASS-A | 312,707/328,624 pages | lbh_so_far=844,518 | adj_rejoins=15,833 | elapsed=446s | HEARTBEAT
+[2026-06-10 19:20 PT] PASS-A | 325,000/328,624 pages | lbh_so_far=852,264 | adj_rejoins=16,076 | elapsed=461s | HEARTBEAT
+[2026-06-10 19:20 PT] PASS-A | lbh_ops=853,625  adj_ops=16,100  bad_occ=1,373,197  pct=1.0374%  recovered=230,666 | OK
+[2026-06-10 19:20 PT] PASS-B | bad_types_total=485,545  freq>=2=99,459  singletons_skipped=386,086(386,086 occ) | OK
+[2026-06-10 19:20 PT] PASS-B | 20,000/99,459 types | splittable_so_far=13,969 | elapsed=0s | rate=74042/s | HEARTBEAT
+[2026-06-10 19:20 PT] PASS-B | 40,000/99,459 types | splittable_so_far=28,466 | elapsed=0s | rate=84274/s | HEARTBEAT
+[2026-06-10 19:20 PT] PASS-B | 60,000/99,459 types | splittable_so_far=43,339 | elapsed=1s | rate=65430/s | HEARTBEAT
+[2026-06-10 19:20 PT] PASS-B | 80,000/99,459 types | splittable_so_far=58,356 | elapsed=1s | rate=65273/s | HEARTBEAT
+[2026-06-10 19:20 PT] PASS-B | DP done: 73,286 splittable types  elapsed=1.9s | OK
+[2026-06-10 19:20 PT] PASS-B | demerge_ops_occ=709,155  splittable_types=73,286  bad_occ=664,042  pct=0.4985%  recovered=709,155 | OK
+[2026-06-10 19:20 PT] PASS-C | freq10_types=3,994  freq10_occ=205,364  starting spell-correct ... | OK
+[2026-06-10 19:21 PT] PASS-C | 388/3,994 types | corrections_so_far=384 | elapsed=15s | rate=26/s | HEARTBEAT
+[2026-06-10 19:21 PT] PASS-C | 719/3,994 types | corrections_so_far=708 | elapsed=30s | rate=24/s | HEARTBEAT
+[2026-06-10 19:21 PT] PASS-C | 1,198/3,994 types | corrections_so_far=1,181 | elapsed=45s | rate=26/s | HEARTBEAT
+[2026-06-10 19:21 PT] PASS-C | 1,579/3,994 types | corrections_so_far=1,553 | elapsed=61s | rate=26/s | HEARTBEAT
+[2026-06-10 19:22 PT] PASS-C | 1,979/3,994 types | corrections_so_far=1,944 | elapsed=76s | rate=26/s | HEARTBEAT
+[2026-06-10 19:22 PT] PASS-C | 2,000/3,994 types | corrections_so_far=1,965 | elapsed=77s | rate=26/s | HEARTBEAT
+[2026-06-10 19:22 PT] PASS-C | 2,270/3,994 types | corrections_so_far=2,231 | elapsed=93s | rate=25/s | HEARTBEAT
+[2026-06-10 19:22 PT] PASS-C | 2,521/3,994 types | corrections_so_far=2,479 | elapsed=108s | rate=23/s | HEARTBEAT
+[2026-06-10 19:22 PT] PASS-C | 2,776/3,994 types | corrections_so_far=2,730 | elapsed=123s | rate=23/s | HEARTBEAT
+[2026-06-10 19:23 PT] PASS-C | 2,999/3,994 types | corrections_so_far=2,949 | elapsed=138s | rate=22/s | HEARTBEAT
+[2026-06-10 19:23 PT] PASS-C | 3,354/3,994 types | corrections_so_far=3,300 | elapsed=153s | rate=22/s | HEARTBEAT
+[2026-06-10 19:23 PT] PASS-C | 3,607/3,994 types | corrections_so_far=3,547 | elapsed=169s | rate=21/s | HEARTBEAT
+[2026-06-10 19:23 PT] PASS-C | 3,722/3,994 types | corrections_so_far=3,656 | elapsed=184s | rate=20/s | HEARTBEAT
+[2026-06-10 19:24 PT] PASS-C | 3,755/3,994 types | corrections_so_far=3,677 | elapsed=200s | rate=19/s | HEARTBEAT
+[2026-06-10 19:24 PT] PASS-C | 3,783/3,994 types | corrections_so_far=3,697 | elapsed=216s | rate=18/s | HEARTBEAT
+[2026-06-10 19:24 PT] PASS-C | 3,882/3,994 types | corrections_so_far=3,784 | elapsed=231s | rate=17/s | HEARTBEAT
+[2026-06-10 19:24 PT] PASS-C | 3,977/3,994 types | corrections_so_far=3,865 | elapsed=246s | rate=16/s | HEARTBEAT
+[2026-06-10 19:25 PT] PASS-C | corrections=3,876  corrected_occ=202,562  bad_occ=461,480  pct=0.3464%  recovered=202,562 | OK
+[2026-06-10 19:25 PT] SUMMARY | baseline=1,603,863  after_A=1,373,197(recovered=230,666)  after_B=664,042(recovered=709,155)  after_C=461,480(recovered=202,562)  true_residual_pct=0.3464%  residual_types=408,383 | OK
+[2026-06-10 19:25 PT] DONE | wall_time=839s  true_residual_pct=0.3464%  residual_types=408,383  residual_occ=461,480 | OK
+[2026-06-10 19:33 PT] START | correction_passes.py v3  TIGHTENED-PassB  CUDA_VISIBLE_DEVICES=''  CPU-only  heartbeat+bounded-PassB | OK
+[2026-06-10 19:33 PT] DICT | Building union dictionary ... | OK
+[2026-06-10 19:33 PT] DICT | ready  static=160,578  wordfreq=True | OK
+[2026-06-10 19:33 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 19:33 PT] LOAD | Loading 205 JSON files ... | OK
+[2026-06-10 19:33 PT] LOAD | 50/205 files | pages=54,083 | elapsed=2s | HEARTBEAT
+[2026-06-10 19:33 PT] LOAD | 100/205 files | pages=138,421 | elapsed=5s | HEARTBEAT
+[2026-06-10 19:33 PT] LOAD | 150/205 files | pages=226,596 | elapsed=8s | HEARTBEAT
+[2026-06-10 19:33 PT] LOAD | 200/205 files | pages=319,070 | elapsed=12s | HEARTBEAT
+[2026-06-10 19:33 PT] LOAD | pages=328,624  files=205  t=13s | OK
+[2026-06-10 19:33 PT] BASELINE | Tokenising corpus (with hyphen expansion) ... | OK
+[2026-06-10 19:34 PT] BASELINE | 25,000/328,624 pages | unique_so_far=191,261 | elapsed=7s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 50,000/328,624 pages | unique_so_far=297,372 | elapsed=14s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 75,000/328,624 pages | unique_so_far=371,824 | elapsed=20s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 100,000/328,624 pages | unique_so_far=420,324 | elapsed=26s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 125,000/328,624 pages | unique_so_far=441,605 | elapsed=32s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 150,000/328,624 pages | unique_so_far=462,773 | elapsed=38s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 175,000/328,624 pages | unique_so_far=481,060 | elapsed=43s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 200,000/328,624 pages | unique_so_far=499,883 | elapsed=49s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 225,000/328,624 pages | unique_so_far=517,790 | elapsed=55s | HEARTBEAT
+[2026-06-10 19:34 PT] BASELINE | 250,000/328,624 pages | unique_so_far=532,811 | elapsed=61s | HEARTBEAT
+[2026-06-10 19:35 PT] BASELINE | 275,000/328,624 pages | unique_so_far=551,376 | elapsed=67s | HEARTBEAT
+[2026-06-10 19:35 PT] BASELINE | 300,000/328,624 pages | unique_so_far=562,696 | elapsed=73s | HEARTBEAT
+[2026-06-10 19:35 PT] BASELINE | 325,000/328,624 pages | unique_so_far=571,903 | elapsed=79s | HEARTBEAT
+[2026-06-10 19:35 PT] BASELINE | total=134,105,434  unique=572,703  bad_types=470,640  bad_occ=1,603,863  pct=1.1960% | OK
+[2026-06-10 19:35 PT] PASS-A | Starting dehyphenation + adjacent-pair rejoin over 328,624 pages ... | OK
+[2026-06-10 19:35 PT] PASS-A | 8,138/328,624 pages | lbh_so_far=37,159 | adj_rejoins=1,268 | elapsed=15s | HEARTBEAT
+[2026-06-10 19:35 PT] PASS-A | 17,602/328,624 pages | lbh_so_far=78,467 | adj_rejoins=2,797 | elapsed=30s | HEARTBEAT
+[2026-06-10 19:36 PT] PASS-A | 25,000/328,624 pages | lbh_so_far=110,031 | adj_rejoins=3,723 | elapsed=42s | HEARTBEAT
+[2026-06-10 19:36 PT] PASS-A | 34,534/328,624 pages | lbh_so_far=152,874 | adj_rejoins=4,782 | elapsed=57s | HEARTBEAT
+[2026-06-10 19:36 PT] PASS-A | 44,523/328,624 pages | lbh_so_far=200,552 | adj_rejoins=5,505 | elapsed=72s | HEARTBEAT
+[2026-06-10 19:36 PT] PASS-A | 50,000/328,624 pages | lbh_so_far=227,072 | adj_rejoins=5,979 | elapsed=80s | HEARTBEAT
+[2026-06-10 19:36 PT] PASS-A | 60,124/328,624 pages | lbh_so_far=273,099 | adj_rejoins=6,849 | elapsed=95s | HEARTBEAT
+[2026-06-10 19:37 PT] PASS-A | 70,233/328,624 pages | lbh_so_far=319,838 | adj_rejoins=7,593 | elapsed=110s | HEARTBEAT
+[2026-06-10 19:37 PT] PASS-A | 75,000/328,624 pages | lbh_so_far=341,982 | adj_rejoins=7,954 | elapsed=117s | HEARTBEAT
+[2026-06-10 19:37 PT] PASS-A | 85,907/328,624 pages | lbh_so_far=401,325 | adj_rejoins=8,688 | elapsed=132s | HEARTBEAT
+[2026-06-10 19:37 PT] PASS-A | 96,725/328,624 pages | lbh_so_far=464,639 | adj_rejoins=9,261 | elapsed=147s | HEARTBEAT
+[2026-06-10 19:37 PT] PASS-A | 100,000/328,624 pages | lbh_so_far=484,101 | adj_rejoins=9,419 | elapsed=152s | HEARTBEAT
+[2026-06-10 19:38 PT] PASS-A | 110,915/328,624 pages | lbh_so_far=551,618 | adj_rejoins=9,919 | elapsed=167s | HEARTBEAT
+[2026-06-10 19:38 PT] PASS-A | 122,281/328,624 pages | lbh_so_far=629,810 | adj_rejoins=10,355 | elapsed=182s | HEARTBEAT
+[2026-06-10 19:38 PT] PASS-A | 125,000/328,624 pages | lbh_so_far=648,446 | adj_rejoins=10,471 | elapsed=186s | HEARTBEAT
+[2026-06-10 19:38 PT] PASS-A | 135,675/328,624 pages | lbh_so_far=716,787 | adj_rejoins=10,945 | elapsed=201s | HEARTBEAT
+[2026-06-10 19:38 PT] PASS-A | 147,021/328,624 pages | lbh_so_far=720,767 | adj_rejoins=11,104 | elapsed=216s | HEARTBEAT
+[2026-06-10 19:39 PT] PASS-A | 150,000/328,624 pages | lbh_so_far=721,913 | adj_rejoins=11,139 | elapsed=220s | HEARTBEAT
+[2026-06-10 19:39 PT] PASS-A | 161,250/328,624 pages | lbh_so_far=725,537 | adj_rejoins=11,340 | elapsed=235s | HEARTBEAT
+[2026-06-10 19:39 PT] PASS-A | 172,252/328,624 pages | lbh_so_far=729,893 | adj_rejoins=11,494 | elapsed=250s | HEARTBEAT
+[2026-06-10 19:39 PT] PASS-A | 175,000/328,624 pages | lbh_so_far=732,172 | adj_rejoins=11,595 | elapsed=253s | HEARTBEAT
+[2026-06-10 19:39 PT] PASS-A | 186,041/328,624 pages | lbh_so_far=739,537 | adj_rejoins=12,057 | elapsed=268s | HEARTBEAT
+[2026-06-10 19:40 PT] PASS-A | 197,626/328,624 pages | lbh_so_far=747,522 | adj_rejoins=12,414 | elapsed=283s | HEARTBEAT
+[2026-06-10 19:40 PT] PASS-A | 200,000/328,624 pages | lbh_so_far=748,816 | adj_rejoins=12,420 | elapsed=286s | HEARTBEAT
+[2026-06-10 19:40 PT] PASS-A | 211,782/328,624 pages | lbh_so_far=760,277 | adj_rejoins=12,870 | elapsed=301s | HEARTBEAT
+[2026-06-10 19:40 PT] PASS-A | 222,768/328,624 pages | lbh_so_far=771,124 | adj_rejoins=13,264 | elapsed=316s | HEARTBEAT
+[2026-06-10 19:40 PT] PASS-A | 225,000/328,624 pages | lbh_so_far=771,239 | adj_rejoins=13,277 | elapsed=320s | HEARTBEAT
+[2026-06-10 19:40 PT] PASS-A | 236,409/328,624 pages | lbh_so_far=784,687 | adj_rejoins=13,794 | elapsed=335s | HEARTBEAT
+[2026-06-10 19:41 PT] PASS-A | 247,845/328,624 pages | lbh_so_far=789,632 | adj_rejoins=14,100 | elapsed=350s | HEARTBEAT
+[2026-06-10 19:41 PT] PASS-A | 250,000/328,624 pages | lbh_so_far=789,747 | adj_rejoins=14,103 | elapsed=352s | HEARTBEAT
+[2026-06-10 19:41 PT] PASS-A | 260,823/328,624 pages | lbh_so_far=803,204 | adj_rejoins=14,545 | elapsed=367s | HEARTBEAT
+[2026-06-10 19:41 PT] PASS-A | 271,827/328,624 pages | lbh_so_far=813,115 | adj_rejoins=14,772 | elapsed=382s | HEARTBEAT
+[2026-06-10 19:41 PT] PASS-A | 275,000/328,624 pages | lbh_so_far=813,280 | adj_rejoins=14,776 | elapsed=387s | HEARTBEAT
+[2026-06-10 19:42 PT] PASS-A | 285,481/328,624 pages | lbh_so_far=822,604 | adj_rejoins=15,037 | elapsed=402s | HEARTBEAT
+[2026-06-10 19:42 PT] PASS-A | 296,731/328,624 pages | lbh_so_far=830,023 | adj_rejoins=15,297 | elapsed=417s | HEARTBEAT
+[2026-06-10 19:42 PT] PASS-A | 300,000/328,624 pages | lbh_so_far=831,548 | adj_rejoins=15,304 | elapsed=422s | HEARTBEAT
+[2026-06-10 19:42 PT] PASS-A | 311,469/328,624 pages | lbh_so_far=844,510 | adj_rejoins=15,833 | elapsed=437s | HEARTBEAT
+[2026-06-10 19:42 PT] PASS-A | 322,915/328,624 pages | lbh_so_far=852,257 | adj_rejoins=16,075 | elapsed=452s | HEARTBEAT
+[2026-06-10 19:42 PT] PASS-A | 325,000/328,624 pages | lbh_so_far=852,264 | adj_rejoins=16,076 | elapsed=454s | HEARTBEAT
+[2026-06-10 19:43 PT] PASS-A | lbh_ops=853,625  adj_ops=16,100  bad_occ=1,373,197  pct=1.0374%  recovered=230,666 | OK
+[2026-06-10 19:43 PT] PASS-B | bad_types_total=485,545  freq>=2=99,459  singletons_skipped=386,086(386,086 occ) | OK
+[2026-06-10 19:43 PT] PASS-B | Gate 1=garble(edit1), Gate 2=piece-plausibility(>=4 or stopword), Gate 3=unique-segmentation -- starting DP ... | OK
+[2026-06-10 19:43 PT] PASS-B | 157/99,459 types | splittable_so_far=9 | gate1_garble_skipped=143 | gate3_ambig_skipped=1 | elapsed=15s | rate=10/s | HEARTBEAT
+[2026-06-10 19:43 PT] PASS-B | 249/99,459 types | splittable_so_far=15 | gate1_garble_skipped=219 | gate3_ambig_skipped=2 | elapsed=30s | rate=8/s | HEARTBEAT
+[2026-06-10 19:43 PT] PASS-B | 356/99,459 types | splittable_so_far=23 | gate1_garble_skipped=302 | gate3_ambig_skipped=2 | elapsed=45s | rate=8/s | HEARTBEAT
+[2026-06-10 19:44 PT] PASS-B | 567/99,459 types | splittable_so_far=26 | gate1_garble_skipped=500 | gate3_ambig_skipped=2 | elapsed=60s | rate=9/s | HEARTBEAT
+[2026-06-10 19:44 PT] PASS-B | 792/99,459 types | splittable_so_far=30 | gate1_garble_skipped=710 | gate3_ambig_skipped=4 | elapsed=76s | rate=10/s | HEARTBEAT
+[2026-06-10 19:44 PT] PASS-B | 969/99,459 types | splittable_so_far=35 | gate1_garble_skipped=874 | gate3_ambig_skipped=4 | elapsed=91s | rate=11/s | HEARTBEAT
+[2026-06-10 19:44 PT] PASS-B | 1,160/99,459 types | splittable_so_far=38 | gate1_garble_skipped=1,054 | gate3_ambig_skipped=5 | elapsed=106s | rate=11/s | HEARTBEAT
+[2026-06-10 19:45 PT] PASS-B | 1,320/99,459 types | splittable_so_far=40 | gate1_garble_skipped=1,194 | gate3_ambig_skipped=5 | elapsed=122s | rate=11/s | HEARTBEAT
+[2026-06-10 19:45 PT] PASS-B | 1,572/99,459 types | splittable_so_far=42 | gate1_garble_skipped=1,430 | gate3_ambig_skipped=5 | elapsed=137s | rate=11/s | HEARTBEAT
+[2026-06-10 19:45 PT] PASS-B | 1,750/99,459 types | splittable_so_far=46 | gate1_garble_skipped=1,588 | gate3_ambig_skipped=5 | elapsed=152s | rate=11/s | HEARTBEAT
+[2026-06-10 19:45 PT] PASS-B | 1,880/99,459 types | splittable_so_far=50 | gate1_garble_skipped=1,697 | gate3_ambig_skipped=6 | elapsed=167s | rate=11/s | HEARTBEAT
+[2026-06-10 19:46 PT] PASS-B | 1,949/99,459 types | splittable_so_far=57 | gate1_garble_skipped=1,747 | gate3_ambig_skipped=6 | elapsed=183s | rate=11/s | HEARTBEAT
+[2026-06-10 19:46 PT] PASS-B | 2,009/99,459 types | splittable_so_far=59 | gate1_garble_skipped=1,796 | gate3_ambig_skipped=7 | elapsed=199s | rate=10/s | HEARTBEAT
+[2026-06-10 19:46 PT] PASS-B | 2,122/99,459 types | splittable_so_far=62 | gate1_garble_skipped=1,891 | gate3_ambig_skipped=7 | elapsed=214s | rate=10/s | HEARTBEAT
+[2026-06-10 19:47 PT] PASS-B | 2,239/99,459 types | splittable_so_far=64 | gate1_garble_skipped=1,990 | gate3_ambig_skipped=7 | elapsed=229s | rate=10/s | HEARTBEAT
+[2026-06-10 19:47 PT] PASS-B | 2,408/99,459 types | splittable_so_far=65 | gate1_garble_skipped=2,139 | gate3_ambig_skipped=7 | elapsed=244s | rate=10/s | HEARTBEAT
+[2026-06-10 19:47 PT] PASS-B | 2,570/99,459 types | splittable_so_far=65 | gate1_garble_skipped=2,298 | gate3_ambig_skipped=7 | elapsed=259s | rate=10/s | HEARTBEAT
+[2026-06-10 19:47 PT] PASS-B | 2,731/99,459 types | splittable_so_far=67 | gate1_garble_skipped=2,455 | gate3_ambig_skipped=7 | elapsed=275s | rate=10/s | HEARTBEAT
+[2026-06-10 19:48 PT] PASS-B | 2,869/99,459 types | splittable_so_far=76 | gate1_garble_skipped=2,572 | gate3_ambig_skipped=7 | elapsed=290s | rate=10/s | HEARTBEAT
+[2026-06-10 19:48 PT] PASS-B | 2,992/99,459 types | splittable_so_far=88 | gate1_garble_skipped=2,672 | gate3_ambig_skipped=7 | elapsed=306s | rate=10/s | HEARTBEAT
+[2026-06-10 19:48 PT] PASS-B | 3,142/99,459 types | splittable_so_far=90 | gate1_garble_skipped=2,808 | gate3_ambig_skipped=7 | elapsed=321s | rate=10/s | HEARTBEAT
+[2026-06-10 19:48 PT] PASS-B | 3,348/99,459 types | splittable_so_far=94 | gate1_garble_skipped=3,003 | gate3_ambig_skipped=8 | elapsed=337s | rate=10/s | HEARTBEAT
+[2026-06-10 19:49 PT] PASS-B | 3,619/99,459 types | splittable_so_far=95 | gate1_garble_skipped=3,265 | gate3_ambig_skipped=8 | elapsed=352s | rate=10/s | HEARTBEAT
+[2026-06-10 19:49 PT] PASS-B | 3,758/99,459 types | splittable_so_far=98 | gate1_garble_skipped=3,399 | gate3_ambig_skipped=8 | elapsed=367s | rate=10/s | HEARTBEAT
+[2026-06-10 19:49 PT] PASS-B | 3,890/99,459 types | splittable_so_far=98 | gate1_garble_skipped=3,522 | gate3_ambig_skipped=8 | elapsed=382s | rate=10/s | HEARTBEAT
+[2026-06-10 19:49 PT] PASS-B | 3,996/99,459 types | splittable_so_far=103 | gate1_garble_skipped=3,617 | gate3_ambig_skipped=8 | elapsed=397s | rate=10/s | HEARTBEAT
+[2026-06-10 19:50 PT] PASS-B | 4,096/99,459 types | splittable_so_far=104 | gate1_garble_skipped=3,709 | gate3_ambig_skipped=9 | elapsed=413s | rate=10/s | HEARTBEAT
+[2026-06-10 19:50 PT] PASS-B | 4,217/99,459 types | splittable_so_far=106 | gate1_garble_skipped=3,817 | gate3_ambig_skipped=9 | elapsed=428s | rate=10/s | HEARTBEAT
+[2026-06-10 19:50 PT] PASS-B | 4,345/99,459 types | splittable_so_far=106 | gate1_garble_skipped=3,935 | gate3_ambig_skipped=10 | elapsed=443s | rate=10/s | HEARTBEAT
+[2026-06-10 19:50 PT] PASS-B | 4,438/99,459 types | splittable_so_far=107 | gate1_garble_skipped=4,014 | gate3_ambig_skipped=11 | elapsed=458s | rate=10/s | HEARTBEAT
+[2026-06-10 19:51 PT] PASS-B | 4,554/99,459 types | splittable_so_far=109 | gate1_garble_skipped=4,125 | gate3_ambig_skipped=11 | elapsed=473s | rate=10/s | HEARTBEAT
+[2026-06-10 19:51 PT] PASS-B | 4,662/99,459 types | splittable_so_far=112 | gate1_garble_skipped=4,216 | gate3_ambig_skipped=11 | elapsed=488s | rate=10/s | HEARTBEAT
+[2026-06-10 19:51 PT] PASS-B | 4,789/99,459 types | splittable_so_far=114 | gate1_garble_skipped=4,329 | gate3_ambig_skipped=11 | elapsed=504s | rate=10/s | HEARTBEAT
+[2026-06-10 19:51 PT] PASS-B | 4,941/99,459 types | splittable_so_far=118 | gate1_garble_skipped=4,472 | gate3_ambig_skipped=11 | elapsed=519s | rate=10/s | HEARTBEAT
+[2026-06-10 19:52 PT] PASS-B | 5,100/99,459 types | splittable_so_far=119 | gate1_garble_skipped=4,622 | gate3_ambig_skipped=12 | elapsed=534s | rate=10/s | HEARTBEAT
+[2026-06-10 19:52 PT] PASS-B | 5,303/99,459 types | splittable_so_far=120 | gate1_garble_skipped=4,818 | gate3_ambig_skipped=12 | elapsed=549s | rate=10/s | HEARTBEAT
+[2026-06-10 19:52 PT] PASS-B | 5,431/99,459 types | splittable_so_far=121 | gate1_garble_skipped=4,941 | gate3_ambig_skipped=13 | elapsed=565s | rate=10/s | HEARTBEAT
+[2026-06-10 19:52 PT] PASS-B | 5,630/99,459 types | splittable_so_far=122 | gate1_garble_skipped=5,132 | gate3_ambig_skipped=13 | elapsed=580s | rate=10/s | HEARTBEAT
+[2026-06-10 19:53 PT] PASS-B | 5,766/99,459 types | splittable_so_far=123 | gate1_garble_skipped=5,263 | gate3_ambig_skipped=13 | elapsed=595s | rate=10/s | HEARTBEAT
+[2026-06-10 19:53 PT] PASS-B | 5,942/99,459 types | splittable_so_far=124 | gate1_garble_skipped=5,431 | gate3_ambig_skipped=13 | elapsed=611s | rate=10/s | HEARTBEAT
+[2026-06-10 19:53 PT] PASS-B | 6,113/99,459 types | splittable_so_far=125 | gate1_garble_skipped=5,596 | gate3_ambig_skipped=13 | elapsed=626s | rate=10/s | HEARTBEAT
+[2026-06-10 19:53 PT] PASS-B | 6,243/99,459 types | splittable_so_far=126 | gate1_garble_skipped=5,722 | gate3_ambig_skipped=13 | elapsed=641s | rate=10/s | HEARTBEAT
+[2026-06-10 19:54 PT] PASS-B | 6,403/99,459 types | splittable_so_far=126 | gate1_garble_skipped=5,876 | gate3_ambig_skipped=13 | elapsed=656s | rate=10/s | HEARTBEAT
+[2026-06-10 20:02 PT] START | correction_passes.py v5  PARALLEL-PassB(early-exit Gate1 + multiprocessing)  CUDA_VISIBLE_DEVICES=''  CPU-only  heartbeat+bounded-PassB | OK
+[2026-06-10 20:02 PT] DICT | Building union dictionary ... | OK
+[2026-06-10 20:02 PT] DICT | ready  static=327,947  wordfreq=True | OK
+[2026-06-10 20:02 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 20:02 PT] LOAD | Loading 205 JSON files ... | OK
+[2026-06-10 20:06 PT] START | correction_passes.py v5  PARALLEL-PassB(early-exit Gate1 + multiprocessing)  CUDA_VISIBLE_DEVICES=''  CPU-only  heartbeat+bounded-PassB | OK
+[2026-06-10 20:06 PT] DICT | Building union dictionary ... | OK
+[2026-06-10 20:06 PT] DICT | ready  static=327,947  wordfreq=True | OK
+[2026-06-10 20:06 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 20:06 PT] LOAD | Loading 205 JSON files ... | OK
+[2026-06-10 20:06 PT] LOAD | 50/205 files | pages=54,083 | elapsed=2s | HEARTBEAT
+[2026-06-10 20:06 PT] LOAD | 100/205 files | pages=138,421 | elapsed=4s | HEARTBEAT
+[2026-06-10 20:06 PT] LOAD | 150/205 files | pages=226,596 | elapsed=7s | HEARTBEAT
+[2026-06-10 20:06 PT] LOAD | 200/205 files | pages=319,070 | elapsed=10s | HEARTBEAT
+[2026-06-10 20:06 PT] LOAD | pages=328,624  files=205  t=11s | OK
+[2026-06-10 20:06 PT] BASELINE | Tokenising corpus (with hyphen expansion) ... | OK
+[2026-06-10 20:07 PT] BASELINE | 25,000/328,624 pages | unique_so_far=191,261 | elapsed=5s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 50,000/328,624 pages | unique_so_far=297,372 | elapsed=11s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 75,000/328,624 pages | unique_so_far=371,824 | elapsed=16s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 100,000/328,624 pages | unique_so_far=420,324 | elapsed=21s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 125,000/328,624 pages | unique_so_far=441,605 | elapsed=26s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 150,000/328,624 pages | unique_so_far=462,773 | elapsed=30s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 175,000/328,624 pages | unique_so_far=481,060 | elapsed=35s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 200,000/328,624 pages | unique_so_far=499,883 | elapsed=39s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 225,000/328,624 pages | unique_so_far=517,790 | elapsed=44s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 250,000/328,624 pages | unique_so_far=532,811 | elapsed=49s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 275,000/328,624 pages | unique_so_far=551,376 | elapsed=54s | HEARTBEAT
+[2026-06-10 20:07 PT] BASELINE | 300,000/328,624 pages | unique_so_far=562,696 | elapsed=59s | HEARTBEAT
+[2026-06-10 20:08 PT] BASELINE | 325,000/328,624 pages | unique_so_far=571,903 | elapsed=64s | HEARTBEAT
+[2026-06-10 20:08 PT] BASELINE | total=134,105,434  unique=572,703  bad_types=468,288  bad_occ=1,562,764  pct=1.1653% | OK
+[2026-06-10 20:08 PT] PASS-A | Starting dehyphenation + adjacent-pair rejoin over 328,624 pages ... | OK
+[2026-06-10 20:08 PT] PASS-A | 10,245/328,624 pages | lbh_so_far=46,921 | adj_rejoins=1,619 | elapsed=15s | HEARTBEAT
+[2026-06-10 20:08 PT] PASS-A | 21,355/328,624 pages | lbh_so_far=93,092 | adj_rejoins=3,178 | elapsed=30s | HEARTBEAT
+[2026-06-10 20:08 PT] PASS-A | 25,000/328,624 pages | lbh_so_far=110,031 | adj_rejoins=3,623 | elapsed=35s | HEARTBEAT
+[2026-06-10 20:08 PT] PASS-A | 35,710/328,624 pages | lbh_so_far=158,418 | adj_rejoins=4,754 | elapsed=50s | HEARTBEAT
+[2026-06-10 20:09 PT] PASS-A | 46,961/328,624 pages | lbh_so_far=212,560 | adj_rejoins=5,540 | elapsed=65s | HEARTBEAT
+[2026-06-10 20:09 PT] PASS-A | 50,000/328,624 pages | lbh_so_far=227,072 | adj_rejoins=5,810 | elapsed=70s | HEARTBEAT
+[2026-06-10 20:09 PT] PASS-A | 61,404/328,624 pages | lbh_so_far=279,273 | adj_rejoins=6,730 | elapsed=85s | HEARTBEAT
+[2026-06-10 20:09 PT] PASS-A | 72,684/328,624 pages | lbh_so_far=330,963 | adj_rejoins=7,558 | elapsed=100s | HEARTBEAT
+[2026-06-10 20:09 PT] PASS-A | 75,000/328,624 pages | lbh_so_far=341,982 | adj_rejoins=7,734 | elapsed=103s | HEARTBEAT
+[2026-06-10 20:10 PT] PASS-A | 86,543/328,624 pages | lbh_so_far=404,992 | adj_rejoins=8,452 | elapsed=118s | HEARTBEAT
+[2026-06-10 20:10 PT] PASS-A | 99,209/328,624 pages | lbh_so_far=479,986 | adj_rejoins=9,086 | elapsed=133s | HEARTBEAT
+[2026-06-10 20:10 PT] PASS-A | 100,000/328,624 pages | lbh_so_far=484,101 | adj_rejoins=9,117 | elapsed=134s | HEARTBEAT
+[2026-06-10 20:10 PT] PASS-A | 113,516/328,624 pages | lbh_so_far=568,952 | adj_rejoins=9,680 | elapsed=149s | HEARTBEAT
+[2026-06-10 20:10 PT] PASS-A | 125,000/328,624 pages | lbh_so_far=648,446 | adj_rejoins=10,098 | elapsed=161s | HEARTBEAT
+[2026-06-10 20:11 PT] PASS-A | 137,904/328,624 pages | lbh_so_far=718,341 | adj_rejoins=10,580 | elapsed=176s | HEARTBEAT
+[2026-06-10 20:11 PT] PASS-A | 150,000/328,624 pages | lbh_so_far=721,913 | adj_rejoins=10,740 | elapsed=190s | HEARTBEAT
+[2026-06-10 20:11 PT] PASS-A | 163,870/328,624 pages | lbh_so_far=727,378 | adj_rejoins=10,992 | elapsed=205s | HEARTBEAT
+[2026-06-10 20:11 PT] PASS-A | 175,000/328,624 pages | lbh_so_far=732,172 | adj_rejoins=11,165 | elapsed=217s | HEARTBEAT
+[2026-06-10 20:11 PT] PASS-A | 187,917/328,624 pages | lbh_so_far=739,809 | adj_rejoins=11,665 | elapsed=232s | HEARTBEAT
+[2026-06-10 20:12 PT] PASS-A | 200,000/328,624 pages | lbh_so_far=748,816 | adj_rejoins=11,956 | elapsed=246s | HEARTBEAT
+[2026-06-10 20:12 PT] PASS-A | 212,748/328,624 pages | lbh_so_far=760,469 | adj_rejoins=12,389 | elapsed=261s | HEARTBEAT
+[2026-06-10 20:12 PT] PASS-A | 225,000/328,624 pages | lbh_so_far=771,239 | adj_rejoins=12,758 | elapsed=275s | HEARTBEAT
+[2026-06-10 20:12 PT] PASS-A | 238,313/328,624 pages | lbh_so_far=784,825 | adj_rejoins=13,245 | elapsed=290s | HEARTBEAT
+[2026-06-10 20:13 PT] PASS-A | 250,000/328,624 pages | lbh_so_far=789,747 | adj_rejoins=13,519 | elapsed=303s | HEARTBEAT
+[2026-06-10 20:13 PT] PASS-A | 264,226/328,624 pages | lbh_so_far=803,445 | adj_rejoins=13,926 | elapsed=318s | HEARTBEAT
+[2026-06-10 20:13 PT] PASS-A | 275,000/328,624 pages | lbh_so_far=813,280 | adj_rejoins=14,124 | elapsed=330s | HEARTBEAT
+[2026-06-10 20:13 PT] PASS-A | 288,532/328,624 pages | lbh_so_far=825,020 | adj_rejoins=14,369 | elapsed=345s | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-A | 300,000/328,624 pages | lbh_so_far=831,548 | adj_rejoins=14,603 | elapsed=357s | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-A | 314,030/328,624 pages | lbh_so_far=844,521 | adj_rejoins=15,071 | elapsed=372s | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-A | 325,000/328,624 pages | lbh_so_far=852,264 | adj_rejoins=15,294 | elapsed=384s | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-A | lbh_ops=853,625  adj_ops=15,316  bad_occ=1,346,308  pct=1.0171%  recovered=216,456 | OK
+[2026-06-10 20:14 PT] PASS-B | bad_types_total=483,268  freq>=2=98,137  singletons_skipped=385,131(385,131 occ) | OK
+[2026-06-10 20:14 PT] PASS-B | Gate 1=garble(edit1), Gate 2=piece-plausibility(>=4 or stopword), Gate 3=unique-segmentation -- starting DP ... | OK
+[2026-06-10 20:14 PT] PASS-B | Parallel de-merge: 98,137 types across 12 workers (each builds dict once) ... | OK
+[2026-06-10 20:14 PT] PASS-B | 20,000/98,137 types | splittable_so_far=1,328 | gate1_garble_skipped=2,638 | gate3_ambig_skipped=238 | elapsed=1s | rate=18559/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-B | 40,000/98,137 types | splittable_so_far=3,268 | gate1_garble_skipped=5,162 | gate3_ambig_skipped=570 | elapsed=1s | rate=35771/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-B | 60,000/98,137 types | splittable_so_far=4,547 | gate1_garble_skipped=7,927 | gate3_ambig_skipped=923 | elapsed=1s | rate=51957/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-B | 80,000/98,137 types | splittable_so_far=5,980 | gate1_garble_skipped=10,800 | gate3_ambig_skipped=1,275 | elapsed=1s | rate=63614/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:14 PT] PASS-B | GATE SUMMARY (parallel): total_bad_types=98,137 | accepted_splits=8,798 | gate1_garble_blocked=12,827 | gate3_ambig_blocked=1,733 | workers=12 | elapsed=1.4s | OK
+[2026-06-10 20:14 PT] PASS-B | DP done: 8,798 splittable types  elapsed=1.4s | OK
+[2026-06-10 20:14 PT] PASS-B | demerge_ops_occ=71,363  splittable_types=8,798  bad_occ=1,274,945  pct=0.9626%  recovered=71,363 | OK
+[2026-06-10 20:14 PT] PASS-C | freq10_types=14,015  freq10_occ=638,087  starting spell-correct ... | OK
+[2026-06-10 20:15 PT] PASS-C | 328/14,015 types | corrections_so_far=320 | elapsed=15s | rate=22/s | HEARTBEAT
+[2026-06-10 20:15 PT] PASS-C | 702/14,015 types | corrections_so_far=677 | elapsed=30s | rate=23/s | HEARTBEAT
+[2026-06-10 20:15 PT] PASS-C | 1,055/14,015 types | corrections_so_far=1,009 | elapsed=46s | rate=23/s | HEARTBEAT
+[2026-06-10 20:15 PT] PASS-C | 1,406/14,015 types | corrections_so_far=1,352 | elapsed=61s | rate=23/s | HEARTBEAT
+[2026-06-10 20:16 PT] PASS-C | 1,844/14,015 types | corrections_so_far=1,785 | elapsed=76s | rate=24/s | HEARTBEAT
+[2026-06-10 20:16 PT] PASS-C | 2,000/14,015 types | corrections_so_far=1,938 | elapsed=82s | rate=24/s | HEARTBEAT
+[2026-06-10 20:16 PT] PASS-C | 2,409/14,015 types | corrections_so_far=2,341 | elapsed=98s | rate=25/s | HEARTBEAT
+[2026-06-10 20:16 PT] PASS-C | 2,869/14,015 types | corrections_so_far=2,796 | elapsed=113s | rate=25/s | HEARTBEAT
+[2026-06-10 20:17 PT] PASS-C | 3,367/14,015 types | corrections_so_far=3,285 | elapsed=128s | rate=26/s | HEARTBEAT
+[2026-06-10 20:17 PT] PASS-C | 3,773/14,015 types | corrections_so_far=3,684 | elapsed=143s | rate=26/s | HEARTBEAT
+[2026-06-10 20:17 PT] PASS-C | 4,000/14,015 types | corrections_so_far=3,893 | elapsed=157s | rate=26/s | HEARTBEAT
+[2026-06-10 20:17 PT] PASS-C | 4,395/14,015 types | corrections_so_far=4,278 | elapsed=172s | rate=26/s | HEARTBEAT
+[2026-06-10 20:18 PT] PASS-C | 4,884/14,015 types | corrections_so_far=4,757 | elapsed=187s | rate=26/s | HEARTBEAT
+[2026-06-10 20:18 PT] PASS-C | 5,356/14,015 types | corrections_so_far=5,213 | elapsed=202s | rate=27/s | HEARTBEAT
+[2026-06-10 20:18 PT] PASS-C | 5,670/14,015 types | corrections_so_far=5,515 | elapsed=217s | rate=26/s | HEARTBEAT
+[2026-06-10 20:18 PT] PASS-C | 6,000/14,015 types | corrections_so_far=5,836 | elapsed=231s | rate=26/s | HEARTBEAT
+[2026-06-10 20:19 PT] PASS-C | 6,279/14,015 types | corrections_so_far=6,109 | elapsed=246s | rate=26/s | HEARTBEAT
+[2026-06-10 20:19 PT] PASS-C | 6,608/14,015 types | corrections_so_far=6,430 | elapsed=261s | rate=25/s | HEARTBEAT
+[2026-06-10 20:19 PT] PASS-C | 6,856/14,015 types | corrections_so_far=6,671 | elapsed=276s | rate=25/s | HEARTBEAT
+[2026-06-10 20:19 PT] PASS-C | 7,159/14,015 types | corrections_so_far=6,961 | elapsed=292s | rate=25/s | HEARTBEAT
+[2026-06-10 20:20 PT] PASS-C | 7,368/14,015 types | corrections_so_far=7,164 | elapsed=307s | rate=24/s | HEARTBEAT
+[2026-06-10 20:20 PT] PASS-C | 7,634/14,015 types | corrections_so_far=7,425 | elapsed=322s | rate=24/s | HEARTBEAT
+[2026-06-10 20:20 PT] PASS-C | 7,894/14,015 types | corrections_so_far=7,678 | elapsed=337s | rate=23/s | HEARTBEAT
+[2026-06-10 20:20 PT] PASS-C | 8,000/14,015 types | corrections_so_far=7,784 | elapsed=340s | rate=24/s | HEARTBEAT
+[2026-06-10 20:20 PT] PASS-C | 8,251/14,015 types | corrections_so_far=8,025 | elapsed=355s | rate=23/s | HEARTBEAT
+[2026-06-10 20:21 PT] PASS-C | 8,673/14,015 types | corrections_so_far=8,444 | elapsed=370s | rate=23/s | HEARTBEAT
+[2026-06-10 20:21 PT] PASS-C | 8,976/14,015 types | corrections_so_far=8,742 | elapsed=386s | rate=23/s | HEARTBEAT
+[2026-06-10 20:21 PT] PASS-C | 9,398/14,015 types | corrections_so_far=9,154 | elapsed=401s | rate=23/s | HEARTBEAT
+[2026-06-10 20:21 PT] PASS-C | 9,673/14,015 types | corrections_so_far=9,425 | elapsed=417s | rate=23/s | HEARTBEAT
+[2026-06-10 20:22 PT] PASS-C | 9,949/14,015 types | corrections_so_far=9,693 | elapsed=432s | rate=23/s | HEARTBEAT
+[2026-06-10 20:22 PT] PASS-C | 10,000/14,015 types | corrections_so_far=9,744 | elapsed=436s | rate=23/s | HEARTBEAT
+[2026-06-10 20:22 PT] PASS-C | 10,254/14,015 types | corrections_so_far=9,992 | elapsed=451s | rate=23/s | HEARTBEAT
+[2026-06-10 20:22 PT] PASS-C | 10,514/14,015 types | corrections_so_far=10,249 | elapsed=466s | rate=23/s | HEARTBEAT
+[2026-06-10 20:22 PT] PASS-C | 10,733/14,015 types | corrections_so_far=10,461 | elapsed=482s | rate=22/s | HEARTBEAT
+[2026-06-10 20:23 PT] PASS-C | 10,916/14,015 types | corrections_so_far=10,637 | elapsed=497s | rate=22/s | HEARTBEAT
+[2026-06-10 20:23 PT] PASS-C | 11,228/14,015 types | corrections_so_far=10,938 | elapsed=513s | rate=22/s | HEARTBEAT
+[2026-06-10 20:23 PT] PASS-C | 11,440/14,015 types | corrections_so_far=11,140 | elapsed=528s | rate=22/s | HEARTBEAT
+[2026-06-10 20:23 PT] PASS-C | 11,765/14,015 types | corrections_so_far=11,457 | elapsed=543s | rate=22/s | HEARTBEAT
+[2026-06-10 20:24 PT] PASS-C | 12,000/14,015 types | corrections_so_far=11,686 | elapsed=557s | rate=22/s | HEARTBEAT
+[2026-06-10 20:24 PT] PASS-C | 12,201/14,015 types | corrections_so_far=11,880 | elapsed=572s | rate=21/s | HEARTBEAT
+[2026-06-10 20:24 PT] PASS-C | 12,370/14,015 types | corrections_so_far=12,041 | elapsed=587s | rate=21/s | HEARTBEAT
+[2026-06-10 20:24 PT] PASS-C | 12,500/14,015 types | corrections_so_far=12,162 | elapsed=602s | rate=21/s | HEARTBEAT
+[2026-06-10 20:25 PT] PASS-C | 12,624/14,015 types | corrections_so_far=12,280 | elapsed=617s | rate=20/s | HEARTBEAT
+[2026-06-10 20:25 PT] PASS-C | 12,758/14,015 types | corrections_so_far=12,403 | elapsed=632s | rate=20/s | HEARTBEAT
+[2026-06-10 20:25 PT] PASS-C | 12,844/14,015 types | corrections_so_far=12,476 | elapsed=648s | rate=20/s | HEARTBEAT
+[2026-06-10 20:25 PT] PASS-C | 12,922/14,015 types | corrections_so_far=12,542 | elapsed=663s | rate=19/s | HEARTBEAT
+[2026-06-10 20:26 PT] PASS-C | 13,004/14,015 types | corrections_so_far=12,610 | elapsed=678s | rate=19/s | HEARTBEAT
+[2026-06-10 20:26 PT] PASS-C | 13,026/14,015 types | corrections_so_far=12,611 | elapsed=694s | rate=19/s | HEARTBEAT
+[2026-06-10 20:26 PT] PASS-C | 13,091/14,015 types | corrections_so_far=12,655 | elapsed=709s | rate=18/s | HEARTBEAT
+[2026-06-10 20:27 PT] PASS-C | 13,144/14,015 types | corrections_so_far=12,696 | elapsed=724s | rate=18/s | HEARTBEAT
+[2026-06-10 20:27 PT] PASS-C | 13,186/14,015 types | corrections_so_far=12,729 | elapsed=740s | rate=18/s | HEARTBEAT
+[2026-06-10 20:27 PT] PASS-C | 13,250/14,015 types | corrections_so_far=12,771 | elapsed=755s | rate=18/s | HEARTBEAT
+[2026-06-10 20:27 PT] PASS-C | 13,283/14,015 types | corrections_so_far=12,791 | elapsed=770s | rate=17/s | HEARTBEAT
+[2026-06-10 20:28 PT] PASS-C | 13,327/14,015 types | corrections_so_far=12,820 | elapsed=786s | rate=17/s | HEARTBEAT
+[2026-06-10 20:28 PT] PASS-C | 13,386/14,015 types | corrections_so_far=12,865 | elapsed=802s | rate=17/s | HEARTBEAT
+[2026-06-10 20:28 PT] PASS-C | 13,450/14,015 types | corrections_so_far=12,921 | elapsed=817s | rate=16/s | HEARTBEAT
+[2026-06-10 20:28 PT] PASS-C | 13,508/14,015 types | corrections_so_far=12,965 | elapsed=833s | rate=16/s | HEARTBEAT
+[2026-06-10 20:29 PT] PASS-C | 13,562/14,015 types | corrections_so_far=13,006 | elapsed=848s | rate=16/s | HEARTBEAT
+[2026-06-10 20:29 PT] PASS-C | 13,616/14,015 types | corrections_so_far=13,049 | elapsed=863s | rate=16/s | HEARTBEAT
+[2026-06-10 20:29 PT] PASS-C | 13,667/14,015 types | corrections_so_far=13,089 | elapsed=878s | rate=16/s | HEARTBEAT
+[2026-06-10 20:29 PT] PASS-C | 13,719/14,015 types | corrections_so_far=13,125 | elapsed=895s | rate=15/s | HEARTBEAT
+[2026-06-10 20:30 PT] PASS-C | 13,786/14,015 types | corrections_so_far=13,181 | elapsed=910s | rate=15/s | HEARTBEAT
+[2026-06-10 20:30 PT] PASS-C | 13,831/14,015 types | corrections_so_far=13,209 | elapsed=925s | rate=15/s | HEARTBEAT
+[2026-06-10 20:30 PT] PASS-C | 13,891/14,015 types | corrections_so_far=13,251 | elapsed=940s | rate=15/s | HEARTBEAT
+[2026-06-10 20:30 PT] PASS-C | 13,954/14,015 types | corrections_so_far=13,297 | elapsed=955s | rate=15/s | HEARTBEAT
+[2026-06-10 20:31 PT] PASS-C | 14,000/14,015 types | corrections_so_far=13,329 | elapsed=968s | rate=14/s | HEARTBEAT
+[2026-06-10 20:31 PT] PASS-C | corrections=13,341  corrected_occ=606,814  bad_occ=668,131  pct=0.5045%  recovered=606,814 | OK
+[2026-06-10 20:31 PT] SUMMARY | baseline=1,562,764  after_A=1,346,308(recovered=216,456)  after_B=1,274,945(recovered=71,363)  after_C=668,131(recovered=606,814)  true_residual_pct=0.5045%  residual_types=461,129 | OK
+[2026-06-10 20:31 PT] DONE | wall_time=1468s  true_residual_pct=0.5045%  residual_types=461,129  residual_occ=668,131 | OK
+[2026-06-10 20:56 PT] START | correction_passes.py v7  FULLY-PARALLEL + SCORED(de-merge pieces is_common Zipf>=2.5; PassC corpus-freq dominance>=3.0; legal-supplement)  CPU-only | OK
+[2026-06-10 20:56 PT] DICT | Building union dictionary ... | OK
+[2026-06-10 20:56 PT] DICT | ready  static=327,994  wordfreq=True | OK
+[2026-06-10 20:56 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 20:56 PT] SCAN | Parallel scan of 205 files across 12 workers (baseline + Pass A in one read) ... | OK
+[2026-06-10 20:56 PT] SCAN | 20/205 files merged | baseline_unique=126,205 | elapsed=2s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 40/205 files merged | baseline_unique=209,442 | elapsed=6s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 60/205 files merged | baseline_unique=336,237 | elapsed=10s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 80/205 files merged | baseline_unique=415,451 | elapsed=13s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 100/205 files merged | baseline_unique=449,996 | elapsed=17s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 120/205 files merged | baseline_unique=480,166 | elapsed=20s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 140/205 files merged | baseline_unique=507,494 | elapsed=23s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 160/205 files merged | baseline_unique=529,611 | elapsed=27s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 180/205 files merged | baseline_unique=553,638 | elapsed=31s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 200/205 files merged | baseline_unique=569,110 | elapsed=34s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 205/205 files merged | baseline_unique=572,703 | elapsed=35s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | scan complete  files=205  t=35s | OK
+[2026-06-10 20:56 PT] BASELINE | total=134,105,434  unique=572,703  bad_types=468,246  bad_occ=1,534,893  pct=1.1445% | OK
+[2026-06-10 20:56 PT] PASS-A | lbh_ops=853,625  adj_ops=15,325  bad_occ=1,317,631  pct=0.9954%  recovered=217,262 | OK
+[2026-06-10 20:56 PT] PASS-B | bad_types_total=483,222  freq>=2=98,091  singletons_skipped=385,131(385,131 occ) | OK
+[2026-06-10 20:56 PT] PASS-B | Gate 1=garble(edit1), Gate 2=piece-plausibility(>=4 or stopword), Gate 3=unique-segmentation -- starting DP ... | OK
+[2026-06-10 20:56 PT] PASS-B | Parallel de-merge: 98,091 types across 12 workers (each builds dict once) ... | OK
+[2026-06-10 20:56 PT] PASS-B | 20,000/98,091 types | splittable_so_far=568 | gate1_garble_skipped=515 | gate3_ambig_skipped=16 | elapsed=1s | rate=23346/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | 40,000/98,091 types | splittable_so_far=1,316 | gate1_garble_skipped=1,016 | gate3_ambig_skipped=25 | elapsed=1s | rate=44683/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | 60,000/98,091 types | splittable_so_far=1,627 | gate1_garble_skipped=1,434 | gate3_ambig_skipped=41 | elapsed=1s | rate=65407/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | 80,000/98,091 types | splittable_so_far=2,099 | gate1_garble_skipped=1,917 | gate3_ambig_skipped=59 | elapsed=1s | rate=84896/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | GATE SUMMARY (parallel): total_bad_types=98,091 | accepted_splits=3,301 | gate1_garble_blocked=2,352 | gate3_ambig_blocked=85 | workers=12 | elapsed=1.0s | OK
+[2026-06-10 20:56 PT] PASS-B | DP done: 3,301 splittable types  elapsed=1.0s | OK
+[2026-06-10 20:57 PT] PASS-B | demerge_ops_occ=27,946  splittable_types=3,301  bad_occ=1,289,685  pct=0.9741%  recovered=27,946 | OK
+[2026-06-10 20:57 PT] PASS-C | freq10_types=14,598  freq10_occ=637,471  PARALLEL candidate-gen + corpus-freq scoring across 12 workers ... | OK
+[2026-06-10 20:57 PT] PASS-C | 2,000/14,598 types | accepted=1,622 | review=378 | elapsed=13s | rate=148/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:57 PT] PASS-C | 4,000/14,598 types | accepted=3,367 | review=633 | elapsed=22s | rate=182/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:57 PT] PASS-C | 6,000/14,598 types | accepted=5,130 | review=870 | elapsed=33s | rate=184/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:57 PT] PASS-C | 8,000/14,598 types | accepted=6,821 | review=1,179 | elapsed=44s | rate=182/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 10,000/14,598 types | accepted=8,556 | review=1,444 | elapsed=56s | rate=179/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 12,000/14,598 types | accepted=10,278 | review=1,722 | elapsed=66s | rate=182/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 12,801/14,598 types | accepted=10,951 | review=1,850 | elapsed=86s | rate=148/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 13,201/14,598 types | accepted=11,259 | review=1,942 | elapsed=102s | rate=130/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 13,401/14,598 types | accepted=11,390 | review=2,011 | elapsed=121s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 13,999/14,598 types | accepted=11,695 | review=2,304 | elapsed=137s | rate=102/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 14,000/14,598 types | accepted=11,695 | review=2,305 | elapsed=137s | rate=102/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 14,598/14,598 types | accepted=11,943 | review=2,655 | elapsed=140s | rate=104/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | review TSV: 2,655 ambiguous/rejected -> C:\Users\patolex\PatoLex-scratch\_vocab\passC_review.tsv | OK
+[2026-06-10 20:59 PT] PASS-C | corrections=11,943  corrected_occ=552,570  bad_occ=737,115  pct=0.5568%  recovered=552,570 | OK
+[2026-06-10 20:59 PT] SUMMARY | baseline=1,534,893  after_A=1,317,631(recovered=217,262)  after_B=1,289,685(recovered=27,946)  after_C=737,115(recovered=552,570)  true_residual_pct=0.5568%  residual_types=467,978 | OK
+[2026-06-10 20:59 PT] DONE | wall_time=208s  true_residual_pct=0.5568%  residual_types=467,978  residual_occ=737,115 | OK

@@ -1,0 +1,407 @@
+[2026-06-10 20:56 PT] START | correction_passes.py v7  FULLY-PARALLEL + SCORED(de-merge pieces is_common Zipf>=2.5; PassC corpus-freq dominance>=3.0; legal-supplement)  CPU-only | OK
+[2026-06-10 20:56 PT] DICT | Building union dictionary ... | OK
+[DICT] pyspellchecker: 160,572 words
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[2026-06-10 20:56 PT] DICT | ready  static=327,994  wordfreq=True | OK
+[2026-06-10 20:56 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 20:56 PT] SCAN | Parallel scan of 205 files across 12 workers (baseline + Pass A in one read) ... | OK
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[2026-06-10 20:56 PT] SCAN | 20/205 files merged | baseline_unique=126,205 | elapsed=2s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 40/205 files merged | baseline_unique=209,442 | elapsed=6s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 60/205 files merged | baseline_unique=336,237 | elapsed=10s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 80/205 files merged | baseline_unique=415,451 | elapsed=13s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 100/205 files merged | baseline_unique=449,996 | elapsed=17s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 120/205 files merged | baseline_unique=480,166 | elapsed=20s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 140/205 files merged | baseline_unique=507,494 | elapsed=23s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 160/205 files merged | baseline_unique=529,611 | elapsed=27s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 180/205 files merged | baseline_unique=553,638 | elapsed=31s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 200/205 files merged | baseline_unique=569,110 | elapsed=34s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | 205/205 files merged | baseline_unique=572,703 | elapsed=35s | HEARTBEAT
+[2026-06-10 20:56 PT] SCAN | scan complete  files=205  t=35s | OK
+[2026-06-10 20:56 PT] BASELINE | total=134,105,434  unique=572,703  bad_types=468,246  bad_occ=1,534,893  pct=1.1445% | OK
+[2026-06-10 20:56 PT] PASS-A | lbh_ops=853,625  adj_ops=15,325  bad_occ=1,317,631  pct=0.9954%  recovered=217,262 | OK
+[PASS-A] bad_occ_after=1,317,631  pct=0.9954%  recovered=217,262
+[PASS-A] Top 25 rejoined words (adj-pair):
+         district: 554
+         compensation: 380
+         property: 279
+         transportation: 261
+         commencing: 222
+         appropriation: 212
+         treasurer: 149
+         districts: 147
+         immediately: 143
+         legislature: 140
+         municipal: 135
+         education: 135
+         appropriated: 133
+         acquisition: 131
+         superintendent: 130
+         expenditure: 114
+         maintenance: 107
+         recreation: 107
+         legislative: 91
+         preliminary: 86
+         commissioners: 85
+         commissioner: 84
+         corporation: 83
+         appropriations: 80
+         proceedings: 77
+[PASS-A] Top 10 LBH rejoined words:
+         prov: 16,831
+         comm: 12,977
+         cont: 11,253
+         dist: 10,743
+         cons: 10,151
+         sect: 8,503
+         comp: 8,173
+         app: 8,170
+         departm: 7,193
+         calif: 5,855
+[2026-06-10 20:56 PT] PASS-B | bad_types_total=483,222  freq>=2=98,091  singletons_skipped=385,131(385,131 occ) | OK
+[2026-06-10 20:56 PT] PASS-B | Gate 1=garble(edit1), Gate 2=piece-plausibility(>=4 or stopword), Gate 3=unique-segmentation -- starting DP ... | OK
+[2026-06-10 20:56 PT] PASS-B | Parallel de-merge: 98,091 types across 12 workers (each builds dict once) ... | OK
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[2026-06-10 20:56 PT] PASS-B | 20,000/98,091 types | splittable_so_far=568 | gate1_garble_skipped=515 | gate3_ambig_skipped=16 | elapsed=1s | rate=23346/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | 40,000/98,091 types | splittable_so_far=1,316 | gate1_garble_skipped=1,016 | gate3_ambig_skipped=25 | elapsed=1s | rate=44683/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | 60,000/98,091 types | splittable_so_far=1,627 | gate1_garble_skipped=1,434 | gate3_ambig_skipped=41 | elapsed=1s | rate=65407/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | 80,000/98,091 types | splittable_so_far=2,099 | gate1_garble_skipped=1,917 | gate3_ambig_skipped=59 | elapsed=1s | rate=84896/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:56 PT] PASS-B | GATE SUMMARY (parallel): total_bad_types=98,091 | accepted_splits=3,301 | gate1_garble_blocked=2,352 | gate3_ambig_blocked=85 | workers=12 | elapsed=1.0s | OK
+[2026-06-10 20:56 PT] PASS-B | DP done: 3,301 splittable types  elapsed=1.0s | OK
+[2026-06-10 20:57 PT] PASS-B | demerge_ops_occ=27,946  splittable_types=3,301  bad_occ=1,289,685  pct=0.9741%  recovered=27,946 | OK
+[PASS-B] demerge_ops_occ=27,946  splittable_types=3,301  bad_occ_after=1,289,685  pct=0.9741%  recovered=27,946
+[PASS-B] Top 25 de-merged tokens (token -> pieces : occ):
+         'califorma' -> ['cali', 'forma'] : 1,654
+         'ratesetting' -> ['rate', 'setting'] : 289
+         'seventyfive' -> ['seventy', 'five'] : 285
+         'toamend' -> ['to', 'amend'] : 259
+         'ineffect' -> ['in', 'effect'] : 217
+         'informalities' -> ['in', 'formalities'] : 200
+         'multihandicapped' -> ['multi', 'handicapped'] : 200
+         'carryback' -> ['carry', 'back'] : 183
+         'stoplamps' -> ['stop', 'lamps'] : 178
+         'counteraffidavit' -> ['counter', 'affidavit'] : 174
+         'contractholder' -> ['contract', 'holder'] : 172
+         'lienholders' -> ['lien', 'holders'] : 157
+         'treatability' -> ['treat', 'ability'] : 140
+         'twenty-cight' -> ['twenty-c', 'ight'] : 136
+         'basinwide' -> ['basin', 'wide'] : 132
+         'repairperson' -> ['repair', 'person'] : 126
+         'thirtyfirst' -> ['thirty', 'first'] : 113
+         'trainwrecking' -> ['train', 'wrecking'] : 111
+         'fifty-cight' -> ['fifty-c', 'ight'] : 109
+         'semifireproof' -> ['semi', 'fireproof'] : 108
+         'homefinding' -> ['home', 'finding'] : 103
+         'inafter' -> ['in', 'after'] : 100
+         'sixty-cight' -> ['sixty-c', 'ight'] : 99
+         'patrolperson' -> ['patrol', 'person'] : 99
+         'postfilled' -> ['post', 'filled'] : 95
+[2026-06-10 20:57 PT] PASS-C | freq10_types=14,598  freq10_occ=637,471  PARALLEL candidate-gen + corpus-freq scoring across 12 workers ... | OK
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 327,994
+[2026-06-10 20:57 PT] PASS-C | 2,000/14,598 types | accepted=1,622 | review=378 | elapsed=13s | rate=148/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:57 PT] PASS-C | 4,000/14,598 types | accepted=3,367 | review=633 | elapsed=22s | rate=182/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:57 PT] PASS-C | 6,000/14,598 types | accepted=5,130 | review=870 | elapsed=33s | rate=184/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:57 PT] PASS-C | 8,000/14,598 types | accepted=6,821 | review=1,179 | elapsed=44s | rate=182/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 10,000/14,598 types | accepted=8,556 | review=1,444 | elapsed=56s | rate=179/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 12,000/14,598 types | accepted=10,278 | review=1,722 | elapsed=66s | rate=182/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 12,801/14,598 types | accepted=10,951 | review=1,850 | elapsed=86s | rate=148/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:58 PT] PASS-C | 13,201/14,598 types | accepted=11,259 | review=1,942 | elapsed=102s | rate=130/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 13,401/14,598 types | accepted=11,390 | review=2,011 | elapsed=121s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 13,999/14,598 types | accepted=11,695 | review=2,304 | elapsed=137s | rate=102/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 14,000/14,598 types | accepted=11,695 | review=2,305 | elapsed=137s | rate=102/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | 14,598/14,598 types | accepted=11,943 | review=2,655 | elapsed=140s | rate=104/s | PARALLEL | HEARTBEAT
+[2026-06-10 20:59 PT] PASS-C | review TSV: 2,655 ambiguous/rejected -> C:\Users\patolex\PatoLex-scratch\_vocab\passC_review.tsv | OK
+[2026-06-10 20:59 PT] PASS-C | corrections=11,943  corrected_occ=552,570  bad_occ=737,115  pct=0.5568%  recovered=552,570 | OK
+[PASS-C] Top 25 spell corrections (bad -> correction : freq):
+         'wuereas' -> 'whereas' : 11,537
+         'publie' -> 'public' : 5,881
+         'secrion' -> 'section' : 5,719
+         'sball' -> 'shall' : 4,065
+         'seetion' -> 'section' : 2,880
+         'statutorv' -> 'statutory' : 2,796
+         'sueh' -> 'such' : 2,310
+         'scction' -> 'section' : 2,199
+         'thercof' -> 'thereof' : 2,184
+         'clection' -> 'election' : 2,047
+         'szc' -> 'sec' : 2,001
+         'eounty' -> 'county' : 1,879
+         'cuap' -> 'chap' : 1,798
+         'strect' -> 'street' : 1,775
+         'jands' -> 'lands' : 1,720
+         'eredit' -> 'credit' : 1,668
+         'whieh' -> 'which' : 1,637
+         'eect' -> 'elect' : 1,625
+         'snch' -> 'such' : 1,595
+         'distriet' -> 'district' : 1,568
+         'fuled' -> 'filed' : 1,565
+         'appropria' -> 'appropriate' : 1,541
+         'elerk' -> 'clerk' : 1,518
+         'fiseal' -> 'fiscal' : 1,474
+         'gencral' -> 'general' : 1,394
+[PASS-C] freq>=10 with no correction: 2,655 types  (84,901 occ)
+[PASS-C] Top 20 uncorrectable freq>=10 tokens:
+         'lambra': 1,591
+         'cight': 1,576
+         'pubhe': 746
+         'cence': 738
+         'erty': 687
+         'cuar': 669
+         'superin': 464
+         'anvear': 430
+         'ereated': 420
+         'ducheny': 414
+         'appheation': 410
+         'karnette': 397
+         'escutia': 389
+         'xiiib': 387
+         'pensation': 346
+         'margett': 340
+         'aroner': 327
+         'schoolage': 318
+         'frusetta': 306
+         'sliag': 293
+
+[RESIDUAL] True residual breakdown:
+  singletons (freq=1): 385,131 types  385,131 occ
+  low-freq  (2-9):     80,192 types  267,083 occ
+  high-freq (>=10):    2,655 types  84,901 occ
+
+[RESIDUAL] Top 30 residual tokens by frequency:
+         'lambra': 1,591
+         'cight': 1,576
+         'pubhe': 746
+         'cence': 738
+         'erty': 687
+         'cuar': 669
+         'superin': 464
+         'anvear': 430
+         'ereated': 420
+         'ducheny': 414
+         'appheation': 410
+         'karnette': 397
+         'escutia': 389
+         'xiiib': 387
+         'pensation': 346
+         'margett': 340
+         'aroner': 327
+         'schoolage': 318
+         'frusetta': 306
+         'sliag': 293
+         'migden': 287
+         'froin': 279
+         'rmpp': 267
+         'canse': 263
+         'cwil': 262
+         'cmsp': 256
+         'nonsex': 255
+         'poochigian': 238
+         'kaloogian': 238
+         'newsection': 228
+
+[RESIDUAL] 20 sample singleton tokens (OCR garbage):
+         'wagerings'
+         'cosesn'
+         'peevecerereveverevcersreserveser'
+         'semiwnually'
+         'manulaetnred'
+         'confficting'
+         'educatioot'
+         'insapreme'
+         'recordahon'
+         'ranxs'
+         'dunivl'
+         'whifhiet'
+         'tiehting'
+         'seesssecsecrescerer'
+         'texesberee'
+         'imninuities'
+         'comteso'
+         'resclect'
+         'lapprowe'
+         'pecpere'
+
+========================================================================
+FINAL BEFORE / AFTER ACCOUNTING
+========================================================================
+  Total corpus tokens (baseline):     134,105,434
+  Unique token types (baseline):          572,703
+
+  BASELINE (no correction):        bad_occ=  1,534,893  types=468,246  1.1445%
+  After Pass A (rejoin):           bad_occ=  1,317,631  types=483,222  0.9954%   recovered=217,262
+  After Pass B (demerge v3):       bad_occ=  1,289,685  types=479,921  0.9741%   recovered=27,946
+  After Pass C (spell >= 10):      bad_occ=    737,115  types=467,978  0.5568%   recovered=552,570
+
+  Total recovered (A+B+C):                797,778 occurrences
+  TRUE RESIDUAL:                   bad_occ=    737,115  types=467,978  0.5568%
+========================================================================
+
+  ~20 residual examples (top by freq):
+    'lambra': 1,591
+    'cight': 1,576
+    'pubhe': 746
+    'cence': 738
+    'erty': 687
+    'cuar': 669
+    'superin': 464
+    'anvear': 430
+    'ereated': 420
+    'ducheny': 414
+    'appheation': 410
+    'karnette': 397
+    'escutia': 389
+    'xiiib': 387
+    'pensation': 346
+    'margett': 340
+    'aroner': 327
+    'schoolage': 318
+    'frusetta': 306
+    'sliag': 293
+========================================================================
+[2026-06-10 20:59 PT] SUMMARY | baseline=1,534,893  after_A=1,317,631(recovered=217,262)  after_B=1,289,685(recovered=27,946)  after_C=737,115(recovered=552,570)  true_residual_pct=0.5568%  residual_types=467,978 | OK
+[OUT] residual TSV: C:\Users\patolex\PatoLex-scratch\_vocab\residual_bad_words.tsv  (467,978 rows)
+[2026-06-10 20:59 PT] DONE | wall_time=208s  true_residual_pct=0.5568%  residual_types=467,978  residual_occ=737,115 | OK
+
+[DONE] Wall time: 208s
