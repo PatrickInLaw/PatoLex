@@ -256,6 +256,14 @@ Prepped the clean re-run (NOT yet run/committed-with-results):
 - **Coordinates NOT on disk** (confirmed: page objects have only text fields, no bbox -- docTR/Surya boxes dropped at extraction, kept only `.value`). BUT preprocessed page images ARE saved (`pages_prep_gray/*.png` + `img_path`), so coordinates+font-height are RE-DERIVABLE via a Tesseract `image_to_data` CPU pass (no GPU/VRAM risk, parallel). Scale: 267,530 images total but marginalia is old-volume-only (~48.6k from 1901-1950 + ~730 pre-1900; the 218k 1951-99 are modern typeset) -> target ~50k pages, est <1h on the 5090 CPU. Benchmark before committing.
 - Newlines in consensus_text = physical scan lines (verified) -> line-end/line-start = right/left-edge proxy for the text-only line-split pass.
 
+### Continuation 17 (2026-06-11) — line-split measure-first + plain-English doc
+
+- **`docs/WHERE_WE_ARE_PLAIN_ENGLISH.md`** added (non-technical status snapshot, Patrick asked to "write that down").
+- **Coordinate question answered definitively:** XY coords are NOT on disk (page objects have only text fields; docTR/Surya boxes dropped at extraction). BUT page images ARE saved (`pages_prep_gray/*.png` + `img_path`) -> coords re-derivable via Tesseract `image_to_data` CPU (no GPU/VRAM risk, parallel). Scale 267,530 images but marginalia is old-volume-only (~48.6k 1901-50; 218k 1951-99 are modern typeset) -> target ~50k.
+- **`pipeline/line_split_finder.py`** (measure-first, 6s parallel scan) — words split across line breaks, incl. margin/blank-line interleaving (newline = scan-line, verified). RESULT: 229,453 split-word pairs total; **217,463 (95%) already caught by Pass A** (hyphen, adjacent); **~11,156 MISSED** by current LBH (blank/margin between) = the new recoverable set; of the missed, only **~1,507 are TRUE margin interleaving** (content between halves), ~9,650 are blank-line gaps.
+- **Decision implication:** split-word marginalia is small (~1,500) and **fully recoverable from text** (join-test works regardless of what's between) -> **coordinate re-derivation likely SKIPPABLE.** The only coordinate-only residue = non-split real-word margin insertions, which path 2 (measure real-word substitutions) will size. If path1+path2 strong -> skip coords (Patrick's hope).
+- **NEXT:** build the reunification pass (emit the ~11k missed splits as corrections; clears matching review-tier fragments like trict/sioner/poration), then path 2.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

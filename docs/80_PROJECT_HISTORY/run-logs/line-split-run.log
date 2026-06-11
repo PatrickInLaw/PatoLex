@@ -1,0 +1,14 @@
+[2026-06-11 06:15 PT] START | line-split finder (measure-first) | OK
+[2026-06-11 06:15 PT] SCAN | 205 consensus files; lookahead=3 content lines | OK
+[2026-06-11 06:15 PT] SCAN | 205/205 files | pairs=229,453 | elapsed=6s | HEARTBEAT
+[2026-06-11 06:15 PT] SUMMARY | TOTAL line-split pairs=229,453 | OK
+[2026-06-11 06:15 PT] SUMMARY | HYPHEN:   adjacent=217,463 (current LBH catches)  separated=11,027 (MISSED by current LBH -- blank/margin between) | OK
+[2026-06-11 06:15 PT] SUMMARY | NOHYPHEN: adjacent=834  separated=129  (looser; non-word line-end joins) | OK
+[2026-06-11 06:15 PT] DONE | sample -> C:\Users\patolex\PatoLex-scratch\_vocab\line_splits_sample.tsv  wall=6s | OK
+[2026-06-11 06:18 PT] START | line-split finder (measure-first) | OK
+[2026-06-11 06:18 PT] SCAN | 205 consensus files; lookahead=3 content lines | OK
+[2026-06-11 06:18 PT] SCAN | 205/205 files | pairs=229,453 | elapsed=6s | HEARTBEAT
+[2026-06-11 06:18 PT] SUMMARY | TOTAL line-split pairs=229,453 | OK
+[2026-06-11 06:18 PT] SUMMARY | HYPHEN:   adjacent=217,463 (current LBH catches)  separated=11,027 (MISSED; of which 1,448 have MARGIN CONTENT between, 9,579 are just blank-line gaps) | OK
+[2026-06-11 06:18 PT] SUMMARY | NOHYPHEN: adjacent=834  separated=129 (of which 59 margin-content)  (looser; non-word line-end joins) | OK
+[2026-06-11 06:18 PT] DONE | sample -> C:\Users\patolex\PatoLex-scratch\_vocab\line_splits_sample.tsv  wall=6s | OK
