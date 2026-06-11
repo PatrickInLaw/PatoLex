@@ -373,6 +373,15 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **The source scans are intact** in `…\PatoLex-scratch\chief-clerk-archive\{vol}_Statutes.pdf` (verified: 1873-74=1086pp, 1869-70=1027pp, 1867-68=828pp). Any heading page is **re-renderable on demand with PyMuPDF**. So the 86 are a cheap local render + re-run of the Sonnet pass, NOT data loss or a model limit.
 - Corrected the durable doc (`CORRECTION_AND_DISPLAY_LAYER.md`, "Finding (root cause…)") and added memory `ocr-bundles-image-free-source-in-archive`. Diagnostics: `PatoLex-scratch\diag_missing.py` / `diag_5080.py` / `find_sources.py`.
 
+### Continuation 31 (2026-06-11) — Chapter REVIEW finished: 214/215 (render-from-PDF + deterministic-first + vision/bracket)
+
+- Rendered all 86 open heading pages from `chief-clerk-archive\{vol}_Statutes.pdf` (calibrated `source_page-1`=PDF idx, 1:1 on 1862 660pp). `pipeline`-side scripts live in `PatoLex-scratch` (finish_chapters.py, aggregate_render.py, merge_final.py, combine_all.py).
+- **Deterministic re-OCR first (Patrick's call):** fresh Tesseract + bracket-fit. Reliable for MODERN Arabic (1971=1235, 1982=830 confirmed) but NOT 19th-c Roman (caught a false 1869-70 o82=111 where page=113). Gated deterministic to Arabic only.
+- **Vision (4 Sonnet agents, 84 pages) + bracket validation:** 48 fit→accepted; **35 flagged by bracket as misfits — bracket was RIGHT** (Sonnet stroke-drops on long Roman, e.g. CCXLI→CXLI). Hand-read all 35 against the page; bracket usually pinned the value. Method win: vision+sequence cross-check catches misreads neither catches alone.
+- **214/215 resolved** → `chapter_corrections_GRAND.tsv` (129 prior + 85: 48 vision-fit/35 hand-read/2 arabic). Hand-reads in `chapter_handread_flagged.tsv`.
+- **1 blocked: 1883-84-regular o42** — archive `1883-84_Statutes.pdf`/`_1E` are **15-page stubs**, not the full regular-session volume the OCR used. Real source-data gap; flagged to re-acquire.
+- Durable finding in `CORRECTION_AND_DISPLAY_LAYER.md` ("Chapter REVIEW closeout").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

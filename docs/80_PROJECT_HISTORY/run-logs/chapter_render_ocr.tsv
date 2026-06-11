@@ -1,0 +1,3 @@
+vol	order	resolved_chapter	reason
+production-1971-vol1-chapters	1034	1235	RENDER_OCR_RANGE(lo=1232,hi=1237,implied=None)ARABIC
+production-1982-vol3	72	830	RENDER_OCR_RANGE(lo=829,hi=832,implied=None)ARABIC

@@ -86,6 +86,31 @@ key as the deterministic overlay), precedence above deterministic.
 historical volumes; per-volume `production-*` bundles are *derived text* and intentionally
 image-free. Never treat an absent `pages_prep_gray` as data loss — render from the archive PDF.
 
+## Chapter REVIEW closeout — 214/215 (RESULTS, 2026-06-11, cc007)
+The 86 open REVIEW cases were finished by **rendering each heading page from the archive PDF**
+(`source_page − 1` = PDF page index; calibrated 1:1 on 1862 = 660pp == 660 prep images) and
+resolving deterministic-first per Patrick's direction:
+- **Deterministic re-OCR (fresh Tesseract on the rendered heading, accept only if a clean
+  numeral fits the clean-neighbour bracket):** RELIABLE for **modern Arabic** chapters
+  (1971-vol1 o1034 = 1235, 1982-vol3 o72 = 830 — both confirmed by eye), but **NOT for
+  19th-century Roman numerals** — single-engine Tesseract drops strokes (`CXIII`→`CXI`),
+  and range-fit lets the wrong value through (caught a false 1869-70 o82=111 where the page
+  says 113). So deterministic is gated to Arabic-numeral volumes only; Roman → vision.
+- **Vision (Sonnet, 4 agents over 84 rendered pages) + bracket validation:** 48 answers fit
+  the clean-neighbour bracket and were accepted; **35 were flagged by the bracket as not
+  fitting — and the bracket was right**: those were Sonnet stroke-drops on long Roman
+  numerals (`CCXLI`→`CXLI` dropping a C, `CXCIII`→`XCIII`, etc.). All 35 were hand-read by
+  Claude against the page (the bracket usually pinpointed the value). This is the key method
+  result: **vision + sequence-bracket cross-validation catches vision misreads that neither
+  signal catches alone.**
+- **Total: 214 of 215 resolved** → `run-logs/chapter_corrections_GRAND.tsv` (129 first
+  campaign + 85 this round: 48 vision-fit, 35 hand-read, 2 Arabic-tesseract).
+- **1 blocked: `1883-84-regular` o42** — the archive's `1883-84_Statutes.pdf` (and `_1E`) are
+  **15-page stubs**, not the full ~600pp regular-session volume the OCR was actually built
+  from. The complete 1883-84 regular-session source is missing from `chief-clerk-archive`;
+  flagged as a real source-data gap to re-acquire. (The OCR consensus text for the volume
+  exists; only the page scan needed to read this one garbled numeral is unavailable.)
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),
