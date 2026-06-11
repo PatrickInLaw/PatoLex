@@ -315,6 +315,15 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Parse is DB-safe** (writes JSON only) and is the FIRST step of the mass-ingest -- so this is real ingest progress, not a one-off. It unblocks: (1) chapter reconstruction on the real act sequence, (2) anchoring the text corrections to acts, (3) the mass-ingest pipeline.
 - **NEXT:** point chapter_reconstruct.py at `parsed_acts_fixed.json` (real act sequence, 3-tier confidence) -> emit `chapter_corrections.tsv`. Then the apply/ingest steps.
 
+### Continuation 24 (2026-06-11) — chapter_corrections.tsv built (3-tier, safety-corrected)
+
+- Added `in_act_order` to `ingest_from_ocr.py` act_rec (was missing despite being the Hans-F7 act key) + re-parsed the 5090 corpus (197 vols, 0 fail) so the parsed acts carry reading-order.
+- **`pipeline/chapter_corrections.py`** reads `parsed_acts_fixed.json` (confident+flagged merged, sorted by in_act_order) and emits the reversible overlay `_vocab/chapter_corrections.tsv` (vol, in_act_order, chapter_raw, ocr_chapter, corrected_chapter, tier, reason). chapter_raw preserved.
+- **CAUGHT MY OWN OVER-CONFIDENCE:** first version had an INFERRED tier that forward-filled prev_anchor+offset and OVERRODE the OCR value even on disagreement (e.g. XXTI: OCR=22 via T->I substitution, fill said 17 -> would have changed a likely-correct citation to a wrong one). The parsed sequence has GAPS (acts missed/merged), so positional offset != chapter numeric offset -> forward-fill is a coin-flip. First (wrong) numbers were "859 fixed / 97% recovered".
+- **SAFE corrected tiers:** AUTO (bracket-verified consecutive span -> override OCR, a verified fix), CONFIRMED (fill AGREES with OCR -> trust, no change), REVIEW (fill disagrees / restart / no-anchor -> human; never silently override on a coin-flip).
+- **HONEST RESULT:** 76,691 acts, 75,485 clean (98.4%), **1,206 garbled (1.57%)**; **AUTO 470 (of which 293 actual verified fixes)**, CONFIRMED 134, **REVIEW 602 (50% -- only 0.78% of all acts)**. AUTO samples verified correct (CLXXIITI ocr 174 -> 173; XI1->12). REVIEW = genuinely ambiguous (restart_or_decrease, collision, fill_disagrees).
+- **Limiting factor = parse completeness** (sequence gaps), not the reconstruction idea -> better act-detection would shrink REVIEW. NEXT options: improve act detection; or resolve REVIEW via image/context (vision) or by trusting the OCR-substitution value where plausible.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

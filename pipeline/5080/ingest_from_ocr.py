@@ -703,6 +703,7 @@ def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged,
         "approved_date": approved_str, "iso_date": iso_date,
         "date_needs_review": date_needs_review,
         "text": body_text[:6000], "source_page": (start_page or 0) + 1,
+        "in_act_order": in_act_order,  # 0-based reading-order position (Hans F7 act key)
         "confident": confident,
         "page_agreement_ratio": page_ocr_results.get(start_page, {}).get("agreement_ratio", 0.0),
     }
