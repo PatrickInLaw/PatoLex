@@ -37,6 +37,20 @@ books (OCR). Scanning makes typos. The work is: (1) measure how dirty the text i
 - **Home stretch:** fix the Roman-numeral chapter-number parser, then the one big ingest
   (back up → wipe → load all of 1850–2026 → compare).
 
+## Both blind spots are now MEASURED (2026-06-11)
+- **Split words / margin notes (Path 1):** of 229k words split across lines, 95% were
+  already handled; the line-aware pass recovered **11,156** more (incl. ~1,500 true
+  margin-interleaved). Solved from text — no image coordinates needed.
+- **Real-word substitutions (Path 2):** the invisible class (State→Slate, lion→lien,
+  1038→1938) measured at **~0.055% overall** (0.11% in pre-1900 scans → 0.015% modern)
+  via a 498-window stratified sample judged by Sonnet. Small.
+- **DECISION: coordinate re-derivation SKIPPED.** Both text paths are strong; the
+  invisible residue (~0.055%, ≈74k instances corpus-wide) is handled by the layered
+  correction architecture (on-demand LLM + community wiki + reversible overlay), not by
+  re-deriving pixel coordinates. Not a launch blocker — a bounded polish tail.
+
 ## One-line status
-The cleaning method is basically solved and getting sharper; what's left is **measuring
-two blind spots, resolving a small hard-garbage pile with images, and then loading it all in.**
+Text quality is **characterized and solved**: both error classes measured (visible
+~1.14%→~0.4% corrected; invisible ~0.055%), cleaning method built. What's left is the
+**parser fix (Roman-numeral chapters)** and the **one big ingest** (back up → wipe →
+load 1850–2026 → compare).

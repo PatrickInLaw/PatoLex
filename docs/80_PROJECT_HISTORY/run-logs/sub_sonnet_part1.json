@@ -1,0 +1,19 @@
+{
+  "7": [{"word": "hack", "correction": "back"}],
+  "12": [{"word": "lion", "correction": "lien"}],
+  "16": [{"word": "Ban", "correction": "San"}],
+  "25": [{"word": "bead", "correction": "head"}],
+  "44": [{"word": "pests", "correction": "posts"}],
+  "69": [{"word": "fall", "correction": "full"}],
+  "76": [{"word": "own", "correction": "down"}],
+  "79": [{"word": "80th", "correction": "30th"}],
+  "92": [{"word": "bad", "correction": "had"}],
+  "123": [{"word": "sand", "correction": "said"}],
+  "143": [{"word": "alloys", "correction": "alleys"}],
+  "149": [{"word": "fur", "correction": "for"}],
+  "159": [
+    {"word": "foes", "correction": "fees"},
+    {"word": "fill", "correction": "full"},
+    {"word": "thar", "correction": "that"}
+  ]
+}

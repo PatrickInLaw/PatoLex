@@ -272,6 +272,14 @@ Prepped the clean re-run (NOT yet run/committed-with-results):
 - **Coordinate re-derivation CONFIRMED skippable for split words** (text-only handled all 11k). Only the non-split real-word margin-insertion class remains -> Path 2 (measure real-word substitutions) sizes it.
 - **NEXT: Path 2** -- stratified-sample + LLM-judge measurement of the real-word->real-word substitution rate (the vocab-diff blind spot). Sample, don't sweep (estimate-before-fanout). Local gemma3 free first; estimate Sonnet-sample cost before any Sonnet fan-out.
 
+### Continuation 19 (2026-06-11) — Path 2: real-word substitution rate MEASURED; coords SKIPPED
+
+- **Stratified sample** (`substitution_sample.py`): 498 windows / 39,840 words, 166 per era (<=1900 / 1901-1950 / 1951-1999), seed 20260611 -> `substitution_sample.jsonl`.
+- **Local gemma3 judge** (`substitution_judge_local.py`, GPU, ~12 min, peaked 69C -- thermal watch never tripped 75/78): raw 730 subs = **1.83%** -- but precision check showed ~55% were NON-words (vocab-diff already catches) + ~25% false positives on correct legal/archaic terms (therefor, moneys). gemma3 too imprecise to trust the number; over-flags.
+- **Sonnet verification** (3 parallel agents, ~155k tokens / ~$1, tighter prompt): **22 genuine valid->valid substitutions / 39,840 words = 0.055%**. By era: <=1900 **0.113%**, 1901-1950 0.038%, 1951-1999 0.015%. All 22 genuine (lion->lien, shell->shall, Ban->San, 80th->30th, 1038->1938...). gemma3 was 33x inflated.
+- **DECISION (Patrick's hope confirmed): SKIP coordinate re-derivation.** Both text paths strong (Path1 recovered 11k splits; Path2 invisible class ~0.055%, includes non-split margin insertions). Not worth a ~50k-image detection pass for ~0.05-0.1%. Residue (~74k instances corpus-wide) handled by the layered arch (on-demand LLM + community wiki + reversible overlay), NOT coordinates. Not a launch blocker.
+- **Text-quality investigation essentially COMPLETE:** both error classes measured -- visible ~1.14% (->~0.4% after correction, mostly recoverable) + invisible ~0.055%. Method built + validated. Remaining corpus work: parser fix (Roman-numeral chapters) + the single 1850-2026 mass ingest.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
