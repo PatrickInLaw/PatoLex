@@ -36,6 +36,21 @@ def _roman_to_int(s):
         val += cur if cur >= prev else -cur
         prev = cur
     return val
+def _modern_digitfix(raw, fillv):
+    """SAFE modern Arabic digit-error fix: the OCR numeral is all-digits and too long
+    (>4 = impossible chapter), AND removing exactly one digit yields the sequence fill.
+    Two independent signals (digit-corrected OCR + sequence position) agree -> trustworthy."""
+    raw = (raw or "").strip()
+    if not raw.isdigit() or len(raw) <= 4:
+        return False
+    if not (1 <= fillv <= 9999):
+        return False
+    for k in range(len(raw)):
+        d = raw[:k] + raw[k + 1:]
+        if d and d.isdigit() and int(d) == fillv:
+            return True
+    return False
+
 def is_clean(chapter_raw, chapter_int):
     raw = (chapter_raw or "").strip().strip(".,;:")
     if not raw:
@@ -125,8 +140,14 @@ def _process_vol(path):
                 corrected, tier, reason = ocr, "OCR_PLAUSIBLE", f"ocr_before({ocr}<{vals[ni]})"
             else:
                 tier, reason = "REVIEW", f"fill_disagrees(ocr={ocr},fill={cand})"
+        # SAFE modern digit-error rescue: a REVIEW where the OCR is digits and a
+        # single-digit removal equals the sequence fill -> two signals agree, accept it.
+        if tier == "REVIEW" and reason.startswith("fill_disagrees"):
+            mfill = re.search(r"fill=(\d+)", reason)
+            if mfill and _modern_digitfix(raws[i], int(mfill.group(1))):
+                corrected, tier, reason = int(mfill.group(1)), "MODERN_DIGITFIX", f"digit_corr_agrees({mfill.group(1)})"
         counts[tier] += 1
-        if tier == "AUTO" and corrected != ocr:
+        if tier in ("AUTO", "MODERN_DIGITFIX") and corrected != ocr:
             counts["value_changed"] += 1
         rows.append((vol, acts[i].get("in_act_order", 0), raws[i], vals[i],
                      ("" if corrected is None else corrected), tier, reason))
@@ -165,6 +186,7 @@ def main():
         rlog(f"     of which the chapter number was actually CHANGED (fixed) = {totals['value_changed']:,}")
         rlog(f"  CONFIRMED (fill agrees with OCR, no change) = {totals['CONFIRMED']:,} ({100.0*totals['CONFIRMED']/g:.1f}%)")
         rlog(f"  OCR_PLAUSIBLE (OCR value fits between clean neighbours -> accept) = {totals['OCR_PLAUSIBLE']:,} ({100.0*totals['OCR_PLAUSIBLE']/g:.1f}%)")
+        rlog(f"  MODERN_DIGITFIX (digit-corrected OCR agrees with fill -> safe fix) = {totals['MODERN_DIGITFIX']:,} ({100.0*totals['MODERN_DIGITFIX']/g:.1f}%)")
         rlog(f"  REVIEW (irreducible: OCR implausible / restart / no-anchor) = {totals['REVIEW']:,} ({100.0*totals['REVIEW']/g:.1f}%)")
     rlog(f"DONE corrections -> {OUT}  wall={time.time()-t0:.0f}s")
 

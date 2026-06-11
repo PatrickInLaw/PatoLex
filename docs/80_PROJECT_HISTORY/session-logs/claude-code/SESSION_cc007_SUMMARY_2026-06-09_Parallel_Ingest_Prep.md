@@ -334,6 +334,16 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Net: 358/602 auto-resolved safely. The 244 remainder = a small, mixed human-review queue:** (a) old Roman garbles needing image-sourcing + human, (b) old garbles too degraded for the 7B vision model, (c) modern digit-errors recoverable by a per-volume (gap-free) forward-fill. Vision gave ~20 assistive readings (a few useful: 10d->105, XTIV->44).
 - Artifacts: `chapter_vision_results.tsv`. NOTE: only 1850-1875 + scattered later volumes have pages_prep_gray on the 5090 -- a real gap for any future image/vision work.
 
+### Continuation 26 (2026-06-11) — MODERN_DIGITFIX (safe) + vision diagnosis
+
+- **MODERN_DIGITFIX tier** (Patrick: "do the modern subset if safe"): a REVIEW case where the OCR numeral is all-digits, too long (>4 = impossible chapter), AND a single-digit removal equals the sequence fill -> two independent signals agree -> safe. Cleared **29**. Tally now: AUTO 470 (322 fixes), CONFIRMED 134, OCR_PLAUSIBLE 358, MODERN_DIGITFIX 29, **REVIEW 215** (0.28% of acts). **991/1,206 garbled resolved (82%).**
+- **Vision diagnosis (Patrick: "it's just 600 images, run the strong model"):** I gave up too early before. Real findings:
+  - **qwen2.5vl:32b is BROKEN** -- corrupt CLIP/vision blob (`Failed to load CLIP model from ...blobs\sha256-043a...`), not OOM (31GB VRAM free). Fix = re-pull (~20GB).
+  - llava:34b useless (refuses); **granite3.2-vision reads document text well** (read act numbers/titles) -- a viable reader.
+  - **Page-targeting matters:** my smoke hit a TOC page (granite read "117An Act...118An Act"), not an act body. Must feed the act's real body page.
+  - **Images scattered:** 1862's 660 imgs are on THIS box (5080) not the 5090; 1869-70 / 1873-74 on neither. Not a clean set -- needs gathering + some are genuinely missing.
+- **Vision IS feasible for the 215 but is real plumbing** (re-pull 32b OR use granite, gather images across both boxes, target body pages). Scoped, pending decision.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
