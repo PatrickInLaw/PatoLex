@@ -1,0 +1,7 @@
+[2026-06-11 10:22 PT] PARSE | START parse-5090  SCRATCH=C:\Users\patolex\PatoLex-scratch | OK
+[2026-06-11 10:22 PT] PARSE | 197 in-scope volumes (1850-1999, has OCR, not skip) | OK
+[2026-06-11 10:23 PT] PARSE | 53/197 vols | ok=53 fail=0 | confident=16,892 flagged=3,384 | elapsed=15s | HEARTBEAT
+[2026-06-11 10:23 PT] PARSE | 105/197 vols | ok=105 fail=0 | confident=43,794 flagged=6,419 | elapsed=31s | HEARTBEAT
+[2026-06-11 10:23 PT] PARSE | 158/197 vols | ok=158 fail=0 | confident=61,918 flagged=7,351 | elapsed=46s | HEARTBEAT
+[2026-06-11 10:23 PT] PARSE | 197/197 vols | ok=197 fail=0 | confident=69,100 flagged=7,591 | elapsed=57s | HEARTBEAT
+[2026-06-11 10:23 PT] PARSE | DONE ok=197 fail=0 | total_confident=69,100 total_flagged=7,591 | wall=57s | OK

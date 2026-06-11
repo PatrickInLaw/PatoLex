@@ -308,6 +308,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Result (act-filtered):** 79,737 act headings, 78,318 clean (98.2%), **1,419 garbled (1.78% of acts)**; **564 recovered high-confidence (39.7%, bracket-verified), of which 347 had a WRONG OCR value fixed**; 842 gap-mismatch (NOT all unrecoverable -- forward-fill-able at medium confidence), 13 one-sided. 39.7% is a conservative FLOOR (strict consecutive-run criterion). Chapter-numeral mangling (1.78%) is narrower than the broad ~7% "citation" figure.
 - **NEXT (the real build):** chapter reconstruction as a correction pass emitting `chapter_corrections.tsv` (3 tiers: bracket-verified=auto, forward-fill=inferred, ambiguous=review), run on the REAL parse output. Requires running the parse stage first -- which is RAM-blocked on the 5080 (2.5GB free) and is also the first step of the mass-ingest. Operational decision pending: run parse on the 5090 (authoritative corpus, path override) or wait for 5080 RAM.
 
+### Continuation 23 (2026-06-11) — PARSE STAGE materialized on the 5090 (milestone)
+
+- **Ran the parse stage over the whole OCR corpus on the 5090** (authoritative corpus, 64GB RAM -- NOT the 2.5GB-free 5080). `pipeline/run_parse_5090.py` mirrors run_parse_all.py but monkeypatches ingest_from_ocr's 3 write-paths (SCRATCH_ROOT, DATE_REVIEW_WORKLIST, LOG_FILE) to 5090 locations. Smoke-tested on 1862 first (115/7, paths OK).
+- **DONE in 57s: 197 volumes, 0 failures -> 69,100 confident + 7,591 flagged = 76,691 acts.** Every `production-*/parsed_acts_fixed.json` now exists on the 5090 (the fine-grained, ordered act sequence: chapter_raw, chapter_int, in_act_order, iso_date, text, confident).
+- **Parse is DB-safe** (writes JSON only) and is the FIRST step of the mass-ingest -- so this is real ingest progress, not a one-off. It unblocks: (1) chapter reconstruction on the real act sequence, (2) anchoring the text corrections to acts, (3) the mass-ingest pipeline.
+- **NEXT:** point chapter_reconstruct.py at `parsed_acts_fixed.json` (real act sequence, 3-tier confidence) -> emit `chapter_corrections.tsv`. Then the apply/ingest steps.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
