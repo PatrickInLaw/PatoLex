@@ -264,6 +264,14 @@ Prepped the clean re-run (NOT yet run/committed-with-results):
 - **Decision implication:** split-word marginalia is small (~1,500) and **fully recoverable from text** (join-test works regardless of what's between) -> **coordinate re-derivation likely SKIPPABLE.** The only coordinate-only residue = non-split real-word margin insertions, which path 2 (measure real-word substitutions) will size. If path1+path2 strong -> skip coords (Patrick's hope).
 - **NEXT:** build the reunification pass (emit the ~11k missed splits as corrections; clears matching review-tier fragments like trict/sioner/poration), then path 2.
 
+### Continuation 18 (2026-06-11) — line-split reunification pass (Path 1 done)
+
+- **`pipeline/line_split_reunify.py`** — emits the corrections artifact for split words the current Pass-A LBH misses. **11,156 reunifications** written to `_vocab/line_split_corrections.tsv` (1,507 margin-interleaved, 9,649 blank-gap; head+tail->joined w/ provenance + margin_text).
+- Reunited words are real high-freq statute terms: district(374), compensation(253), transportation(228), appropriation, commencing, acquisition, superintendent, legislature...
+- **Validates the fragment-gate handoff:** the tail fragments cleared (`-trict`374, `-priation`131, `-pensation`114, `-priated`93, `-sition`69, `-tion`943) + heads (`appropria-`, `commis-`, `cor-`, `transporta-`) are EXACTLY the review-tier fragments the Pass C gate parked. Gate parks -> reunify clears.
+- **Coordinate re-derivation CONFIRMED skippable for split words** (text-only handled all 11k). Only the non-split real-word margin-insertion class remains -> Path 2 (measure real-word substitutions) sizes it.
+- **NEXT: Path 2** -- stratified-sample + LLM-judge measurement of the real-word->real-word substitution rate (the vocab-diff blind spot). Sample, don't sweep (estimate-before-fanout). Local gemma3 free first; estimate Sonnet-sample cost before any Sonnet fan-out.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

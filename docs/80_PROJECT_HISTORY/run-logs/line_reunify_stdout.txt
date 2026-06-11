@@ -1,0 +1,121 @@
+[2026-06-11 06:24 PT] START | line-split reunification (emit corrections for MISSED splits) | OK
+[2026-06-11 06:24 PT] SCAN | 205 consensus files | OK
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] pyspellchecker: 160,572 words
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] Static dict size: 328,139
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] nltk words: 234,377 raw, +167,372 new
+[DICT] wordfreq available (per-token check)
+[DICT] Static dict size: 328,139
+[DICT] Static dict size: 328,139
+[2026-06-11 06:24 PT] SCAN | 205/205 files | missed_so_far=11,156 | elapsed=6s | HEARTBEAT
+[2026-06-11 06:24 PT] SUMMARY | missed reunifications emitted=11,156  (margin=1,507, blankgap=9,649) | OK
+[2026-06-11 06:24 PT] SUMMARY | already-handled-by-PassA adjacent: HYPHEN=217,463 NOHYPHEN=834 | OK
+[2026-06-11 06:24 PT] SUMMARY | distinct joined words=1,931  distinct head-frags=1,148  distinct tail-frags=1,514 | OK
+
+[TOP 20 reunited words]
+   district: 374
+   compensation: 253
+   transportation: 228
+   commencing: 191
+   property: 190
+   appropriation: 170
+   education: 133
+   acquisition: 127
+   immediately: 111
+   recreation: 104
+   municipal: 99
+   expenditure: 96
+   districts: 95
+   appropriated: 88
+   treasurer: 85
+   preliminary: 83
+   legislature: 75
+   superintendent: 71
+   development: 69
+   developmental: 68
+
+[TOP 20 tail fragments cleared from residual]
+   -tion: 943
+   -trict: 374
+   -erty: 196
+   -ing: 182
+   -ucation: 133
+   -portation: 132
+   -mencing: 132
+   -priation: 131
+   -gency: 115
+   -pensation: 114
+   -ture: 114
+   -ferred: 112
+   -tions: 110
+   -tricts: 95
+   -priated: 93
+   -urer: 91
+   -bered: 73
+   -nary: 70
+   -diately: 69
+   -sition: 69
+
+[TOP 20 head fragments cleared from residual]
+   con-: 569
+   dis-: 519
+   pro-: 393
+   com-: 385
+   re-: 321
+   de-: 266
+   in-: 235
+   appro-: 201
+   prop-: 196
+   ex-: 168
+   trans-: 165
+   ed-: 134
+   ac-: 122
+   im-: 116
+   cor-: 111
+   commis-: 106
+   appropria-: 104
+   transporta-: 102
+   treas-: 85
+   em-: 85
+[2026-06-11 06:24 PT] DONE | corrections -> C:\Users\patolex\PatoLex-scratch\_vocab\line_split_corrections.tsv  wall=6s | OK

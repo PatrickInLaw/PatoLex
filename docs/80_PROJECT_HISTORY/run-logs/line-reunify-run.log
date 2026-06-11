@@ -1,0 +1,7 @@
+[2026-06-11 06:24 PT] START | line-split reunification (emit corrections for MISSED splits) | OK
+[2026-06-11 06:24 PT] SCAN | 205 consensus files | OK
+[2026-06-11 06:24 PT] SCAN | 205/205 files | missed_so_far=11,156 | elapsed=6s | HEARTBEAT
+[2026-06-11 06:24 PT] SUMMARY | missed reunifications emitted=11,156  (margin=1,507, blankgap=9,649) | OK
+[2026-06-11 06:24 PT] SUMMARY | already-handled-by-PassA adjacent: HYPHEN=217,463 NOHYPHEN=834 | OK
+[2026-06-11 06:24 PT] SUMMARY | distinct joined words=1,931  distinct head-frags=1,148  distinct tail-frags=1,514 | OK
+[2026-06-11 06:24 PT] DONE | corrections -> C:\Users\patolex\PatoLex-scratch\_vocab\line_split_corrections.tsv  wall=6s | OK
