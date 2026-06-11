@@ -359,6 +359,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Several resolved cases were ones where OCR+fill+digitfix ALL fail (1861 o91=155, o218=443; 1905 o40=44) -> only reading the scan gets them.
 - **REVIEW 215 status: 61 resolved by vision.** Remaining 154 = 2 Sonnet-UNKNOWN (Claude to read) + 152 lacking 5090 images (gather from 5080: 1862's 660 imgs are there; re-source the truly-absent, then same Sonnet fan-out). NEXT: apply chapter_vision_final.tsv to the overlay as tier=VISION; finish the 154.
 
+### Continuation 29 (2026-06-11) — Second Sonnet batch aggregated; REVIEW 129/215 resolved
+
+- **Second Sonnet batch** (69 this-box / 5080 images, `sub_chvis2_part{1,2,3}.tsv`): read 68/69. Extended `aggregate_chvis.py` to ingest both batches; re-validated against my 7 hand-reads → still **7/7 agree**.
+- **Combined: 129 of 215 REVIEW resolved** (61 batch1 + 68 batch2) → `chapter_vision_final.tsv` (now 129 rows).
+- **3 Sonnet-UNKNOWN** (1971-vol1 o1034, 1982-vol3 o72, 1999-vol4 o159): I read the staged images myself — all three are **body-text pages, not chapter-heading pages** (parse `source_page` points off the heading). Confirmed unresolvable from the staged image; they join the image-sourcing bucket, NOT a reasoning failure.
+- **86 still open = image-sourcing-bound** (83 no usable image + 3 wrong-page). All need the actual chapter-heading scan re-acquired; model capability is not the limit.
+- Finding recorded durably in `docs/30_SYSTEM_DESIGN/CORRECTION_AND_DISPLAY_LAYER.md` ("Layer-2 in practice"). NEXT (deferred to the single mass-ingest): apply `chapter_vision_final.tsv` as overlay tier=VISION; re-source the 86 heading pages.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

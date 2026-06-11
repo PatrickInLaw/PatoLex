@@ -50,6 +50,31 @@ display_text  =  original_OCR  +  [ layer 1: deterministic auto-correct ]
    *as-of-date* versioning is a separate axis. Confirm they compose cleanly (a correction
    applies to a source page; the page underlies many point-in-time statute states).
 
+## Layer-2 in practice — chapter-number vision resolution (RESULTS, 2026-06-11, cc007)
+The first real layer-2 (model/vision) artifact is the **chapter-number** overlay. The
+deterministic chapter pass (`chapter_corrections.py`, monotonic-sequence reconstruction)
+left **215 REVIEW** garbled chapter numbers it would not silently override. Those were
+resolved by **reading the source-page scans directly** — Claude vision validated against
+Sonnet-vision-at-scale:
+
+- **Validation gate:** Sonnet returns the *printed numeral as it appears* (e.g. `CCCCXLIII`);
+  Roman→int conversion is done deterministically in `aggregate_chvis.py` (Sonnet reads
+  reliably but does Roman arithmetic unreliably). On the 7-case overlap with Claude's own
+  hand-reads, **agreement was 7/7** — the basis for trusting the Sonnet batch.
+- **Result:** **129 of 215 resolved** (61 first batch / 68 second batch) →
+  `run-logs/chapter_vision_final.tsv` (`vol, order, resolved_chapter, source`).
+- **3 Sonnet-UNKNOWN** (1971-vol1 o1034, 1982-vol3 o72, 1999-vol4 o159): Claude read the
+  staged images directly and confirmed they are **body-text pages, not chapter-heading
+  pages** — the parse's `source_page` for these points one or more pages off the heading.
+  Not resolvable without re-acquiring the correct page; **same bucket as the 83 below**.
+- **83 with no usable staged image** + the 3 wrong-page = **86 still open**, all
+  **image-sourcing-bound** (need the actual chapter-heading scan), NOT a reasoning gap.
+
+**Finding:** vision-on-scan is a *viable, validated* layer-2 source for the hard residual;
+the remaining limit is **image acquisition** (correct heading page), not model capability.
+When applied, these land as overlay tier **`VISION`** keyed by `(source_document_id,
+in_act_order)` (same key as the deterministic overlay), precedence above deterministic.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

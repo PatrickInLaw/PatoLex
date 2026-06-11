@@ -14,14 +14,17 @@ def to_int(s):
     return None
 
 son = {}
-for n in (1, 2, 3):
-    fp = os.path.join(RL, f"sub_chvis_part{n}.tsv")
-    if not os.path.exists(fp):
-        continue
-    for ln in open(fp, encoding="utf-8"):
-        p = ln.rstrip("\n").split("\t")
-        if len(p) >= 3 and p[0].startswith("production-"):
-            son[(p[0], p[1])] = p[2].strip()
+for batch in ("sub_chvis_part{}.tsv", "sub_chvis2_part{}.tsv"):
+    for n in (1, 2, 3):
+        fp = os.path.join(RL, batch.format(n))
+        if not os.path.exists(fp):
+            continue
+        for ln in open(fp, encoding="utf-8"):
+            p = ln.rstrip("\n").split("\t")
+            if len(p) >= 3 and p[0].startswith("production-"):
+                son[(p[0], p[1])] = p[2].strip()
+
+TOTAL_REVIEW = 215
 
 mine = {}
 for i, ln in enumerate(open(os.path.join(RL, "chapter_vision_resolved.tsv"), encoding="utf-8")):
@@ -52,7 +55,7 @@ for k, sp in son.items():
 for k, mv in mine.items():
     res[k] = (mv, "hand")
 unp = [(k, son[k]) for k in son if to_int(son[k]) is None]
-print(f"\ntotal resolved = {len(res)} of 63  | sonnet unparseable/UNKNOWN = {len(unp)}: {unp}")
+print(f"\nsonnet readings total = {len(son)}  | resolved = {len(res)} of {TOTAL_REVIEW}  | sonnet unparseable/UNKNOWN = {len(unp)}: {unp}")
 
 with open(os.path.join(RL, "chapter_vision_final.tsv"), "w", encoding="utf-8") as f:
     f.write("vol\torder\tresolved_chapter\tsource\n")
