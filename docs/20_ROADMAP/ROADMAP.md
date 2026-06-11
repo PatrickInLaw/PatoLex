@@ -2,7 +2,16 @@
 
 ## Current Status
 
-**Gate:** Between E and F — **the historical OCR campaign is COMPLETE; the modern layer (Gate F) is largely built; the 1876–1993 ingest gap is the primary remaining build task.**
+**Gate:** Between E and F — **the historical OCR campaign is COMPLETE; the modern layer (Gate F) is largely built.**
+
+> ### ⚠️ THE INGEST PLAN (read this — it is NOT a gap-fill)
+> The remaining build is **ONE single mass ingest of the FULL 1850–2026 corpus**, performed exactly once after all prep is done:
+> 1. **BACK UP** the current `patolex` DB.
+> 2. **CLEAR / wipe** the DB (drop the enactment data — start clean).
+> 3. **INGEST the entire 1850–2026 corpus in one fresh pass.**
+> 4. **DIFF** the result against the backup for the already-populated segments (1850–75 OCR, 1991–2024 Gate F, 2000–08 born-digital) as a non-regression check (logical-key diff; bigint PKs re-id, so match on citation/chapter + in_act_order, carry forward stable `public_id`).
+>
+> **We do NOT ingest "1876–1990" as a separate step into the existing DB.** The current DB only *looks* like it's missing 1876–1990 because the single full re-ingest has not run yet. Everything below labeled a "gap/blocker" is a **PREREQUISITE to that one ingest**, not its own ingest task.
 
 **As of 2026-06-09 (cc006 verification):**
 - **Schema is LIVE on local PostgreSQL 16** (5080 box, DB `patolex`): migrations `0000`–`0004`, **7 tables**, with `btree_gist`, GiST exclusion constraints, `uuid_generate_v7()`, and the generated `fts_vector` all applied cleanly.
@@ -13,7 +22,7 @@
   - **(a) OCR-linked acts** (`source_document_id` set): 1850–1875 dense (~3,946 acts). The 1876–1993 span is **nearly empty (~360 acts)** — OCR is done for these volumes but ingest is blocked (see blockers below).
   - **(b) Gate F modern layer:** ~22,780 acts, **1991–2024**, reconstructed from official **leginfo CAML bill-XML** (139,211 section change_events, `trust_level='official_xml'`, confidence 1.0), via `pipeline/gate_f/`. **Gate F is largely built — the old "not started" framing is obsolete.**
 - **Gate F remaining gaps:** sessions 1993-94 / 2001-02 / 2003-04 absent; layer ends 2023-24. PUBINFO archives for those + 2025 (current `LAW_SECTION_TBL`) + 1989 acquired 2026-06-08; parse + ingest in progress to close gaps and reach gap-free 1989→2026.
-- **THE REAL REMAINING GAP — 1876–1993 historical ingest.** OCR is complete but ingest is blocked on 4 Hans-flagged items: (1) `source_document` registration for 1877–1990 volumes, (2) `LEGISLATURE_MAP` extension past 1875-76, (3) dedup-variant resolution 1927-1965, (4) logical-key diff for re-ingest validation. Date-parser fix for the chaptered_date parser bug (51 acts have wrong date, correct text) is also required first.
+- **PREREQUISITES to the single mass ingest (NOT separate ingests).** Before the one backup→clear→full-1850–2026-ingest→diff pass can run, finish: (1) `source_document` registration for 1877–1990 volumes, (2) `LEGISLATURE_MAP` extension past 1875-76, (3) dedup-variant resolution 1927-1965, (4) logical-key diff harness for re-ingest validation, (5) **parser fix** for the 19th-c Roman-numeral chapter headings + the chaptered_date parser bug (51 acts wrong date, correct text) — re-derive citations, (6) parse+ingest-ready the **2025 + current-2026** modern data (already acquired 2026-06-08) so the single pass reaches gap-free 1850→2026, (7) the modern-layer integrity fix (22,780 Gate F acts have NULL `source_document_id`), (8) text-quality corrections layer (Pass A + high-confidence fixes, reversible). When ALL of these are ready → run the one mass ingest.
 - **Three-tier corpus model** (see `DATA_SOURCES_HISTORICAL.md` §1d): (a) image-only ≤ ~1996 → OCR consensus, (b) born-digital Chief Clerk ~1997–2008 → direct text extract (no OCR), (c) leginfo PUBINFO XML 1989/1994–present → reconstruct backward. **The OCR campaign is bounded on the modern end at ~1993–94, not 2008.**
 - **OCR↔Gate-F overlap (~1995–2008):** same chapters appear in both layers with different citation keys; no collision. Gate F (official XML) is authoritative; the OCR for those years is the seam-validation oracle. Arbitration rule for the served corpus still to define.
 - **`provision_version = 0` and `lineage_edge = 0` — both BY DESIGN.** `provision_version` is a materialized read model (deferred build/publish-time sweep, not yet run); `lineage_edge` is empty because the 1872 recodification edges are not yet materialized.

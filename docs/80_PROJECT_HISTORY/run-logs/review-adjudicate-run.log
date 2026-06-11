@@ -1,0 +1,40 @@
+[2026-06-10 21:20 PT] START | review adjudication model=gemma3:27b batch=25 | OK
+[2026-06-10 21:20 PT] LOAD | 2655 review tokens loaded from passC_review.tsv | OK
+[2026-06-10 21:20 PT] ADJ | 25/2655 | FIX=8 | elapsed=16s | rate=1.6/s | HEARTBEAT
+[2026-06-10 21:20 PT] ADJ | 100/2655 | FIX=55 | elapsed=37s | rate=2.7/s | HEARTBEAT
+[2026-06-10 21:21 PT] ADJ | 175/2655 | FIX=95 | elapsed=59s | rate=3.0/s | HEARTBEAT
+[2026-06-10 21:21 PT] ADJ | 250/2655 | FIX=125 | elapsed=81s | rate=3.1/s | HEARTBEAT
+[2026-06-10 21:21 PT] ADJ | 325/2655 | FIX=155 | elapsed=102s | rate=3.2/s | HEARTBEAT
+[2026-06-10 21:22 PT] ADJ | 400/2655 | FIX=192 | elapsed=124s | rate=3.2/s | HEARTBEAT
+[2026-06-10 21:22 PT] ADJ | 475/2655 | FIX=225 | elapsed=145s | rate=3.3/s | HEARTBEAT
+[2026-06-10 21:22 PT] ADJ | 550/2655 | FIX=264 | elapsed=167s | rate=3.3/s | HEARTBEAT
+[2026-06-10 21:23 PT] ADJ | 625/2655 | FIX=300 | elapsed=188s | rate=3.3/s | HEARTBEAT
+[2026-06-10 21:23 PT] ADJ | 700/2655 | FIX=340 | elapsed=210s | rate=3.3/s | HEARTBEAT
+[2026-06-10 21:23 PT] ADJ | 775/2655 | FIX=372 | elapsed=231s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:24 PT] ADJ | 850/2655 | FIX=402 | elapsed=252s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:24 PT] ADJ | 925/2655 | FIX=432 | elapsed=274s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:24 PT] ADJ | 1000/2655 | FIX=467 | elapsed=295s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:25 PT] ADJ | 1075/2655 | FIX=506 | elapsed=317s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:25 PT] ADJ | 1150/2655 | FIX=550 | elapsed=338s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:26 PT] ADJ | 1225/2655 | FIX=577 | elapsed=359s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:26 PT] ADJ | 1300/2655 | FIX=611 | elapsed=380s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:26 PT] ADJ | 1375/2655 | FIX=648 | elapsed=402s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:27 PT] ADJ | 1450/2655 | FIX=688 | elapsed=423s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:27 PT] ADJ | 1525/2655 | FIX=719 | elapsed=444s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:27 PT] ADJ | 1600/2655 | FIX=750 | elapsed=465s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:28 PT] ADJ | 1675/2655 | FIX=794 | elapsed=486s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:28 PT] ADJ | 1750/2655 | FIX=831 | elapsed=508s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:28 PT] ADJ | 1825/2655 | FIX=867 | elapsed=529s | rate=3.4/s | HEARTBEAT
+[2026-06-10 21:29 PT] ADJ | 1900/2655 | FIX=902 | elapsed=550s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:29 PT] ADJ | 1975/2655 | FIX=936 | elapsed=571s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:29 PT] ADJ | 2050/2655 | FIX=988 | elapsed=592s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:30 PT] ADJ | 2125/2655 | FIX=1011 | elapsed=614s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:30 PT] ADJ | 2200/2655 | FIX=1042 | elapsed=635s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:30 PT] ADJ | 2275/2655 | FIX=1086 | elapsed=656s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:31 PT] ADJ | 2350/2655 | FIX=1109 | elapsed=678s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:31 PT] ADJ | 2425/2655 | FIX=1147 | elapsed=699s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:32 PT] ADJ | 2500/2655 | FIX=1189 | elapsed=721s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:32 PT] ADJ | 2575/2655 | FIX=1228 | elapsed=742s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:32 PT] ADJ | 2650/2655 | FIX=1248 | elapsed=763s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:32 PT] ADJ | 2655/2655 | FIX=1252 | elapsed=765s | rate=3.5/s | HEARTBEAT
+[2026-06-10 21:32 PT] DONE | n=2655 tally={'KEEP': 231, 'FIX': 1252, 'GARBAGE': 861, 'NAME': 311} out=C:\Users\patolex\PatoLex-scratch\_vocab\review_local_gemma3.json wall=765s | OK

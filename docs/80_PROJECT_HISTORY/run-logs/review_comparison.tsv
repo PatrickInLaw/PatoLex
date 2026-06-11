@@ -1,0 +1,2655 @@
+token	freq	candidates	local_verdict	local_value	sonnet_verdict	sonnet_value	agree
+lambra	1591	lambda	KEEP	lambra	NAME	Alhambra	N
+cight	1576	right,eight	FIX	eight	FIX	eight	Y
+pubhe	746	dubhe	GARBAGE		FIX	public	N
+cence	738	fence,cense	FIX	fence	FIX	cense	Y
+erty	687	ert,arty	GARBAGE		FIX	erty	N
+cuar	669	car,char	FIX	car	FIX	car	Y
+superin	464	suberin	GARBAGE		FIX	superintendent	N
+anvear	430	anear	GARBAGE		FIX	appear	N
+ereated	420	created,treated	FIX	created	FIX	created	Y
+ducheny	414	duchy,duchess	NAME	Ducheny	NAME	Ducheny	Y
+appheation	410		GARBAGE		FIX	application	N
+karnette	397	barnett,annette	NAME	Karnette	NAME	Karnette	Y
+escutia	389	scotia,escurial	NAME	Scotia	NAME	Escutia	Y
+xiiib	387		GARBAGE		KEEP	xiiib	N
+pensation	346	sensation	FIX	pensation	FIX	compensation	Y
+margett	340	margent	NAME	Margett	NAME	Margett	Y
+aroner	327	atoner,ironer	GARBAGE		NAME	Aroner	N
+schoolage	318	schoolbag,schoolbags	FIX	schoolage	FIX	school-age	Y
+frusetta	306	frusta,rosetta	NAME	Frusetta	NAME	Frusetta	Y
+sliag	293	sling,slag	FIX	slag	GARBAGE		N
+migden	287	midden,milden	GARBAGE		NAME	Migden	N
+froin	279	groin,frown	GARBAGE		FIX	from	N
+rmpp	267	repp	GARBAGE		GARBAGE		Y
+canse	263	case,cause	FIX	case	FIX	cause	Y
+cwil	262	ceil,coil	KEEP	cwil	FIX	civil	N
+cmsp	256	cusp	FIX	cusp	GARBAGE		N
+nonsex	255	none,noise	GARBAGE		GARBAGE		Y
+poochigian	238		NAME	Poochigian	NAME	Poochigian	Y
+kaloogian	238		NAME	Kaloogian	NAME	Kaloogian	Y
+newsection	228	resection	FIX	resection	FIX	new section	Y
+cahforma	222		FIX	california	FIX	california	Y
+creck	221	check,creek	FIX	creek	FIX	creek	Y
+ceedings	220	feedings	FIX	proceedings	FIX	proceedings	Y
+priation	210	privation	FIX	privation	FIX	appropriation	Y
+ceee	205	cere,cree	GARBAGE		GARBAGE		Y
+earrier	204	carrier,earlier	FIX	carrier	FIX	carrier	Y
+mterest	203	merest	FIX	merest	FIX	interest	Y
+onequarter	202	forequarter	FIX	forequarter	FIX	one-quarter	Y
+weggeland	202		NAME	Weggeland	NAME	Weggeland	Y
+tioned	200	tined,toned	FIX	toned	FIX	tioned	Y
+frorn	199	frown,frore	GARBAGE		FIX	from	N
+eenter	197	center,enter	FIX	center	FIX	center	Y
+clets	193	cleats,lets	FIX	clets	FIX	cleats	Y
+eent	192	event,cent	FIX	event	FIX	cent	Y
+subitems	192	suites	FIX	subitems	KEEP	subitems	N
+diserction	191	discretion,direction	FIX	discretion	FIX	discretion	Y
+remanufacturer	191	remanufacture	FIX	remanufacture	KEEP	remanufacturer	N
+quired	190	quire,quires	GARBAGE		FIX	required	N
+ceeee	187	cease,creek	GARBAGE		GARBAGE		Y
+shaj	183	shad,shaw	FIX	shad	FIX	shall	Y
+ttem	183	item,them	FIX	item	FIX	item	Y
+sonth	179	month,south	FIX	south	FIX	month	Y
+ptember	178	member,september	FIX	september	FIX	september	Y
+thereo	176	thereof,there	FIX	thereof	FIX	thereof	Y
+housecar	176	horsecar,housecarl	NAME	housecarl	KEEP	housecar	N
+eeeeeeeee	174		GARBAGE		GARBAGE		Y
+nonphysician	170	nonphysical	KEEP	nonphysician	KEEP	nonphysician	Y
+retary	169	rotary,retard	FIX	retary	FIX	secretary	Y
+legisla	168	legible,legibly	FIX	legisla	FIX	legislature	Y
+ercated	166	enacted,located	FIX	enacted	FIX	enacted	Y
+bioanalyst	162	biocatalyst	KEEP	bioanalyst	KEEP	bioanalyst	Y
+gation	155	nation,cation	FIX	gation	FIX	igation	Y
+followmg	155	following,follows	FIX	following	FIX	following	Y
+elock	154	block,clock	FIX	block	FIX	clock	Y
+whon	154	who,when	FIX	who	FIX	who	Y
+omeers	154	ameers	NAME	omeers	FIX	officers	N
+ceeeeee	153		GARBAGE		GARBAGE		Y
+zation	151	nation,cation	FIX	zation	FIX	ization	Y
+enene	149	event,nine	FIX	enene	GARBAGE		N
+repressuring	145	pressuring,repressing	FIX	pressuring	FIX	repressuring	Y
+reregisters	145	preregisters	FIX	reregisters	KEEP	reregisters	N
+reflectorized	140		GARBAGE		KEEP	reflectorized	N
+porated	139	prorated,ported	FIX	porated	FIX	incorporated	Y
+hmited	139	united,limited	FIX	limited	FIX	limited	Y
+lje	138	le,lie	FIX	lje	FIX	the	Y
+strued	136	trued	FIX	strued	FIX	construed	Y
+certam	136	ceram	GARBAGE		FIX	certain	N
+indorser	134	indorsed,indorse	FIX	indorser	KEEP	indorser	N
+norpseudoephedrine	132		GARBAGE		KEEP	norpseudoephedrine	N
+pubheation	131		GARBAGE		FIX	publication	N
+islais	130	islams	GARBAGE		NAME	Islais	N
+munici	130	munich	GARBAGE		FIX	municipal	N
+ceeding	129	ceding,feeding	FIX	ceding	FIX	proceeding	Y
+additiona	129	additional,addition	FIX	additional	FIX	additional	Y
+emsting	127	easting,emoting	GARBAGE		FIX	existing	N
+terest	126	teresa,merest	FIX	terest	FIX	interest	Y
+omcers	126	orders,owners	FIX	omcers	FIX	officers	Y
+ferred	126	erred,feared	FIX	ferred	FIX	referred	Y
+salesyard	124	kaleyard	GARBAGE		KEEP	salesyard	N
+tificate	123	silicate,titivate	GARBAGE		FIX	certificate	N
+cuav	122	cav	KEEP	cuav	GARBAGE		N
+portation	121	hortation,potation	GARBAGE		FIX	transportation	N
+providec	120	provided,provide	FIX	provided	FIX	provided	Y
+ately	119	lately	FIX	ately	FIX	lately	Y
+structed	119	strutted	FIX	structed	FIX	constructed	Y
+szorion	119	orion,azorian	NAME	Orion	GARBAGE		N
+mencing	119	fencing,mending	FIX	mencing	FIX	commencing	Y
+codlin	119	codling,colin	GARBAGE		FIX	codling	N
+beheve	117	behave	FIX	behave	FIX	believe	Y
+misde	116	misdo	GARBAGE		FIX	misdemeanor	N
+encumbrancers	116	encumbrances,encumbrancer	FIX	encumbrances	KEEP	encumbrancers	N
+tuly	114	july,duly	FIX	july	FIX	july	Y
+ciation	114	citation,cation	FIX	citation	FIX	citation	Y
+eeeeeeeeee	114		GARBAGE		GARBAGE		Y
+daty	113	date,day	FIX	date	FIX	duty	Y
+construcd	112	construed,construct	FIX	construed	FIX	construed	Y
+cceeeee	111		GARBAGE		GARBAGE		Y
+eneeee	110	sneeze	GARBAGE		GARBAGE		Y
+rnay	110	ray,nay	KEEP	rnay	FIX	may	N
+puble	110	ruble,pule	FIX	pule	FIX	public	Y
+bronshvag	110		GARBAGE		GARBAGE		Y
+payrate	110	prorate,parade	FIX	prorate	FIX	pay rate	Y
+agricul	109	agricola,auricula	FIX	agricul	FIX	agricultural	Y
+cipal	108	copal	GARBAGE		FIX	principal	N
+stantially	108	spatially,statically	FIX	stantially	FIX	substantially	Y
+eross	108	gross,cross	FIX	gross	FIX	cross	Y
+setencich	106		GARBAGE		NAME	Setencich	N
+eters	105	enters,meters	FIX	enters	FIX	meters	Y
+appropris	104		GARBAGE		FIX	appropriates	N
+ceive	104	chive,clive	GARBAGE		FIX	receive	N
+rict	104	rice,riot	KEEP	rict	FIX	district	N
+inade	103	invade,inane	FIX	inane	FIX	made	Y
+appheable	103		GARBAGE		FIX	applicable	N
+teaa	102	team,tear	FIX	tear	FIX	term	Y
+jurisdic	101	juristic,juridic	FIX	jurisdic	FIX	jurisdiction	Y
+nonmonetary	101		KEEP	nonmonetary	KEEP	nonmonetary	Y
+surance	100	durance	FIX	durance	FIX	insurance	Y
+appor	100	apply,appear	FIX	apply	FIX	apportion	Y
+ceeeeeee	100		GARBAGE		GARBAGE		Y
+achon	100	acton,chon	GARBAGE		FIX	action	N
+sacss	98	sacks,sachs	GARBAGE		NAME	Sachs	N
+meanor	97	manor,meaner	FIX	meanor	FIX	misdemeanor	Y
+urder	97	under,order	FIX	under	FIX	murder	Y
+aunum	96	aurum	NAME	aurum	FIX	annum	N
+thesum	95	these,them	FIX	these	GARBAGE		N
+thorized	95	theorized	FIX	theorized	FIX	authorized	Y
+seventytwo	95		KEEP	seventytwo	FIX	seventy-two	N
+appheant	95		GARBAGE		FIX	applicant	N
+approprin	94		GARBAGE		FIX	appropriation	N
+slungshot	93	slingshot	FIX	slingshot	KEEP	slungshot	N
+stahitorv	93		GARBAGE		FIX	statutory	N
+distnet	92	distinct,distant	FIX	distinct	FIX	district	Y
+roadmasters	91	broadcasters,headmasters	NAME	roadmasters	KEEP	roadmasters	N
+cceee	90	creek,cheese	GARBAGE		GARBAGE		Y
+earried	90	carried,married	FIX	carried	FIX	carried	Y
+nonservice-connected	90		KEEP	nonservice-connected	KEEP	nonservice-connected	Y
+joun	89	john,join	NAME	john	FIX	join	N
+eeeeeeeeeee	89		GARBAGE		GARBAGE		Y
+vight	88	right,eight	FIX	right	FIX	right	Y
+twenty-cighth	88		GARBAGE		FIX	twenty-eighth	N
+salanes	88	salines	FIX	salines	FIX	salaries	Y
+deukmbejian	88		NAME	deukmbejian	NAME	Deukmejian	Y
+onefourth	87		FIX	one fourth	FIX	one-fourth	Y
+edness	86	redness	FIX	redness	FIX	indebtedness	Y
+distributees	86	distributes,distributee	FIX	distributees	KEEP	distributees	N
+xiiia	86	cilia,lilia	GARBAGE		KEEP	xiiia	N
+pescetti	86		NAME	pescetti	NAME	Pescetti	Y
+jobn	84	job,john	FIX	john	FIX	john	Y
+subhaulers	84		GARBAGE		KEEP	subhaulers	N
+heenses	83	defenses,lenses	FIX	defenses	FIX	licenses	Y
+nonservice	83		GARBAGE		KEEP	nonservice	N
+sunenor	82	senor	FIX	senor	FIX	superior	Y
+tribution	81	attribution,retribution	FIX	attribution	FIX	distribution	Y
+nelap	81	neap	FIX	neap	NAME	NELAP	N
+penses	80	lenses,senses	FIX	senses	FIX	expenses	Y
+sixtyone	80		FIX	sixty one	FIX	sixty-one	Y
+cnar	80	car,char	FIX	car	FIX	char	Y
+wueereeas	80		GARBAGE		FIX	whereas	N
+trary	79	tracy,tray	FIX	tracy	FIX	contrary	Y
+iners	79	miners,inert	FIX	miners	FIX	miners	Y
+snech	79	sech,sneck	GARBAGE		GARBAGE		Y
+innavigable	79	unnavigable	FIX	unnavigable	FIX	unnavigable	Y
+eneneeee	79		GARBAGE		GARBAGE		Y
+ceeeeeeee	78		GARBAGE		GARBAGE		Y
+pomt	78	port,post	FIX	port	FIX	point	Y
+tpz	78	the,to	KEEP	tpz	GARBAGE		N
+mination	77	nomination,nation	FIX	nomination	FIX	termination	Y
+registerable	77	registrable	FIX	registrable	FIX	registrable	Y
+eeeneeee	76		GARBAGE		GARBAGE		Y
+mobilehome-manufactured	76		KEEP	mobilehome-manufactured	KEEP	mobilehome-manufactured	Y
+nonattorney	75		KEEP	nonattorney	KEEP	nonattorney	Y
+subvened	75	subvene	FIX	subvene	KEEP	subvened	N
+cceeeeee	75		GARBAGE		GARBAGE		Y
+cnuct	74	cnut	GARBAGE		FIX	enact	N
+deeree	73	degree,decree	FIX	degree	FIX	decree	Y
+frora	73	fora,flora	FIX	fora	FIX	from	Y
+fricot	73	tricot	FIX	tricot	NAME	Fricot	N
+theretor	72	thereto,therefor	FIX	thereto	FIX	therefor	Y
+bered	72	bred,breed	FIX	bred	FIX	numbered	Y
+nondistrict	72		KEEP	nondistrict	KEEP	nondistrict	Y
+jeases	71	leases,ceases	FIX	leases	FIX	leases	Y
+cedure	71	reduce,secure	GARBAGE		FIX	procedure	N
+istration	71	station,situation	FIX	station	FIX	administration	Y
+fiood	71	food,flood	FIX	flood	FIX	flood	Y
+nejedly-hart	71		NAME	nejedly-hart	NAME	Nejedly-Hart	Y
+deukmbjian	71		NAME	deukmbjian	NAME	Deukmejian	Y
+standardbreds	71		KEEP	standardbreds	KEEP	standardbreds	Y
+eeeeeeeeeeee	70		GARBAGE		GARBAGE		Y
+cortain	70	certain,contain	FIX	certain	FIX	certain	Y
+wuerezas	70	guerezas	NAME	wuerezas	FIX	whereas	N
+umted	70	muted,umped	FIX	united	FIX	united	Y
+subpara	70	subpar	FIX	subpar	KEEP	subpara	N
+noncontracting	70		KEEP	noncontracting	KEEP	noncontracting	Y
+vendorization	70	deodorization,vectorization	GARBAGE		KEEP	vendorization	N
+seventysix	69		KEEP	seventysix	FIX	seventy-six	N
+trusteed	69	trustees,trustee	FIX	trustee	FIX	trusteed	Y
+nonrecycled	69		KEEP	nonrecycled	KEEP	nonrecycled	Y
+xijib	69	jib,fiji	NAME	jib	KEEP	xijib	N
+contaming	68	contain,containing	FIX	containing	FIX	containing	Y
+sictta	68	dicta,sita	FIX	dicta	FIX	dicta	Y
+etary	68	teary	GARBAGE		FIX	dietary	N
+eeneeee	68		GARBAGE		GARBAGE		Y
+subcustodian	68		KEEP	subcustodian	KEEP	subcustodian	Y
+sectionized	67	sectioned	FIX	sectioned	FIX	sectioned	Y
+sereen	67	screen,serene	FIX	screen	FIX	screen	Y
+cfis	67	chis	GARBAGE		GARBAGE		Y
+sinkyone	66	sinkhole	GARBAGE		NAME	Sinkyone	N
+faet	65	feet,fact	FIX	fact	FIX	fact	Y
+cceeeeeee	65		GARBAGE		GARBAGE		Y
+eitv	65	with,city	GARBAGE		FIX	city	N
+noncommunity	65	noncommunist	KEEP	noncommunity	KEEP	noncommunity	Y
+nongroup	65	ingroup	FIX	ingroup	KEEP	nongroup	N
+atany	64	atony	FIX	atony	FIX	at any	Y
+ccceee	64	accede	GARBAGE		GARBAGE		Y
+empow	64	embow	GARBAGE		FIX	empower	N
+lishment	64	ligament,liniment	FIX	lishment	FIX	establishment	Y
+ornia	64	ornis	GARBAGE		FIX	california	N
+asamby	64	sammy,samey	GARBAGE		FIX	assembly	N
+panied	63	panier,pained	FIX	panied	FIX	accompanied	Y
+sixtysix	63		KEEP	sixtysix	FIX	sixty-six	N
+nonglaring	63		KEEP	nonglaring	KEEP	nonglaring	Y
+posttrial	63	postural,postaxial	KEEP	posttrial	KEEP	posttrial	Y
+counse	62	course,counsel	FIX	counsel	FIX	counsel	Y
+perannum	62	perineum,geranium	GARBAGE		FIX	per annum	N
+sixtytwo	62		KEEP	sixtytwo	FIX	sixty-two	N
+inanner	62	inaner	GARBAGE		FIX	manner	N
+nonreimbursable	62		KEEP	nonreimbursable	KEEP	nonreimbursable	Y
+phenylpiperidine	62		KEEP	phenylpiperidine	KEEP	phenylpiperidine	Y
+jines	61	lines,fines	FIX	lines	FIX	lines	Y
+ifno	61	info,fino	FIX	info	FIX	if no	Y
+ercek	61	creek,erect	GARBAGE		FIX	creek	N
+calforma	61	alforja	FIX	california	FIX	california	Y
+hbrary	61	horary	GARBAGE		FIX	library	N
+nonpossessory	61		KEEP	nonpossessory	KEEP	nonpossessory	Y
+prograrn	61	program,programs	FIX	program	FIX	program	Y
+eation	60	nation,cation	GARBAGE		FIX	creation	N
+tificates	60	silicates,titivates	GARBAGE		FIX	certificates	N
+lcast	60	least,last	FIX	least	FIX	least	Y
+ccceeee	60		GARBAGE		GARBAGE		Y
+reconveyed	60	reconvened	KEEP	reconveyed	KEEP	reconveyed	Y
+toadd	60	toad,todd	FIX	toadd	FIX	to add	Y
+cratary	60	rotary,oratory	GARBAGE		FIX	secretary	N
+nonurbanized	60		KEEP	nonurbanized	KEEP	nonurbanized	Y
+calstars	60	casters,altars	GARBAGE		NAME	CalSTARS	N
+teense	59	teens,tense	FIX	teens	FIX	license	Y
+rehef	59	reef	FIX	reef	FIX	relief	Y
+ollice	59	ollie,ellice	GARBAGE		FIX	office	N
+eges	59	ages,eggs	FIX	ages	FIX	ages	Y
+employec	59	employee,employer	FIX	employee	FIX	employee	Y
+eops	59	tops,eos	GARBAGE		FIX	cops	N
+executorships	59	executorship	KEEP	executorships	KEEP	executorships	Y
+nonlegislative	59		KEEP	nonlegislative	KEEP	nonlegislative	Y
+aanestad	59		NAME	aanestad	NAME	Aanestad	Y
+berg-nejedly	59		NAME	berg-nejedly	NAME	Berg-Nejedly	Y
+nonaluminum	59		KEEP	nonaluminum	KEEP	nonaluminum	Y
+bronzan	59	bronze,brennan	FIX	bronze	NAME	Bronzan	N
+fications	58	fictions,fixations	GARBAGE		FIX	specifications	N
+nonwithdrawable	58		KEEP	nonwithdrawable	KEEP	nonwithdrawable	Y
+jamps	58	james,camps	NAME	jamps	FIX	james	N
+tributions	58	tribulations,attributions	FIX	tribulations	FIX	contributions	Y
+ceeeeeeeee	58		GARBAGE		GARBAGE		Y
+eneee	57	need,enter	GARBAGE		GARBAGE		Y
+dohars	57		GARBAGE		FIX	dollars	N
+eeeeeees	57		GARBAGE		GARBAGE		Y
+sinte	57	site,since	FIX	site	FIX	since	Y
+ercate	57	rate,estate	FIX	estate	FIX	create	Y
+anuum	57	annul,vacuum	GARBAGE		FIX	annum	N
+ereation	57	creation,erection	FIX	creation	FIX	creation	Y
+brary	57	barry,brady	NAME	brady	FIX	library	N
+manv	57	many,man	FIX	many	FIX	many	Y
+mmimum	57	minimum,maximum	FIX	minimum	FIX	minimum	Y
+guilucos	57		GARBAGE		GARBAGE		Y
+rights-ofway	57		KEEP	rights-ofway	FIX	rights-of-way	N
+recodified	57	codified,rectified	FIX	codified	KEEP	recodified	N
+nonproject	57		GARBAGE		KEEP	nonproject	N
+ccceeeee	57		GARBAGE		GARBAGE		Y
+cuses	56	cases,uses	FIX	cases	FIX	causes	Y
+nonprobate	56		KEEP	nonprobate	KEEP	nonprobate	Y
+cighty-five	55		GARBAGE		FIX	eighty-five	N
+yead	55	read,year	FIX	year	FIX	year	Y
+nonaccepting	55		GARBAGE		KEEP	nonaccepting	N
+calipatria	55		NAME	calipatria	NAME	Calipatria	Y
+ehminating	55	eliminating,terminating	FIX	eliminating	FIX	eliminating	Y
+subse	54	subs,subset	GARBAGE		FIX	subsequent	N
+construet	54	construed,construct	FIX	construed	FIX	construct	Y
+anee	54	ane,anew	GARBAGE		FIX	ance	N
+issuec	54	issued,issue	FIX	issued	FIX	issued	Y
+rolleall	54		GARBAGE		GARBAGE		Y
+nonparking	54	nonpaying,nonworking	KEEP	nonparking	KEEP	nonparking	Y
+pletion	53	election,portion	GARBAGE		FIX	completion	N
+thority	53	thorite	FIX	thority	FIX	authority	Y
+hibited	53	habited	FIX	hibited	FIX	prohibited	Y
+enses	53	eases,lenses	FIX	lenses	FIX	licenses	Y
+firet	53	first,fire	FIX	first	FIX	first	Y
+inelnded	53	included,intended	FIX	included	FIX	included	Y
+constituphrase	53		GARBAGE		GARBAGE		Y
+microphotographs	53	microphotograph	KEEP	microphotographs	KEEP	microphotographs	Y
+ploqtam	53		GARBAGE		GARBAGE		Y
+subfranchisor	53		KEEP	subfranchisor	KEEP	subfranchisor	Y
+counell	52	cornell	FIX	counell	FIX	council	Y
+cccee	52	cycle,cree	GARBAGE		GARBAGE		Y
+jomtly	52	comply,jointly	FIX	jointly	FIX	jointly	Y
+newsectin	52		GARBAGE		FIX	new section	N
+phenylacetone	52		KEEP	phenylacetone	KEEP	phenylacetone	Y
+apml	51	all,am	FIX	am	FIX	april	Y
+potition	51	petition,position	FIX	petition	FIX	petition	Y
+sxorion	51	orion,chorion	NAME	orion	GARBAGE		N
+onethird	51		KEEP	onethird	FIX	one-third	N
+stamislaus	51		NAME	stamislaus	NAME	Stanislaus	Y
+tirne	51	tire,tine	FIX	time	FIX	time	Y
+vards	51	wards,cards	FIX	wards	FIX	yards	Y
+eraft	51	draft,craft	FIX	draft	FIX	draft	Y
+sonnel	51	sonnet	GARBAGE		FIX	personnel	N
+newsecton	51		GARBAGE		FIX	new section	N
+penod	51	pernod	NAME	penod	FIX	period	N
+nonschool	51		FIX	nonschool	KEEP	nonschool	N
+cytotechnologist	51		KEEP	cytotechnologist	KEEP	cytotechnologist	Y
+nondomiciliary	51		FIX	nondomiciliary	KEEP	nondomiciliary	N
+apnum	50	opium,annul	GARBAGE		FIX	annum	N
+ifornia	50	fornix,ionia	FIX	ifornia	FIX	california	Y
+agement	50	agreement,agent	FIX	agement	FIX	management	Y
+incorpora	50	incorporate,corpora	FIX	incorpora	FIX	incorporates	Y
+semor	50	senor	NAME	senor	FIX	senior	N
+appropriaappropriated	50		GARBAGE		FIX	appropriated	N
+cleeted	50	fleeted,sleeted	GARBAGE		FIX	elected	N
+gabilan	50	fabian,basilan	NAME	gabilan	NAME	Gabilan	Y
+neonatorum	50		KEEP	neonatorum	KEEP	neonatorum	Y
+sctc	50	act,sec	FIX	sctc	FIX	section	Y
+annnm	49	annam	NAME	annnm	FIX	annum	N
+omee	49	omer,omen	GARBAGE		FIX	office	N
+ouly	49	only,july	FIX	ouly	FIX	only	Y
+buperin	49	burin,butyrin	GARBAGE		FIX	superintendent	N
+eeeeeeeeeeeee	49		GARBAGE		GARBAGE		Y
+contamers	49	containers,consumers	FIX	contamers	FIX	containers	Y
+rightsof-way	49		KEEP	rightsof-way	FIX	rights-of-way	N
+nonemployee	49		FIX	nonemployee	KEEP	nonemployee	N
+neneeee	49		GARBAGE		GARBAGE		Y
+micrographics	49		KEEP	micrographics	KEEP	micrographics	Y
+xiti	48	titi,ziti	GARBAGE		KEEP	xiti	N
+ecee	48	emcee	FIX	ecee	GARBAGE		N
+deerce	48	deere	FIX	deere	FIX	decree	Y
+jnly	48	only,july	FIX	only	FIX	july	Y
+reletting	48	resetting,relenting	FIX	reletting	KEEP	reletting	N
+oddnumbered	48	outnumbered	FIX	oddnumbered	FIX	odd-numbered	Y
+nonrepairable	48	unrepairable	FIX	unrepairable	KEEP	nonrepairable	N
+nonsworn	48	forsworn	FIX	nonsworn	KEEP	nonsworn	N
+thesaid	47	thebaid	KEEP	thesaid	FIX	the said	N
+zanjas	47	ganjas	NAME	zanjas	KEEP	zanjas	N
+ccceeeeee	47		GARBAGE		GARBAGE		Y
+ercam	47	cream,gram	FIX	cream	FIX	cream	Y
+eusting	47	dusting,easting	FIX	eusting	FIX	existing	Y
+eeeeees	47	peewees,teepees	GARBAGE		GARBAGE		Y
+preaddressed	47	readdressed	FIX	preaddressed	KEEP	preaddressed	N
+n-ethylephedrine	47		KEEP	n-ethylephedrine	KEEP	n-ethylephedrine	Y
+acerned	46	accrued,earned	FIX	accrued	FIX	concerned	Y
+odispo	46	disco,dipso	GARBAGE		NAME	Obispo	N
+erest	46	erect,rest	FIX	rest	FIX	interest	Y
+lampara	46	lamar,samara	NAME	lampara	KEEP	lampara	N
+mghts	46	mights	FIX	mights	FIX	rights	Y
+deliverv	46	delivery,deliver	FIX	delivery	FIX	delivery	Y
+earrving	46	earring	FIX	earring	FIX	carrying	Y
+mills-alquist-deddeh	46		NAME	mills-alquist-deddeh	NAME	Mills-Alquist-Deddeh	Y
+noncontract	46		GARBAGE		KEEP	noncontract	N
+n-methylephedrine	46		KEEP	n-methylephedrine	KEEP	n-methylephedrine	Y
+lempert-keene-seastrand	46		NAME	lempert-keene-seastrand	NAME	Lempert-Keene-Seastrand	Y
+gations	45	nations,cations	FIX	cations	FIX	obligations	Y
+seventyone	45		FIX	seventy one	FIX	seventy-one	Y
+aequiring	45	requiring,acquiring	FIX	acquiring	FIX	acquiring	Y
+nondelinquent	45		KEEP	nondelinquent	KEEP	nondelinquent	Y
+nonhospital	45		KEEP	nonhospital	KEEP	nonhospital	Y
+monagan	45	monaghan,monacan	NAME	Monaghan	NAME	Monagan	Y
+nondecay	45		KEEP	nondecay	KEEP	nondecay	Y
+incorpo	44		FIX	incorporate	FIX	incorporates	Y
+steerers	44	steerer	FIX	steerers	KEEP	steerers	N
+xiia	44	ixia	GARBAGE		KEEP	xiia	N
+hearme	44	hearse,heaume	GARBAGE		GARBAGE		Y
+uncler	44	uncle,unclear	FIX	uncle	FIX	unclear	Y
+eeeeeeeeees	44		GARBAGE		GARBAGE		Y
+nonprotected	44	unprotected	FIX	unprotected	KEEP	nonprotected	N
+vuich	44	such,which	FIX	such	FIX	such	Y
+anveles	43	aneles	GARBAGE		NAME	Angeles	N
+istrator	43	stator,castrator	FIX	administrator	FIX	administrator	Y
+coer	43	cover,cor	FIX	cor	FIX	cover	Y
+drytown	43	dayton,drown	NAME	Drytown	NAME	Drytown	Y
+cighty-three	43		FIX	eighty three	FIX	eighty-three	Y
+terins	43	terns,serins	GARBAGE		FIX	terms	N
+appropriain	43	appropriate,appropriation	FIX	appropriation	FIX	appropriation	Y
+hercinabove	43		GARBAGE		FIX	hereinabove	N
+licensce	43	license,licensee	FIX	license	FIX	license	Y
+nonmerit	43		KEEP	nonmerit	KEEP	nonmerit	Y
+tified	42	tidied,tiffed	FIX	certified	FIX	certified	Y
+stule	42	stale,style	FIX	style	FIX	statute	Y
+bation	42	nation,cation	FIX	caption	FIX	probation	Y
+onehundredths	42		KEEP	onehundredths	FIX	one-hundredths	N
+eeeeeeeeeeeeee	42		GARBAGE		GARBAGE		Y
+rnade	42	reade	FIX	made	FIX	made	Y
+certineate	42		FIX	certificate	FIX	certificate	Y
+heensee	42		GARBAGE		FIX	licensee	N
+roncovieri	42		NAME	Roncovieri	NAME	Roncovieri	Y
+butions	42	buttons,bunions	FIX	buttons	FIX	contributions	Y
+dihydrocodeinone	42		KEEP	dihydrocodeinone	KEEP	dihydrocodeinone	Y
+nonconfining	42		KEEP	nonconfining	KEEP	nonconfining	Y
+pledgees	41	pledges,pledgee	FIX	pledgees	KEEP	pledgees	N
+fortytwo	41		KEEP	fortytwo	FIX	forty-two	N
+rutes	41	rules,rates	FIX	rules	FIX	rules	Y
+eceeee	41	eceses	GARBAGE		GARBAGE		Y
+rectly	41	erectly	FIX	directly	FIX	directly	Y
+honses	41	houses,horses	FIX	houses	FIX	houses	Y
+exeented	41	expended,executed	FIX	expended	FIX	executed	Y
+depu	41	depp	GARBAGE		FIX	deputy	N
+torth	41	forth,north	FIX	forth	FIX	forth	Y
+siskivou	41		GARBAGE		NAME	Siskiyou	N
+statcs	41	states,stats	FIX	states	FIX	states	Y
+cahformia	41		NAME	California	FIX	california	N
+audiometrist	41	audiometric	FIX	audiometrist	KEEP	audiometrist	N
+domenigoni	41		NAME	Domeniconi	NAME	Domenigoni	Y
+privatizer	41	privatize,privatized	FIX	privatized	KEEP	privatizer	N
+nonassisted	41	unassisted	FIX	unassisted	KEEP	nonassisted	N
+jtpa	41	ta,pa	GARBAGE		KEEP	JTPA	N
+annim	40	annie,annam	NAME	Annie	FIX	annum	N
+ppropria	40		GARBAGE		FIX	appropriation	N
+chises	40	chases,crises	FIX	crises	FIX	franchises	Y
+inaking	40	inking,snaking	FIX	snaking	FIX	making	Y
+inws	40	ins,ines	GARBAGE		FIX	laws	N
+appropna	40		GARBAGE		FIX	appropriation	N
+exeention	40	exemption,execution	FIX	execution	FIX	exemption	Y
+elee	40	lee,else	NAME	Lee	FIX	else	N
+dations	40	nations,cations	FIX	nations	FIX	foundations	Y
+revolv	40	revolve,revolt	FIX	revolve	FIX	revolve	Y
+misdemeanants	40	misdemeanant	FIX	misdemeanant	KEEP	misdemeanants	N
+demulsifiers	40	emulsifiers,demulsifies	FIX	demulsifiers	KEEP	demulsifiers	N
+midpeninsula	40		NAME	Midpeninsula	KEEP	midpeninsula	N
+nonprepackaged	40		GARBAGE		KEEP	nonprepackaged	N
+termof	39	termor	GARBAGE		FIX	term of	N
+fortyone	39	foregone,fortune	FIX	fortyone	FIX	forty-one	Y
+ninetysix	39		KEEP	ninetysix	FIX	ninety-six	N
+inany	39	inane	FIX	inane	FIX	in any	Y
+tations	39	stations,nations	FIX	stations	FIX	stations	Y
+caminetti	39	marinetti	NAME	Marinetti	NAME	Caminetti	Y
+btals	39	baals	GARBAGE		FIX	totals	N
+levving	39	levying,leaving	FIX	levying	FIX	levying	Y
+displaved	39	displayed,displaced	FIX	displayed	FIX	displayed	Y
+nonpotable	39		KEEP	nonpotable	KEEP	nonpotable	Y
+reneal	39	repeal,renewal	FIX	repeal	FIX	repeal	Y
+uncreamed	39	uncreated,undreamed	GARBAGE		GARBAGE		Y
+audiometrists	39		KEEP	audiometrists	KEEP	audiometrists	Y
+compensability	39	condensability	GARBAGE		KEEP	compensability	N
+cost-of-hving	39		GARBAGE		FIX	cost-of-living	N
+nonfederally	39		KEEP	nonfederally	KEEP	nonfederally	Y
+forestwide	39	foreside	FIX	forestwide	KEEP	forestwide	N
+nonerasable	39	inerasable	GARBAGE		KEEP	nonerasable	N
+commander-in-chicf	38		GARBAGE		FIX	commander-in-chief	N
+fected	38	felted,feted	GARBAGE		FIX	affected	N
+offunds	38	offends	GARBAGE		FIX	of funds	N
+proeceding	38	preceding,proceeding	FIX	proceeding	FIX	proceeding	Y
+secunty	38	security,seventy	FIX	security	FIX	security	Y
+twentv-five	38		GARBAGE		FIX	twenty-five	N
+trar	38	tear,trap	GARBAGE		FIX	registrar	N
+sucli	38	sulci	GARBAGE		FIX	such	N
+appropriaotherwise	38		GARBAGE		FIX	appropriation otherwise	N
+milias	38	milia	KEEP	milias	FIX	milia	N
+culy	38	july,duly	FIX	july	FIX	july	Y
+nonhandicapped	38		KEEP	nonhandicapped	KEEP	nonhandicapped	Y
+nonpromotional	38		KEEP	nonpromotional	KEEP	nonpromotional	Y
+nonsmall	38		KEEP	nonsmall	KEEP	nonsmall	Y
+selpas	38	salpas	GARBAGE		FIX	salpas	N
+twonty-five	37		FIX	twenty-five	FIX	twenty-five	Y
+limita	37	limit,limits	FIX	limits	FIX	limitation	Y
+polico	37	policy,police	FIX	police	FIX	police	Y
+incumbrancers	37	encumbrances,encumbrancer	FIX	encumbrances	KEEP	incumbrancers	N
+cerns	37	ferns,terns	GARBAGE		FIX	concerns	N
+ional	37	tonal,ronal	GARBAGE		FIX	tional	N
+eeeeeeees	37		GARBAGE		GARBAGE		Y
+drawal	37	drawl	FIX	drawl	FIX	withdrawal	Y
+saie	37	said,same	FIX	said	FIX	sale	Y
+setoffs	37	stuffs,staffs	FIX	setoffs	KEEP	setoffs	N
+sisting	37	listing,sitting	FIX	sitting	FIX	consisting	Y
+obliga	37	oblige	FIX	oblige	FIX	obligation	Y
+meorporated	37		GARBAGE		FIX	incorporated	N
+pupus	37	lupus,pups	GARBAGE		FIX	lupus	N
+wuheereeas	37		GARBAGE		FIX	whereas	N
+counhes	37	couches	FIX	couches	FIX	counties	Y
+subdistributor	37		KEEP	subdistributor	KEEP	subdistributor	Y
+neeee	37	need,needs	FIX	need	GARBAGE		N
+shobi-zue	37		GARBAGE		KEEP	shobi-zue	N
+ticular	36	titular	FIX	titular	FIX	particular	Y
+clate	36	plate,late	FIX	plate	FIX	date	Y
+lishing	36	fishing,listing	FIX	listing	FIX	establishing	Y
+viving	36	giving,living	FIX	living	FIX	reviving	Y
+srcrron	36	sharron,scarron	GARBAGE		NAME	Sharron	N
+dupheate	36	upheave	FIX	upheave	FIX	duplicate	Y
+cightcon	36		GARBAGE		FIX	eighteen	N
+ereating	36	creating,treating	FIX	creating	FIX	creating	Y
+douars	36	douras	GARBAGE		FIX	dollars	N
+uary	36	vary,nary	KEEP	uary	FIX	january	N
+paranzella	36	tarantella	FIX	tarantella	NAME	Paranzella	N
+pandalus	36	pandanus,pandarus	NAME	pandanus	KEEP	pandalus	N
+inholding	36	infolding	FIX	infolding	KEEP	inholding	N
+stiern	36	stern	FIX	stern	NAME	Stiern	N
+pohcy	36	poncy	GARBAGE		FIX	policy	N
+prelicensing	36		FIX	prelicensing	KEEP	prelicensing	N
+safco	36	sacco	NAME	sacco	NAME	SAFCO	Y
+rected	35	erected,rented	FIX	erected	FIX	directed	Y
+actentitled	35		GARBAGE		FIX	act entitled	N
+ottice	35	office,notice	FIX	office	FIX	office	Y
+niust	35	first,must	FIX	first	FIX	must	Y
+cccceee	35		GARBAGE		GARBAGE		Y
+acknowl	35		GARBAGE		FIX	acknowledge	N
+dcem	35	deem,diem	FIX	deem	FIX	deem	Y
+venience	35	lenience	FIX	lenience	FIX	convenience	Y
+mumber	35	member,number	FIX	member	FIX	number	Y
+sattley	35	cattle,settle	NAME	sattley	NAME	Sattley	Y
+erties	35	reties	GARBAGE		FIX	properties	N
+notwith	35	nitwit,nitwits	GARBAGE		FIX	notwithstanding	N
+mumeipal	35		GARBAGE		FIX	municipal	N
+ecnter	35	center,enter	FIX	center	FIX	center	Y
+water-closct	35		GARBAGE		FIX	water-closet	N
+mcsheehy	35		NAME	mcsheehy	NAME	McSheehy	Y
+remaming	35	renaming,remaking	FIX	renaming	FIX	remaining	Y
+nonclassroom	35		KEEP	nonclassroom	KEEP	nonclassroom	Y
+lowand	35	lowland	FIX	lowland	FIX	lowland	Y
+direeter	35	directer	FIX	director	FIX	director	Y
+subdi	34	submit,sub	FIX	sub	FIX	subdi	Y
+ramento	34	ament,ramen	NAME	sacramento	FIX	ramento	N
+priations	34	privations	FIX	appropriations	FIX	priations	Y
+lighth	34	light,eighth	FIX	eighth	GARBAGE		N
+cuapr	34	cupar	NAME	cuapar	GARBAGE		N
+ticable	34	taxable,liable	FIX	taxable	FIX	practicable	Y
+onetwelfth	34		KEEP	onetwelfth	KEEP	onetwelfth	Y
+sively	34	lively	FIX	lively	GARBAGE		N
+condnet	34	conduct,consent	FIX	conduct	FIX	conduct	Y
+trahern	34	traherne	NAME	traherne	NAME	Trahern	Y
+mackerricher	34		NAME	mackerricher	NAME	Mackerricher	Y
+reflectorizing	34		GARBAGE		KEEP	reflectorizing	N
+enenenee	34		GARBAGE		GARBAGE		Y
+noncredentialed	34		KEEP	noncredentialed	KEEP	noncredentialed	Y
+nonmanagement	34		KEEP	nonmanagement	KEEP	nonmanagement	Y
+prezoned	34	rezoned	FIX	rezoned	FIX	rezoned	Y
+nonissuer	34	nonissue	FIX	nonissue	KEEP	nonissuer	N
+n-ethylpseudoephedrine	34		NAME	n-ethylpseudoephedrine	KEEP	n-ethylpseudoephedrine	N
+catheterizations	34		KEEP	catheterizations	KEEP	catheterizations	Y
+preced	33	precede,priced	FIX	precede	FIX	precede	Y
+ninetytwo	33		FIX	ninetytwo	KEEP	ninetytwo	N
+pohtical	33	poetical	FIX	poetical	FIX	political	Y
+eightyone	33		FIX	eightyone	KEEP	eightyone	N
+somoma	33	somoza	NAME	Somoma	NAME	Sonoma	Y
+xiji	33	fiji	NAME	Fiji	GARBAGE		N
+vame	33	same,name	FIX	name	FIX	same	Y
+nouce	33	nonce,douce	FIX	nonce	FIX	notice	Y
+maxe	33	made,make	FIX	make	FIX	make	Y
+avpropria	33		GARBAGE		GARBAGE		Y
+cighty-nine	33		FIX	eighty-nine	FIX	eighty-nine	Y
+ié	33	in,is	FIX	in	FIX	is	Y
+eeeeeeeees	33		GARBAGE		GARBAGE		Y
+right-ofway	33		KEEP	right-ofway	FIX	right-of-way	N
+disineorporation	33		GARBAGE		FIX	disincorporation	N
+errone	33	error,errors	FIX	error	FIX	erroneous	Y
+preventoriums	33		GARBAGE		KEEP	preventoriums	N
+asamb	33	asama	NAME	Asama	GARBAGE		N
+bronzan-mccorquodale	33		NAME	bronzan-mccorquodale	NAME	Bronzan-McCorquodale	Y
+ninetyone	32		FIX	ninetyone	KEEP	ninetyone	N
+vood	32	food,good	FIX	good	FIX	good	Y
+replanked	32	replanted	FIX	replanted	KEEP	replanked	N
+cighty-two	32		FIX	eighty-two	FIX	eighty-two	Y
+onv	32	on,one	FIX	on	FIX	on	Y
+naines	32	nines,gaines	FIX	nines	FIX	names	Y
+unnum	32	undue,annul	GARBAGE		GARBAGE		Y
+cancella	32	canella	GARBAGE		GARBAGE		Y
+sircet	32	siret	GARBAGE		FIX	street	N
+venient	32	lenient	FIX	lenient	FIX	convenient	Y
+warreas	32	warrens	FIX	warrens	FIX	whereas	Y
+tising	32	timing,rising	FIX	timing	FIX	advertising	Y
+trative	32	tractive	FIX	tractive	FIX	administrative	Y
+comphed	32	comped	GARBAGE		FIX	complied	N
+heeome	32	become,home	FIX	become	FIX	become	Y
+poliev	32	policy,police	FIX	police	FIX	policy	Y
+turer	32	surer,turner	FIX	surer	FIX	manufacturer	Y
+drodelabi	32		GARBAGE		GARBAGE		Y
+havenner	32	avenger,lavender	GARBAGE		NAME	Havenner	N
+japatul	32		NAME	japatul	NAME	Japatul	Y
+yoats	32	boats,goats	FIX	boats	FIX	boats	Y
+nonbypassable	32		KEEP	nonbypassable	KEEP	nonbypassable	Y
+nonrecreational	32		KEEP	nonrecreational	KEEP	nonrecreational	Y
+ehminate	32	terminate,eliminate	FIX	eliminate	FIX	eliminate	Y
+mbursement	32		GARBAGE		FIX	reimbursement	N
+preexpulsion	32		KEEP	preexpulsion	KEEP	preexpulsion	Y
+dbcp	32	deep,duct	GARBAGE		KEEP	dbcp	N
+disenroll	32		KEEP	disenroll	KEEP	disenroll	Y
+prequalifying	32		KEEP	prequalifying	KEEP	prequalifying	Y
+cighty-one	31		FIX	eighty-one	FIX	eighty-one	Y
+fiftysix	31		FIX	fifty-six	KEEP	fiftysix	N
+cecee	31	cease,decree	GARBAGE		GARBAGE		Y
+posals	31	poses,goals	GARBAGE		FIX	proposals	N
+tchama	31	cham,hama	GARBAGE		NAME	Tehama	N
+tants	31	tanks,ants	GARBAGE		FIX	consultants	N
+inonth	31	month,north	FIX	month	FIX	month	Y
+courity	31	county,court	FIX	county	FIX	county	Y
+demnation	31	damnation	FIX	damnation	FIX	condemnation	Y
+eneeeeeee	31		GARBAGE		GARBAGE		Y
+pror	31	prior,pro	FIX	prior	FIX	prior	Y
+appropriathereof	31		GARBAGE		GARBAGE		Y
+inefect	31	infect	FIX	infect	FIX	in effect	Y
+keting	31	meting,kiting	GARBAGE		FIX	marketing	N
+inurnment	31	inurement	FIX	inurement	FIX	inurnment	Y
+punnd	31	punned	FIX	punned	FIX	pound	Y
+elverta	31	alberta,evert	NAME	Elberta	NAME	Elverta	Y
+eeeeeeeeeeeeeee	31		GARBAGE		GARBAGE		Y
+cccceeee	31		GARBAGE		GARBAGE		Y
+ceeeeeeeeee	31		GARBAGE		GARBAGE		Y
+cccceeeeee	31		GARBAGE		GARBAGE		Y
+diphenoxylate	31		KEEP	diphenoxylate	KEEP	diphenoxylate	Y
+n-methylpseudoephedrine	31		KEEP	n-methylpseudoephedrine	KEEP	n-methylpseudoephedrine	Y
+seeeeee	30		GARBAGE		GARBAGE		Y
+eece	30	sec,each	FIX	sec	GARBAGE		N
+promded	30	prodded	FIX	prodded	FIX	provided	Y
+svon	30	sion,soon	FIX	soon	FIX	soon	Y
+cnter	30	center,enter	FIX	center	FIX	center	Y
+omees	30	omens	FIX	omens	GARBAGE		N
+nincty-six	30		FIX	ninety-six	FIX	ninety-six	Y
+exeente	30	extent,expense	FIX	extent	FIX	execute	Y
+cighty-seven	30		FIX	eighty-seven	FIX	eighty-seven	Y
+ccccee	30		GARBAGE		GARBAGE		Y
+cighty-eight	30		FIX	eighty-eight	FIX	eighty-eight	Y
+ilouse	30	louse,blouse	FIX	louse	FIX	house	Y
+appropriadollars	30		GARBAGE		GARBAGE		Y
+yoio	30	yoko	NAME	Yoko	GARBAGE		N
+erans	30	evans,earns	NAME	Evans	FIX	veterans	N
+mmor	30	moor,amor	FIX	moor	FIX	minor	Y
+corbina	30	corina	NAME	Corina	NAME	Corbina	Y
+subeontainer	30		GARBAGE		FIX	subcontainer	N
+ethy	30	ethyl,thy	FIX	ethyl	FIX	ethyl	Y
+pohey	30	pokey,pogey	NAME	Pokey	FIX	policy	N
+rimpau	30	rameau,rimbaud	NAME	Rameau	NAME	Rimpau	Y
+khandahar	30	kandahar	NAME	Kandahar	NAME	Kandahar	Y
+noncivil	30	uncivil	FIX	uncivil	KEEP	noncivil	N
+stepd	30	step,steps	FIX	step	FIX	step	Y
+cceeeeeeeeee	30		GARBAGE		GARBAGE		Y
+mdicated	30	medicated	FIX	medicated	FIX	medicated	Y
+misassignment	30	misalignment	FIX	misalignment	KEEP	misassignment	N
+duplissea	30		GARBAGE		NAME	Duplissea	N
+mobilehomes-manufactured	30		KEEP	mobilehomes-manufactured	KEEP	mobilehomes-manufactured	Y
+reroofed	30	reproofed	FIX	reproofed	KEEP	reroofed	N
+mapin	30	main,marin	NAME	marin	NAME	Marin	Y
+ruary	29	jury,guard	GARBAGE		FIX	february	N
+ficers	29	fibers,filers	FIX	officers	FIX	officers	Y
+caar	29	car,char	FIX	car	FIX	car	Y
+retums	29	rectums	GARBAGE		FIX	returns	N
+sloners	29	loners	FIX	loners	FIX	commissioners	Y
+fisea	29	filed,five	FIX	filed	FIX	fiscal	Y
+iment	29	ament	FIX	ament	GARBAGE		N
+solidated	29	validated,solicited	FIX	consolidated	FIX	consolidated	Y
+certiteate	29		GARBAGE		FIX	certificate	N
+halepense	29	halfpence	FIX	halfpence	KEEP	halepense	N
+indorsers	29	indorses,endorsers	FIX	endorsers	KEEP	indorsers	N
+whese	29	where,these	FIX	where	FIX	where	Y
+eceeeeee	29		GARBAGE		GARBAGE		Y
+suea	29	sea,sue	FIX	suea	FIX	such	Y
+appheations	29		GARBAGE		FIX	applications	N
+therecn	29	therein,thereon	FIX	therein	FIX	thereon	Y
+ribier	29	ribber,rimier	NAME	ribier	NAME	Ribier	Y
+frori	29	frore	GARBAGE		FIX	from	N
+onginal	29	anginal	FIX	original	FIX	original	Y
+approveecretary	29		GARBAGE		GARBAGE		Y
+dipheny	29	diphenyl	FIX	diphenyl	FIX	diphenyl	Y
+mecorquodale	29		GARBAGE		NAME	McCorquodale	N
+eeeneeeeeeeees	29		GARBAGE		GARBAGE		Y
+lacmta	29	lama,lacuna	NAME	lacmta	KEEP	lacmta	N
+cawelo	29	camel,camels	GARBAGE		NAME	Cawelo	N
+eceeeee	28		GARBAGE		GARBAGE		Y
+ulations	28	relations,stations	FIX	relations	FIX	regulations	Y
+stituted	28	statutes,statute	FIX	statute	FIX	constituted	Y
+sehoo	28	shoo	GARBAGE		FIX	school	N
+vowers	28	powers,voters	FIX	powers	FIX	powers	Y
+repiled	28	refiled,replied	FIX	refiled	FIX	refiled	Y
+szcrron	28	sharron,scarron	NAME	szcrron	NAME	Szcrron	Y
+seeeeeee	28		GARBAGE		GARBAGE		Y
+xame	28	same,name	FIX	same	FIX	same	Y
+joaned	28	loaned,joined	FIX	joined	FIX	loaned	Y
+iting	28	ting,siting	GARBAGE		FIX	siting	N
+innds	28	inns	FIX	inns	FIX	inns	Y
+londs	28	bonds,lands	FIX	lands	FIX	bonds	Y
+offoct	28	effect,office	FIX	effect	FIX	effect	Y
+porary	28	horary	GARBAGE		FIX	temporary	N
+calpella	28	capella	NAME	calpella	NAME	Calpella	Y
+aecording	28	according,recording	FIX	according	FIX	according	Y
+replanking	28	replanting	FIX	replanting	KEEP	replanking	N
+transue	28	transude	GARBAGE		GARBAGE		Y
+annlv	28	angle,annex	GARBAGE		FIX	annex	N
+tigation	28	ligation	FIX	ligation	FIX	litigation	Y
+caltforma	28		NAME	caltforma	NAME	California	Y
+forty-fiftil	28		FIX	forty-fifth	FIX	forty-fifth	Y
+receivec	28	receive,received	FIX	received	FIX	received	Y
+policv	28	policy,police	FIX	policy	FIX	policy	Y
+blairsden	28		NAME	Blairsden	NAME	Blairsden	Y
+iccal	28	local,fiscal	FIX	local	FIX	local	Y
+nonfire	28	bonfire	GARBAGE		KEEP	nonfire	N
+nonsupervisory	28		KEEP	nonsupervisory	KEEP	nonsupervisory	Y
+phenmetrazine	28		NAME	phenmetrazine	KEEP	phenmetrazine	N
+housecars	28	horsecars,housecarl	GARBAGE		KEEP	housecars	N
+nonschoolday	28		KEEP	nonschoolday	KEEP	nonschoolday	Y
+cceeeeeeee	28		GARBAGE		GARBAGE		Y
+nonoffending	28	unoffending	FIX	unoffending	KEEP	nonoffending	N
+vanpooling	28	carpooling	FIX	carpooling	KEEP	vanpooling	N
+nonadversarial	28		KEEP	nonadversarial	KEEP	nonadversarial	Y
+lindheim	28	blindheim	NAME	Lindheim	NAME	Lindheim	Y
+jority	27	majority,forty	FIX	majority	FIX	majority	Y
+fortysix	27	fortyish	KEEP	fortysix	KEEP	fortysix	Y
+stantial	27	spatial,statical	FIX	substantial	FIX	substantial	Y
+fiftytwo	27		KEEP	fiftytwo	KEEP	fiftytwo	Y
+bxc	27	exc,bic	GARBAGE		GARBAGE		Y
+markleeville	27		NAME	Markleeville	NAME	Markleeville	Y
+oight	27	right,eight	FIX	right	FIX	eight	Y
+whoin	27	whin	GARBAGE		FIX	whom	N
+tious	27	thous,titus	GARBAGE		GARBAGE		Y
+quict	27	quiet,quit	FIX	quiet	FIX	quiet	Y
+moucy	27	mousy	FIX	mousy	GARBAGE		N
+scem	27	seem,stem	FIX	seem	FIX	seem	Y
+payab	27	pay,payable	FIX	payable	FIX	payable	Y
+appropriahereby	27		GARBAGE		GARBAGE		Y
+enees	27	knees	FIX	knees	GARBAGE		N
+bohnett	27	burnett,bennett	NAME	bohnett	NAME	Bohnett	Y
+superindred	27		GARBAGE		GARBAGE		Y
+palities	27	polities,parities	FIX	polities	FIX	municipalities	Y
+comties	27	commies,cooties	GARBAGE		FIX	counties	N
+sveh	27	sven	NAME	sveh	FIX	such	N
+iuled	27	ruled,puled	FIX	ruled	FIX	ruled	Y
+meludes	27	eludes,deludes	FIX	eludes	FIX	includes	Y
+cholame	27	chelate,chorale	NAME	cholame	NAME	Cholame	Y
+jender	27	render,lender	FIX	render	FIX	gender	Y
+dattier	27	battier,cattier	GARBAGE		GARBAGE		Y
+dizmar	27	disbar,dagmar	GARBAGE		GARBAGE		Y
+ficer	27	fiber,filer	FIX	filer	FIX	officer	Y
+nondeductibility	27		KEEP	nondeductibility	KEEP	nondeductibility	Y
+noncompensable	27		KEEP	noncompensable	KEEP	noncompensable	Y
+dolwig	27	doling,dowie	GARBAGE		NAME	Dolwig	N
+nonspouse	27		KEEP	nonspouse	KEEP	nonspouse	Y
+cccceeeee	27		GARBAGE		GARBAGE		Y
+nonownership	27		KEEP	nonownership	KEEP	nonownership	Y
+fléchette	27		NAME	fléchette	KEEP	fléchette	N
+calnet	27	carnet	NAME	calnet	KEEP	calnet	N
+eeeeeeeeeees	27		GARBAGE		GARBAGE		Y
+hemapheresis	27		FIX	hemophoresis	KEEP	hemapheresis	N
+jeading	26	heading,reading	FIX	reading	FIX	heading	Y
+sonally	26	tonally,zonally	GARBAGE		FIX	personally	N
+ereee	26	free,creek	GARBAGE		GARBAGE		Y
+vahd	26	fahd,vaud	GARBAGE		FIX	valid	N
+ensation	26	sensation	FIX	sensation	FIX	sensation	Y
+sessed	26	sensed,fessed	FIX	sensed	FIX	assessed	Y
+licutenant-governor	26		FIX	lieutenant-governor	FIX	lieutenant-governor	Y
+loast	26	least,last	FIX	least	FIX	least	Y
+cighty-six	26		GARBAGE		FIX	eighty-six	N
+forin	26	orin,florin	GARBAGE		FIX	foreign	N
+icgal	26	legal,cal	FIX	legal	FIX	legal	Y
+vrade	26	grade,trade	FIX	grade	FIX	grade	Y
+furmsh	26	furnish,forms	FIX	furnish	FIX	furnish	Y
+narne	26	carne,marne	GARBAGE		FIX	name	N
+limt	26	list,limit	FIX	limit	FIX	limit	Y
+wuenrzas	26		GARBAGE		FIX	whereas	N
+wuere	26	where,were	FIX	where	FIX	where	Y
+heremabove	26		GARBAGE		FIX	hereinabove	N
+pistnet	26	piste,pistes	GARBAGE		FIX	district	N
+wauerras	26		GARBAGE		FIX	whereas	N
+ecurt	26	curt	FIX	curt	FIX	court	Y
+entrymen	26	vestrymen	NAME	vestrymen	FIX	entrymen	N
+nommation	26	formation,nomination	FIX	nomination	FIX	nomination	Y
+wauerzas	26		GARBAGE		FIX	whereas	N
+xill	26	bill,will	FIX	bill	FIX	bill	Y
+effee	26	effie,effed	NAME	Effie	GARBAGE		N
+jamacha	26	jamaica,camacho	NAME	Jamaica	NAME	Jamacha	Y
+nongeneral	26		GARBAGE		KEEP	nongeneral	N
+nutgrass	26	knotgrass	FIX	knotgrass	KEEP	nutgrass	N
+nonregulatory	26		GARBAGE		KEEP	nonregulatory	N
+stepc	26	step,steps	FIX	step	FIX	step	Y
+rehrement	26	recrement	GARBAGE		FIX	retirement	N
+nonvested	26	invested,converted	FIX	nonvested	KEEP	nonvested	N
+peliee	26	pelee,pelite	NAME	Pelee	FIX	police	N
+aitangemenl	26		GARBAGE		FIX	arrangement	N
+officet	26	office,officer	FIX	office	FIX	officer	Y
+airbill	26	airily,arbil	GARBAGE		KEEP	airbill	N
+schabarum	26		NAME	Schabarum	NAME	Schabarum	Y
+nonhalogenated	26		GARBAGE		KEEP	nonhalogenated	N
+nonrenew	26		GARBAGE		KEEP	nonrenew	N
+cervantez	26	cervantes	FIX	cervantes	NAME	Cervantez	N
+criginal	25	original,criminal	FIX	original	FIX	original	Y
+uation	25	nation,cation	GARBAGE		FIX	situation	N
+ditional	25	additional,national	FIX	additional	FIX	additional	Y
+cnav	25	cav	FIX	cav	GARBAGE		N
+bandred	25	banded,bandied	GARBAGE		FIX	hundred	N
+iret	25	ire,fret	GARBAGE		GARBAGE		Y
+therchy	25	thearchy	GARBAGE		FIX	thereby	N
+indorsee	25	indorsed,indorse	FIX	indorsed	KEEP	indorsee	N
+plaus	25	plans,plus	GARBAGE		FIX	plans	N
+francisen	25	francisco,franchise	NAME	francisco	NAME	Francisco	Y
+ficial	25	facial,filial	FIX	official	FIX	official	Y
+anpum	25	input,annul	GARBAGE		GARBAGE		Y
+wuenrras	25		GARBAGE		FIX	whereas	N
+sbali	25	bali	NAME	bali	FIX	shall	N
+pohce	25	ponce	GARBAGE		FIX	police	N
+serip	25	strip,scrip	FIX	scrip	FIX	scrip	Y
+deerned	25	defined,deemed	FIX	deemed	FIX	deemed	Y
+eable	25	able,enable	FIX	enable	FIX	enable	Y
+thirty-cighth	25		GARBAGE		FIX	thirty-eighth	N
+tted	25	ted,tied	KEEP	tted	GARBAGE		N
+watergates	25	watergate	NAME	watergate	KEEP	watergates	N
+subregistrar	25		GARBAGE		KEEP	subregistrar	N
+furbearing	25	forbearing	FIX	forbearing	KEEP	furbearing	N
+dstnet	25	stent,stet	KEEP	dstnet	FIX	district	N
+sinsheimer	25		NAME	sinsheimer	NAME	Sinsheimer	Y
+buchon	25	buchan	NAME	buchan	NAME	Buchon	Y
+ilarbor	25	labor,harbor	FIX	labor	FIX	harbor	Y
+eards	25	wards,cards	FIX	wards	FIX	wards	Y
+panama-pacifie	25		GARBAGE		FIX	panama-pacific	N
+pubbeation	25		GARBAGE		FIX	publication	N
+audito	25	auditor,audit	FIX	auditor	FIX	auditor	Y
+fitate	25	fixate	FIX	fixate	FIX	state	Y
+exnended	25	expended,extended	FIX	extended	FIX	expended	Y
+condemnor	25	contemnor,condemner	FIX	condemnor	KEEP	condemnor	N
+kelloggvoorhis	25		NAME	kelloggvoorhis	NAME	Kellogg-Voorhis	Y
+stepb	25	step,steps	FIX	step	FIX	step	Y
+nonforwardable	25		GARBAGE		KEEP	nonforwardable	N
+eeeneeeeeee	25		GARBAGE		GARBAGE		Y
+nisene	25	nicene	NAME	nisene	NAME	Nisene	Y
+offhighway	25		GARBAGE		FIX	off-highway	N
+ccceeeeeeee	25		GARBAGE		GARBAGE		Y
+ccceeeeeee	25		GARBAGE		GARBAGE		Y
+phenazocine	25	phenazine	FIX	phenazocine	KEEP	phenazocine	N
+decocainized	25	cocainized	FIX	decocainized	KEEP	decocainized	N
+nonearthen	25		GARBAGE		KEEP	nonearthen	N
+nondiagnostic	25		GARBAGE		KEEP	nondiagnostic	N
+buspools	25	spools	FIX	buspools	KEEP	buspools	N
+knopki	25	knock,knocks	NAME	knopki	NAME	Knopki	Y
+flushometer	25	fluorometer	FIX	flushometer	KEEP	flushometer	N
+subgrants	25	subtracts	GARBAGE		KEEP	subgrants	N
+nonprivileged	25	unprivileged	FIX	nonprivileged	KEEP	nonprivileged	N
+tuted	24	muted,tuned	FIX	muted	FIX	constituted	Y
+nardino	24	marino,sardine	NAME	nardino	NAME	Bernardino	Y
+wnere	24	where,were	FIX	where	FIX	where	Y
+cightoon	24		GARBAGE		FIX	eighteen	N
+eeneeeee	24		GARBAGE		GARBAGE		Y
+jation	24	nation,cation	FIX	nation	FIX	nation	Y
+compotent	24	competent,component	FIX	competent	FIX	competent	Y
+staic	24	stair,static	FIX	static	FIX	static	Y
+wuenrsas	24		GARBAGE		FIX	whereas	N
+innd	24	inn,ind	KEEP	innd	FIX	and	N
+appropra	24		GARBAGE		GARBAGE		Y
+neld	24	held,need	FIX	held	FIX	held	Y
+disincorporating	24		KEEP	disincorporating	KEEP	disincorporating	Y
+multiphed	24	multiped	GARBAGE		FIX	multiplied	N
+cless	24	less,class	FIX	less	FIX	class	Y
+llagas	24	llamas	NAME	llagas	NAME	Llagas	Y
+maiter	24	matter,master	FIX	matter	FIX	matter	Y
+hghting	24	lighting,hunting	FIX	lighting	FIX	lighting	Y
+tiguous	24	tenuous,exiguous	GARBAGE		FIX	contiguous	N
+famihes	24	famines,famishes	GARBAGE		FIX	families	N
+mtended	24	tended,mended	FIX	tended	FIX	intended	Y
+fective	24	festive,fictive	GARBAGE		FIX	effective	N
+aguanga	24	agana,iguana	NAME	aguanga	NAME	Aguanga	Y
+riod	24	rio,riot	KEEP	riod	FIX	period	N
+emment	24	emmett,emmet	NAME	emment	FIX	government	N
+delnery	24	deanery	GARBAGE		FIX	delivery	N
+excludible	24		GARBAGE		KEEP	excludible	N
+eeeeeeeeeeeeeeee	24		GARBAGE		GARBAGE		Y
+nonrenewed	24	unrenewed	FIX	unrenewed	KEEP	nonrenewed	N
+eeneneeeeereees	24		GARBAGE		GARBAGE		Y
+preproject	24		GARBAGE		KEEP	preproject	N
+anileridine	24		GARBAGE		KEEP	anileridine	N
+piminodine	24		GARBAGE		KEEP	piminodine	N
+isomethadone	24		GARBAGE		KEEP	isomethadone	N
+levorphanol	24		KEEP	levorphanol	KEEP	levorphanol	Y
+timpany	24	tympany,timpani	FIX	tympany	FIX	tympany	Y
+allcounty	24		FIX	all county	KEEP	allcounty	N
+phenylcyclohexyl	24		GARBAGE		KEEP	phenylcyclohexyl	N
+nonseverely	24		FIX	nonseverely	KEEP	nonseverely	N
+fayor	23	mayor,favor	FIX	mayor	FIX	favor	Y
+devisadero	23		NAME	devisadero	NAME	Divisadero	Y
+cludes	23	eludes,clues	FIX	cludes	FIX	includes	Y
+seeree	23	sheree	GARBAGE		GARBAGE		Y
+sixty-threc	23		FIX	sixty-three	FIX	sixty-three	Y
+cuoar	23	cupar	GARBAGE		GARBAGE		Y
+sirth	23	birth,sixth	FIX	sixth	FIX	sixth	Y
+providea	23	provided,provide	FIX	provided	FIX	provided	Y
+eenes	23	genes,menes	GARBAGE		GARBAGE		Y
+disposa	23	disposal,dispose	FIX	disposal	FIX	disposal	Y
+decom	23	decoy,deco	GARBAGE		FIX	decompose	N
+thirty-siath	23		FIX	thirty-sixth	FIX	thirty-sixth	Y
+veyance	23	vance,abeyance	FIX	abeyance	FIX	conveyance	Y
+devree	23	degree,decree	FIX	degree	FIX	degree	Y
+tirey	23	tire,tires	KEEP	tirey	NAME	Tirey	N
+forty-cighth	23		FIX	forty-eighth	FIX	forty-eighth	Y
+nember	23	member,number	FIX	member	FIX	member	Y
+deputyships	23		GARBAGE		KEEP	deputyships	N
+hereinahove	23		GARBAGE		FIX	hereinabove	N
+represa	23	repress	FIX	repress	NAME	Represa	N
+rnore	23	snore	FIX	snore	FIX	more	Y
+appheants	23		GARBAGE		FIX	applicants	N
+determinec	23	determined,determine	FIX	determined	FIX	determined	Y
+navable	23	namable,savable	GARBAGE		FIX	navigable	N
+governmg	23	governor,governing	FIX	governing	FIX	governing	Y
+appheatio	23		GARBAGE		FIX	application	N
+rerecordation	23	redecoration	GARBAGE		KEEP	rerecordation	N
+redrilled	23	drilled,refilled	FIX	redrilled	FIX	redrilled	Y
+delaveaga	23		NAME	delaveaga	NAME	De La Veaga	Y
+rehabili	23		GARBAGE		FIX	rehabilitate	N
+niehouse	23	firehouse,alehouse	NAME	niehouse	NAME	Niehouse	Y
+perlette	23	perlite,permeate	FIX	perlite	NAME	Perlette	N
+strohecker	23		NAME	strohecker	NAME	Strohecker	Y
+oblberg	23	arlberg	NAME	arlberg	NAME	Oblberg	Y
+eeneneeee	23		GARBAGE		GARBAGE		Y
+hydroxy-nordihydromorphinone	23		KEEP	hydroxy-nordihydromorphinone	KEEP	hydroxy-nordihydromorphinone	Y
+bezitramide	23		KEEP	bezitramide	KEEP	bezitramide	Y
+nonqualifying	23		KEEP	nonqualifying	KEEP	nonqualifying	Y
+resubmittal	23	submittal,resubmitted	FIX	resubmittal	KEEP	resubmittal	N
+nonmonetized	23		KEEP	nonmonetized	KEEP	nonmonetized	Y
+buspool	23	spool	GARBAGE		KEEP	buspool	N
+terested	22	interested,treated	FIX	interested	FIX	interested	Y
+sxcrron	22	sharron,scarron	FIX	sharron	NAME	Sxcrron	N
+siaty-three	22		FIX	sixty-three	FIX	sixty-three	Y
+slong	22	along,long	FIX	along	FIX	along	Y
+thuse	22	those,these	FIX	those	FIX	those	Y
+ccecee	22		GARBAGE		GARBAGE		Y
+adupt	22	adopt,adult	FIX	adopt	FIX	adopt	Y
+inbor	22	inborn	KEEP	inbor	FIX	labor	N
+recla	22	recta	GARBAGE		GARBAGE		Y
+assoon	22	bassoon,sassoon	GARBAGE		GARBAGE		Y
+annuni	22	annuli	FIX	annuli	GARBAGE		N
+slature	22	stature	FIX	stature	FIX	legislature	Y
+poundkeepers	22		KEEP	poundkeepers	KEEP	poundkeepers	Y
+tioner	22	toner,tinner	GARBAGE		FIX	petitioner	N
+hourd	22	hours,hour	FIX	hours	FIX	hour	Y
+accumu	22	accuse	FIX	accuse	FIX	accumulate	Y
+huichica	22		NAME	Huichica	NAME	Huichica	Y
+tillermen	22		KEEP	tillermen	KEEP	tillermen	Y
+taxley	22	talley	FIX	talley	NAME	Taxley	N
+heisinger	22	feininger	NAME	Heisinger	NAME	Heisinger	Y
+prelimi	22	prelims	FIX	prelims	FIX	preliminary	Y
+pizzutello	22		NAME	Pizzutello	NAME	Pizzutello	Y
+erypt	22	crypt,egypt	FIX	crypt	FIX	crypt	Y
+seald	22	seal,sealed	FIX	sealed	FIX	sealed	Y
+tuffree	22	toffee,unfree	GARBAGE		GARBAGE		Y
+craprer	22	crapper	FIX	crapper	GARBAGE		N
+tvne	22	tine,tune	FIX	tune	FIX	type	Y
+mvolving	22	evolving	FIX	evolving	FIX	involving	Y
+isonipecaine	22		NAME	isonipecaine	KEEP	isonipecaine	N
+subcounty	22		GARBAGE		KEEP	subcounty	N
+cusanovich	22		NAME	cusanovich	NAME	Cusanovich	Y
+ceeeeeeeeeee	22		GARBAGE		GARBAGE		Y
+foothill-deanza	22		NAME	foothill-deanza	NAME	Foothill-DeAnza	Y
+zoveinot	22		NAME	zoveinot	GARBAGE		N
+chetcuti	22		NAME	chetcuti	NAME	Chetcuti	Y
+rapozo	22	rebozo	FIX	rebozo	NAME	Rapozo	N
+alphaprodine	22		NAME	alphaprodine	KEEP	alphaprodine	N
+dextrorphan	22		NAME	dextrorphan	KEEP	dextrorphan	N
+lowincome	22	downcome	FIX	downcome	FIX	low-income	Y
+nonstakes	22		GARBAGE		KEEP	nonstakes	N
+felando	22	fernando,leland	NAME	fernando	NAME	Felando	Y
+nonamortized	22		NAME	nonamortized	KEEP	nonamortized	N
+eecee	21	emcee	FIX	emcee	GARBAGE		N
+tracted	21	traced,tracked	FIX	traced	FIX	contracted	Y
+fendant	21	pendant,fondant	FIX	pendant	FIX	defendant	Y
+seeees	21	series,serves	FIX	series	GARBAGE		N
+xiil	21	bill,will	FIX	bill	FIX	bill	Y
+gompensa	21	gompers	NAME	gompers	FIX	compensation	N
+szorton	21	shorten,norton	NAME	szorton	NAME	Szorton	Y
+tering	21	tearing,turing	FIX	tearing	FIX	entering	Y
+eightytwo	21		KEEP	eightytwo	KEEP	eightytwo	Y
+comy	21	copy,com	FIX	copy	FIX	copy	Y
+terrns	21	terns	GARBAGE		FIX	terms	N
+yood	21	food,good	FIX	good	FIX	good	Y
+crection	21	creation,erection	FIX	creation	FIX	erection	Y
+vated	21	voted,dated	FIX	voted	FIX	voted	Y
+woder	21	wider,wader	GARBAGE		FIX	wider	N
+ployés	21	ploys	GARBAGE		GARBAGE		Y
+behool	21	behoof,befool	GARBAGE		FIX	behoof	N
+ccccceeee	21		GARBAGE		GARBAGE		Y
+arnum	21	barnum,arum	GARBAGE		NAME	Barnum	N
+approprla	21		GARBAGE		GARBAGE		Y
+parls	21	parks,parts	FIX	parts	FIX	parks	Y
+anyeles	21	aneles	NAME	anyeles	NAME	Angeles	Y
+islative	21	illative,isolative	FIX	islative	FIX	legislative	Y
+beneht	21	benet	GARBAGE		FIX	benefit	N
+ioint	21	joint,point	FIX	joint	FIX	joint	Y
+cahtornia	21		NAME	cahtornia	NAME	California	Y
+onetenth	21		KEEP	onetenth	KEEP	onetenth	Y
+eome	21	home,some	FIX	home	FIX	come	Y
+teeta	21	teeth,testa	FIX	teeth	GARBAGE		N
+ficate	21	fichte,fixate	GARBAGE		FIX	certificate	N
+notwithstand	21		GARBAGE		FIX	notwithstanding	N
+nses	21	uses,ness	FIX	uses	FIX	senses	Y
+bitect	21	bisect	FIX	bisect	FIX	architect	Y
+ained	21	mined,fined	GARBAGE		FIX	obtained	N
+urgenev	21	turgenev	FIX	turgenev	NAME	Turgenev	N
+msurers	21	usurers	FIX	usurers	FIX	insurers	Y
+dinary	21	diary,binary	FIX	binary	FIX	ordinary	Y
+cuaprerr	21		GARBAGE		GARBAGE		Y
+vouth	21	south,youth	FIX	youth	FIX	youth	Y
+hicle	21	chicle	GARBAGE		FIX	vehicle	N
+mudsuckers	21		GARBAGE		KEEP	mudsuckers	N
+eeeeeeeeeeeees	21		GARBAGE		GARBAGE		Y
+nonovertime	21		GARBAGE		KEEP	nonovertime	N
+asacondition	21		GARBAGE		FIX	as a condition	N
+batiquitos	21		NAME	batiquitos	NAME	Batiquitos	Y
+preimprisonment	21		GARBAGE		KEEP	preimprisonment	N
+nonelderly	21		GARBAGE		KEEP	nonelderly	N
+hsted	21	hosted,hated	FIX	hosted	FIX	listed	Y
+metazocine	21		GARBAGE		KEEP	metazocine	N
+cytotechnologists	21		GARBAGE		KEEP	cytotechnologists	N
+elijo	21	eli,lino	NAME	elijo	NAME	Elijo	Y
+eeeeneeee	21		GARBAGE		GARBAGE		Y
+nonformulary	21		GARBAGE		KEEP	nonformulary	N
+nondepositary	21		GARBAGE		KEEP	nondepositary	N
+dextropropoxyphene	21		GARBAGE		KEEP	dextropropoxyphene	N
+unty	20	unto,unity	FIX	unto	FIX	county	Y
+eserves	20	reserves,serves	FIX	reserves	FIX	reserves	Y
+srorton	20	shorten,norton	NAME	srorton	NAME	Norton	Y
+viously	20	piously,vinously	GARBAGE		FIX	previously	N
+veyed	20	keyed,eyed	FIX	keyed	FIX	conveyed	Y
+seorton	20	shorten,norton	NAME	Norton	NAME	Norton	Y
+ereeee	20	renee,greene	GARBAGE		GARBAGE		Y
+scce	20	syce	GARBAGE		GARBAGE		Y
+cxxix	20	calix,cylix	GARBAGE		KEEP	cxxix	N
+clvi	20	clavi	FIX	clavi	KEEP	clvi	N
+twenty-fivo	20		FIX	twenty-five	FIX	twenty-five	Y
+taxen	20	taxes,taken	FIX	taxes	FIX	taken	Y
+eenees	20	renee,levees	GARBAGE		GARBAGE		Y
+thereun	20	therein,thereon	FIX	therein	FIX	thereon	Y
+erented	20	erected,rented	FIX	erected	FIX	erected	Y
+ovory	20	ivory,ovary	FIX	ivory	FIX	ivory	Y
+atrect	20	street,direct	FIX	street	FIX	direct	Y
+ency	20	envy	GARBAGE		FIX	agency	N
+mocting	20	mocking,mooting	FIX	mocking	FIX	meeting	Y
+paicl	20	pail	FIX	pail	FIX	paid	Y
+fature	20	nature,future	FIX	nature	FIX	nature	Y
+ishment	20		GARBAGE		FIX	punishment	N
+fortv	20	forth,forty	FIX	forty	FIX	forty	Y
+joeal	20	joel	NAME	Joel	NAME	Joel	Y
+bocly	20	only,body	FIX	only	FIX	body	Y
+joval	20	oval,jovial	FIX	oval	FIX	jovial	Y
+obtaming	20	obtain,obtaining	FIX	obtaining	FIX	obtaining	Y
+fecble-minded	20	feebleminded	FIX	feebleminded	FIX	feeble-minded	Y
+saultry	20	sultry	FIX	sultry	FIX	sultry	Y
+sults	20	suits,salts	FIX	suits	FIX	results	Y
+clusion	20	elusion	FIX	clusion	FIX	conclusion	Y
+creden	20	credent	FIX	credent	FIX	credence	Y
+licensec	20	license,licensed	FIX	licensec	FIX	licensed	Y
+exeeptions	20	exceptions,exemptions	FIX	exceptions	FIX	exceptions	Y
+corrugata	20	corrugate	FIX	corrugate	FIX	corrugated	Y
+eense	20	sense,cense	FIX	sense	FIX	license	Y
+nioney	20	money,nine	FIX	money	FIX	money	Y
+carners	20	careers,corners	FIX	corners	FIX	carriers	Y
+erage	20	erase,rage	FIX	erase	FIX	average	Y
+habihty	20	habits,habit	FIX	habit	FIX	liability	Y
+forty-fourtil	20		GARBAGE		GARBAGE		Y
+erative	20	elative,ergative	FIX	erative	FIX	operative	Y
+oneeighth	20		KEEP	oneeighth	FIX	one-eighth	N
+mpose	20	impose,pose	FIX	impose	FIX	impose	Y
+beope	20	people,before	FIX	people	FIX	before	Y
+fpuled	20	puled,fouled	GARBAGE		GARBAGE		Y
+appomtmen	20		GARBAGE		FIX	appointment	N
+procharter	20	recharter,trochanter	FIX	recharter	FIX	pro-charter	Y
+nondegree	20		GARBAGE		KEEP	nondegree	N
+puddingstone	20		NAME	puddingstone	KEEP	puddingstone	N
+nonretail	20	nonmetal	GARBAGE		KEEP	nonretail	N
+n-acetylanthranilic	20		NAME	n-acetylanthranilic	KEEP	n-acetylanthranilic	N
+hydrochlorofluorocarbon	20		NAME	hydrochlorofluorocarbon	KEEP	hydrochlorofluorocarbon	N
+nonpotentially	20		GARBAGE		GARBAGE		Y
+cmra	20	cara,cora	FIX	cara	GARBAGE		N
+eeneeeeeeeees	20		GARBAGE		GARBAGE		Y
+eneneeeeereees	20		GARBAGE		GARBAGE		Y
+weisenthal	20	wiesenthal	NAME	wiesenthal	NAME	Wiesenthal	Y
+kumeyaay	20		NAME	kumeyaay	NAME	Kumeyaay	Y
+neneneeee	20		GARBAGE		GARBAGE		Y
+lazzaretto	20	lazaretto	FIX	lazaretto	FIX	lazaretto	Y
+nelac	20	near,delay	KEEP	nelac	GARBAGE		N
+atplao	20	atlas	FIX	atlas	GARBAGE		N
+benzilate	20	ventilate,benzoate	FIX	benzoate	FIX	benzoate	Y
+noncharter	20	nonstarter	FIX	nonstarter	KEEP	noncharter	N
+valleyeast	20		GARBAGE		GARBAGE		Y
+kennick	20	kendrick,kenning	NAME	kendrick	NAME	Kennick	Y
+talawa	20	tarawa	NAME	tarawa	NAME	Talawa	Y
+nonsalary	20		GARBAGE		KEEP	nonsalary	N
+penasquitos	20		NAME	penasquitos	NAME	Penasquitos	Y
+porter-sesnon	20		NAME	porter-sesnon	NAME	Porter-Sesnon	Y
+sbdcs	20	sides,secs	GARBAGE		GARBAGE		Y
+hesis	20	hess,thesis	FIX	thesis	FIX	thesis	Y
+copermittee	20		GARBAGE		KEEP	co-permittee	N
+comsetuction	20		GARBAGE		FIX	construction	N
+coowned	20	crowned,clowned	FIX	crowned	FIX	co-owned	Y
+cxxvi	19	clavi	GARBAGE		KEEP	cxxvi	N
+stanislans	19		GARBAGE		NAME	Stanislaus	N
+therco	19	thereof,there	FIX	thereof	FIX	thereof	Y
+piumas	19	pumas,pimas	FIX	pumas	NAME	Plumas	N
+ployer	19	player,plover	FIX	player	FIX	player	Y
+senl	19	sell,seal	FIX	sell	FIX	seal	Y
+cxxxix	19		GARBAGE		KEEP	cxxxix	N
+clared	19	cared,cleared	FIX	cleared	FIX	declared	Y
+ccxi	19	xi,cali	GARBAGE		KEEP	ccxi	N
+surn	19	turn,sur	FIX	turn	FIX	turn	Y
+cighty-four	19		FIX	eighty-four	FIX	eighty-four	Y
+nually	19	dually	FIX	annually	FIX	annually	Y
+cxcvi	19	cacti,cocci	GARBAGE		KEEP	cxcvi	N
+lecting	19	electing,letting	FIX	electing	FIX	electing	Y
+sules	19	rules,sales	FIX	rules	FIX	rules	Y
+crar	19	car,char	FIX	car	FIX	car	Y
+cntilled	19	untilled	FIX	untilled	FIX	entitled	Y
+racts	19	acts,facts	FIX	acts	FIX	acts	Y
+neering	19	needing,nearing	FIX	needing	FIX	engineering	Y
+umne	19	one,use	FIX	one	NAME	Umne	N
+statos	19	states,stats	FIX	states	FIX	states	Y
+fiye	19	five,file	FIX	five	FIX	five	Y
+eame	19	same,name	FIX	same	FIX	same	Y
+oftive	19	office,five	FIX	office	FIX	office	Y
+onment	19	intent,consent	FIX	intent	FIX	onment	Y
+tinnin	19	tinning,tannin	FIX	tinning	NAME	Tinnin	N
+tifieate	19	titivate	FIX	titivate	FIX	certificate	Y
+pliance	19	pliancy	GARBAGE		FIX	compliance	N
+tutional	19	tuitional	FIX	constitutional	FIX	constitutional	Y
+cighty-cight	19		GARBAGE		FIX	eighty-eight	N
+didates	19	dilates	FIX	candidates	FIX	candidates	Y
+conercte	19	concrete,coerce	FIX	concrete	FIX	concrete	Y
+monumented	19	monument,documented	FIX	monumented	FIX	monumented	Y
+becorne	19	before,become	FIX	become	FIX	become	Y
+earricr	19	carrier,earlier	FIX	earlier	FIX	carrier	Y
+onefortieth	19		KEEP	onefortieth	FIX	one-fortieth	N
+htigation	19	litigation,mitigation	FIX	litigation	FIX	litigation	Y
+xita	19	rita,vita	NAME	rita	NAME	Rita	Y
+wuenrgas	19		GARBAGE		GARBAGE		Y
+nonrancid	19	nonacid	FIX	nonacid	KEEP	nonrancid	N
+honality	19	tonality	GARBAGE		FIX	nationality	N
+vearly	19	early,nearly	FIX	early	FIX	yearly	Y
+maximuin	19	maximin	FIX	maximum	FIX	maximum	Y
+ennum	19	ennui	GARBAGE		FIX	ennui	N
+issuecl	19	issued,issue	FIX	issued	FIX	issued	Y
+recreationa	19	recreation,recreational	FIX	recreational	FIX	recreational	Y
+appheatior	19		GARBAGE		FIX	application	N
+nbers	19	numbers,needs	FIX	numbers	FIX	numbers	Y
+imtiative	19	imitative	FIX	initiative	FIX	initiative	Y
+exudations	19	exudation	FIX	exudation	KEEP	exudations	N
+thermalito	19		NAME	thermalito	NAME	Thermalito	Y
+nonlicensees	19		KEEP	nonlicensees	KEEP	nonlicensees	Y
+desoxyephedrine	19		NAME	desoxyephedrine	KEEP	desoxyephedrine	N
+koverman	19	overman	FIX	overman	NAME	Koverman	N
+caponette	19	caporetto,wagonette	NAME	Caporetto	GARBAGE		N
+britschgi	19		NAME	Britschgi	NAME	Britschgi	Y
+short-dovle	19		GARBAGE		NAME	Short-Doyle	N
+biscailuz	19		NAME	Biscailuz	NAME	Biscailuz	Y
+reinjection	19	reinfection	FIX	reinfection	KEEP	reinjection	N
+cceeeeeeeee	19		GARBAGE		GARBAGE		Y
+bilhon	19	billon	FIX	billon	FIX	billion	Y
+calstart	19		NAME	Calstart	NAME	CalStart	Y
+noncharging	19		KEEP	noncharging	KEEP	noncharging	Y
+reaqa	19	reata	FIX	reata	GARBAGE		N
+misassignments	19		KEEP	misassignments	KEEP	misassignments	Y
+ghpp	19	ship,chap	GARBAGE		GARBAGE		Y
+ultrapasteurized	19		KEEP	ultrapasteurized	KEEP	ultrapasteurized	Y
+administrathot	19	administration,administrator	FIX	administration	FIX	administration	Y
+eeeeeeeeeeees	19		GARBAGE		GARBAGE		Y
+quiniela	19		NAME	quiniela	KEEP	quiniela	N
+ceceeee	18		GARBAGE		GARBAGE		Y
+cessive	18	essive	FIX	essive	FIX	excessive	Y
+benent	18	benet,bennet	NAME	Benet	FIX	benefit	N
+twoyear	18	twofer	KEEP	twoyear	FIX	two-year	N
+amonaem	18		GARBAGE		GARBAGE		Y
+cxii	18	xi,cali	FIX	xi	KEEP	cxii	N
+cxlix	18	calix,cylix	NAME	calix	KEEP	cxlix	N
+clxxx	18		KEEP	clxxx	KEEP	clxxx	Y
+cxcii	18	cacti,cecil	KEEP	cxcii	KEEP	cxcii	Y
+ccxix	18	calix,cylix	KEEP	ccxix	KEEP	ccxix	Y
+cclx	18	calx	KEEP	cclx	KEEP	cclx	Y
+polltax	18	poleax,pollux	FIX	poll tax	FIX	poll-tax	Y
+rolis	18	rolls,solis	FIX	rolls	FIX	rolls	Y
+clxvi	18	clavi	KEEP	clxvi	KEEP	clxvi	Y
+erento	18	trento	GARBAGE		NAME	Trento	N
+eont	18	ont,eon	KEEP	eont	FIX	font	N
+proteet	18	protect,protest	FIX	protect	FIX	protect	Y
+buve	18	bute	GARBAGE		GARBAGE		Y
+alarch	18	larch,anarch	NAME	alarch	FIX	larch	N
+acerne	18	accrue,acre	FIX	acre	FIX	accrue	Y
+cxxxiv	18		KEEP	cxxxiv	KEEP	cxxxiv	Y
+yold	18	sold,hold	FIX	sold	FIX	hold	Y
+oilice	18	cilice	GARBAGE		FIX	office	N
+facic	18	facia	GARBAGE		FIX	facia	N
+saucelito	18		NAME	Sausalito	NAME	Sausalito	Y
+crannell	18	cranwell	NAME	Crannell	NAME	Crannell	Y
+boncls	18	bonces	FIX	bonces	FIX	bonds	Y
+eeeene	18	greene,serene	GARBAGE		GARBAGE		Y
+viee	18	vice,view	FIX	vice	FIX	vice	Y
+settlors	18	settlor,settlers	FIX	settlors	KEEP	settlors	N
+termot	18	termor	GARBAGE		FIX	termor	N
+supphed	18	supped	FIX	supped	FIX	supplied	Y
+duiy	18	duty,duly	FIX	duty	FIX	duly	Y
+leasc	18	least,lease	FIX	lease	FIX	lease	Y
+contmued	18	construed,continued	FIX	continued	FIX	continued	Y
+perior	18	prior,period	FIX	prior	FIX	prior	Y
+fered	18	feed,fred	GARBAGE		FIX	offered	N
+mder	18	oder	GARBAGE		FIX	under	N
+ihere	18	there,where	FIX	there	FIX	there	Y
+iwenty-second	18		GARBAGE		FIX	twenty-second	N
+iments	18	aments	GARBAGE		FIX	amendments	N
+appropriatec	18	appropriated,appropriate	FIX	appropriate	FIX	appropriated	Y
+fessional	18	fusional,passional	GARBAGE		FIX	professional	N
+remova	18	removal,remove	FIX	removal	FIX	removal	Y
+proamended	18	promenaded	GARBAGE		GARBAGE		Y
+dstnets	18	stets,donets	GARBAGE		FIX	districts	N
+forty-fipth	18		GARBAGE		FIX	forty-fifth	N
+hling	18	fling,cling	FIX	cling	FIX	filing	Y
+comphanee	18		GARBAGE		FIX	compliance	N
+usive	18	five,use	GARBAGE		FIX	inclusive	N
+dumng	18	dung	GARBAGE		FIX	during	N
+onstruction	18	construction,instruction	FIX	construction	FIX	construction	Y
+wueenreas	18		GARBAGE		GARBAGE		Y
+contams	18	contain,contains	FIX	contain	FIX	contains	Y
+housmg	18	housing,house	FIX	housing	FIX	housing	Y
+specul	18	specula	GARBAGE		FIX	specul	N
+hederacea	18		GARBAGE		KEEP	hederacea	N
+pubue	18	pub,pursue	GARBAGE		FIX	public	N
+threeeighths	18		FIX	three eighths	FIX	three-eighths	Y
+pereentum	18		GARBAGE		FIX	percentum	N
+retat	18	resat	GARBAGE		GARBAGE		Y
+benents	18	bennets	FIX	benefits	FIX	benefits	Y
+jacumba	18	macumba	NAME	Jacumba	NAME	Jacumba	Y
+undenatured	18	indentured,denatured	FIX	denatured	FIX	undenatured	Y
+weitchpec	18		NAME	Weitchpec	NAME	Weitchpec	Y
+highty-first	18		FIX	eighty first	FIX	eighty-first	Y
+berkemeyer	18		NAME	Berkemeyer	NAME	Berkemeyer	Y
+defosset	18	deforest	FIX	deforest	NAME	Deforest	N
+suboffices	18	subofficer	FIX	suboffices	KEEP	suboffices	N
+rnake	18	snake,rake	FIX	snake	FIX	make	Y
+chnic	18	chic,conic	GARBAGE		FIX	ethnic	N
+bioanalysts	18	biocatalysts	FIX	bioanalysts	KEEP	bioanalysts	N
+cooper-molera	18		NAME	Cooper-Molera	NAME	Cooper-Molera	Y
+deanza	18	deana,deanna	NAME	Deanza	NAME	De Anza	Y
+nonconsumer	18		KEEP	nonconsumer	KEEP	nonconsumer	Y
+subbasins	18	subbases	FIX	subbasins	KEEP	subbasins	N
+ehmuinating	18		GARBAGE		FIX	eliminating	N
+ocjp	18	oc,cap	GARBAGE		GARBAGE		Y
+nontraffic	18		KEEP	nontraffic	KEEP	nontraffic	Y
+eeeeeeeeeeeeeeeee	18		GARBAGE		GARBAGE		Y
+nondegenerative	18		KEEP	nondegenerative	KEEP	nondegenerative	Y
+oshpd	18	shed,shad	NAME	OSHPD	GARBAGE		N
+precrisis	18	precises	FIX	precrisis	KEEP	pre-crisis	N
+fredonyer	18		GARBAGE		NAME	Fredonyer	N
+rerefined	18	redefined	FIX	redefined	FIX	re-refined	Y
+ecia	18	elia,aecia	GARBAGE		GARBAGE		Y
+structing	17	strutting	GARBAGE		FIX	constructing	N
+tablished	17	established,published	FIX	established	FIX	established	Y
+erwise	17	revise,wise	FIX	wise	FIX	otherwise	Y
+jected	17	ejected,jested	FIX	ejected	FIX	ejected	Y
+etion	17	eton	GARBAGE		FIX	section	N
+atory	17	tory,story	NAME	story	FIX	mandatory	N
+amaavit	17	akvavit,amadavat	GARBAGE		GARBAGE		Y
+cxxi	17	xi,cali	KEEP	cxxi	KEEP	cxxi	Y
+clxxi	17	clavi	KEEP	clxxi	KEEP	clxxi	Y
+cciv	17	coin,acid	KEEP	cciv	KEEP	cciv	Y
+cxlv	17	cal,call	KEEP	cxlv	KEEP	cxlv	Y
+xcvii	17		KEEP	xcvii	KEEP	xcvii	Y
+srcrton	17	sacaton	NAME	sacaton	GARBAGE		N
+lxxxvi	17		KEEP	lxxxvi	KEEP	lxxxvi	Y
+surveyor-gencral	17		FIX	surveyor general	FIX	surveyor-general	Y
+clocted	17	clotted,clocked	FIX	clotted	FIX	elected	Y
+byxbee	17	bawbee	NAME	bawbee	NAME	Byxbee	Y
+fenee	17	renee,fence	FIX	fence	FIX	fence	Y
+aqt	17	at,act	FIX	act	FIX	act	Y
+approverl	17	approver	FIX	approver	FIX	approval	Y
+clxxvi	17	clavi	KEEP	clxxvi	KEEP	clxxvi	Y
+cxcix	17	cecil,calix	NAME	calix	KEEP	cxcix	N
+unincor	17	unicorn	FIX	unicorn	FIX	unincorporated	Y
+nupa	17	pupa,nipa	GARBAGE		NAME	Nupa	N
+necting	17	netting,nesting	FIX	nesting	FIX	connecting	Y
+exeepted	17	exempted,excepted	FIX	exempted	FIX	excepted	Y
+rorth	17	forth,north	FIX	north	FIX	forth	Y
+noder	17	oder,nuder	GARBAGE		GARBAGE		Y
+nanees	17	nantes,ranees	GARBAGE		FIX	nances	N
+perey	17	perry,prey	NAME	Perry	NAME	Perey	Y
+deterinine	17	determine,determining	FIX	determine	FIX	determine	Y
+twenty-sizth	17		FIX	twenty-sixth	FIX	twenty-sixth	Y
+schomp	17	chomp	FIX	chomp	NAME	Schomp	N
+constrnet	17	construed,construct	FIX	construed	FIX	construct	Y
+whule	17	while,whole	FIX	while	FIX	while	Y
+cxxiv	17		KEEP	cxxiv	KEEP	cxxiv	Y
+indebtednesses	17		FIX	indebtednesses	FIX	indebtedness	Y
+reasonab	17	reasonable,reason	FIX	reasonable	FIX	reasonable	Y
+lavor	17	labor,favor	FIX	labor	FIX	labor	Y
+veur	17	veer,eur	GARBAGE		GARBAGE		Y
+fiith	17	faith,fifth	FIX	fifth	FIX	fifth	Y
+dential	17	dental,denial	FIX	dental	FIX	credential	Y
+evurt	17	evert	GARBAGE		FIX	court	N
+inelu	17	inlet,inert	GARBAGE		FIX	include	N
+prolongated	17	prolongate	FIX	prolongated	FIX	prolonged	Y
+laveaga	17	lavage	NAME	Laveaga	NAME	Laveaga	Y
+weisbaum	17		NAME	Weisbaum	NAME	Weisbaum	Y
+valled	17	called,valley	FIX	called	FIX	called	Y
+vlock	17	block,clock	FIX	block	FIX	block	Y
+three-cighths	17		GARBAGE		FIX	three-eighths	N
+tocal	17	local,total	FIX	local	FIX	local	Y
+onetwentieth	17		KEEP	onetwentieth	FIX	one-twentieth	N
+euts	17	nuts,cuts	FIX	cuts	FIX	cuts	Y
+siens	17	liens,signs	FIX	liens	FIX	liens	Y
+siaie	17	state,said	FIX	state	FIX	state	Y
+sibility	17	liability,ability	FIX	liability	FIX	liability	Y
+rnember	17	member,number	FIX	member	FIX	member	Y
+declarec	17	declared,declares	FIX	declared	FIX	declared	Y
+ttee	17	tee,tree	KEEP	ttee	FIX	committee	N
+meumbent	17	decumbent,recumbent	GARBAGE		FIX	incumbent	N
+servec	17	serve,served	FIX	served	FIX	served	Y
+tenpoint	17	tenpin,gunpoint	GARBAGE		GARBAGE		Y
+toint	17	joint,point	FIX	joint	FIX	joint	Y
+plovees	17	plovers	GARBAGE		FIX	employees	N
+shaii	17	shari	NAME	shari	FIX	shall	N
+istrative	17	isolative,iterative	GARBAGE		FIX	administrative	N
+resolut	17	resolute	FIX	resolute	FIX	resolution	Y
+prousions	17	profusions,prolusions	GARBAGE		FIX	provisions	N
+andriano	17	adrian,adriana	NAME	adriano	NAME	Andriano	Y
+mutualized	17	mutualize	FIX	mutualize	KEEP	mutualized	N
+lienors	17	minors,liens	FIX	liens	KEEP	lienors	N
+register-pajaronian	17		GARBAGE		NAME	Register-Pajaronian	N
+guapys	17	grapes,guards	FIX	grapes	GARBAGE		N
+calleguas	17		NAME	Calleguas	NAME	Calleguas	Y
+sulfomethane	17	sulfonmethane	FIX	sulfonmethane	KEEP	sulfomethane	N
+damsites	17	campsites,adamsite	GARBAGE		FIX	dam sites	N
+pentemper	17		GARBAGE		GARBAGE		Y
+orthoptics	17	orthotics,orthoptic	FIX	orthotics	KEEP	orthoptics	N
+nonprinted	17	unprinted	FIX	unprinted	KEEP	nonprinted	N
+komandorski	17		NAME	Komandorski	NAME	Komandorski	Y
+eeeneeeeees	17		GARBAGE		GARBAGE		Y
+noncompacting	17	noncompeting	FIX	noncompeting	KEEP	noncompacting	N
+levoalphacetylmethadol	17		GARBAGE		KEEP	levoalphacetylmethadol	N
+tetrahydrocannabinols	17	tetrahydrocannabinol	FIX	tetrahydrocannabinol	FIX	tetrahydrocannabinols	Y
+glutethimide	17		NAME	glutethimide	KEEP	glutethimide	N
+ccccceee	17		GARBAGE		GARBAGE		Y
+euthanasic	17	euthanasia	FIX	euthanasia	FIX	euthanasia	Y
+busdrivers	17		KEEP	busdrivers	FIX	bus drivers	N
+eceeeeeee	17		GARBAGE		GARBAGE		Y
+sieroty	17		GARBAGE		GARBAGE		Y
+nonsafety	17		GARBAGE		KEEP	nonsafety	N
+nonhousing	17	nonplusing	GARBAGE		KEEP	nonhousing	N
+levomethorphan	17		NAME	levomethorphan	KEEP	levomethorphan	N
+dimethoxy-alpha-methylphenethylamine	17		GARBAGE		KEEP	dimethoxy-alpha-methylphenethylamine	N
+entihes	17	entices	FIX	entices	FIX	entities	Y
+nonrecyclable	17		KEEP	nonrecyclable	KEEP	nonrecyclable	Y
+eeeeeeeeeeeeeeeeee	17		GARBAGE		GARBAGE		Y
+nonenterprise	17		FIX	nonenterprise	KEEP	nonenterprise	N
+twenty-siath	16		FIX	twenty-sixth	FIX	twenty-sixth	Y
+reeeee	16	referee,redeem	GARBAGE		GARBAGE		Y
+oné	16	on,one	FIX	one	FIX	one	Y
+cxiii	16	chili,chiai	KEEP	cxiii	KEEP	cxiii	Y
+cxv	16	cav	KEEP	cxv	KEEP	cxv	Y
+cxxxi	16		KEEP	cxxxi	KEEP	cxxxi	Y
+sxerion	16	exertion,sermon	FIX	exertion	FIX	exertion	Y
+fuing	16	suing,fling	FIX	suing	FIX	suing	Y
+ciates	16	crates,cites	FIX	cites	FIX	associates	Y
+cxciv	16	cecil	KEEP	cxciv	KEEP	cxciv	Y
+cxci	16	xi,cali	KEEP	cxci	KEEP	cxci	Y
+cccx	16	cox,coca	KEEP	cccx	KEEP	cccx	Y
+eightysix	16		FIX	eightysix	FIX	eighty-six	Y
+eccee	16	emcee	FIX	emcee	GARBAGE		N
+eenenee	16		GARBAGE		GARBAGE		Y
+unap	16	una,nap	FIX	una	GARBAGE		N
+suly	16	july,duly	FIX	july	FIX	july	Y
+lxxxii	16		KEEP	lxxxii	KEEP	lxxxii	Y
+avain	16	again,avail	FIX	again	FIX	again	Y
+poace	16	place,peace	FIX	place	FIX	place	Y
+luid	16	fluid,luis	FIX	fluid	FIX	fluid	Y
+cnable	16	unable,enable	FIX	unable	FIX	enable	Y
+turers	16	tubers,curers	FIX	curers	FIX	manufacturers	Y
+appropriapriated	16		GARBAGE		FIX	appropriated	N
+throo	16	throw,throe	FIX	throw	FIX	through	Y
+thorcon	16	thoron	GARBAGE		GARBAGE		Y
+sxco	16	such,sec	FIX	such	FIX	such	Y
+ceceeeee	16		GARBAGE		GARBAGE		Y
+nincty-four	16		FIX	ninety-four	FIX	ninety-four	Y
+beerstecher	16		GARBAGE		NAME	Beerstecher	N
+clitus	16	coitus	FIX	coitus	GARBAGE		N
+coolieism	16	coolies	FIX	coolies	KEEP	coolieism	N
+thenre	16	there,thence	FIX	there	FIX	thence	Y
+raade	16	reade	FIX	reade	FIX	made	Y
+ishable	16	stable,usable	FIX	stable	FIX	publishable	Y
+cted	16	cited,acted	FIX	cited	FIX	enacted	Y
+eneh	16	neh	KEEP	eneh	GARBAGE		N
+munie	16	june,unit	GARBAGE		FIX	muni	N
+pubite	16	suite,unite	FIX	suite	FIX	public	Y
+biam	16	bias,bim	FIX	bias	FIX	bias	Y
+constita	16	constanta	GARBAGE		FIX	constitution	N
+buper	16	buyer,super	FIX	super	FIX	super	Y
+uccessary	16	accessary	FIX	accessary	FIX	necessary	Y
+centuin	16	certain,contain	FIX	certain	FIX	certain	Y
+tuolumine	16		NAME	tuolumine	NAME	Tuolumne	Y
+continuea	16	continue,continued	FIX	continue	FIX	continued	Y
+regwar	16	regear	GARBAGE		GARBAGE		Y
+nincty-nine	16		FIX	ninety-nine	FIX	ninety-nine	Y
+rently	16	gently	FIX	gently	FIX	currently	Y
+aduit	16	adult,audit	FIX	adult	FIX	adult	Y
+tweuty-five	16		FIX	twenty-five	FIX	twenty-five	Y
+subpartnership	16		GARBAGE		KEEP	subpartnership	N
+conunission	16		FIX	commission	FIX	commission	Y
+viduals	16	visuals	FIX	individuals	FIX	individuals	Y
+zations	16	nations,cations	FIX	cations	FIX	organizations	Y
+eates	16	rates,dates	FIX	rates	FIX	rates	Y
+aiong	16	along,among	FIX	along	FIX	along	Y
+extraordi	16		GARBAGE		FIX	extraordinary	N
+determma	16		GARBAGE		FIX	determine	N
+vellow	16	yellow,fellow	FIX	yellow	FIX	yellow	Y
+createc	16	created,create	FIX	created	FIX	created	Y
+rodmen	16	hodmen	NAME	rodmen	FIX	rodmen	N
+forty-fifti	16		GARBAGE		FIX	forty-fifth	N
+adcled	16	addled	GARBAGE		FIX	added	N
+culiforma	16	cubiform	FIX	california	NAME	California	N
+fihng	16	filing,ing	FIX	filing	FIX	filing	Y
+tinuously	16	sinuously,tenuously	FIX	continuously	FIX	continuously	Y
+ealls	16	falls,walls	FIX	falls	FIX	calls	Y
+supplementa	16	supplemental,supplement	FIX	supplemental	FIX	supplemental	Y
+iail	16	mail,jail	FIX	jail	FIX	jail	Y
+chloralhydrate	16		NAME	chloralhydrate	FIX	chloral hydrate	N
+mellifica	16		NAME	mellifica	KEEP	mellifica	N
+engagec	16	engaged,engage	FIX	engaged	FIX	engaged	Y
+reation	16	creation,relation	FIX	creation	FIX	creation	Y
+vahdation	16	valuation,vacation	FIX	valuation	FIX	validation	Y
+sacramentosan	16		NAME	Sacramento San	GARBAGE		N
+wauenreas	16		GARBAGE		GARBAGE		Y
+acquirec	16	acquired,acquire	FIX	acquired	FIX	acquired	Y
+carmenita	16	armenia,carmelite	NAME	carmenita	NAME	Carmenita	Y
+henholder	16	penholder	FIX	penholder	FIX	lienholder	Y
+weybret	16		GARBAGE		NAME	Weybret	N
+nonendowment	16		GARBAGE		KEEP	nonendowment	N
+ketobemidone	16		GARBAGE		KEEP	ketobemidone	N
+proraters	16	prorates	FIX	prorates	KEEP	proraters	N
+ceeeeeeeeeeee	16		GARBAGE		GARBAGE		Y
+clawings	16	clawing	FIX	clawing	KEEP	clawings	N
+guajome	16		NAME	guajome	NAME	Guajome	Y
+simnia	16	sonia,siena	NAME	simnia	NAME	Simnia	Y
+semicossyphus	16		GARBAGE		KEEP	semicossyphus	N
+juaneno	16		NAME	juaneno	NAME	Juaneno	Y
+acjachemen	16		NAME	acjachemen	NAME	Acjachemen	Y
+eeneeeeeee	16		GARBAGE		GARBAGE		Y
+eeneeeeeeereeers	16		GARBAGE		GARBAGE		Y
+olazar	16	lazar	FIX	lazar	NAME	Olazar	N
+noncancelable	16		GARBAGE		KEEP	noncancelable	N
+alosta	16	acosta,alost	NAME	acosta	NAME	Alosta	Y
+comptche	16	comanche,campeche	NAME	comptche	NAME	Comptche	Y
+subgovernment	16		GARBAGE		KEEP	subgovernment	N
+shellstock	16		GARBAGE		KEEP	shellstock	N
+aesdp	16	aesop	FIX	aesop	GARBAGE		N
+garrapata	16		GARBAGE		NAME	Garrapata	N
+mdso	16	miso	FIX	miso	GARBAGE		N
+xitib	16	titi,titis	NAME	titi	GARBAGE		N
+hmuted	16	muted	FIX	muted	FIX	limited	Y
+preaudit	16	plaudit,preadult	GARBAGE		KEEP	pre-audit	N
+aquaculturists	16	aquaculturist	FIX	aquaculturist	FIX	aquaculturists	Y
+nontransit	16		GARBAGE		KEEP	nontransit	N
+outstationing	16		GARBAGE		KEEP	outstationing	N
+xijia	16	fiji,cilia	NAME	fiji	GARBAGE		N
+levopropoxyphene	16		GARBAGE		KEEP	levopropoxyphene	N
+moramide-intermediate	16		GARBAGE		KEEP	moramide-intermediate	N
+ssorion	15	orion,chorion	NAME	orion	FIX	section	N
+vious	15	virus,vinous	FIX	virus	FIX	previous	Y
+piration	15	portion,operation	FIX	portion	FIX	expiration	Y
+gatary	15	tatary,datary	GARBAGE		GARBAGE		Y
+cxxxii	15		KEEP	cxxxii	KEEP	cxxxii	Y
+lxxxviii	15		KEEP	lxxxviii	KEEP	lxxxviii	Y
+clvii	15	civil,claim	FIX	civil	KEEP	clvii	N
+clxxv	15		KEEP	clxxv	KEEP	clxxv	Y
+clxxix	15		KEEP	clxxix	KEEP	clxxix	Y
+clxxxiv	15		KEEP	clxxxiv	KEEP	clxxxiv	Y
+ccxxii	15		KEEP	ccxxii	KEEP	ccxxii	Y
+ccxlix	15	calix,cylix	NAME	calix	KEEP	ccxlix	N
+cclix	15	calix,cylix	NAME	calix	KEEP	cclix	N
+maae	15	made,make	FIX	made	FIX	made	Y
+replank	15	replant	FIX	replant	FIX	replant	Y
+destruc	15	destruct	KEEP	destruct	FIX	destruct	N
+clviii	15		GARBAGE		KEEP	clviii	N
+bzc	15	bic	GARBAGE		GARBAGE		Y
+reeset	15	reese,reset	FIX	reset	FIX	reset	Y
+seseee	15	lessee,severe	GARBAGE		FIX	lessee	N
+aaca	15	abaca	GARBAGE		GARBAGE		Y
+ceeeeeees	15		GARBAGE		GARBAGE		Y
+seeeeeeee	15		GARBAGE		GARBAGE		Y
+clxviii	15		GARBAGE		KEEP	clxviii	N
+apie	15	pie,ape	FIX	ape	FIX	apiece	Y
+siven	15	given,seven	FIX	given	FIX	given	Y
+suscol	15	succor,cusco	GARBAGE		NAME	Suscol	N
+resnit	15	reknit,resit	FIX	reknit	GARBAGE		N
+commanderin-chief	15		KEEP	commanderin-chief	FIX	commander-in-chief	N
+ient	15	cent,rent	FIX	cent	FIX	client	Y
+gnid	15	enid,grid	GARBAGE		NAME	Enid	N
+hydesville	15		NAME	hydesville	NAME	Hydesville	Y
+approprialars	15	appropriators	FIX	appropriators	FIX	appropriators	Y
+enurt	15	enure	FIX	enure	FIX	court	Y
+cyual	15	equal,actual	FIX	equal	FIX	equal	Y
+eligi	15	eli,align	GARBAGE		FIX	eligible	N
+enghsh	15	english,eighth	FIX	english	FIX	english	Y
+precita	15	recite,recital	FIX	recite	NAME	Precita	N
+scnute	15	scute	FIX	scute	FIX	statute	Y
+proceding	15	preceding,proceeding	FIX	proceeding	FIX	proceeding	Y
+disere	15	disease,desire	FIX	disease	FIX	disease	Y
+tioning	15	tinning,toning	GARBAGE		FIX	rationing	N
+exeenting	15	extending,excepting	FIX	extending	FIX	excepting	Y
+duily	15	duly,daily	FIX	duly	FIX	duly	Y
+vreated	15	created,treated	FIX	created	FIX	created	Y
+olema	15	ulema	NAME	Olema	NAME	Olema	Y
+veying	15	vexing,eying	GARBAGE		FIX	conveying	N
+matiposa	15		NAME	Mariposa	NAME	Mariposa	Y
+bercby	15	bercy	NAME	bercy	FIX	hereby	N
+artment	15	apartment,argument	FIX	apartment	FIX	department	Y
+srcriox	15		GARBAGE		GARBAGE		Y
+neunaber	15		NAME	Neunaber	NAME	Neunaber	Y
+ohleyer	15	obeyer,volleyer	GARBAGE		NAME	Ohleyer	N
+vacquerel	15	becquerel,lacquered	NAME	Becquerel	NAME	Vacquerel	Y
+appropia	15		GARBAGE		FIX	appropriation	N
+subinit	15	subunit	FIX	subunit	FIX	submit	Y
+inatters	15	natters	GARBAGE		FIX	matters	N
+woless	15	unless,less	FIX	unless	FIX	unless	Y
+fisce	15	fisc,fiscs	GARBAGE		FIX	fisc	N
+bined	15	mined,fined	FIX	fined	FIX	combined	Y
+ventions	15	mentions	FIX	mentions	FIX	conventions	Y
+cifically	15	civically	GARBAGE		FIX	specifically	N
+neuces	15	deuces	FIX	deuces	GARBAGE		N
+inatter	15	natter	FIX	natter	FIX	matter	Y
+muenter	15	muenster	FIX	muenster	NAME	Muenter	N
+compensashall	15		GARBAGE		GARBAGE		Y
+orestimba	15		GARBAGE		NAME	Orestimba	N
+pened	15	opened,pended	FIX	opened	FIX	opened	Y
+yment	15	ament	FIX	ament	FIX	payment	Y
+sced	15	sued,seed	FIX	seed	FIX	sued	Y
+pedrotti	15		NAME	pedrotti	NAME	Pedrotti	Y
+inseet	15	insert,insect	FIX	insert	FIX	insect	Y
+anrum	15	antrum,arum	GARBAGE		FIX	antrum	N
+crossarms	15	crossarm	KEEP	crossarms	KEEP	crossarms	Y
+wauersas	15		GARBAGE		GARBAGE		Y
+unincorpo	15		GARBAGE		FIX	unincorporated	N
+charicr	15	charier	FIX	charier	FIX	charter	Y
+ssary	15	scary	GARBAGE		FIX	necessary	N
+crade	15	grade,trade	FIX	grade	FIX	grade	Y
+commenemg	15		GARBAGE		FIX	commencing	N
+whcle	15	while,whole	FIX	whole	FIX	whole	Y
+operatior	15	operation,operator	FIX	operator	FIX	operation	Y
+amendme	15	amended,amend	FIX	amended	FIX	amendment	Y
+stuls	15	stubs,studs	FIX	stubs	FIX	stubs	Y
+therce	15	there,thence	FIX	there	FIX	thence	Y
+newseetion	15		GARBAGE		GARBAGE		Y
+vcting	15	voting,acting	FIX	voting	FIX	voting	Y
+jurisdict	15	juristic,juridic	FIX	juridic	FIX	jurisdiction	Y
+wacreas	15	whereas,areas	FIX	whereas	FIX	whereas	Y
+mamme	15	mamie,mamma	NAME	Mamie	FIX	mammae	N
+encum	15	incur,centum	GARBAGE		FIX	encumbrance	N
+assessme	15	assessment,assessed	FIX	assessment	FIX	assessment	Y
+appheaton	15	appleton	NAME	appleton	NAME	Appleton	Y
+tributor	15	tribute,tributary	FIX	tribute	FIX	contributor	Y
+pped	15	pied,pled	GARBAGE		FIX	clipped	N
+annlied	15	applied,annexed	FIX	applied	FIX	applied	Y
+pursuar	15	pursuer	GARBAGE		FIX	pursuant	N
+luitwieler	15		GARBAGE		NAME	Luitwieler	N
+tender-meated	15		GARBAGE		KEEP	tender-meated	N
+cceeeeeeeeeee	15		GARBAGE		GARBAGE		Y
+ceeeeeeeeeeeee	15		GARBAGE		GARBAGE		Y
+preapprentice	15		GARBAGE		KEEP	pre-apprentice	N
+eeeneee	15		GARBAGE		GARBAGE		Y
+grpi	15	grip	FIX	grip	FIX	grip	Y
+calstars-related	15		GARBAGE		NAME	CalSTARS-related	N
+usdva	15	suva,siva	GARBAGE		GARBAGE		Y
+reusers	15	reuses,reuters	FIX	reuses	KEEP	reusers	N
+noncommunications-related	15		GARBAGE		KEEP	noncommunications-related	N
+erenene	15	renee,greene	NAME	Renee	GARBAGE		N
+tracen	15	trace,traced	FIX	trace	FIX	traced	Y
+piperidinocyclohexane	15		GARBAGE		KEEP	piperidinocyclohexane	N
+czuleger	15		GARBAGE		NAME	Czuleger	N
+sbbem	15	seem,stem	FIX	seem	FIX	seem	Y
+mitial	15	initial,mutual	FIX	initial	FIX	initial	Y
+davis-dolwig	15		NAME	Davis-Dolwig	NAME	Davis-Dolwig	Y
+noncollege	15		KEEP	noncollege	KEEP	noncollege	Y
+leshe	15	leste,lethe	GARBAGE		NAME	Leshe	N
+chloroephedrine	15		GARBAGE		KEEP	chloroephedrine	N
+chloropseudoephedrine	15		GARBAGE		KEEP	chloropseudoephedrine	N
+nonyard	15	nonfarm,onward	KEEP	nonyard	GARBAGE		N
+seera	15	seer,seers	FIX	seer	FIX	seer	Y
+subschedules	15		GARBAGE		KEEP	subschedules	N
+nondosage	15		GARBAGE		KEEP	nondosage	N
+diphenylpropane-carboxylic	15		GARBAGE		KEEP	diphenylpropane-carboxylic	N
+pheresis	15	apheresis	FIX	apheresis	FIX	apheresis	Y
+clxxii	14		KEEP	clxxii	KEEP	clxxii	Y
+cciii	14	chili,acini	KEEP	cciii	KEEP	cciii	Y
+onap	14	nap,snap	FIX	nap	GARBAGE		N
+disaffirmed	14	disaffirm	FIX	disaffirm	KEEP	disaffirmed	N
+plicant	14	pliant	FIX	pliant	FIX	applicant	Y
+amenem	14	amended,amend	FIX	amended	FIX	amended	Y
+cxxxviii	14		KEEP	cxxxviii	KEEP	cxxxviii	Y
+ision	14	sion,vision	FIX	vision	FIX	vision	Y
+orany	14	oran,orang	GARBAGE		GARBAGE		Y
+eete	14	rete,pete	GARBAGE		GARBAGE		Y
+clxxxix	14		KEEP	clxxxix	KEEP	clxxxix	Y
+cxcv	14	coca,csc	KEEP	cxcv	KEEP	cxcv	Y
+ccxiv	14		KEEP	ccxiv	KEEP	ccxiv	Y
+breuner	14	brenner,breuer	NAME	Breuner	NAME	Breuner	Y
+xviti	14	vita,titi	GARBAGE		GARBAGE		Y
+siaty-eight	14		FIX	eighty-eight	FIX	sixty-eight	Y
+fanding	14	funding,finding	FIX	funding	FIX	funding	Y
+nently	14	gently,neatly	FIX	neatly	FIX	gently	Y
+cclxiv	14		KEEP	cclxiv	KEEP	cclxiv	Y
+cccxx	14	coccyx	GARBAGE		KEEP	cccxx	N
+cxcvii	14		KEEP	cxcvii	KEEP	cxcvii	Y
+censee	14	cense,censed	FIX	cense	FIX	licensee	Y
+fitle	14	title,file	FIX	title	FIX	title	Y
+cereee	14	creek,career	GARBAGE		GARBAGE		Y
+clxxxii	14		KEEP	clxxxii	KEEP	clxxxii	Y
+cclxx	14	calyx,calix	GARBAGE		KEEP	cclxx	N
+tached	14	taches,tache	GARBAGE		FIX	attached	N
+soners	14	toners,sones	GARBAGE		FIX	prisoners	N
+jevicd	14	levied,device	FIX	levied	FIX	levied	Y
+towit	14	twit,tobit	KEEP	towit	FIX	to-wit	N
+tating	14	taking,stating	FIX	taking	FIX	stating	Y
+cuact	14	coact	GARBAGE		GARBAGE		Y
+iability	14	liability,ability	FIX	liability	FIX	liability	Y
+pranted	14	granted,printed	FIX	granted	FIX	granted	Y
+eeer	14	ever,beer	GARBAGE		GARBAGE		Y
+cxxxvi	14		KEEP	cxxxvi	KEEP	cxxxvi	Y
+gioners	14	goners	GARBAGE		FIX	petitioners	N
+fifly-nine	14		FIX	fifty-nine	FIX	fifty-nine	Y
+represcnicd	14		FIX	represented	FIX	represented	Y
+sarily	14	scarily,warily	FIX	necessarily	FIX	necessarily	Y
+tised	14	tied,tiled	FIX	tied	FIX	advertised	Y
+exceuting	14	excepting,executing	FIX	executing	FIX	executing	Y
+cccccee	14		GARBAGE		GARBAGE		Y
+plice	14	place,police	FIX	police	FIX	police	Y
+xil	14	oil,xi	FIX	oil	GARBAGE		N
+rohnerville	14		NAME	Rohnerville	NAME	Rohnerville	Y
+ership	14	reship	FIX	ownership	FIX	ownership	Y
+shect	14	sheet,sect	FIX	sheet	FIX	sheet	Y
+ccxii	14		GARBAGE		KEEP	ccxii	N
+niember	14	member,number	FIX	member	FIX	member	Y
+cellaneous	14		GARBAGE		FIX	miscellaneous	N
+twenty-sicth	14		FIX	twenty-sixth	FIX	twenty-sixth	Y
+snown	14	known,shown	FIX	shown	FIX	known	Y
+gocs	14	goes,docs	FIX	goes	FIX	goes	Y
+euled	14	ruled,puled	FIX	ruled	FIX	ruled	Y
+fitng	14	filing,ing	FIX	filing	FIX	filing	Y
+appren	14	apples,apparent	FIX	apparent	FIX	apprentice	Y
+assessmer	14	assessment,assessed	FIX	assessment	FIX	assessment	Y
+theretn	14	thereto,therein	FIX	thereto	FIX	therein	Y
+ulation	14	elation	GARBAGE		FIX	regulation	N
+bursed	14	burned,buried	FIX	buried	FIX	reimbursed	Y
+miums	14	mums	GARBAGE		FIX	premiums	N
+ppoint	14	appoint,point	FIX	appoint	FIX	appoint	Y
+munict	14	munich	FIX	munich	FIX	municipal	Y
+sausal	14	causal	GARBAGE		NAME	Sausal	N
+indorsees	14	indorses	FIX	indorses	KEEP	indorsees	N
+resewering	14	reseeding,resewing	FIX	reseeding	FIX	resewering	Y
+nexation	14	negation,vexation	FIX	negation	FIX	annexation	Y
+preemets	14	preempts	FIX	preempts	FIX	preempts	Y
+billheads	14	billhead,bullheads	GARBAGE		KEEP	billheads	N
+jeneth	14	length,tenth	FIX	length	FIX	length	Y
+fifty-cighth	14		GARBAGE		FIX	fifty-eighth	N
+eonneil	14	donnell,neil	NAME	O'Neill	NAME	O'Neill	Y
+jies	14	ties,dies	FIX	ties	FIX	ties	Y
+containmg	14	contained,contain	FIX	contained	FIX	containing	Y
+eutting	14	cutting,putting	FIX	cutting	FIX	cutting	Y
+rernain	14	certain,remain	FIX	remain	FIX	remain	Y
+horized	14	horned,horizon	GARBAGE		FIX	authorized	N
+ofteers	14	others,offers	FIX	others	FIX	officers	Y
+sixty-cighth	14		GARBAGE		FIX	sixty-eighth	N
+protempore	14		KEEP	protempore	FIX	pro-tempore	N
+hearmes	14	hearses,hermes	GARBAGE		GARBAGE		Y
+msuranee	14	suwanee	GARBAGE		FIX	insurance	N
+praving	14	paving,proving	FIX	paving	FIX	paving	Y
+hibiting	14	limiting,visiting	FIX	limiting	FIX	prohibiting	Y
+nnee	14	knee	FIX	knee	FIX	knee	Y
+mvolved	14	evolved	FIX	evolved	FIX	involved	Y
+mittees	14	mittens	GARBAGE		FIX	committees	N
+waurreas	14	warrens	FIX	warrens	FIX	whereas	Y
+forty-fiftii	14		FIX	forty-fifth	FIX	forty-fifth	Y
+pauciflorus	14		GARBAGE		KEEP	pauciflorus	N
+retam	14	ream	FIX	ream	FIX	retain	Y
+astnet	14	asset,assent	FIX	asset	FIX	assent	Y
+advertismg	14	advertising,advertise	FIX	advertising	FIX	advertising	Y
+shanock	14	hancock,shock	NAME	hancock	NAME	Hancock	Y
+chauf	14	chaff	FIX	chaff	FIX	chauffeur	Y
+appropriawise	14		GARBAGE		GARBAGE		Y
+appropiia	14		GARBAGE		FIX	appropriation	N
+nulk	14	bulk,null	FIX	bulk	FIX	bulk	Y
+roneovieri	14		GARBAGE		GARBAGE		Y
+vross	14	gross,cross	FIX	gross	FIX	gross	Y
+nonconsumptive	14		GARBAGE		KEEP	nonconsumptive	N
+tionality	14	tonality	FIX	tonality	FIX	nationality	Y
+mscal	14	mescal	FIX	mescal	FIX	fiscal	Y
+sials	14	seals,rials	FIX	seals	FIX	serials	Y
+reurement	14	recrement	GARBAGE		FIX	requirement	N
+admmstra	14		GARBAGE		FIX	administration	N
+neously	14	onerously,nervously	FIX	onerously	FIX	simultaneously	Y
+ownec	14	owner,owned	FIX	owner	FIX	owned	Y
+chargec	14	charge,charges	FIX	charge	FIX	charged	Y
+alloca	14	allow,allocate	FIX	allocate	FIX	allocate	Y
+loara	14	lara,lora	NAME	lara	NAME	Loara	Y
+solstitialis	14	solstitial	FIX	solstitial	KEEP	solstitialis	N
+nonpark	14	nonfarm,nonary	FIX	nonfarm	KEEP	nonpark	N
+taxdeeded	14		GARBAGE		KEEP	tax-deeded	N
+mutolo	14	mutely,mutule	GARBAGE		GARBAGE		Y
+nonlicensee	14		KEEP	nonlicensee	KEEP	nonlicensee	Y
+inacounty	14		GARBAGE		FIX	in a county	N
+luckel	14	lucked	FIX	lucked	GARBAGE		N
+soupfin	14	souping,on	FIX	souping	KEEP	soupfin	N
+moabi	14	moab	NAME	Moab	NAME	Moabi	Y
+hsting	14	hosting,sting	FIX	hosting	FIX	hosting	Y
+resoluti	14	resolute	FIX	resolute	FIX	resolution	Y
+wnting	14	wanting,anting	FIX	wanting	FIX	writing	Y
+tamiasciurus	14		NAME	Tamiasciurus	KEEP	tamiasciurus	N
+proqian	14	propman,protean	GARBAGE		FIX	program	N
+conservahon	14	conservation,conservator	FIX	conservation	FIX	conservation	Y
+ippb	14	pub,pipe	GARBAGE		GARBAGE		Y
+noncohabiting	14		KEEP	noncohabiting	KEEP	noncohabiting	Y
+itahes	14	itches	FIX	itches	FIX	itches	Y
+clylp	14	clyde,clip	NAME	Clyde	GARBAGE		N
+munemori	14		NAME	Munemori	NAME	Munemori	Y
+cupas	14	cups,upas	FIX	cups	FIX	cups	Y
+xuia	14	xi,suit	GARBAGE		GARBAGE		Y
+eneneeeee	14		GARBAGE		GARBAGE		Y
+cwric	14	ceric	FIX	ceric	GARBAGE		N
+eeeneeeeee	14		GARBAGE		GARBAGE		Y
+nenenee	14		GARBAGE		GARBAGE		Y
+nachand	14	nathan,backhand	FIX	nathan	NAME	Nachand	N
+misadjustment	14	maladjustment	FIX	maladjustment	FIX	maladjustment	Y
+jughandle	14		KEEP	jughandle	KEEP	jughandle	Y
+prograra	14	program,programs	FIX	program	FIX	program	Y
+diethylthiambutene	14		GARBAGE		KEEP	diethylthiambutene	N
+quadriweekly	14		GARBAGE		KEEP	quadriweekly	N
+busline	14	outline,baseline	KEEP	busline	FIX	bus line	N
+gillichthys	14		GARBAGE		KEEP	gillichthys	N
+stepe	14	step,steps	FIX	step	FIX	step	Y
+fishlife	14	fishwife	GARBAGE		GARBAGE		Y
+piperidy	14	piperine	FIX	piperine	GARBAGE		N
+cwda	14	coda	FIX	coda	GARBAGE		N
+sicita	14	silica,dicta	FIX	silica	FIX	silica	Y
+nonduplicative	14		GARBAGE		KEEP	nonduplicative	N
+vemiuta	14		GARBAGE		GARBAGE		Y
+nonaided	14	confided,unaided	FIX	unaided	KEEP	nonaided	N
+pemhca	14	pemba,pemican	GARBAGE		GARBAGE		Y
+mojonnier	14	moonier	GARBAGE		NAME	Mojonnier	N
+bonent	14	bonnet	FIX	bonnet	FIX	bonnet	Y
+bayfair-east	14		NAME	Bayfair-East	NAME	Bayfair-East	Y
+nonclaiming	14		GARBAGE		KEEP	nonclaiming	N
+apportionate	14		GARBAGE		KEEP	apportionate	N
+xhia	14	shia	FIX	shia	GARBAGE		N
+nonrefrigerated	14	unrefrigerated	FIX	unrefrigerated	KEEP	nonrefrigerated	N
+xxiiird	14		GARBAGE		KEEP	xxiiird	N
+nonconformities	14		KEEP	nonconformities	KEEP	nonconformities	Y
+ocss	14	coss	FIX	coss	GARBAGE		N
+nondistressed	14	undistressed	FIX	undistressed	KEEP	nondistressed	N
+liabili	13	liability,liable	FIX	liability	FIX	liability	Y
+thorize	13	theorize,thorite	GARBAGE		FIX	authorize	N
+teeee	13	teepee,tepee	FIX	teepee	GARBAGE		N
+amenae	13	amebae,camenae	GARBAGE		GARBAGE		Y
+clxxxi	13		KEEP	clxxxi	KEEP	clxxxi	Y
+cclvii	13	calvin	NAME	calvin	KEEP	cclvii	N
+viil	13	vial,vail	FIX	vial	FIX	viii	Y
+cclxxii	13		KEEP	cclxxii	KEEP	cclxxii	Y
+lxxviii	13		KEEP	lxxviii	KEEP	lxxviii	Y
+ignated	13	ignited	FIX	ignited	FIX	designated	Y
+tebama	13	team,teams	GARBAGE		GARBAGE		Y
+deraigning	13	designing,draining	FIX	designing	FIX	deraigning	Y
+eereee	13	serene,terete	GARBAGE		GARBAGE		Y
+clxxxvi	13		KEEP	clxxxvi	KEEP	clxxxvi	Y
+siaty-five	13		GARBAGE		FIX	sixty-five	N
+cccl	13	cal,call	FIX	cal	KEEP	cccl	N
+cxciii	13		KEEP	cxciii	KEEP	cxciii	Y
+ccxl	13	cal,call	FIX	cal	KEEP	ccxl	N
+duectors	13	directors,electors	FIX	directors	FIX	directors	Y
+dntics	13	antics	GARBAGE		FIX	antics	N
+zood	13	food,good	FIX	good	FIX	good	Y
+srcerion	13		GARBAGE		GARBAGE		Y
+pnty	13	pity,panty	FIX	pity	FIX	pity	Y
+enenes	13	events,engines	FIX	events	GARBAGE		N
+ofivers	13	fivers	GARBAGE		FIX	officers	N
+dend	13	end,deed	FIX	end	FIX	deed	Y
+betes	13	bees,bates	GARBAGE		FIX	betes	N
+oflicio	13		GARBAGE		FIX	officio	N
+sicty-one	13		GARBAGE		FIX	sixty-one	N
+streetim	13	street,streets	FIX	street	FIX	street	Y
+tnvestiga	13		GARBAGE		FIX	investigate	N
+blarch	13	larch,blanch	FIX	larch	FIX	larch	Y
+uorth	13	forth,north	FIX	north	FIX	forth	Y
+cxxii	13		KEEP	cxxii	KEEP	cxxii	Y
+cxxvii	13		KEEP	cxxvii	KEEP	cxxvii	Y
+tisement	13	easement,tenement	FIX	easement	FIX	advertisement	Y
+dainages	13	damages,drainage	FIX	damages	FIX	damages	Y
+denomi	13	denote,genome	GARBAGE		FIX	denominations	N
+scuate	13	acuate,scutate	GARBAGE		GARBAGE		Y
+puper	13	paper,super	FIX	paper	FIX	paper	Y
+cuard	13	card,guard	FIX	card	FIX	guard	Y
+gomg	13	gong,gog	GARBAGE		FIX	going	N
+oltice	13	office,notice	FIX	office	FIX	office	Y
+tioners	13	toners	GARBAGE		FIX	petitioners	N
+ilities	13	cities,utilities	FIX	utilities	FIX	utilities	Y
+insuffi	13		GARBAGE		FIX	insufficient	N
+melodeons	13	melodeon	FIX	melodeon	KEEP	melodeons	N
+clescribed	13	prescribed,described	FIX	described	FIX	described	Y
+appropnia	13		GARBAGE		FIX	appropriation	N
+wnght	13	wight	KEEP	wnght	FIX	wright	N
+sehoul	13	seoul	NAME	Seoul	FIX	school	N
+coses	13	costs,cases	FIX	cases	FIX	costs	Y
+rnonth	13	month,north	FIX	month	FIX	month	Y
+eount	13	count,mount	FIX	count	FIX	count	Y
+enllected	13	collected,elected	FIX	collected	FIX	collected	Y
+venr	13	vent,ven	GARBAGE		FIX	year	N
+nanies	13	nantes,navies	NAME	Nantes	FIX	names	N
+uncremated	13	uncreated	FIX	uncreated	KEEP	uncremated	N
+anaes	13	antes,anas	GARBAGE		GARBAGE		Y
+notee	13	note,notes	FIX	note	FIX	notice	Y
+cireu	13	care,fire	GARBAGE		FIX	circuit	N
+unprofes	13	unproven,unproved	FIX	unproven	FIX	unprofessional	Y
+ineffeet	13		GARBAGE		FIX	in effect	N
+tecture	13	lecture,texture	FIX	lecture	FIX	architecture	Y
+itera	13	item,term	FIX	item	FIX	inter	Y
+subregistrars	13		NAME	subregistrars	KEEP	subregistrars	N
+heensing	13	censing,sensing	GARBAGE		FIX	licensing	N
+naking	13	making,taking	FIX	making	FIX	making	Y
+stultorum	13		GARBAGE		KEEP	stultorum	N
+jahor	13	labor,mayor	FIX	labor	FIX	labor	Y
+publicad	13	publican	NAME	publican	GARBAGE		N
+calhforma	13		GARBAGE		FIX	california	N
+cral	13	cal,oral	FIX	oral	FIX	oral	Y
+assesso	13	assessor,assess	FIX	assessor	FIX	assessor	Y
+ticn	13	tin,tics	GARBAGE		FIX	tion	N
+neous	13	nous,nexus	FIX	nous	GARBAGE		N
+fonstitu	13		GARBAGE		FIX	constitute	N
+sance	13	since,nance	FIX	since	FIX	nuisance	Y
+swect	13	sect,sweet	FIX	sect	FIX	select	Y
+ciltapter	13		GARBAGE		FIX	chapter	N
+acent	13	agent,cent	FIX	agent	FIX	adjacent	Y
+survevors	13	survivors,surveyors	FIX	survivors	FIX	surveyors	Y
+slative	13	elative,stative	GARBAGE		FIX	legislative	N
+providecl	13	provided,provide	FIX	provided	FIX	provided	Y
+includmg	13	including,include	FIX	including	FIX	including	Y
+showmg	13	shown,showing	FIX	showing	FIX	showing	Y
+juty	13	july,duty	FIX	july	FIX	duty	Y
+riore	13	more,prior	FIX	more	FIX	more	Y
+esidence	13	evidence,residence	FIX	evidence	FIX	residence	Y
+larity	13	parity,clarity	FIX	clarity	FIX	clarity	Y
+monukka	13		GARBAGE		NAME	Monukka	N
+nmission	13	mission,omission	FIX	mission	FIX	commission	Y
+sints	13	sinks,sits	GARBAGE		FIX	stints	N
+tionments	13	torments	GARBAGE		FIX	apportionments	N
+ecpy	13	espy	GARBAGE		FIX	copy	N
+nount	13	count,mount	FIX	count	FIX	mount	Y
+subds	13	subs	FIX	subs	FIX	subdivisions	Y
+fauure	13	failure,nature	FIX	failure	FIX	failure	Y
+bankruptev	13	bankrupted	FIX	bankrupted	FIX	bankruptcy	Y
+wauercas	13		GARBAGE		FIX	whereas	N
+defmtion	13	demotion,deletion	FIX	demotion	FIX	definition	Y
+redaa	13	redan	FIX	redan	GARBAGE		N
+newarticle	13		KEEP	newarticle	FIX	new article	N
+nscal	13	local,fiscal	FIX	local	FIX	fiscal	Y
+seruce	13	spruce,seduce	FIX	spruce	FIX	service	Y
+xitia	13	tia,rita	NAME	tia	GARBAGE		N
+loyment	13	loment	GARBAGE		FIX	employment	N
+ineludable	13	ineludible	FIX	ineludible	FIX	ineludible	Y
+nonowners	13		GARBAGE		KEEP	nonowners	N
+chnical	13	conical,cynical	FIX	cynical	FIX	technical	Y
+nonprepaid	13		KEEP	nonprepaid	KEEP	nonprepaid	Y
+ereeeee	13	freebee	GARBAGE		GARBAGE		Y
+ejecucién	13		GARBAGE		FIX	ejecucion	N
+forzosa	13	formosa	NAME	formosa	FIX	forzosa	N
+cercidium	13	peridium	GARBAGE		KEEP	cercidium	N
+awings	13	awnings,wings	FIX	awnings	FIX	awnings	Y
+invoicable	13	inviolable,insociable	FIX	inviolable	FIX	inviolable	Y
+subescrow	13		GARBAGE		KEEP	subescrow	N
+eneeeeees	13		GARBAGE		GARBAGE		Y
+ccilts	13	gilts,quilts	FIX	quilts	FIX	gilts	Y
+gsmpbc	13		GARBAGE		GARBAGE		Y
+chlorhexadol	13		GARBAGE		KEEP	chlorhexadol	N
+sulfondiethylmethane	13		GARBAGE		KEEP	sulfondiethylmethane	N
+nalorphine	13		FIX	nalorphine	KEEP	nalorphine	N
+rereference	13	reference,preference	FIX	reference	FIX	reference	Y
+saltponds	13		FIX	saltponds	NAME	Saltponds	N
+planada	13	panada	NAME	planada	NAME	Planada	Y
+subfranchisors	13		GARBAGE		KEEP	subfranchisors	N
+frago	13	fargo,frag	NAME	frago	NAME	Frago	Y
+nonsuitability	13	unsuitability	FIX	unsuitability	KEEP	nonsuitability	N
+ceeeeees	13		GARBAGE		GARBAGE		Y
+kapiloff	13	karloff	NAME	kapiloff	NAME	Kapiloff	Y
+ccceeeeeeeee	13		GARBAGE		GARBAGE		Y
+cccceeeeeeee	13		GARBAGE		GARBAGE		Y
+cceeeeees	13		GARBAGE		GARBAGE		Y
+nnes	13	noes,ones	FIX	ones	FIX	ones	Y
+morpheridine	13		GARBAGE		KEEP	morpheridine	N
+domiciliaries	13		GARBAGE		KEEP	domiciliaries	N
+telrad	13	tetrad	FIX	tetrad	NAME	Telrad	N
+difenoxin	13		GARBAGE		KEEP	difenoxin	N
+camsi	13	cams	NAME	camsi	GARBAGE		N
+carbonitrile	13		GARBAGE		KEEP	carbonitrile	N
+subboard	13	hubbard,outboard	GARBAGE		FIX	subboard	N
+adcrc	13	acre,arc	GARBAGE		GARBAGE		Y
+czma	13	coma,cyma	NAME	czma	GARBAGE		N
+feederbus	13	feeders	FIX	feeders	FIX	feeder bus	Y
+supnenor	13		GARBAGE		FIX	superior	N
+iterm	13	item,term	FIX	term	FIX	item	Y
+eqquipme	13		GARBAGE		FIX	equipment	N
+incen	13	incan	GARBAGE		FIX	incentive	N
+nonuniformed	13	nonuniform	KEEP	nonuniformed	KEEP	nonuniformed	Y
+cxviii	12		NAME	cxviii	KEEP	cxviii	N
+subserip	12	subserve,subscript	FIX	subserve	FIX	subscript	Y
+clxxiv	12		NAME	clxxiv	KEEP	clxxiv	N
+ively	12	lively	FIX	lively	FIX	actively	Y
+rereee	12	referee,redeem	GARBAGE		FIX	referee	N
+sesees	12	series,serves	FIX	series	FIX	series	Y
+cerned	12	corned,cered	GARBAGE		FIX	concerned	N
+ccxxi	12		NAME	ccxxi	KEEP	ccxxi	N
+ccxxvi	12		NAME	ccxxvi	KEEP	ccxxvi	N
+ccxlviii	12		NAME	ccxlviii	KEEP	ccxlviii	N
+ccxviii	12		NAME	ccxviii	KEEP	ccxviii	N
+bifect	12	bisect	FIX	bisect	FIX	bisect	Y
+vrand	12	grand,brand	FIX	grand	FIX	grand	Y
+ceees	12	ceres,cedes	GARBAGE		GARBAGE		Y
+cclxvi	12	clavi	NAME	cclxvi	KEEP	cclxvi	N
+cclxxiv	12		NAME	cclxxiv	KEEP	cclxxiv	N
+cclxxx	12		NAME	cclxxx	KEEP	cclxxx	N
+cccliv	12	cyclic	GARBAGE		KEEP	cccliv	N
+clxiii	12		NAME	clxiii	KEEP	clxiii	N
+orev	12	ore,rev	FIX	rev	FIX	over	Y
+screenees	12	screened,screens	FIX	screened	FIX	screened	Y
+nenes	12	genes,nines	FIX	nines	GARBAGE		N
+feso	12	fess,fest	GARBAGE		GARBAGE		Y
+eseeeee	12		GARBAGE		GARBAGE		Y
+cuoap	12	chap,crop	GARBAGE		FIX	chapter	N
+atomey	12	atomy	FIX	atomy	FIX	attorney	Y
+ccci	12	cocci	FIX	cocci	KEEP	ccci	N
+sarae	12	sarah,saree	NAME	Sarah	NAME	Sarah	Y
+bercin	12	berlin	NAME	Berlin	NAME	Berlin	Y
+ceeceeee	12		GARBAGE		GARBAGE		Y
+ocenr	12	owner,over	FIX	owner	FIX	owner	Y
+overscor	12	overscore	FIX	overscore	GARBAGE		N
+ofticio	12		GARBAGE		FIX	officio	N
+adjutant-goneral	12		GARBAGE		FIX	adjutant-general	N
+seore	12	store,shore	FIX	store	FIX	score	Y
+collectod	12	collected,collector	FIX	collector	FIX	collected	Y
+givea	12	given,give	FIX	given	FIX	given	Y
+changeot	12	change,changes	FIX	change	FIX	change	Y
+cxxxvii	12		GARBAGE		KEEP	cxxxvii	N
+cxlvii	12	calvin	GARBAGE		KEEP	cxlvii	N
+ccxvi	12	clavi	GARBAGE		KEEP	ccxvi	N
+ccxxx	12		GARBAGE		KEEP	ccxxx	N
+pulgas	12	pulas	GARBAGE		NAME	Pulgas	N
+ccxliv	12		GARBAGE		KEEP	ccxliv	N
+decded	12	deeded,decided	FIX	decided	FIX	decided	Y
+ccccx	12	cocci,coccyx	GARBAGE		KEEP	ccccx	N
+inentioned	12	intentioned	FIX	intentioned	FIX	mentioned	Y
+ormed	12	formed,armed	FIX	formed	FIX	formed	Y
+perpen	12	perpend	FIX	perpend	FIX	perpendicular	Y
+pluns	12	plans,plus	FIX	plans	FIX	plans	Y
+icased	12	cased	FIX	cased	FIX	leased	Y
+compensn	12	compels,cowpens	GARBAGE		FIX	compensation	N
+makmg	12	make,making	FIX	making	FIX	making	Y
+tetera	12	tetra	KEEP	tetera	FIX	cetera	N
+uame	12	same,name	FIX	same	FIX	same	Y
+uine	12	line,fine	FIX	line	FIX	line	Y
+sicty-three	12		GARBAGE		FIX	sixty-three	N
+conditiona	12	conditions,condition	FIX	conditions	FIX	conditions	Y
+jurisdie	12	juristic,juridic	FIX	juridic	FIX	jurisdic	Y
+stationory	12	stationary,stationery	FIX	stationary	FIX	stationary	Y
+puen	12	pen,pun	FIX	pen	FIX	pen	Y
+offivio	12		GARBAGE		FIX	officio	N
+seveuty-five	12		GARBAGE		FIX	seventy-five	N
+pubheations	12		GARBAGE		FIX	publications	N
+ereed	12	creed,breed	FIX	breed	FIX	creed	Y
+nonth	12	month,north	FIX	month	FIX	month	Y
+comof	12	como	GARBAGE		GARBAGE		Y
+ebild	12	bill,child	FIX	bill	FIX	child	Y
+guperin	12	couperin,suberin	NAME	couperin	GARBAGE		N
+reter	12	refer,deter	FIX	refer	FIX	refer	Y
+eeres	12	ceres,meres	GARBAGE		GARBAGE		Y
+uent	12	cent,rent	FIX	cent	FIX	cent	Y
+thirty-sizth	12		FIX	thirty-sixth	FIX	thirty-sixth	Y
+didate	12	dilate	FIX	didate	FIX	candidate	Y
+electroliers	12	electrolier	FIX	electroliers	KEEP	electroliers	N
+mitment	12	fitment	FIX	fitment	FIX	commitment	Y
+herehv	12	hereby,herein	FIX	hereby	FIX	hereby	Y
+cebt	12	cent,debt	FIX	debt	FIX	debt	Y
+thirtysiz	12		FIX	thirty-six	FIX	thirty-six	Y
+shent	12	sent,spent	FIX	sent	FIX	sent	Y
+pitals	12	pitas,vitals	FIX	vitals	FIX	hospitals	Y
+pollu	12	poll,polls	FIX	poll	FIX	pollution	Y
+mishranded	12	mishandled	FIX	mishandled	FIX	misbranded	Y
+mmission	12	mission,omission	FIX	mission	FIX	commission	Y
+uous	12	sous,nous	GARBAGE		GARBAGE		Y
+malimposed	12		GARBAGE		GARBAGE		Y
+furid	12	lurid	FIX	lurid	FIX	lurid	Y
+dends	12	deeds,ends	FIX	deeds	FIX	dividends	Y
+gressional	12		FIX	congressional	FIX	congressional	Y
+itled	12	titled,tiled	FIX	titled	FIX	entitled	Y
+comcommission	12		GARBAGE		FIX	commission	N
+iiome	12	biome	FIX	biome	FIX	home	Y
+firc	12	fire,firm	FIX	fire	FIX	fire	Y
+etce	12	etch	FIX	etch	FIX	etce	Y
+forins	12	forint,florins	FIX	florins	FIX	florins	Y
+eify	12	deify,edify	FIX	edify	FIX	edify	Y
+scventy-five	12		FIX	seventy-five	FIX	seventy-five	Y
+excentive	12	exceptive	FIX	exceptive	FIX	executive	Y
+sceds	12	seeds,sheds	FIX	seeds	FIX	seeds	Y
+one-cighth	12		FIX	one-eighth	FIX	one-eighth	Y
+truek	12	true,truck	FIX	truck	FIX	truck	Y
+fibng	12	filing,ing	FIX	filing	FIX	filing	Y
+nincty-seven	12		FIX	ninety-seven	FIX	ninety-seven	Y
+ools	12	pools,tools	FIX	tools	FIX	tools	Y
+fenal	12	penal,final	FIX	penal	FIX	penal	Y
+gional	12	final,regional	FIX	regional	FIX	regional	Y
+eftert	12	after,effect	FIX	after	FIX	effect	Y
+vavable	12	savable	GARBAGE		FIX	payable	N
+ghway	12	highway,way	FIX	highway	FIX	highway	Y
+appropriamuch	12		GARBAGE		GARBAGE		Y
+wuenrcas	12		GARBAGE		FIX	whereas	N
+eold	12	sold,hold	FIX	sold	FIX	sold	Y
+oters	12	voters,others	FIX	voters	FIX	voters	Y
+ssment	12	sent,spent	GARBAGE		FIX	assessment	N
+orized	12	prized	GARBAGE		FIX	authorized	N
+camelorum	12		NAME	camelorum	KEEP	camelorum	N
+seld	12	held,sold	FIX	held	FIX	held	Y
+tlus	12	plus,thus	FIX	thus	FIX	thus	Y
+previnet	12	prevent,precinct	FIX	prevent	FIX	precinct	Y
+ineet	12	inlet,inert	GARBAGE		FIX	inlet	N
+mereased	12	released,deceased	FIX	released	FIX	increased	Y
+culosis	12	dulosis	FIX	dulosis	FIX	tuberculosis	Y
+reeordation	12	retardation,reformation	GARBAGE		FIX	recordation	N
+joeated	12	located,created	FIX	located	FIX	located	Y
+ssioner	12	sooner,missioner	FIX	missioner	FIX	commissioner	Y
+melusion	12	elusion,delusion	FIX	delusion	FIX	conclusion	Y
+contnbu	12		GARBAGE		FIX	contribute	N
+commenda	12	commend,commends	FIX	commend	FIX	commenda	Y
+cleath	12	cleats,cleat	GARBAGE		FIX	death	N
+imission	12	mission,omission	FIX	mission	FIX	omission	Y
+dences	12	denies,fences	GARBAGE		FIX	evidences	N
+withdrawa	12	withdrawal,withdrawn	FIX	withdrawal	FIX	withdrawal	Y
+pensated	12	penates,pennate	GARBAGE		FIX	compensated	N
+reconditioners	12	reconditioned,conditioners	FIX	reconditioned	KEEP	reconditioners	N
+nonpro	12	nonary,nonego	GARBAGE		FIX	nonprofit	N
+calrforma	12		NAME	california	FIX	california	N
+limbrub	12	imbrue,limburg	GARBAGE		GARBAGE		Y
+mumepal	12	numeral,humeral	FIX	numeral	FIX	municipal	Y
+meurring	12	recurring,herring	FIX	recurring	FIX	recurring	Y
+threesixteenths	12		KEEP	threesixteenths	KEEP	three-sixteenths	Y
+afterbay	12	afterbody	GARBAGE		KEEP	afterbay	N
+hollibaugh	12		NAME	hollibaugh	NAME	Hollibaugh	Y
+recoverv	12	recovery,recover	FIX	recovery	FIX	recovery	Y
+unplaceable	12	replaceable,untraceable	FIX	replaceable	FIX	replaceable	Y
+debellis	12		NAME	debellis	NAME	De Bellis	Y
+cardaria	12	calvaria,carrara	GARBAGE		KEEP	cardaria	N
+blec	12	bled,alec	FIX	bled	GARBAGE		N
+beverwil	12		NAME	Beverwil	NAME	Beverwil	Y
+lodginghouses	12		KEEP	lodginghouses	KEEP	lodging-houses	Y
+acetyluria	12		KEEP	acetyluria	KEEP	acetyluria	Y
+reperforates	12	perforates	FIX	perforates	FIX	perforates	Y
+administrahon	12	administration,administrator	FIX	administration	FIX	administration	Y
+riw	12	raw,rio	FIX	raw	GARBAGE		N
+depredating	12	deprecating	FIX	deprecating	FIX	depredating	Y
+ausencia	12		NAME	ausencia	KEEP	ausencia	N
+legalmente	12		NAME	legalmente	KEEP	legalmente	N
+ecceeee	12		GARBAGE		GARBAGE		Y
+valleywide	12		KEEP	valleywide	KEEP	valleywide	Y
+imtative	12	imitative	FIX	imitative	FIX	imitative	Y
+torca	12	torch,tora	NAME	torca	NAME	Torca	Y
+thiosulfite	12		KEEP	thiosulfite	KEEP	thiosulfite	Y
+demulsification	12	emulsification	FIX	emulsification	KEEP	demulsification	N
+alisos	12	alison	NAME	alisos	NAME	Alisos	Y
+waivets	12	waivers,waives	FIX	waivers	FIX	waivers	Y
+beneficiating	12		KEEP	beneficiating	KEEP	beneficiating	Y
+rnnene	12	renee,rene	NAME	renee	FIX	renee	N
+methyprylon	12		GARBAGE		KEEP	methyprylon	N
+presterilized	12		KEEP	presterilized	KEEP	presterilized	Y
+psychometrists	12	psychometrist	FIX	psychometrist	KEEP	psychometrists	N
+nonprogram	12		KEEP	nonprogram	KEEP	nonprogram	Y
+cseeeee	12		GARBAGE		GARBAGE		Y
+equipimone	12		GARBAGE		FIX	equipment	N
+annadel	12	annabel	NAME	Annabel	NAME	Annadel	Y
+konocti	12		NAME	Konocti	NAME	Konocti	Y
+photostating	12	photostatting	FIX	photostatting	FIX	photostating	Y
+cymatogaster	12		GARBAGE		KEEP	cymatogaster	N
+wedworth	12	wentworth	FIX	wentworth	NAME	Wedworth	N
+nonfictitious	12		KEEP	nonfictitious	KEEP	nonfictitious	Y
+rolicall	12		GARBAGE		FIX	roll call	N
+betaprodine	12		GARBAGE		KEEP	betaprodine	N
+betameprodine	12		GARBAGE		KEEP	betameprodine	N
+benzethidine	12		GARBAGE		KEEP	benzethidine	N
+dipipanone	12		GARBAGE		KEEP	dipipanone	N
+normethadone	12		GARBAGE		KEEP	normethadone	N
+phenadoxone	12		GARBAGE		KEEP	phenadoxone	N
+phenampromide	12		GARBAGE		KEEP	phenampromide	N
+levophenacylmorphan	12		GARBAGE		KEEP	levophenacylmorphan	N
+proheptazine	12		GARBAGE		KEEP	proheptazine	N
+duphcative	12		FIX	duplicate	FIX	duplicative	Y
+berrenda	12	brenda,berretta	NAME	Berrenda	NAME	Berrenda	Y
+bufotenine	12		GARBAGE		KEEP	bufotenine	N
+ewep	12	ewe,ewes	FIX	ewe	GARBAGE		N
+neumiller	12		NAME	Neumiller	NAME	Neumiller	Y
+frizzelle	12	frizzle	KEEP	frizzelle	NAME	Frizzelle	N
+ownet	12	owner,owned	FIX	owner	FIX	owner	Y
+thionylchloride	12		KEEP	thionylchloride	KEEP	thionylchloride	Y
+chitat	12	chita	FIX	chita	NAME	Chitat	N
+nongynecologic	12		GARBAGE		KEEP	nongynecologic	N
+relending	12	relenting,resending	FIX	relenting	FIX	relending	Y
+ucimc	12	uric	GARBAGE		GARBAGE		Y
+immunohematology	12		KEEP	immunohematology	KEEP	immunohematology	Y
+sewerline	12		GARBAGE		FIX	sewer line	N
+eeeeeeeeeeeeees	12		GARBAGE		GARBAGE		Y
+stirpes	12	stripes,stipes	FIX	stripes	KEEP	stirpes	N
+preimprinted	12		KEEP	preimprinted	KEEP	preimprinted	Y
+nanocuries	12		KEEP	nanocuries	KEEP	nanocuries	Y
+landfarm	12	landform	FIX	landform	KEEP	landfarm	N
+nonlevel-of-care	12		GARBAGE		KEEP	nonlevel-of-care	N
+intercommunications	12	intercommunication	FIX	intercommunication	KEEP	intercommunications	N
+wcab	12	cab,scab	NAME	WCAB	KEEP	wcab	N
+deukmebejian	12		NAME	deukmebejian	NAME	Deukmejian	Y
+fned	11	fined,fed	FIX	fined	FIX	fined	Y
+cxlviii	11		KEEP	cxlviii	KEEP	cxlviii	Y
+ciously	11	piously	FIX	piously	FIX	maliciously	Y
+sxorton	11	shorten,norton	NAME	sxorton	NAME	Norton	Y
+easurer	11	measurer,ensurer	GARBAGE		FIX	treasurer	N
+andsale	11	anisole,ansate	GARBAGE		GARBAGE		Y
+tlle	11	tile,tale	FIX	tile	FIX	title	Y
+dxxx	11	dix,doxy	GARBAGE		KEEP	dxxx	N
+appeai	11	appear,appeal	FIX	appeal	FIX	appeal	Y
+cxxxv	11		KEEP	cxxxv	KEEP	cxxxv	Y
+claiin	11	claim,claims	FIX	claim	FIX	claim	Y
+pubneation	11		GARBAGE		FIX	publication	N
+plemental	11	elemental	FIX	elemental	FIX	supplemental	Y
+overscors	11	overscore	FIX	overscore	GARBAGE		N
+iable	11	liable,able	FIX	liable	FIX	liable	Y
+renaity	11	penalty,entity	FIX	penalty	FIX	penalty	Y
+siaty-four	11		GARBAGE		FIX	sixty-four	N
+gregate	11	gregale	GARBAGE		FIX	aggregate	N
+cclxix	11	calix,cylix	NAME	calix	KEEP	cclxix	N
+qualited	11	qualified,quality	FIX	qualified	FIX	qualified	Y
+cccxli	11		GARBAGE		KEEP	cccxli	N
+szco	11	such,sec	FIX	such	FIX	such	Y
+cccxlix	11		GARBAGE		KEEP	cccxlix	N
+ccclvi	11		GARBAGE		KEEP	ccclvi	N
+cccci	11	cocci	NAME	cocci	KEEP	cccci	N
+vereee	11	verde,serene	GARBAGE		GARBAGE		Y
+eeere	11	deere	GARBAGE		GARBAGE		Y
+jations	11	nations,cations	FIX	nations	FIX	nations	Y
+ceseeee	11		GARBAGE		GARBAGE		Y
+ceveee	11	levee,severe	GARBAGE		GARBAGE		Y
+szcrton	11	sacaton	NAME	sacaton	GARBAGE		N
+ccxxxiv	11		GARBAGE		KEEP	ccxxxiv	N
+disin	11	oisin	GARBAGE		GARBAGE		Y
+cclxxi	11		GARBAGE		KEEP	cclxxi	N
+brundige	11	brandie	NAME	brandie	NAME	Brundige	Y
+ccseee	11		GARBAGE		GARBAGE		Y
+bept	11	best,kept	FIX	kept	FIX	kept	Y
+lowis	11	lewis,lows	NAME	Lewis	FIX	lewis	N
+huld	11	held,hold	FIX	held	FIX	held	Y
+ssseee	11	essene	GARBAGE		GARBAGE		Y
+ccccce	11		GARBAGE		GARBAGE		Y
+sulury	11	sultry	FIX	sultry	FIX	salary	Y
+francisev	11	francisco,franchise	NAME	Francisco	FIX	francisco	N
+tosue	11	josue,toque	NAME	Josue	FIX	issue	N
+ccxxvii	11		GARBAGE		KEEP	ccxxvii	N
+ccxlvi	11		GARBAGE		KEEP	ccxlvi	N
+cclxvii	11		GARBAGE		KEEP	cclxvii	N
+cottection	11	connection,collection	FIX	connection	FIX	collection	Y
+dened	11	deed,denied	FIX	deed	FIX	denied	Y
+eeers	11	seers,peers	FIX	seers	GARBAGE		N
+retarned	11	returned,retained	FIX	returned	FIX	returned	Y
+appeat	11	appear,appeal	FIX	appear	FIX	appeal	Y
+rized	11	sized,rived	FIX	sized	FIX	authorized	Y
+cizht	11	right,eight	FIX	eight	FIX	eight	Y
+ouses	11	uses,houses	FIX	uses	FIX	houses	Y
+borein	11	herein,foreign	FIX	herein	FIX	herein	Y
+wlio	11	clio,olio	GARBAGE		FIX	who	N
+hurdygurdy	11		KEEP	hurdygurdy	KEEP	hurdygurdy	Y
+snecession	11	secession	FIX	secession	FIX	succession	Y
+eeseeeeee	11		GARBAGE		GARBAGE		Y
+modily	11	bodily,modify	FIX	modify	FIX	modify	Y
+travelmg	11	travelog	GARBAGE		FIX	traveling	N
+appropriafund	11		GARBAGE		GARBAGE		Y
+demned	11	damned,demoed	FIX	damned	FIX	condemned	Y
+beenme	11	been,become	FIX	become	FIX	become	Y
+cccceeeeeeeee	11		GARBAGE		GARBAGE		Y
+lompoe	11	compose,compo	NAME	lompoc	NAME	Lompoc	Y
+banots	11	banks,ballots	GARBAGE		FIX	ballots	N
+soniat	11	sonia	NAME	sonia	NAME	Soniat	Y
+putics	11	duties,pupils	FIX	duties	FIX	duties	Y
+lamation	11	laxation,lavation	GARBAGE		FIX	proclamation	N
+reeviving	11	reviving	FIX	reviving	FIX	reviving	Y
+eeeceee	11		GARBAGE		GARBAGE		Y
+ceseeeee	11		GARBAGE		GARBAGE		Y
+ofiee	11	office,five	FIX	office	FIX	office	Y
+bergeant-at-arms	11		KEEP	bergeant-at-arms	FIX	sergeant-at-arms	N
+forty-sizth	11		FIX	forty-sixth	FIX	forty-sixth	Y
+ablic	11	abulic,aulic	GARBAGE		FIX	public	N
+tendentof	11		GARBAGE		GARBAGE		Y
+olty	11	jolty,oldy	GARBAGE		GARBAGE		Y
+thisact	11	trisect	GARBAGE		FIX	this act	N
+nincty-three	11		FIX	ninety-three	FIX	ninety-three	Y
+foint	11	joint,point	FIX	joint	FIX	joint	Y
+itation	11	station,citation	FIX	citation	FIX	citation	Y
+spicuously	11	sinuously,spaciously	GARBAGE		FIX	conspicuously	N
+unappor	11	snapper,napper	FIX	unappor	FIX	unapportioned	Y
+petency	11	potency,patency	FIX	potency	FIX	competency	Y
+ditures	11	figures,fixtures	FIX	figures	FIX	expenditures	Y
+prescrip	11	prescript	KEEP	prescrip	FIX	prescription	N
+horticul	11	cortical,vortical	GARBAGE		FIX	horticultural	N
+endum	11	endue	GARBAGE		FIX	referendum	N
+tequesquite	11		NAME	tequesquite	NAME	Tequesquite	Y
+ceceeeeee	11		GARBAGE		GARBAGE		Y
+finel	11	final,fine	FIX	final	FIX	final	Y
+incated	11	incited	FIX	incited	FIX	indicated	Y
+iacts	11	acts,facts	FIX	acts	FIX	facts	Y
+unauthor	11	author,coauthor	FIX	author	FIX	unauthorized	Y
+molera	11	monera	NAME	molera	NAME	Molera	Y
+mmors	11	mors,moors	GARBAGE		FIX	minors	N
+exelu	11	eel,expel	GARBAGE		FIX	exclude	N
+penalt	11	penal,penalty	FIX	penalty	FIX	penalty	Y
+eluss	11	eluls	GARBAGE		GARBAGE		Y
+egent	11	event,agent	FIX	agent	FIX	agent	Y
+sment	11	sent,spent	GARBAGE		FIX	assessment	N
+horough	11	borough,thorough	FIX	thorough	FIX	borough	Y
+sercen	11	percent,seven	FIX	percent	FIX	percent	Y
+whorn	11	worn,horn	FIX	worn	FIX	whom	Y
+eyele	11	eyelet	FIX	eyelet	FIX	eyelet	Y
+btaty	11	batty	FIX	batty	GARBAGE		N
+lardine	11	sardine,larding	FIX	sardine	FIX	sardine	Y
+notier	11	nosier	FIX	nosier	FIX	notice	Y
+enpy	11	envy,espy	FIX	envy	FIX	enjoy	Y
+ciliapter	11	ciliates,ciliate	FIX	ciliates	FIX	chapter	Y
+ilome	11	lome	GARBAGE		GARBAGE		Y
+macist	11	racist,maoist	FIX	racist	FIX	pharmacist	Y
+incidenta	11	incidental,incident	FIX	incidental	FIX	incidental	Y
+icft	11	act,if	FIX	act	FIX	left	Y
+mcorporated	11	incorporated,corporate	FIX	incorporated	FIX	incorporated	Y
+mches	11	aches	FIX	aches	FIX	inches	Y
+nasoni	11	mason,masonic	NAME	mason	NAME	Nasoni	Y
+eneeeee	11		GARBAGE		GARBAGE		Y
+mehes	11	meshes,metes	FIX	meshes	FIX	meshes	Y
+atives	11	natives,actives	FIX	natives	FIX	natives	Y
+offermg	11	offered,offer	FIX	offered	FIX	offering	Y
+parments	11	payments,parents	FIX	payments	FIX	payments	Y
+disabil	11	isabel,disable	FIX	disable	FIX	disability	Y
+unconstitu	11		GARBAGE		FIX	unconstitutional	N
+voint	11	joint,point	FIX	joint	FIX	joint	Y
+coruner	11	corner,coroner	FIX	corner	FIX	coroner	Y
+pinate	11	pilate,binate	NAME	pilate	GARBAGE		N
+appneation	11		GARBAGE		FIX	application	N
+constitulegislature	11		GARBAGE		GARBAGE		Y
+ureeny	11	greeny	GARBAGE		FIX	larceny	N
+cormer	11	corner,former	FIX	corner	FIX	corner	Y
+habitues	11	habitudes	FIX	habitudes	KEEP	habitues	N
+stons	11	sons,tons	FIX	sons	FIX	stones	Y
+armv	11	army,arms	FIX	army	FIX	army	Y
+pubile	11	nubile	GARBAGE		FIX	public	N
+igation	11	ligation	FIX	ligation	FIX	litigation	Y
+imestiga	11	mestiza	GARBAGE		FIX	investigation	N
+freeho	11	free,fresno	KEEP	freeho	FIX	freehold	N
+cabforma	11		GARBAGE		FIX	california	N
+cahforna	11		GARBAGE		FIX	california	N
+appoi	11	apply,appoint	FIX	appoint	FIX	appoint	Y
+extraord	11	extrabold	GARBAGE		FIX	extraordinary	N
+constituthereof	11		GARBAGE		GARBAGE		Y
+imown	11	mown	FIX	mown	FIX	known	Y
+tanster	11	taster,tapster	FIX	taster	FIX	transfer	Y
+comter	11	comer,comte	GARBAGE		FIX	counter	N
+sisquoe	11	bisque,misquote	GARBAGE		NAME	Sisquoc	N
+sisquoc	11		NAME	Sisquoc	NAME	Sisquoc	Y
+includec	11	include,included	FIX	include	FIX	included	Y
+sorghums	11	sorghum	FIX	sorghum	KEEP	sorghums	N
+blackeap	11	blackcap	FIX	blackcap	FIX	blackcap	Y
+aspiran	11	aspirin,aspirant	FIX	aspirin	FIX	aspirant	Y
+piment	11	pigment,pimento	FIX	pigment	FIX	pigment	Y
+falloux	11	fallout	GARBAGE		FIX	fallout	N
+sultanina	11	sultana	FIX	sultana	KEEP	sultanina	N
+zabalkanski	11		NAME	zabalkanski	NAME	Zabalkanski	Y
+molinera	11	molina,moliere	NAME	molinera	NAME	Molinera	Y
+zabalkanskoi	11		GARBAGE		NAME	Zabalkanskoi	N
+panariti	11	planarity	FIX	planarity	NAME	Panariti	N
+cazouls	11	cagoule,cagoules	NAME	cagoule	NAME	Cazouls	Y
+danugue	11	dengue,langue	FIX	dengue	FIX	dengue	Y
+saali	11	saadi	NAME	saadi	NAME	Saali	Y
+containec	11	contained,container	FIX	contained	FIX	contained	Y
+relaundered	11	laundered,remaindered	FIX	laundered	FIX	laundered	Y
+unmediatel	11	unmediated	FIX	unmediated	FIX	immediately	Y
+opii	11	open,oil	FIX	oil	FIX	opii	Y
+beitigheimer	11		NAME	beitigheimer	NAME	Beitigheimer	Y
+harotp	11	hart,harold	FIX	hart	NAME	Harrop	N
+wuheerzeas	11		GARBAGE		FIX	whereas	N
+insuret	11	insurer,insured	FIX	insured	FIX	insurer	Y
+seeton	11	sexton,seton	NAME	sexton	NAME	Seeton	Y
+appheatin	11		GARBAGE		FIX	application	N
+pierovich	11		NAME	pierovich	NAME	Pierovich	Y
+enues	11	ensues,venues	FIX	ensues	FIX	venues	Y
+usion	11	union,sion	FIX	union	FIX	usion	Y
+administratior	11	administration,administrator	FIX	administrator	FIX	administration	Y
+waueereas	11		GARBAGE		FIX	whereas	N
+mateh	11	match,mate	FIX	match	FIX	match	Y
+uthties	11	unties,butties	GARBAGE		FIX	utilities	N
+needv	11	need,needs	FIX	need	FIX	needy	Y
+diethyl-stilbestrol	11		KEEP	diethyl-stilbestrol	KEEP	diethyl-stilbestrol	Y
+dimout	11	devout,dismount	FIX	dismount	FIX	dimout	Y
+tuled	11	ruled,tiled	FIX	ruled	FIX	ruled	Y
+cedures	11	reduces,secures	GARBAGE		FIX	procedures	N
+schrouder	11	schroeder	NAME	Schroeder	NAME	Schrouder	Y
+nonpaternity	11		GARBAGE		KEEP	nonpaternity	N
+adineagle	11		GARBAGE		GARBAGE		Y
+euarctos	11	quartos	GARBAGE		GARBAGE		Y
+nonrecordation	11		GARBAGE		KEEP	nonrecordation	N
+operahon	11	operation,operator	FIX	operation	FIX	operation	Y
+ptojochs	11		GARBAGE		GARBAGE		Y
+eeeeeeeeeeeeeees	11		GARBAGE		GARBAGE		Y
+nonserialized	11		GARBAGE		KEEP	nonserialized	N
+mulemen	11	mullen,milkmen	FIX	milkmen	FIX	muleteers	Y
+cceceeee	11		GARBAGE		GARBAGE		Y
+hypsypops	11		GARBAGE		KEEP	hypsypops	N
+rubicundus	11	rubicund	FIX	rubicund	KEEP	rubicundus	N
+eeneneee	11		GARBAGE		GARBAGE		Y
+eeeeneees	11		GARBAGE		GARBAGE		Y
+rainev	11	rained	FIX	rained	NAME	Rainey	N
+honeveutt	11		GARBAGE		NAME	Honeycutt	N
+naiio	11	nation,ratio	FIX	nation	FIX	ratio	Y
+gabrielinos	11		NAME	Gabrielinos	NAME	Gabrielinos	Y
+nonfeed	11	nonfood,nonsked	GARBAGE		FIX	nonfood	N
+redomestication	11	domestication	FIX	domestication	KEEP	redomestication	N
+qoveinot	11		GARBAGE		FIX	governor	N
+otatuule	11		GARBAGE		GARBAGE		Y
+eeneneneeereees	11		GARBAGE		GARBAGE		Y
+fulasz	11	fulas	GARBAGE		NAME	Fulasz	N
+ccceeeees	11		GARBAGE		GARBAGE		Y
+tularcitos	11		NAME	Tularcitos	NAME	Tularcitos	Y
+cccceeeeeee	11		GARBAGE		GARBAGE		Y
+propionoxypiperidine	11		NAME	propionoxypiperidine	KEEP	propionoxypiperidine	N
+beheves	11	beeves,behaves	FIX	behaves	FIX	believes	Y
+dihydromorphine	11		NAME	dihydromorphine	KEEP	dihydromorphine	N
+benzylmorphine	11		NAME	benzylmorphine	KEEP	benzylmorphine	N
+desomorphine	11		NAME	desomorphine	KEEP	desomorphine	N
+allylprodine	11		NAME	allylprodine	KEEP	allylprodine	N
+furethidine	11		NAME	furethidine	KEEP	furethidine	N
+dimepheptanol	11		NAME	dimepheptanol	KEEP	dimepheptanol	N
+dimenoxadol	11		NAME	dimenoxadol	KEEP	dimenoxadol	N
+racemoramide	11		NAME	racemoramide	KEEP	racemoramide	N
+diampromide	11		NAME	diampromide	KEEP	diampromide	N
+norlevorphanol	11		NAME	norlevorphanol	KEEP	norlevorphanol	N
+dimethylthiambutene	11		NAME	dimethylthiambutene	KEEP	dimethylthiambutene	N
+ethylmethylthiambutene	11		NAME	ethylmethylthiambutene	KEEP	ethylmethylthiambutene	N
+boomstops	11	bookshops,doorstops	FIX	bookshops	GARBAGE		N
+noncontractual	11		KEEP	noncontractual	KEEP	noncontractual	Y
+clonitazene	11		NAME	clonitazene	KEEP	clonitazene	N
+etonitazene	11		NAME	etonitazene	KEEP	etonitazene	N
+levomoramide	11		NAME	levomoramide	KEEP	levomoramide	N
+norpipanone	11		NAME	norpipanone	KEEP	norpipanone	N
+trimeperidine	11		FIX	trimethoprim	KEEP	trimeperidine	N
+hydromorphinol	11		FIX	hydromorphone	KEEP	hydromorphinol	N
+normorphine	11		FIX	normorphine	KEEP	normorphine	N
+hmuts	11	huts,muts	GARBAGE		FIX	limits	N
+alfentanyl	11		FIX	alfentanil	KEEP	alfentanyl	N
+nonpeace	11	noplace	GARBAGE		KEEP	nonpeace	N
+nonsevere	11		FIX	nonsevere	KEEP	nonsevere	N
+nonprevailing	11		FIX	nonprevailing	KEEP	nonprevailing	N
+strl	11	sell,seal	FIX	sell	FIX	still	Y
+nonevidentiary	11		FIX	nonevidentiary	KEEP	nonevidentiary	N
+nonaccidentally	11		FIX	nonaccidentally	KEEP	nonaccidentally	N
+isosafrole	11		FIX	isosafrole	KEEP	isosafrole	N
+imds	11	ids,imps	GARBAGE		FIX	ids	N
+repackagers	11	repackages	FIX	repackages	KEEP	repackagers	N
+maics	11	mains,mails	GARBAGE		FIX	mails	N
+chuckawalla	11	chuckwalla	NAME	chuckwalla	FIX	chuckwalla	N
+residentrun	11		FIX	residentrun	GARBAGE		N
+subproducer	11		GARBAGE		KEEP	subproducer	N
+wcmis	11	wis,acis	GARBAGE		GARBAGE		Y
+ploqtams	11		GARBAGE		GARBAGE		Y
+administraton	11	administration,administrator	FIX	administration	FIX	administration	Y
+eeceeee	11		GARBAGE		GARBAGE		Y
+phenyleyclohexyl	11		FIX	phenylethylcyclohexyl	FIX	phenylcyclohexyl	Y
+phenylcyclohexylamine	11		FIX	phenylcyclohexylamine	KEEP	phenylcyclohexylamine	N
+ofncer	10	officer,owner	FIX	officer	FIX	officer	Y
+ndred	10	hundred,added	FIX	hundred	FIX	hundred	Y
+refor	10	refer,reform	FIX	refer	FIX	reform	Y
+treasu	10	treasury,areas	FIX	treasury	FIX	treasury	Y
+clxxxiii	10		KEEP	clxxxiii	KEEP	clxxxiii	Y
+twenty-vighth	10		GARBAGE		FIX	twenty-eighth	N
+eeceeeee	10		GARBAGE		GARBAGE		Y
+memillan	10	mcmillan	FIX	mcmillan	NAME	McMillan	N
+extin	10	extine	FIX	extine	FIX	extinction	Y
+nonresi	10	nones	GARBAGE		FIX	nonresident	N
+jowing	10	owing,lowing	FIX	owing	FIX	following	Y
+stxty-three	10		GARBAGE		FIX	sixty-three	N
+nincty-one	10		GARBAGE		FIX	ninety-one	N
+dehver	10	denver,delver	NAME	denver	FIX	deliver	N
+tablish	10	stablish,tallish	FIX	establish	FIX	establish	Y
+ccxxix	10		KEEP	ccxxix	KEEP	ccxxix	Y
+janded	10	landed,handed	FIX	landed	FIX	landed	Y
+cccxl	10	cecil,cecal	GARBAGE		KEEP	cccxl	N
+siaty-six	10		GARBAGE		FIX	sixty-six	N
+siaty-one	10		GARBAGE		FIX	sixty-one	N
+itants	10	stats,grants	FIX	itants	FIX	inhabitants	Y
+reir	10	rear,heir	FIX	rear	FIX	their	Y
+enumera	10	enumerate,numeral	FIX	enumerate	FIX	enumeration	Y
+cclxxxix	10		KEEP	cclxxxix	KEEP	cclxxxix	Y
+cccxxxix	10		KEEP	cccxxxix	KEEP	cccxxxix	Y
+ccclxvi	10		KEEP	ccclxvi	KEEP	ccclxvi	Y
+ccclxx	10		GARBAGE		KEEP	ccclxx	N
+ccclxxiv	10		GARBAGE		KEEP	ccclxxiv	N
+ccccxxi	10		GARBAGE		KEEP	ccccxxi	N
+serees	10	series,serves	FIX	series	FIX	series	Y
+veeee	10	levee,renee	GARBAGE		GARBAGE		Y
+sesses	10	nesses,senses	FIX	senses	GARBAGE		N
+ceesee	10	cease,lessee	FIX	lessee	GARBAGE		N
+ccceceeee	10		GARBAGE		GARBAGE		Y
+ccccli	10	cocci	GARBAGE		KEEP	ccccli	N
+simuar	10	simar	NAME	Simar	FIX	similar	N
+inen	10	inn,ines	FIX	inn	FIX	linen	Y
+sxcriox	10		GARBAGE		GARBAGE		Y
+ponas	10	ponds,pons	FIX	ponds	FIX	ponds	Y
+ccclix	10	calix,cyclic	GARBAGE		KEEP	ccclix	N
+assessincnt	10		GARBAGE		FIX	assessment	N
+dxxiv	10	dixie	NAME	Dixie	KEEP	dxxiv	N
+jector	10	sector,rector	FIX	sector	FIX	sector	Y
+ofheers	10	others,offers	FIX	others	FIX	officers	Y
+eact	10	act,each	FIX	act	FIX	each	Y
+cseeeeee	10		GARBAGE		GARBAGE		Y
+eceeeeeeee	10		GARBAGE		GARBAGE		Y
+sanots	10	santos,sabots	NAME	Santos	NAME	Santos	Y
+hends	10	hands,heads	FIX	hands	FIX	hands	Y
+noties	10	notes,notices	FIX	notes	FIX	notices	Y
+theiy	10	their,they	FIX	their	FIX	their	Y
+cighicen	10		FIX	eighteen	FIX	eighteen	Y
+oftcer	10	other,after	FIX	officer	FIX	officer	Y
+prmted	10	prated	FIX	printed	FIX	printed	Y
+ccclxix	10		GARBAGE		KEEP	ccclxix	N
+recorda	10	record,records	FIX	records	FIX	records	Y
+ccxxxvi	10		GARBAGE		KEEP	ccxxxvi	N
+ccxlv	10		GARBAGE		KEEP	ccxlv	N
+fecling	10	feeling,felling	FIX	feeling	FIX	feeling	Y
+seheol	10	sheol	NAME	Sheol	FIX	school	N
+soventy-five	10		FIX	seventy-five	FIX	seventy-five	Y
+steth	10	seth,stets	NAME	Seth	NAME	Steth	Y
+therei	10	there,therein	FIX	therein	FIX	therein	Y
+feneral	10	general,federal	FIX	general	FIX	general	Y
+reercation	10	recreation,revocation	FIX	recreation	FIX	recreation	Y
+inacriminal	10		GARBAGE		GARBAGE		Y
+ually	10	tally,ally	FIX	ally	FIX	usually	Y
+eenses	10	lenses,senses	FIX	senses	FIX	licenses	Y
+yrade	10	grade,trade	FIX	grade	FIX	trade	Y
+wluch	10	such,which	FIX	such	FIX	which	Y
+cilect	10	direct,collect	FIX	collect	FIX	collect	Y
+assegs	10	assets,assess	FIX	assets	FIX	assets	Y
+temof	10	lemon,tempo	GARBAGE		GARBAGE		Y
+hillegass	10	illegals	NAME	Hillegass	NAME	Hillegass	Y
+ceeeeeeeeees	10		GARBAGE		GARBAGE		Y
+gueh	10	gush	FIX	gush	FIX	such	Y
+compensi	10	compels,compendia	FIX	compels	FIX	compensatory	Y
+theret	10	there,thereto	FIX	thereto	FIX	thereto	Y
+watil	10	wail	GARBAGE		FIX	until	N
+biect	10	bisect	FIX	bisect	FIX	object	Y
+sicty-two	10		FIX	eighty-two	FIX	sixty-two	Y
+allsuch	10		FIX	all such	FIX	all such	Y
+arately	10	irately	GARBAGE		FIX	separately	N
+ceereee	10		GARBAGE		GARBAGE		Y
+twonty-four	10		FIX	twenty-four	FIX	twenty-four	Y
+alpme	10	alone,lapse	FIX	alone	FIX	alpine	Y
+gions	10	ions,lions	KEEP	ions	FIX	regions	N
+iorth	10	forth,north	FIX	north	FIX	forth	Y
+pointments	10	ointments	GARBAGE		FIX	appointments	N
+diserection	10	discretion,direction	FIX	discretion	FIX	discretion	Y
+rosemon	10	rosamond,robeson	NAME	Rosamond	NAME	Rosemon	Y
+peddar	10	pedlar	FIX	pedlar	FIX	pedlar	Y
+fompensa	10		GARBAGE		FIX	compensation	N
+providel	10	provided,provide	FIX	provided	FIX	provided	Y
+miscon	10	mascon	GARBAGE		FIX	misconduct	N
+erintendent	10		GARBAGE		FIX	superintendent	N
+preter	10	prefer,peter	FIX	prefer	FIX	prefer	Y
+dustry	10	dusty	KEEP	dustry	FIX	industry	N
+taxlevy	10	talley	GARBAGE		FIX	tax levy	N
+curring	10	curing,curbing	FIX	curing	FIX	occurring	Y
+lamanda	10	amanda,lawanda	NAME	Amanda	NAME	La Manda	Y
+resewered	10	reseeded,resewed	FIX	resewed	FIX	resewered	Y
+dismissa	10	dismissal,dismiss	FIX	dismissal	FIX	dismissal	Y
+tuting	10	turing,tubing	KEEP	tuting	FIX	constituting	N
+commls	10	commas	GARBAGE		FIX	commas	N
+imerest	10	merest,imprest	FIX	merest	FIX	interest	Y
+peatn	10	peat,pean	FIX	peat	FIX	death	Y
+gairdneri	10	gardner	NAME	Gardner	NAME	Gairdneri	Y
+superinper	10	superliner	FIX	superliner	GARBAGE		N
+appropriaor	10	appropriator	FIX	appropriator	FIX	appropriator	Y
+milx	10	milk,mile	FIX	milk	FIX	milk	Y
+wuheerreas	10		GARBAGE		FIX	whereas	N
+athletie	10	athletic,athlete	FIX	athletic	FIX	athletic	Y
+wueerzeas	10		GARBAGE		FIX	whereas	N
+iwenty-five	10		GARBAGE		FIX	twenty-five	N
+joeation	10	location,creation	FIX	location	FIX	location	Y
+venrs	10	vents,veers	FIX	vents	FIX	years	Y
+coumy	10	county,court	FIX	county	FIX	county	Y
+ercale	10	percale	GARBAGE		FIX	percale	N
+fourtenths	10	fourteenths	FIX	fourteenths	FIX	four-tenths	Y
+eatehes	10	catches,matches	KEEP	eatehes	FIX	catches	N
+nonapplied	10	nonallied	GARBAGE		KEEP	nonapplied	N
+haliolis	10	aiolis,halitosis	GARBAGE		FIX	haliotis	N
+amdarit	10	amharic	GARBAGE		GARBAGE		Y
+eommander-in-chief	10		GARBAGE		FIX	commander-in-chief	N
+facturing	10	factoring,fracturing	FIX	fracturing	FIX	manufacturing	Y
+merated	10	aerated,cerated	FIX	enumerated	FIX	enumerated	Y
+connei	10	conner,connie	NAME	Connie	NAME	Connei	Y
+onefifth	10		KEEP	onefifth	FIX	one-fifth	N
+earricd	10	carried,married	FIX	carried	FIX	carried	Y
+furty-second	10		FIX	forty-second	FIX	forty-second	Y
+raake	10	rake	FIX	rake	FIX	rake	Y
+quencies	10	quenches	FIX	quencies	FIX	frequencies	Y
+exeep	10	except,exceed	FIX	except	FIX	except	Y
+izes	10	ices,sizes	FIX	sizes	FIX	sizes	Y
+tornia	10	tonia	NAME	Tornia	FIX	california	N
+eatches	10	catches,matches	FIX	catches	FIX	catches	Y
+btatz	10	blatz	GARBAGE		GARBAGE		Y
+fleishhacker	10		NAME	Fleishhacker	NAME	Fleishhacker	Y
+helding	10	holding,heading	FIX	holding	FIX	holding	Y
+hereo	10	hereof,here	FIX	hereof	FIX	hereof	Y
+delinquenev	10	delinquent,delinquency	FIX	delinquent	FIX	delinquency	Y
+quicting	10	quieting,quitting	FIX	quieting	FIX	quieting	Y
+tmder	10	under,order	FIX	under	FIX	under	Y
+citiapter	10		GARBAGE		FIX	chapter	N
+jeval	10	reval	FIX	reval	GARBAGE		N
+apprupria	10		GARBAGE		FIX	appropriation	N
+marvsville	10	marseille	NAME	Marysville	NAME	Marysville	Y
+sequit	10	sequin	FIX	sequin	FIX	sequitur	Y
+lixe	10	line,life	FIX	line	FIX	line	Y
+halepensis	10		GARBAGE		KEEP	halepensis	N
+narnes	10	barnes,nares	FIX	barnes	FIX	barnes	Y
+ilege	10	ilene,liege	FIX	ilege	FIX	privilege	Y
+vaeanev	10		GARBAGE		FIX	vacancy	N
+tiun	10	tin,tun	KEEP	tiun	FIX	tion	N
+theve	10	there,these	FIX	there	FIX	there	Y
+doara	10	dora,dobra	GARBAGE		NAME	Doara	N
+stvle	10	stale,style	FIX	style	FIX	style	Y
+astrets	10	streets,assets	FIX	streets	FIX	streets	Y
+cunent	10	current,consent	FIX	current	FIX	current	Y
+vider	10	vide,video	FIX	vide	FIX	provide	Y
+appointmer	10	appointed,appointment	FIX	appointment	FIX	appointment	Y
+one-nalf	10		GARBAGE		FIX	one-half	N
+mamtenanee	10		GARBAGE		FIX	maintenance	N
+corinthe	10	corinth	NAME	corinth	NAME	Corinthe	Y
+hnes	10	ones,hes	FIX	ones	FIX	lines	Y
+remair	10	remain,repair	FIX	remain	FIX	remain	Y
+efectne	10		GARBAGE		FIX	effective	N
+earu	10	earn,ear	KEEP	earu	FIX	earn	N
+portionments	10		GARBAGE		FIX	apportionments	N
+agneultural	10		GARBAGE		FIX	agricultural	N
+loyee	10	lower,levee	FIX	levee	FIX	employee	Y
+nittee	10	little,litter	FIX	little	FIX	committee	Y
+camphorata	10	camphorate	FIX	camphorate	KEEP	camphorata	N
+eaty	10	eat,easy	KEEP	eaty	FIX	treaty	N
+remam	10	ream,remap	GARBAGE		FIX	remain	N
+vandation	10	valuation,vacation	FIX	valuation	FIX	foundation	Y
+mainta	10	manta	GARBAGE		FIX	maintain	N
+ducers	10	dupers	GARBAGE		FIX	producers	N
+wueerzas	10	guerezas	GARBAGE		FIX	whereas	N
+trammg	10	trammel,trauma	FIX	trammel	FIX	training	Y
+marily	10	marilyn,marbly	NAME	Marilyn	FIX	primarily	N
+redlegged	10		KEEP	redlegged	KEEP	redlegged	Y
+ributions	10	dilutions,libations	GARBAGE		FIX	contributions	N
+schco	10	schmo	FIX	schmo	FIX	school	Y
+encinita	10	encrinite	NAME	Encinitas	NAME	Encinita	Y
+reneals	10	repeals,rentals	FIX	repeals	FIX	repeals	Y
+relatamended	10		GARBAGE		GARBAGE		Y
+subsee	10	subset	FIX	subset	FIX	subsection	Y
+cuaprtter	10		GARBAGE		GARBAGE		Y
+falureto	10		GARBAGE		GARBAGE		Y
+certafeate	10		GARBAGE		FIX	certificate	N
+inguinale	10	inguinal	FIX	inguinal	KEEP	inguinale	N
+federalaid	10		GARBAGE		FIX	federal aid	N
+ormance	10	romance	FIX	romance	FIX	performance	Y
+perent	10	percent,parent	FIX	percent	FIX	percent	Y
+unior	10	junior,union	FIX	junior	FIX	junior	Y
+iiouse	10	house,spouse	FIX	house	FIX	house	Y
+cuaptterr	10		GARBAGE		GARBAGE		Y
+indebitatus	10		GARBAGE		KEEP	indebitatus	N
+borids	10	boris,bovids	GARBAGE		FIX	bonds	N
+dreco	10	deco,greco	FIX	deco	NAME	Greco	N
+michillinda	10		NAME	Michillinda	NAME	Michillinda	Y
+subrentals	10		KEEP	subrentals	KEEP	subrentals	Y
+nostate	10	costate,notate	FIX	notate	GARBAGE		N
+parvipinnis	10		KEEP	parvipinnis	KEEP	parvipinnis	Y
+tamaras	10	tamara	NAME	Tamara	NAME	Tamaras	Y
+piperidyl	10		KEEP	piperidyl	KEEP	piperidyl	Y
+aphelocoma	10		KEEP	aphelocoma	KEEP	aphelocoma	Y
+hrearm	10	rearm	FIX	rearm	FIX	firearm	Y
+ccccceeeee	10		GARBAGE		GARBAGE		Y
+acetylmethadol	10		KEEP	acetylmethadol	KEEP	acetylmethadol	Y
+betamethadol	10		KEEP	betamethadol	KEEP	betamethadol	Y
+methyldihydromorphine	10		KEEP	methyldihydromorphine	KEEP	methyldihydromorphine	Y
+controlvot	10		GARBAGE		GARBAGE		Y
+eseeeeee	10		GARBAGE		GARBAGE		Y
+ceceeeeeee	10		GARBAGE		GARBAGE		Y
+somota	10	somoza	NAME	Somoza	NAME	Sonoma	Y
+propietario	10		KEEP	propietario	KEEP	propietario	Y
+lassom	10	lasso,lassos	FIX	lasso	FIX	lasso	Y
+eeneeeeee	10		GARBAGE		GARBAGE		Y
+eneneees	10		GARBAGE		GARBAGE		Y
+tariffing	10	rarifying,riffing	FIX	rarifying	FIX	tariffing	Y
+xitb	10	with,city	GARBAGE		FIX	with	N
+cctp	10	act,city	GARBAGE		GARBAGE		Y
+predisciplinary	10		KEEP	predisciplinary	KEEP	predisciplinary	Y
+peltee	10	pelee,pelted	FIX	pelee	NAME	Peltee	N
+eteeee	10	steele,teepee	GARBAGE		GARBAGE		Y
+eeneneeeee	10		GARBAGE		GARBAGE		Y
+enneetennees	10		GARBAGE		GARBAGE		Y
+ilevs	10	ileus	FIX	ileus	FIX	levies	Y
+bcedp	10	beds,bed	FIX	beds	GARBAGE		N
+repurchasable	10	purchasable	FIX	purchasable	KEEP	repurchasable	N
+arklin	10	arlin	NAME	Arlin	NAME	Arklin	Y
+clairns	10	cairns	FIX	cairns	FIX	claims	Y
+environmenta	10	environmental,environment	FIX	environmental	FIX	environmental	Y
+noncontracted	10		KEEP	noncontracted	KEEP	noncontracted	Y
+nonapplicability	10	inapplicability	FIX	inapplicability	KEEP	nonapplicability	N
+cceceeeee	10		GARBAGE		GARBAGE		Y
+qtams	10	tams	KEEP	tams	GARBAGE		N
+ccccceeeeeee	10		GARBAGE		GARBAGE		Y
+brakeshoes	10	bakeshops	FIX	brakeshoes	KEEP	brakeshoes	N
+noncoterminous	10		KEEP	noncoterminous	KEEP	noncoterminous	Y
+alphameprodine	10		GARBAGE		KEEP	alphameprodine	N
+alphacetylmethadol	10		GARBAGE		KEEP	alphacetylmethadol	N
+alphamethadol	10		GARBAGE		KEEP	alphamethadol	N
+dextromoramide	10		GARBAGE		KEEP	dextromoramide	N
+ehminated	10	terminated,nominated	FIX	terminated	FIX	eliminated	Y
+tohowine	10		GARBAGE		GARBAGE		Y
+nonurgency	10		KEEP	nonurgency	KEEP	nonurgency	Y
+betacetylmethadol	10		GARBAGE		KEEP	betacetylmethadol	N
+hydroxypethidine	10		GARBAGE		KEEP	hydroxypethidine	N
+noracymethadol	10		GARBAGE		KEEP	noracymethadol	N
+phenoperidine	10		GARBAGE		KEEP	phenoperidine	N
+piritramide	10		GARBAGE		KEEP	piritramide	N
+acetorphine	10		GARBAGE		KEEP	acetorphine	N
+acetyldihydrocodeine	10		GARBAGE		KEEP	acetyldihydrocodeine	N
+cyprenorphine	10		GARBAGE		KEEP	cyprenorphine	N
+methyldesorphine	10		GARBAGE		KEEP	methyldesorphine	N
+ftovis	10	clovis,stoves	NAME	clovis	NAME	Clovis	Y
+cobranza	10	carranza	NAME	carranza	KEEP	cobranza	N
+cobrarle	10	coracle	GARBAGE		KEEP	cobrarle	N
+usarse	10	users,usage	GARBAGE		KEEP	usarse	N
+sufentanyl	10		GARBAGE		KEEP	sufentanyl	N
+entty	10	entity,entry	FIX	entity	FIX	entity	Y
+stirhng	10	storing,strong	FIX	strong	FIX	stirling	Y
+cnteria	10	criteria,interim	FIX	criteria	FIX	criteria	Y
+eeeece	10	greece,fleece	GARBAGE		GARBAGE		Y
+subcaps	10	hubcaps	GARBAGE		GARBAGE		Y
+leghold	10	leopold,behold	NAME	leopold	KEEP	leghold	N
+bermardino	10	bernardine	FIX	bernardine	NAME	Bernardino	N
+gcwr	10	cor,car	GARBAGE		KEEP	gcwr	N
+nearsite	10	nearside	FIX	nearside	FIX	nearside	Y
+noninvestment	10		GARBAGE		KEEP	noninvestment	N
+sqgs	10	sags	FIX	sags	GARBAGE		N
+nonprisoner	10		GARBAGE		KEEP	nonprisoner	N
+outstationed	10	outstation,outstations	FIX	outstationed	KEEP	outstationed	N
+nonminority	10		FIX	nonminority	KEEP	nonminority	N
+erreca	10	erect,eureka	NAME	eureka	NAME	Erreca	Y
+nonschool-related	10		FIX	nonschool-related	KEEP	nonschool-related	N
