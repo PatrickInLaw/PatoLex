@@ -344,6 +344,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
   - **Images scattered:** 1862's 660 imgs are on THIS box (5080) not the 5090; 1869-70 / 1873-74 on neither. Not a clean set -- needs gathering + some are genuinely missing.
 - **Vision IS feasible for the 215 but is real plumbing** (re-pull 32b OR use granite, gather images across both boxes, target body pages). Scoped, pending decision.
 
+### Continuation 27 (2026-06-11) — Claude reads the REVIEW scans directly (Patrick: "YOU can look at the 215!")
+
+- **Key realization (Patrick):** I (Claude) HAVE vision -- I can `Read` the page scans myself, no local vision model needed. The broken qwen blob is irrelevant.
+- **Staged the 215 REVIEW scans** (`review_worklist.py` -> `review_worklist.tsv` + `_vocab/review_imgs/`). **63 of 215 have images on the 5090** (pulled locally); 152 don't (some on the 5080, some missing).
+- **Read 7 so far, 7/7 correct** (`chapter_vision_resolved.tsv`) -- and crucially several were cases where OCR AND sequence-fill AND digit-fix would ALL be wrong, so only reading the scan gets them: 1861 o91 `CLV`=155 (ocr 101, fill 152), 1861 o218 `CCCCXLIII`=443, 1905 o40 `XLIV`=44 ("restart" was spurious), 1941 o681 `1132` (digit error, fill off by 1), + fill-confirmations (1905 o202=241, o458=571, 1935 o90=105). Next-act numbers confirm each.
+- **CONTINUING:** read the remaining ~56 available scans in batches; gather the 152 missing images (1862's 660 are on the 5080; re-source the truly-absent). Output: `chapter_vision_resolved.tsv` (authoritative readings -> overlay).
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

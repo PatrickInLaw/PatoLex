@@ -1,0 +1,8 @@
+vol	in_act_order	ocr_value	fill_was	resolved_chapter	read_as	note
+production-1861	91	101	152	155	CLV	both OCR and fill wrong; next act CLVI=156 confirms
+production-1861	218	441	442	443	CCCCXLIII	both OCR and fill wrong
+production-1905	40	15	45	44	XLIV	"restart" flag was spurious; fill off by 1
+production-1905	202	260	241	241	CCXLI	fill right; next CCXLII=242 confirms
+production-1905	458	500	571	571	DLXXI	OCR "d" garbage; fill right
+production-1941-vol1-41chapters	681	11382	1131	1132	1132	digit-error; fill off by 1; next 1133 confirms
+production-1935-vol1-chapters	90	0	105	105	105	OCR "10d" garbage; fill right; next 106/107 confirm
