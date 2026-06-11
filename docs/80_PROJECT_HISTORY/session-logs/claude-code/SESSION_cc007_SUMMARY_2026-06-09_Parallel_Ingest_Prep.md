@@ -351,6 +351,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Read 7 so far, 7/7 correct** (`chapter_vision_resolved.tsv`) -- and crucially several were cases where OCR AND sequence-fill AND digit-fix would ALL be wrong, so only reading the scan gets them: 1861 o91 `CLV`=155 (ocr 101, fill 152), 1861 o218 `CCCCXLIII`=443, 1905 o40 `XLIV`=44 ("restart" was spurious), 1941 o681 `1132` (digit error, fill off by 1), + fill-confirmations (1905 o202=241, o458=571, 1935 o90=105). Next-act numbers confirm each.
 - **CONTINUING:** read the remaining ~56 available scans in batches; gather the 152 missing images (1862's 660 are on the 5080; re-source the truly-absent). Output: `chapter_vision_resolved.tsv` (authoritative readings -> overlay).
 
+### Continuation 28 (2026-06-11) — Sonnet vision agents read the scans (validated, scalable)
+
+- **Patrick: "Can sonnet read these?"** YES. Test: 1 Sonnet agent read 3 scans, got the readings right (CLV/CCCCXLIII/XLIV) but mis-CONVERTED one Roman->Arabic (CCCCXLIII->"4343"). Fix: **Sonnet returns the PRINTED numeral; Claude converts Roman->int deterministically** (zero arithmetic risk).
+- **Fanned the 63 image-available cases to 3 parallel Sonnet vision agents** (~21 each, ~4 min, ~105k tokens / ~$1). Read 61/63 (2 UNKNOWN). Each writes `sub_chvis_part{N}.tsv` (vol, order, printed-numeral).
+- **`aggregate_chvis.py`** converts + VALIDATES against my 7 hand-reads: **7/7 agree** -> Sonnet readings trustworthy. Output `chapter_vision_final.tsv` (61 resolved authoritative chapter numbers).
+- Several resolved cases were ones where OCR+fill+digitfix ALL fail (1861 o91=155, o218=443; 1905 o40=44) -> only reading the scan gets them.
+- **REVIEW 215 status: 61 resolved by vision.** Remaining 154 = 2 Sonnet-UNKNOWN (Claude to read) + 152 lacking 5090 images (gather from 5080: 1862's 660 imgs are there; re-source the truly-absent, then same Sonnet fan-out). NEXT: apply chapter_vision_final.tsv to the overlay as tier=VISION; finish the 154.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
