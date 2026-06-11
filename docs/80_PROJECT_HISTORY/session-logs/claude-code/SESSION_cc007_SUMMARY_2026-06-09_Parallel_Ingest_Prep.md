@@ -247,6 +247,15 @@ Prepped the clean re-run (NOT yet run/committed-with-results):
 - **Design doc** `docs/30_SYSTEM_DESIGN/CORRECTION_AND_DISPLAY_LAYER.md` — captures Patrick's layered display-layer architecture (immutable OCR + reversible overlays: deterministic -> model/vision -> community wiki, materialized display for the hot path) and the OPEN pre-ingestion decisions (anchor granularity, layer precedence, original-also-searchable, correction-axis vs point-in-time-axis).
 - v8 syntax-checked + on 5090; re-run (freq>=2) pending Patrick's go.
 
+### Continuation 16 (2026-06-11) — v8 run results + verification; coordinate scoping
+
+- **v8 freq>=2 run DONE** (wall 1086s): baseline 1,531,515 (gazetteer trimmed ~3.4k flagged names vs 1,534,893) -> after_A **1,277,800** (LBH guard recovered +253,715, MORE than the unguarded 217,262, AND stopped manufacturing `appropriadollars`) -> after_B 1,256,448 -> after_C **578,153 = 0.4364%**. Corrections accepted **65,177**, review **~28,029**. Residual slightly HIGHER than the pre-gate 0.4049% ON PURPOSE -- the fragment gate declined ~6k risky fixes.
+- **VERIFIED `passC_corrections.tsv` written** (the persistence fix): 65,177 rows, each with provenance (`unique(whereas:32050)`, `dominant(shall:2006583>>small:14032)`). First applyable, auditable corrections artifact. Confirms corpus-freq dominance (sball->shall not small).
+- **VERIFIED fragment gate fired** on exactly the dangerous cases: `trict->fragment_gate(tract)`, `sioner->fragment_gate(sooner)`, `poration->fragment_gate(portion)`, `priated->fragment_gate(printed)` -- all conservatee-class corruptions AVERTED. Minor: a few genuine typos over-parked (aiter->after) -- safe direction.
+- **KEY: the parked fragments ARE the line-split halves** (dis-trict, commis-sioner, cor-poration, appro-priated) -> validates the line-geometry reunification pass (Patrick's margin idea) has high-frequency targets sitting in the review tier.
+- **Coordinates NOT on disk** (confirmed: page objects have only text fields, no bbox -- docTR/Surya boxes dropped at extraction, kept only `.value`). BUT preprocessed page images ARE saved (`pages_prep_gray/*.png` + `img_path`), so coordinates+font-height are RE-DERIVABLE via a Tesseract `image_to_data` CPU pass (no GPU/VRAM risk, parallel). Scale: 267,530 images total but marginalia is old-volume-only (~48.6k from 1901-1950 + ~730 pre-1900; the 218k 1951-99 are modern typeset) -> target ~50k pages, est <1h on the 5090 CPU. Benchmark before committing.
+- Newlines in consensus_text = physical scan lines (verified) -> line-end/line-start = right/left-edge proxy for the text-only line-split pass.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
