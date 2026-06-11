@@ -398,3 +398,130 @@
 [2026-06-10 20:59 PT] PASS-C | corrections=11,943  corrected_occ=552,570  bad_occ=737,115  pct=0.5568%  recovered=552,570 | OK
 [2026-06-10 20:59 PT] SUMMARY | baseline=1,534,893  after_A=1,317,631(recovered=217,262)  after_B=1,289,685(recovered=27,946)  after_C=737,115(recovered=552,570)  true_residual_pct=0.5568%  residual_types=467,978 | OK
 [2026-06-10 20:59 PT] DONE | wall_time=208s  true_residual_pct=0.5568%  residual_types=467,978  residual_occ=737,115 | OK
+[2026-06-10 22:36 PT] START | correction_passes.py v7  FULLY-PARALLEL + SCORED(de-merge pieces is_common Zipf>=2.5; PassC corpus-freq dominance>=3.0; legal-supplement)  CPU-only | OK
+[2026-06-10 22:36 PT] DICT | Building union dictionary ... | OK
+[2026-06-10 22:36 PT] DICT | ready  static=327,994  wordfreq=True | OK
+[2026-06-10 22:36 PT] SCAN | Found 205 consensus JSON files | OK
+[2026-06-10 22:36 PT] SCAN | Parallel scan of 205 files across 12 workers (baseline + Pass A in one read) ... | OK
+[2026-06-10 22:36 PT] SCAN | 20/205 files merged | baseline_unique=126,205 | elapsed=2s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 40/205 files merged | baseline_unique=220,244 | elapsed=6s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 60/205 files merged | baseline_unique=328,728 | elapsed=10s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 80/205 files merged | baseline_unique=415,451 | elapsed=13s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 100/205 files merged | baseline_unique=449,996 | elapsed=16s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 120/205 files merged | baseline_unique=480,166 | elapsed=19s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 140/205 files merged | baseline_unique=507,262 | elapsed=22s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 160/205 files merged | baseline_unique=527,098 | elapsed=25s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 180/205 files merged | baseline_unique=555,416 | elapsed=29s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 200/205 files merged | baseline_unique=569,110 | elapsed=32s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | 205/205 files merged | baseline_unique=572,703 | elapsed=34s | HEARTBEAT
+[2026-06-10 22:36 PT] SCAN | scan complete  files=205  t=34s | OK
+[2026-06-10 22:36 PT] BASELINE | total=134,105,434  unique=572,703  bad_types=468,246  bad_occ=1,534,893  pct=1.1445% | OK
+[2026-06-10 22:37 PT] PASS-A | lbh_ops=853,625  adj_ops=15,325  bad_occ=1,317,631  pct=0.9954%  recovered=217,262 | OK
+[2026-06-10 22:37 PT] PASS-B | bad_types_total=483,222  freq>=2=98,091  singletons_skipped=385,131(385,131 occ) | OK
+[2026-06-10 22:37 PT] PASS-B | Gate 1=garble(edit1), Gate 2=piece-plausibility(>=4 or stopword), Gate 3=unique-segmentation -- starting DP ... | OK
+[2026-06-10 22:37 PT] PASS-B | Parallel de-merge: 98,091 types across 12 workers (each builds dict once) ... | OK
+[2026-06-10 22:37 PT] PASS-B | 20,000/98,091 types | splittable_so_far=559 | gate1_garble_skipped=524 | gate3_ambig_skipped=16 | elapsed=1s | rate=23099/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:37 PT] PASS-B | 40,000/98,091 types | splittable_so_far=1,316 | gate1_garble_skipped=1,016 | gate3_ambig_skipped=25 | elapsed=1s | rate=44167/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:37 PT] PASS-B | 60,000/98,091 types | splittable_so_far=1,625 | gate1_garble_skipped=1,430 | gate3_ambig_skipped=40 | elapsed=1s | rate=64714/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:37 PT] PASS-B | 80,000/98,091 types | splittable_so_far=2,099 | gate1_garble_skipped=1,917 | gate3_ambig_skipped=59 | elapsed=1s | rate=84002/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:37 PT] PASS-B | GATE SUMMARY (parallel): total_bad_types=98,091 | accepted_splits=3,301 | gate1_garble_blocked=2,352 | gate3_ambig_blocked=85 | workers=12 | elapsed=1.1s | OK
+[2026-06-10 22:37 PT] PASS-B | DP done: 3,301 splittable types  elapsed=1.1s | OK
+[2026-06-10 22:37 PT] PASS-B | demerge_ops_occ=27,946  splittable_types=3,301  bad_occ=1,289,685  pct=0.9741%  recovered=27,946 | OK
+[2026-06-10 22:37 PT] PASS-C | min_freq=2  freq_types=94,790  freq_occ=904,554  PARALLEL candidate-gen + corpus-freq scoring across 12 workers ... | OK
+[2026-06-10 22:37 PT] PASS-C | 201/94,790 types | accepted=158 | review=43 | elapsed=17s | rate=12/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:37 PT] PASS-C | 2,000/94,790 types | accepted=1,393 | review=607 | elapsed=29s | rate=68/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:37 PT] PASS-C | 4,000/94,790 types | accepted=2,666 | review=1,334 | elapsed=42s | rate=96/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:38 PT] PASS-C | 6,000/94,790 types | accepted=4,211 | review=1,789 | elapsed=54s | rate=112/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:38 PT] PASS-C | 7,201/94,790 types | accepted=5,138 | review=2,063 | elapsed=70s | rate=103/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:38 PT] PASS-C | 8,000/94,790 types | accepted=5,733 | review=2,267 | elapsed=72s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:38 PT] PASS-C | 10,000/94,790 types | accepted=7,399 | review=2,601 | elapsed=87s | rate=115/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 11,601/94,790 types | accepted=8,749 | review=2,852 | elapsed=103s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 12,000/94,790 types | accepted=9,083 | review=2,917 | elapsed=103s | rate=116/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 13,601/94,790 types | accepted=10,303 | review=3,298 | elapsed=120s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 14,000/94,790 types | accepted=10,588 | review=3,412 | elapsed=122s | rate=115/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 15,401/94,790 types | accepted=11,590 | review=3,811 | elapsed=137s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 16,000/94,790 types | accepted=12,027 | review=3,973 | elapsed=140s | rate=114/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 17,801/94,790 types | accepted=13,397 | review=4,404 | elapsed=156s | rate=114/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:39 PT] PASS-C | 18,000/94,790 types | accepted=13,562 | review=4,438 | elapsed=156s | rate=116/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:40 PT] PASS-C | 19,601/94,790 types | accepted=14,805 | review=4,796 | elapsed=171s | rate=115/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:40 PT] PASS-C | 20,000/94,790 types | accepted=15,059 | review=4,941 | elapsed=178s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:40 PT] PASS-C | 22,000/94,790 types | accepted=16,705 | review=5,295 | elapsed=188s | rate=117/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:40 PT] PASS-C | 23,001/94,790 types | accepted=17,496 | review=5,505 | elapsed=203s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:40 PT] PASS-C | 24,000/94,790 types | accepted=18,246 | review=5,754 | elapsed=206s | rate=117/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:40 PT] PASS-C | 24,801/94,790 types | accepted=18,853 | review=5,948 | elapsed=222s | rate=112/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:41 PT] PASS-C | 26,000/94,790 types | accepted=19,830 | review=6,170 | elapsed=226s | rate=115/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:41 PT] PASS-C | 27,601/94,790 types | accepted=21,140 | review=6,461 | elapsed=244s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:41 PT] PASS-C | 28,000/94,790 types | accepted=21,436 | review=6,564 | elapsed=245s | rate=115/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:41 PT] PASS-C | 29,601/94,790 types | accepted=22,579 | review=7,022 | elapsed=260s | rate=114/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:41 PT] PASS-C | 30,000/94,790 types | accepted=22,897 | review=7,103 | elapsed=263s | rate=114/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:41 PT] PASS-C | 32,000/94,790 types | accepted=24,362 | review=7,638 | elapsed=277s | rate=116/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:42 PT] PASS-C | 33,001/94,790 types | accepted=25,059 | review=7,942 | elapsed=294s | rate=112/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:42 PT] PASS-C | 34,000/94,790 types | accepted=25,800 | review=8,200 | elapsed=298s | rate=114/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:42 PT] PASS-C | 35,201/94,790 types | accepted=26,736 | review=8,465 | elapsed=314s | rate=112/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:42 PT] PASS-C | 36,000/94,790 types | accepted=27,416 | review=8,584 | elapsed=317s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:42 PT] PASS-C | 37,601/94,790 types | accepted=28,731 | review=8,870 | elapsed=333s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:42 PT] PASS-C | 38,000/94,790 types | accepted=29,063 | review=8,937 | elapsed=333s | rate=114/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:43 PT] PASS-C | 39,201/94,790 types | accepted=30,048 | review=9,153 | elapsed=348s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:43 PT] PASS-C | 40,000/94,790 types | accepted=30,661 | review=9,339 | elapsed=359s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:43 PT] PASS-C | 42,000/94,790 types | accepted=32,210 | review=9,790 | elapsed=372s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:43 PT] PASS-C | 43,001/94,790 types | accepted=33,004 | review=9,997 | elapsed=387s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:43 PT] PASS-C | 44,000/94,790 types | accepted=33,812 | review=10,188 | elapsed=391s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:44 PT] PASS-C | 45,001/94,790 types | accepted=34,609 | review=10,392 | elapsed=408s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:44 PT] PASS-C | 46,000/94,790 types | accepted=35,418 | review=10,582 | elapsed=413s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:44 PT] PASS-C | 47,401/94,790 types | accepted=36,566 | review=10,835 | elapsed=429s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:44 PT] PASS-C | 48,000/94,790 types | accepted=37,036 | review=10,964 | elapsed=434s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:44 PT] PASS-C | 49,801/94,790 types | accepted=38,497 | review=11,304 | elapsed=451s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:44 PT] PASS-C | 50,000/94,790 types | accepted=38,659 | review=11,341 | elapsed=451s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:45 PT] PASS-C | 51,601/94,790 types | accepted=39,899 | review=11,702 | elapsed=466s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:45 PT] PASS-C | 52,000/94,790 types | accepted=40,196 | review=11,804 | elapsed=469s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:45 PT] PASS-C | 53,401/94,790 types | accepted=41,315 | review=12,086 | elapsed=485s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:45 PT] PASS-C | 54,000/94,790 types | accepted=41,789 | review=12,211 | elapsed=491s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:45 PT] PASS-C | 56,000/94,790 types | accepted=43,424 | review=12,576 | elapsed=505s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:45 PT] PASS-C | 57,401/94,790 types | accepted=44,555 | review=12,846 | elapsed=521s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:46 PT] PASS-C | 58,000/94,790 types | accepted=45,037 | review=12,963 | elapsed=522s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:46 PT] PASS-C | 59,801/94,790 types | accepted=46,473 | review=13,328 | elapsed=544s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:46 PT] PASS-C | 60,000/94,790 types | accepted=46,638 | review=13,362 | elapsed=544s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:46 PT] PASS-C | 62,000/94,790 types | accepted=48,162 | review=13,838 | elapsed=556s | rate=112/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:46 PT] PASS-C | 64,000/94,790 types | accepted=49,805 | review=14,195 | elapsed=568s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:47 PT] PASS-C | 65,801/94,790 types | accepted=51,343 | review=14,458 | elapsed=583s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:47 PT] PASS-C | 66,000/94,790 types | accepted=51,514 | review=14,486 | elapsed=583s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:47 PT] PASS-C | 67,601/94,790 types | accepted=52,845 | review=14,756 | elapsed=599s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:47 PT] PASS-C | 68,000/94,790 types | accepted=53,167 | review=14,833 | elapsed=602s | rate=113/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:47 PT] PASS-C | 68,801/94,790 types | accepted=53,761 | review=15,040 | elapsed=618s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:47 PT] PASS-C | 70,000/94,790 types | accepted=54,616 | review=15,384 | elapsed=628s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:48 PT] PASS-C | 71,201/94,790 types | accepted=55,521 | review=15,680 | elapsed=645s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:48 PT] PASS-C | 72,000/94,790 types | accepted=56,122 | review=15,878 | elapsed=650s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:48 PT] PASS-C | 73,401/94,790 types | accepted=57,250 | review=16,151 | elapsed=667s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:48 PT] PASS-C | 74,000/94,790 types | accepted=57,721 | review=16,279 | elapsed=669s | rate=111/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:48 PT] PASS-C | 75,601/94,790 types | accepted=58,983 | review=16,618 | elapsed=685s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:48 PT] PASS-C | 76,000/94,790 types | accepted=59,294 | review=16,706 | elapsed=697s | rate=109/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:49 PT] PASS-C | 78,000/94,790 types | accepted=60,825 | review=17,175 | elapsed=707s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:49 PT] PASS-C | 78,201/94,790 types | accepted=60,980 | review=17,221 | elapsed=724s | rate=108/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:49 PT] PASS-C | 80,000/94,790 types | accepted=62,356 | review=17,644 | elapsed=729s | rate=110/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:49 PT] PASS-C | 80,401/94,790 types | accepted=62,656 | review=17,745 | elapsed=752s | rate=107/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:49 PT] PASS-C | 82,000/94,790 types | accepted=63,802 | review=18,198 | elapsed=760s | rate=108/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:50 PT] PASS-C | 82,601/94,790 types | accepted=64,221 | review=18,380 | elapsed=778s | rate=106/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:50 PT] PASS-C | 83,601/94,790 types | accepted=64,962 | review=18,639 | elapsed=796s | rate=105/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:50 PT] PASS-C | 84,000/94,790 types | accepted=65,219 | review=18,781 | elapsed=797s | rate=105/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:51 PT] PASS-C | 84,801/94,790 types | accepted=65,728 | review=19,073 | elapsed=823s | rate=103/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:51 PT] PASS-C | 85,601/94,790 types | accepted=66,184 | review=19,417 | elapsed=839s | rate=102/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:51 PT] PASS-C | 86,000/94,790 types | accepted=66,420 | review=19,580 | elapsed=841s | rate=102/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:51 PT] PASS-C | 86,601/94,790 types | accepted=66,803 | review=19,798 | elapsed=857s | rate=101/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:51 PT] PASS-C | 87,401/94,790 types | accepted=67,253 | review=20,148 | elapsed=876s | rate=100/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:52 PT] PASS-C | 87,801/94,790 types | accepted=67,540 | review=20,261 | elapsed=891s | rate=98/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:52 PT] PASS-C | 88,000/94,790 types | accepted=67,671 | review=20,329 | elapsed=891s | rate=99/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:52 PT] PASS-C | 89,001/94,790 types | accepted=68,280 | review=20,721 | elapsed=917s | rate=97/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:52 PT] PASS-C | 89,601/94,790 types | accepted=68,615 | review=20,986 | elapsed=936s | rate=96/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:52 PT] PASS-C | 90,000/94,790 types | accepted=68,816 | review=21,184 | elapsed=937s | rate=96/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:53 PT] PASS-C | 91,401/94,790 types | accepted=69,682 | review=21,719 | elapsed=978s | rate=94/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:53 PT] PASS-C | 92,000/94,790 types | accepted=69,942 | review=22,058 | elapsed=988s | rate=93/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:54 PT] PASS-C | 92,801/94,790 types | accepted=70,359 | review=22,442 | elapsed=1004s | rate=92/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:54 PT] PASS-C | 93,401/94,790 types | accepted=70,627 | review=22,774 | elapsed=1024s | rate=91/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:54 PT] PASS-C | 93,601/94,790 types | accepted=70,686 | review=22,915 | elapsed=1041s | rate=90/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:54 PT] PASS-C | 94,000/94,790 types | accepted=70,864 | review=23,136 | elapsed=1048s | rate=90/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:55 PT] PASS-C | 94,401/94,790 types | accepted=71,065 | review=23,336 | elapsed=1076s | rate=88/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:55 PT] PASS-C | 94,790/94,790 types | accepted=71,189 | review=23,601 | elapsed=1083s | rate=87/s | PARALLEL | HEARTBEAT
+[2026-06-10 22:55 PT] PASS-C | review TSV: 23,601 ambiguous/rejected -> C:\Users\patolex\PatoLex-scratch\_vocab\passC_review.tsv | OK
+[2026-06-10 22:55 PT] PASS-C | corrections=71,189  corrected_occ=753,632  bad_occ=536,053  pct=0.4049%  recovered=753,632 | OK
+[2026-06-10 22:55 PT] SUMMARY | baseline=1,534,893  after_A=1,317,631(recovered=217,262)  after_B=1,289,685(recovered=27,946)  after_C=536,053(recovered=753,632)  true_residual_pct=0.4049%  residual_types=408,732 | OK
+[2026-06-10 22:55 PT] DONE | wall_time=1145s  true_residual_pct=0.4049%  residual_types=408,732  residual_occ=536,053 | OK

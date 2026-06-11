@@ -1,0 +1,10 @@
+[2026-06-10 22:30 PT] START | residual triage  top_n=60000 | OK
+[2026-06-10 22:30 PT] LOAD | 467,978 residual tokens from residual_bad_words.tsv | OK
+[2026-06-10 22:30 PT] TRIAGE | 467,978/467,978 | elapsed=2s | rate=197867/s | HEARTBEAT
+[2026-06-10 22:30 PT] SUMMARY | category x tier counts: | OK
+[2026-06-10 22:30 PT] SUMMARY | tier        NOISE      TYPO       FRAGMENT   NAMELIKE   GARBLE     TOTAL | OK
+[2026-06-10 22:30 PT] SUMMARY | singleton   37079      97209      1407       215502     33934      385131 | OK
+[2026-06-10 22:30 PT] SUMMARY | low_2_9     1308       48589      1043       26692      2560       80192 | OK
+[2026-06-10 22:30 PT] SUMMARY | high_10     126        972        160        1247       150        2655 | OK
+[2026-06-10 22:30 PT] SUMMARY | ALL         38513      146770     2610       243441     36644      467978 | OK
+[2026-06-10 22:30 PT] DONE | out=C:\Users\patolex\PatoLex-scratch\_vocab\residual_triage.tsv  wall=3s | OK

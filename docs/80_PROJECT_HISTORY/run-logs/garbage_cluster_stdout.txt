@@ -1,0 +1,30 @@
+[2026-06-10 22:15 PT] START | garbage page-cluster scan | OK
+[2026-06-10 22:15 PT] LOAD | 361 GARBAGE tokens from Sonnet verdicts | OK
+[2026-06-10 22:15 PT] SCAN | 205 consensus files | OK
+[2026-06-10 22:16 PT] SCAN | pages=114,321 | hits=3,374 | elapsed=15s | HEARTBEAT
+[2026-06-10 22:16 PT] SCAN | pages=235,933 | hits=5,900 | elapsed=30s | HEARTBEAT
+[2026-06-10 22:16 PT] DONE | tokens_found=340/361 | total_occ=10,807 | distinct_pages=6,447 | min_pages_cover_all=225 | wall=42s | OK
+
+[TOP 20 garbage tokens by occ]  token  occ  on_n_pages
+   sliag                       310    105
+   sively                      304    298
+   rmpp                        267     44
+   cmsp                        256    118
+   nonsex                      255     62
+   ceee                        206    198
+   ceeee                       188    179
+   eeeeeeeee                   174    150
+   recla                       174    165
+   cancella                    155    150
+   ceeeeee                     153    143
+   enene                       149     68
+   tious                       134    132
+   cuav                        122    120
+   szorion                     119    119
+   eeeeeeeeee                  116    109
+   cceeeee                     111    102
+   eneeee                      110     87
+   bronshvag                   110     45
+   ceeeeeee                    100     99
+
+[CLUSTERING] tokens on exactly 1 page: 1/340  |  on <=3 pages: 7/340

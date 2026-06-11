@@ -88,6 +88,7 @@ except Exception:
 MIN_ZIPF        = float(os.environ.get("DEMERGE_MIN_ZIPF", "2.5"))
 MIN_CORPUS_FREQ = int(os.environ.get("PASSC_MIN_CORPUS_FREQ", "50"))
 CORR_DOMINANCE  = float(os.environ.get("PASSC_DOMINANCE", "3.0"))
+PASSC_MIN_FREQ  = int(os.environ.get("PASSC_MIN_FREQ", "10"))  # Pass C frequency floor (lower to 2 to clean the 2-9 band)
 
 def is_common(tok):
     """Stricter than is_known(): is this a *plausible* real word, not just present
@@ -809,9 +810,9 @@ def main():
     # HEARTBEAT every 2,000 types
     # ================================================================
     passB_bad_freq = {tok: passB_freq[tok] for tok in passB_freq if not is_known(tok)}
-    freq10 = {tok: cnt for tok, cnt in passB_bad_freq.items() if cnt >= 10}
+    freq10 = {tok: cnt for tok, cnt in passB_bad_freq.items() if cnt >= PASSC_MIN_FREQ}
     freq10_occ_total = sum(freq10.values())
-    rlog("PASS-C", f"freq10_types={len(freq10):,}  freq10_occ={freq10_occ_total:,}  PARALLEL candidate-gen + corpus-freq scoring across {n_workers} workers ...")
+    rlog("PASS-C", f"min_freq={PASSC_MIN_FREQ}  freq_types={len(freq10):,}  freq_occ={freq10_occ_total:,}  PARALLEL candidate-gen + corpus-freq scoring across {n_workers} workers ...")
 
     # PARALLEL Pass C (v7): workers generate edit-distance candidate SETS (slow);
     # the MAIN process scores them against the CORPUS frequency distribution
