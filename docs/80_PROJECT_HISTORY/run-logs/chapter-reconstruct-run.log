@@ -1,0 +1,13 @@
+[2026-06-11 08:48 PT] START chapter sequence-reconstruction (measure-first) | OK
+[2026-06-11 08:48 PT] 205 consensus files | OK
+[2026-06-11 08:48 PT] 205/205 vols | headings=87,197 | elapsed=1s | HEARTBEAT
+[2026-06-11 08:48 PT] ==== RESULT ==== | OK
+[2026-06-11 08:48 PT] chapter headings total = 87,197 | OK
+[2026-06-11 08:48 PT] clean (trusted as-is)  = 84,972 | OK
+[2026-06-11 08:48 PT] garbled                = 2,225 | OK
+[2026-06-11 08:48 PT]   -> RECOVERED by sequence (unique) = 723 (32.5% of garbled) | OK
+[2026-06-11 08:48 PT]        of which OCR value was WRONG  = 457 (reconstruction fixes these) | OK
+[2026-06-11 08:48 PT]   -> one-sided (inferable, unverified) = 43 | OK
+[2026-06-11 08:48 PT]   -> ambiguous gap-mismatch (restart/missing) = 1,455 | OK
+[2026-06-11 08:48 PT]   -> ambiguous no-anchor = 4 | OK
+[2026-06-11 08:48 PT] DONE sample -> C:\Users\patolex\PatoLex-scratch\_vocab\chapter_reconstruct_sample.tsv  wall=2s | OK

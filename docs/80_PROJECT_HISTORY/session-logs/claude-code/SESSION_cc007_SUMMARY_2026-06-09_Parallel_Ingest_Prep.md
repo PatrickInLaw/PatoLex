@@ -289,6 +289,16 @@ Investigated the "parser fix" (Roman-numeral chapter mangling + chaptered_date b
 - **Added `pipeline/test_chapter_parser.py`** (17 tests, all pass): `parse_chapter_number` value extraction (CCCLIV->354, ordinals->0, garbled->no crash) + `chapter_was_ocr_substituted` F11 guard (trusts clean arabic/roman, flags lowercase/junk/mismatch). Locks in the existing guards (previously untested).
 - **Remaining (NOT parser code):** the 51 stray DB date rows self-correct on re-ingest (parser now produces right dates); the flagged-act routing (ingest-with-flag vs exclude) is a pending design decision for Patrick.
 
+### Continuation 21 (2026-06-11) — chapter sequence-RECONSTRUCTION (proper fix, measure-first)
+
+Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbled chapters but does NOT recover the correct number (~the citation). Proper fix = reconstruct from the monotonic sequence (chapters are 1..N per session).
+
+- **`pipeline/chapter_reconstruct.py`** (self-contained: HEADER_RE + parse_chapter_number + clean-check copied verbatim; parallel; 2s over 205 vols). For each garbled heading, recover its value iff bracketed by clean anchors whose numeric gap == positional gap (unique).
+- **Result (LOWER BOUND):** 87,197 headings, 84,972 clean (97.4%), **2,225 garbled**; **723 recovered by sequence (32.5%)**, of which **457 had a WRONG OCR value reconstruction fixes**; 1,455 gap-mismatch, 43 one-sided, 4 no-anchor.
+- **Recoveries are clearly CORRECT** (sample): `d`(ocr 500)->148, `Ii`(2)->50, `CLY`(150)->104, `TVI`(5)->56, `CXxX`(130)->120. Real mis-citations recovered, not just flagged. Validates Patrick's instinct.
+- **CAVEAT — 32.5% is a lower bound:** the analyzer used RAW HEADER_RE matches (87,197) but the corpus has only ~75,340 real acts; the ~12k extra are non-acts (TOC, running-heads) the real parser filters via enact-markers/TOC-exclusion. They pollute the sequence and inflate the gap-mismatch bucket. On the properly-segmented PARSED-ACT sequence, recovery is substantially higher.
+- **NEXT (proper impl):** (1) re-measure on parse_volume's ordered/filtered act sequence for the true rate; (2) wire reconstruction into ingest_clean.py's per-volume pass -- anchor on clean numerals, infer garbled from the run, store `chapter_inferred=true` (auditable/reversible), flag only genuinely-ambiguous (runs/restarts).
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
