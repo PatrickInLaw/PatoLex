@@ -30,9 +30,10 @@ import multiprocessing as mp
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 os.environ["PYTORCH_NO_CUDA_MEMORY_CACHING"] = "1"
 
-SCRATCH  = r"C:\Users\patolex\PatoLex-scratch"
-OUT_DIR  = r"C:\Users\patolex\PatoLex-scratch\_vocab"
-LOG_PATH = r"C:\Users\patolex\PatoLex-scratch\_vocab\correction-pass-run.log"
+import config  # single source of truth for data paths (the 3060 cutover knob); pipeline/ on sys.path
+SCRATCH  = config.path_for("data_root")
+OUT_DIR  = config.path_for("vocab_dir")
+LOG_PATH = config.path_for("vocab_dir", "correction-pass-run.log")
 
 os.makedirs(OUT_DIR, exist_ok=True)
 

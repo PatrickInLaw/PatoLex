@@ -5,8 +5,9 @@ Run standalone after a cascade, or import build_summary() (the harness calls it 
 Output: _cascade/per_volume_summary.tsv
 """
 import os, json, glob
+import config  # single source of truth for data paths (the 3060 cutover knob); pipeline/ on sys.path
 
-CASCADE = r"C:\Users\patolex\PatoLex-scratch\_cascade"
+CASCADE = config.path_for("cascade_dir")
 
 def build_summary(cascade_dir=CASCADE):
     rows = []

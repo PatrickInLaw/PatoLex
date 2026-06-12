@@ -14,9 +14,10 @@ Reports the resolution rate + a hand-check sample. Does NOT modify any text (mea
 import os, re, json, glob, math, time
 from collections import Counter
 import multiprocessing as mp
+import config  # single source of truth for data paths (the 3060 cutover knob); pipeline/ on sys.path
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-CASCADE = os.path.join(SCRATCH, "_cascade")
+SCRATCH = config.path_for("data_root")
+CASCADE = config.path_for("cascade_dir")
 STAGE_OUT = os.path.join(CASCADE, "out_autocorrect")
 LOG = os.path.join(CASCADE, "context-run.log")
 ALPHA = "abcdefghijklmnopqrstuvwxyz"

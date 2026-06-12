@@ -5,8 +5,9 @@ autocorrect) -> _cascade/corpus_freq.json = {word: count} for words attested >= 
 Run this ONCE on the 5090 before re-running the cascade from autocorrect.
 """
 import os, time
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-CASCADE = os.path.join(SCRATCH, "_cascade")
+import config  # single source of truth for data paths (the 3060 cutover knob); pipeline/ on sys.path
+SCRATCH = config.path_for("data_root")
+CASCADE = config.path_for("cascade_dir")
 OUT_SPLIT = os.path.join(CASCADE, "out_split")
 FREQ_PATH = os.path.join(CASCADE, "corpus_freq.json")
 LOG = os.path.join(CASCADE, "corpus-freq-run.log")

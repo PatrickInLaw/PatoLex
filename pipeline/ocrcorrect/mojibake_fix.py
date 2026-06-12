@@ -10,9 +10,10 @@ precision check, and writes the fix worklist to _cascade/mojibake_fixes.tsv.
 """
 import os, re, json, glob, time
 from collections import Counter
+import config  # single source of truth for data paths (the 3060 cutover knob); pipeline/ on sys.path
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-CASCADE = os.path.join(SCRATCH, "_cascade")
+SCRATCH = config.path_for("data_root")
+CASCADE = config.path_for("cascade_dir")
 STAGE_OUT = os.path.join(CASCADE, "out_autocorrect")
 FREQ_PATH = os.path.join(CASCADE, "corpus_freq.json")
 OUT_TSV = os.path.join(CASCADE, "mojibake_fixes.tsv")

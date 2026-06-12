@@ -34,9 +34,10 @@ import multiprocessing as mp
 from ocrcorrect.edits import edits1 as _edits1, is_prefix_frag as _e_is_prefix, is_suffix_frag as _e_is_suffix
 
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-VOCAB   = os.path.join(SCRATCH, "_vocab")
-CASCADE = os.path.join(SCRATCH, "_cascade")
+import config  # SINGLE source of truth for data paths (the 3060 cutover knob); pipeline/ on sys.path
+SCRATCH = config.path_for("data_root")
+VOCAB   = config.path_for("vocab_dir")
+CASCADE = config.path_for("cascade_dir")
 STAGES  = ["reunify", "split", "autocorrect"]
 CASCADE_FROM = os.environ.get("CASCADE_FROM", "reunify")
 APPLY_SYMSPELL = os.environ.get("CASCADE_APPLY_SYMSPELL", "0") == "1"  # default OFF: SymSpell routes to adjudication, not auto-apply

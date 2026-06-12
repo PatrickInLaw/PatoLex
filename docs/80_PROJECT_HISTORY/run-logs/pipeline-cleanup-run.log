@@ -39,3 +39,8 @@
 [2026-06-12 13:18 PT] STEP-C | config refined (Patrick): location REGISTRY + ONE path_for(name) resolver (override logic in one place); per-location abs override verified (PATOLEX_PARSE_OUTPUT_DIR=E:\big\parse relocates just that folder) | OK
 [2026-06-12 13:22 PT] STEP-C | Patrick: drop the convenience constants (no back-compat -- we're rewriting). config = ONE function path_for(name, *subpath); updated ingest_from_ocr + parse_all to use it. py_compile OK, net green | OK
 [2026-06-12 13:23 PT] STEP-C2 | re-validated after path_for refactor: 1862 output still BYTE-IDENTICAL (065A1F26). Parallel config-driven parser DONE + proven | OK
+[2026-06-12 13:31 PT] UCP | session log Continuation 58 committed + pushed (4ee22d9) | OK
+[2026-06-12 13:33 PT] STEP-C | de-hardcoded the CASCADE + all ocrcorrect engine files onto config.path_for (correction_cascade, cascade_summary, correction_passes, build_corpus_freq, context_resolve, mojibake_fix). config paths resolve to same locations. py_compile OK, net green | OK
+[2026-06-12 13:34 PT] STEP-C | (recovered from a shell crash -- all 6 edits were safe on disk, resumed validation) | OK
+[2026-06-12 13:35 PT] STEP-C | redeployed engine to patolex, launched golden-master gate for the config-driven cascade | PENDING
+[2026-06-12 13:49 PT] STEP-C | GOLDEN-MASTER OK -- config-driven cascade reproduces locked numbers EXACTLY. Whole engine now de-hardcoded onto config.path_for + validated. Workers loaded config cleanly in spawn | OK
