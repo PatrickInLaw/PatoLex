@@ -5,8 +5,10 @@
 | Session | cc007 |
 | Date | 2026-06-09 |
 | Type | Orchestrator (Opus delegating to subagents) |
-| Status | **IN PROGRESS** — all work is LOCAL; nothing committed or pushed |
-| Goal | Clear the path to ingesting the 1876–1993 historical OCR backlog by running four prep streams in parallel |
+| Status | **COMMITTED & PUSHED through 2026-06-11.** Started as ingest-prep; evolved into a deep **text-correction-pipeline** phase (chapters, reunifier, dictionary, autocorrect). |
+| Goal | (orig) clear the 1876–1993 ingest backlog → (became) characterize & build the OCR text-correction stack and prove the error rate is reducible |
+
+> **READ THIS FIRST — the sections immediately below (What Was Done / Files Changed / Decisions Owed / Next Session) describe the ORIGINAL ingest-prep phase only. The bulk of this session was the correction-pipeline work summarized in "## Session Arc (2026-06-11)" just below, with full detail in Continuations 1–44 and the Lessons section at the end.**
 
 ---
 
@@ -46,6 +48,25 @@ Gathered the facts to clear the 4 Hans-flagged ingest blockers:
 
 ---
 
+## Session Arc (2026-06-11) — Correction-Pipeline Phase (the bulk of this session)
+
+High-level narrative; details in Continuations 1–44 + Lessons. All committed/pushed.
+
+**Chapter numbers — DONE (215/215):** the garbled Roman/Arabic chapter numbers were resolved as a reversible overlay. Deterministic monotonic-sequence reconstruction handled ~991; the 215 hardest REVIEW cases were finished by **rendering the heading page from the archive PDFs and reading the scan** (deterministic re-OCR for modern Arabic; Sonnet-vision + sequence-bracket cross-check for 19th-c Roman; ~35 hand-read). `chapter_corrections_GRAND.tsv`.
+
+**Text quality — characterized, then attacked:** post-Pass-ABC garble flag-rate is **0.56% (737k token-occ of ~132M)** — and that's a PRE-overlay UPPER BOUND, not an error rate. Decomposed the residual honestly:
+- **Reunifier (line_split_reunify.py v3):** rebuilt to catch what it missed — same-line space-splits, cross-page splits, NOHYPHEN-adjacent, larger lookahead, **multi-fragment (longest-first, post-Hans)**, + a flag-only FUZZY tier for dropped-char-at-split misspellings. 11,156 → 15,434 rejoins.
+- **Singleton tail (385k) decomposed RIGHT:** **~17% structural garbage, ~63% autocorrectable (edit-1/2 + real over-merges), ~19% harder typos.** ("60% garbage" was my wrong claim, refuted by measurement.)
+- **Singleton autocorrect (Patrick's idea):** corpus-weighted edit-1 fixes ~23% of the tail cleanly; edit-2 lifts it further. The freq≥2 passes had skipped singletons.
+- **Dictionary integration (Patrick's #4):** `build_dictionary` now loads **5,926 validated additions** (5,425 census/GeoNames-attested names + **501 LLM-validated legal terms**). Heuristic curation failed 3× (frequency≠validity; it kept fragments/errors); an LLM pass cleanly split REAL/NAME from FRAGMENT/ERROR.
+- **Sonnet text-adjudication overlay** expanded to 1,704 freq≥10 fixes (58,700 occ).
+
+**The agreed correction-pass ARCHITECTURE (Patrick):** dict-integration FIRST → reunify (fragments) → split (over-merges, NEW pass TBD) → spell edit-1/2/3 (singletons) → systematic-error sweep. All reversible overlays; **re-measure the residual only AFTER they apply** for the first real error rate.
+
+**Two Hans reviews** (parser tombstones early; dict+reunifier late — caught a CRITICAL shortest-first stranding bug, fixed to longest-first).
+
+---
+
 ## Files Changed (local, uncommitted)
 
 **Modified — pipeline:**
@@ -77,6 +98,15 @@ Gathered the facts to clear the 4 Hans-flagged ingest blockers:
 ---
 
 ## Next Session Should Start With
+
+**Correction-pipeline track (current, as of 2026-06-11):**
+1. Build the **over-merge SPLIT pass** (inverse of the reunifier; only split tokens not themselves known). Doesn't exist yet.
+2. Build the **singleton autocorrect pass** for real: corpus + general-English weighted edit-1/2 (and test edit-3, flag/LLM-only), guarded against frequent-corpus-error targets, emitting a reversible overlay.
+3. **Apply all reversible overlays** (chapter + Sonnet text + line-reunify + autocorrect + dict) to the corpus, then **RE-MEASURE the residual** — that is the first real error rate (everything so far is a pre-overlay upper bound).
+4. Extend dict-integration with the LLM-validated legal vocab to the FULL freq tiers (this pass only validated the freq≥15 genuine-novel set).
+5. Systematic-error sweep completeness check (high-freq consistently-broken words like `secrion`→section).
+
+**Ingest track (original, still pending):**
 1. Patrick's decisions on the table above (esp. 1998-vol6 recovery + dedup winners + legislature-map ambiguities).
 2. Extend `LEGISLATURE_MAP` (1877→1993) once ambiguities resolved.
 3. Build the registration batch for dedup-winner volumes (`register_source_document.py`).
@@ -494,3 +524,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - A completeness verifier MUST consult `page_classification.json`: the OCR producer intentionally omits empty/index pages, so "absent page-key" ≠ "missing content". A real gap = a **body-classified** page absent from OCR output. Root-causing this turned a scary 748-page punch list into ~0 real work — and only the corrected check surfaced the genuine 1993–1996 mid-volume OCR truncations. Verify completeness against the producer's own page taxonomy, never against a naive 1..max range.
 - Subagents must use the **Write tool**, not bash heredocs, for file creation — the compound-bash/heredoc hook blocks them, and a haiku worker silently left a `"test"` stub and falsely reported success. Orchestrator must verify subagent file outputs.
 - Two unfixed copies of a parser nearly slipped through; the Hans pass caught them — adversarial review earns its keep on pipeline code.
+
+### Correction-pipeline lessons (2026-06-11 phase)
+- **VERIFY, don't assert.** Nearly every confident claim I made this phase was wrong and caught by Patrick + measurement: "scans are missing", "the file is missing", "60% of the tail is garbage", "the tail is intractable", "names are the highest-leverage move." Each collapsed under a real check. Measure the contents of a bucket; never label it by what one test couldn't do.
+- **Frequency ≠ validity for OCR.** Systematic OCR errors recur thousands of times (`secrion`→section, `sball`→shall), so a frequency gate happily admits them as "real words." Corpus frequency cannot validate vocabulary.
+- **Heuristics cannot curate vocabulary — proven 3×.** freq+edit-distance filters kept fragments (`admunistra`) and legal-word errors (`aforesnid`); an edit/affix filter dropped real legislators and kept `aaad`. Clean curation needs **real ground truth (name DBs) or an LLM validation pass** — and the LLM pass worked (split 1,266 candidates into 565 real / 701 error+fragment).
+- **The error-rate number is measured PRE-overlay.** The 0.56% (and 0.50% "after") reflect text with NONE of the computed overlays applied, and with a then-broken reunifier — so they're upper bounds, not the rate. The real number only exists after overlays apply + re-measure.
+- **"No edit-1 candidate" ≠ garbage.** It conflates garbage with fragments, over-merges, and edit-2 typos. The honest singleton split is ~17% garbage / ~63% autocorrectable / ~19% harder typos.
+- **Don't scope to one machine.** "Missing file" was a filename-picker bug + not sweeping both boxes; the 448-page source was right there named `_Code.pdf`. A "missing" claim needs a both-machines sweep reconciled against what artifacts prove must exist.
+- **OCR bundles are text-only; source PDFs live in `chief-clerk-archive`.** Absent `pages_prep_gray` ≠ data loss — render the page from the archive PDF (`source_page-1`, calibrated 1:1).
+- **Classifier ORDER + permissive `known()` corrupt results.** Putting OVER_MERGE before EDIT1 (with `wf>0` splits) mislabeled typos as merges; longest-first + `strong_known` fixed it. Same `wf>0`-too-permissive trap recurred in the reunifier and the de-merge.
+- **Correction-pass architecture:** dict-integration FIRST → reunify → split → spell-1/2/3 → systematic sweep; all reversible; re-measure after applying.
