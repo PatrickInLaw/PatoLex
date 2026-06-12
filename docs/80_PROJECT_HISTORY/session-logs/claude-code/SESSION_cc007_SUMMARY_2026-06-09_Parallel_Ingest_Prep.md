@@ -435,6 +435,15 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Corrections 11,156→15,647. Re-measured: still **0.5003%** (singleton tail bound, not fragments).
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Reunifier v3").
 
+### Continuation 39 (2026-06-11) — corpus vocab: frequency ≠ validity (Patrick's "ridiculous" catch)
+
+- Verified: `build_dictionary` = English (pyspellchecker+nltk+wordfreq) + small LEGAL_SUPPLEMENT, NO corpus vocab. Patrick right in principle (real corpus words wrongly flagged into residual).
+- BUT tested it (`build_corpus_confident.py`): naive high-freq corpus vocab is CONTAMINATED — top "new" tokens are systematic OCR errors/fragments (`wuereas`/`secrion`/`publie`/`sball`/`trict`/`compen`/`sioner`), because OCR errors are SYSTEMATIC → frequency ≠ validity. Adding raw corpus vocab would legitimize thousands of recurring errors.
+- Real corpus words DO hide there (`deukmbejian`=Deukmejian, `encumbrancers`, `distributees`, `roadmasters`, `indorser`) — value exists, but only after VALIDATION.
+- Measured: only 1,707/467,978 residual reclaimed (several themselves errors). So residual is mostly GENUINE errors, not wrongly-flagged real words.
+- Correct path: validate (LLM/Sonnet) the high-freq corpus vocab to split real-words from systematic-errors; systematic errors (secrion→section) are themselves high-value bulk fixes.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Corpus vocabulary: frequency ≠ validity").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

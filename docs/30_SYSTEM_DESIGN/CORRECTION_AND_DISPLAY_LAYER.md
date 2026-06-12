@@ -251,6 +251,34 @@ Total corrections 11,156 (v1) → 15,647 (v3). Re-measured residual: **still 0.5
 again the rate is bound by the singleton tail, not fragments; the reunifier work is a correctness
 fix, not a rate lever. FUZZY suggestions are flag-only and excluded from auto-applied fixes.
 
+## Corpus vocabulary: frequency ≠ validity (KEY methodology finding, 2026-06-11)
+Patrick: the dictionary should start from the corpus's own words, not just standard English
+(`build_dictionary` = pyspellchecker + nltk + wordfreq + small LEGAL_SUPPLEMENT — verified, no
+corpus vocab). Correct in principle: real corpus words (legislator names, legal terms, archaic
+statutory words) are absent from English dicts and get wrongly flagged into the residual.
+**BUT the naive "high-frequency corpus token = trusted word" approach FAILS, and the data proves
+it.** Built corpus-confident vocab (`build_corpus_confident.py`, freq≥15, word-like, minus Sonnet-
+adjudicated errors): 40,854 confident / 9,588 "new" (not in English). The TOP of that "new" list
+is systematic OCR ERRORS and FRAGMENTS, not words: `wuereas`(whereas), `secrion`/`seetion`/
+`scction`(section), `publie`(public), `sball`(shall), `sueh`(such), `thercof`(thereof),
+`califorma`(california), `trict`/`appropria`/`compen`/`sioner`/`urer`/`priated`/`poration`
+(fragments). **OCR errors are SYSTEMATIC -> they recur thousands of times -> frequency cannot
+distinguish a real legal term from a recurring error.** Adding raw corpus vocab to `is_known`
+would legitimize thousands of recurring errors (marked "real", never corrected) — the opposite of
+the goal, and the reason the original curated-dictionary design was right.
+- Real corpus words DO hide in the same list (`deukmbejian`=Gov. Deukmejian, `encumbrancers`,
+  `distributees`, `roadmasters`, `subhaulers`, `slungshot`, `indorser`, `reflectorized`) — so
+  curated corpus vocab has value, but only after validation.
+- Measured: only **1,707 of 467,978 residual types** reclaimed even by the contaminated filter
+  (several themselves errors, e.g. `lambra`). So the residual is **mostly genuine errors**, NOT
+  wrongly-flagged real-corpus-words.
+- **Correct path:** to use corpus vocab, separate real-words from systematic-errors via VALIDATION
+  (extend the Sonnet/LLM adjudication to the high-freq corpus vocab), then add only the validated
+  real words to `is_known` (benefits the reunifier's join-target check AND shrinks the residual).
+  Frequency alone cannot do this. Corollary: high-freq systematic errors (`secrion`→section,
+  `sball`→shall) are HIGH-VALUE correction targets (each fixes thousands of occurrences) — the
+  same validation pass that curates the vocab also yields these bulk fixes.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),
