@@ -87,7 +87,19 @@ Move the rest into the buckets above (`git mv`, history preserved). Fix imports 
 Decide cascade invocation (`python -m ocrcorrect.cascade` or a thin `pipeline/run_cascade.py` shim). Update
 the run sandbox + golden-master gate procedure for the package layout. GATE → commit.
 
-## Step C — De-gating done RIGHT: shared source + de-hardcode + parallel parser + GIT-versioned outputs (Patrick 2026-06-12)
+## Step C — DECOMPOSED (Patrick 2026-06-12): config route + parallel parser NOW, serve local, 3060 LATER
+Step C was too big as one move. Break it:
+- **C1 — config route (NOW):** `pipeline/config.py` = the single source of truth for data-root paths, read from
+  `PATOLEX_DATA_ROOT` env with a LOCAL default. Every script reads paths from it (no baked-in `C:\Users\...`).
+  Goal: the 3060 cutover becomes "move the files + change ONE config line."
+- **C2 — parallel parser (NOW, "for starters"):** rebuild the parse driver = `ProcessPoolExecutor` over volumes,
+  reading paths from `config`, eliminating the `run_parse_5090` monkeypatch -> ONE config-driven parser for both boxes.
+- **C3 — git-versioned parse outputs (NOW):** parse outputs go to a config'd, repo-trackable location so re-parses
+  diff via `git diff`.
+- **C4 — 3060 SMB share (LATER, Patrick's hand):** clean cutover -- move files to the 3060 share, change the one
+  `PATOLEX_DATA_ROOT` config line. For now SERVE LOCAL.
+
+### (original Step C notes, retained)
 The root cause of the parser divergence was **per-machine local copies of the data that drift**. Fix it at
 the source, per the original decoupling plan:
 1. **Shared corpus source** — ONE source of truth for DATA (like the repo is for CODE), reachable from both
