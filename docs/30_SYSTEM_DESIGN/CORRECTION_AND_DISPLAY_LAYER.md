@@ -228,6 +228,29 @@ REAL words, one-off garbles, one-off fragments). Lowering the rate requires deco
 processing that tail, not more fragment work. The reunifier still belongs in the overlay stack as a
 deterministic, no-LLM correction; it just isn't the lever on the rate.
 
+## Reunifier v3 — multi-fragment + fuzzy (misspelled-real-word) + Hans pass (2026-06-11)
+Patrick caught two correctness gaps in v2: (a) it only joined 2 fragments — a word split into 3+
+pieces (`ad min istration`) was missed; (b) a join can produce a MISSPELLED real word
+(`philade+phia → 'philadephia'`, the `l` dropped at the split) which v2 just discarded.
+v3 fixes both:
+- **Multi-fragment greedy** (`MAXFRAG=4`): from each token, take the shortest run of 2–4
+  consecutive pieces whose concatenation is a real word (not-all-pieces-known), consume the whole
+  run (no overlap). Corpus has ~0 same-line 3-fragment cases, but the blind spot is gone.
+- **`FUZZY_REVIEW` tier (flag-only, 131 found)**: when an all-fragment run is ONE inserted char
+  from a strong word (`_insert1_known`), emit the suggestion WITHOUT auto-applying — recovers
+  `subdivision`, `slaughter`, `apportionment`, `succession`, `embezzlement`, `indebtedness`,
+  `unconstitutional`, etc. These go to a review/LLM pass before any application (no auto-corrupt).
+- **Hans review (round 1)**: flagged CRITICAL-3 (same-line could emit overlapping pairs for a
+  multi-fragment word → fixed by the greedy consume-the-run). His CRITICAL-1 (missing break) was
+  a MISREAD (the break exists, verified line 139); MAJOR-2 (page-key sort) and MAJOR-4 (CRLF) were
+  hypothetical — verified against data: keys are pure digits, text is LF-only. Hardened anyway
+  (CRLF-safe regex, numeric TSV sort, cross-page lookahead 2→LOOKAHEAD). **Round-2 Hans on the new
+  multi-fragment/fuzzy loop still owed.**
+
+Total corrections 11,156 (v1) → 15,647 (v3). Re-measured residual: **still 0.5003%** — confirms
+again the rate is bound by the singleton tail, not fragments; the reunifier work is a correctness
+fix, not a rate lever. FUZZY suggestions are flag-only and excluded from auto-applied fixes.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

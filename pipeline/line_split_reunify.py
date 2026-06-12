@@ -30,9 +30,10 @@ OUT_DIR  = r"C:\Users\patolex\PatoLex-scratch\_vocab"
 LOG_PATH = os.path.join(OUT_DIR, "line-reunify-run.log")
 CORR_OUT = os.path.join(OUT_DIR, "line_split_corrections.tsv")
 LOOKAHEAD = 6
+MAXFRAG = 4   # max consecutive same-line pieces to try fusing (handles 3-4 fragment words)
 
 WORD = re.compile(r"[A-Za-z\xc0-\xff]+")
-HEAD_HYPHEN = re.compile(r"([A-Za-z\xc0-\xff]{2,})-[ \t]*$")
+HEAD_HYPHEN = re.compile(r"([A-Za-z\xc0-\xff]{2,})-[ \t\r]*$")  # \r-safe for CRLF text
 _DIGITS = re.compile(r"(\d+)")
 
 def pt():
@@ -76,6 +77,19 @@ def _strong_known(tok):
     if _ZIPF is not None and _ZIPF(tok, "en") >= 2.8:
         return True
     return False
+
+_ALPHA = "abcdefghijklmnopqrstuvwxyz"
+def _insert1_known(s):
+    """Is s exactly ONE inserted character away from a strongly-known word? Recovers the common
+    OCR failure where a character is DROPPED at the split point (philade+phia -> 'philadephia',
+    +l -> 'philadelphia'). Returns the recovered word or None. Bounded length to cap compute."""
+    if len(s) < 6 or len(s) > 18:
+        return None
+    for pos in range(len(s) + 1):
+        for c in _ALPHA:
+            if _strong_known(s[:pos] + c + s[pos:]):
+                return s[:pos] + c + s[pos:]
+    return None
 
 def _pagekey(k):
     m = _DIGITS.search(str(k))
@@ -138,24 +152,43 @@ def _scan_file(path):
                         counts[("HYPHEN", "adjacent_passA")] += 1  # Pass A handles
                     break
 
-        # ---- Class 2: same-line spurious-space splits ("superin tendent") ----
+        # ---- Class 2: same-line spurious-space splits, MULTI-FRAGMENT (2..MAXFRAG pieces) ----
+        # Greedy: from token i, try the SHORTEST run (len 2..MAXFRAG) whose concatenation is a
+        # real word, with not-all-pieces-already-known. Consume the whole run (i += L) so a token
+        # is never both a tail and the next head (no overlap; handles 3+ -fragment words like
+        # "ad min istration"). If the exact join fails but is one dropped char from a real word
+        # ("philade phia" -> philadelphia), emit a FLAG-ONLY FUZZY_REVIEW (never auto-applied).
         for idx, toks, first, last, head_h in content:
             low = [t.lower() for t in toks]
-            for i in range(len(low) - 1):
-                a, b = low[i], low[i + 1]
-                if len(a) < 2 or len(b) < 2:
-                    continue
-                joined = a + b
-                if len(joined) < 5:
-                    continue
-                # STRICT for same-line rejoin: joined must be strongly known, not both halves known
-                if not _strong_known(joined) or (_known(a) and _known(b)):
-                    continue
-                # the UNKNOWN half must be substantial (avoid "s"+"omething" noise)
-                if (not _known(a) and len(a) < 3) or (not _known(b) and len(b) < 3):
-                    continue
-                out.append((vol, pk, "SPACESPLIT", "spacesplit", 0, a, b, joined, ""))
-                counts[("SPACESPLIT", "spacesplit")] += 1
+            i = 0
+            while i < len(low) - 1:
+                emitted = False
+                maxL = min(MAXFRAG, len(low) - i)
+                for L in range(2, maxL + 1):
+                    run = low[i:i + L]
+                    if any(len(c) < 2 for c in run):
+                        continue
+                    joined = "".join(run)
+                    if len(joined) < 5:
+                        continue
+                    if all(_known(c) for c in run):
+                        continue  # all real words -> never fuse
+                    if any((not _known(c)) and len(c) < 3 for c in run):
+                        continue  # an unknown piece too short -> noise
+                    head = run[0]; tail = "".join(run[1:])
+                    if _strong_known(joined):
+                        out.append((vol, pk, "SPACESPLIT", f"spacesplit{L}", 0, head, tail, joined, ""))
+                        counts[("SPACESPLIT", f"spacesplit{L}")] += 1
+                        i += L; emitted = True; break
+                    # only attempt fuzzy when the whole run is fragments (no real word inside)
+                    if not any(_known(c) for c in run):
+                        fz = _insert1_known(joined)
+                        if fz:
+                            out.append((vol, pk, "FUZZY_REVIEW", f"fuzzy{L}", 0, head, tail, fz, joined))
+                            counts[("FUZZY_REVIEW", f"fuzzy{L}")] += 1
+                            i += L; emitted = True; break
+                if not emitted:
+                    i += 1
 
     # ---- Class 3: cross-page splits (head end of page N, tail start of page N+1) ----
     for pidx in range(len(pages) - 1):
@@ -170,7 +203,7 @@ def _scan_file(path):
         else:
             continue
         # next non-empty page's first token
-        for j in range(pidx + 1, min(pidx + 3, len(pages))):
+        for j in range(pidx + 1, min(pidx + 1 + LOOKAHEAD, len(pages))):
             npk, ncontent = pages[j]
             if ncontent:
                 tail = ncontent[0][2]
@@ -204,7 +237,7 @@ def main():
 
     with open(CORR_OUT, "w", encoding="utf-8") as f:
         f.write("vol\tpage\ttier\tkind\tmargin_words\thead\ttail\tjoined\tmargin_text\n")
-        for r in sorted(allrows, key=lambda x: (x[0], x[1])):
+        for r in sorted(allrows, key=lambda x: (x[0], _pagekey(x[1]))):
             f.write("\t".join(str(x) for x in r) + "\n")
 
     kindct = Counter(r[3] for r in allrows)
@@ -216,11 +249,17 @@ def main():
     print("\n[TOP 25 reunited words]")
     for w, c in joined_ct.most_common(25):
         print(f"   {w}: {c}")
-    print("\n[SPACESPLIT sample]")
+    print("\n[SPACESPLIT sample (incl. multi-fragment)]")
     n = 0
     for r in allrows:
-        if r[3] == "spacesplit":
-            print(f"   {r[5]} + {r[6]} -> {r[7]}"); n += 1
+        if str(r[3]).startswith("spacesplit"):
+            print(f"   [{r[3]}] {r[5]} + {r[6]} -> {r[7]}"); n += 1
+        if n >= 20: break
+    print("\n[FUZZY_REVIEW sample (flag-only: dropped-char-at-split, NOT auto-applied)]")
+    n = 0
+    for r in allrows:
+        if str(r[3]).startswith("fuzzy"):
+            print(f"   [{r[3]}] {r[5]} + {r[6]} = '{r[8]}'  ~=>  {r[7]}"); n += 1
         if n >= 20: break
     print("\n[CROSSPAGE sample]")
     n = 0

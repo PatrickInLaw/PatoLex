@@ -428,6 +428,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - NEXT: decompose the singleton tail (real-word vs garble vs fragment) to find the true error rate; Hans review on the reunifier (pipeline change).
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Reunifier FIXED (v2)").
 
+### Continuation 38 (2026-06-11) — Reunifier v3: multi-fragment + fuzzy + Hans
+
+- Patrick (2 catches): v2 ignored 3+-fragment splits, and discarded misspelled-real-words (philade+phia='philadephia', dropped l). v3: **MAXFRAG=4 greedy multi-fragment** (consume whole run, no overlap) + **FUZZY_REVIEW flag-only tier** (`_insert1_known`: 1 inserted char from a strong word) → 131 found (subdivision/slaughter/apportionment/embezzlement/unconstitutional...), NOT auto-applied.
+- **Hans round-1**: CRITICAL-3 (same-line overlapping emissions) REAL → fixed by greedy consume-run. CRITICAL-1 (missing break) was Hans MISREAD (break at line 139, verified). MAJOR-2 (pagekey)/MAJOR-4 (CRLF) hypothetical — verified data: pure-digit keys, LF-only. Hardened anyway (CRLF regex, numeric TSV sort, cross-page lookahead→LOOKAHEAD). Round-2 Hans on new loop still owed.
+- Corrections 11,156→15,647. Re-measured: still **0.5003%** (singleton tail bound, not fragments).
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Reunifier v3").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
