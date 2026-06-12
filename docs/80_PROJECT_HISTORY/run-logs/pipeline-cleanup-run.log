@@ -9,3 +9,6 @@
 [2026-06-12 12:30 PT] PLAN | PIPELINE_CLEANUP_EXECUTION.md = working ref; B(reorg) -> C(SMB 3060 + de-hardcode + parallel parser + git-versioned outputs) -> D(reparse+diff+ingest) | OK
 [2026-06-12 12:35 PT] STEP-B | ocr/ cluster moved (consensus, ab_compare, test_consensus); ingest_clean re-pointed; smoke-net no new violations | OK
 [2026-06-12 12:40 PT] STEP-B | NEXT clusters: ingest (clears baseline 2), chapter, verify, analysis, adjudicate, runners, correction_support, then ocrcorrect/ engine (golden-master-gated) | PENDING
+[NOTE] run-log discipline corrected (Patrick): append-only LIVE with real timestamps as work happens, not batched after.
+[2026-06-12 12:30 PT] STEP-B | git mv adjudicate/ (5 files), verify/ (3), chapter/ (4) -- standalone clusters, zero import fixes expected | OK
+[2026-06-12 12:31 PT] STEP-B | smoke-net after adjudicate/verify/chapter: same 2 baseline violations, ZERO new -> clean | OK
