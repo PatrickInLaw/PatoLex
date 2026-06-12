@@ -499,6 +499,52 @@ the partner is >6 tokens away, was OCR-corrupted (so head+tail ≠ `strong_known
 orphaned (no partner in the volume). Lesson re-learned: *don't conflate "I added a window" with "I added
 THE window we designed" — verify the built behavior against the agreed spec, not the label.*
 
+## Pipeline state — the funnel, the gates, the tail (2026-06-12, cc007)
+**The funnel (133.7M tokens, 205 vols). Flagged = alpha, len>=2, not in dict and not in wordfreq.**
+
+| stage | what it does | flagged | rate | status |
+|---|---|---|---|---|
+| RAW | OCR consensus text | 1,476,105 | 1.1042% | — |
+| Reunify | rejoin split words (A1 adjacency, A2 line-break, A3 cross-page, **A4 within-6-word window**) | 1,236,821 | 0.9268% | AUTO-APPLIED |
+| Split | break over-merged tokens | 1,231,231 | 0.9226% | AUTO-APPLIED |
+| Autocorrect e1 | strict edit-1 typo fix (~90-95% precision) | 656,695 | **0.4921%** | AUTO-APPLIED |
+
+**0.4921% (656,695) is the deterministic floor — locked in with NO AI.** It splits:
+- **Garbage 60,404 (0.0453%)** — irreducible (`eeee`, consonant salad); re-OCR territory, not text-fixable.
+- **Roman numerals 4,906** — valid (`xiv`, `clvii`); NOT errors, exclude from the rate.
+- **Recoverable 591,385 (0.4431%)** — real words mangled by OCR; the whole remaining game.
+
+**SymSpell (corpus-aware edit-1/2) split the recoverable into two:**
+- **Has a confident candidate: 280,063 occ / 124,353 distinct token->fix TYPES** -> the *adjudication tier*. By pair-frequency: **freq>=10 = 2,897 types / 108,730 occ (39%)**; freq 2-9 = 23,068 types / 72,945 occ; **singleton = 98,388 types / 98,388 occ (35% of occ, 79% of types)**.
+- **No confident candidate: ~311,322 occ** -> the *deep tail* (edit-distance >2, ambiguous, mojibake, or rare-word-out-of-vocab).
+
+**Why SymSpell is NOT auto-applied (decision 2026-06-12):** sampled precision es1(dist-1) ~83%, es2(dist-2) ~75-80% — below legal-grade; a wrong fix is an INVISIBLE error (worse than a flag). SymSpell is a high-RECALL **candidate generator**; the context adjudication is the LLM (Sonnet) job. Per the local-model evidence (gemma3:27b = 62% verdict agreement, over-discards real words, 33x substitution-inflation, "do not run standalone") the local model is NOT the adjudicator — at most a recall-preserving triage on the tail.
+
+**Remaining gates:**
+1. **Lock the deterministic line** — validate e1's ~90-95% with a real sample before trusting 0.4921%.
+2. **Adjudicate the candidate tier (280k occ)** — Sonnet judges each token->fix TYPE in context (confirm/reject/replace/"context-dependent->leave flagged"), frequency-tiered. Type-level dedup is the efficiency win (judge `innmediately->immediately` once).
+3. **The deep tail** — cutoff decision: local triage / vision re-OCR / accept-as-flagged. Diminishing returns (singletons recover 1 occ per judgement).
+4. **Defensible true error rate** — stratified ground-truth sample vs the page image, measuring BOTH residual-visible AND correction-introduced-invisible errors. The number we ship. NOT yet measured.
+5. **Ingestion** — single 1850-2026 mass ingest (backup->clear->ingest->diff), only after text work is done.
+
+**What's in the tail (two different tails, often conflated):**
+- **Candidate singleton tail (98,388 types, 1 occ each):** one-off OCR garbles of ordinary words (`distrilmtion->distribution`, `cuaptrr->chapter`). Real text, no frequency leverage -> ~9M Sonnet tokens to recover 98k occ (1:1). "Is it worth it?" lives here.
+- **No-candidate recoverable (~311k):** too-garbled (`reretrecccse`), genuinely ambiguous (`peution`=section OR petition -> needs the sentence), and mojibake/short stubs (`m�neys`).
+
+**Token-budget note:** Sonnet here runs on Patrick's *subscription* (weekly session limit), NOT API $. As the weekly reset approaches (Sat 2 PM) the opportunity cost of spending the week's remaining tokens drops toward zero -> run heavier adjudication BEFORE reset; after reset the cost flips high. Opus orchestration draws the same budget -> batch aggressively.
+
+## Mojibake-targeted correction (Patrick, 2026-06-12) -- constrained-position fix, NOT blind edit
+A token containing a mojibake char (`�` / non-ASCII) tells us EXACTLY where the OCR error is, so the
+fix is a *constrained single/double-position* substitution, not a blind edit-1 over the whole token --
+much higher precision. See `pipeline/mojibake_fix.py`. (Counts + precision: filled in after the run.)
+
+## Context-heuristic disambiguation (Patrick, 2026-06-12) -- procedural trim before AI
+Legal drafting is extremely repetitive, so the immediate (prev-word, candidate) / (candidate, next-word)
+collocations are highly predictive. Idea: build a corpus bigram model from the KNOWN-good tokens; for an
+ambiguous candidate, pick the fix whose context bigrams dominate; resolve procedurally (free) when there
+is a clear winner, send only the genuinely-ambiguous remainder to AI. See `pipeline/context_resolve.py`.
+(Resolution-rate feasibility: filled in after the prototype run.)
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

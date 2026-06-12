@@ -1,0 +1,30 @@
+{
+  "_README": "Locked reference for the DETERMINISTIC correction cascade (reunify + split + edit-1-strict; the auto-applied path -- SymSpell/mojibake/context are excluded because they route to adjudication, not blind apply). Source: 2026-06-12 A4 run (from_stage=reunify). ANY refactor must reproduce these EXACTLY -- the passes are deterministic, so a diff is a regression, not progress. Validate with check_golden_master.py against a fresh _cascade/cascade_report.json.",
+  "source_run": "2026-06-12 06:44 PT, from_stage=reunify, 205 volumes",
+  "stage_progression": {
+    "raw":                {"flagged": 1476105, "total": 133679152, "rate_pct": 1.1042},
+    "after_reunify":      {"flagged": 1236821, "total": 133446266, "rate_pct": 0.9268},
+    "after_split":        {"flagged": 1231231, "total": 133452831, "rate_pct": 0.9226},
+    "after_autocorrect":  {"flagged": 656695,  "total": 133452831, "rate_pct": 0.4921}
+  },
+  "stage_corrections": {
+    "reunify_space": 623,
+    "reunify_break": 225418,
+    "reunify_xpage": 244,
+    "reunify_window": 6681,
+    "split": 5590,
+    "autocorrect_e1": 574536
+  },
+  "residual_classification": {
+    "garbage": 60404,
+    "roman": 4906,
+    "recoverable": 591385,
+    "by_rule": {
+      "garbage_repeat4": 44967,
+      "garbage_cons5": 8575,
+      "garbage_repeat3": 5115,
+      "garbage_toolong": 1697,
+      "garbage_mojibake": 50
+    }
+  }
+}

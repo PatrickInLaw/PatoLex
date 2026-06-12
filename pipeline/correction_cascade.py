@@ -38,6 +38,7 @@ VOCAB   = os.path.join(SCRATCH, "_vocab")
 CASCADE = os.path.join(SCRATCH, "_cascade")
 STAGES  = ["reunify", "split", "autocorrect"]
 CASCADE_FROM = os.environ.get("CASCADE_FROM", "reunify")
+APPLY_SYMSPELL = os.environ.get("CASCADE_APPLY_SYMSPELL", "0") == "1"  # default OFF: SymSpell routes to adjudication, not auto-apply
 for sub in ["audit", "counts"] + ["out_" + s for s in STAGES] + ["done_" + s for s in STAGES]:
     os.makedirs(os.path.join(CASCADE, sub), exist_ok=True)
 LOG = os.path.join(CASCADE, "cascade-run.log")
@@ -64,9 +65,14 @@ def rlog(phase, desc, status="OK"):
 
 # ---- worker dict / helpers ----
 _WS = None; _HASWF = False; _WF = None; _ZIPF = None; _SORTED = None; _SORTED_REV = None
+_SYM = None                                   # corpus-aware SymSpell edit-2 index (None if freq file absent)
+_NAMES = frozenset()                          # gazetteer names -- never autocorrect a token that IS a name
+_GARBAGE_SHAPED = lambda t: False             # repeat4/cons5/novowel shape test (from symspell_e2)
+_CORPUS_FREQ_PATH = os.path.join(CASCADE, "corpus_freq.json")
+_GAZETTEER_PATH = os.path.join(SCRATCH, "name_gazetteer.txt")
 _C_BC = {}; _C_E1 = {}; _C_AFF = {}; _C_SPLIT = {}
 def _init():
-    global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV
+    global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV, _SYM, _NAMES, _GARBAGE_SHAPED
     from correction_passes import build_dictionary
     ws, _spell, has_wf, wf = build_dictionary()
     _WS = frozenset(ws); _HASWF = has_wf; _WF = wf
@@ -74,6 +80,13 @@ def _init():
     _ZIPF = zipf_frequency
     common = [w for w in _WS if w.isalpha() and len(w) >= 6 and _ZIPF(w, "en") >= 3.0]
     _SORTED = sorted(common); _SORTED_REV = sorted(w[::-1] for w in common)
+    from symspell_e2 import _garbage_shaped
+    _GARBAGE_SHAPED = _garbage_shaped
+    if os.path.exists(_GAZETTEER_PATH):       # protect real names/places from being "corrected"
+        _NAMES = frozenset(l.strip() for l in open(_GAZETTEER_PATH, encoding="utf-8") if l.strip())
+    if os.path.exists(_CORPUS_FREQ_PATH):     # build the edit-2 index from the corpus-native freq model
+        from symspell_e2 import SymSpellE2, load_target_freq
+        _SYM = SymSpellE2(load_target_freq(_CORPUS_FREQ_PATH))
 
 def known(t): return (t in _WS) or (_HASWF and _WF(t, "en") > 0)
 def zipf(t): return _ZIPF(t, "en")
@@ -145,6 +158,11 @@ def _best_correction(tok):
         sc = sorted(((c, zipf(c)) for c in e1), key=lambda x: -x[1])
         tz = sc[0][1]; mg = tz - (sc[1][1] if len(sc) > 1 else 0.0)
         res = (sc[0][0], 1) if (tz >= 3.3 and mg >= 0.5) else None
+    if res is None and APPLY_SYMSPELL and _SYM is not None and len(tok) >= 5:
+        # corpus-aware edit-2 fallback. DECISION 2026-06-12: SymSpell precision (es1 ~83%, es2 ~75-80%)
+        # is below legal-grade, so it is NOT auto-applied -- it routes to LLM context adjudication.
+        # This path is OFF by default; set CASCADE_APPLY_SYMSPELL=1 only to reproduce the experiment.
+        res = _SYM.lookup(tok)                # -> (word, 's1'|'s2') or None
     _C_BC[tok] = res
     return res
 def _split(tok):
@@ -325,13 +343,14 @@ def stage_autocorrect(vol_pages, audit, cnt):
             for ti in range(len(toks)):
                 t = toks[ti]
                 if len(t) < 3 or known(t) or is_roman(t) or _affix_of_common(t): continue
+                if t in _NAMES or _GARBAGE_SHAPED(t): continue   # don't "fix" a real name or guaranteed garbage
                 r = _best_correction(t)
                 if r:
                     toks[ti] = r[0]; audit.append((pk, f"autocorrect_e{r[1]}", t, r[0])); cnt[f"autocorrect_e{r[1]}"] += 1
 
 _TRANSFORM = {"reunify": stage_reunify, "split": stage_split, "autocorrect": stage_autocorrect}
 _STAGE_KEYS = {"reunify": ("reunify_space", "reunify_break", "reunify_xpage", "reunify_window"),
-               "split": ("split",), "autocorrect": ("autocorrect_e1", "autocorrect_e2")}
+               "split": ("split",), "autocorrect": ("autocorrect_e1", "autocorrect_es1", "autocorrect_es2")}
 
 def _process_volume(arg):
     path, from_stage = arg
