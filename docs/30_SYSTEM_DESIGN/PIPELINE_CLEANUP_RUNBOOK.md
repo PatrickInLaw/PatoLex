@@ -33,15 +33,16 @@ moves, you introduced a bug — STOP and revert, do not "re-bless" it.
 The rest of this runbook was written for a 5080 session reaching the 5090 over SSH. Running ON the 5090
 is simpler EXCEPT for these:
 
-- **Work in a GIT CLONE of the repo, not the scratch copies.** The repo is the source of truth; CLAUDE.md,
-  the pre-commit hooks, and `git` only work inside a checkout. The scripts in
-  `C:\Users\patolex\PatoLex-scratch\` are loose, un-versioned, FLAT-layout copies — editing them as the
-  source of truth re-creates the drift you're cleaning. If no clone exists on the 5090, clone
-  `https://github.com/PatrickInLaw/PatoLex.git` first and launch the session from inside it.
-- **SSH/scp steps (§0, §4) become LOCAL copies.** The cascade hardcodes `SCRATCH=C:\Users\patolex\PatoLex-scratch`
-  and runs from there. So before each validation run, COPY the refactored modules from the repo clone into
-  `PatoLex-scratch\`. Data + deps are already local — no scp, no detached-launch needed (you can run the
-  cascade in the foreground or background locally; ~450s).
+- **Work in the GIT REPO, not the scratch copies.** The repo is the source of truth (CLAUDE.md, hooks, git).
+  The 5090 has the full repo synced — work there. The loose `C:\Users\patolex\PatoLex-scratch\*.py` files are
+  STALE LEGACY scp'd copies; do NOT edit or run them — that re-creates the drift you're cleaning.
+- **Run the cascade DIRECTLY FROM THE REPO — no copy-to-scratch.** `correction_cascade.py` hardcodes its DATA
+  paths as absolute (`SCRATCH=C:\Users\patolex\PatoLex-scratch`, so `_cascade\`, `corpus_freq.json`,
+  `name_gazetteer.txt` always resolve to scratch), and its imports are siblings in `pipeline\`
+  (`correction_passes`, `symspell_e2`, `cascade_summary`, and the new `dictionary`/`edits` after refactor).
+  So `python pipeline\correction_cascade.py` from the repo runs the REPO code against the SCRATCH data — code
+  stays single-source, data flows to scratch automatically. No scp, no dual copies, no detached-launch
+  needed (local foreground/background; ~450s, watch `_cascade\cascade-run.log`).
 - **STALE-STATE WARNING:** the scratch `_cascade\cascade_report.json` and `out_autocorrect\` currently hold
   the SymSpell EXPERIMENT output (es1/es2 applied), NOT the deterministic baseline. Do NOT check the golden
   master against the existing report — it WILL mismatch and look like a false regression. Re-run the cascade
