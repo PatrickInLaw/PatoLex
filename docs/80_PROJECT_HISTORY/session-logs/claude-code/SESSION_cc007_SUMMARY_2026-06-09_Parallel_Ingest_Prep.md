@@ -684,3 +684,37 @@ documented-but-deferred, Patrick decides port-vs-archive when/if new OCR work ap
 
 **Open at close:** back to TEXT CLEANUP (Sonnet context-adjudication of SymSpell candidates + defensible
 ground-truth error-rate measurement). Lots of subscription tokens available, weekly reset ~Sat 2pm PT.
+
+---
+
+## Continuation 60 — 2026-06-12 (re-parse re-grounded: corpus OCR verified COMPLETE)
+
+**Re-grounded the actual objective.** The driver of the whole cleanup was: discovered the 5080 parsed with a
+STALE parser (missing the volume_year date-clamp) → need a clean full re-parse of the corpus → "do it right"
+(parallel, de-hardcoded, single source) → that became the reorg. **Re-parse != mass ingest** (Patrick corrected
+a conflation): re-parse = regenerate parsed_acts (CPU, near-term, diffable, no DB); mass ingest = DB load, MUCH
+later, after text cleanup. Docs had wrongly chained "Step D: re-parse → diff → mass-ingest" so the re-parse
+inherited the "much later" tag that only the ingest deserves.
+
+**Clean-state map built (the point of the cleanup).** Inventoried OCR inputs on the 5090: 205/211 production
+vols have ocr_consensus/page_ocr_results.json; the only 6 without are production-2000-vol* (out of 1850-1999
+re-parse scope, born-digital boundary). The 1996-99 "unsynced" blocker (L186) is RESOLVED.
+
+**Corpus OCR verified COMPLETE (answered "are all the files there?").** Re-ran verify_volume_completeness
+--all on the current 5090 state (PID 40132, <1 min): 25 COMPLETE / 133 LEADING_GAP_ONLY / 7 GAPS_FOUND / 40
+STUB / 0 SUSPECT / 0 ERROR — and **ZERO volumes with missing body pages**. The 6/9 report's real gaps
+(1994-vol1 was missing 2041 body pages; 1993-96 totals ~6,400) are ALL FILLED — those vols now have full page
+counts + 0 gaps (1994-vol1: LEADING_GAP_ONLY, 2191 pages). The 7 GAPS_FOUND all have body_gaps=0 (expected
+empty/index skips). The 40 STUB = 30 pre-1915 old-format (chapter regex can't count "Chapter N." old style;
+that's the live-in-DB 1850s-1900s segment) + index/back-matter vols. Spot-checked 1993-vol5 (STUB, 1467 pages):
+confirmed a complete index/tables volume (digests + topical index + affected-sections table), not data loss.
+
+**Findings landed durably:** fresh completeness-report.json pulled into repo; verify_volume_completeness.py
+REPORT_PATH de-hardcoded (was a 5080-only repo path that crashed the final write on the 5090) → config(vocab_dir).
+
+**Decisions:** re-parse is near-term + independent of text cleanup; mass ingest stays much later. Source lives on
+the 5090 for now (it has all in-scope inputs); SMB-on-5090-over-SSH is available (patolex IS admin) as the clean
+single-source option but not required to re-parse.
+
+**Open at close:** running the clean parallel re-parse (python -m ingest.parse_all on 5090) → diff vs C3 baseline
+manifest. Then back to TEXT CLEANUP (heuristic long-tail first, per Patrick — NOT Sonnet yet).

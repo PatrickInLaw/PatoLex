@@ -110,9 +110,11 @@ from typing import Optional
 import config
 
 # ── paths ──────────────────────────────────────────────────────────────────────
+# De-hardcoded 2026-06-12: REPORT_PATH was a 5080-only repo path that doesn't exist on the 5090,
+# crashing the final report write when run on the data box. Now config-driven (writes to vocab_dir,
+# a data location present on whatever box runs the sweep); pull it back into the repo afterward.
 SCRATCH_ROOT = Path(config.path_for("data_root"))
-REPO_ROOT = Path(r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex")
-REPORT_PATH = REPO_ROOT / "docs" / "80_PROJECT_HISTORY" / "run-logs" / "completeness-report.json"
+REPORT_PATH = Path(config.path_for("vocab_dir", "completeness-report.json"))
 
 # ── tunable thresholds ─────────────────────────────────────────────────────────
 MIN_CHAPTER_THRESHOLD = 5          # fewer than this = STUB
