@@ -540,6 +540,12 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Patrick: the harness should expose PER-STAGE flagged rates so we can tune each stage/order and compare runs apples-to-apples "heading into sonnet", then run sonnet once tuned. I'd only measured raw + final. Fixed: `_measure_now()` after each stage → report `stage_progression` (raw → after_reunify → after_split → after_autocorrect). `APPLY_SONNET=False` halts before the overlay.
 - Re-running (sonnet off) for the per-stage breakdown of the tightened cascade.
 
+### Continuation 49 (2026-06-12) — Cascade restructured: per-stage OUTPUTS + timing + resume
+
+- Patrick: capture per-stage OUTPUTS (not just counts); and run-log needs per-stage TIMING + a heartbeat. Restructured `correction_cascade.py`: each stage reads the prior stage's PERSISTED output (`out_reunify`/`out_split`/`out_autocorrect/{vol}.json`), writes its own output + per-stage audit (`{vol}.{stage}.tsv`) + per-stage flagged measurement + done marker. `CASCADE_FROM={stage}` re-runs from any stage reading the prior cached output (tune one stage without re-running earlier ones).
+- Added per-stage **cpu-seconds** timing (timed each transform, aggregated) → report `stage_cpu_seconds` + final log + heartbeat. Heartbeat every 15s shows raw%→pre-sonnet% + per-stage cpu time + wall.
+- Cleared stale `_cascade`, syntax-checked, running fresh from reunify (sonnet held out).
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
