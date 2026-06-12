@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-12 06:44 PT",
+  "generated": "2026-06-12 09:23 PT",
   "from_stage": "reunify",
   "volumes": 205,
   "sonnet_applied": false,
@@ -20,24 +20,24 @@
       "rate_pct": 0.9226
     },
     "after_autocorrect": {
-      "flagged": 656695,
+      "flagged": 666212,
       "total": 133452831,
-      "rate_pct": 0.4921
+      "rate_pct": 0.4992
     }
   },
-  "pre_sonnet_rate_pct": 0.4921,
-  "reduction_pct_relative": 55.5,
+  "pre_sonnet_rate_pct": 0.4992,
+  "reduction_pct_relative": 54.9,
   "residual_classification": {
-    "flagged": 656695,
-    "garbage": 60404,
+    "flagged": 666212,
+    "garbage": 64457,
     "roman": 4906,
-    "recoverable": 591385,
-    "garbage_pct_of_corpus": 0.0453,
-    "recoverable_pct_of_corpus": 0.4431,
-    "garbage_pct_of_flagged": 9.2,
+    "recoverable": 596849,
+    "garbage_pct_of_corpus": 0.0483,
+    "recoverable_pct_of_corpus": 0.4472,
+    "garbage_pct_of_flagged": 9.7,
     "by_rule": {
-      "garbage_repeat4": 44967,
-      "garbage_cons5": 8575,
+      "garbage_repeat4": 44986,
+      "garbage_cons5": 12609,
       "garbage_repeat3": 5115,
       "garbage_toolong": 1697,
       "garbage_mojibake": 50
@@ -47,16 +47,17 @@
     "reunify_space": 623,
     "reunify_break": 225418,
     "reunify_xpage": 244,
+    "reunify_window": 6681,
     "split": 5590,
-    "autocorrect_e1": 574536,
-    "autocorrect_e2": 0,
-    "reunify_window": 6681
+    "autocorrect_e1": 565019,
+    "autocorrect_es1": 0,
+    "autocorrect_es2": 0
   },
   "stage_cpu_seconds": {
-    "load": 109.5,
-    "reunify": 580.4,
-    "split": 1678.9,
-    "autocorrect": 2351.3
+    "load": 95.0,
+    "reunify": 523.4,
+    "split": 1651.2,
+    "autocorrect": 1550.4
   },
-  "wall_seconds": 449.7
+  "wall_seconds": 352.9
 }
