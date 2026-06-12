@@ -388,6 +388,7 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Rendered o42 from the correct file → **CHAPTER LIV (54)** (Napa Asylum amendment, title matches). **Chapter REVIEW = 215/215.**
 - Ran `verify_mapping.py` integrity sweep over all 16 open volumes: 1883-84 was the ONLY mismapping; every other chosen PDF's page_count comfortably exceeds its bundle max source_page.
 - Fixes recorded durably: corrected `CORRECTION_AND_DISPLAY_LAYER.md` (was "missing source," now "resolver bug, file present"); new lesson `LESSON_2026-06-11_verify_source_dont_scope_to_handy.md`; memory `verify-dont-scope-to-handy`. **Rule: map source PDF by page-count match vs the bundle, never by filename; never declare "missing" from one folder — sweep both machines.**
+- **Both-machines sweep CLOSED (`hunt_1883.py` on 5080 + 5090):** the correct `1883-84_Code.pdf` (25,308 KB) and the 15pp `1883-84_Statutes.pdf` (580 KB) exist on **both** boxes, byte-identical sizes — confirming nothing was missing anywhere; the bug was purely the filename-based picker. (5090 page counts showed `?` only because its base Python312 lacks `fitz`; matching sizes confirm identity.) This is the cross-machine verification the new rule demands, actually carried out rather than assumed.
 
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
