@@ -206,6 +206,28 @@ residual — the directed margin/line-wrap work exists but covers only the per-p
 Fix: sample the uncovered fragments to confirm classes, add cross-page + same-line space-rejoin +
 larger lookahead, re-run, then RE-MEASURE the residual (the number above is not final).
 
+## Reunifier FIXED (v2) + re-measured — the bottleneck is the singleton tail, not fragments (2026-06-11)
+`line_split_reunify.py` v2 adds the missing classes: **same-line space-splits** (`superin tendent`),
+**cross-page splits** (head end of page N / tail start of N+1), **NOHYPHEN-adjacent** (Pass A only
+did HYPHEN), and **LOOKAHEAD 3→6**. Corrections **11,156 → 15,516** (+1,068 crosspage, +834
+nohyphen-adjacent, +602 same-line, +1,856 margin). Same-line rejoin uses a STRICTER guard
+(`_strong_known`: static dict OR zipf≥2.8) after the first run produced false joins
+(`philadephia`, `administra`, `offerred`) — those are now rejected. Cross-page + line-break samples
+are clean.
+**Re-measured residual after the fix: 0.5014% → 0.5005% — essentially unchanged.** Two reasons,
+and they matter:
+1. **Overlap with the Sonnet overlay.** The high-freq fragments the reunifier catches (`superin`,
+   `pensation`, `legisla`, `retary`) are freq≥10, so the Sonnet adjudication ALREADY fixed them —
+   the reunifier's catch is largely redundant at the type level (its unique add ≈ +1,348 occ).
+2. **The residual is dominated by the SINGLETON TAIL.** Of the 564k unresolved occ, ~385k are
+   freq-1 singletons — one-off tokens that NEITHER the reunifier (recurring fragments) NOR Sonnet
+   (freq≥10) touches. **That tail is the real bottleneck, not fragments.**
+**Conclusion:** fixing the reunifier was necessary for correctness (and it IS correct now), but it
+does not move the headline number — because the 0.43% lives in 385k one-off tokens (a mix of rare
+REAL words, one-off garbles, one-off fragments). Lowering the rate requires decomposing and
+processing that tail, not more fragment work. The reunifier still belongs in the overlay stack as a
+deterministic, no-LLM correction; it just isn't the lever on the rate.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),
