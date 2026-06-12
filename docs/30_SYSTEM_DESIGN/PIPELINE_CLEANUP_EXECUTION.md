@@ -130,3 +130,12 @@ GATE: golden master (engine) + smoke-import net + a parse smoke-run.
 - Validate against the golden master after EACH structural step; do not batch A+B+C without a gate between.
 - Don't re-bless the golden master to make a failing check pass (unless it's an intentional, separate, flagged
   algorithm change — it isn't, during cleanup).
+
+---
+## Status update — 2026-06-12 (cc007 cont.59)
+- **Launcher config-CLI: DONE.** `config.py` now exposes `python -m config <name> [subpath]` (and `--list`) so
+  shell launchers query the single path source instead of hardcoding. Templates: `pipeline/runners/_TEMPLATE_run.{bat,ps1}`.
+  (Stale box-specific `runners/*.bat` referencing pre-reorg script names left untouched — archive-vs-rewrite TBD.)
+- **Queue: documented + DEFERRED.** See `QUEUE_PORT_PLAN.md` (JSON-over-SSH → built/unused SQL → Postgres).
+  Port-vs-archive is Patrick's call when/if new OCR work appears. `queue_claim` unification HELD.
+- **NEXT: TEXT CLEANUP** (the actual deliverable) — Sonnet adjudication of SymSpell candidates + defensible error rate.

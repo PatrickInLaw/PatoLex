@@ -654,3 +654,33 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **OCR bundles are text-only; source PDFs live in `chief-clerk-archive`.** Absent `pages_prep_gray` ≠ data loss — render the page from the archive PDF (`source_page-1`, calibrated 1:1).
 - **Classifier ORDER + permissive `known()` corrupt results.** Putting OVER_MERGE before EDIT1 (with `wf>0` splits) mislabeled typos as merges; longest-first + `strong_known` fixed it. Same `wf>0`-too-permissive trap recurred in the reunifier and the de-merge.
 - **Correction-pass architecture:** dict-integration FIRST → reunify → split → spell-1/2/3 → systematic sweep; all reversible; re-measure after applying.
+
+---
+
+## Continuation 59 — 2026-06-12 (post-compaction resume: recovery-memo verified, launcher config-CLI, queue-port marker)
+
+**Recovery memo integrity verified.** After compaction, confirmed from the raw session JSONL that
+`CC007_RECOVERY_MEMO_2026-06-12.md` was written at line 11059 (22:06 UTC) immediately after Patrick's
+"write a memo" request (line 11055, 22:03 UTC) with all ~11k lines of full context present — NO compaction
+summary preceded the write. The memo was authored pre-compaction with complete context; nothing lost.
+Clarified the "cleanup is done" ambiguity: **PIPELINE cleanup** is done; **TEXT cleanup** (the deliverable)
+is explicitly unfinished and is the priority (memo §7). Committed + pushed the memo (`21318ce`).
+
+**Launcher config-CLI (DONE).** `config.py` gained a `__main__` bridge: `python -m config <name> [subpath...]`
+prints `path_for(...)`; `--list` dumps all locations; no-args/-h prints usage (exit 2). Lets `.bat`/`.ps1`
+launchers shell out to the single path source instead of hardcoding data paths. Added canonical templates
+`pipeline/runners/_TEMPLATE_run.bat` + `_TEMPLATE_run.ps1` (query config for PYTHONPATH anchor + vocab_dir log
+target). Tested on 5080 (config has no deps): all invocations correct. Smoke-net GREEN (94 names), py_compile OK.
+NOTE: the 11 stale box-specific `runners/*.bat` still reference pre-reorg flat script names — left untouched
+(archive-vs-rewrite is a separate call, not done unilaterally).
+
+**Queue-port plan documented (MARKER ONLY, not built).** New `docs/30_SYSTEM_DESIGN/QUEUE_PORT_PLAN.md`: the
+durable come-back marker for the queue decision — JSON-over-SSH (live, fragile, must not ship) → SQL
+(built, unused, MSSQL-targeted) → Postgres (already running, `FOR UPDATE SKIP LOCKED`). Decision rule recorded
+(future multi-box OCR? port to Postgres : archive the whole layer). `queue_claim` unification stays HELD.
+
+**Decisions:** (1) launcher CLI = `python -m config` shell bridge, not a per-launcher rewrite; (2) queue =
+documented-but-deferred, Patrick decides port-vs-archive when/if new OCR work appears; (3) NEXT = text cleanup.
+
+**Open at close:** back to TEXT CLEANUP (Sonnet context-adjudication of SymSpell candidates + defensible
+ground-truth error-rate measurement). Lots of subscription tokens available, weekly reset ~Sat 2pm PT.

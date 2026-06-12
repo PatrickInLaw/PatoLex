@@ -56,3 +56,33 @@ def path_for(name, *subpath):
 def ensure_dirs():
     for n in ("cascade_dir", "vocab_dir", "parse_output_dir"):
         os.makedirs(path_for(n), exist_ok=True)
+
+
+# ---- shell bridge: `python -m config <name> [subpath...]` prints the resolved path ------------------
+# Shell launchers (.bat/.ps1) can't `import config`, but they CAN shell out. This makes config the single
+# source of truth even for shell:  .bat  -> for /f %%i in ('python -m config vocab_dir x.txt') do set OUT=%%i
+#                                   .ps1  -> $out = python -m config vocab_dir x.txt
+# `--list` dumps every location; no args / -h prints usage. Output is the bare path + newline (shell strips it).
+def _main(argv):
+    import sys
+    if not argv or argv[0] in ("-h", "--help"):
+        sys.stdout.write(
+            "usage: python -m config <location-name> [subpath ...]   # print resolved path\n"
+            "       python -m config --list                         # list all locations\n"
+            "locations: " + ", ".join(sorted(_LOCATIONS)) + "\n")
+        return 0 if argv else 2
+    if argv[0] == "--list":
+        for n in sorted(_LOCATIONS):
+            sys.stdout.write(f"{n}\t{path_for(n)}\n")
+        return 0
+    try:
+        sys.stdout.write(path_for(argv[0], *argv[1:]) + "\n")
+        return 0
+    except KeyError as e:
+        sys.stderr.write(str(e) + "\n")
+        return 2
+
+
+if __name__ == "__main__":
+    import sys
+    raise SystemExit(_main(sys.argv[1:]))
