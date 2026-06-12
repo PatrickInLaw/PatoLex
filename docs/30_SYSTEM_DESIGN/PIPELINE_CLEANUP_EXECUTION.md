@@ -22,7 +22,11 @@ structural step: the deterministic cascade must still reproduce `pipeline/tests/
 - [x] Repo-root declutter (7 dead scripts → `project-archives/superseded-pipeline/`; gitignore scratch).
 - [x] Scratch reconciliation: 11 originals rescued into `pipeline/` (flat); 34 throwaways archived box-side.
 - [x] **Step A — de-dup core** — `pipeline/edits.py` (edits1/deletes/dl_within/affix, was dup'd in cascade+symspell+context) + `pipeline/dictionary.py` (build_dictionary re-export + build_sorted_common). Re-pointed cascade/symspell/context/mojibake/build_corpus_freq. Fixed the stale-count-merge double-count bug. **GOLDEN-MASTER OK** (2026-06-12). Flat for now; moves into `ocrcorrect/` in Step B.
-- [ ] **Step B — folder reorg** (`pipeline/` → package + concern subdirs). GATE.
+- [~] **Step B — folder reorg** (`pipeline/` → package + concern subdirs). DONE for the flat-root files:
+      ocr/ ingest/ chapter/ verify/ analysis/ adjudicate/ runners/ correction_support/ **ocrcorrect/ (engine,
+      GOLDEN-MASTER OK as `python -m ocrcorrect.correction_cascade`)** tests/. Each move smoke-net-validated.
+      DEFERRED to Step C: the parser scripts (ingest_from_ocr + run_parse_5090 + parse_born_digital* + the
+      parser-coupled tests) and the machine subdirs (5080/ 5090/ 5090-scale/ gate_f/ sql/).
 - [ ] **Step C — scratch de-gating** (data → `C:\PatoLex`, de-hardcode paths). GATE.
 - [ ] Final: update structure docs, session log, push.
 
