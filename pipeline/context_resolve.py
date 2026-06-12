@@ -46,15 +46,7 @@ def _bigrams(fp):
                 prev = t
     return c
 
-def _edits1(w):
-    out = set(); sp = [(w[:i], w[i:]) for i in range(len(w) + 1)]
-    for a, b in sp:
-        if b: out.add(a + b[1:])
-        if len(b) > 1: out.add(a + b[1] + b[0] + b[2:])
-        for c in ALPHA:
-            if b: out.add(a + c + b[1:])
-            out.add(a + c + b)
-    out.discard(w); return out
+from edits import edits1 as _edits1   # the ONE home for edit-1 generation (was duplicated)
 
 def _ambig_cands(t):
     cs = sorted({c for c in _edits1(t) if known(c) and zipf(c) >= 3.0}, key=lambda c: -zipf(c))

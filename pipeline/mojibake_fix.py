@@ -57,7 +57,7 @@ def choose_fix(cands, score, ambig=AMBIG):
     return (None, True)
 
 def main():
-    from correction_passes import build_dictionary
+    from dictionary import build_dictionary
     ws, _s, has_wf, wf = build_dictionary()
     WS = frozenset(ws)
     from wordfreq import zipf_frequency

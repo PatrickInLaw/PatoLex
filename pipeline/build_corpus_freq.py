@@ -20,7 +20,7 @@ def _log(msg):
 def main():
     t0 = time.time()
     _log("building dictionary...")
-    from correction_passes import build_dictionary
+    from dictionary import build_dictionary
     ws, _spell, has_wf, wf = build_dictionary()
     WS = frozenset(ws)
     # STRICT membership only (the 334k static dict: pyspell + nltk + validated additions/names).

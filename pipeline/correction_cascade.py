@@ -31,6 +31,7 @@ import os, sys, re, json, glob, time, bisect, threading
 from collections import Counter
 from datetime import datetime, timezone, timedelta
 import multiprocessing as mp
+from edits import edits1 as _edits1, is_prefix_frag as _e_is_prefix, is_suffix_frag as _e_is_suffix
 
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
@@ -73,13 +74,12 @@ _GAZETTEER_PATH = os.path.join(SCRATCH, "name_gazetteer.txt")
 _C_BC = {}; _C_E1 = {}; _C_AFF = {}; _C_SPLIT = {}
 def _init():
     global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV, _SYM, _NAMES, _GARBAGE_SHAPED
-    from correction_passes import build_dictionary
+    from dictionary import build_dictionary, build_sorted_common
     ws, _spell, has_wf, wf = build_dictionary()
     _WS = frozenset(ws); _HASWF = has_wf; _WF = wf
     from wordfreq import zipf_frequency
     _ZIPF = zipf_frequency
-    common = [w for w in _WS if w.isalpha() and len(w) >= 6 and _ZIPF(w, "en") >= 3.0]
-    _SORTED = sorted(common); _SORTED_REV = sorted(w[::-1] for w in common)
+    _SORTED, _SORTED_REV = build_sorted_common(_WS, _ZIPF)
     from symspell_e2 import _garbage_shaped
     _GARBAGE_SHAPED = _garbage_shaped
     if os.path.exists(_GAZETTEER_PATH):       # protect real names/places from being "corrected"
@@ -123,27 +123,13 @@ def classify_residual(t):
     if len(t) >= 25: return "garbage_toolong"            # long + unsplittable (split ran upstream)
     return "recoverable"
 
-def _edits1(w):
-    sp = [(w[:i], w[i:]) for i in range(len(w) + 1)]
-    out = set()
-    for a, b in sp:
-        if b: out.add(a + b[1:])
-        if len(b) > 1: out.add(a + b[1] + b[0] + b[2:])
-        for c in ALPHA:
-            if b: out.add(a + c + b[1:])
-            out.add(a + c + b)
-    out.discard(w); return out
 def _edit1_known(w):
     v = _C_E1.get(w)
     if v is None:
         v = any(known(c) for c in _edits1(w)); _C_E1[w] = v
     return v
-def _is_prefix_frag(s):                                   # some common word STARTS with s -> s is a HEAD
-    i = bisect.bisect_left(_SORTED, s)
-    return i < len(_SORTED) and _SORTED[i].startswith(s) and len(_SORTED[i]) >= len(s) + 2
-def _is_suffix_frag(s):                                    # some common word ENDS with s -> s is a TAIL
-    r = s[::-1]; j = bisect.bisect_left(_SORTED_REV, r)
-    return j < len(_SORTED_REV) and _SORTED_REV[j].startswith(r) and len(_SORTED_REV[j]) >= len(s) + 2
+def _is_prefix_frag(s): return _e_is_prefix(s, _SORTED)        # edits.py logic, over this worker's _SORTED
+def _is_suffix_frag(s): return _e_is_suffix(s, _SORTED_REV)
 def _affix_of_common(s):
     v = _C_AFF.get(s)
     if v is None:
@@ -357,11 +343,14 @@ def _process_volume(arg):
     vol = os.path.basename(os.path.dirname(os.path.dirname(path)))
     cfp = os.path.join(CASCADE, "counts", vol + ".json")
     prior = json.load(open(cfp, encoding="utf-8")) if os.path.exists(cfp) else {}
+    start = STAGES.index(from_stage)
     meas = dict(prior.get("meas", {}))          # {"raw":[f,t], "reunify":[f,t], "split":[f,t], "autocorrect":[f,t]}
-    stage_cnt = Counter(prior.get("stages", {}))
+    # Keep correction counts ONLY for stages BEFORE the resume point; re-run stages recompute fresh.
+    # (A full re-run from "reunify" starts the counter clean -- fixes the stale-count-merge double-count.)
+    _keep = set().union(*[set(_STAGE_KEYS[s]) for s in STAGES[:start]]) if start else set()
+    stage_cnt = Counter({k: v for k, v in prior.get("stages", {}).items() if k in _keep})
 
     timings = dict(prior.get("timings", {}))    # per-stage wall seconds for THIS volume
-    start = STAGES.index(from_stage)
     t_load = time.time()
     # load the input to the first stage we run; fall back to full run if the prior output is missing
     if start > 0 and os.path.exists(os.path.join(CASCADE, "out_" + STAGES[start - 1], vol + ".json")):

@@ -33,45 +33,7 @@ _VOWELS  = set("aeiouy")
 def _garbage_shaped(t):
     return bool(_REPEAT4.search(t)) or bool(_CONS5.search(t)) or (len(t) >= 5 and not (set(t) & _VOWELS))
 
-def _deletes(word, max_dist):
-    """All strings reachable from `word` by up to max_dist single-char deletions (incl. word itself)."""
-    out = {word}
-    cur = {word}
-    for _ in range(max_dist):
-        nxt = set()
-        for w in cur:
-            if len(w) <= 1:
-                continue
-            for i in range(len(w)):
-                nxt.add(w[:i] + w[i + 1:])
-        out |= nxt
-        cur = nxt
-    return out
-
-def _dl_within(a, b, maxd):
-    """Optimal-string-alignment (restricted Damerau-Levenshtein) distance, early-exit if > maxd."""
-    la, lb = len(a), len(b)
-    if abs(la - lb) > maxd:
-        return maxd + 1
-    prev2 = None
-    prev = list(range(lb + 1))
-    for i in range(1, la + 1):
-        cur = [i] + [0] * lb
-        rowmin = cur[0]
-        ca = a[i - 1]
-        for j in range(1, lb + 1):
-            cost = 0 if ca == b[j - 1] else 1
-            v = min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost)
-            if (prev2 is not None and i > 1 and j > 1
-                    and ca == b[j - 2] and a[i - 2] == b[j - 1]):
-                v = min(v, prev2[j - 2] + 1)
-            cur[j] = v
-            if v < rowmin:
-                rowmin = v
-        if rowmin > maxd:
-            return maxd + 1
-        prev2, prev = prev, cur
-    return prev[lb]
+from edits import deletes as _deletes, dl_within as _dl_within   # the ONE home for these (was duplicated)
 
 class SymSpellE2:
     def __init__(self, freq, max_dist=MAX_DIST):
