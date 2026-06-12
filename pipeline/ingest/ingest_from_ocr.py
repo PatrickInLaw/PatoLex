@@ -44,7 +44,7 @@ import config  # SINGLE source of truth for data paths (the 3060 cutover knob); 
 # OCR-error suspect.  The act is NOT silently committed with a wrong date;
 # instead the match is appended here so a human can review and correct it.
 # Location: next to the existing run-logs so the same review workflow applies.
-DATE_REVIEW_WORKLIST = Path(config.DATE_REVIEW_WORKLIST)
+DATE_REVIEW_WORKLIST = Path(config.path_for("parse_output_dir", "date-review-worklist.jsonl"))
 
 
 def _append_date_review(record: dict):
@@ -60,8 +60,8 @@ def _append_date_review(record: dict):
     with open(str(DATE_REVIEW_WORKLIST), "a", encoding="utf-8") as fh:
         fh.write(line)
 
-SCRATCH_ROOT = Path(config.DATA_ROOT)
-LOG_FILE = Path(config.PARSE_LOG)
+SCRATCH_ROOT = Path(config.path_for("data_root"))
+LOG_FILE = Path(config.path_for("vocab_dir", "resume-5090-run.log"))
 PSQL = config.PSQL_BIN
 
 # session_label -> (session_str, legislature_ordinal, start_year)
