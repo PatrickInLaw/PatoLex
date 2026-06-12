@@ -1,0 +1,798 @@
+{
+  "archive": "parse_20260612.zip",
+  "archive_bytes": 78959776,
+  "archive_sha256": "fc06ddcd6c53f9134d383129d498f00522729bc366866c02823c2dfd7bd131a5",
+  "count": 197,
+  "files": {
+    "1861": {
+      "bytes": 1028931,
+      "sha256": "5d3bd68ca74d980666a339ce0590dfc7b260e6e0c2665a5bc1e87c9b5db44835"
+    },
+    "1862": {
+      "bytes": 605122,
+      "sha256": "065a1f264d90fe86e7ecaae5a5f2d61b83a15f2877e0d584dd9dd38d3904cb3f"
+    },
+    "1863": {
+      "bytes": 756723,
+      "sha256": "230d9ba1039bd93669e5b39760f818c51bd5d7ccaad6f376f40c7b8f58fc23ce"
+    },
+    "1863-64": {
+      "bytes": 962418,
+      "sha256": "5d4f5439633b9384562cad47a33445909b2b09049c505845edd3ee07fadd617f"
+    },
+    "1865-66": {
+      "bytes": 1292590,
+      "sha256": "a290c0c627ec3c509da609d2cbd14c41b8a924e3614110af813b5f99fb442c43"
+    },
+    "1867-68": {
+      "bytes": 1304513,
+      "sha256": "64e2c3436b591d5f5118a365470dc8f460860a0a3e1a10c875e0ec9f8b3ad60e"
+    },
+    "1869-70": {
+      "bytes": 1151294,
+      "sha256": "f295d403c3f9cf05a1a5d33f08db8d5e5921bba7d66e5e0755d6169d2bb1fb65"
+    },
+    "1871-72": {
+      "bytes": 1461047,
+      "sha256": "9a9200f81dc1470506d9f0a0123b64a60a6f635fbd409739c829619f5ba7ab18"
+    },
+    "1873-74": {
+      "bytes": 1298348,
+      "sha256": "6f3977f40004ad3172c12a472873f4552199932f7120a3d79b80f7e2ce04a6d1"
+    },
+    "1875-76": {
+      "bytes": 1201777,
+      "sha256": "012d77e20709dfd223c186642a12cb075d68247aeaeefe656ddeaa0a064a7b9a"
+    },
+    "1877-78": {
+      "bytes": 1344988,
+      "sha256": "860d6f338902ec2fb30c7243301e7a07301eac03951158812ed9e09a9aba0bfb"
+    },
+    "1880": {
+      "bytes": 291293,
+      "sha256": "ca14438038e2cd1b8261eb7229f6d6ce8a6b6e07562da099ca3e5b3c3f604cd7"
+    },
+    "1881": {
+      "bytes": 197812,
+      "sha256": "8a3635188e62fbdbb50ad5c6a580f636cc66eabed52ffc8cc150f45389bfb9d6"
+    },
+    "1883-84": {
+      "bytes": 10978,
+      "sha256": "d59806ef3286fc2487db6a31e6d3d3852ce6ef196e0f52561f2245c705cb11ff"
+    },
+    "1883-84-regular": {
+      "bytes": 244468,
+      "sha256": "af6063e8a8472dfccab0dbb129415783de285e7231bcfe34dabad7823f0f2dd8"
+    },
+    "1885-86": {
+      "bytes": 390604,
+      "sha256": "936c6c88762f0b6eef6629636839bb8a40a50f8f36fd052d9ac7ac7b72599fe3"
+    },
+    "1887": {
+      "bytes": 414492,
+      "sha256": "0d85959c2db9f4c45ba1cc0ef69c2d1449a7733874038f960d4d8ae08def3e24"
+    },
+    "1889": {
+      "bytes": 682478,
+      "sha256": "59a4f6048b7e4b83137683315384571e0b96c01e984885cf10237c447dd1531f"
+    },
+    "1891": {
+      "bytes": 741069,
+      "sha256": "5a9c633c007f454062a66e32a02381a776328852a7a08acfdaf37f6944be1c47"
+    },
+    "1893": {
+      "bytes": 667198,
+      "sha256": "3515ad3decdcaad4345686620d62826a67b62b0fb6c54c0515de64f88ca0b3ea"
+    },
+    "1895": {
+      "bytes": 616533,
+      "sha256": "7c69b375101b909d0826df6ed970e729b95b75a62c9c3b0fd303128721a5e637"
+    },
+    "1897": {
+      "bytes": 773902,
+      "sha256": "79eb61208d1632d1344b0bda84e5c295017f308dec12adb21c89222ca4b7e5dd"
+    },
+    "1899": {
+      "bytes": 520272,
+      "sha256": "61179d1db1a106303fc7f5a2c43cb27ddcba3bbdbabc63c74655abf3cb766603"
+    },
+    "1900-01": {
+      "bytes": 777485,
+      "sha256": "393b17b8a48d152b36112b3b9c12c2db73fb33043ee106ad2200bcb88d0d33f8"
+    },
+    "1903": {
+      "bytes": 1088877,
+      "sha256": "533cde8512399f71a3a7c34626dd212b6f521ca032d1b8008592dd094c903652"
+    },
+    "1905": {
+      "bytes": 1671978,
+      "sha256": "445d65a9624f8f8def981f286b7a140a4a0f00c36cdd65675748e9404327bdd9"
+    },
+    "1906-07": {
+      "bytes": 1523729,
+      "sha256": "f8ede91775b78dc5e88779b97cf52f1bb8ed95980287d62d1da4954a1ebdbf97"
+    },
+    "1907-09": {
+      "bytes": 1812457,
+      "sha256": "ebfd07fa311f2f783117975b1271418953d60213063caa02e9c2029500b5fcf4"
+    },
+    "1910-11": {
+      "bytes": 1599486,
+      "sha256": "bfaf212fd7776b8f0a95730f85d889180c681dfdeba95863e7ecdc3958645a65"
+    },
+    "1913-statutes": {
+      "bytes": 1833680,
+      "sha256": "8c254d8c780b7b28f788d5dde1375be0a4f87f134da04e0dfd81cb06b2233396"
+    },
+    "1915-vol1-chapters": {
+      "bytes": 1247528,
+      "sha256": "34416e0efe4e19d8983def76516b785316330e4a7bf03dab5eba0d09c1e828cc"
+    },
+    "1917-vol1-chapters": {
+      "bytes": 2131438,
+      "sha256": "5a09445132a9259587642e230ccc9796b4ed259e8ddd490b752c93bdf27b7f57"
+    },
+    "1919-vol1-chapters": {
+      "bytes": 1635073,
+      "sha256": "44a26036f9c8ad896822d96d27c1826d3e059abe335b1b3965d817d66c2271e4"
+    },
+    "1921-vol1-chapters": {
+      "bytes": 2523814,
+      "sha256": "20119c632a73e1f0877ce52fb0068176ed4d1892ba000f4fe4fcce8fefc7f7fc"
+    },
+    "1923-vol1-chapters": {
+      "bytes": 1457126,
+      "sha256": "97baf444853a1f5286cf9c7fe5a692d0081ada85fc933c6aa76442a070fa16c2"
+    },
+    "1925-vol1-chapters": {
+      "bytes": 1504015,
+      "sha256": "07af17e4bdf9544d2b13d3dbe87f58bea5260af03a76bc858a2cc3d6ea9baa61"
+    },
+    "1927-vol1-26chapters": {
+      "bytes": 51,
+      "sha256": "5d2c81554dd28d2972e3f86e39feee8d7971d579d33f7854179c9edc66104742"
+    },
+    "1927-vol1-chapters": {
+      "bytes": 3041298,
+      "sha256": "4e582bf8e94ad4094228413f48bd37059c8ca28d0fda071b18eca522016a0086"
+    },
+    "1929-vol1-28chapters": {
+      "bytes": 6623,
+      "sha256": "40b376b7efef3a389aa47af180d7ad261e53f36258950108d2e7c252e0a8bed6"
+    },
+    "1929-vol1-29chapters": {
+      "bytes": 2612447,
+      "sha256": "8a20f310305d68b3187d1f39bbfcd6f24b071106f0e1dfb81e38280b8cf74678"
+    },
+    "1931-vol1-chapters": {
+      "bytes": 3277949,
+      "sha256": "3dfee7920f6f69c9a88dfb914faaa0113ebed83339a89b43692a45cdd2e4cf63"
+    },
+    "1933-vol1-chapters": {
+      "bytes": 2865316,
+      "sha256": "51bcd6a02f5a37feba25fee68e32efcd7867ef65b3b023210b5799c3a4162c30"
+    },
+    "1935-vol1-34chapters": {
+      "bytes": 49252,
+      "sha256": "ce6cf937b8abb033fb2d7fed47f5c8ba4cc0f5acfd94ca5fb8a7768874609a50"
+    },
+    "1935-vol1-chapters": {
+      "bytes": 2641436,
+      "sha256": "404b5b16b92b86af806576213553a2b1e77a5260507ae27163a58a6e567032c3"
+    },
+    "1937-vol1-chapters": {
+      "bytes": 2939049,
+      "sha256": "12c9107cce8af49517f6f7e01b5cf5d48d8d19d550754973ebb00cf873fdd268"
+    },
+    "1938-vol1-chapters": {
+      "bytes": 138642,
+      "sha256": "2aec8d4060ba85a86e0a9dd81b1efbc736e2f68895dbcfb8fffb9d9163525359"
+    },
+    "1939-vol1-chapters": {
+      "bytes": 3050226,
+      "sha256": "531eb112e72e98e58188bcee7f2e215f66ae3794c567b5a0654e322e64304dfe"
+    },
+    "1941-vol1-41chapters": {
+      "bytes": 3115623,
+      "sha256": "db5eed6e3a1c2ed848916515ae03b479a4e4f48dd093a9ad8bf56e8f64008b16"
+    },
+    "1943-vol1-42chapters": {
+      "bytes": 69573,
+      "sha256": "149444be91a466d6f5d026a19894d548f67313e0a4965a953096c0caea67df6a"
+    },
+    "1943-vol1-chapters": {
+      "bytes": 2886783,
+      "sha256": "efd37a2f3dc8799d43dbe03be52b0c2521fa0d7386097dab94d3cb2c03c0b112"
+    },
+    "1945-vol1-chapters": {
+      "bytes": 4199156,
+      "sha256": "cfe35f1db27e6ca58494b0fa11f6e9813a4c6c6e77c99b9bf4a1883d199d39f1"
+    },
+    "1947-vol1-46chapters": {
+      "bytes": 487091,
+      "sha256": "a36c10338fcebdedb431ecd4bdfec61fd997858443429251d93bfc89e606ba9c"
+    },
+    "1947-vol1-chapters": {
+      "bytes": 4542513,
+      "sha256": "7c635cd73ab185712385772dc56a25340fd6a98ceafc7f7c1264fac240ce75fe"
+    },
+    "1948-vol1-chapters": {
+      "bytes": 144210,
+      "sha256": "415b50fb4991f7691e58dc74b7bf936efcdf34cdea3a7b2f936ae2e980ae72e6"
+    },
+    "1949-vol1-49chapters-prior": {
+      "bytes": 47702,
+      "sha256": "8f5e3bba0559ccbeecc4f98f08dd6dceb8aa88612a015826abdd643e9b5d304c"
+    },
+    "1949-vol1-chapters": {
+      "bytes": 4165657,
+      "sha256": "8e62a13b196fb7ffd2dae3c06840b3258eb1bae25d85a302553d963111db32d4"
+    },
+    "1950-vol1-chapters": {
+      "bytes": 299324,
+      "sha256": "b0a52ccf9f0bfd97a890e6383dd65d91490fa845764b5b8941f9f6e454240927"
+    },
+    "1951-vol1-50chapters": {
+      "bytes": 134970,
+      "sha256": "335e7ad4b7d30a579cfcc187013cfce75440998ecdb4e9280e6cd1e7b5962f7e"
+    },
+    "1951-vol1-chapters": {
+      "bytes": 2530570,
+      "sha256": "3f7028d5300799e85f8acdd9cfd2ee68bd59a6a1f9d466a6795480709b702774"
+    },
+    "1951-vol2-chapters": {
+      "bytes": 2075598,
+      "sha256": "cead89c7465f2deda30d04ce07c286cadaa6c1694781b475d43d735e20d8220e"
+    },
+    "1953-vol1-52chapters": {
+      "bytes": 315578,
+      "sha256": "d9d550a993b65fc21ea781f9c075d46e510d5e76b0b5efe7e5a9312ff7c08c48"
+    },
+    "1953-vol1-chapters": {
+      "bytes": 2872393,
+      "sha256": "0ffe8d17fc59b273197c0bf81d59b74e00d6af64caffa03f976b3c7d155a2d07"
+    },
+    "1953-vol2-chapters": {
+      "bytes": 2279235,
+      "sha256": "ed48cabdf1c6832b62e4579bf1018135301b3610c5811e6578a90fd397106c3a"
+    },
+    "1955-vol1-54chapters": {
+      "bytes": 246884,
+      "sha256": "1954b3faaaabb2dc743611c6af83aa8ed399c7e52415f5c8ca5be2ef2e746726"
+    },
+    "1955-vol1-55chapters": {
+      "bytes": 2722365,
+      "sha256": "9fc84c347cec0d47ad9344c739cc9c19840fa58f2e72dd2b9b4b792cc12a062a"
+    },
+    "1955-vol2-chapters": {
+      "bytes": 2295043,
+      "sha256": "03b4a77d9c8d05a203296d78c5c5bad55206387bed8018043f63bde6d2fdc61e"
+    },
+    "1957-vol1-56chapters": {
+      "bytes": 273529,
+      "sha256": "6adcfaa78e6e2d13f51bc2f3d6d19505724ab21626d9d711cc3f608d72f184d2"
+    },
+    "1957-vol1-57chapters": {
+      "bytes": 3459983,
+      "sha256": "f63586966c405e87a5e1279b414d7a42c06ccc6502144ae27e7c7f625f86da32"
+    },
+    "1957-vol2-57chapters": {
+      "bytes": 2874046,
+      "sha256": "12485c0cadd06d975703e93d8819f7dc0d324ffe6b7a80488c9b197ffc1fc744"
+    },
+    "1959-vol1-58chapters": {
+      "bytes": 367402,
+      "sha256": "6c878c918959dac5b1419327b4391619d832156f7dd228055145b1153f2a4450"
+    },
+    "1959-vol1-59chapters": {
+      "bytes": 2579821,
+      "sha256": "fd3166f13e23a2f3285d623e58c386a6b83aa7d1607ea91a18e245f34eace695"
+    },
+    "1959-vol2-chapters": {
+      "bytes": 3376142,
+      "sha256": "a336270afe2c7cb5818de4c9ef2560b71d38bd647dd8d594550326e28ebf3a66"
+    },
+    "1961-vol1-60chapters": {
+      "bytes": 320509,
+      "sha256": "f57211f9bc5561607dfbc04f5424c9894d96cbc2ec868d462b6551ccedc2aa0b"
+    },
+    "1961-vol1-61chapters": {
+      "bytes": 3100426,
+      "sha256": "84331300b4589b144a0261c3863475f1ba7e7c9bdeefdb6aeed38e84ff1d8449"
+    },
+    "1961-vol2-chapters": {
+      "bytes": 2865817,
+      "sha256": "4740b815904b73f782d0e7dd83d8b13999763594ef3ab19d1341ac539954f9e5"
+    },
+    "1963-vol1-62chapters": {
+      "bytes": 297987,
+      "sha256": "e55c773bbd17508ab9d3896cbfbdd334f23c8cbe2602c62d2408d02c273f7a83"
+    },
+    "1963-vol1-63chapters": {
+      "bytes": 2914592,
+      "sha256": "7a3767e92e4c5f47e85940d0ea309174e1337600ad4ad54e7769e15d0c43c875"
+    },
+    "1963-vol2-chapters": {
+      "bytes": 3502608,
+      "sha256": "47dc2b941f79043f34264cc9ff9ab29c9db6d2d680bc27bf34f2b993062d6ad6"
+    },
+    "1965-vol1-65chapters": {
+      "bytes": 1401289,
+      "sha256": "12e6b3c3c97b60731fd253d226f70e1a0d46aebf7f4ce18ff039c9dd35b1aa1f"
+    },
+    "1965-vol2": {
+      "bytes": 3486323,
+      "sha256": "e38d66b17b1921ecd0e26d63019600a114fcc82babf251ebd37bc9447803061a"
+    },
+    "1965-vol3-chapters": {
+      "bytes": 1258238,
+      "sha256": "911f60bd14751bdbfe0d3f2b04a1a0be28c3c604a32098f29f321cd982e487c0"
+    },
+    "1966-vol1-chapters": {
+      "bytes": 32960,
+      "sha256": "65b57500473f13a68a7d19922d014d10aff0ec1e00f7f3729468c625e3241584"
+    },
+    "1967-vol1-chapters": {
+      "bytes": 1558758,
+      "sha256": "b3414b8251bea56b15e60e0c941907001717ca817926c85d001c25d5f219680b"
+    },
+    "1967-vol2": {
+      "bytes": 3442326,
+      "sha256": "88987ae06788ff1c318fac79e824d2121dacc42dde1455b024f065145a58747c"
+    },
+    "1967-vol3-chapters": {
+      "bytes": 414701,
+      "sha256": "ecefa31e462c2460e5bf59fa73d934fd026113dfcc30acd85b51cfca3fae3428"
+    },
+    "1968-vol1-chapters": {
+      "bytes": 2657550,
+      "sha256": "0b3a6d4cb2b9ff59314eb3bfd0c0a9f250464f0308392b0b85802cf855c9489d"
+    },
+    "1968-vol2-chapters": {
+      "bytes": 1701283,
+      "sha256": "5bcb336ac3c12f358d0dc34c363864178485986f72ff399d2ad63fd4bddc492e"
+    },
+    "1969-vol1-chapters": {
+      "bytes": 3342751,
+      "sha256": "d16947eb135088ef22753e15fb8831a274c7717dcb81a8df7172fdd4ae9d62cc"
+    },
+    "1969-vol2-chapters": {
+      "bytes": 1624802,
+      "sha256": "5aaa0b4dd69661305ca50ea2ed63445f2e44d7c8751bceb6f65340f8619958b0"
+    },
+    "1970-vol1-chapters": {
+      "bytes": 3296145,
+      "sha256": "da28d2548b88f9886c10601ca289489f69ee23d5b5be4b18f411e6cda3da9e90"
+    },
+    "1970-vol2-chapters": {
+      "bytes": 1850984,
+      "sha256": "cbbaf73ecab4da96530807e28802497862b2b6f58f3496bf68e812fef2eeae0e"
+    },
+    "1971-vol1-chapters": {
+      "bytes": 3780315,
+      "sha256": "2ee75f51ca8efcfabbcd97a11d30de08d531a2de0dd3f9b7b872b9d88466b8b3"
+    },
+    "1971-vol2": {
+      "bytes": 1440132,
+      "sha256": "21af5f124261cbc49d6051ba30035f3e4866dd0e16fd5d30861be23978a142da"
+    },
+    "1972-vol1-chapters": {
+      "bytes": 4314187,
+      "sha256": "0b66a1c8eb7a346daece005dd69b6784f3d2d60d7b43a2e8423bc0e70dee6d9f"
+    },
+    "1972-vol2-chapters": {
+      "bytes": 627888,
+      "sha256": "79373fec23b198da046b4397530eb9acc737c38179460b78c66837175d42cf60"
+    },
+    "1973-vol1-chapters": {
+      "bytes": 3635248,
+      "sha256": "88a3fd40f8a5d60881279d997bf4c6f32280a98ac0bab3f7b6a1d1fdfe2b5b14"
+    },
+    "1973-vol2-chapters": {
+      "bytes": 397602,
+      "sha256": "cdc659e39e477bc8a5b2912e8c0c2ea46294744054362836460ed17a958373db"
+    },
+    "1974-vol1-chapters": {
+      "bytes": 3834981,
+      "sha256": "9ea9ff0b2d726559456b43fcfed933d2273f9b90a34b7231d2f9a9e4915b9041"
+    },
+    "1974-vol2-chapters": {
+      "bytes": 1251671,
+      "sha256": "6cd958c3029d3103ff48e463887591547b850fa59ba7a2b65d1e242a3052c61f"
+    },
+    "1975-vol1-chapters": {
+      "bytes": 3736769,
+      "sha256": "f4458db131e76f00361b14b9e9a9afa4968528cae2f65a6ea5b4d17d1fef2f74"
+    },
+    "1975-vol2-chapters": {
+      "bytes": 975410,
+      "sha256": "9fa1f78c6c521d6fec7f98263509d8f529bac227e47cbb22f9f867a1abb68bf8"
+    },
+    "1976-vol1-chapters": {
+      "bytes": 3514631,
+      "sha256": "2470144094d938b28dc0d25ca686de2c3a20071251967946703039e19db02047"
+    },
+    "1976-vol2": {
+      "bytes": 47554,
+      "sha256": "8520bf624409c340a1f79b1a33d784a7d620a9277956e784a133ce1fe93594ac"
+    },
+    "1976-vol3": {
+      "bytes": 2119043,
+      "sha256": "0a699ce2915a729cafe0e49a56bf188b9f967d41d7afb6f141076e65d3e299a0"
+    },
+    "1977-vol1-chapters": {
+      "bytes": 2595449,
+      "sha256": "bebbb947b6e18157507026945cefd224528415bdb3434473b37e39ca7c94e521"
+    },
+    "1977-vol2": {
+      "bytes": 2056305,
+      "sha256": "5d0965600959b28124cf82a02a6ea73f7984aabc3ebaa99d552ec2a549aa8ef1"
+    },
+    "1977-vol3-chapters": {
+      "bytes": 30912,
+      "sha256": "a4692d48361f6534d0761387affef1e2e7fe7ac2b9fcccef81f1258c107d72ab"
+    },
+    "1978-vol1-chapters": {
+      "bytes": 1973111,
+      "sha256": "4664ec7a4f6a96dc2930e2a9254f01a66dbc48446da752591fba5f0a56845264"
+    },
+    "1978-vol2": {
+      "bytes": 2282089,
+      "sha256": "c557a81845ba9945bfbea5f802147166d691257f6bf3bf9817a6df99ea932014"
+    },
+    "1978-vol3": {
+      "bytes": 1351439,
+      "sha256": "ce7a3fbb364bd333543b5b5591761e2fdbf46b993b45451efe601c99ca1dcd24"
+    },
+    "1979-vol1-chapters": {
+      "bytes": 2107113,
+      "sha256": "4f9a70f9614bd3f25e31afb5e79fa27314cf802b9631a2adad6e9f2281837087"
+    },
+    "1979-vol2": {
+      "bytes": 1627728,
+      "sha256": "59194c39a8fcf468ab528596c650438c591d4345c56643b6ddca26856ec41fb5"
+    },
+    "1979-vol3": {
+      "bytes": 1003213,
+      "sha256": "eb2e89087da2dcb00794af05e8de9a415abeaf0bce6f392181132684b89e3386"
+    },
+    "1980-vol1-chapters": {
+      "bytes": 2020074,
+      "sha256": "f0c044c3c9a0b4f855f113b984a1924209414acdcac27ad6c514bf418dda28b7"
+    },
+    "1980-vol2": {
+      "bytes": 1980453,
+      "sha256": "8a3350c95d337e676c71fd1be80fb7c13c3e7a061ce9c5029b48ca14920098af"
+    },
+    "1980-vol3": {
+      "bytes": 1849100,
+      "sha256": "2b9b9cf8d0e09f9bc6dfa9a5ad041d8e73c39dc2fdf3033e83ff2d59f9ee0e55"
+    },
+    "1981-vol1-chapters": {
+      "bytes": 1142780,
+      "sha256": "0761a9134303ed969a60eafb04ca2582b91e81fb0a84f10ad2f9bdf3205e7726"
+    },
+    "1981-vol2": {
+      "bytes": 1896046,
+      "sha256": "e88bcf1b3722e59c0cd00b1d7bb971a085248f25e98a3bc6d2163e2e3b78c0e4"
+    },
+    "1981-vol3": {
+      "bytes": 1554405,
+      "sha256": "d9788b0df458aa1de8f3d40638ed64359b9e47823f799fb43cccaa5c278b7b7a"
+    },
+    "1982-vol1-chapters": {
+      "bytes": 1266024,
+      "sha256": "5a1548bf55c315c1659a14625d1758b643f77c43e7f49dc21065717c2867c3d2"
+    },
+    "1982-vol2": {
+      "bytes": 1389953,
+      "sha256": "88990608bc9d70545473d20e05d97d213ddcf017ca7d3c519e1e3e109bdd50ad"
+    },
+    "1982-vol3": {
+      "bytes": 1970508,
+      "sha256": "75dd71cab4c02bb41bb6b4c38eb426d54e7fe63d29b86bdc36c89f7ef8ce441c"
+    },
+    "1982-vol4": {
+      "bytes": 1197486,
+      "sha256": "68a082b014e725cb72395c76e5d103f21743e3e9e7f7b62139d1ff748f822371"
+    },
+    "1982-vol5": {
+      "bytes": 617561,
+      "sha256": "f0e1a16402db20c3735482eeaaf3cbc0ef531a9681bc861062c4060846744cfb"
+    },
+    "1983-vol1-chapters": {
+      "bytes": 1201175,
+      "sha256": "06e81618b7102b6f748caba1ec8921667f5bb804545b15c70b26b95614936557"
+    },
+    "1983-vol2": {
+      "bytes": 2065959,
+      "sha256": "84e1497445b5a1bce997b9e9530623002dfedf2224318209211c6eaa7bf6711d"
+    },
+    "1983-vol3": {
+      "bytes": 1535259,
+      "sha256": "ea8e4c52873b3a4f4135a70d79d4ebea71c46bd30039025ef1671f83894a8b17"
+    },
+    "1983-vol4-chapters": {
+      "bytes": 255762,
+      "sha256": "0679922fad1107ca3c939366d91bbda11b992a1a96d6ca50c34b7f66d1c4342e"
+    },
+    "1984-vol1-chapters": {
+      "bytes": 1942727,
+      "sha256": "223e2fb1ee00cde924d85be4ba8993b4ab469b74831465532962ee60a46b1c9c"
+    },
+    "1984-vol2": {
+      "bytes": 3368178,
+      "sha256": "ac8b7a783d8b24883cf8e42cbb528d291b3db1c38c42f8ad714e9ed1d5d46e30"
+    },
+    "1984-vol3": {
+      "bytes": 2451370,
+      "sha256": "b81021894f3bcdea9efab95fa7e6cb1004c2aef67bec9ef73d6fd054c27eda39"
+    },
+    "1985-vol1-chapters": {
+      "bytes": 1764816,
+      "sha256": "328d5672088d57bed40fb729a5c69839c9e31772b87b9b67d63e6bbd17efa071"
+    },
+    "1985-vol2": {
+      "bytes": 2708923,
+      "sha256": "842d26bba04dfe519923d8c4b3f27b7a15020960cee5f4d3092e547e6dc1f398"
+    },
+    "1985-vol3": {
+      "bytes": 1799364,
+      "sha256": "0363c0fed621b0ef6bc2587bd703ba12a864bef72246d66939b270aa56786bc0"
+    },
+    "1986-vol1-chapters": {
+      "bytes": 1477171,
+      "sha256": "f71126002d19526a6b402205901a1c9bbdaef93cb33897d816ed9b0d2f8dd9f7"
+    },
+    "1986-vol2": {
+      "bytes": 2342652,
+      "sha256": "a27bf65e4c64ede0392488b6ef84b485353f9a49ec3a68958ac5bee8114b4f41"
+    },
+    "1986-vol3": {
+      "bytes": 1968822,
+      "sha256": "78b38093a09a844be468e14923228d210265af356dfaed35bb5a3da8f383862c"
+    },
+    "1987-vol1-chapters": {
+      "bytes": 1618939,
+      "sha256": "748e3e6358f4d15eb7883bb08df4196e450d36da84c281c7bf1168a5920a4230"
+    },
+    "1987-vol2": {
+      "bytes": 2382747,
+      "sha256": "4c09c8d55ca0f61988ef15be7e4aa4c93ce899b80070e98c933bfdb7b49bd70e"
+    },
+    "1987-vol3": {
+      "bytes": 1382680,
+      "sha256": "d91eeb3c3db4008dcf18261a978a8e83ec83ca42a8c2e847c133565108be4421"
+    },
+    "1988-vol1-chapters": {
+      "bytes": 1343103,
+      "sha256": "3f38c283709363dd7cf28c515ab90f46a61aae4eebca175ab72074cb757f7a5c"
+    },
+    "1988-vol2": {
+      "bytes": 2754660,
+      "sha256": "b1cdcc78f2e5ece94607aa1be3b9969219c4347ee42ddc0a767a1af4db541172"
+    },
+    "1988-vol3": {
+      "bytes": 1738267,
+      "sha256": "c9a4bcb01201539d09c1746db93c11c2bdedd2ee14dea4348da2663631d94b95"
+    },
+    "1989-vol1-chapters": {
+      "bytes": 1982715,
+      "sha256": "6b14ab777d8ce69ee0ffb4a8742e98f49ff1fa26a2cc29d08da93b500ad3f29b"
+    },
+    "1989-vol2": {
+      "bytes": 2342707,
+      "sha256": "c43e86a71360f1b53e330c64c9f716545f7e2da18063fd1ad94f76e876d6f82c"
+    },
+    "1989-vol3": {
+      "bytes": 1105352,
+      "sha256": "84039fdee191cd5e0c546ab8e701e3961061d4a83f69f170234549c8485d0311"
+    },
+    "1990-vol1-chapters": {
+      "bytes": 671642,
+      "sha256": "b5bbfb76c44c3dc55c1c6a27be8044ae6755f73b2c6b5afcf464ad9cb03c68fd"
+    },
+    "1990-vol2": {
+      "bytes": 1983051,
+      "sha256": "3ed405d77de472af8e6aa91a849758e076799151adde1df8da0ec29277b8e1ee"
+    },
+    "1990-vol3": {
+      "bytes": 2166505,
+      "sha256": "83a1b42acba4551cca6355226455913d3d3b572d407821329cf641b572c7ba71"
+    },
+    "1990-vol4": {
+      "bytes": 1349666,
+      "sha256": "0addfe6c744c83cdb6d0b41c046570234c7e174fd955d4b2e96cdc1e251c25da"
+    },
+    "1990-vol5-firstextra": {
+      "bytes": 176350,
+      "sha256": "832f4b69d0702c82ecc6feb1b43e349b399994c2077a0ab7a54c274fa8847e52"
+    },
+    "1990-vol5-reg-session": {
+      "bytes": 413003,
+      "sha256": "cc1bc5be67edb7cd958b3e627487d168d6b68f0e8a97f809f7556d8b61cac58e"
+    },
+    "1991-vol1": {
+      "bytes": 1336179,
+      "sha256": "09fcd3d8163b6c655e86da7678a06d6752a6a4ca72a62252f76295706419f9d2"
+    },
+    "1991-vol2": {
+      "bytes": 2499018,
+      "sha256": "1e4a236d6212e4641596099e1f5ffa0d90d261d09327cdeac183483deabe62af"
+    },
+    "1991-vol3": {
+      "bytes": 1331618,
+      "sha256": "e574e546eef71c51eaba8d35a77adda7c88e32977029a6abbe31c368df4c7fe9"
+    },
+    "1992-vol1-statutes": {
+      "bytes": 2375928,
+      "sha256": "b8bd3c84c6c4a54a650590247af290361e33c2363a2a65a7d6c910fc353edabf"
+    },
+    "1992-vol2": {
+      "bytes": 2131040,
+      "sha256": "964d1d3ccec27728e27d62e6cc3095dc98152184e01631b16ebb7c70dc3e498e"
+    },
+    "1992-vol3": {
+      "bytes": 2227412,
+      "sha256": "9baaf3c4744597aeac632a1f5593e57e9538a8178e57abc427298939fad1e14d"
+    },
+    "1992-vol4": {
+      "bytes": 51,
+      "sha256": "5d2c81554dd28d2972e3f86e39feee8d7971d579d33f7854179c9edc66104742"
+    },
+    "1993-vol1": {
+      "bytes": 1001851,
+      "sha256": "c5ad9dd63c88ed1c44a15c17a9922176092a1f76df56dfeef495d94041b62c16"
+    },
+    "1993-vol2": {
+      "bytes": 2022207,
+      "sha256": "29aa5a7ab3f1507a18ce5419866b5acfa99fa36675b9acba340a6f7ef2a23011"
+    },
+    "1993-vol3": {
+      "bytes": 1781241,
+      "sha256": "ee1e5d7f48d14103289e66eec01e83d1b2bd192c271e49e80b2feebb7fb145d8"
+    },
+    "1993-vol4": {
+      "bytes": 778399,
+      "sha256": "b6915b397dade01e5589cdff1bc22d67ffd587c831b3d72eebe31feac2e530b2"
+    },
+    "1993-vol5": {
+      "bytes": 51,
+      "sha256": "5d2c81554dd28d2972e3f86e39feee8d7971d579d33f7854179c9edc66104742"
+    },
+    "1994-vol1": {
+      "bytes": 808101,
+      "sha256": "76497ce922ad8e440b18a01ebb613522ce570b08a60ca7fc7c0656a7b0358c2c"
+    },
+    "1994-vol2": {
+      "bytes": 2360784,
+      "sha256": "2b32b1163637a01d1720c09a896883cd143dbb006f07c6850f93a05233ca74f3"
+    },
+    "1994-vol3": {
+      "bytes": 1013080,
+      "sha256": "2fb9cf6638259424e075d8c7abdee4889cd3f7b103eaef815343c4dce52820f7"
+    },
+    "1994-vol4": {
+      "bytes": 1326384,
+      "sha256": "0a14f7cef84bd0cb4512a69fa78f8c8670a5f789d2f7f43ab939177d5c60b529"
+    },
+    "1994-vol5": {
+      "bytes": 253297,
+      "sha256": "908fc8e9190b2292589d75a4e1b60b582e8396e4509f674361a299e27db966da"
+    },
+    "1995-vol1": {
+      "bytes": 1641615,
+      "sha256": "30da03b3da183914448ca3873901d4bbc8df2ec8820b5cecc911787dcc7ece6b"
+    },
+    "1995-vol2": {
+      "bytes": 861324,
+      "sha256": "2893a3ea6fc4c6d2d3695de87630f23c1435c5509af773603286e3b5a56cd7d5"
+    },
+    "1995-vol3": {
+      "bytes": 1597770,
+      "sha256": "775ab181273fd9f050f3a582ea6524a27f6a418f989f34477ad4cff2e408f7a5"
+    },
+    "1995-vol4": {
+      "bytes": 781068,
+      "sha256": "b806d9fbc219e42525f9e96cbe2184ac82b90a0af33b8a4d256d3cdce09913b1"
+    },
+    "1995-vol5": {
+      "bytes": 62156,
+      "sha256": "a77efe255615e128c19fbc0e19f521d6b1bad926bc64eb86159a6b4d2d91e8e3"
+    },
+    "1996-vol1": {
+      "bytes": 924185,
+      "sha256": "e3d333c888444ac6fede060b9cf608573334fc9a345d67aaf0c7ace85433a462"
+    },
+    "1996-vol2": {
+      "bytes": 1879908,
+      "sha256": "0a332de392ed08f361fabc963a40c297d77172ba86a2376d0028511464061da6"
+    },
+    "1996-vol3": {
+      "bytes": 1699197,
+      "sha256": "54fdf9e99a43b20ee3390971e72447630dd71f857da1f3b5cf337103bba6febf"
+    },
+    "1996-vol4": {
+      "bytes": 878413,
+      "sha256": "f1b04f6b8dcd313d2e8e76ebb33516af14ff1a48700401d1b3331ac712c7b44d"
+    },
+    "1996-vol5": {
+      "bytes": 525843,
+      "sha256": "68b7ecd9ed9b7800301110814ed621df0bd7cbcaf58a4df9cafa22d10ea691f3"
+    },
+    "1996-vol6": {
+      "bytes": 51,
+      "sha256": "5d2c81554dd28d2972e3f86e39feee8d7971d579d33f7854179c9edc66104742"
+    },
+    "1997-vol1": {
+      "bytes": 1064090,
+      "sha256": "eabac00ea2a287f7a07de3dcb7fa2190af6347c199c7762af0bb1c24113596b8"
+    },
+    "1997-vol2": {
+      "bytes": 581903,
+      "sha256": "6e3a506159983bae90d984fbaed1ad883c139700879d4eb8bca0464d4360acf2"
+    },
+    "1997-vol3": {
+      "bytes": 1228190,
+      "sha256": "2042aee747645e95865feaec45f4af78db1f9187f9b92fbc2538989d9f229fe4"
+    },
+    "1997-vol4": {
+      "bytes": 1119524,
+      "sha256": "8c66def7a69531e64e07752f5ea39fcd32794d5b0d4f7e6046045fdaab089369"
+    },
+    "1997-vol5": {
+      "bytes": 939736,
+      "sha256": "189ba59fd9ccf80398278e3ca6792a362fdd43e810eb9e315d87fb9849aad2ba"
+    },
+    "1997-vol6": {
+      "bytes": 51,
+      "sha256": "5d2c81554dd28d2972e3f86e39feee8d7971d579d33f7854179c9edc66104742"
+    },
+    "1998-vol1": {
+      "bytes": 1428477,
+      "sha256": "01656e49082ff9942c1fef39707b70544d623bdb279982f3ba67457376c05e94"
+    },
+    "1998-vol2": {
+      "bytes": 739506,
+      "sha256": "8a037223f5f9902331623cffe67c476029eda56c9e9208e74a5caf34d60301d5"
+    },
+    "1998-vol3": {
+      "bytes": 1914116,
+      "sha256": "c633beb3c62c146634af136e6460727dc73d3003dc11540a8672fa0effcb926a"
+    },
+    "1998-vol4": {
+      "bytes": 735996,
+      "sha256": "4b92249fbbdb13896c8400fa4d24f6a9ca820dc213dd18fdd3596407b9a87080"
+    },
+    "1998-vol5": {
+      "bytes": 750503,
+      "sha256": "e3d3f7cf104d4926f63dadda30c34e90be3bf384a8fad2b0bcdaed29b184a9c3"
+    },
+    "1998-vol6": {
+      "bytes": 51,
+      "sha256": "5d2c81554dd28d2972e3f86e39feee8d7971d579d33f7854179c9edc66104742"
+    },
+    "1999-vol1": {
+      "bytes": 392478,
+      "sha256": "7ac6679b3ede18477a5ad3ec8391d3d87cd1be41b35951eed4694787823c5c56"
+    },
+    "1999-vol2": {
+      "bytes": 2072349,
+      "sha256": "89dc62d1f8f6f46994962cc2290cf2f15785ede7c6ae2b7fdf5772e401196467"
+    },
+    "1999-vol3": {
+      "bytes": 1339858,
+      "sha256": "2818f0e0b421388d0a8453c06d7a5eab20d3f98ece7004d6d59ca9aac472101b"
+    },
+    "1999-vol4": {
+      "bytes": 1187004,
+      "sha256": "fec587ebc7197c2b06999cf8c0a2c57d3de3c9858516f275323920a5fa07ec5e"
+    },
+    "1999-vol5": {
+      "bytes": 254260,
+      "sha256": "843b2858a442bee7c0f886386af83945fd5209b0005706d3ef7815e8200cc848"
+    }
+  },
+  "generated": "2026-06-12 14:22:03",
+  "purpose": "re-parse comparison baseline (current parse outputs, pre-full-reparse)"
+}
