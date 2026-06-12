@@ -76,8 +76,10 @@ import json
 import datetime
 from pathlib import Path
 
+import config
+
 # ---------------------------------------------------------------------------
-SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH_ROOT = Path(config.path_for("data_root"))
 VOLUMES = ["1850", "1851", "1852", "1853", "1854", "1855", "1856",
            "1857", "1858", "1859", "1860"]
 LOG_FILE = Path(

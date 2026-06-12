@@ -41,8 +41,10 @@ import threading
 import subprocess
 from pathlib import Path
 
+import config
+
 # --- LOCAL (5080) ---
-LOCAL_SCRATCH = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+LOCAL_SCRATCH = Path(config.path_for("data_root"))
 ARCHIVE       = LOCAL_SCRATCH / "chief-clerk-archive"
 OCR_SCRIPT    = LOCAL_SCRATCH / "ocr_only_5080.py"
 OCR_PY        = r"C:\Users\PatrickKolasinski\AppData\Local\Programs\Python\Python312\python.exe"

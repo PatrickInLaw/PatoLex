@@ -55,10 +55,12 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+import config
+
 # ---------------------------------------------------------------------------
 # CONSTANTS
 # ---------------------------------------------------------------------------
-SCRATCH_ROOT    = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH_ROOT    = Path(config.path_for("data_root"))
 LOG_FILE        = Path(r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex\docs\80_PROJECT_HISTORY\run-logs\production-batch-run.log")
 PSQL            = r"C:\Program Files\PostgreSQL\16\bin\psql.exe"
 TESS_PATH       = r"C:\Users\PatrickKolasinski\AppData\Local\Tesseract-OCR\tesseract.exe"

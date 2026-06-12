@@ -49,8 +49,10 @@ import datetime
 import subprocess
 from pathlib import Path
 
+import config
+
 # ---------------------------------------------------------------------------
-LOCAL_SCRATCH = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+LOCAL_SCRATCH = Path(config.path_for("data_root"))
 STATE_FILE    = LOCAL_SCRATCH / "ingest_state.json"
 LOG_FILE      = Path(
     r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"

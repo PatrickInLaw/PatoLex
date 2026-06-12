@@ -25,7 +25,9 @@ import errno
 import datetime
 from pathlib import Path
 
-SCRATCH = Path(r"C:\Users\patolex\PatoLex-scratch")
+import config
+
+SCRATCH = Path(config.path_for("data_root"))
 QUEUE   = SCRATCH / "production_queue_state.json"
 LOCK    = SCRATCH / "production_queue_state.lock"
 

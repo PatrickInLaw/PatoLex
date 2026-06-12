@@ -52,8 +52,10 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+import config
+
 # ---------------------------------------------------------------------------
-SCRATCH_ROOT = Path(r"C:\Users\patolex\PatoLex-scratch")
+SCRATCH_ROOT = Path(config.path_for("data_root"))
 LOG_FILE     = Path(r"C:\Users\patolex\PatoLex-scratch\ocr-5090-run.log")
 TESS_PATH    = r"C:\Users\patolex\AppData\Local\Tesseract-OCR\tesseract.exe"
 PRODUCTION_DPI = 300

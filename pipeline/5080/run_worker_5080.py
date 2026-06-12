@@ -51,7 +51,9 @@ from pathlib import Path
 
 import psutil
 
-SCRATCH   = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+import config
+
+SCRATCH   = Path(config.path_for("data_root"))
 ARCHIVE   = SCRATCH / "chief-clerk-archive"
 OCR_SCRIPT = Path(__file__).resolve().parent / "ocr_only_5080.py"
 RUN_LOG   = Path(r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"

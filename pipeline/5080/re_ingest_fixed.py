@@ -42,7 +42,9 @@ import subprocess
 import datetime
 from pathlib import Path
 
-SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+import config
+
+SCRATCH_ROOT = Path(config.path_for("data_root"))
 LOG_FILE = Path(
     r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"
     r"\docs\80_PROJECT_HISTORY\run-logs\parser-fix-run.log"

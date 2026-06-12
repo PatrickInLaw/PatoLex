@@ -13,7 +13,9 @@ Usage:
 import sys, subprocess, datetime
 from pathlib import Path
 
-SCRATCH = Path(r"C:\Users\patolex\PatoLex-scratch")
+import config
+
+SCRATCH = Path(config.path_for("data_root"))
 PY      = r"C:\Users\patolex\PatoLex-scratch\ocr-engines\surya-venv\Scripts\python.exe"
 SCRIPT  = SCRATCH / "ocr_only_5090.py"
 ARCHIVE = SCRATCH / "chief-clerk-archive"

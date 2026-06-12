@@ -8,7 +8,9 @@ entries; skips any label already present.
 import os, sys, json, time, errno
 from pathlib import Path
 
-S = Path(r"C:\Users\patolex\PatoLex-scratch")
+import config
+
+S = Path(config.path_for("data_root"))
 Q = S / "production_queue_state.json"
 L = S / "production_queue_state.lock"
 
