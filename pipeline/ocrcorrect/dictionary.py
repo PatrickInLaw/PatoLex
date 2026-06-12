@@ -11,7 +11,7 @@ copy-pasted into correction_cascade._init and recoverable_compose._init. De-dupl
   has_wordfreq  whether wordfreq is importable (per-token frequency available)
   wf_fn         wordfreq.word_frequency (or None)
 """
-from correction_passes import build_dictionary, LEGAL_SUPPLEMENT  # noqa: F401 (re-export)
+from ocrcorrect.correction_passes import build_dictionary, LEGAL_SUPPLEMENT  # noqa: F401 (re-export)
 
 def build_sorted_common(word_set, zipf_fn, min_len=6, min_zipf=3.0):
     """The fragment-matcher reference lists: common alphabetic words >= min_len with zipf >= min_zipf,

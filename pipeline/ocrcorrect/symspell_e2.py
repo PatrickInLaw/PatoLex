@@ -33,7 +33,7 @@ _VOWELS  = set("aeiouy")
 def _garbage_shaped(t):
     return bool(_REPEAT4.search(t)) or bool(_CONS5.search(t)) or (len(t) >= 5 and not (set(t) & _VOWELS))
 
-from edits import deletes as _deletes, dl_within as _dl_within   # the ONE home for these (was duplicated)
+from ocrcorrect.edits import deletes as _deletes, dl_within as _dl_within   # the ONE home for these (was duplicated)
 
 class SymSpellE2:
     def __init__(self, freq, max_dist=MAX_DIST):

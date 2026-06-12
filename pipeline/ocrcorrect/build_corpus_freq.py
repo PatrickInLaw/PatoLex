@@ -20,7 +20,7 @@ def _log(msg):
 def main():
     t0 = time.time()
     _log("building dictionary...")
-    from dictionary import build_dictionary
+    from ocrcorrect.dictionary import build_dictionary
     ws, _spell, has_wf, wf = build_dictionary()
     WS = frozenset(ws)
     # STRICT membership only (the 334k static dict: pyspell + nltk + validated additions/names).
@@ -28,7 +28,7 @@ def main():
     def strong(t):
         return t in WS
     _log("aggregating strong-dict corpus frequency from out_split...")
-    from symspell_e2 import build_corpus_freq, MIN_TARGET_COUNT
+    from ocrcorrect.symspell_e2 import build_corpus_freq, MIN_TARGET_COUNT
     tgt = build_corpus_freq(OUT_SPLIT, strong, FREQ_PATH)
     _log(f"DONE: {len(tgt):,} target words (count >= {MIN_TARGET_COUNT}) -> {FREQ_PATH}  | {time.time()-t0:.0f}s")
 

@@ -19,7 +19,7 @@ ALPHA = "abcdefghijklmnopqrstuvwxyz"
 VOW = set("aeiouy")
 SAMPLE = 6000
 
-from correction_passes import build_dictionary
+from ocrcorrect.correction_passes import build_dictionary
 ws, spell, has_wf, wf = build_dictionary()
 WS = frozenset(ws)
 try:

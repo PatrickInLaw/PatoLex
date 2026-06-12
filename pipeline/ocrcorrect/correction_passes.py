@@ -72,7 +72,7 @@ LEGAL_SUPPLEMENT = {
 # --- CA proper-name supplement (counties/cities/features/legislators) ---
 # Stops real CA names being false-flagged and protects them from mis-correction.
 try:
-    from ca_gazetteer import CA_NAME_TOKENS
+    from ocrcorrect.ca_gazetteer import CA_NAME_TOKENS
     LEGAL_SUPPLEMENT |= CA_NAME_TOKENS
 except Exception as _e:
     print(f"[WARN] ca_gazetteer not loaded: {_e}", file=sys.stderr)

@@ -26,7 +26,7 @@ MARGIN = 1.0             # log-score margin for a "clear winner" (~2.7x collocat
 _WS = None; _HASWF = False; _WF = None; _ZIPF = None
 def _init():
     global _WS, _HASWF, _WF, _ZIPF
-    from correction_passes import build_dictionary
+    from ocrcorrect.correction_passes import build_dictionary
     ws, _s, has, wf = build_dictionary()
     _WS = frozenset(ws); _HASWF = has; _WF = wf
     from wordfreq import zipf_frequency; _ZIPF = zipf_frequency
@@ -46,7 +46,7 @@ def _bigrams(fp):
                 prev = t
     return c
 
-from edits import edits1 as _edits1   # the ONE home for edit-1 generation (was duplicated)
+from ocrcorrect.edits import edits1 as _edits1   # the ONE home for edit-1 generation (was duplicated)
 
 def _ambig_cands(t):
     cs = sorted({c for c in _edits1(t) if known(c) and zipf(c) >= 3.0}, key=lambda c: -zipf(c))

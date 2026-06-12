@@ -28,7 +28,7 @@ _VOWELS = set("aeiouy")
 _WS = None; _HASWF = False; _WF = None; _SORTED = None; _SORTED_REV = None; _NAMES = frozenset()
 def _init():
     global _WS, _HASWF, _WF, _SORTED, _SORTED_REV, _NAMES
-    from correction_passes import build_dictionary
+    from ocrcorrect.correction_passes import build_dictionary
     ws, _s, has_wf, wf = build_dictionary()
     _WS = frozenset(ws); _HASWF = has_wf; _WF = wf
     from wordfreq import zipf_frequency

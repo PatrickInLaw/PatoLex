@@ -21,3 +21,9 @@
 [2026-06-12 12:38 PT] STEP-B | committed ingest/ (76bf813) | OK
 [2026-06-12 12:39 PT] STEP-B | moving ocr/ additions (archive_images, benchmark_throughput) + runners/ (prep_runner, queue_append, queue_extend_manifest, run_*.bat) -- all standalone | PENDING
 [2026-06-12 12:40 PT] STEP-B | moved ocr/+runners/ (2 py + 3 py + 11 bat); smoke-net same 2 baseline, ZERO new -> clean | OK
+[2026-06-12 12:41 PT] STEP-B | committed ocr-additions+runners (58ae7d8), pushed | OK
+[2026-06-12 12:42 PT] STEP-B-ENGINE | moving engine -> ocrcorrect/ (correction_cascade, edits, dictionary, symspell_e2, cascade_summary, build_corpus_freq, mojibake_fix, context_resolve, correction_passes, ca_gazetteer). Absolute imports from ocrcorrect.X. CAREFUL: multiprocessing-spawn cascade + patolex deploy change + GOLDEN MASTER gate | PENDING
+[2026-06-12 12:50 PT] STEP-B-ENGINE | 10 engine files moved; all intra+cross imports -> ocrcorrect.X (12 files edited); smoke-net only 2 baseline; py_compile OK; local unit test 13/13 against the package | OK
+[2026-06-12 12:51 PT] STEP-B-ENGINE | deploying ocrcorrect/ to patolex scratch + new run bat (PYTHONPATH=scratch, python -m ocrcorrect.correction_cascade) -> golden master | PENDING
+[2026-06-12 12:53 PT] STEP-B-ENGINE | launched via -m ocrcorrect.correction_cascade. SPAWN WORKERS LOADED OK (the risk point) -- intermediate per-volume numbers IDENTICAL to the de-dup run. Waiting for completion to run golden master | OK
+[2026-06-12 12:59 PT] STEP-B-ENGINE | GOLDEN-MASTER OK -- engine packaged into ocrcorrect/ + run as python -m, reproduces locked numbers EXACTLY. The hardest reorg step DONE + validated | OK

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-12 11:03 PT",
+  "generated": "2026-06-12 12:49 PT",
   "from_stage": "reunify",
   "volumes": 205,
   "sonnet_applied": false,
@@ -54,10 +54,10 @@
     "autocorrect_es2": 0
   },
   "stage_cpu_seconds": {
-    "load": 94.0,
-    "reunify": 514.9,
-    "split": 1644.2,
-    "autocorrect": 1549.6
+    "load": 93.1,
+    "reunify": 512.3,
+    "split": 1645.9,
+    "autocorrect": 1558.5
   },
-  "wall_seconds": 348.9
+  "wall_seconds": 351.0
 }

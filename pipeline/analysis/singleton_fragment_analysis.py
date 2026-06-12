@@ -18,7 +18,7 @@ RESID   = r"C:\Users\patolex\PatoLex-scratch\_vocab\residual_triage.tsv"
 WORD = re.compile(r"[A-Za-z\xc0-\xff]+")
 VOW = set("aeiouy")
 
-from correction_passes import build_dictionary
+from ocrcorrect.correction_passes import build_dictionary
 ws, _spell, has_wf, wf = build_dictionary()
 WS = frozenset(ws)
 def known(t):

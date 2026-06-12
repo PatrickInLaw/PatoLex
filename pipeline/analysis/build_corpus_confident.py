@@ -43,7 +43,7 @@ for p in glob.glob(os.path.join(VOCAB, "review_sonnet_part*.json")):
 print(f"adjudicated-bad (Sonnet FIX/GARBAGE) = {len(adjudicated_bad):,}")
 
 # 3) standard English dict, to see what's NEW
-from correction_passes import build_dictionary
+from ocrcorrect.correction_passes import build_dictionary
 ws, _spell, has_wf, wf = build_dictionary()
 WS = frozenset(ws)
 def english(t):

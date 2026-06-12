@@ -31,7 +31,7 @@ import os, sys, re, json, glob, time, bisect, threading
 from collections import Counter
 from datetime import datetime, timezone, timedelta
 import multiprocessing as mp
-from edits import edits1 as _edits1, is_prefix_frag as _e_is_prefix, is_suffix_frag as _e_is_suffix
+from ocrcorrect.edits import edits1 as _edits1, is_prefix_frag as _e_is_prefix, is_suffix_frag as _e_is_suffix
 
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
@@ -74,18 +74,18 @@ _GAZETTEER_PATH = os.path.join(SCRATCH, "name_gazetteer.txt")
 _C_BC = {}; _C_E1 = {}; _C_AFF = {}; _C_SPLIT = {}
 def _init():
     global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV, _SYM, _NAMES, _GARBAGE_SHAPED
-    from dictionary import build_dictionary, build_sorted_common
+    from ocrcorrect.dictionary import build_dictionary, build_sorted_common
     ws, _spell, has_wf, wf = build_dictionary()
     _WS = frozenset(ws); _HASWF = has_wf; _WF = wf
     from wordfreq import zipf_frequency
     _ZIPF = zipf_frequency
     _SORTED, _SORTED_REV = build_sorted_common(_WS, _ZIPF)
-    from symspell_e2 import _garbage_shaped
+    from ocrcorrect.symspell_e2 import _garbage_shaped
     _GARBAGE_SHAPED = _garbage_shaped
     if os.path.exists(_GAZETTEER_PATH):       # protect real names/places from being "corrected"
         _NAMES = frozenset(l.strip() for l in open(_GAZETTEER_PATH, encoding="utf-8") if l.strip())
     if os.path.exists(_CORPUS_FREQ_PATH):     # build the edit-2 index from the corpus-native freq model
-        from symspell_e2 import SymSpellE2, load_target_freq
+        from ocrcorrect.symspell_e2 import SymSpellE2, load_target_freq
         _SYM = SymSpellE2(load_target_freq(_CORPUS_FREQ_PATH))
 
 def known(t): return (t in _WS) or (_HASWF and _WF(t, "en") > 0)
@@ -467,7 +467,7 @@ def main():
     rlog("TIMING", f"stage cpu-seconds: {dict(report['stage_cpu_seconds'])}  | wall={report['wall_seconds']}s")
     rlog("STAGES", json.dumps(dict(agg)))
     try:
-        from cascade_summary import build_summary
+        from ocrcorrect.cascade_summary import build_summary
         sp, srows = build_summary(CASCADE)
         rlog("SUMMARY", f"per-volume summary ({len(srows)} vols) -> {sp}")
     except Exception as _e:
