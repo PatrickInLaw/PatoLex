@@ -43,6 +43,7 @@ HEAD_HYPHEN = re.compile(r"([A-Za-z\xc0-\xff]{2,})-[ \t\r]*$")
 ALPHA = "abcdefghijklmnopqrstuvwxyz"
 LOOKAHEAD = 6
 MAXFRAG = 4
+APPLY_SONNET = False   # stop the cascade BEFORE the Sonnet overlay (Patrick) -- measure reunify+split+autocorrect only
 _DIGITS = re.compile(r"(\d+)")
 
 def pt():
@@ -241,12 +242,22 @@ def _process_volume(path):
                     audit.append((pk, "reunify_xpage", last + "|" + tail, j)); cnt["reunify_xpage"] += 1
                 break
 
-    # flatten to token stream for B/C/D (formatting not needed for measurement)
+    # flatten to token stream (formatting not needed for measurement)
     def all_tokens():
         for pk, lines in vol_pages:
             for ln in lines:
                 for t in ln[0]:
                     yield pk, ln, t
+    def _measure_now():
+        f = t = 0
+        for pk, lines in vol_pages:
+            for ln in lines:
+                for tok in ln[0]:
+                    if len(tok) >= 2:
+                        t += 1
+                        if not known(tok): f += 1
+        return f, t
+    m_reunify = _measure_now()   # flagged AFTER stage A (reunify)
 
     # ---------- STAGE B: SPLIT (over-merges) -- BEFORE autocorrect so over-merges aren't mis-fixed ----
     for pk, lines in vol_pages:
@@ -260,6 +271,7 @@ def _process_volume(path):
                         continue
                 newtoks.append(t)
             ln[0] = newtoks
+    m_split = _measure_now()     # flagged AFTER stage B (split)
 
     # ---------- STAGE C: AUTOCORRECT (typos) -- guarded ----
     # GUARDS (precision): skip Roman numerals (cxiii), and skip affix-of-a-real-word tokens
@@ -278,7 +290,7 @@ def _process_volume(path):
                     cnt[f"autocorrect_e{r[1]}"] += 1
 
     # ---------- STAGE D: SONNET overlay ----------
-    if _SONNET:
+    if APPLY_SONNET and _SONNET:
         for pk, lines in vol_pages:
             for ln in lines:
                 toks = ln[0]
@@ -298,41 +310,57 @@ def _process_volume(path):
         f.write("page\tstage\tbefore\tafter\n")
         for r in audit: f.write("\t".join(str(x) for x in r) + "\n")
     res = {"vol": vol, "raw_flagged": raw_flag, "raw_total": raw_tot,
+           "reunify_flagged": m_reunify[0], "reunify_total": m_reunify[1],
+           "split_flagged": m_split[0], "split_total": m_split[1],
            "after_flagged": aft_flag, "after_total": aft_tot, "stages": dict(cnt)}
     json.dump(res, open(os.path.join(CASCADE, "counts", vol + ".json"), "w", encoding="utf-8"))
     open(done_marker, "w").write(pt())
     return res
 
 def main():
-    rlog("START", "correction cascade (reunify -> autocorrect -> split -> sonnet), resumable")
+    rlog("START", f"correction cascade (reunify -> split -> autocorrect{' -> sonnet' if APPLY_SONNET else ' [STOP before sonnet]'}), resumable")
     files = sorted(glob.glob(os.path.join(SCRATCH, "production-*", "ocr_consensus", "page_ocr_results.json")))
     rlog("SCAN", f"{len(files)} volumes")
     nw = max(2, min(12, (os.cpu_count() or 4) - 2))
-    agg = Counter(); raw_f = raw_t = aft_f = aft_t = 0; done = 0
+    agg = Counter(); done = 0
+    # accumulate flagged/total at each stage boundary
+    F = {k: 0 for k in ("raw", "reunify", "split", "after")}
+    T = {k: 0 for k in ("raw", "reunify", "split", "after")}
     t0 = time.time(); last = time.time()
     ctx = mp.get_context("spawn")
     with ctx.Pool(nw, initializer=_init) as pool:
         for res in pool.imap_unordered(_process_volume, files, chunksize=1):
             done += 1
             if res:
-                raw_f += res["raw_flagged"]; raw_t += res["raw_total"]
-                aft_f += res["after_flagged"]; aft_t += res["after_total"]
+                F["raw"] += res["raw_flagged"]; T["raw"] += res["raw_total"]
+                F["reunify"] += res["reunify_flagged"]; T["reunify"] += res["reunify_total"]
+                F["split"] += res["split_flagged"]; T["split"] += res["split_total"]
+                F["after"] += res["after_flagged"]; T["after"] += res["after_total"]
                 for k, v in res["stages"].items(): agg[k] += v
             now = time.time()
             if now - last >= 15 or done == len(files):
-                rr = 100.0 * raw_f / max(1, raw_t); ar = 100.0 * aft_f / max(1, aft_t)
-                rlog("CASCADE", f"{done}/{len(files)} vols | raw {rr:.3f}% -> after {ar:.3f}% | elapsed={now-t0:.0f}s", "HEARTBEAT")
+                rr = 100.0 * F["raw"] / max(1, T["raw"]); ar = 100.0 * F["after"] / max(1, T["after"])
+                rlog("CASCADE", f"{done}/{len(files)} vols | raw {rr:.3f}% -> pre-sonnet {ar:.3f}% | elapsed={now-t0:.0f}s", "HEARTBEAT")
                 last = now
-    rr = 100.0 * raw_f / max(1, raw_t); ar = 100.0 * aft_f / max(1, aft_t)
-    report = {"generated": pt(), "volumes": done,
-              "raw_flagged": raw_f, "raw_total": raw_t, "raw_rate_pct": round(rr, 4),
-              "after_flagged": aft_f, "after_total": aft_t, "after_rate_pct": round(ar, 4),
-              "reduction_pct_relative": round(100.0 * (raw_f - aft_f) / max(1, raw_f), 1),
+    def rate(k): return round(100.0 * F[k] / max(1, T[k]), 4)
+    stages_progression = {
+        "raw":              {"flagged": F["raw"],     "total": T["raw"],     "rate_pct": rate("raw")},
+        "after_reunify":    {"flagged": F["reunify"], "total": T["reunify"], "rate_pct": rate("reunify")},
+        "after_split":      {"flagged": F["split"],   "total": T["split"],   "rate_pct": rate("split")},
+        "after_autocorrect":{"flagged": F["after"],   "total": T["after"],   "rate_pct": rate("after")},
+    }
+    report = {"generated": pt(), "volumes": done, "sonnet_applied": APPLY_SONNET,
+              "stage_progression": stages_progression,
+              "final_rate_pct": rate("after"),
+              "reduction_pct_relative": round(100.0 * (F["raw"] - F["after"]) / max(1, F["raw"]), 1),
               "stage_corrections": dict(agg)}
     json.dump(report, open(os.path.join(CASCADE, "cascade_report.json"), "w", encoding="utf-8"), indent=2)
-    rlog("==== RESULT ====", "")
-    rlog("RATE", f"raw flagged = {raw_f:,}/{raw_t:,} = {rr:.4f}%")
-    rlog("RATE", f"after cascade = {aft_f:,}/{aft_t:,} = {ar:.4f}%  (down {report['reduction_pct_relative']}% relative)")
+    rlog("==== STAGE PROGRESSION (flagged-rate after each stage) ====", "")
+    rlog("RATE", f"raw               = {F['raw']:,}/{T['raw']:,} = {rate('raw')}%")
+    rlog("RATE", f"after reunify     = {F['reunify']:,}/{T['reunify']:,} = {rate('reunify')}%")
+    rlog("RATE", f"after split       = {F['split']:,}/{T['split']:,} = {rate('split')}%")
+    rlog("RATE", f"after autocorrect = {F['after']:,}/{T['after']:,} = {rate('after')}%   <- pre-sonnet (STOP)")
+    rlog("RATE", f"total reduction = {report['reduction_pct_relative']}% relative")
     rlog("STAGES", json.dumps(dict(agg)))
     rlog("DONE", f"-> {os.path.join(CASCADE, 'cascade_report.json')}  wall={time.time()-t0:.0f}s")
 

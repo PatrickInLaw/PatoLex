@@ -535,6 +535,11 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Cleared `_cascade/done/*.marker` (logic changed → full re-run). Re-running.
 - NEXT: compare tightened before/after + re-validate autocorrect precision; then the ground-truth validation sample for the defensible number.
 
+### Continuation 48 (2026-06-12) — Cascade: per-stage measurement + STOP-before-sonnet (Patrick)
+
+- Patrick: the harness should expose PER-STAGE flagged rates so we can tune each stage/order and compare runs apples-to-apples "heading into sonnet", then run sonnet once tuned. I'd only measured raw + final. Fixed: `_measure_now()` after each stage → report `stage_progression` (raw → after_reunify → after_split → after_autocorrect). `APPLY_SONNET=False` halts before the overlay.
+- Re-running (sonnet off) for the per-stage breakdown of the tightened cascade.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
