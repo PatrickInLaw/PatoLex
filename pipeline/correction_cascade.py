@@ -6,10 +6,10 @@ docs/30_SYSTEM_DESIGN/CORRECTION_AND_DISPLAY_LAYER.md).
 
 ORDER (per volume, on the progressively-corrected token stream):
   A. REUNIFY   rejoin OCR-split fragments  (same-line multi-fragment + line-break + cross-page)
-  B. AUTOCORRECT  edit-1 then edit-2 typo -> dominant COMMON word (zipf-ranked: avoids correcting
-                  one OCR error into another)
-  C. SPLIT     guarded 2-piece over-merge (only tokens that survived A+B and are neither a typo
-               [edit-1 of a word] nor a fragment [affix of a word])
+  B. SPLIT     guarded 2-piece over-merge (BEFORE autocorrect so over-merges aren't mis-fixed);
+               only tokens that are neither a typo [edit-1 of a word] nor a fragment [affix of a word]
+  C. AUTOCORRECT  edit-1 typo -> dominant COMMON word (zipf-ranked, tightened margins). GUARDED:
+               skips Roman numerals and affix-of-a-real-word tokens (orphaned fragments).
   D. SONNET    apply the validated freq>=10 adjudication map (token -> fix)
 Then count flagged tokens (alpha, len>=2, not is_known) BEFORE (raw) and AFTER (cascaded), same dict.
 
@@ -82,6 +82,8 @@ def _init():
 def known(t): return (t in _WS) or (_HASWF and _WF(t, "en") > 0)
 def zipf(t): return _ZIPF(t, "en")
 def strong_known(t): return (t in _WS) or zipf(t) >= 2.8
+_ROMAN = re.compile(r"^[ivxlcdm]+$")
+def is_roman(t): return bool(_ROMAN.match(t)) and len(t) >= 2  # protect chapter/section numerals
 
 # per-worker memo caches (workers reused across volumes -> compute each token once)
 _C_BC = {}; _C_E1 = {}; _C_AFF = {}; _C_SPLIT = {}
@@ -122,7 +124,7 @@ def _best_correction(tok):
     if e1:
         sc = sorted(((c, zipf(c)) for c in e1), key=lambda x: -x[1])
         tz = sc[0][1]; mg = tz - (sc[1][1] if len(sc) > 1 else 0.0)
-        res = (sc[0][0], 1) if (tz >= 3.0 and mg >= 0.4) else None
+        res = (sc[0][0], 1) if (tz >= 3.3 and mg >= 0.5) else None  # tightened (Hans-style precision)
     _C_BC[tok] = res
     return res
 
@@ -246,19 +248,7 @@ def _process_volume(path):
                 for t in ln[0]:
                     yield pk, ln, t
 
-    # ---------- STAGE B: AUTOCORRECT ----------
-    for pk, lines in vol_pages:
-        for ln in lines:
-            toks = ln[0]
-            for ti in range(len(toks)):
-                t = toks[ti]
-                if len(t) < 3 or known(t): continue
-                r = _best_correction(t)
-                if r:
-                    toks[ti] = r[0]; audit.append((pk, f"autocorrect_e{r[1]}", t, r[0]))
-                    cnt[f"autocorrect_e{r[1]}"] += 1
-
-    # ---------- STAGE C: SPLIT ----------
+    # ---------- STAGE B: SPLIT (over-merges) -- BEFORE autocorrect so over-merges aren't mis-fixed ----
     for pk, lines in vol_pages:
         for ln in lines:
             toks = ln[0]; newtoks = []
@@ -270,6 +260,22 @@ def _process_volume(path):
                         continue
                 newtoks.append(t)
             ln[0] = newtoks
+
+    # ---------- STAGE C: AUTOCORRECT (typos) -- guarded ----
+    # GUARDS (precision): skip Roman numerals (cxiii), and skip affix-of-a-real-word tokens
+    # (orphaned FRAGMENTS like ferred=referred, urer=treasurer -> leave flagged, don't mis-fix
+    # them into an invisible error).
+    for pk, lines in vol_pages:
+        for ln in lines:
+            toks = ln[0]
+            for ti in range(len(toks)):
+                t = toks[ti]
+                if len(t) < 3 or known(t) or is_roman(t) or _affix_of_common(t):
+                    continue
+                r = _best_correction(t)
+                if r:
+                    toks[ti] = r[0]; audit.append((pk, f"autocorrect_e{r[1]}", t, r[0]))
+                    cnt[f"autocorrect_e{r[1]}"] += 1
 
     # ---------- STAGE D: SONNET overlay ----------
     if _SONNET:

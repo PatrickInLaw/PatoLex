@@ -529,6 +529,12 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - NEXT: (1) tighten autocorrect (protect roman numerals, affix-of-word fragments, raise margin; consider split-before-autocorrect); (2) validation SAMPLE judged vs ground-truth image for the defensible number (measures residual-visible + autocorrect-invisible errors). Audit trail `_cascade/audit/{vol}.tsv` makes every change reviewable.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Cascade RESULT + autocorrect-precision caveat").
 
+### Continuation 47 (2026-06-12) — Cascade TIGHTENED (reorder + guards), re-running
+
+- Reordered cascade: **reunify → SPLIT → autocorrect → sonnet** (split BEFORE autocorrect, so over-merges aren't mis-fixed by edit-1). Autocorrect guards added: skip Roman numerals (`is_roman`), skip affix-of-a-real-word tokens (orphaned fragments `ferred`/`urer`/`examina` → leave flagged not mis-fixed). Tightened thresholds: zipf 3.0→3.3, margin 0.4→0.5.
+- Cleared `_cascade/done/*.marker` (logic changed → full re-run). Re-running.
+- NEXT: compare tightened before/after + re-validate autocorrect precision; then the ground-truth validation sample for the defensible number.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
