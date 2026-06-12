@@ -28,6 +28,31 @@ moves, you introduced a bug — STOP and revert, do not "re-bless" it.
 
 ---
 
+## 0b. IF THIS SESSION IS RUNNING ON THE 5090 DIRECTLY (read first)
+
+The rest of this runbook was written for a 5080 session reaching the 5090 over SSH. Running ON the 5090
+is simpler EXCEPT for these:
+
+- **Work in a GIT CLONE of the repo, not the scratch copies.** The repo is the source of truth; CLAUDE.md,
+  the pre-commit hooks, and `git` only work inside a checkout. The scripts in
+  `C:\Users\patolex\PatoLex-scratch\` are loose, un-versioned, FLAT-layout copies — editing them as the
+  source of truth re-creates the drift you're cleaning. If no clone exists on the 5090, clone
+  `https://github.com/PatrickInLaw/PatoLex.git` first and launch the session from inside it.
+- **SSH/scp steps (§0, §4) become LOCAL copies.** The cascade hardcodes `SCRATCH=C:\Users\patolex\PatoLex-scratch`
+  and runs from there. So before each validation run, COPY the refactored modules from the repo clone into
+  `PatoLex-scratch\`. Data + deps are already local — no scp, no detached-launch needed (you can run the
+  cascade in the foreground or background locally; ~450s).
+- **STALE-STATE WARNING:** the scratch `_cascade\cascade_report.json` and `out_autocorrect\` currently hold
+  the SymSpell EXPERIMENT output (es1/es2 applied), NOT the deterministic baseline. Do NOT check the golden
+  master against the existing report — it WILL mismatch and look like a false regression. Re-run the cascade
+  FROM REUNIFY with `CASCADE_APPLY_SYMSPELL` unset to regenerate deterministic `out_*`/report first.
+- **Sync after committing:** push from the 5090 clone, then `git pull` on the 5080 (or vice versa) so the two
+  boxes don't diverge into a new mess.
+- The `$_`-mangling and `-ExecutionPolicy Bypass` gotchas in §0 are SSH/remote artifacts — they don't apply
+  to local runs (but the compound-bash + session-log hooks in the clone still fire).
+
+---
+
 ## 1. Establish the baseline gate (do this FIRST, before touching anything)
 
 1. Read `PIPELINE_REFACTOR_PLAN.md` and this file fully.
