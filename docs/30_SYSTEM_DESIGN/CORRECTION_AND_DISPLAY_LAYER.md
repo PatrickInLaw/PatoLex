@@ -137,12 +137,22 @@ NOISE 38,513, GARBLE 36,644, FRAGMENT 2,610.
   GARBLE (~75K) quarantine most of it, BUT **~6,785 garbage tokens still leak into TYPO (2,166)
   + NAMELIKE (4,619)** — the procedural garbage filter is real but not airtight; tighten it so
   no `eeee`-class token rides in a fixable/real bucket.
-- **NAMELIKE (243K, 52% of residual) is a heuristic mix of REAL surnames (`karnette`, `migden`,
-  `frusetta`, `escutia`) and OCR typos (`pubhe`, `appheation`).** A real **name gazetteer**
-  (US Census surnames ~160K + SSA given names + GNIS place names) would deterministically split
-  real-name→KEEP from typo→FIX — the single highest-leverage move on the residual, and it
-  directly lowers the true-error rate (much of the 0.44–0.56% "garble" is real proper nouns the
-  dictionary lacks). Extends the existing `ca_gazetteer.py` (only 319 names today).
+- **NAMELIKE (243K, 52% of residual) is a heuristic label — and it is MOSTLY WRONG.** A name
+  gazetteer was built and MEASURED against the residual (2026-06-11): **370,183 names** = US
+  Census 2010 surnames (162,253) + SSA given names (88,297) + GeoNames US place tokens (119,619)
+  + ca_gazetteer. Result: **only 5,438 residual types / 17,929 occurrences (1.2% of types,
+  2.4% of occ) match a real name** — and even that includes coincidental matches (`repressuring`,
+  `agricul`, `meanor` = OCR fragments equal to some place token). **Correction of an earlier
+  overclaim:** the name gazetteer is NOT "the highest-leverage move," and the residual is NOT
+  "mostly rare real names." The 243K NAMELIKE bucket is overwhelmingly pronounceable OCR garble,
+  not real vocabulary. **The residual really is mostly OCR damage / typos / line-split fragments
+  — names explain only ~1–2% of it, so a name dictionary does NOT materially lower the true-error
+  rate.** What the gazetteer IS good for: a high-confidence KEEP list of genuine names being
+  wrongly flagged (real CA legislators `ducheny`/`karnette`/`escutia`/`migden`/`poochigian`,
+  places `islais`/`fricot`) — apply it (esp. the high-freq, cross-checked subset:
+  `gazetteer_keep.tsv`) so corrections never overwrite a real name, but it is a precision
+  cleanup, not a residual-slasher. Gazetteer build: `build_gazetteer.py`; GNIS per-state URLs
+  are dead (404/503) — GeoNames `US.zip` is the working place source.
 
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`

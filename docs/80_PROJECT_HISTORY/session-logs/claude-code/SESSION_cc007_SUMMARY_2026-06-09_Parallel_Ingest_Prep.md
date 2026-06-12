@@ -398,6 +398,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Q (Patrick): name dictionary for the rare names?** YES — highest-leverage move. NAMELIKE 243K conflates real surnames (karnette/migden/frusetta) with typos (pubhe). A census-surname + GNIS + given-name gazetteer splits them deterministically, reclassifying a big chunk of "garble" as real vocab (lowers true-error rate). Extends `ca_gazetteer.py` (319 names today).
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Text-correction overlay — ... residual characterized").
 
+### Continuation 34 (2026-06-11) — Name gazetteer BUILT + MEASURED: corrects my overclaim
+
+- Built `build_gazetteer.py`: **370,183 names** (Census surnames 162k + SSA given 88k + GeoNames US places 120k + ca_gazetteer). GNIS per-state URLs dead (404/503); GeoNames US.zip is the working place source. Saved `name_gazetteer.txt`.
+- Matched vs the 467,978 residual types: **only 5,438 types / 17,929 occ (1.2% / 2.4%)** are real names — and even that has coincidental matches (`repressuring`, `agricul`, `meanor`). `gazetteer_keep.tsv` = the KEEP list (top = real legislators ducheny/karnette/escutia/migden/poochigian, places islais/fricot).
+- **HONEST CORRECTION:** I oversold the gazetteer as "highest-leverage" and claimed the 243K NAMELIKE bucket was mostly real names. **Wrong** — names explain only ~1–2% of the residual; NAMELIKE is overwhelmingly pronounceable OCR garble. A name dictionary does NOT materially lower the true-error rate. The residual really is mostly OCR damage/typos/fragments.
+- Value retained: apply the gazetteer KEEP list (cross-checked, esp. high-freq) so corrections never overwrite a real name — a precision guard, not a residual-slasher.
+- Durable: corrected the `CORRECTION_AND_DISPLAY_LAYER.md` note (was "highest-leverage move").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
