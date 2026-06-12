@@ -27,3 +27,7 @@
 [2026-06-12 12:51 PT] STEP-B-ENGINE | deploying ocrcorrect/ to patolex scratch + new run bat (PYTHONPATH=scratch, python -m ocrcorrect.correction_cascade) -> golden master | PENDING
 [2026-06-12 12:53 PT] STEP-B-ENGINE | launched via -m ocrcorrect.correction_cascade. SPAWN WORKERS LOADED OK (the risk point) -- intermediate per-volume numbers IDENTICAL to the de-dup run. Waiting for completion to run golden master | OK
 [2026-06-12 12:59 PT] STEP-B-ENGINE | GOLDEN-MASTER OK -- engine packaged into ocrcorrect/ + run as python -m, reproduces locked numbers EXACTLY. The hardest reorg step DONE + validated | OK
+[2026-06-12 13:01 PT] STEP-B-ENGINE | committed (3b594b2) + pushed | OK
+[2026-06-12 13:02 PT] STEP-B | moving correction_support/ (build_dict_additions, regen_additions, regen_raw_names dict-builders) + test_local_fixes -> tests/ (fix its sys.path to pipeline root) | PENDING
+[2026-06-12 13:03 PT] STEP-B | correction_support/ + tests/test_local_fixes done; unit test 13/13 from tests/; net only 2 baseline (parser, deferred to Step C) | OK
+[2026-06-12 13:03 PT] STEP-B | REPO REORG essentially complete: ocr/ ingest/ chapter/ verify/ analysis/ adjudicate/ runners/ correction_support/ ocrcorrect/ tests/. REMAINING for Step C: parser scripts (ingest_from_ocr, run_parse_5090, parse_born_digital*, test_chapter_parser, test_date_parser_fix, test_detect_body_start) + the machine subdirs (5080/ 5090/ 5090-scale/ gate_f/ sql/) | OK

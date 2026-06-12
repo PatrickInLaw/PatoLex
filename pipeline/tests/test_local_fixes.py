@@ -3,7 +3,7 @@ dictionaries / bigram models -- no wordfreq/nltk/corpus needed. Run with any Pyt
 import os, sys
 try: sys.stdout.reconfigure(encoding="utf-8")        # Windows console is cp1252 by default
 except Exception: pass
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # pipeline/ (so ocrcorrect importable)
 from ocrcorrect.mojibake_fix import mojibake_candidates, choose_fix
 from ocrcorrect.context_resolve import resolve
 from collections import Counter
