@@ -551,7 +551,7 @@ def build_page_consensus(session_label: str) -> dict:
         }
 
     sys.path.insert(0, str(REPO / "pipeline"))
-    from consensus import (  # noqa: E402
+    from ocr.consensus import (  # noqa: E402  (consensus moved to pipeline/ocr/ in the reorg)
         consensus_from_page_record, LOW_CONFIDENCE_THRESHOLD,
     )
 
