@@ -444,6 +444,24 @@ errors: short-function-word over-merges autocorrect mis-grabs because split's MI
 them (`whoare`→whore = "who are") + ambiguous garbles (`dolge`/`trpam`). Next options: handle the
 short-merge class, OR add Sonnet + run the ground-truth validation sample for the defensible rate.
 
+## Procedural garbage filter — separates the irreducible-garbage floor (2026-06-12)
+`garbage_filter.py` classifies the post-cascade FLAGGED tokens (high precision, structural-only,
+applied only to already-unknown tokens). Of 664,247 flagged (pre-sonnet 0.4977%):
+- **guaranteed garbage = 77,297 (11.6% of flagged ≈ 0.058% of corpus)** — `repeat3` (3+ same char:
+  66,964), `cons5` (consonant salad: 8,600), `toolong` (≥25-char mashed: 1,712). The re-OCR /
+  illegible FLOOR.
+- **roman numerals = 4,906 (0.7%)** — valid chapter/section numerals, NOT errors (exclude from the
+  error count).
+- **recoverable residual = 582,044 (87.6% ≈ 0.436% of corpus).**
+Verify-the-output catch: the first cut wrongly flagged Roman numerals (`cccc` runs) and single-`�`
+words (`cl�rk`=clerk) as garbage; fixed by excluding the roman charset + dropping single-mojibake
+(residual `novowel` rule still nicks ~21 mojibake-recoverable, negligible). 11.6% garbage-of-flagged
+is consistent with the singleton decomposition (~17% of singletons; lower across all-flagged because
+high-freq errors are mostly recoverable systematic typos). Runs in 4s. `garbage_per_volume.tsv`.
+**Use:** subtract roman from the error count; quarantine garbage as the re-OCR floor; the ~0.436%
+recoverable is the real target for the remaining passes. Fold the garbage/roman/recoverable split
+into the cascade measurement so every run reports it.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

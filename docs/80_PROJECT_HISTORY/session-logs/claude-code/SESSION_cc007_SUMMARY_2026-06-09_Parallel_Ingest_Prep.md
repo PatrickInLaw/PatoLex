@@ -562,6 +562,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Slowest volumes = large modern (1991-vol1 136s); split+autocorrect dominate cpu (edit-1 per token).
 - Both answered Patrick's "per-volume counts?" + "per-volume timing?": yes, captured + now surfaced.
 
+### Continuation 52 (2026-06-12) — Procedural garbage filter (Patrick)
+
+- `garbage_filter.py`: classify post-cascade flagged tokens, high-precision structural-only. Of 664,247 flagged: **guaranteed garbage 77,297 (11.6% ≈ 0.058% corpus)** [repeat3 66,964 / cons5 8,600 / toolong 1,712], **roman numerals 4,906 (0.7%, valid not errors)**, **recoverable 582,044 (87.6% ≈ 0.436%)**. 4s.
+- Verify-the-output: first cut mis-flagged Roman numerals (cccc runs) + single-� words (cl�rk=clerk) as garbage → fixed (exclude roman charset, drop single-mojibake; residual novowel nicks ~21, negligible).
+- Use: subtract roman from error count; garbage = re-OCR floor; ~0.436% recoverable = real target. Fold garbage/roman/recoverable split into cascade measurement next.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Procedural garbage filter").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
