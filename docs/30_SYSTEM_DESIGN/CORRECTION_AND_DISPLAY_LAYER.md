@@ -373,6 +373,32 @@ vocab)**, live in `build_dictionary`. (`validated_legal_vocab.txt`, `sub_nv_b1..
 **Pattern confirmed: corpus-vocab curation = real ground truth (name DBs) OR LLM validation, never
 a frequency/distance heuristic.**
 
+## SEQUENCE IS THE ARCHITECTURE — the correction cascade (Patrick, 2026-06-11)
+The passes must run as an **ordered cascade**, each consuming the PREVIOUS pass's corrected output
+— NOT each in isolation on raw text. Running them isolated on raw text is why each over-fired: the
+word-splitter mangled `tollowing`→"toll owing" only because the typo was still present; had
+autocorrect already produced `following`, the splitter would never have seen it. **A pass's
+precision collapses while the error classes it can't handle are still in the text, and jumps once
+they're removed.** Order is fixed by two rules — dependency (remove a class before it confuses a
+later pass) and confidence (most certain first):
+1. **Dictionary** (foundation; `is_known` used by all). Names + LLM-validated legal vocab. DONE.
+2. **Reunify (fragments)** — rejoin split words FIRST; fragments masquerade as typos and over-merges.
+   Highest confidence (context-confirmed). After it, `superin`+`tendent`→`superintendent` can't be
+   mis-grabbed downstream.
+3. **Autocorrect edit-1 then edit-2 (typos)** — removes the typo class that was wrecking the splitter
+   (`cornmission`→commission, `tollowing`→following).
+4. **Split (over-merges)** — runs on text where fragments + typos are already gone, so a token that
+   segments into two real words is genuinely likely a true over-merge; precision jumps. Residual to
+   LLM validation (the heuristic alone is ~50% precise — `word_splitter.py` is a candidate generator).
+5. **Re-measure** on the fully-cascaded text → the defensible error rate.
+
+**Order also IS the conflict-resolution policy:** when reunify wants to join and split wants to cut
+the same token, the earlier/higher-confidence pass (reunify) wins. **Build a cascade harness**
+(apply overlay N → intermediate text → run pass N+1 on it → repeat → one clean re-measure), which is
+also exactly what produces the defensible error number. NOTE: the standalone pass outputs measured
+so far (reunify 15,434; splitter 4,888 @ ~50%; autocorrect TBD) are ISOLATED-on-raw numbers and will
+change under the cascade.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

@@ -514,6 +514,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Pattern locked in: corpus-vocab curation = real ground truth (name DBs) OR LLM validation, NEVER a frequency/distance heuristic.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("LLM validation unlocked the legal-vocab dict layer").
 
+### Continuation 45 (2026-06-11) — SEQUENCE insight + correction cascade harness
+
+- **Patrick: "the sequence we run the tools in is very important."** Correct and load-bearing. Running each pass in ISOLATION on raw text is why each over-fired (word-splitter mangled `tollowing` because the typo was still present). Passes must run as an ORDERED CASCADE, each on the previous pass's output: dict → reunify (fragments) → autocorrect (typos) → split (over-merges) → sonnet → re-measure. Order also IS the conflict-resolution policy. Recorded in `CORRECTION_AND_DISPLAY_LAYER.md` ("SEQUENCE IS THE ARCHITECTURE").
+- Built `word_splitter.py` (over-merges) — heuristic only ~50% precise even guarded (edit-2 typos slip, real merges mis-segment `actshall`→"acts hall", place names split) → CANDIDATE generator for LLM validation, NOT auto-apply. Over-merges are ~2% of residual.
+- Built `autocorrect_pass.py` (edit-1/2, zipf-ranked to avoid correcting one OCR error into another). Killed the isolated-on-raw run (pointless once cascade understood).
+- Built **`correction_cascade.py`** — runs the cascade per-volume in order, measures flagged-rate raw vs after, with run-log heartbeats, per-volume corrected/audit/counts persistence + DONE markers (resumable). Autocorrect is EDIT-1-only in the cascade (edit-2 brute force is intractable corpus-wide → deferred, needs SymSpell). Running now.
+- NEXT: cascade numbers (raw vs post-cascade flagged rate) + then a validation SAMPLE (LLM-judged) for the true defensible error rate.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
