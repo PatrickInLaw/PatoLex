@@ -28,29 +28,36 @@ moves, you introduced a bug — STOP and revert, do not "re-bless" it.
 
 ---
 
-## 0b. IF THIS SESSION IS RUNNING ON THE 5090 DIRECTLY (read first)
+## 0b. ENV REALITY: two accounts on this box; the golden master is env-sensitive (read first)
 
-The rest of this runbook was written for a 5080 session reaching the 5090 over SSH. Running ON the 5090
-is simpler EXCEPT for these:
+The repo + interactive (Azure-AD) session run as **`patrickkolasinski`** (a system admin). The cascade's Python
+deps (wordfreq/nltk/pyspellchecker) and the corpus data (`_cascade\`, `corpus_freq.json`, `name_gazetteer.txt`
+under `C:\Users\patolex\`) live under **`patolex`** — a LOCAL, SSH-ONLY account (created to drive the box over
+Tailscale; not interactively loginable). The 5090 has the full repo synced.
 
-- **Work in the GIT REPO, not the scratch copies.** The repo is the source of truth (CLAUDE.md, hooks, git).
-  The 5090 has the full repo synced — work there. The loose `C:\Users\patolex\PatoLex-scratch\*.py` files are
-  STALE LEGACY scp'd copies; do NOT edit or run them — that re-creates the drift you're cleaning.
-- **Run the cascade DIRECTLY FROM THE REPO — no copy-to-scratch.** `correction_cascade.py` hardcodes its DATA
-  paths as absolute (`SCRATCH=C:\Users\patolex\PatoLex-scratch`, so `_cascade\`, `corpus_freq.json`,
-  `name_gazetteer.txt` always resolve to scratch), and its imports are siblings in `pipeline\`
-  (`correction_passes`, `symspell_e2`, `cascade_summary`, and the new `dictionary`/`edits` after refactor).
-  So `python pipeline\correction_cascade.py` from the repo runs the REPO code against the SCRATCH data — code
-  stays single-source, data flows to scratch automatically. No scp, no dual copies, no detached-launch
-  needed (local foreground/background; ~450s, watch `_cascade\cascade-run.log`).
-- **STALE-STATE WARNING:** the scratch `_cascade\cascade_report.json` and `out_autocorrect\` currently hold
-  the SymSpell EXPERIMENT output (es1/es2 applied), NOT the deterministic baseline. Do NOT check the golden
-  master against the existing report — it WILL mismatch and look like a false regression. Re-run the cascade
-  FROM REUNIFY with `CASCADE_APPLY_SYMSPELL` unset to regenerate deterministic `out_*`/report first.
-- **Sync after committing:** push from the 5090 clone, then `git pull` on the 5080 (or vice versa) so the two
-  boxes don't diverge into a new mess.
-- The `$_`-mangling and `-ExecutionPolicy Bypass` gotchas in §0 are SSH/remote artifacts — they don't apply
-  to local runs (but the compound-bash + session-log hooks in the clone still fire).
+- **Code work + injected-core UNIT TESTS: run locally as `patrickkolasinski`.** No deps/data needed; the repo is
+  the single source of truth. The loose `C:\Users\patolex\PatoLex-scratch\*.py` are stale legacy scp'd copies —
+  never edit them as source.
+- **`patrickkolasinski` (admin) CAN run the cascade locally** — access is not a hard blocker: it just needs
+  (1) the deps in its own Python (`pip install wordfreq nltk pyspellchecker` + `nltk.download('words')`) and
+  (2) access to patolex's data (run elevated, or `icacls C:\Users\patolex\PatoLex-scratch /grant patrickkolasinski:(OI)(CI)F /T`).
+- **BUT the GOLDEN-MASTER GATE is environment-sensitive.** The locked numbers were minted in patolex's exact
+  env, and `build_dictionary` (pyspellchecker + nltk `words` + wordfreq) is VERSION-sensitive — a different dep
+  version shifts the dictionary and the flagged counts, producing a FALSE regression. So run the gate in an env
+  that reproduces the baseline:
+  - **(a) Easiest/safest:** run the gate as `patolex` over SSH (`ssh -i C:\Users\PatrickKolasinski\.ssh\patolex_5090 patolex@100.70.54.56`).
+    scp the COMPLETE refactored `pipeline\*.py` set (incl. new `dictionary.py`+`edits.py`) into patolex
+    `PatoLex-scratch\` (flat — all of them, or imports break), run `correction_cascade.py` (`CASCADE_FROM=reunify`,
+    `CASCADE_APPLY_SYMSPELL` unset), then `check_golden_master.py`. Run-sandbox fed from the repo, NOT editing scratch as source.
+  - **(b) Fully local (one-box, no SSH ever again):** pin your Python's deps to patolex's EXACT versions
+    (`pip show` them over SSH first), then re-run the CURRENT (pre-refactor) cascade locally and confirm it
+    reproduces the golden master. Once your env reproduces the baseline, trust local gate runs.
+- **STALE-STATE WARNING:** the scratch `_cascade\cascade_report.json` and `out_autocorrect\` currently hold the
+  SymSpell EXPERIMENT output (es1/es2 applied), NOT the deterministic baseline. Do NOT check the golden master
+  against the EXISTING report — re-run FROM REUNIFY (`CASCADE_APPLY_SYMSPELL` unset) to regenerate deterministic
+  `out_*`/report first, then check.
+- SSH gotchas (if using (a)): avoid `$_` (mangles to "extglob"); no `-ExecutionPolicy Bypass` (auto-denied) —
+  invoke `& 'C:\Users\patolex\AppData\Local\Programs\Python\Python312\python.exe' script.py`.
 
 ---
 
