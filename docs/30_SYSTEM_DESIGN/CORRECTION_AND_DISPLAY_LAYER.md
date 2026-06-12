@@ -103,13 +103,22 @@ resolving deterministic-first per Patrick's direction:
   Claude against the page (the bracket usually pinpointed the value). This is the key method
   result: **vision + sequence-bracket cross-validation catches vision misreads that neither
   signal catches alone.**
-- **Total: 214 of 215 resolved** → `run-logs/chapter_corrections_GRAND.tsv` (129 first
-  campaign + 85 this round: 48 vision-fit, 35 hand-read, 2 Arabic-tesseract).
-- **1 blocked: `1883-84-regular` o42** — the archive's `1883-84_Statutes.pdf` (and `_1E`) are
-  **15-page stubs**, not the full ~600pp regular-session volume the OCR was actually built
-  from. The complete 1883-84 regular-session source is missing from `chief-clerk-archive`;
-  flagged as a real source-data gap to re-acquire. (The OCR consensus text for the volume
-  exists; only the page scan needed to read this one garbled numeral is unavailable.)
+- **Total: 215 of 215 resolved** → `run-logs/chapter_corrections_GRAND.tsv` (129 first
+  campaign + 86 this round: 48 vision-fit, 36 hand-read, 2 Arabic-tesseract).
+- **`1883-84-regular` o42 — initially mis-called "missing source," actually a resolver bug
+  (corrected 2026-06-11).** The render step's `resolve_pdf()` mapped the volume to its source
+  PDF by *filename keyword* (preferring `*_Statutes.pdf`), and silently grabbed the 15-page
+  `1883-84_Statutes.pdf` — which is really the *other*, tiny bundle (`production-1883-84`,
+  2 acts). The full 1883-84 regular-session volume was OCR'd from `1883-84_Code.pdf`
+  (**448 pages**, matching the bundle's `page_classification` max of 448). The file was never
+  missing — the resolver picked the wrong one. o42 = **CHAPTER LIV (54)** (Napa Asylum
+  amendment), read from `1883-84_Code.pdf` p329. **Fix:** map a `production-*` bundle to its
+  source PDF by checking the candidate PDF's `page_count` ≥ the bundle's max `source_page`
+  (and ideally == its `page_classification` body count) — NEVER by filename keyword alone.
+  An integrity sweep (`verify_mapping.py`) confirmed this was the ONLY mismapped volume of
+  the 16 open; every other chosen PDF's page count comfortably exceeds its bundle's max
+  source_page. **Lesson: do not infer a source file from a convenient name — verify it
+  against what the bundle was actually built from.**
 
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`

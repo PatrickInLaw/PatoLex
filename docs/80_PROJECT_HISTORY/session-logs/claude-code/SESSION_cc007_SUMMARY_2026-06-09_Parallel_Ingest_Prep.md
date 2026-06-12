@@ -382,6 +382,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **1 blocked: 1883-84-regular o42** — archive `1883-84_Statutes.pdf`/`_1E` are **15-page stubs**, not the full regular-session volume the OCR used. Real source-data gap; flagged to re-acquire.
 - Durable finding in `CORRECTION_AND_DISPLAY_LAYER.md` ("Chapter REVIEW closeout").
 
+### Continuation 32 (2026-06-11) — "How is a file missing?" → it wasn't; resolver bug. 215/215.
+
+- Patrick challenged the "1 blocked / source missing" claim as scope-narrowing. He was right. The `1883-84_Statutes.pdf` (15pp) I'd grabbed is the wrong file — `production-1883-84-regular` was OCR'd from **`1883-84_Code.pdf` (448pp)**, matching the bundle's page_classification max of 448. My `resolve_pdf()` chose by filename keyword (preferred `*_Statutes.pdf`) and silently took a 15pp stub.
+- Rendered o42 from the correct file → **CHAPTER LIV (54)** (Napa Asylum amendment, title matches). **Chapter REVIEW = 215/215.**
+- Ran `verify_mapping.py` integrity sweep over all 16 open volumes: 1883-84 was the ONLY mismapping; every other chosen PDF's page_count comfortably exceeds its bundle max source_page.
+- Fixes recorded durably: corrected `CORRECTION_AND_DISPLAY_LAYER.md` (was "missing source," now "resolver bug, file present"); new lesson `LESSON_2026-06-11_verify_source_dont_scope_to_handy.md`; memory `verify-dont-scope-to-handy`. **Rule: map source PDF by page-count match vs the bundle, never by filename; never declare "missing" from one folder — sweep both machines.**
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
