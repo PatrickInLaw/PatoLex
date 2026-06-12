@@ -1,0 +1,11 @@
+[2026-06-12 11:30 PT] GOLDEN-MASTER | re-blessed to current deterministic numbers (e1 565019 / flagged 666212) + verified on patolex | OK
+[2026-06-12 11:35 PT] ENV | pinned pipeline/requirements-correction.txt from patolex pip freeze | OK
+[2026-06-12 11:40 PT] REPO-ROOT | archived 7 dead scripts -> project-archives/superseded-pipeline; gitignored scratch | OK
+[2026-06-12 11:50 PT] SCRATCH-RECON | 11 scratch-only originals rescued into pipeline/; 34 throwaways archived box-side | OK
+[2026-06-12 12:05 PT] STEP-A | de-dup edits.py + dictionary.py; re-pointed engine; count-merge bug fixed; GOLDEN-MASTER OK | OK
+[2026-06-12 12:20 PT] NET | built pipeline/tests/smoke_imports.py (static import-resolution net); baseline 2 known violations | OK
+[2026-06-12 12:25 PT] PARSER-FIX | 5080 ran STALE parser missing volume_year date-clamp (D551B56F); archived + synced to canonical 9E9DCC4B (all 3 boxes identical) | OK
+[2026-06-12 12:25 PT] PARSER-FLAG | data-quality: re-parse any 5080 stale-parser volume outputs before mass-ingest | WARN
+[2026-06-12 12:30 PT] PLAN | PIPELINE_CLEANUP_EXECUTION.md = working ref; B(reorg) -> C(SMB 3060 + de-hardcode + parallel parser + git-versioned outputs) -> D(reparse+diff+ingest) | OK
+[2026-06-12 12:35 PT] STEP-B | ocr/ cluster moved (consensus, ab_compare, test_consensus); ingest_clean re-pointed; smoke-net no new violations | OK
+[2026-06-12 12:40 PT] STEP-B | NEXT clusters: ingest (clears baseline 2), chapter, verify, analysis, adjudicate, runners, correction_support, then ocrcorrect/ engine (golden-master-gated) | PENDING
