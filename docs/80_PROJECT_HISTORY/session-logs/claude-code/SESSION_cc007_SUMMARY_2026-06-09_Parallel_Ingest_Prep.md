@@ -406,6 +406,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Value retained: apply the gazetteer KEEP list (cross-checked, esp. high-freq) so corrections never overwrite a real name — a precision guard, not a residual-slasher.
 - Durable: corrected the `CORRECTION_AND_DISPLAY_LAYER.md` note (was "highest-leverage move").
 
+### Continuation 35 (2026-06-11) — residual is PRE-overlay; `agricul`/`ramento` already solved
+
+- Patrick: why are line-split fragments (`agricul`|tural, sac|`ramento`) in the residual? They're ALREADY in `line_split_corrections.tsv` (11,156 rejoin fixes incl. NOHYPHEN + margin cases). They appear in `residual_triage.tsv` because the garble metric was computed BEFORE the line-reunify (+ Sonnet text + chapter) overlays were applied.
+- Quantified (`xref_linesplit.py`): **1,104 residual types / 14,792 occ (~2%) are already-solved line-split fragments** (erty/superin/pensation/priation/retary/legisla…).
+- **Key implication: the 0.44–0.56% residual OVERSTATES the true rate** — it reflects none of the 3 computed overlays. A faithful number needs re-measuring after overlays apply (at ingest).
+- **Gap exposed:** reunify still misses margin-interleaved/cross-page fragments; recoverable by neighbour-concat + dict-check (Patrick's method). Extend before re-measuring.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("The residual is measured PRE-overlay").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

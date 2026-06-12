@@ -154,6 +154,24 @@ NOISE 38,513, GARBLE 36,644, FRAGMENT 2,610.
   cleanup, not a residual-slasher. Gazetteer build: `build_gazetteer.py`; GNIS per-state URLs
   are dead (404/503) — GeoNames `US.zip` is the working place source.
 
+## The residual is measured PRE-overlay (2026-06-11) — fragments like `agricul`/`ramento` are already solved
+Diagnostic from Patrick ("`agricul` is a fragment of agricul|tural; `ramento` of sac|ramento — why
+are these in the residual?"). Answer: they ARE line-split fragments, and the **line-reunify overlay
+already fixes them** — `agricul+tural→agricultural` and `sac+ramento→sacramento` are both in
+`line_split_corrections.tsv` (**11,156 rejoin corrections**, HYPHEN + NOHYPHEN + margin-interleaved).
+They still appear in `residual_triage.tsv` because **the residual/garble metric was computed on text
+BEFORE the line-reunify (and Sonnet text, and chapter) overlays were applied.**
+- Measured: **1,104 residual types / 14,792 occ (~2% of residual) are already-solved line-split
+  fragments** (`erty`, `superin`, `pensation`, `priation`, `retary`, `legisla`, `munici`, `terest`…).
+- **Implication: the 0.44–0.56% "residual" OVERSTATES the true post-correction error rate** — it
+  reflects none of the three computed overlays (chapter, Sonnet text 58,700 occ, line-reunify 11,156).
+  A faithful residual number requires re-measuring AFTER the overlays are applied (which happens at
+  mass-ingest). Until then, treat 0.56% as an upper bound inflated by already-solved items.
+- **Gap this exposes:** the reunify pass still MISSES some fragments (margin-interleaved / cross-page
+  / cross-column breaks where adjacency is broken). Those are recoverable by the neighbour-
+  concatenation + dictionary check Patrick described (a fragment + its real neighbour → a real word).
+  Worth extending the reunify pass to the missed cases before the residual is re-measured.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),
