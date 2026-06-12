@@ -718,3 +718,36 @@ single-source option but not required to re-parse.
 
 **Open at close:** running the clean parallel re-parse (python -m ingest.parse_all on 5090) → diff vs C3 baseline
 manifest. Then back to TEXT CLEANUP (heuristic long-tail first, per Patrick — NOT Sonnet yet).
+
+---
+
+## Continuation 61 — 2026-06-12 (re-parse DONE from the repo + scratch made data-only)
+
+**Course-corrected the run mechanism (Patrick caught it).** I'd reverted to the scattered-copies anti-pattern
+(scp parser into scratch, write a box .bat, hash-compare two copies). Wrong — the whole cleanup was to have ONE
+parser in the repo. Found the 5090 repo checkout at `C:\github\PatoLex` (synced to origin 2302e34), added the
+git safe.directory exception for the patolex cross-account access, and ran the parser DIRECTLY from the repo
+(`PYTHONPATH=C:\github\PatoLex\pipeline` or CurrentDirectory; config default LOCATION_ROOT=scratch data). No copy.
+
+**Re-parse done + verified.** 1862 smoke = 115/7 (date-clamp active). Full run: 197 vols, 0 fail,
+confident=69,100 flagged=7,591, wall=4s. **Diff vs C3 baseline manifest: 197/197 byte-identical, 0 changed** →
+the corpus parse is uniform + correct; the stale-5080 parser never contaminated it. Nothing to commit (outputs
+unchanged; _parse_outputs stays out of git per C3).
+
+**Scratch made DATA-ONLY (Patrick: "why does the scratch even exist?").** Proved the whole pipeline (cascade,
+symspell, correction_passes+deps, parser, verifier) imports + runs from the repo under patolex's Python. Cross-
+checked all 50 scratch-root .py vs the repo: every one is a redundant copy or a superseded standalone (logic
+folded into correction_cascade/parse_all). Archived ALL scratch code (50 .py + bats + ocrcorrect/ + ingest/ +
+__pycache__ + .bak = 152 files) to `_archive/code-pre-reorg-20260612/` (reversible, never-delete). Re-ran the
+parser from the repo with scratch code gone → still 115/7. Scratch root now data/logs/artifacts only (the only
+.bak left are queue-state JSON data backups). Removed the committed anti-pattern `run_completeness_5090.bat`.
+
+**The run pattern going forward:** run from `C:\github\PatoLex\pipeline` (the single source), pointed at data via
+`PATOLEX_LOCATION_ROOT` (default = scratch; future = 5090 SMB or 3060). No code in the data dir, ever.
+
+**NOTE (Patrick):** corpus OCR completeness improved recently (1993-96 gaps filled, ~6,400 body pages) — the
+text-cleanup benchmarks (133.7M tokens, flagged rates, golden master) predate that, so they'll shift slightly
+when the cascade is re-run on the verified-complete corpus. The re-PARSE itself was byte-identical (no change).
+
+**Open:** back to TEXT CLEANUP — heuristic long-tail first (context_resolve + singleton autocorrect + mojibake),
+THEN Sonnet on the genuinely-ambiguous residual, THEN the defensible ground-truth error rate.
