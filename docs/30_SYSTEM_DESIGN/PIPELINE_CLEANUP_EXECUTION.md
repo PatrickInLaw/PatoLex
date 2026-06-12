@@ -83,11 +83,24 @@ Move the rest into the buckets above (`git mv`, history preserved). Fix imports 
 Decide cascade invocation (`python -m ocrcorrect.cascade` or a thin `pipeline/run_cascade.py` shim). Update
 the run sandbox + golden-master gate procedure for the package layout. GATE → commit.
 
-## Step C — Scratch de-gating
-Move corpus data `C:\Users\patolex\PatoLex-scratch` → `C:\PatoLex` (only real volume, 507 GB free), grant
-Users full control, so any login reaches it without the patolex account. De-hardcode the path: read from a
-single `PATOLEX_SCRATCH` env/config (default `C:\PatoLex`) instead of the baked-in string in every script.
-Junction the old path during transition so nothing breaks. GATE → commit.
+## Step C — De-gating done RIGHT: SMB-shared source + de-hardcode + parallel parser (Patrick 2026-06-12)
+The root cause of the parser divergence was **per-machine local copies of the data that drift**. Fix it at
+the source, per the original decoupling plan:
+1. **SMB-shared corpus source** — host the corpus/scratch on an SMB share reachable from BOTH the 5080 and
+   5090 (one source of truth for DATA, like the repo is for CODE). No more per-box copies to drift.
+2. **De-hardcode ALL pipeline paths** — every script reads its root from ONE config/env (`PATOLEX_SCRATCH`
+   etc.) pointing at the share, instead of the baked-in `C:\Users\...` strings. Eliminates the
+   `run_parse_5090.py` monkeypatch entirely → ONE byte-identical file runs on both boxes.
+3. **Rebuild the parser PARALLEL** — `ingest_from_ocr` parse driver = `ProcessPoolExecutor` over volumes
+   (parsing is per-volume-independent / embarrassingly parallel). One multi-threaded parser, shared source.
+GATE: golden master (engine) + smoke-import net + a parse smoke-run.
+
+## Step D — Re-parse the corpus with the fixed+parallel parser (AFTER B+C)
+1. **ARCHIVE the 197 current `parsed_acts_fixed.json` FIRST** (they are NOT in git — scratch is outside the
+   repo; the current set is a mix of stale-5080 + fixed-5090 outputs). Snapshot so we can diff.
+2. Re-parse ALL OCR'd historical volumes (1850-1999) parallel from the shared source (CPU-only, no GPU, free).
+3. **Diff old vs new** parse outputs → confirm exactly what the date-clamp fix changed.
+4. Then the single 1850-2026 mass-ingest reads a uniformly-correct parse.
 
 ## Guardrails
 - STRUCTURE only — never change pass logic, dictionary composition, or thresholds during cleanup. A number
