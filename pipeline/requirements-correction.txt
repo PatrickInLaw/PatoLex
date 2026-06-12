@@ -1,0 +1,34 @@
+# Text-correction cascade environment — PINNED to the exact versions that minted the golden master
+# (docs/30_SYSTEM_DESIGN/.. / pipeline/tests/golden_master_cascade.json). Captured 2026-06-12 from the
+# patolex Python on the 5090 (`pip freeze`). The dictionary (build_dictionary = pyspellchecker + nltk
+# `words` + wordfreq + english-words) is VERSION-SENSITIVE, so a different version set shifts the flagged
+# counts and breaks golden-master reproducibility. Pin these to reproduce the correction pipeline anywhere.
+#
+# NOTE: this is the CORRECTION/text pipeline only. The OCR engines (Tesseract/docTR/Surya/PyMuPDF) run in
+# a separate environment and are NOT listed here.
+#
+# Reproduce:  python -m venv .venv  &&  .venv\Scripts\activate  &&  pip install -r requirements-correction.txt
+#             python -c "import nltk; nltk.download('words')"
+
+# --- direct deps (the dictionary + frequency model) ---
+nltk==3.9.4
+pyspellchecker==0.9.0
+wordfreq==3.1.1
+english-words==2.0.2
+
+# --- transitive deps (pinned for full reproducibility) ---
+certifi==2026.5.20
+charset-normalizer==3.4.7
+click==8.4.1
+colorama==0.4.6
+ftfy==6.3.1
+idna==3.18
+joblib==1.5.3
+langcodes==3.5.1
+locate==1.1.1
+msgpack==1.1.2
+regex==2026.5.9
+requests==2.34.2
+tqdm==4.68.2
+urllib3==2.7.0
+wcwidth==0.8.1

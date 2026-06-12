@@ -71,6 +71,10 @@ pipeline/data/
 pipeline/raw/
 pipeline/cache/
 
+# --- Claude Code scratch / commit-message staging (never commit) ---
+_commitmsg.txt
+.pytest_cache/
+
 # --- Drizzle kit ---
 # Commit the ENTIRE drizzle/ folder: the *.sql migrations AND drizzle/meta/
 # (_journal.json is the migration ledger; snapshots are the diff baseline).
