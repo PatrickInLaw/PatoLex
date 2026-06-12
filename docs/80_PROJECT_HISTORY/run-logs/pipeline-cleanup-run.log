@@ -18,3 +18,6 @@
 [2026-06-12 12:35 PT] STEP-B | committed analysis/ (46913a6) | OK
 [2026-06-12 12:36 PT] STEP-B | moving ingest/ CLEAN scripts only (ingest_clean, register_source_document, batch_ingest_born_digital, ingest_born_digital_prep, acquire_leginfo_pubinfo, resume_leginfo_pubinfo). DEFERRING parser scripts (ingest_from_ocr, run_parse_5090, parse_born_digital*) to Step C parser rebuild -- the 2 baseline violations stay until then | PENDING
 [2026-06-12 12:37 PT] STEP-B | net CAUGHT a new violation: test_chapter_parser imported ingest_clean -> fixed to import ingest.ingest_clean; re-ran net -> back to 2 baseline, clean | OK
+[2026-06-12 12:38 PT] STEP-B | committed ingest/ (76bf813) | OK
+[2026-06-12 12:39 PT] STEP-B | moving ocr/ additions (archive_images, benchmark_throughput) + runners/ (prep_runner, queue_append, queue_extend_manifest, run_*.bat) -- all standalone | PENDING
+[2026-06-12 12:40 PT] STEP-B | moved ocr/+runners/ (2 py + 3 py + 11 bat); smoke-net same 2 baseline, ZERO new -> clean | OK
