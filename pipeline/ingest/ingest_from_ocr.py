@@ -35,6 +35,8 @@ import datetime
 import subprocess
 from pathlib import Path
 
+import config  # SINGLE source of truth for data paths (the 3060 cutover knob); pipeline/ on sys.path
+
 # ---------------------------------------------------------------------------
 # DATE REVIEW WORKLIST
 # ---------------------------------------------------------------------------
@@ -42,10 +44,7 @@ from pathlib import Path
 # OCR-error suspect.  The act is NOT silently committed with a wrong date;
 # instead the match is appended here so a human can review and correct it.
 # Location: next to the existing run-logs so the same review workflow applies.
-DATE_REVIEW_WORKLIST = Path(
-    r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"
-    r"\docs\80_PROJECT_HISTORY\run-logs\date-review-worklist.jsonl"
-)
+DATE_REVIEW_WORKLIST = Path(config.DATE_REVIEW_WORKLIST)
 
 
 def _append_date_review(record: dict):
@@ -61,12 +60,9 @@ def _append_date_review(record: dict):
     with open(str(DATE_REVIEW_WORKLIST), "a", encoding="utf-8") as fh:
         fh.write(line)
 
-SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
-LOG_FILE = Path(
-    r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex"
-    r"\docs\80_PROJECT_HISTORY\run-logs\resume-5090-run.log"
-)
-PSQL = r"C:\Program Files\PostgreSQL\16\bin\psql.exe"
+SCRATCH_ROOT = Path(config.DATA_ROOT)
+LOG_FILE = Path(config.PARSE_LOG)
+PSQL = config.PSQL_BIN
 
 # session_label -> (session_str, legislature_ordinal, start_year)
 # TODO: LEGISLATURE_MAP is duplicated in pipeline/ingest_clean.py.

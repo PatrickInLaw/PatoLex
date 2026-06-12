@@ -18,7 +18,7 @@ _REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(_REPO, "pipeline", "5080"))
 sys.path.insert(0, os.path.join(_REPO, "pipeline"))
 
-import ingest_from_ocr as _ocr
+import ingest.ingest_from_ocr as _ocr   # parser moved to pipeline/ingest/ in the reorg
 
 _fail = 0
 def check(name, got, want):
