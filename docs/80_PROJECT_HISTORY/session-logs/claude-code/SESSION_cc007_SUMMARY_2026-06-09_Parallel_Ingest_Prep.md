@@ -476,6 +476,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Dict integration visibly helps reunifier: name-fragments now rejoin (`covaru+bias`→covarubias, `hy+desville`→hydesville). Corrections 15,647→15,434 (len≥4 + longest-first).
 - Durable: design doc updated. NEXT: LLM validation of corpus legal-vocab candidates (running).
 
+### Continuation 44 (2026-06-11) — LLM validation unlocked the legal-vocab dict layer (both owed items DONE)
+
+- 4 Sonnet agents validated the 1,266 genuine-novel candidates: REAL 446 + NAME 119 = **565 real vocab** (estrays/subpenas/depositaries/appraisements/acetylmethadol/accountholder); FRAGMENT 412 + ERROR 289 = 701 correctly excluded (expendi/cerning/frecholders/hcense). LLM cleanly did what heuristics couldn't (3x).
+- Merged validated terms → **dict_additions.txt = 5,926 (5,425 names + 501 legal vocab)**, live in build_dictionary. `validated_legal_vocab.txt`, `sub_nv_b1..4.tsv`, `aggregate_nv.py`.
+- Both owed items now done: Hans review (Cont. 43, CRITICAL longest-first fix) + LLM validation (this).
+- Pattern locked in: corpus-vocab curation = real ground truth (name DBs) OR LLM validation, NEVER a frequency/distance heuristic.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("LLM validation unlocked the legal-vocab dict layer").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

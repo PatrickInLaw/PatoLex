@@ -361,6 +361,18 @@ error rate is therefore very reducible via the pass architecture (reunify → sp
 not bound by garbage. (Two bugs Patrick caught fixed: classifier ORDER put OVER_MERGE before EDIT1,
 and permissive `known`=`wf>0` false-split typos; plus edit-2 had been dropped.)
 
+## LLM validation unlocked the legal-vocab dict layer (2026-06-11)
+The legal/corpus vocab that heuristics could NOT curate (kept fragments `admunistra`, errors
+`aforesnid`) was validated by an LLM pass: 4 Sonnet agents classified the 1,266 genuine-novel
+candidates as REAL / NAME / FRAGMENT / ERROR. Result: **REAL 446 + NAME 119 = 565 validated real
+vocab** (e.g. `estrays`, `subpenas`, `depositaries`, `appraisements`, `apprenticeable`,
+`acetylmethadol`, `accountholder`), vs FRAGMENT 412 + ERROR 289 = 701 correctly excluded
+(`expendi`, `cerning`, `frecholders`, `hcense`). The LLM cleanly did what frequency/edit heuristics
+could not. Validated terms merged → **`dict_additions.txt` now 5,926 (5,425 names + 501 legal
+vocab)**, live in `build_dictionary`. (`validated_legal_vocab.txt`, `sub_nv_b1..4.tsv`.)
+**Pattern confirmed: corpus-vocab curation = real ground truth (name DBs) OR LLM validation, never
+a frequency/distance heuristic.**
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),
