@@ -26,6 +26,17 @@ structural step: the deterministic cascade must still reproduce `pipeline/tests/
 - [ ] **Step C — scratch de-gating** (data → `C:\PatoLex`, de-hardcode paths). GATE.
 - [ ] Final: update structure docs, session log, push.
 
+## Open-source target: FOUR repos (the reorg defines these seams)
+The subdir boundaries below are future **repo-extraction points** — minimize cross-concern imports so each
+splits cleanly (see [[opensource-ocr-engine-plan]]):
+- **GitLaw** — law-as-git-repo data emitter (future component).
+- **OCR toolset** — `ocr/` (acquisition + consensus + workers). MUST NOT import the correction pipeline.
+- **Correction/cleanup/verification pipeline** — `ocrcorrect/` (corpus-AGNOSTIC engine) + `analysis/` + `adjudicate/` + `verify/`.
+- **Front end** — `src/` (the Next.js app).
+PatoLex-specific (`patolex/`: `ca_gazetteer`, `LEGAL_SUPPLEMENT`, dict-additions, chapter, DB ingest) stays
+with the app. The engine takes the CA dictionary/name layers as **injectable config**, not baked in.
+Gate every move with `pipeline/tests/smoke_imports.py` (static import net) + the golden master for the engine.
+
 ## Target `pipeline/` structure
 ```
 pipeline/
