@@ -15,10 +15,11 @@ Also reports the FREQUENCY split (freq>=10 vs 2-9 vs singleton): only the freq>=
 import os, sys, re, json, glob, bisect
 from collections import Counter
 import multiprocessing as mp
+import config
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-CASCADE = os.path.join(SCRATCH, "_cascade")
-VOCAB = os.path.join(SCRATCH, "_vocab")
+SCRATCH = config.path_for("data_root")
+CASCADE = config.path_for("cascade_dir")
+VOCAB = config.path_for("vocab_dir")
 STAGE_OUT = os.path.join(CASCADE, "out_autocorrect")
 _ROMAN = re.compile(r"^[ivxlcdm]+$")
 _REPEAT4 = re.compile(r"(.)\1\1\1"); _REPEAT3 = re.compile(r"(.)\1\1")
@@ -34,7 +35,7 @@ def _init():
     from wordfreq import zipf_frequency
     common = [w for w in _WS if w.isalpha() and len(w) >= 6 and zipf_frequency(w, "en") >= 3.0]
     _SORTED = sorted(common); _SORTED_REV = sorted(w[::-1] for w in common)
-    p = os.path.join(SCRATCH, "name_gazetteer.txt")
+    p = config.path_for("gazetteer")
     if os.path.exists(p):
         _NAMES = frozenset(l.strip() for l in open(p, encoding="utf-8") if l.strip())
 def known(t): return (t in _WS) or (_HASWF and _WF(t, "en") > 0)

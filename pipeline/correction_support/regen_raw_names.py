@@ -1,5 +1,6 @@
 import os
-VOCAB = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+import config
+VOCAB = config.path_for("vocab_dir")
 names = set()
 for i, ln in enumerate(open(os.path.join(VOCAB, "gazetteer_keep.tsv"), encoding="utf-8")):
     if i == 0: continue

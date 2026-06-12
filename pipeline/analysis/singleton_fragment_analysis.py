@@ -12,9 +12,10 @@ actual neighbours, and classify with CONTEXT (not a guess):
 """
 import os, sys, re, json, glob, bisect
 from collections import Counter
+import config
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-RESID   = r"C:\Users\patolex\PatoLex-scratch\_vocab\residual_triage.tsv"
+SCRATCH = config.path_for("data_root")
+RESID   = config.path_for("vocab_dir", "residual_triage.tsv")
 WORD = re.compile(r"[A-Za-z\xc0-\xff]+")
 VOW = set("aeiouy")
 

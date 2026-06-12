@@ -14,9 +14,10 @@ and the most-clustered tokens). CPU-only, heartbeat run log.
 import os, sys, re, json, glob, time
 from collections import defaultdict
 from datetime import datetime, timezone, timedelta
+import config
 
-SCRATCH  = r"C:\Users\patolex\PatoLex-scratch"
-OUT_DIR  = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+SCRATCH  = config.path_for("data_root")
+OUT_DIR  = config.path_for("vocab_dir")
 LOG_PATH = os.path.join(OUT_DIR, "garbage-cluster-run.log")
 SONNET   = OUT_DIR  # dir holding review_sonnet_part*.json
 OUT_JSON = os.path.join(OUT_DIR, "garbage_locations.json")

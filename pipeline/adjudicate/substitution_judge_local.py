@@ -9,8 +9,9 @@ Reads _vocab/substitution_sample.jsonl; writes _vocab/substitution_findings_loca
 """
 import os, sys, re, json, time, urllib.request
 from datetime import datetime, timezone, timedelta
+import config
 
-OUT_DIR = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+OUT_DIR = config.path_for("vocab_dir")
 SAMPLE  = os.path.join(OUT_DIR, "substitution_sample.jsonl")
 OUT     = os.path.join(OUT_DIR, "substitution_findings_local.json")
 LOG     = os.path.join(OUT_DIR, "substitution-judge-run.log")

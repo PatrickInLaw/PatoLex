@@ -107,9 +107,10 @@ import time
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Optional
+import config
 
 # ── paths ──────────────────────────────────────────────────────────────────────
-SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH_ROOT = Path(config.path_for("data_root"))
 REPO_ROOT = Path(r"C:\Users\PatrickKolasinski\Documents\GitHub\patolex")
 REPORT_PATH = REPO_ROOT / "docs" / "80_PROJECT_HISTORY" / "run-logs" / "completeness-report.json"
 

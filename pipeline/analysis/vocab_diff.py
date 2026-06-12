@@ -20,12 +20,13 @@ import unicodedata
 import time
 import argparse
 from collections import defaultdict
+import config
 
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-DEFAULT_SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-DEFAULT_OUT     = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+DEFAULT_SCRATCH = config.path_for("data_root")
+DEFAULT_OUT     = config.path_for("vocab_dir")
 
 LEGAL_SUPPLEMENT = {
     # Common legal/archaic terms that real dictionaries miss

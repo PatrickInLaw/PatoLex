@@ -44,3 +44,4 @@
 [2026-06-12 13:34 PT] STEP-C | (recovered from a shell crash -- all 6 edits were safe on disk, resumed validation) | OK
 [2026-06-12 13:35 PT] STEP-C | redeployed engine to patolex, launched golden-master gate for the config-driven cascade | PENDING
 [2026-06-12 13:49 PT] STEP-C | GOLDEN-MASTER OK -- config-driven cascade reproduces locked numbers EXACTLY. Whole engine now de-hardcoded onto config.path_for + validated. Workers loaded config cleanly in spawn | OK
+[2026-06-12 13:55 PT] STEP-C | DE-HARDCODE EVERYTHING: swept 32 cluster scripts (analysis/ingest/ocr/chapter/verify/adjudicate/correction_support/runners) onto config.path_for (delegated to an agent w/ py_compile+net self-verify). Net independently confirmed GREEN; spot-checked benchmark_throughput kept the remote 5090 SSH path correctly. DEFERRED: machine subdirs (5080/ 5090/ 5090-scale/) + .ps1/.bat launchers (ops infra) | OK

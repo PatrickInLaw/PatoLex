@@ -8,7 +8,8 @@ proven to keep fragments/errors three times this session):
 Runs on the 5090. Output: _vocab/dict_additions.txt -> loaded by build_dictionary if present.
 """
 import os
-VOCAB = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+import config
+VOCAB = config.path_for("vocab_dir")
 
 adds = set()
 # A) names (len>=4: 3-char tokens are a reunifier noise-floor risk -- Hans C1-4)

@@ -29,8 +29,9 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+import config
 
-SCRATCH = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH = Path(config.path_for("data_root"))
 ARCHIVE = SCRATCH / "chief-clerk-archive"
 PIPELINE = Path(__file__).parent
 

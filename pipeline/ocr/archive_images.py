@@ -96,6 +96,7 @@ import sys
 import tarfile
 import tempfile
 from pathlib import Path
+import config
 
 # --- box defaults --------------------------------------------------------
 
@@ -139,6 +140,7 @@ def log(phase: str, desc: str, status: str = "OK") -> None:
 def autodetect_scratch() -> Path:
     user = getpass.getuser()
     candidates = [
+        Path(config.path_for("data_root")),
         Path(rf"C:\Users\{user}\PatoLex-scratch"),
         Path(r"C:\Users\patolex\PatoLex-scratch"),
         Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch"),

@@ -11,9 +11,10 @@ HONEST decomposition of the singleton tail (v2 -- fixed). Uses the INTEGRATED di
 """
 import os, re, json, glob, random, bisect
 from collections import Counter
+import config
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-VOCAB   = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+SCRATCH = config.path_for("data_root")
+VOCAB   = config.path_for("vocab_dir")
 WORD = re.compile(r"[A-Za-z\xc0-\xff]+")
 ALPHA = "abcdefghijklmnopqrstuvwxyz"
 VOW = set("aeiouy")

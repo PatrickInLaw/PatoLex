@@ -21,10 +21,11 @@ import urllib.request
 import urllib.error
 import re
 import sys
+import config
 
 OLLAMA_CHAT_URL = "http://localhost:11434/api/chat"
-SAMPLE_PATH = pathlib.Path(r"C:\Users\patolex\PatoLex-scratch\local_llm_validation_sample.json")
-OUT_DIR = pathlib.Path(r"C:\Users\patolex\PatoLex-scratch")
+SAMPLE_PATH = pathlib.Path(config.path_for("data_root", "local_llm_validation_sample.json"))
+OUT_DIR = pathlib.Path(config.path_for("data_root"))
 
 # Few-shot system prompt with explicit garbage examples to prevent "noisy" collapse
 SYSTEM_PROMPT = """You are a California legal text quality analyst for OCR validation.

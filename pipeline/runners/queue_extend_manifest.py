@@ -9,8 +9,9 @@ The pdf field is written explicitly so queue_worker.py uses the correct filename
 """
 import os, sys, json, time, errno
 from pathlib import Path
+import config
 
-S = Path(r"C:\Users\patolex\PatoLex-scratch")
+S = Path(config.path_for("data_root"))
 Q = S / "production_queue_state.json"
 L = S / "production_queue_state.lock"
 

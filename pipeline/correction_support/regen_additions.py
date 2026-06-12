@@ -6,7 +6,8 @@ Filter names lightly: drop any that is a prefix/suffix of a common English word 
 coincidental fragment-matches like 'meanor'/'agricul'); keep distinctive real names.
 """
 import os, re, bisect
-VOCAB = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+import config
+VOCAB = config.path_for("vocab_dir")
 from spellchecker import SpellChecker
 spell = SpellChecker()
 try:

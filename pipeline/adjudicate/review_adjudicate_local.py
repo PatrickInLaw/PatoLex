@@ -13,8 +13,9 @@ Writes _vocab/review_local_gemma3.json. CPU/GPU: uses the 5090 GPU via Ollama.
 """
 import os, sys, re, json, time, urllib.request
 from datetime import datetime, timezone, timedelta
+import config
 
-OUT_DIR  = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+OUT_DIR  = config.path_for("vocab_dir")
 TSV      = os.path.join(OUT_DIR, "passC_review.tsv")
 OUT_JSON = os.path.join(OUT_DIR, "review_local_gemma3.json")
 LOG_PATH = os.path.join(OUT_DIR, "review-adjudicate-run.log")

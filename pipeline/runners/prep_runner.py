@@ -15,8 +15,9 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+import config
 
-SCRATCH   = Path(r"C:\Users\patolex\PatoLex-scratch")
+SCRATCH   = Path(config.path_for("data_root"))
 QUEUE     = SCRATCH / "production_queue_state.json"
 ARCHIVE   = SCRATCH / "chief-clerk-archive"
 OCR_SCRIPT = SCRATCH / "ocr_only_5090.py"

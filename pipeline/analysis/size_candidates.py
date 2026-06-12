@@ -2,7 +2,8 @@
 occurrence counts, tiered by corpus frequency. Reads the autocorrect audit (es1/es2 rows)."""
 import glob, os
 from collections import Counter
-AUD = r"C:\Users\patolex\PatoLex-scratch\_cascade\audit"
+import config
+AUD = config.path_for("cascade_dir", "audit")
 pair_occ = Counter()      # (token, candidate, dist) -> occurrences
 for fp in glob.glob(os.path.join(AUD, "*.autocorrect.tsv")):
     for line in open(fp, encoding="utf-8"):

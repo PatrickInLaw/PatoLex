@@ -56,9 +56,10 @@ from collections import Counter
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from consensus import build_consensus, tokenize as c_tokenize  # noqa: E402
+import config
 
 # --------------------------------------------------------------------------- #
-BASE = r"C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-bakeoff"
+BASE = config.path_for("data_root", "ocr-bakeoff")
 MANIFEST = os.path.join(BASE, "opusgold_manifest.json")
 OPUSGOLD_DIR = os.path.join(BASE, "gold", "opusgold")
 REPO = r"C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex"

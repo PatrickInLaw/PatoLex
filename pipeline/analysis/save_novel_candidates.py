@@ -1,7 +1,8 @@
 """Save the genuine-novel corpus-vocab candidates (high-freq, not within edit-2 of a COMMON
 English word) for LLM validation. These are the ambiguous real-legal-term vs fragment/error cases."""
 import os
-VOCAB = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+import config
+VOCAB = config.path_for("vocab_dir")
 from spellchecker import SpellChecker
 spell = SpellChecker()
 try:
@@ -18,7 +19,7 @@ import re, json, glob
 from collections import Counter
 WORD = re.compile(r"[A-Za-z\xc0-\xff]+")
 freq = Counter()
-for fp in sorted(glob.glob(r"C:\Users\patolex\PatoLex-scratch\production-*\ocr_consensus\page_ocr_results.json")):
+for fp in sorted(glob.glob(config.path_for("data_root", "production-*", "ocr_consensus", "page_ocr_results.json"))):
     try: data = json.load(open(fp, encoding="utf-8", errors="replace"))
     except Exception: continue
     for pk, po in data.items():

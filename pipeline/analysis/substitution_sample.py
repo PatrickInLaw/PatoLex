@@ -11,9 +11,10 @@ across eras so the OCR-heavy older volumes are well represented.
 """
 import os, sys, re, json, glob, random
 from datetime import datetime, timezone, timedelta
+import config
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-OUT_DIR = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+SCRATCH = config.path_for("data_root")
+OUT_DIR = config.path_for("vocab_dir")
 OUT     = os.path.join(OUT_DIR, "substitution_sample.jsonl")
 LOG     = os.path.join(OUT_DIR, "substitution-sample-run.log")
 

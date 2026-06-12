@@ -91,8 +91,9 @@ import datetime
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
+import config
 
-SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH_ROOT = Path(config.path_for("data_root"))
 REPO = Path(r"C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex")
 LOG_FILE = REPO / "docs" / "80_PROJECT_HISTORY" / "run-logs" / "phaseB-build-run.log"
 

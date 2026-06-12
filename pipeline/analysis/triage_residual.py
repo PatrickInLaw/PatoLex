@@ -15,10 +15,11 @@ import os, sys, re, json, time, bisect
 from collections import Counter
 from datetime import datetime, timezone, timedelta
 import multiprocessing as mp
+import config
 
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
-OUT_DIR  = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+OUT_DIR  = config.path_for("vocab_dir")
 TSV_IN   = os.path.join(OUT_DIR, "residual_bad_words.tsv")
 TSV_OUT  = os.path.join(OUT_DIR, "residual_triage.tsv")
 LOG_PATH = os.path.join(OUT_DIR, "triage-run.log")

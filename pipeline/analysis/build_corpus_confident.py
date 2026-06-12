@@ -6,9 +6,10 @@ standard English dictionaries. Measure how much of the 'residual' is actually re
 """
 import os, sys, re, json, glob
 from collections import Counter
+import config
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-VOCAB   = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+SCRATCH = config.path_for("data_root")
+VOCAB   = config.path_for("vocab_dir")
 WORD = re.compile(r"[A-Za-z\xc0-\xff]+")
 VOW = set("aeiouy")
 THRESH = 15   # a non-English token appearing >=15x across the corpus is almost certainly real

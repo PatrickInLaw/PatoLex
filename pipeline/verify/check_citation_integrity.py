@@ -55,11 +55,12 @@ import re
 import sys
 from collections import defaultdict
 from typing import Any
+import config
 
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-SCRATCH = r"C:\Users\PatrickKolasinski\PatoLex-scratch"
+SCRATCH = config.path_for("data_root")
 L2_DIR = os.path.join(SCRATCH, "_coherence", "l2_results")
 OUT_FILE = os.path.join(SCRATCH, "_coherence", "citation_integrity_flags.json")
 

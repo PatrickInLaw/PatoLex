@@ -1,6 +1,7 @@
 """Stage the source-page scans for the REVIEW chapter cases so they can be eyeballed."""
 import os, json, shutil, re
-ROOT = r"C:\Users\patolex\PatoLex-scratch"
+import config
+ROOT = config.path_for("data_root")
 CORR = os.path.join(ROOT, "_vocab", "chapter_corrections.tsv")
 STAGE = os.path.join(ROOT, "_vocab", "review_imgs")
 os.makedirs(STAGE, exist_ok=True)

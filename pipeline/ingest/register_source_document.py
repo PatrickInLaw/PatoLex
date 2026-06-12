@@ -32,6 +32,7 @@ import json
 import os
 import sys
 from pathlib import Path
+import config
 
 try:
     import psycopg
@@ -39,7 +40,7 @@ except ImportError:
     print("ERROR: psycopg not installed. Run: pip install psycopg[binary]", file=sys.stderr)
     sys.exit(1)
 
-SCRATCH_ROOT = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH_ROOT = Path(config.path_for("data_root"))
 
 # ---------------------------------------------------------------------------
 # SQL

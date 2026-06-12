@@ -44,6 +44,7 @@ import json
 import subprocess
 from datetime import datetime
 from pathlib import Path
+import config
 
 # --------------------------------------------------------------------------
 # CONFIG (read-only endpoints)
@@ -57,7 +58,7 @@ LOG_5090       = r"C:\Users\patolex\PatoLex-scratch\ocr-5090-run.log"
 SCRATCH_5090   = r"C:\Users\patolex\PatoLex-scratch"
 
 LOG_5080       = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch\ocr-5080-run.log")
-SCRATCH_5080   = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH_5080   = Path(config.path_for("data_root"))
 
 PSQL = r"C:\Program Files\PostgreSQL\16\bin\psql.exe"
 

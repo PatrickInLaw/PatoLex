@@ -12,8 +12,9 @@ import zipfile
 import datetime
 import requests
 from pathlib import Path
+import config
 
-SCRATCH = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH = Path(config.path_for("data_root"))
 REPO_ROOT = Path(r"C:\Users\PatrickKolasinski\Documents\GitHub\PatoLex")
 LOG_FILE = REPO_ROOT / "docs" / "80_PROJECT_HISTORY" / "run-logs" / "acquire-leginfo-pubinfo-run.log"
 BASE_URL = "https://downloads.leginfo.legislature.ca.gov/pubinfo_{}.zip"

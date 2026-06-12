@@ -11,9 +11,10 @@ vision_value, raw). Heartbeat run log. Free (5090 GPU).
 """
 import os, sys, re, json, glob, time, base64, urllib.request
 from datetime import datetime, timezone, timedelta
+import config
 
-ROOT    = r"C:\Users\patolex\PatoLex-scratch"
-OUT_DIR = os.path.join(ROOT, "_vocab")
+ROOT    = config.path_for("data_root")
+OUT_DIR = config.path_for("vocab_dir")
 CORR    = os.path.join(OUT_DIR, "chapter_corrections.tsv")
 OUT     = os.path.join(OUT_DIR, "chapter_vision_results.tsv")
 LOG     = os.path.join(OUT_DIR, "chapter-vision-run.log")

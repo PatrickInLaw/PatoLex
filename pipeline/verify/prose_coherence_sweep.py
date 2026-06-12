@@ -41,6 +41,7 @@ from pathlib import Path
 from typing import Optional
 
 import requests
+import config
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -49,7 +50,7 @@ import requests
 OLLAMA_URL = "http://100.70.54.56:11434"   # 5090 Ollama over Tailscale
 MODEL = "gemma3:27b"
 
-SCRATCH_BASE = Path(r"C:\Users\PatrickKolasinski\PatoLex-scratch")
+SCRATCH_BASE = Path(config.path_for("data_root"))
 OUTPUT_FILE = SCRATCH_BASE / "_coherence" / "prose_coherence_sweep.jsonl"
 RUN_LOG = (
     Path(__file__).parent.parent

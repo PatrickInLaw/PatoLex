@@ -18,9 +18,10 @@ import os, sys, re, json, glob, time
 from collections import Counter
 from datetime import datetime, timezone, timedelta
 import multiprocessing as mp
+import config
 
-SCRATCH = r"C:\Users\patolex\PatoLex-scratch"
-OUT_DIR = r"C:\Users\patolex\PatoLex-scratch\_vocab"
+SCRATCH = config.path_for("data_root")
+OUT_DIR = config.path_for("vocab_dir")
 LOG     = os.path.join(OUT_DIR, "chapter-reconstruct-run.log")
 SAMPLE  = os.path.join(OUT_DIR, "chapter_reconstruct_sample.tsv")
 
