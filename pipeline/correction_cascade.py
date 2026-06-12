@@ -80,6 +80,35 @@ def strong_known(t): return (t in _WS) or zipf(t) >= 2.8
 _ROMAN = re.compile(r"^[ivxlcdm]+$")
 def is_roman(t): return bool(_ROMAN.match(t)) and len(t) >= 2
 
+# ---- garbage classification (refined per Patrick) ----
+_REPEAT4 = re.compile(r"(.)\1\1\1")                        # 4+ same char in a row -> guaranteed garbage
+_REPEAT3 = re.compile(r"(.)\1\1")                          # 3+ same char -> recoverability-checked
+_CONS5   = re.compile(r"[bcdfghjklmnpqrstvwxz]{5,}")       # 5+ consonants in a row
+_RUN3    = re.compile(r"(.)\1\1+")
+_VOWELS  = set("aeiouy")
+def _collapse(t): return _RUN3.sub(r"\1\1", t)            # collapse any 3+ run to 2 (addresss->address)
+
+def classify_residual(t):
+    """Classify an already-FLAGGED (unknown) token: roman | garbage_<rule> | recoverable.
+    LONG run-ons are handled by the splitter upstream; a long token still here = unsplittable."""
+    if _ROMAN.match(t) and len(t) >= 2:
+        return "roman"
+    nonascii = sum(1 for c in t if ord(c) > 127)
+    if nonascii:                                          # single mojibake in a word-ish token = recoverable
+        return "recoverable" if (nonascii <= 1 and len(t) <= 16) else "garbage_mojibake"
+    if _REPEAT4.search(t):
+        return "garbage_repeat4"                          # 4+ same char (>3) -- guaranteed
+    if _REPEAT3.search(t):                                # exactly-3: garbage ONLY if not recoverable
+        if known(_collapse(t)) or _edit1_known(t):
+            return "recoverable"                          # fianeee->fiancee, addresss->address
+        if _CONS5.search(t) or (len(t) >= 5 and not (set(t) & _VOWELS)):
+            return "garbage_repeat3"
+        return "recoverable"                             # benefit of the doubt (rare real word)
+    if _CONS5.search(t): return "garbage_cons5"
+    if len(t) >= 5 and not (set(t) & _VOWELS): return "garbage_novowel"
+    if len(t) >= 25: return "garbage_toolong"            # long + unsplittable (split ran upstream)
+    return "recoverable"
+
 def _edits1(w):
     sp = [(w[:i], w[i:]) for i in range(len(w) + 1)]
     out = set()
@@ -126,6 +155,23 @@ def _split(tok):
     res = best[1] if best else None
     _C_SPLIT[tok] = res
     return res
+
+_C_DEC = {}
+def _decompose_long(tok):
+    """For a LONG token (a possible multi-word run-on): greedily segment into >=2 common words
+    (each >=3 chars, zipf>=3.0). Char salad won't fully cover -> None -> it falls to garbage."""
+    if tok in _C_DEC: return _C_DEC[tok]
+    n = len(tok); pieces = []; i = 0
+    while i < n:
+        matched = False
+        for L in range(min(15, n - i), 2, -1):
+            p = tok[i:i + L]
+            if len(p) >= 3 and (p in _WS or zipf(p) >= 3.0):
+                pieces.append(p); i += L; matched = True; break
+        if not matched:
+            _C_DEC[tok] = None; return None
+    res = " ".join(pieces) if len(pieces) >= 2 else None
+    _C_DEC[tok] = res; return res
 
 def _measure(vol_pages):
     f = t = 0
@@ -217,6 +263,9 @@ def stage_split(vol_pages, audit, cnt):
             for t in ln[0]:
                 if len(t) >= 8 and not known(t) and not _edit1_known(t) and not _affix_of_common(t):
                     s = _split(t)
+                    if not s and len(t) >= 15:          # long run-on: try multi-word decomposition
+                        s = _decompose_long(t)
+                        if s: cnt["split_long"] += 1
                     if s:
                         newtoks.extend(s.split(" ")); audit.append((pk, "split", t, s)); cnt["split"] += 1; continue
                 newtoks.append(t)
@@ -272,7 +321,19 @@ def _process_volume(arg):
             for r in audit: fh.write("\t".join(str(x) for x in r) + "\n")
         open(os.path.join(CASCADE, "done_" + st, vol + ".marker"), "w").write(pt())
 
-    res = {"vol": vol, "meas": meas, "stages": dict(stage_cnt), "timings": timings}
+    # FINAL garbage classification of the post-cascade flagged tokens (in-cascade, not standalone)
+    gc = Counter()
+    for pk, lines in vol_pages:
+        for ln in lines:
+            for t in ln[0]:
+                if len(t) >= 2 and not known(t):
+                    c = classify_residual(t)
+                    gc["roman" if c == "roman" else ("garbage" if c.startswith("garbage") else "recoverable")] += 1
+                    if c.startswith("garbage"): gc[c] += 1   # keep per-rule breakdown too
+    classify = {"roman": gc["roman"], "garbage": gc["garbage"], "recoverable": gc["recoverable"],
+                "by_rule": {k: v for k, v in gc.items() if k.startswith("garbage_")}}
+
+    res = {"vol": vol, "meas": meas, "stages": dict(stage_cnt), "timings": timings, "classify": classify}
     json.dump(res, open(cfp, "w", encoding="utf-8"))
     return res
 
@@ -282,7 +343,7 @@ def main():
     rlog("SCAN", f"{len(files)} volumes")
     nw = max(2, min(12, (os.cpu_count() or 4) - 2))
     keys = ["raw", "reunify", "split", "autocorrect"]
-    F = {k: 0 for k in keys}; T = {k: 0 for k in keys}; agg = Counter(); tim = Counter()
+    F = {k: 0 for k in keys}; T = {k: 0 for k in keys}; agg = Counter(); tim = Counter(); cls = Counter()
     state = {"done": 0}
     lock = threading.Lock()
     t0 = time.time()
@@ -314,14 +375,27 @@ def main():
                             F[k] += res["meas"][k][0]; T[k] += res["meas"][k][1]
                     for k, v in res["stages"].items(): agg[k] += v
                     for k, v in res.get("timings", {}).items(): tim[k] += v
+                    c = res.get("classify", {})
+                    cls["garbage"] += c.get("garbage", 0); cls["roman"] += c.get("roman", 0)
+                    cls["recoverable"] += c.get("recoverable", 0)
+                    for k, v in c.get("by_rule", {}).items(): cls[k] += v
     hb_stop.set(); hb.join(timeout=2)
     done = state["done"]
     def rate(k): return round(100.0 * F[k] / max(1, T[k]), 4)
     prog = {("raw" if k == "raw" else "after_" + k): {"flagged": F[k], "total": T[k], "rate_pct": rate(k)} for k in keys}
+    fl = F["autocorrect"]; ga = cls["garbage"]; ro = cls["roman"]; rc = cls["recoverable"]
+    corpus_tot = T["autocorrect"]
+    classification = {
+        "flagged": fl, "garbage": ga, "roman": ro, "recoverable": rc,
+        "garbage_pct_of_corpus": round(100.0 * ga / max(1, corpus_tot), 4),
+        "recoverable_pct_of_corpus": round(100.0 * rc / max(1, corpus_tot), 4),
+        "garbage_pct_of_flagged": round(100.0 * ga / max(1, fl), 1),
+        "by_rule": {k: cls[k] for k in cls if k.startswith("garbage_")}}
     report = {"generated": pt(), "from_stage": CASCADE_FROM, "volumes": done, "sonnet_applied": False,
               "stage_progression": prog,
               "pre_sonnet_rate_pct": rate("autocorrect"),
               "reduction_pct_relative": round(100.0 * (F["raw"] - F["autocorrect"]) / max(1, F["raw"]), 1),
+              "residual_classification": classification,
               "stage_corrections": dict(agg),
               "stage_cpu_seconds": {k: round(v, 1) for k, v in tim.items()},
               "wall_seconds": round(time.time() - t0, 1)}
@@ -332,6 +406,9 @@ def main():
         ts = f"  [{tim[k]:.0f}s cpu]" if k in tim else ""
         rlog("RATE", f"{lab:18s} = {F[k]:,}/{T[k]:,} = {rate(k)}%{ts}")
     rlog("RATE", f"total reduction = {report['reduction_pct_relative']}% relative  (pre-sonnet)")
+    cz = report["residual_classification"]
+    rlog("CLASSIFY", f"of {cz['flagged']:,} flagged: garbage={cz['garbage']:,} ({cz['garbage_pct_of_corpus']}% corpus) | roman={cz['roman']:,} | recoverable={cz['recoverable']:,} ({cz['recoverable_pct_of_corpus']}% corpus)")
+    rlog("CLASSIFY", f"garbage by rule: {cz['by_rule']}")
     rlog("TIMING", f"stage cpu-seconds: {dict(report['stage_cpu_seconds'])}  | wall={report['wall_seconds']}s")
     rlog("STAGES", json.dumps(dict(agg)))
     try:

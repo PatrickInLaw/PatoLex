@@ -462,6 +462,20 @@ high-freq errors are mostly recoverable systematic typos). Runs in 4s. `garbage_
 recoverable is the real target for the remaining passes. Fold the garbage/roman/recoverable split
 into the cascade measurement so every run reports it.
 
+## Garbage filter refined + INTEGRATED into the cascade (2026-06-12)
+Per Patrick: (1) 3+-repeat was too aggressive (`fiancee`→`fianeee` is a recoverable typo) → use
+**4+ repeat (>3)** for guaranteed garbage; exactly-3 gets a recoverability check (collapse-run or
+edit-1 → known = recoverable). (2) Long tokens → the **splitter** tries multi-word decomposition
+first (`_decompose_long`); only undecomposable-long = `toolong` garbage. (3) Garbage classification
+is now a **stage IN the cascade** (`classify_residual` in `correction_cascade.py`), reported in
+`cascade_report.json` every run — not a standalone script.
+**Effect on the number (answers "0.058 vs ~0.040"):** the 3+→4+ change moved ~17,000 recoverable
+3-repeats out of garbage: **garbage 77,297 (0.058%) → 60,404 (0.0453% of corpus)** — repeat4 44,967
+/ cons5 8,575 / repeat3-unrecoverable 5,115 / toolong 1,697 / mojibake 50. So the 0.058% was inflated
+by the exact rule Patrick flagged; refined = 0.0453%. Long-decomposition: split 4,805 → 5,590
+(+785 run-ons). Final residual (pre-sonnet): **0.0453% garbage floor + 0.4482% recoverable + 4,906
+valid Romans**, of 0.4971% flagged.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

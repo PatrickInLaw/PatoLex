@@ -1,0 +1,61 @@
+{
+  "generated": "2026-06-12 06:13 PT",
+  "from_stage": "split",
+  "volumes": 205,
+  "sonnet_applied": false,
+  "stage_progression": {
+    "raw": {
+      "flagged": 1476105,
+      "total": 133679152,
+      "rate_pct": 1.1042
+    },
+    "after_reunify": {
+      "flagged": 1243595,
+      "total": 133452947,
+      "rate_pct": 0.9319
+    },
+    "after_split": {
+      "flagged": 1238005,
+      "total": 133459512,
+      "rate_pct": 0.9276
+    },
+    "after_autocorrect": {
+      "flagged": 663462,
+      "total": 133459512,
+      "rate_pct": 0.4971
+    }
+  },
+  "pre_sonnet_rate_pct": 0.4971,
+  "reduction_pct_relative": 55.1,
+  "residual_classification": {
+    "flagged": 663462,
+    "garbage": 60404,
+    "roman": 4906,
+    "recoverable": 598152,
+    "garbage_pct_of_corpus": 0.0453,
+    "recoverable_pct_of_corpus": 0.4482,
+    "garbage_pct_of_flagged": 9.1,
+    "by_rule": {
+      "garbage_repeat4": 44967,
+      "garbage_cons5": 8575,
+      "garbage_repeat3": 5115,
+      "garbage_toolong": 1697,
+      "garbage_mojibake": 50
+    }
+  },
+  "stage_corrections": {
+    "reunify_space": 623,
+    "reunify_break": 225418,
+    "reunify_xpage": 244,
+    "split": 5590,
+    "autocorrect_e1": 574543,
+    "autocorrect_e2": 0
+  },
+  "stage_cpu_seconds": {
+    "load": 67.9,
+    "reunify": 352.3,
+    "split": 1660.7,
+    "autocorrect": 2330.9
+  },
+  "wall_seconds": 395.9
+}

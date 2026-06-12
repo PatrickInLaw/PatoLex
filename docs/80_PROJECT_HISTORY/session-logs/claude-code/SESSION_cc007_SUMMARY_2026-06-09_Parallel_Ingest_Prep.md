@@ -569,6 +569,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Use: subtract roman from error count; garbage = re-OCR floor; ~0.436% recoverable = real target. Fold garbage/roman/recoverable split into cascade measurement next.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Procedural garbage filter").
 
+### Continuation 53 (2026-06-12) — Garbage filter refined (4+ not 3+) + integrated into cascade
+
+- Patrick: 3+ repeat too aggressive (fiancee→fianeee recoverable); long→splitter first; garbage collector must be IN the cascade. Implemented: **4+ repeat** for garbage + 3-repeat recoverability check; `_decompose_long` in split stage for run-ons; `classify_residual` is now an in-cascade stage reported in cascade_report.json.
+- **Answers 0.058 vs ~0.040:** the 3+→4+ change moved ~17k recoverable 3-repeats out → garbage **77,297 (0.058%) → 60,404 (0.0453%)**. The 3+ rule was the inflation (exactly as flagged). Long-decomp: split 4,805→5,590.
+- Final pre-sonnet residual: **0.0453% garbage floor + 0.4482% recoverable + 4,906 valid Romans** (of 0.4971% flagged). Run wall 6.6min (split+autocorrect are the cpu-heavy stages; from-split doesn't save much). Timer heartbeat confirmed firing.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Garbage filter refined + INTEGRATED into the cascade").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
