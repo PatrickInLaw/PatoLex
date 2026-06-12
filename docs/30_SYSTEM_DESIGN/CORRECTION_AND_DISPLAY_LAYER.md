@@ -279,6 +279,28 @@ the goal, and the reason the original curated-dictionary design was right.
   `sball`→shall) are HIGH-VALUE correction targets (each fixes thousands of occurrences) — the
   same validation pass that curates the vocab also yields these bulk fixes.
 
+## Singleton autocorrect (Patrick's idea) — the real lever on the tail (2026-06-11)
+Patrick: run the residual through autocorrect weighted toward corpus-attested words. The freq≥2
+passes (B de-merge, C spell) had SKIPPED the 385k singletons for safety (autocorrecting a freq-1
+token risks corrupting a rare real word). Tested corpus-weighted edit-1 autocorrect on a random
+8,000 singletons (`singleton_autocorrect_test.py`):
+- **confident fix (dominant corpus-attested edit-1) = 23.1% → ~89,000 of 385k.** Sample quality
+  high: `cisplayed→displayed`, `califorcia→california`, `appurtevances→appurtenances`,
+  `sufficiens→sufficient`, `fuperintendent→superintendent`, `impiisonment→imprisonment`,
+  `transzortation→transportation`. These are one-off typos the freq≥2 passes never touched.
+- ambiguous (multi-candidate, needs context/LLM) = 13.8% (~53k).
+- **no candidate (deep garbage / novel) = 63.1% (~243k)** — `eeee`-class, ≥26-char mashed tokens,
+  severe garbles; not close to any word, so autocorrect can't help (re-OCR / illegible floor).
+**Caveat:** corpus-frequency weighting occasionally picks a FREQUENT CORPUS ERROR as the target
+(`clther→cither`, `ofticia→officia`, `yality→ality`) — ~10–15% of the "confident" fixes. Mitigate
+by ALSO requiring the target be common in GENERAL English (not just corpus), and/or run it as a
+flagged reversible layer with an LLM pass on borderline cases.
+**Conclusion — corrects my earlier "tail is intractable" claim:** ~25–35% of the singleton tail
+is recoverable typos (the autocorrect lever), ~60% is deep unrecoverable garbage (the honest
+re-OCR floor), small remainder real-words. This is the most promising rate-reducer found; sequence
+it as: guarded corpus+English-weighted autocorrect on singletons → apply as reversible layer →
+re-measure residual → the deep-garbage 60% defines the true unrecoverable floor.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

@@ -444,6 +444,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Correct path: validate (LLM/Sonnet) the high-freq corpus vocab to split real-words from systematic-errors; systematic errors (secrion→section) are themselves high-value bulk fixes.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Corpus vocabulary: frequency ≠ validity").
 
+### Continuation 40 (2026-06-11) — Singleton autocorrect (Patrick's idea) = the real tail lever
+
+- Freq≥2 passes skipped the 385k singletons (autocorrecting freq-1 risks corrupting rare real words). Tested corpus-weighted edit-1 autocorrect on 8,000 sample (`singleton_autocorrect_test.py`): **23.1% confident fix (~89k of 385k)**, 13.8% ambiguous (~53k), 63.1% no-candidate/deep-garbage (~243k).
+- Confident sample mostly excellent (cisplayed→displayed, califorcia→california, fuperintendent→superintendent, impiisonment→imprisonment). These are one-off typos never processed before.
+- Caveat: corpus-freq weighting sometimes targets a FREQUENT CORPUS ERROR (clther→cither, ofticia→officia) ~10-15%; mitigate by also requiring general-English-common target + flagged reversible layer + LLM on borderline.
+- **Corrects my "tail intractable" claim:** ~25-35% recoverable typos, ~60% deep unrecoverable garbage (re-OCR floor), small real-word remainder. Most promising rate-reducer found.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Singleton autocorrect").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
