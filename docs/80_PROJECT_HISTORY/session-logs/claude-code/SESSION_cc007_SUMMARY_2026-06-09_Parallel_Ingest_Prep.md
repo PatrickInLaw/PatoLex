@@ -390,6 +390,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Fixes recorded durably: corrected `CORRECTION_AND_DISPLAY_LAYER.md` (was "missing source," now "resolver bug, file present"); new lesson `LESSON_2026-06-11_verify_source_dont_scope_to_handy.md`; memory `verify-dont-scope-to-handy`. **Rule: map source PDF by page-count match vs the bundle, never by filename; never declare "missing" from one folder — sweep both machines.**
 - **Both-machines sweep CLOSED (`hunt_1883.py` on 5080 + 5090):** the correct `1883-84_Code.pdf` (25,308 KB) and the 15pp `1883-84_Statutes.pdf` (580 KB) exist on **both** boxes, byte-identical sizes — confirming nothing was missing anywhere; the bug was purely the filename-based picker. (5090 page counts showed `?` only because its base Python312 lacks `fitz`; matching sizes confirm identity.) This is the cross-machine verification the new rule demands, actually carried out rather than assumed.
 
+### Continuation 33 (2026-06-11) — Sonnet adjudication expanded + residual characterized
+
+- **Expanded Sonnet text-adjudication** past the timid 541 floor → `text_corrections_overlay.tsv`: AUTO_SAFE 538 / SONNET_FIX 909 / SONNET_NAME 257 / KEEP 587 / GARBAGE_FLAG 361. **1,704 fix types / 58,700 occ** (vs 16,506 floor). Spot-check confirmed recoveries gemma had wrongly GARBAGE'd (pubhe→public, superin→superintendent, shaj→shall). Added a FRAGMENT_HOLD guard (output-not-a-word, e.g. gation→igation) — needs wordfreq box to finalize.
+- **Characterized full residual** (`residual_triage.tsv`, 467,978 types: 385,131 singletons): NAMELIKE **243,441 (52%)**, TYPO 146,770, NOISE 38,513, GARBLE 36,644, FRAGMENT 2,610.
+- **Q (Patrick): are eeee singletons filtered?** Partially — NOISE+GARBLE (~75K) quarantine most, but ~6,785 structural-garbage tokens still leak into TYPO/NAMELIKE. Filter real but not airtight.
+- **Q (Patrick): name dictionary for the rare names?** YES — highest-leverage move. NAMELIKE 243K conflates real surnames (karnette/migden/frusetta) with typos (pubhe). A census-surname + GNIS + given-name gazetteer splits them deterministically, reclassifying a big chunk of "garble" as real vocab (lowers true-error rate). Extends `ca_gazetteer.py` (319 names today).
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Text-correction overlay — ... residual characterized").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

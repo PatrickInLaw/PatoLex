@@ -120,6 +120,30 @@ resolving deterministic-first per Patrick's direction:
   source_page. **Lesson: do not infer a source file from a convenient name — verify it
   against what the bundle was actually built from.**
 
+## Text-correction overlay — Sonnet adjudication expanded + residual characterized (2026-06-11, cc007)
+**Sonnet adjudication consolidated** (`text_corrections_overlay.tsv`): the 2,655 freq≥10
+ambiguous types, expanded past the timid 541 both-models-agree floor to Sonnet's full
+authoritative set (Sonnet wins disagreements ~27/30). Tiers: AUTO_SAFE 538 / SONNET_FIX 909 /
+SONNET_NAME 257 / KEEP 587 / GARBAGE_FLAG 361 / FRAGMENT_HOLD 2. **Applied corrections: 1,704
+types covering 58,700 occurrences** (vs 16,506 under the old floor). A guard holds "fixes" whose
+*output* is itself a non-word (line-split fragments mis-cast as substitutions, e.g.
+`gation→igation`); the wordfreq-based guard must run on a box with `wordfreq` (the 5080
+orchestrator interpreter lacks it) before application.
+
+**Residual fully characterized** (`residual_triage.tsv`, 467,978 types = 385,131 singletons +
+80,192 freq 2–9 + 2,655 freq≥10). Triage categories: NAMELIKE 243,441 (52%!), TYPO 146,770,
+NOISE 38,513, GARBLE 36,644, FRAGMENT 2,610.
+- **Structural garbage ("eeee"/cons-run/no-vowel): 67,201 types (63,695 singletons).** NOISE+
+  GARBLE (~75K) quarantine most of it, BUT **~6,785 garbage tokens still leak into TYPO (2,166)
+  + NAMELIKE (4,619)** — the procedural garbage filter is real but not airtight; tighten it so
+  no `eeee`-class token rides in a fixable/real bucket.
+- **NAMELIKE (243K, 52% of residual) is a heuristic mix of REAL surnames (`karnette`, `migden`,
+  `frusetta`, `escutia`) and OCR typos (`pubhe`, `appheation`).** A real **name gazetteer**
+  (US Census surnames ~160K + SSA given names + GNIS place names) would deterministically split
+  real-name→KEEP from typo→FIX — the single highest-leverage move on the residual, and it
+  directly lowers the true-error rate (much of the 0.44–0.56% "garble" is real proper nouns the
+  dictionary lacks). Extends the existing `ca_gazetteer.py` (only 319 names today).
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

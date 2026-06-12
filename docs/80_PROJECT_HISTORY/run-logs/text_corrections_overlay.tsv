@@ -1,0 +1,2655 @@
+token	freq	corrected	tier	sonnet_verdict	gemma_verdict
+lambra	1591	Alhambra	SONNET_NAME	NAME	KEEP
+cight	1576	eight	AUTO_SAFE	FIX	FIX
+pubhe	746	public	SONNET_FIX	FIX	GARBAGE
+cence	738	cense	SONNET_FIX	FIX	FIX
+erty	687		KEEP	FIX	GARBAGE
+cuar	669	car	AUTO_SAFE	FIX	FIX
+superin	464	superintendent	SONNET_FIX	FIX	GARBAGE
+anvear	430	appear	SONNET_FIX	FIX	GARBAGE
+ereated	420	created	AUTO_SAFE	FIX	FIX
+ducheny	414	Ducheny	SONNET_NAME	NAME	NAME
+appheation	410	application	SONNET_FIX	FIX	GARBAGE
+karnette	397	Karnette	SONNET_NAME	NAME	NAME
+escutia	389	Escutia	SONNET_NAME	NAME	NAME
+xiiib	387		KEEP	KEEP	GARBAGE
+pensation	346	compensation	SONNET_FIX	FIX	FIX
+margett	340	Margett	SONNET_NAME	NAME	NAME
+aroner	327	Aroner	SONNET_NAME	NAME	GARBAGE
+schoolage	318	school-age	SONNET_FIX	FIX	FIX
+frusetta	306	Frusetta	SONNET_NAME	NAME	NAME
+sliag	293		GARBAGE_FLAG	GARBAGE	FIX
+migden	287	Migden	SONNET_NAME	NAME	GARBAGE
+froin	279	from	SONNET_FIX	FIX	GARBAGE
+rmpp	267		GARBAGE_FLAG	GARBAGE	GARBAGE
+canse	263	cause	SONNET_FIX	FIX	FIX
+cwil	262	civil	SONNET_FIX	FIX	KEEP
+cmsp	256		GARBAGE_FLAG	GARBAGE	FIX
+nonsex	255		GARBAGE_FLAG	GARBAGE	GARBAGE
+kaloogian	238	Kaloogian	SONNET_NAME	NAME	NAME
+poochigian	238	Poochigian	SONNET_NAME	NAME	NAME
+newsection	228	new section	SONNET_FIX	FIX	FIX
+cahforma	222	california	AUTO_SAFE	FIX	FIX
+creck	221	creek	AUTO_SAFE	FIX	FIX
+ceedings	220	proceedings	AUTO_SAFE	FIX	FIX
+priation	210	appropriation	SONNET_FIX	FIX	FIX
+ceee	205		GARBAGE_FLAG	GARBAGE	GARBAGE
+earrier	204	carrier	AUTO_SAFE	FIX	FIX
+mterest	203	interest	SONNET_FIX	FIX	FIX
+onequarter	202	one-quarter	SONNET_FIX	FIX	FIX
+weggeland	202	Weggeland	SONNET_NAME	NAME	NAME
+tioned	200		KEEP	FIX	FIX
+frorn	199	from	SONNET_FIX	FIX	GARBAGE
+eenter	197	center	AUTO_SAFE	FIX	FIX
+clets	193	cleats	SONNET_FIX	FIX	FIX
+eent	192	cent	SONNET_FIX	FIX	FIX
+subitems	192		KEEP	KEEP	FIX
+diserction	191	discretion	AUTO_SAFE	FIX	FIX
+remanufacturer	191		KEEP	KEEP	FIX
+quired	190	required	SONNET_FIX	FIX	GARBAGE
+ceeee	187		GARBAGE_FLAG	GARBAGE	GARBAGE
+shaj	183	shall	SONNET_FIX	FIX	FIX
+ttem	183	item	AUTO_SAFE	FIX	FIX
+sonth	179	month	SONNET_FIX	FIX	FIX
+ptember	178	september	AUTO_SAFE	FIX	FIX
+housecar	176		KEEP	KEEP	NAME
+thereo	176	thereof	AUTO_SAFE	FIX	FIX
+eeeeeeeee	174		GARBAGE_FLAG	GARBAGE	GARBAGE
+nonphysician	170		KEEP	KEEP	KEEP
+retary	169	secretary	SONNET_FIX	FIX	FIX
+legisla	168	legislature	SONNET_FIX	FIX	FIX
+ercated	166	enacted	AUTO_SAFE	FIX	FIX
+bioanalyst	162		KEEP	KEEP	KEEP
+followmg	155	following	AUTO_SAFE	FIX	FIX
+gation	155	igation	SONNET_FIX	FIX	FIX
+elock	154	clock	SONNET_FIX	FIX	FIX
+omeers	154	officers	SONNET_FIX	FIX	NAME
+whon	154	who	AUTO_SAFE	FIX	FIX
+ceeeeee	153		GARBAGE_FLAG	GARBAGE	GARBAGE
+zation	151	ization	SONNET_FIX	FIX	FIX
+enene	149		GARBAGE_FLAG	GARBAGE	FIX
+repressuring	145		KEEP	FIX	FIX
+reregisters	145		KEEP	KEEP	FIX
+reflectorized	140		KEEP	KEEP	GARBAGE
+hmited	139	limited	AUTO_SAFE	FIX	FIX
+porated	139	incorporated	SONNET_FIX	FIX	FIX
+lje	138	the	SONNET_FIX	FIX	FIX
+certam	136	certain	SONNET_FIX	FIX	GARBAGE
+strued	136	construed	SONNET_FIX	FIX	FIX
+indorser	134		KEEP	KEEP	FIX
+norpseudoephedrine	132		KEEP	KEEP	GARBAGE
+pubheation	131	publication	SONNET_FIX	FIX	GARBAGE
+islais	130	Islais	SONNET_NAME	NAME	GARBAGE
+munici	130	municipal	SONNET_FIX	FIX	GARBAGE
+additiona	129	additional	AUTO_SAFE	FIX	FIX
+ceeding	129	proceeding	SONNET_FIX	FIX	FIX
+emsting	127	existing	SONNET_FIX	FIX	GARBAGE
+ferred	126	referred	SONNET_FIX	FIX	FIX
+omcers	126	officers	SONNET_FIX	FIX	FIX
+terest	126	interest	SONNET_FIX	FIX	FIX
+salesyard	124		KEEP	KEEP	GARBAGE
+tificate	123	certificate	SONNET_FIX	FIX	GARBAGE
+cuav	122		GARBAGE_FLAG	GARBAGE	KEEP
+portation	121	transportation	SONNET_FIX	FIX	GARBAGE
+providec	120	provided	AUTO_SAFE	FIX	FIX
+ately	119	lately	SONNET_FIX	FIX	FIX
+codlin	119	codling	SONNET_FIX	FIX	GARBAGE
+mencing	119	commencing	SONNET_FIX	FIX	FIX
+structed	119	constructed	SONNET_FIX	FIX	FIX
+szorion	119		GARBAGE_FLAG	GARBAGE	NAME
+beheve	117	believe	SONNET_FIX	FIX	FIX
+encumbrancers	116		KEEP	KEEP	FIX
+misde	116	misdemeanor	SONNET_FIX	FIX	GARBAGE
+ciation	114	citation	AUTO_SAFE	FIX	FIX
+eeeeeeeeee	114		GARBAGE_FLAG	GARBAGE	GARBAGE
+tuly	114	july	AUTO_SAFE	FIX	FIX
+daty	113	duty	SONNET_FIX	FIX	FIX
+construcd	112	construed	AUTO_SAFE	FIX	FIX
+cceeeee	111		GARBAGE_FLAG	GARBAGE	GARBAGE
+bronshvag	110		GARBAGE_FLAG	GARBAGE	GARBAGE
+eneeee	110		GARBAGE_FLAG	GARBAGE	GARBAGE
+payrate	110	pay rate	SONNET_FIX	FIX	FIX
+puble	110	public	SONNET_FIX	FIX	FIX
+rnay	110	may	SONNET_FIX	FIX	KEEP
+agricul	109	agricultural	SONNET_FIX	FIX	FIX
+cipal	108	principal	SONNET_FIX	FIX	GARBAGE
+eross	108	cross	SONNET_FIX	FIX	FIX
+stantially	108	substantially	SONNET_FIX	FIX	FIX
+setencich	106	Setencich	SONNET_NAME	NAME	GARBAGE
+eters	105	meters	SONNET_FIX	FIX	FIX
+appropris	104	appropriates	SONNET_FIX	FIX	GARBAGE
+ceive	104	receive	SONNET_FIX	FIX	GARBAGE
+rict	104	district	SONNET_FIX	FIX	KEEP
+appheable	103	applicable	SONNET_FIX	FIX	GARBAGE
+inade	103	made	SONNET_FIX	FIX	FIX
+teaa	102	term	SONNET_FIX	FIX	FIX
+jurisdic	101	jurisdiction	SONNET_FIX	FIX	FIX
+nonmonetary	101		KEEP	KEEP	KEEP
+achon	100	action	SONNET_FIX	FIX	GARBAGE
+appor	100	apportion	SONNET_FIX	FIX	FIX
+ceeeeeee	100		GARBAGE_FLAG	GARBAGE	GARBAGE
+surance	100	insurance	SONNET_FIX	FIX	FIX
+sacss	98	Sachs	SONNET_NAME	NAME	GARBAGE
+meanor	97	misdemeanor	SONNET_FIX	FIX	FIX
+urder	97	murder	SONNET_FIX	FIX	FIX
+aunum	96	annum	SONNET_FIX	FIX	NAME
+appheant	95	applicant	SONNET_FIX	FIX	GARBAGE
+seventytwo	95	seventy-two	SONNET_FIX	FIX	KEEP
+thesum	95		GARBAGE_FLAG	GARBAGE	FIX
+thorized	95	authorized	SONNET_FIX	FIX	FIX
+approprin	94	appropriation	SONNET_FIX	FIX	GARBAGE
+slungshot	93		KEEP	KEEP	FIX
+stahitorv	93	statutory	SONNET_FIX	FIX	GARBAGE
+distnet	92	district	SONNET_FIX	FIX	FIX
+roadmasters	91		KEEP	KEEP	NAME
+cceee	90		GARBAGE_FLAG	GARBAGE	GARBAGE
+earried	90	carried	AUTO_SAFE	FIX	FIX
+nonservice-connected	90		KEEP	KEEP	KEEP
+eeeeeeeeeee	89		GARBAGE_FLAG	GARBAGE	GARBAGE
+joun	89	join	SONNET_FIX	FIX	NAME
+deukmbejian	88	Deukmejian	SONNET_NAME	NAME	NAME
+salanes	88	salaries	SONNET_FIX	FIX	FIX
+twenty-cighth	88	twenty-eighth	SONNET_FIX	FIX	GARBAGE
+vight	88	right	AUTO_SAFE	FIX	FIX
+onefourth	87	one-fourth	SONNET_FIX	FIX	FIX
+distributees	86		KEEP	KEEP	FIX
+edness	86	indebtedness	SONNET_FIX	FIX	FIX
+pescetti	86	Pescetti	SONNET_NAME	NAME	NAME
+xiiia	86		KEEP	KEEP	GARBAGE
+jobn	84	john	AUTO_SAFE	FIX	FIX
+subhaulers	84		KEEP	KEEP	GARBAGE
+heenses	83	licenses	SONNET_FIX	FIX	FIX
+nonservice	83		KEEP	KEEP	GARBAGE
+sunenor	82	superior	SONNET_FIX	FIX	FIX
+nelap	81	NELAP	SONNET_NAME	NAME	FIX
+tribution	81	distribution	SONNET_FIX	FIX	FIX
+cnar	80	char	SONNET_FIX	FIX	FIX
+penses	80	expenses	SONNET_FIX	FIX	FIX
+sixtyone	80	sixty-one	SONNET_FIX	FIX	FIX
+wueereeas	80	whereas	SONNET_FIX	FIX	GARBAGE
+eneneeee	79		GARBAGE_FLAG	GARBAGE	GARBAGE
+iners	79	miners	AUTO_SAFE	FIX	FIX
+innavigable	79	unnavigable	AUTO_SAFE	FIX	FIX
+snech	79		GARBAGE_FLAG	GARBAGE	GARBAGE
+trary	79	contrary	SONNET_FIX	FIX	FIX
+ceeeeeeee	78		GARBAGE_FLAG	GARBAGE	GARBAGE
+pomt	78	point	SONNET_FIX	FIX	FIX
+tpz	78		GARBAGE_FLAG	GARBAGE	KEEP
+mination	77	termination	SONNET_FIX	FIX	FIX
+registerable	77	registrable	AUTO_SAFE	FIX	FIX
+eeeneeee	76		GARBAGE_FLAG	GARBAGE	GARBAGE
+mobilehome-manufactured	76		KEEP	KEEP	KEEP
+cceeeeee	75		GARBAGE_FLAG	GARBAGE	GARBAGE
+nonattorney	75		KEEP	KEEP	KEEP
+subvened	75		KEEP	KEEP	FIX
+cnuct	74	enact	SONNET_FIX	FIX	GARBAGE
+deeree	73	decree	SONNET_FIX	FIX	FIX
+fricot	73	Fricot	SONNET_NAME	NAME	FIX
+frora	73	from	SONNET_FIX	FIX	FIX
+bered	72	numbered	SONNET_FIX	FIX	FIX
+nondistrict	72		KEEP	KEEP	KEEP
+theretor	72	therefor	SONNET_FIX	FIX	FIX
+cedure	71	procedure	SONNET_FIX	FIX	GARBAGE
+deukmbjian	71	Deukmejian	SONNET_NAME	NAME	NAME
+fiood	71	flood	AUTO_SAFE	FIX	FIX
+istration	71	administration	SONNET_FIX	FIX	FIX
+jeases	71	leases	AUTO_SAFE	FIX	FIX
+nejedly-hart	71	Nejedly-Hart	SONNET_NAME	NAME	NAME
+standardbreds	71		KEEP	KEEP	KEEP
+cortain	70	certain	AUTO_SAFE	FIX	FIX
+eeeeeeeeeeee	70		GARBAGE_FLAG	GARBAGE	GARBAGE
+noncontracting	70		KEEP	KEEP	KEEP
+subpara	70		KEEP	KEEP	FIX
+umted	70	united	AUTO_SAFE	FIX	FIX
+vendorization	70		KEEP	KEEP	GARBAGE
+wuerezas	70	whereas	SONNET_FIX	FIX	NAME
+nonrecycled	69		KEEP	KEEP	KEEP
+seventysix	69	seventy-six	SONNET_FIX	FIX	KEEP
+trusteed	69		KEEP	FIX	FIX
+xijib	69		KEEP	KEEP	NAME
+contaming	68	containing	AUTO_SAFE	FIX	FIX
+eeneeee	68		GARBAGE_FLAG	GARBAGE	GARBAGE
+etary	68	dietary	SONNET_FIX	FIX	GARBAGE
+sictta	68	dicta	AUTO_SAFE	FIX	FIX
+subcustodian	68		KEEP	KEEP	KEEP
+cfis	67		GARBAGE_FLAG	GARBAGE	GARBAGE
+sectionized	67	sectioned	AUTO_SAFE	FIX	FIX
+sereen	67	screen	AUTO_SAFE	FIX	FIX
+sinkyone	66	Sinkyone	SONNET_NAME	NAME	GARBAGE
+cceeeeeee	65		GARBAGE_FLAG	GARBAGE	GARBAGE
+eitv	65	city	SONNET_FIX	FIX	GARBAGE
+faet	65	fact	AUTO_SAFE	FIX	FIX
+noncommunity	65		KEEP	KEEP	KEEP
+nongroup	65		KEEP	KEEP	FIX
+asamby	64	assembly	SONNET_FIX	FIX	GARBAGE
+atany	64	at any	SONNET_FIX	FIX	FIX
+ccceee	64		GARBAGE_FLAG	GARBAGE	GARBAGE
+empow	64	empower	SONNET_FIX	FIX	GARBAGE
+lishment	64	establishment	SONNET_FIX	FIX	FIX
+ornia	64	california	SONNET_FIX	FIX	GARBAGE
+nonglaring	63		KEEP	KEEP	KEEP
+panied	63	accompanied	SONNET_FIX	FIX	FIX
+posttrial	63		KEEP	KEEP	KEEP
+sixtysix	63	sixty-six	SONNET_FIX	FIX	KEEP
+counse	62	counsel	AUTO_SAFE	FIX	FIX
+inanner	62	manner	SONNET_FIX	FIX	GARBAGE
+nonreimbursable	62		KEEP	KEEP	KEEP
+perannum	62	per annum	SONNET_FIX	FIX	GARBAGE
+phenylpiperidine	62		KEEP	KEEP	KEEP
+sixtytwo	62	sixty-two	SONNET_FIX	FIX	KEEP
+calforma	61	california	AUTO_SAFE	FIX	FIX
+ercek	61	creek	SONNET_FIX	FIX	GARBAGE
+hbrary	61	library	SONNET_FIX	FIX	GARBAGE
+ifno	61	if no	SONNET_FIX	FIX	FIX
+jines	61	lines	AUTO_SAFE	FIX	FIX
+nonpossessory	61		KEEP	KEEP	KEEP
+prograrn	61	program	AUTO_SAFE	FIX	FIX
+calstars	60	CalSTARS	SONNET_NAME	NAME	GARBAGE
+ccceeee	60		GARBAGE_FLAG	GARBAGE	GARBAGE
+cratary	60	secretary	SONNET_FIX	FIX	GARBAGE
+eation	60	creation	SONNET_FIX	FIX	GARBAGE
+lcast	60	least	AUTO_SAFE	FIX	FIX
+nonurbanized	60		KEEP	KEEP	KEEP
+reconveyed	60		KEEP	KEEP	KEEP
+tificates	60	certificates	SONNET_FIX	FIX	GARBAGE
+toadd	60	to add	SONNET_FIX	FIX	FIX
+aanestad	59	Aanestad	SONNET_NAME	NAME	NAME
+berg-nejedly	59	Berg-Nejedly	SONNET_NAME	NAME	NAME
+bronzan	59	Bronzan	SONNET_NAME	NAME	FIX
+eges	59	ages	AUTO_SAFE	FIX	FIX
+employec	59	employee	AUTO_SAFE	FIX	FIX
+eops	59	cops	SONNET_FIX	FIX	GARBAGE
+executorships	59		KEEP	KEEP	KEEP
+nonaluminum	59		KEEP	KEEP	KEEP
+nonlegislative	59		KEEP	KEEP	KEEP
+ollice	59	office	SONNET_FIX	FIX	GARBAGE
+rehef	59	relief	SONNET_FIX	FIX	FIX
+teense	59	license	SONNET_FIX	FIX	FIX
+ceeeeeeeee	58		GARBAGE_FLAG	GARBAGE	GARBAGE
+fications	58	specifications	SONNET_FIX	FIX	GARBAGE
+jamps	58	james	SONNET_FIX	FIX	NAME
+nonwithdrawable	58		KEEP	KEEP	KEEP
+tributions	58	contributions	SONNET_FIX	FIX	FIX
+anuum	57	annum	SONNET_FIX	FIX	GARBAGE
+brary	57	library	SONNET_FIX	FIX	NAME
+ccceeeee	57		GARBAGE_FLAG	GARBAGE	GARBAGE
+dohars	57	dollars	SONNET_FIX	FIX	GARBAGE
+eeeeeees	57		GARBAGE_FLAG	GARBAGE	GARBAGE
+eneee	57		GARBAGE_FLAG	GARBAGE	GARBAGE
+ercate	57	create	SONNET_FIX	FIX	FIX
+ereation	57	creation	AUTO_SAFE	FIX	FIX
+guilucos	57		GARBAGE_FLAG	GARBAGE	GARBAGE
+manv	57	many	AUTO_SAFE	FIX	FIX
+mmimum	57	minimum	AUTO_SAFE	FIX	FIX
+nonproject	57		KEEP	KEEP	GARBAGE
+recodified	57		KEEP	KEEP	FIX
+rights-ofway	57	rights-of-way	SONNET_FIX	FIX	KEEP
+sinte	57	since	SONNET_FIX	FIX	FIX
+cuses	56	causes	SONNET_FIX	FIX	FIX
+nonprobate	56		KEEP	KEEP	KEEP
+calipatria	55	Calipatria	SONNET_NAME	NAME	NAME
+cighty-five	55	eighty-five	SONNET_FIX	FIX	GARBAGE
+ehminating	55	eliminating	AUTO_SAFE	FIX	FIX
+nonaccepting	55		KEEP	KEEP	GARBAGE
+yead	55	year	AUTO_SAFE	FIX	FIX
+anee	54	ance	SONNET_FIX	FIX	GARBAGE
+construet	54	construct	SONNET_FIX	FIX	FIX
+issuec	54	issued	AUTO_SAFE	FIX	FIX
+nonparking	54		KEEP	KEEP	KEEP
+rolleall	54		GARBAGE_FLAG	GARBAGE	GARBAGE
+subse	54	subsequent	SONNET_FIX	FIX	GARBAGE
+constituphrase	53		GARBAGE_FLAG	GARBAGE	GARBAGE
+enses	53	licenses	SONNET_FIX	FIX	FIX
+firet	53	first	AUTO_SAFE	FIX	FIX
+hibited	53	prohibited	SONNET_FIX	FIX	FIX
+inelnded	53	included	AUTO_SAFE	FIX	FIX
+microphotographs	53		KEEP	KEEP	KEEP
+pletion	53	completion	SONNET_FIX	FIX	GARBAGE
+ploqtam	53		GARBAGE_FLAG	GARBAGE	GARBAGE
+subfranchisor	53		KEEP	KEEP	KEEP
+thority	53	authority	SONNET_FIX	FIX	FIX
+cccee	52		GARBAGE_FLAG	GARBAGE	GARBAGE
+counell	52	council	SONNET_FIX	FIX	FIX
+jomtly	52	jointly	AUTO_SAFE	FIX	FIX
+newsectin	52	new section	SONNET_FIX	FIX	GARBAGE
+phenylacetone	52		KEEP	KEEP	KEEP
+apml	51	april	SONNET_FIX	FIX	FIX
+cytotechnologist	51		KEEP	KEEP	KEEP
+eraft	51	draft	AUTO_SAFE	FIX	FIX
+newsecton	51	new section	SONNET_FIX	FIX	GARBAGE
+nondomiciliary	51		KEEP	KEEP	FIX
+nonschool	51		KEEP	KEEP	FIX
+onethird	51	one-third	SONNET_FIX	FIX	KEEP
+penod	51	period	SONNET_FIX	FIX	NAME
+potition	51	petition	AUTO_SAFE	FIX	FIX
+sonnel	51	personnel	SONNET_FIX	FIX	GARBAGE
+stamislaus	51	Stanislaus	SONNET_NAME	NAME	NAME
+sxorion	51		GARBAGE_FLAG	GARBAGE	NAME
+tirne	51	time	AUTO_SAFE	FIX	FIX
+vards	51	yards	SONNET_FIX	FIX	FIX
+agement	50	management	SONNET_FIX	FIX	FIX
+apnum	50	annum	SONNET_FIX	FIX	GARBAGE
+appropriaappropriated	50	appropriated	SONNET_FIX	FIX	GARBAGE
+cleeted	50	elected	SONNET_FIX	FIX	GARBAGE
+gabilan	50	Gabilan	SONNET_NAME	NAME	NAME
+ifornia	50	california	SONNET_FIX	FIX	FIX
+incorpora	50	incorporates	SONNET_FIX	FIX	FIX
+neonatorum	50		KEEP	KEEP	KEEP
+sctc	50	section	SONNET_FIX	FIX	FIX
+semor	50	senior	SONNET_FIX	FIX	NAME
+annnm	49	annum	SONNET_FIX	FIX	NAME
+buperin	49	superintendent	SONNET_FIX	FIX	GARBAGE
+contamers	49	containers	SONNET_FIX	FIX	FIX
+eeeeeeeeeeeee	49		GARBAGE_FLAG	GARBAGE	GARBAGE
+micrographics	49		KEEP	KEEP	KEEP
+neneeee	49		GARBAGE_FLAG	GARBAGE	GARBAGE
+nonemployee	49		KEEP	KEEP	FIX
+omee	49	office	SONNET_FIX	FIX	GARBAGE
+ouly	49	only	SONNET_FIX	FIX	FIX
+rightsof-way	49	rights-of-way	SONNET_FIX	FIX	KEEP
+deerce	48	decree	SONNET_FIX	FIX	FIX
+ecee	48		GARBAGE_FLAG	GARBAGE	FIX
+jnly	48	july	SONNET_FIX	FIX	FIX
+nonrepairable	48		KEEP	KEEP	FIX
+nonsworn	48		KEEP	KEEP	FIX
+oddnumbered	48	odd-numbered	SONNET_FIX	FIX	FIX
+reletting	48		KEEP	KEEP	FIX
+xiti	48		KEEP	KEEP	GARBAGE
+ccceeeeee	47		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeeees	47		GARBAGE_FLAG	GARBAGE	GARBAGE
+ercam	47	cream	AUTO_SAFE	FIX	FIX
+eusting	47	existing	SONNET_FIX	FIX	FIX
+n-ethylephedrine	47		KEEP	KEEP	KEEP
+preaddressed	47		KEEP	KEEP	FIX
+thesaid	47	the said	SONNET_FIX	FIX	KEEP
+zanjas	47		KEEP	KEEP	NAME
+acerned	46	concerned	SONNET_FIX	FIX	FIX
+deliverv	46	delivery	AUTO_SAFE	FIX	FIX
+earrving	46	carrying	SONNET_FIX	FIX	FIX
+erest	46	interest	SONNET_FIX	FIX	FIX
+lampara	46		KEEP	KEEP	NAME
+lempert-keene-seastrand	46	Lempert-Keene-Seastrand	SONNET_NAME	NAME	NAME
+mghts	46	rights	SONNET_FIX	FIX	FIX
+mills-alquist-deddeh	46	Mills-Alquist-Deddeh	SONNET_NAME	NAME	NAME
+n-methylephedrine	46		KEEP	KEEP	KEEP
+noncontract	46		KEEP	KEEP	GARBAGE
+odispo	46	Obispo	SONNET_NAME	NAME	GARBAGE
+aequiring	45	acquiring	AUTO_SAFE	FIX	FIX
+gations	45	obligations	SONNET_FIX	FIX	FIX
+monagan	45	Monagan	SONNET_NAME	NAME	NAME
+nondecay	45		KEEP	KEEP	KEEP
+nondelinquent	45		KEEP	KEEP	KEEP
+nonhospital	45		KEEP	KEEP	KEEP
+seventyone	45	seventy-one	SONNET_FIX	FIX	FIX
+eeeeeeeeees	44		GARBAGE_FLAG	GARBAGE	GARBAGE
+hearme	44		GARBAGE_FLAG	GARBAGE	GARBAGE
+incorpo	44	incorporates	SONNET_FIX	FIX	FIX
+nonprotected	44		KEEP	KEEP	FIX
+steerers	44		KEEP	KEEP	FIX
+uncler	44	unclear	SONNET_FIX	FIX	FIX
+vuich	44	such	AUTO_SAFE	FIX	FIX
+xiia	44		KEEP	KEEP	GARBAGE
+anveles	43	Angeles	SONNET_NAME	NAME	GARBAGE
+appropriain	43	appropriation	AUTO_SAFE	FIX	FIX
+cighty-three	43	eighty-three	SONNET_FIX	FIX	FIX
+coer	43	cover	SONNET_FIX	FIX	FIX
+drytown	43	Drytown	SONNET_NAME	NAME	NAME
+hercinabove	43	hereinabove	SONNET_FIX	FIX	GARBAGE
+istrator	43	administrator	AUTO_SAFE	FIX	FIX
+licensce	43	license	AUTO_SAFE	FIX	FIX
+nonmerit	43		KEEP	KEEP	KEEP
+terins	43	terms	SONNET_FIX	FIX	GARBAGE
+bation	42	probation	SONNET_FIX	FIX	FIX
+butions	42	contributions	SONNET_FIX	FIX	FIX
+certineate	42	certificate	AUTO_SAFE	FIX	FIX
+dihydrocodeinone	42		KEEP	KEEP	KEEP
+eeeeeeeeeeeeee	42		GARBAGE_FLAG	GARBAGE	GARBAGE
+heensee	42	licensee	SONNET_FIX	FIX	GARBAGE
+nonconfining	42		KEEP	KEEP	KEEP
+onehundredths	42	one-hundredths	SONNET_FIX	FIX	KEEP
+rnade	42	made	AUTO_SAFE	FIX	FIX
+roncovieri	42	Roncovieri	SONNET_NAME	NAME	NAME
+stule	42	statute	SONNET_FIX	FIX	FIX
+tified	42	certified	AUTO_SAFE	FIX	FIX
+audiometrist	41		KEEP	KEEP	FIX
+cahformia	41	california	SONNET_FIX	FIX	NAME
+depu	41	deputy	SONNET_FIX	FIX	GARBAGE
+domenigoni	41	Domenigoni	SONNET_NAME	NAME	NAME
+eceeee	41		GARBAGE_FLAG	GARBAGE	GARBAGE
+exeented	41	executed	SONNET_FIX	FIX	FIX
+fortytwo	41	forty-two	SONNET_FIX	FIX	KEEP
+honses	41	houses	AUTO_SAFE	FIX	FIX
+jtpa	41		KEEP	KEEP	GARBAGE
+nonassisted	41		KEEP	KEEP	FIX
+pledgees	41		KEEP	KEEP	FIX
+privatizer	41		KEEP	KEEP	FIX
+rectly	41	directly	AUTO_SAFE	FIX	FIX
+rutes	41	rules	AUTO_SAFE	FIX	FIX
+siskivou	41	Siskiyou	SONNET_NAME	NAME	GARBAGE
+statcs	41	states	AUTO_SAFE	FIX	FIX
+torth	41	forth	AUTO_SAFE	FIX	FIX
+annim	40	annum	SONNET_FIX	FIX	NAME
+appropna	40	appropriation	SONNET_FIX	FIX	GARBAGE
+chises	40	franchises	SONNET_FIX	FIX	FIX
+dations	40	foundations	SONNET_FIX	FIX	FIX
+demulsifiers	40		KEEP	KEEP	FIX
+elee	40	else	SONNET_FIX	FIX	NAME
+exeention	40	exemption	SONNET_FIX	FIX	FIX
+inaking	40	making	SONNET_FIX	FIX	FIX
+inws	40	laws	SONNET_FIX	FIX	GARBAGE
+midpeninsula	40		KEEP	KEEP	NAME
+misdemeanants	40		KEEP	KEEP	FIX
+nonprepackaged	40		KEEP	KEEP	GARBAGE
+ppropria	40	appropriation	SONNET_FIX	FIX	GARBAGE
+revolv	40	revolve	AUTO_SAFE	FIX	FIX
+audiometrists	39		KEEP	KEEP	KEEP
+btals	39	totals	SONNET_FIX	FIX	GARBAGE
+caminetti	39	Caminetti	SONNET_NAME	NAME	NAME
+compensability	39		KEEP	KEEP	GARBAGE
+cost-of-hving	39	cost-of-living	SONNET_FIX	FIX	GARBAGE
+displaved	39	displayed	AUTO_SAFE	FIX	FIX
+forestwide	39		KEEP	KEEP	FIX
+fortyone	39	forty-one	SONNET_FIX	FIX	FIX
+inany	39	in any	SONNET_FIX	FIX	FIX
+levving	39	levying	AUTO_SAFE	FIX	FIX
+ninetysix	39	ninety-six	SONNET_FIX	FIX	KEEP
+nonerasable	39		KEEP	KEEP	GARBAGE
+nonfederally	39		KEEP	KEEP	KEEP
+nonpotable	39		KEEP	KEEP	KEEP
+reneal	39	repeal	AUTO_SAFE	FIX	FIX
+tations	39	stations	AUTO_SAFE	FIX	FIX
+termof	39	term of	SONNET_FIX	FIX	GARBAGE
+uncreamed	39		GARBAGE_FLAG	GARBAGE	GARBAGE
+appropriaotherwise	38	appropriation otherwise	SONNET_FIX	FIX	GARBAGE
+commander-in-chicf	38	commander-in-chief	SONNET_FIX	FIX	GARBAGE
+culy	38	july	AUTO_SAFE	FIX	FIX
+fected	38	affected	SONNET_FIX	FIX	GARBAGE
+milias	38	milia	SONNET_FIX	FIX	KEEP
+nonhandicapped	38		KEEP	KEEP	KEEP
+nonpromotional	38		KEEP	KEEP	KEEP
+nonsmall	38		KEEP	KEEP	KEEP
+offunds	38	of funds	SONNET_FIX	FIX	GARBAGE
+proeceding	38	proceeding	AUTO_SAFE	FIX	FIX
+secunty	38	security	AUTO_SAFE	FIX	FIX
+selpas	38	salpas	SONNET_FIX	FIX	GARBAGE
+sucli	38	such	SONNET_FIX	FIX	GARBAGE
+trar	38	registrar	SONNET_FIX	FIX	GARBAGE
+twentv-five	38	twenty-five	SONNET_FIX	FIX	GARBAGE
+cerns	37	concerns	SONNET_FIX	FIX	GARBAGE
+counhes	37	counties	SONNET_FIX	FIX	FIX
+drawal	37	withdrawal	SONNET_FIX	FIX	FIX
+eeeeeeees	37		GARBAGE_FLAG	GARBAGE	GARBAGE
+incumbrancers	37		KEEP	KEEP	FIX
+ional	37	tional	SONNET_FIX	FIX	GARBAGE
+limita	37	limitation	SONNET_FIX	FIX	FIX
+meorporated	37	incorporated	SONNET_FIX	FIX	GARBAGE
+neeee	37		GARBAGE_FLAG	GARBAGE	FIX
+obliga	37	obligation	SONNET_FIX	FIX	FIX
+polico	37	police	AUTO_SAFE	FIX	FIX
+pupus	37	lupus	SONNET_FIX	FIX	GARBAGE
+saie	37	sale	SONNET_FIX	FIX	FIX
+setoffs	37		KEEP	KEEP	FIX
+shobi-zue	37		KEEP	KEEP	GARBAGE
+sisting	37	consisting	SONNET_FIX	FIX	FIX
+subdistributor	37		KEEP	KEEP	KEEP
+twonty-five	37	twenty-five	AUTO_SAFE	FIX	FIX
+wuheereeas	37	whereas	SONNET_FIX	FIX	GARBAGE
+cightcon	36	eighteen	SONNET_FIX	FIX	GARBAGE
+clate	36	date	SONNET_FIX	FIX	FIX
+douars	36	dollars	SONNET_FIX	FIX	GARBAGE
+dupheate	36	duplicate	SONNET_FIX	FIX	FIX
+ereating	36	creating	AUTO_SAFE	FIX	FIX
+inholding	36		KEEP	KEEP	FIX
+lishing	36	establishing	SONNET_FIX	FIX	FIX
+pandalus	36		KEEP	KEEP	NAME
+paranzella	36	Paranzella	SONNET_NAME	NAME	FIX
+pohcy	36	policy	SONNET_FIX	FIX	GARBAGE
+prelicensing	36		KEEP	KEEP	FIX
+safco	36	SAFCO	SONNET_NAME	NAME	NAME
+srcrron	36	Sharron	SONNET_NAME	NAME	GARBAGE
+stiern	36	Stiern	SONNET_NAME	NAME	FIX
+ticular	36	particular	SONNET_FIX	FIX	FIX
+uary	36	january	SONNET_FIX	FIX	KEEP
+viving	36	reviving	SONNET_FIX	FIX	FIX
+acknowl	35	acknowledge	SONNET_FIX	FIX	GARBAGE
+actentitled	35	act entitled	SONNET_FIX	FIX	GARBAGE
+cccceee	35		GARBAGE_FLAG	GARBAGE	GARBAGE
+dcem	35	deem	AUTO_SAFE	FIX	FIX
+direeter	35	director	AUTO_SAFE	FIX	FIX
+ecnter	35	center	AUTO_SAFE	FIX	FIX
+erties	35	properties	SONNET_FIX	FIX	GARBAGE
+lowand	35	lowland	AUTO_SAFE	FIX	FIX
+mcsheehy	35	McSheehy	SONNET_NAME	NAME	NAME
+mumber	35	number	SONNET_FIX	FIX	FIX
+mumeipal	35	municipal	SONNET_FIX	FIX	GARBAGE
+niust	35	must	SONNET_FIX	FIX	FIX
+nonclassroom	35		KEEP	KEEP	KEEP
+notwith	35	notwithstanding	SONNET_FIX	FIX	GARBAGE
+ottice	35	office	AUTO_SAFE	FIX	FIX
+rected	35	directed	SONNET_FIX	FIX	FIX
+remaming	35	remaining	SONNET_FIX	FIX	FIX
+sattley	35	Sattley	SONNET_NAME	NAME	NAME
+venience	35	convenience	SONNET_FIX	FIX	FIX
+water-closct	35	water-closet	SONNET_FIX	FIX	GARBAGE
+catheterizations	34		KEEP	KEEP	KEEP
+condnet	34	conduct	AUTO_SAFE	FIX	FIX
+cuapr	34		GARBAGE_FLAG	GARBAGE	NAME
+enenenee	34		GARBAGE_FLAG	GARBAGE	GARBAGE
+lighth	34		GARBAGE_FLAG	GARBAGE	FIX
+mackerricher	34	Mackerricher	SONNET_NAME	NAME	NAME
+n-ethylpseudoephedrine	34		KEEP	KEEP	NAME
+noncredentialed	34		KEEP	KEEP	KEEP
+nonissuer	34		KEEP	KEEP	FIX
+nonmanagement	34		KEEP	KEEP	KEEP
+onetwelfth	34		KEEP	KEEP	KEEP
+prezoned	34	rezoned	AUTO_SAFE	FIX	FIX
+priations	34		KEEP	FIX	FIX
+ramento	34		KEEP	FIX	NAME
+reflectorizing	34		KEEP	KEEP	GARBAGE
+sively	34		GARBAGE_FLAG	GARBAGE	FIX
+subdi	34		KEEP	FIX	FIX
+ticable	34	practicable	SONNET_FIX	FIX	FIX
+trahern	34	Trahern	SONNET_NAME	NAME	NAME
+asamb	33		GARBAGE_FLAG	GARBAGE	NAME
+avpropria	33		GARBAGE_FLAG	GARBAGE	GARBAGE
+bronzan-mccorquodale	33	Bronzan-McCorquodale	SONNET_NAME	NAME	NAME
+cighty-nine	33	eighty-nine	AUTO_SAFE	FIX	FIX
+disineorporation	33	disincorporation	SONNET_FIX	FIX	GARBAGE
+eeeeeeeees	33		GARBAGE_FLAG	GARBAGE	GARBAGE
+eightyone	33		KEEP	KEEP	FIX
+errone	33	erroneous	SONNET_FIX	FIX	FIX
+ié	33		FRAGMENT_HOLD	FIX	FIX
+maxe	33	make	AUTO_SAFE	FIX	FIX
+ninetytwo	33		KEEP	KEEP	FIX
+nouce	33	notice	SONNET_FIX	FIX	FIX
+pohtical	33	political	SONNET_FIX	FIX	FIX
+preced	33	precede	AUTO_SAFE	FIX	FIX
+preventoriums	33		KEEP	KEEP	GARBAGE
+right-ofway	33	right-of-way	SONNET_FIX	FIX	KEEP
+somoma	33	Sonoma	SONNET_NAME	NAME	NAME
+vame	33	same	SONNET_FIX	FIX	FIX
+xiji	33		GARBAGE_FLAG	GARBAGE	NAME
+cancella	32		GARBAGE_FLAG	GARBAGE	GARBAGE
+cighty-two	32	eighty-two	AUTO_SAFE	FIX	FIX
+comphed	32	complied	SONNET_FIX	FIX	GARBAGE
+dbcp	32		KEEP	KEEP	GARBAGE
+disenroll	32		KEEP	KEEP	KEEP
+drodelabi	32		GARBAGE_FLAG	GARBAGE	GARBAGE
+ehminate	32	eliminate	AUTO_SAFE	FIX	FIX
+havenner	32	Havenner	SONNET_NAME	NAME	GARBAGE
+heeome	32	become	AUTO_SAFE	FIX	FIX
+japatul	32	Japatul	SONNET_NAME	NAME	NAME
+mbursement	32	reimbursement	SONNET_FIX	FIX	GARBAGE
+naines	32	names	SONNET_FIX	FIX	FIX
+ninetyone	32		KEEP	KEEP	FIX
+nonbypassable	32		KEEP	KEEP	KEEP
+nonrecreational	32		KEEP	KEEP	KEEP
+onv	32		FRAGMENT_HOLD	FIX	FIX
+poliev	32	policy	SONNET_FIX	FIX	FIX
+preexpulsion	32		KEEP	KEEP	KEEP
+prequalifying	32		KEEP	KEEP	KEEP
+replanked	32		KEEP	KEEP	FIX
+sircet	32	street	SONNET_FIX	FIX	GARBAGE
+tising	32	advertising	SONNET_FIX	FIX	FIX
+trative	32	administrative	SONNET_FIX	FIX	FIX
+turer	32	manufacturer	SONNET_FIX	FIX	FIX
+unnum	32		GARBAGE_FLAG	GARBAGE	GARBAGE
+venient	32	convenient	SONNET_FIX	FIX	FIX
+vood	32	good	AUTO_SAFE	FIX	FIX
+warreas	32	whereas	SONNET_FIX	FIX	FIX
+yoats	32	boats	AUTO_SAFE	FIX	FIX
+appropriathereof	31		GARBAGE_FLAG	GARBAGE	GARBAGE
+cccceeee	31		GARBAGE_FLAG	GARBAGE	GARBAGE
+cccceeeeee	31		GARBAGE_FLAG	GARBAGE	GARBAGE
+cecee	31		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceeeeeeeeee	31		GARBAGE_FLAG	GARBAGE	GARBAGE
+cighty-one	31	eighty-one	AUTO_SAFE	FIX	FIX
+courity	31	county	AUTO_SAFE	FIX	FIX
+demnation	31	condemnation	SONNET_FIX	FIX	FIX
+diphenoxylate	31		KEEP	KEEP	KEEP
+eeeeeeeeeeeeeee	31		GARBAGE_FLAG	GARBAGE	GARBAGE
+elverta	31	Elverta	SONNET_NAME	NAME	NAME
+eneeeeeee	31		GARBAGE_FLAG	GARBAGE	GARBAGE
+fiftysix	31		KEEP	KEEP	FIX
+inefect	31	in effect	SONNET_FIX	FIX	FIX
+inonth	31	month	AUTO_SAFE	FIX	FIX
+inurnment	31		KEEP	FIX	FIX
+keting	31	marketing	SONNET_FIX	FIX	GARBAGE
+n-methylpseudoephedrine	31		KEEP	KEEP	KEEP
+posals	31	proposals	SONNET_FIX	FIX	GARBAGE
+pror	31	prior	AUTO_SAFE	FIX	FIX
+punnd	31	pound	SONNET_FIX	FIX	FIX
+tants	31	consultants	SONNET_FIX	FIX	GARBAGE
+tchama	31	Tehama	SONNET_NAME	NAME	GARBAGE
+appropriadollars	30		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccccee	30		GARBAGE_FLAG	GARBAGE	GARBAGE
+cceeeeeeeeee	30		GARBAGE_FLAG	GARBAGE	GARBAGE
+cighty-eight	30	eighty-eight	AUTO_SAFE	FIX	FIX
+cighty-seven	30	eighty-seven	AUTO_SAFE	FIX	FIX
+cnter	30	center	AUTO_SAFE	FIX	FIX
+corbina	30	Corbina	SONNET_NAME	NAME	NAME
+duplissea	30	Duplissea	SONNET_NAME	NAME	GARBAGE
+eece	30		GARBAGE_FLAG	GARBAGE	FIX
+erans	30	veterans	SONNET_FIX	FIX	NAME
+ethy	30	ethyl	AUTO_SAFE	FIX	FIX
+exeente	30	execute	SONNET_FIX	FIX	FIX
+ilouse	30	house	SONNET_FIX	FIX	FIX
+khandahar	30	Kandahar	SONNET_NAME	NAME	NAME
+mapin	30	Marin	SONNET_NAME	NAME	NAME
+mdicated	30	medicated	AUTO_SAFE	FIX	FIX
+misassignment	30		KEEP	KEEP	FIX
+mmor	30	minor	SONNET_FIX	FIX	FIX
+mobilehomes-manufactured	30		KEEP	KEEP	KEEP
+nincty-six	30	ninety-six	AUTO_SAFE	FIX	FIX
+noncivil	30		KEEP	KEEP	FIX
+omees	30		GARBAGE_FLAG	GARBAGE	FIX
+pohey	30	policy	SONNET_FIX	FIX	NAME
+promded	30	provided	SONNET_FIX	FIX	FIX
+reroofed	30		KEEP	KEEP	FIX
+rimpau	30	Rimpau	SONNET_NAME	NAME	NAME
+seeeeee	30		GARBAGE_FLAG	GARBAGE	GARBAGE
+stepd	30	step	AUTO_SAFE	FIX	FIX
+subeontainer	30	subcontainer	SONNET_FIX	FIX	GARBAGE
+svon	30	soon	AUTO_SAFE	FIX	FIX
+yoio	30		GARBAGE_FLAG	GARBAGE	NAME
+appheations	29	applications	SONNET_FIX	FIX	GARBAGE
+approveecretary	29		GARBAGE_FLAG	GARBAGE	GARBAGE
+caar	29	car	AUTO_SAFE	FIX	FIX
+cawelo	29	Cawelo	SONNET_NAME	NAME	GARBAGE
+certiteate	29	certificate	SONNET_FIX	FIX	GARBAGE
+dipheny	29	diphenyl	AUTO_SAFE	FIX	FIX
+eceeeeee	29		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeneeeeeeeees	29		GARBAGE_FLAG	GARBAGE	GARBAGE
+ficers	29	officers	AUTO_SAFE	FIX	FIX
+fisea	29	fiscal	SONNET_FIX	FIX	FIX
+frori	29	from	SONNET_FIX	FIX	GARBAGE
+halepense	29		KEEP	KEEP	FIX
+iment	29		GARBAGE_FLAG	GARBAGE	FIX
+indorsers	29		KEEP	KEEP	FIX
+lacmta	29		KEEP	KEEP	NAME
+mecorquodale	29	McCorquodale	SONNET_NAME	NAME	GARBAGE
+onginal	29	original	AUTO_SAFE	FIX	FIX
+retums	29	returns	SONNET_FIX	FIX	GARBAGE
+ribier	29	Ribier	SONNET_NAME	NAME	NAME
+ruary	29	february	SONNET_FIX	FIX	GARBAGE
+sloners	29	commissioners	SONNET_FIX	FIX	FIX
+solidated	29	consolidated	AUTO_SAFE	FIX	FIX
+suea	29	such	SONNET_FIX	FIX	FIX
+therecn	29	thereon	SONNET_FIX	FIX	FIX
+whese	29	where	AUTO_SAFE	FIX	FIX
+aecording	28	according	AUTO_SAFE	FIX	FIX
+annlv	28	annex	SONNET_FIX	FIX	GARBAGE
+blairsden	28	Blairsden	SONNET_NAME	NAME	NAME
+calpella	28	Calpella	SONNET_NAME	NAME	NAME
+caltforma	28	California	SONNET_NAME	NAME	NAME
+cceeeeeeee	28		GARBAGE_FLAG	GARBAGE	GARBAGE
+eceeeee	28		GARBAGE_FLAG	GARBAGE	GARBAGE
+forty-fiftil	28	forty-fifth	AUTO_SAFE	FIX	FIX
+housecars	28		KEEP	KEEP	GARBAGE
+iccal	28	local	AUTO_SAFE	FIX	FIX
+innds	28	inns	AUTO_SAFE	FIX	FIX
+iting	28	siting	SONNET_FIX	FIX	GARBAGE
+joaned	28	loaned	SONNET_FIX	FIX	FIX
+lindheim	28	Lindheim	SONNET_NAME	NAME	NAME
+londs	28	bonds	SONNET_FIX	FIX	FIX
+nonadversarial	28		KEEP	KEEP	KEEP
+nonfire	28		KEEP	KEEP	GARBAGE
+nonoffending	28		KEEP	KEEP	FIX
+nonschoolday	28		KEEP	KEEP	KEEP
+nonsupervisory	28		KEEP	KEEP	KEEP
+offoct	28	effect	AUTO_SAFE	FIX	FIX
+phenmetrazine	28		KEEP	KEEP	NAME
+policv	28	policy	AUTO_SAFE	FIX	FIX
+porary	28	temporary	SONNET_FIX	FIX	GARBAGE
+receivec	28	received	AUTO_SAFE	FIX	FIX
+repiled	28	refiled	AUTO_SAFE	FIX	FIX
+replanking	28		KEEP	KEEP	FIX
+seeeeeee	28		GARBAGE_FLAG	GARBAGE	GARBAGE
+sehoo	28	school	SONNET_FIX	FIX	GARBAGE
+stituted	28	constituted	SONNET_FIX	FIX	FIX
+szcrron	28	Szcrron	SONNET_NAME	NAME	NAME
+tigation	28	litigation	SONNET_FIX	FIX	FIX
+transue	28		GARBAGE_FLAG	GARBAGE	GARBAGE
+ulations	28	regulations	SONNET_FIX	FIX	FIX
+vanpooling	28		KEEP	KEEP	FIX
+vowers	28	powers	AUTO_SAFE	FIX	FIX
+xame	28	same	AUTO_SAFE	FIX	FIX
+appropriahereby	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+bohnett	27	Bohnett	SONNET_NAME	NAME	NAME
+bxc	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+calnet	27		KEEP	KEEP	NAME
+cccceeeee	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+cholame	27	Cholame	SONNET_NAME	NAME	NAME
+comties	27	counties	SONNET_FIX	FIX	GARBAGE
+dattier	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+dizmar	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+dolwig	27	Dolwig	SONNET_NAME	NAME	GARBAGE
+eeeeeeeeeees	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+enees	27		GARBAGE_FLAG	GARBAGE	FIX
+ficer	27	officer	SONNET_FIX	FIX	FIX
+fiftytwo	27		KEEP	KEEP	KEEP
+fléchette	27		KEEP	KEEP	NAME
+fortysix	27		KEEP	KEEP	KEEP
+hemapheresis	27		KEEP	KEEP	FIX
+iuled	27	ruled	AUTO_SAFE	FIX	FIX
+jender	27	gender	SONNET_FIX	FIX	FIX
+jority	27	majority	AUTO_SAFE	FIX	FIX
+markleeville	27	Markleeville	SONNET_NAME	NAME	NAME
+meludes	27	includes	SONNET_FIX	FIX	FIX
+moucy	27		GARBAGE_FLAG	GARBAGE	FIX
+noncompensable	27		KEEP	KEEP	KEEP
+nondeductibility	27		KEEP	KEEP	KEEP
+nonownership	27		KEEP	KEEP	KEEP
+nonspouse	27		KEEP	KEEP	KEEP
+oight	27	eight	SONNET_FIX	FIX	FIX
+palities	27	municipalities	SONNET_FIX	FIX	FIX
+payab	27	payable	AUTO_SAFE	FIX	FIX
+quict	27	quiet	AUTO_SAFE	FIX	FIX
+scem	27	seem	AUTO_SAFE	FIX	FIX
+stantial	27	substantial	AUTO_SAFE	FIX	FIX
+superindred	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+sveh	27	such	SONNET_FIX	FIX	NAME
+tious	27		GARBAGE_FLAG	GARBAGE	GARBAGE
+whoin	27	whom	SONNET_FIX	FIX	GARBAGE
+airbill	26		KEEP	KEEP	GARBAGE
+aitangemenl	26	arrangement	SONNET_FIX	FIX	GARBAGE
+cervantez	26	Cervantez	SONNET_NAME	NAME	FIX
+cighty-six	26	eighty-six	SONNET_FIX	FIX	GARBAGE
+ecurt	26	court	SONNET_FIX	FIX	FIX
+effee	26		GARBAGE_FLAG	GARBAGE	NAME
+ensation	26	sensation	AUTO_SAFE	FIX	FIX
+entrymen	26		KEEP	FIX	NAME
+ereee	26		GARBAGE_FLAG	GARBAGE	GARBAGE
+forin	26	foreign	SONNET_FIX	FIX	GARBAGE
+furmsh	26	furnish	AUTO_SAFE	FIX	FIX
+heremabove	26	hereinabove	SONNET_FIX	FIX	GARBAGE
+icgal	26	legal	AUTO_SAFE	FIX	FIX
+jamacha	26	Jamacha	SONNET_NAME	NAME	NAME
+jeading	26	heading	SONNET_FIX	FIX	FIX
+licutenant-governor	26	lieutenant-governor	AUTO_SAFE	FIX	FIX
+limt	26	limit	AUTO_SAFE	FIX	FIX
+loast	26	least	AUTO_SAFE	FIX	FIX
+narne	26	name	SONNET_FIX	FIX	GARBAGE
+nommation	26	nomination	AUTO_SAFE	FIX	FIX
+nongeneral	26		KEEP	KEEP	GARBAGE
+nonhalogenated	26		KEEP	KEEP	GARBAGE
+nonregulatory	26		KEEP	KEEP	GARBAGE
+nonrenew	26		KEEP	KEEP	GARBAGE
+nonvested	26		KEEP	KEEP	FIX
+nutgrass	26		KEEP	KEEP	FIX
+officet	26	officer	SONNET_FIX	FIX	FIX
+peliee	26	police	SONNET_FIX	FIX	NAME
+pistnet	26	district	SONNET_FIX	FIX	GARBAGE
+rehrement	26	retirement	SONNET_FIX	FIX	GARBAGE
+schabarum	26	Schabarum	SONNET_NAME	NAME	NAME
+sessed	26	assessed	SONNET_FIX	FIX	FIX
+sonally	26	personally	SONNET_FIX	FIX	GARBAGE
+stepc	26	step	AUTO_SAFE	FIX	FIX
+vahd	26	valid	SONNET_FIX	FIX	GARBAGE
+vrade	26	grade	AUTO_SAFE	FIX	FIX
+wauerras	26	whereas	SONNET_FIX	FIX	GARBAGE
+wauerzas	26	whereas	SONNET_FIX	FIX	GARBAGE
+wuenrzas	26	whereas	SONNET_FIX	FIX	GARBAGE
+wuere	26	where	AUTO_SAFE	FIX	FIX
+xill	26	bill	AUTO_SAFE	FIX	FIX
+anpum	25		GARBAGE_FLAG	GARBAGE	GARBAGE
+audito	25	auditor	AUTO_SAFE	FIX	FIX
+bandred	25	hundred	SONNET_FIX	FIX	GARBAGE
+buchon	25	Buchon	SONNET_NAME	NAME	NAME
+buspools	25		KEEP	KEEP	FIX
+ccceeeeeee	25		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccceeeeeeee	25		GARBAGE_FLAG	GARBAGE	GARBAGE
+cnav	25		GARBAGE_FLAG	GARBAGE	FIX
+condemnor	25		KEEP	KEEP	FIX
+criginal	25	original	AUTO_SAFE	FIX	FIX
+decocainized	25		KEEP	KEEP	FIX
+deerned	25	deemed	AUTO_SAFE	FIX	FIX
+ditional	25	additional	AUTO_SAFE	FIX	FIX
+dstnet	25	district	SONNET_FIX	FIX	KEEP
+eable	25	enable	AUTO_SAFE	FIX	FIX
+eards	25	wards	AUTO_SAFE	FIX	FIX
+eeeneeeeeee	25		GARBAGE_FLAG	GARBAGE	GARBAGE
+exnended	25	expended	SONNET_FIX	FIX	FIX
+ficial	25	official	AUTO_SAFE	FIX	FIX
+fitate	25	state	SONNET_FIX	FIX	FIX
+flushometer	25		KEEP	KEEP	FIX
+francisen	25	Francisco	SONNET_NAME	NAME	NAME
+furbearing	25		KEEP	KEEP	FIX
+ilarbor	25	harbor	SONNET_FIX	FIX	FIX
+indorsee	25		KEEP	KEEP	FIX
+iret	25		GARBAGE_FLAG	GARBAGE	GARBAGE
+kelloggvoorhis	25	Kellogg-Voorhis	SONNET_NAME	NAME	NAME
+knopki	25	Knopki	SONNET_NAME	NAME	NAME
+nisene	25	Nisene	SONNET_NAME	NAME	NAME
+nondiagnostic	25		KEEP	KEEP	GARBAGE
+nonearthen	25		KEEP	KEEP	GARBAGE
+nonforwardable	25		KEEP	KEEP	GARBAGE
+nonprivileged	25		KEEP	KEEP	FIX
+offhighway	25	off-highway	SONNET_FIX	FIX	GARBAGE
+panama-pacifie	25	panama-pacific	SONNET_FIX	FIX	GARBAGE
+phenazocine	25		KEEP	KEEP	FIX
+plaus	25	plans	SONNET_FIX	FIX	GARBAGE
+pohce	25	police	SONNET_FIX	FIX	GARBAGE
+pubbeation	25	publication	SONNET_FIX	FIX	GARBAGE
+sbali	25	shall	SONNET_FIX	FIX	NAME
+serip	25	scrip	AUTO_SAFE	FIX	FIX
+sinsheimer	25	Sinsheimer	SONNET_NAME	NAME	NAME
+stepb	25	step	AUTO_SAFE	FIX	FIX
+subgrants	25		KEEP	KEEP	GARBAGE
+subregistrar	25		KEEP	KEEP	GARBAGE
+therchy	25	thereby	SONNET_FIX	FIX	GARBAGE
+thirty-cighth	25	thirty-eighth	SONNET_FIX	FIX	GARBAGE
+tted	25		GARBAGE_FLAG	GARBAGE	KEEP
+uation	25	situation	SONNET_FIX	FIX	GARBAGE
+watergates	25		KEEP	KEEP	NAME
+wuenrras	25	whereas	SONNET_FIX	FIX	GARBAGE
+aguanga	24	Aguanga	SONNET_NAME	NAME	NAME
+allcounty	24		KEEP	KEEP	FIX
+anileridine	24		KEEP	KEEP	GARBAGE
+appropra	24		GARBAGE_FLAG	GARBAGE	GARBAGE
+cightoon	24	eighteen	SONNET_FIX	FIX	GARBAGE
+cless	24	class	SONNET_FIX	FIX	FIX
+compotent	24	competent	AUTO_SAFE	FIX	FIX
+delnery	24	delivery	SONNET_FIX	FIX	GARBAGE
+disincorporating	24		KEEP	KEEP	KEEP
+eeeeeeeeeeeeeeee	24		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeneeeee	24		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeneneeeeereees	24		GARBAGE_FLAG	GARBAGE	GARBAGE
+emment	24	government	SONNET_FIX	FIX	NAME
+excludible	24		KEEP	KEEP	GARBAGE
+famihes	24	families	SONNET_FIX	FIX	GARBAGE
+fective	24	effective	SONNET_FIX	FIX	GARBAGE
+hghting	24	lighting	AUTO_SAFE	FIX	FIX
+innd	24	and	SONNET_FIX	FIX	KEEP
+isomethadone	24		KEEP	KEEP	GARBAGE
+jation	24	nation	AUTO_SAFE	FIX	FIX
+levorphanol	24		KEEP	KEEP	KEEP
+llagas	24	Llagas	SONNET_NAME	NAME	NAME
+maiter	24	matter	AUTO_SAFE	FIX	FIX
+mtended	24	intended	SONNET_FIX	FIX	FIX
+multiphed	24	multiplied	SONNET_FIX	FIX	GARBAGE
+nardino	24	Bernardino	SONNET_NAME	NAME	NAME
+neld	24	held	AUTO_SAFE	FIX	FIX
+nonrenewed	24		KEEP	KEEP	FIX
+nonseverely	24		KEEP	KEEP	FIX
+phenylcyclohexyl	24		KEEP	KEEP	GARBAGE
+piminodine	24		KEEP	KEEP	GARBAGE
+preproject	24		KEEP	KEEP	GARBAGE
+riod	24	period	SONNET_FIX	FIX	KEEP
+staic	24	static	AUTO_SAFE	FIX	FIX
+tiguous	24	contiguous	SONNET_FIX	FIX	GARBAGE
+timpany	24	tympany	AUTO_SAFE	FIX	FIX
+tuted	24	constituted	SONNET_FIX	FIX	FIX
+wnere	24	where	AUTO_SAFE	FIX	FIX
+wuenrsas	24	whereas	SONNET_FIX	FIX	GARBAGE
+appheants	23	applicants	SONNET_FIX	FIX	GARBAGE
+appheatio	23	application	SONNET_FIX	FIX	GARBAGE
+bezitramide	23		KEEP	KEEP	KEEP
+buspool	23		KEEP	KEEP	GARBAGE
+cludes	23	includes	SONNET_FIX	FIX	FIX
+cuoar	23		GARBAGE_FLAG	GARBAGE	GARBAGE
+decom	23	decompose	SONNET_FIX	FIX	GARBAGE
+delaveaga	23	De La Veaga	SONNET_NAME	NAME	NAME
+deputyships	23		KEEP	KEEP	GARBAGE
+determinec	23	determined	AUTO_SAFE	FIX	FIX
+devisadero	23	Divisadero	SONNET_NAME	NAME	NAME
+devree	23	degree	AUTO_SAFE	FIX	FIX
+disposa	23	disposal	AUTO_SAFE	FIX	FIX
+eeneneeee	23		GARBAGE_FLAG	GARBAGE	GARBAGE
+eenes	23		GARBAGE_FLAG	GARBAGE	GARBAGE
+fayor	23	favor	SONNET_FIX	FIX	FIX
+forty-cighth	23	forty-eighth	AUTO_SAFE	FIX	FIX
+governmg	23	governing	AUTO_SAFE	FIX	FIX
+hereinahove	23	hereinabove	SONNET_FIX	FIX	GARBAGE
+hydroxy-nordihydromorphinone	23		KEEP	KEEP	KEEP
+navable	23	navigable	SONNET_FIX	FIX	GARBAGE
+nember	23	member	AUTO_SAFE	FIX	FIX
+niehouse	23	Niehouse	SONNET_NAME	NAME	NAME
+nonmonetized	23		KEEP	KEEP	KEEP
+nonqualifying	23		KEEP	KEEP	KEEP
+oblberg	23	Oblberg	SONNET_NAME	NAME	NAME
+perlette	23	Perlette	SONNET_NAME	NAME	FIX
+providea	23	provided	AUTO_SAFE	FIX	FIX
+redrilled	23		KEEP	FIX	FIX
+rehabili	23	rehabilitate	SONNET_FIX	FIX	GARBAGE
+represa	23	Represa	SONNET_NAME	NAME	FIX
+rerecordation	23		KEEP	KEEP	GARBAGE
+resubmittal	23		KEEP	KEEP	FIX
+rnore	23	more	SONNET_FIX	FIX	FIX
+seeree	23		GARBAGE_FLAG	GARBAGE	GARBAGE
+sirth	23	sixth	AUTO_SAFE	FIX	FIX
+sixty-threc	23	sixty-three	AUTO_SAFE	FIX	FIX
+strohecker	23	Strohecker	SONNET_NAME	NAME	NAME
+thirty-siath	23	thirty-sixth	AUTO_SAFE	FIX	FIX
+tirey	23	Tirey	SONNET_NAME	NAME	KEEP
+veyance	23	conveyance	SONNET_FIX	FIX	FIX
+accumu	22	accumulate	SONNET_FIX	FIX	FIX
+adupt	22	adopt	AUTO_SAFE	FIX	FIX
+alphaprodine	22		KEEP	KEEP	NAME
+annuni	22		GARBAGE_FLAG	GARBAGE	FIX
+assoon	22		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccecee	22		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceeeeeeeeeee	22		GARBAGE_FLAG	GARBAGE	GARBAGE
+chetcuti	22	Chetcuti	SONNET_NAME	NAME	NAME
+craprer	22		GARBAGE_FLAG	GARBAGE	FIX
+cusanovich	22	Cusanovich	SONNET_NAME	NAME	NAME
+dextrorphan	22		KEEP	KEEP	NAME
+erypt	22	crypt	AUTO_SAFE	FIX	FIX
+felando	22	Felando	SONNET_NAME	NAME	NAME
+foothill-deanza	22	Foothill-DeAnza	SONNET_NAME	NAME	NAME
+heisinger	22	Heisinger	SONNET_NAME	NAME	NAME
+hourd	22	hour	SONNET_FIX	FIX	FIX
+huichica	22	Huichica	SONNET_NAME	NAME	NAME
+inbor	22	labor	SONNET_FIX	FIX	KEEP
+isonipecaine	22		KEEP	KEEP	NAME
+lowincome	22	low-income	SONNET_FIX	FIX	FIX
+mvolving	22	involving	SONNET_FIX	FIX	FIX
+nonamortized	22		KEEP	KEEP	NAME
+nonstakes	22		KEEP	KEEP	GARBAGE
+pizzutello	22	Pizzutello	SONNET_NAME	NAME	NAME
+poundkeepers	22		KEEP	KEEP	KEEP
+prelimi	22	preliminary	SONNET_FIX	FIX	FIX
+rapozo	22	Rapozo	SONNET_NAME	NAME	FIX
+recla	22		GARBAGE_FLAG	GARBAGE	GARBAGE
+seald	22	sealed	AUTO_SAFE	FIX	FIX
+siaty-three	22	sixty-three	AUTO_SAFE	FIX	FIX
+slature	22	legislature	SONNET_FIX	FIX	FIX
+slong	22	along	AUTO_SAFE	FIX	FIX
+subcounty	22		KEEP	KEEP	GARBAGE
+sxcrron	22	Sxcrron	SONNET_NAME	NAME	FIX
+taxley	22	Taxley	SONNET_NAME	NAME	FIX
+terested	22	interested	AUTO_SAFE	FIX	FIX
+thuse	22	those	AUTO_SAFE	FIX	FIX
+tillermen	22		KEEP	KEEP	KEEP
+tioner	22	petitioner	SONNET_FIX	FIX	GARBAGE
+tuffree	22		GARBAGE_FLAG	GARBAGE	GARBAGE
+tvne	22	type	SONNET_FIX	FIX	FIX
+zoveinot	22		GARBAGE_FLAG	GARBAGE	NAME
+ained	21	obtained	SONNET_FIX	FIX	GARBAGE
+anyeles	21	Angeles	SONNET_NAME	NAME	NAME
+approprla	21		GARBAGE_FLAG	GARBAGE	GARBAGE
+arnum	21	Barnum	SONNET_NAME	NAME	GARBAGE
+asacondition	21	as a condition	SONNET_FIX	FIX	GARBAGE
+batiquitos	21	Batiquitos	SONNET_NAME	NAME	NAME
+behool	21	behoof	SONNET_FIX	FIX	GARBAGE
+beneht	21	benefit	SONNET_FIX	FIX	GARBAGE
+bitect	21	architect	SONNET_FIX	FIX	FIX
+cahtornia	21	California	SONNET_NAME	NAME	NAME
+ccccceeee	21		GARBAGE_FLAG	GARBAGE	GARBAGE
+comy	21	copy	AUTO_SAFE	FIX	FIX
+crection	21	erection	SONNET_FIX	FIX	FIX
+cuaprerr	21		GARBAGE_FLAG	GARBAGE	GARBAGE
+cytotechnologists	21		KEEP	KEEP	GARBAGE
+dextropropoxyphene	21		KEEP	KEEP	GARBAGE
+dinary	21	ordinary	SONNET_FIX	FIX	FIX
+eecee	21		GARBAGE_FLAG	GARBAGE	FIX
+eeeeeeeeeeeees	21		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeeneeee	21		GARBAGE_FLAG	GARBAGE	GARBAGE
+eightytwo	21		KEEP	KEEP	KEEP
+elijo	21	Elijo	SONNET_NAME	NAME	NAME
+eome	21	come	SONNET_FIX	FIX	FIX
+fendant	21	defendant	SONNET_FIX	FIX	FIX
+ficate	21	certificate	SONNET_FIX	FIX	GARBAGE
+gompensa	21	compensation	SONNET_FIX	FIX	NAME
+hicle	21	vehicle	SONNET_FIX	FIX	GARBAGE
+hsted	21	listed	SONNET_FIX	FIX	FIX
+ioint	21	joint	AUTO_SAFE	FIX	FIX
+islative	21	legislative	SONNET_FIX	FIX	FIX
+metazocine	21		KEEP	KEEP	GARBAGE
+msurers	21	insurers	SONNET_FIX	FIX	FIX
+mudsuckers	21		KEEP	KEEP	GARBAGE
+nondepositary	21		KEEP	KEEP	GARBAGE
+nonelderly	21		KEEP	KEEP	GARBAGE
+nonformulary	21		KEEP	KEEP	GARBAGE
+nonovertime	21		KEEP	KEEP	GARBAGE
+notwithstand	21	notwithstanding	SONNET_FIX	FIX	GARBAGE
+nses	21	senses	SONNET_FIX	FIX	FIX
+onetenth	21		KEEP	KEEP	KEEP
+parls	21	parks	SONNET_FIX	FIX	FIX
+ployés	21		GARBAGE_FLAG	GARBAGE	GARBAGE
+preimprisonment	21		KEEP	KEEP	GARBAGE
+seeees	21		GARBAGE_FLAG	GARBAGE	FIX
+szorton	21	Szorton	SONNET_NAME	NAME	NAME
+teeta	21		GARBAGE_FLAG	GARBAGE	FIX
+tering	21	entering	SONNET_FIX	FIX	FIX
+terrns	21	terms	SONNET_FIX	FIX	GARBAGE
+tracted	21	contracted	SONNET_FIX	FIX	FIX
+urgenev	21	Turgenev	SONNET_NAME	NAME	FIX
+vated	21	voted	AUTO_SAFE	FIX	FIX
+vouth	21	youth	AUTO_SAFE	FIX	FIX
+woder	21	wider	SONNET_FIX	FIX	GARBAGE
+xiil	21	bill	AUTO_SAFE	FIX	FIX
+yood	21	good	AUTO_SAFE	FIX	FIX
+appomtmen	20	appointment	SONNET_FIX	FIX	GARBAGE
+atplao	20		GARBAGE_FLAG	GARBAGE	FIX
+atrect	20	direct	SONNET_FIX	FIX	FIX
+benzilate	20	benzoate	AUTO_SAFE	FIX	FIX
+beope	20	before	SONNET_FIX	FIX	FIX
+bocly	20	body	SONNET_FIX	FIX	FIX
+carners	20	carriers	SONNET_FIX	FIX	FIX
+clusion	20	conclusion	SONNET_FIX	FIX	FIX
+clvi	20		KEEP	KEEP	FIX
+cmra	20		GARBAGE_FLAG	GARBAGE	FIX
+comsetuction	20	construction	SONNET_FIX	FIX	GARBAGE
+coowned	20	co-owned	SONNET_FIX	FIX	FIX
+copermittee	20		KEEP	KEEP	GARBAGE
+corrugata	20	corrugated	SONNET_FIX	FIX	FIX
+creden	20	credence	SONNET_FIX	FIX	FIX
+cxxix	20		KEEP	KEEP	GARBAGE
+eeneeeeeeeees	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+eenees	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+eense	20	license	SONNET_FIX	FIX	FIX
+ency	20	agency	SONNET_FIX	FIX	GARBAGE
+eneneeeeereees	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+erage	20	average	SONNET_FIX	FIX	FIX
+erative	20	operative	SONNET_FIX	FIX	FIX
+ereeee	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+erented	20	erected	AUTO_SAFE	FIX	FIX
+eserves	20	reserves	AUTO_SAFE	FIX	FIX
+exeeptions	20	exceptions	AUTO_SAFE	FIX	FIX
+fature	20	nature	AUTO_SAFE	FIX	FIX
+fecble-minded	20	feeble-minded	SONNET_FIX	FIX	FIX
+fortv	20	forty	AUTO_SAFE	FIX	FIX
+forty-fourtil	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+fpuled	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+habihty	20	liability	SONNET_FIX	FIX	FIX
+hesis	20	thesis	AUTO_SAFE	FIX	FIX
+hydrochlorofluorocarbon	20		KEEP	KEEP	NAME
+ishment	20	punishment	SONNET_FIX	FIX	GARBAGE
+joeal	20	Joel	SONNET_NAME	NAME	NAME
+joval	20	jovial	SONNET_FIX	FIX	FIX
+kennick	20	Kennick	SONNET_NAME	NAME	NAME
+kumeyaay	20	Kumeyaay	SONNET_NAME	NAME	NAME
+lazzaretto	20	lazaretto	AUTO_SAFE	FIX	FIX
+licensec	20	licensed	SONNET_FIX	FIX	FIX
+mocting	20	meeting	SONNET_FIX	FIX	FIX
+mpose	20	impose	AUTO_SAFE	FIX	FIX
+n-acetylanthranilic	20		KEEP	KEEP	NAME
+nelac	20		GARBAGE_FLAG	GARBAGE	KEEP
+neneneeee	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+nioney	20	money	AUTO_SAFE	FIX	FIX
+noncharter	20		KEEP	KEEP	FIX
+nondegree	20		KEEP	KEEP	GARBAGE
+nonpotentially	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+nonretail	20		KEEP	KEEP	GARBAGE
+nonsalary	20		KEEP	KEEP	GARBAGE
+obtaming	20	obtaining	AUTO_SAFE	FIX	FIX
+oneeighth	20	one-eighth	SONNET_FIX	FIX	KEEP
+ovory	20	ivory	AUTO_SAFE	FIX	FIX
+paicl	20	paid	SONNET_FIX	FIX	FIX
+penasquitos	20	Penasquitos	SONNET_NAME	NAME	NAME
+porter-sesnon	20	Porter-Sesnon	SONNET_NAME	NAME	NAME
+procharter	20	pro-charter	SONNET_FIX	FIX	FIX
+puddingstone	20		KEEP	KEEP	NAME
+saultry	20	sultry	AUTO_SAFE	FIX	FIX
+sbdcs	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+scce	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+seorton	20	Norton	SONNET_NAME	NAME	NAME
+srorton	20	Norton	SONNET_NAME	NAME	NAME
+sults	20	results	SONNET_FIX	FIX	FIX
+talawa	20	Talawa	SONNET_NAME	NAME	NAME
+taxen	20	taken	SONNET_FIX	FIX	FIX
+thereun	20	thereon	SONNET_FIX	FIX	FIX
+twenty-fivo	20	twenty-five	AUTO_SAFE	FIX	FIX
+unty	20	county	SONNET_FIX	FIX	FIX
+valleyeast	20		GARBAGE_FLAG	GARBAGE	GARBAGE
+veyed	20	conveyed	SONNET_FIX	FIX	FIX
+viously	20	previously	SONNET_FIX	FIX	GARBAGE
+weisenthal	20	Wiesenthal	SONNET_NAME	NAME	NAME
+administrathot	19	administration	AUTO_SAFE	FIX	FIX
+appheatior	19	application	SONNET_FIX	FIX	GARBAGE
+becorne	19	become	AUTO_SAFE	FIX	FIX
+bilhon	19	billion	SONNET_FIX	FIX	FIX
+biscailuz	19	Biscailuz	SONNET_NAME	NAME	NAME
+britschgi	19	Britschgi	SONNET_NAME	NAME	NAME
+calstart	19	CalStart	SONNET_NAME	NAME	NAME
+caponette	19		GARBAGE_FLAG	GARBAGE	NAME
+cceeeeeeeee	19		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccxi	19		KEEP	KEEP	GARBAGE
+cighty-cight	19	eighty-eight	SONNET_FIX	FIX	GARBAGE
+cighty-four	19	eighty-four	AUTO_SAFE	FIX	FIX
+clared	19	declared	SONNET_FIX	FIX	FIX
+cntilled	19	entitled	SONNET_FIX	FIX	FIX
+conercte	19	concrete	AUTO_SAFE	FIX	FIX
+crar	19	car	AUTO_SAFE	FIX	FIX
+cxcvi	19		KEEP	KEEP	GARBAGE
+cxxvi	19		KEEP	KEEP	GARBAGE
+cxxxix	19		KEEP	KEEP	GARBAGE
+desoxyephedrine	19		KEEP	KEEP	NAME
+didates	19	candidates	AUTO_SAFE	FIX	FIX
+eame	19	same	AUTO_SAFE	FIX	FIX
+earricr	19	carrier	SONNET_FIX	FIX	FIX
+eeeeeeeeeeees	19		GARBAGE_FLAG	GARBAGE	GARBAGE
+ennum	19	ennui	SONNET_FIX	FIX	GARBAGE
+exudations	19		KEEP	KEEP	FIX
+fiye	19	five	AUTO_SAFE	FIX	FIX
+ghpp	19		GARBAGE_FLAG	GARBAGE	GARBAGE
+honality	19	nationality	SONNET_FIX	FIX	GARBAGE
+htigation	19	litigation	AUTO_SAFE	FIX	FIX
+imtiative	19	initiative	AUTO_SAFE	FIX	FIX
+issuecl	19	issued	AUTO_SAFE	FIX	FIX
+koverman	19	Koverman	SONNET_NAME	NAME	FIX
+lecting	19	electing	AUTO_SAFE	FIX	FIX
+maximuin	19	maximum	AUTO_SAFE	FIX	FIX
+misassignments	19		KEEP	KEEP	KEEP
+monumented	19		KEEP	FIX	FIX
+nbers	19	numbers	AUTO_SAFE	FIX	FIX
+neering	19	engineering	SONNET_FIX	FIX	FIX
+noncharging	19		KEEP	KEEP	KEEP
+nonlicensees	19		KEEP	KEEP	KEEP
+nonrancid	19		KEEP	KEEP	FIX
+nually	19	annually	AUTO_SAFE	FIX	FIX
+oftive	19	office	AUTO_SAFE	FIX	FIX
+onefortieth	19	one-fortieth	SONNET_FIX	FIX	KEEP
+onment	19		KEEP	FIX	FIX
+piumas	19	Plumas	SONNET_NAME	NAME	FIX
+pliance	19	compliance	SONNET_FIX	FIX	GARBAGE
+ployer	19	player	AUTO_SAFE	FIX	FIX
+quiniela	19		KEEP	KEEP	NAME
+racts	19	acts	AUTO_SAFE	FIX	FIX
+reaqa	19		GARBAGE_FLAG	GARBAGE	FIX
+recreationa	19	recreational	AUTO_SAFE	FIX	FIX
+reinjection	19		KEEP	KEEP	FIX
+senl	19	seal	SONNET_FIX	FIX	FIX
+short-dovle	19	Short-Doyle	SONNET_NAME	NAME	GARBAGE
+stanislans	19	Stanislaus	SONNET_NAME	NAME	GARBAGE
+statos	19	states	AUTO_SAFE	FIX	FIX
+sules	19	rules	AUTO_SAFE	FIX	FIX
+surn	19	turn	AUTO_SAFE	FIX	FIX
+therco	19	thereof	AUTO_SAFE	FIX	FIX
+thermalito	19	Thermalito	SONNET_NAME	NAME	NAME
+tifieate	19	certificate	SONNET_FIX	FIX	FIX
+tinnin	19	Tinnin	SONNET_NAME	NAME	FIX
+tutional	19	constitutional	AUTO_SAFE	FIX	FIX
+ultrapasteurized	19		KEEP	KEEP	KEEP
+umne	19	Umne	SONNET_NAME	NAME	FIX
+vearly	19	yearly	SONNET_FIX	FIX	FIX
+wuenrgas	19		GARBAGE_FLAG	GARBAGE	GARBAGE
+xita	19	Rita	SONNET_NAME	NAME	NAME
+acerne	18	accrue	SONNET_FIX	FIX	FIX
+alarch	18	larch	SONNET_FIX	FIX	NAME
+amonaem	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+appropriatec	18	appropriated	SONNET_FIX	FIX	FIX
+benent	18	benefit	SONNET_FIX	FIX	NAME
+benents	18	benefits	AUTO_SAFE	FIX	FIX
+berkemeyer	18	Berkemeyer	SONNET_NAME	NAME	NAME
+bioanalysts	18		KEEP	KEEP	FIX
+boncls	18	bonds	SONNET_FIX	FIX	FIX
+buve	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+cclx	18		KEEP	KEEP	KEEP
+ccxix	18		KEEP	KEEP	KEEP
+ceceeee	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+cessive	18	excessive	SONNET_FIX	FIX	FIX
+chnic	18	ethnic	SONNET_FIX	FIX	GARBAGE
+clxvi	18		KEEP	KEEP	KEEP
+clxxx	18		KEEP	KEEP	KEEP
+comphanee	18	compliance	SONNET_FIX	FIX	GARBAGE
+contams	18	contains	SONNET_FIX	FIX	FIX
+contmued	18	continued	AUTO_SAFE	FIX	FIX
+cooper-molera	18	Cooper-Molera	SONNET_NAME	NAME	NAME
+crannell	18	Crannell	SONNET_NAME	NAME	NAME
+cxcii	18		KEEP	KEEP	KEEP
+cxii	18		KEEP	KEEP	FIX
+cxlix	18		KEEP	KEEP	NAME
+cxxxiv	18		KEEP	KEEP	KEEP
+deanza	18	De Anza	SONNET_NAME	NAME	NAME
+defosset	18	Deforest	SONNET_NAME	NAME	FIX
+dstnets	18	districts	SONNET_FIX	FIX	GARBAGE
+duiy	18	duly	SONNET_FIX	FIX	FIX
+dumng	18	during	SONNET_FIX	FIX	GARBAGE
+ecia	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeeeeeeeeeeeeeee	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeene	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+ehmuinating	18	eliminating	SONNET_FIX	FIX	GARBAGE
+eont	18	font	SONNET_FIX	FIX	KEEP
+erento	18	Trento	SONNET_NAME	NAME	GARBAGE
+facic	18	facia	SONNET_FIX	FIX	GARBAGE
+fered	18	offered	SONNET_FIX	FIX	GARBAGE
+fessional	18	professional	SONNET_FIX	FIX	GARBAGE
+forty-fipth	18	forty-fifth	SONNET_FIX	FIX	GARBAGE
+fredonyer	18	Fredonyer	SONNET_NAME	NAME	GARBAGE
+hederacea	18		KEEP	KEEP	GARBAGE
+highty-first	18	eighty-first	SONNET_FIX	FIX	FIX
+hling	18	filing	SONNET_FIX	FIX	FIX
+housmg	18	housing	AUTO_SAFE	FIX	FIX
+ihere	18	there	AUTO_SAFE	FIX	FIX
+iments	18	amendments	SONNET_FIX	FIX	GARBAGE
+iwenty-second	18	twenty-second	SONNET_FIX	FIX	GARBAGE
+jacumba	18	Jacumba	SONNET_NAME	NAME	NAME
+leasc	18	lease	AUTO_SAFE	FIX	FIX
+mder	18	under	SONNET_FIX	FIX	GARBAGE
+nonconsumer	18		KEEP	KEEP	KEEP
+nondegenerative	18		KEEP	KEEP	KEEP
+nontraffic	18		KEEP	KEEP	KEEP
+ocjp	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+oilice	18	office	SONNET_FIX	FIX	GARBAGE
+onstruction	18	construction	AUTO_SAFE	FIX	FIX
+oshpd	18		GARBAGE_FLAG	GARBAGE	NAME
+pereentum	18	percentum	SONNET_FIX	FIX	GARBAGE
+perior	18	prior	AUTO_SAFE	FIX	FIX
+polltax	18	poll-tax	SONNET_FIX	FIX	FIX
+precrisis	18		KEEP	KEEP	FIX
+proamended	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+proteet	18	protect	AUTO_SAFE	FIX	FIX
+pubue	18	public	SONNET_FIX	FIX	GARBAGE
+remova	18	removal	AUTO_SAFE	FIX	FIX
+rerefined	18	re-refined	SONNET_FIX	FIX	FIX
+retat	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+rnake	18	make	SONNET_FIX	FIX	FIX
+rolis	18	rolls	AUTO_SAFE	FIX	FIX
+saucelito	18	Sausalito	SONNET_NAME	NAME	NAME
+settlors	18		KEEP	KEEP	FIX
+specul	18		KEEP	FIX	GARBAGE
+subbasins	18		KEEP	KEEP	FIX
+suboffices	18		KEEP	KEEP	FIX
+supphed	18	supplied	SONNET_FIX	FIX	FIX
+termot	18	termor	SONNET_FIX	FIX	GARBAGE
+threeeighths	18	three-eighths	SONNET_FIX	FIX	FIX
+twoyear	18	two-year	SONNET_FIX	FIX	KEEP
+undenatured	18		KEEP	FIX	FIX
+usive	18	inclusive	SONNET_FIX	FIX	GARBAGE
+viee	18	vice	AUTO_SAFE	FIX	FIX
+weitchpec	18	Weitchpec	SONNET_NAME	NAME	NAME
+wueenreas	18		GARBAGE_FLAG	GARBAGE	GARBAGE
+yold	18	hold	SONNET_FIX	FIX	FIX
+amaavit	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+andriano	17	Andriano	SONNET_NAME	NAME	NAME
+approverl	17	approval	SONNET_FIX	FIX	FIX
+aqt	17	act	AUTO_SAFE	FIX	FIX
+atory	17	mandatory	SONNET_FIX	FIX	NAME
+busdrivers	17	bus drivers	SONNET_FIX	FIX	KEEP
+byxbee	17	Byxbee	SONNET_NAME	NAME	NAME
+calleguas	17	Calleguas	SONNET_NAME	NAME	NAME
+ccccceee	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+cciv	17		KEEP	KEEP	KEEP
+clocted	17	elected	SONNET_FIX	FIX	FIX
+clxxi	17		KEEP	KEEP	KEEP
+clxxvi	17		KEEP	KEEP	KEEP
+constrnet	17	construct	SONNET_FIX	FIX	FIX
+cxcix	17		KEEP	KEEP	NAME
+cxlv	17		KEEP	KEEP	KEEP
+cxxi	17		KEEP	KEEP	KEEP
+cxxiv	17		KEEP	KEEP	KEEP
+damsites	17	dam sites	SONNET_FIX	FIX	GARBAGE
+declarec	17	declared	AUTO_SAFE	FIX	FIX
+dential	17	credential	SONNET_FIX	FIX	FIX
+deterinine	17	determine	AUTO_SAFE	FIX	FIX
+dimethoxy-alpha-methylphenethylamine	17		KEEP	KEEP	GARBAGE
+eceeeeeee	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeeeeeeeeeeeeeeee	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeneeeeees	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+entihes	17	entities	SONNET_FIX	FIX	FIX
+erwise	17	otherwise	SONNET_FIX	FIX	FIX
+etion	17	section	SONNET_FIX	FIX	GARBAGE
+euthanasic	17	euthanasia	AUTO_SAFE	FIX	FIX
+euts	17	cuts	AUTO_SAFE	FIX	FIX
+evurt	17	court	SONNET_FIX	FIX	GARBAGE
+exeepted	17	excepted	SONNET_FIX	FIX	FIX
+fenee	17	fence	AUTO_SAFE	FIX	FIX
+fiith	17	fifth	AUTO_SAFE	FIX	FIX
+glutethimide	17		KEEP	KEEP	NAME
+guapys	17		GARBAGE_FLAG	GARBAGE	FIX
+indebtednesses	17	indebtedness	SONNET_FIX	FIX	FIX
+inelu	17	include	SONNET_FIX	FIX	GARBAGE
+istrative	17	administrative	SONNET_FIX	FIX	GARBAGE
+jected	17	ejected	AUTO_SAFE	FIX	FIX
+komandorski	17	Komandorski	SONNET_NAME	NAME	NAME
+laveaga	17	Laveaga	SONNET_NAME	NAME	NAME
+lavor	17	labor	AUTO_SAFE	FIX	FIX
+levoalphacetylmethadol	17		KEEP	KEEP	GARBAGE
+levomethorphan	17		KEEP	KEEP	NAME
+lienors	17		KEEP	KEEP	FIX
+lxxxvi	17		KEEP	KEEP	KEEP
+meumbent	17	incumbent	SONNET_FIX	FIX	GARBAGE
+mutualized	17		KEEP	KEEP	FIX
+nanees	17	nances	SONNET_FIX	FIX	GARBAGE
+necting	17	connecting	SONNET_FIX	FIX	FIX
+noder	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+noncompacting	17		KEEP	KEEP	FIX
+nonenterprise	17		KEEP	KEEP	FIX
+nonhousing	17		KEEP	KEEP	GARBAGE
+nonprinted	17		KEEP	KEEP	FIX
+nonrecyclable	17		KEEP	KEEP	KEEP
+nonsafety	17		KEEP	KEEP	GARBAGE
+nupa	17	Nupa	SONNET_NAME	NAME	GARBAGE
+onetwentieth	17	one-twentieth	SONNET_FIX	FIX	KEEP
+orthoptics	17		KEEP	KEEP	FIX
+pentemper	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+perey	17	Perey	SONNET_NAME	NAME	NAME
+plovees	17	employees	SONNET_FIX	FIX	GARBAGE
+prolongated	17	prolonged	SONNET_FIX	FIX	FIX
+prousions	17	provisions	SONNET_FIX	FIX	GARBAGE
+reasonab	17	reasonable	AUTO_SAFE	FIX	FIX
+register-pajaronian	17	Register-Pajaronian	SONNET_NAME	NAME	GARBAGE
+resolut	17	resolution	SONNET_FIX	FIX	FIX
+rnember	17	member	AUTO_SAFE	FIX	FIX
+rorth	17	forth	SONNET_FIX	FIX	FIX
+schomp	17	Schomp	SONNET_NAME	NAME	FIX
+servec	17	served	AUTO_SAFE	FIX	FIX
+shaii	17	shall	SONNET_FIX	FIX	NAME
+siaie	17	state	AUTO_SAFE	FIX	FIX
+sibility	17	liability	AUTO_SAFE	FIX	FIX
+siens	17	liens	AUTO_SAFE	FIX	FIX
+sieroty	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+srcrton	17		GARBAGE_FLAG	GARBAGE	NAME
+structing	17	constructing	SONNET_FIX	FIX	GARBAGE
+sulfomethane	17		KEEP	KEEP	FIX
+surveyor-gencral	17	surveyor-general	SONNET_FIX	FIX	FIX
+tablished	17	established	AUTO_SAFE	FIX	FIX
+tenpoint	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+tetrahydrocannabinols	17		KEEP	FIX	FIX
+three-cighths	17	three-eighths	SONNET_FIX	FIX	GARBAGE
+tocal	17	local	AUTO_SAFE	FIX	FIX
+toint	17	joint	AUTO_SAFE	FIX	FIX
+ttee	17	committee	SONNET_FIX	FIX	KEEP
+twenty-sizth	17	twenty-sixth	AUTO_SAFE	FIX	FIX
+unincor	17	unincorporated	SONNET_FIX	FIX	FIX
+valled	17	called	AUTO_SAFE	FIX	FIX
+veur	17		GARBAGE_FLAG	GARBAGE	GARBAGE
+vlock	17	block	AUTO_SAFE	FIX	FIX
+weisbaum	17	Weisbaum	SONNET_NAME	NAME	NAME
+whule	17	while	AUTO_SAFE	FIX	FIX
+xcvii	17		KEEP	KEEP	KEEP
+acjachemen	16	Acjachemen	SONNET_NAME	NAME	NAME
+acquirec	16	acquired	AUTO_SAFE	FIX	FIX
+adcled	16	added	SONNET_FIX	FIX	GARBAGE
+aduit	16	adult	AUTO_SAFE	FIX	FIX
+aesdp	16		GARBAGE_FLAG	GARBAGE	FIX
+aiong	16	along	AUTO_SAFE	FIX	FIX
+alosta	16	Alosta	SONNET_NAME	NAME	NAME
+appropriapriated	16	appropriated	SONNET_FIX	FIX	GARBAGE
+aquaculturists	16		KEEP	FIX	FIX
+avain	16	again	AUTO_SAFE	FIX	FIX
+beerstecher	16	Beerstecher	SONNET_NAME	NAME	GARBAGE
+biam	16	bias	AUTO_SAFE	FIX	FIX
+buper	16	super	AUTO_SAFE	FIX	FIX
+carmenita	16	Carmenita	SONNET_NAME	NAME	NAME
+cccx	16		KEEP	KEEP	KEEP
+ceceeeee	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceeeeeeeeeeee	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+centuin	16	certain	AUTO_SAFE	FIX	FIX
+chloralhydrate	16	chloral hydrate	SONNET_FIX	FIX	NAME
+ciates	16	associates	SONNET_FIX	FIX	FIX
+clawings	16		KEEP	KEEP	FIX
+clitus	16		GARBAGE_FLAG	GARBAGE	FIX
+cnable	16	enable	SONNET_FIX	FIX	FIX
+comptche	16	Comptche	SONNET_NAME	NAME	NAME
+constita	16	constitution	SONNET_FIX	FIX	GARBAGE
+continuea	16	continued	SONNET_FIX	FIX	FIX
+conunission	16	commission	AUTO_SAFE	FIX	FIX
+coolieism	16		KEEP	KEEP	FIX
+createc	16	created	AUTO_SAFE	FIX	FIX
+cted	16	enacted	SONNET_FIX	FIX	FIX
+culiforma	16	California	SONNET_NAME	NAME	FIX
+cxci	16		KEEP	KEEP	KEEP
+cxciv	16		KEEP	KEEP	KEEP
+cxiii	16		KEEP	KEEP	KEEP
+cxv	16		KEEP	KEEP	KEEP
+cxxxi	16		KEEP	KEEP	KEEP
+determma	16	determine	SONNET_FIX	FIX	GARBAGE
+ealls	16	calls	SONNET_FIX	FIX	FIX
+eates	16	rates	AUTO_SAFE	FIX	FIX
+eccee	16		GARBAGE_FLAG	GARBAGE	FIX
+eeneeeeeee	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeneeeeeeereeers	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+eenenee	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+eightysix	16	eighty-six	SONNET_FIX	FIX	FIX
+eneh	16		GARBAGE_FLAG	GARBAGE	KEEP
+engagec	16	engaged	AUTO_SAFE	FIX	FIX
+extraordi	16	extraordinary	SONNET_FIX	FIX	GARBAGE
+fihng	16	filing	AUTO_SAFE	FIX	FIX
+forty-fifti	16	forty-fifth	SONNET_FIX	FIX	GARBAGE
+fuing	16	suing	AUTO_SAFE	FIX	FIX
+garrapata	16	Garrapata	SONNET_NAME	NAME	GARBAGE
+guajome	16	Guajome	SONNET_NAME	NAME	NAME
+henholder	16	lienholder	SONNET_FIX	FIX	FIX
+hmuted	16	limited	SONNET_FIX	FIX	FIX
+iail	16	jail	AUTO_SAFE	FIX	FIX
+ishable	16	publishable	SONNET_FIX	FIX	FIX
+juaneno	16	Juaneno	SONNET_NAME	NAME	NAME
+ketobemidone	16		KEEP	KEEP	GARBAGE
+levopropoxyphene	16		KEEP	KEEP	GARBAGE
+luid	16	fluid	AUTO_SAFE	FIX	FIX
+lxxxii	16		KEEP	KEEP	KEEP
+mdso	16		GARBAGE_FLAG	GARBAGE	FIX
+mellifica	16		KEEP	KEEP	NAME
+moramide-intermediate	16		KEEP	KEEP	GARBAGE
+munie	16	muni	SONNET_FIX	FIX	GARBAGE
+nincty-four	16	ninety-four	AUTO_SAFE	FIX	FIX
+nincty-nine	16	ninety-nine	AUTO_SAFE	FIX	FIX
+noncancelable	16		KEEP	KEEP	GARBAGE
+nonendowment	16		KEEP	KEEP	GARBAGE
+nontransit	16		KEEP	KEEP	GARBAGE
+olazar	16	Olazar	SONNET_NAME	NAME	FIX
+oné	16	one	AUTO_SAFE	FIX	FIX
+outstationing	16		KEEP	KEEP	GARBAGE
+poace	16	place	AUTO_SAFE	FIX	FIX
+preaudit	16		KEEP	KEEP	GARBAGE
+proraters	16		KEEP	KEEP	FIX
+pubite	16	public	SONNET_FIX	FIX	FIX
+raade	16	made	SONNET_FIX	FIX	FIX
+reation	16	creation	AUTO_SAFE	FIX	FIX
+reeeee	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+regwar	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+rently	16	currently	SONNET_FIX	FIX	FIX
+rodmen	16		KEEP	FIX	NAME
+sacramentosan	16		GARBAGE_FLAG	GARBAGE	NAME
+semicossyphus	16		KEEP	KEEP	GARBAGE
+shellstock	16		KEEP	KEEP	GARBAGE
+simnia	16	Simnia	SONNET_NAME	NAME	NAME
+subgovernment	16		KEEP	KEEP	GARBAGE
+subpartnership	16		KEEP	KEEP	GARBAGE
+suly	16	july	AUTO_SAFE	FIX	FIX
+supplementa	16	supplemental	AUTO_SAFE	FIX	FIX
+sxco	16	such	AUTO_SAFE	FIX	FIX
+sxerion	16	exertion	AUTO_SAFE	FIX	FIX
+thenre	16	thence	SONNET_FIX	FIX	FIX
+thorcon	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+throo	16	through	SONNET_FIX	FIX	FIX
+tinuously	16	continuously	AUTO_SAFE	FIX	FIX
+tuolumine	16	Tuolumne	SONNET_NAME	NAME	NAME
+turers	16	manufacturers	SONNET_FIX	FIX	FIX
+twenty-siath	16	twenty-sixth	AUTO_SAFE	FIX	FIX
+tweuty-five	16	twenty-five	AUTO_SAFE	FIX	FIX
+uccessary	16	necessary	SONNET_FIX	FIX	FIX
+unap	16		GARBAGE_FLAG	GARBAGE	FIX
+vahdation	16	validation	SONNET_FIX	FIX	FIX
+vellow	16	yellow	AUTO_SAFE	FIX	FIX
+viduals	16	individuals	AUTO_SAFE	FIX	FIX
+wauenreas	16		GARBAGE_FLAG	GARBAGE	GARBAGE
+weybret	16	Weybret	SONNET_NAME	NAME	GARBAGE
+xijia	16		GARBAGE_FLAG	GARBAGE	NAME
+xitib	16		GARBAGE_FLAG	GARBAGE	NAME
+zations	16	organizations	SONNET_FIX	FIX	FIX
+aaca	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+amendme	15	amendment	SONNET_FIX	FIX	FIX
+annlied	15	applied	AUTO_SAFE	FIX	FIX
+anrum	15	antrum	SONNET_FIX	FIX	GARBAGE
+apie	15	apiece	SONNET_FIX	FIX	FIX
+appheaton	15	Appleton	SONNET_NAME	NAME	NAME
+appropia	15	appropriation	SONNET_FIX	FIX	GARBAGE
+approprialars	15	appropriators	AUTO_SAFE	FIX	FIX
+artment	15	department	SONNET_FIX	FIX	FIX
+assessme	15	assessment	AUTO_SAFE	FIX	FIX
+bercby	15	hereby	SONNET_FIX	FIX	NAME
+bined	15	combined	SONNET_FIX	FIX	FIX
+bzc	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+calstars-related	15	CalSTARS-related	SONNET_NAME	NAME	GARBAGE
+cceeeeeeeeeee	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+cclix	15		KEEP	KEEP	NAME
+ccxlix	15		KEEP	KEEP	NAME
+ccxxii	15		KEEP	KEEP	KEEP
+ceeeeeeeeeeeee	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceeeeeees	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+charicr	15	charter	SONNET_FIX	FIX	FIX
+chloroephedrine	15		KEEP	KEEP	GARBAGE
+chloropseudoephedrine	15		KEEP	KEEP	GARBAGE
+cifically	15	specifically	SONNET_FIX	FIX	GARBAGE
+clvii	15		KEEP	KEEP	FIX
+clviii	15		KEEP	KEEP	GARBAGE
+clxviii	15		KEEP	KEEP	GARBAGE
+clxxix	15		KEEP	KEEP	KEEP
+clxxv	15		KEEP	KEEP	KEEP
+clxxxiv	15		KEEP	KEEP	KEEP
+commanderin-chief	15	commander-in-chief	SONNET_FIX	FIX	KEEP
+commenemg	15	commencing	SONNET_FIX	FIX	GARBAGE
+compensashall	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+crade	15	grade	AUTO_SAFE	FIX	FIX
+crossarms	15		KEEP	KEEP	KEEP
+cxxxii	15		KEEP	KEEP	KEEP
+cyual	15	equal	AUTO_SAFE	FIX	FIX
+czuleger	15	Czuleger	SONNET_NAME	NAME	GARBAGE
+davis-dolwig	15	Davis-Dolwig	SONNET_NAME	NAME	NAME
+destruc	15	destruct	SONNET_FIX	FIX	KEEP
+diphenylpropane-carboxylic	15		KEEP	KEEP	GARBAGE
+disere	15	disease	AUTO_SAFE	FIX	FIX
+duily	15	duly	AUTO_SAFE	FIX	FIX
+eeeneee	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+eligi	15	eligible	SONNET_FIX	FIX	GARBAGE
+encum	15	encumbrance	SONNET_FIX	FIX	GARBAGE
+enghsh	15	english	AUTO_SAFE	FIX	FIX
+enurt	15	court	SONNET_FIX	FIX	FIX
+erenene	15		GARBAGE_FLAG	GARBAGE	NAME
+exeenting	15	excepting	SONNET_FIX	FIX	FIX
+fisce	15	fisc	SONNET_FIX	FIX	GARBAGE
+gatary	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+gnid	15	Enid	SONNET_NAME	NAME	GARBAGE
+grpi	15	grip	AUTO_SAFE	FIX	FIX
+hydesville	15	Hydesville	SONNET_NAME	NAME	NAME
+ient	15	client	SONNET_FIX	FIX	FIX
+inatter	15	matter	SONNET_FIX	FIX	FIX
+inatters	15	matters	SONNET_FIX	FIX	GARBAGE
+inseet	15	insect	SONNET_FIX	FIX	FIX
+jurisdict	15	jurisdiction	SONNET_FIX	FIX	FIX
+leshe	15	Leshe	SONNET_NAME	NAME	GARBAGE
+luitwieler	15	Luitwieler	SONNET_NAME	NAME	GARBAGE
+lxxxviii	15		KEEP	KEEP	KEEP
+maae	15	made	AUTO_SAFE	FIX	FIX
+mamme	15	mammae	SONNET_FIX	FIX	NAME
+matiposa	15	Mariposa	SONNET_NAME	NAME	NAME
+mitial	15	initial	AUTO_SAFE	FIX	FIX
+muenter	15	Muenter	SONNET_NAME	NAME	FIX
+neuces	15		GARBAGE_FLAG	GARBAGE	FIX
+neunaber	15	Neunaber	SONNET_NAME	NAME	NAME
+newseetion	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+noncollege	15		KEEP	KEEP	KEEP
+noncommunications-related	15		KEEP	KEEP	GARBAGE
+nondosage	15		KEEP	KEEP	GARBAGE
+nonyard	15		GARBAGE_FLAG	GARBAGE	KEEP
+ohleyer	15	Ohleyer	SONNET_NAME	NAME	GARBAGE
+olema	15	Olema	SONNET_NAME	NAME	NAME
+operatior	15	operation	SONNET_FIX	FIX	FIX
+orestimba	15	Orestimba	SONNET_NAME	NAME	GARBAGE
+pedrotti	15	Pedrotti	SONNET_NAME	NAME	NAME
+pened	15	opened	AUTO_SAFE	FIX	FIX
+pheresis	15	apheresis	AUTO_SAFE	FIX	FIX
+piperidinocyclohexane	15		KEEP	KEEP	GARBAGE
+piration	15	expiration	SONNET_FIX	FIX	FIX
+pped	15	clipped	SONNET_FIX	FIX	GARBAGE
+preapprentice	15		KEEP	KEEP	GARBAGE
+precita	15	Precita	SONNET_NAME	NAME	FIX
+proceding	15	proceeding	AUTO_SAFE	FIX	FIX
+pursuar	15	pursuant	SONNET_FIX	FIX	GARBAGE
+reeset	15	reset	AUTO_SAFE	FIX	FIX
+replank	15	replant	AUTO_SAFE	FIX	FIX
+resnit	15		GARBAGE_FLAG	GARBAGE	FIX
+reusers	15		KEEP	KEEP	FIX
+sbbem	15	seem	AUTO_SAFE	FIX	FIX
+sced	15	sued	SONNET_FIX	FIX	FIX
+scnute	15	statute	SONNET_FIX	FIX	FIX
+seeeeeeee	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+seera	15	seer	AUTO_SAFE	FIX	FIX
+seseee	15	lessee	SONNET_FIX	FIX	GARBAGE
+siven	15	given	AUTO_SAFE	FIX	FIX
+srcriox	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+ssary	15	necessary	SONNET_FIX	FIX	GARBAGE
+ssorion	15	section	SONNET_FIX	FIX	NAME
+stuls	15	stubs	AUTO_SAFE	FIX	FIX
+subinit	15	submit	SONNET_FIX	FIX	FIX
+subschedules	15		KEEP	KEEP	GARBAGE
+suscol	15	Suscol	SONNET_NAME	NAME	GARBAGE
+tender-meated	15		KEEP	KEEP	GARBAGE
+therce	15	thence	SONNET_FIX	FIX	FIX
+tioning	15	rationing	SONNET_FIX	FIX	GARBAGE
+tracen	15	traced	SONNET_FIX	FIX	FIX
+tributor	15	contributor	SONNET_FIX	FIX	FIX
+unincorpo	15	unincorporated	SONNET_FIX	FIX	GARBAGE
+usdva	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+vacquerel	15	Vacquerel	SONNET_NAME	NAME	NAME
+vcting	15	voting	AUTO_SAFE	FIX	FIX
+ventions	15	conventions	SONNET_FIX	FIX	FIX
+veying	15	conveying	SONNET_FIX	FIX	GARBAGE
+vious	15	previous	SONNET_FIX	FIX	FIX
+vreated	15	created	AUTO_SAFE	FIX	FIX
+wacreas	15	whereas	AUTO_SAFE	FIX	FIX
+wauersas	15		GARBAGE_FLAG	GARBAGE	GARBAGE
+whcle	15	whole	AUTO_SAFE	FIX	FIX
+woless	15	unless	AUTO_SAFE	FIX	FIX
+yment	15	payment	SONNET_FIX	FIX	FIX
+admmstra	14	administration	SONNET_FIX	FIX	GARBAGE
+advertismg	14	advertising	AUTO_SAFE	FIX	FIX
+alloca	14	allocate	AUTO_SAFE	FIX	FIX
+amenem	14	amended	AUTO_SAFE	FIX	FIX
+apportionate	14		KEEP	KEEP	GARBAGE
+appren	14	apprentice	SONNET_FIX	FIX	FIX
+appropiia	14	appropriation	SONNET_FIX	FIX	GARBAGE
+appropriawise	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+assessmer	14	assessment	AUTO_SAFE	FIX	FIX
+astnet	14	assent	SONNET_FIX	FIX	FIX
+bayfair-east	14	Bayfair-East	SONNET_NAME	NAME	NAME
+billheads	14		KEEP	KEEP	GARBAGE
+bonent	14	bonnet	AUTO_SAFE	FIX	FIX
+breuner	14	Breuner	SONNET_NAME	NAME	NAME
+bursed	14	reimbursed	SONNET_FIX	FIX	FIX
+busline	14	bus line	SONNET_FIX	FIX	KEEP
+cccccee	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+cccxx	14		KEEP	KEEP	GARBAGE
+cciii	14		KEEP	KEEP	KEEP
+cclxiv	14		KEEP	KEEP	KEEP
+cclxx	14		KEEP	KEEP	GARBAGE
+ccxii	14		KEEP	KEEP	GARBAGE
+ccxiv	14		KEEP	KEEP	KEEP
+cellaneous	14	miscellaneous	SONNET_FIX	FIX	GARBAGE
+censee	14	licensee	SONNET_FIX	FIX	FIX
+cereee	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+chargec	14	charged	SONNET_FIX	FIX	FIX
+chauf	14	chauffeur	SONNET_FIX	FIX	FIX
+clxxii	14		KEEP	KEEP	KEEP
+clxxxii	14		KEEP	KEEP	KEEP
+clxxxix	14		KEEP	KEEP	KEEP
+clylp	14		GARBAGE_FLAG	GARBAGE	NAME
+conservahon	14	conservation	AUTO_SAFE	FIX	FIX
+containmg	14	containing	SONNET_FIX	FIX	FIX
+cuact	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+cupas	14	cups	AUTO_SAFE	FIX	FIX
+cwda	14		GARBAGE_FLAG	GARBAGE	FIX
+cwric	14		GARBAGE_FLAG	GARBAGE	FIX
+cxcv	14		KEEP	KEEP	KEEP
+cxcvii	14		KEEP	KEEP	KEEP
+cxxxvi	14		KEEP	KEEP	KEEP
+cxxxviii	14		KEEP	KEEP	KEEP
+diethylthiambutene	14		KEEP	KEEP	GARBAGE
+disaffirmed	14		KEEP	KEEP	FIX
+eeeneeeeee	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeer	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+eete	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+eneneeeee	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+eonneil	14	O'Neill	SONNET_NAME	NAME	NAME
+ership	14	ownership	AUTO_SAFE	FIX	FIX
+euled	14	ruled	AUTO_SAFE	FIX	FIX
+eutting	14	cutting	AUTO_SAFE	FIX	FIX
+exceuting	14	executing	AUTO_SAFE	FIX	FIX
+fanding	14	funding	AUTO_SAFE	FIX	FIX
+fifly-nine	14	fifty-nine	AUTO_SAFE	FIX	FIX
+fifty-cighth	14	fifty-eighth	SONNET_FIX	FIX	GARBAGE
+fishlife	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+fitle	14	title	AUTO_SAFE	FIX	FIX
+fitng	14	filing	AUTO_SAFE	FIX	FIX
+forty-fiftii	14	forty-fifth	AUTO_SAFE	FIX	FIX
+gillichthys	14		KEEP	KEEP	GARBAGE
+gioners	14	petitioners	SONNET_FIX	FIX	GARBAGE
+gocs	14	goes	AUTO_SAFE	FIX	FIX
+hearmes	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+hibiting	14	prohibiting	SONNET_FIX	FIX	FIX
+horized	14	authorized	SONNET_FIX	FIX	GARBAGE
+hsting	14	hosting	AUTO_SAFE	FIX	FIX
+iability	14	liability	AUTO_SAFE	FIX	FIX
+inacounty	14	in a county	SONNET_FIX	FIX	GARBAGE
+indorsees	14		KEEP	KEEP	FIX
+ippb	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+ision	14	vision	AUTO_SAFE	FIX	FIX
+itahes	14	itches	AUTO_SAFE	FIX	FIX
+jeneth	14	length	AUTO_SAFE	FIX	FIX
+jevicd	14	levied	AUTO_SAFE	FIX	FIX
+jies	14	ties	AUTO_SAFE	FIX	FIX
+jughandle	14		KEEP	KEEP	KEEP
+loara	14	Loara	SONNET_NAME	NAME	NAME
+luckel	14		GARBAGE_FLAG	GARBAGE	FIX
+misadjustment	14	maladjustment	AUTO_SAFE	FIX	FIX
+mittees	14	committees	SONNET_FIX	FIX	GARBAGE
+miums	14	premiums	SONNET_FIX	FIX	GARBAGE
+moabi	14	Moabi	SONNET_NAME	NAME	NAME
+mojonnier	14	Mojonnier	SONNET_NAME	NAME	GARBAGE
+mscal	14	fiscal	SONNET_FIX	FIX	FIX
+msuranee	14	insurance	SONNET_FIX	FIX	GARBAGE
+munemori	14	Munemori	SONNET_NAME	NAME	NAME
+munict	14	municipal	SONNET_FIX	FIX	FIX
+mutolo	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+mvolved	14	involved	SONNET_FIX	FIX	FIX
+nachand	14	Nachand	SONNET_NAME	NAME	FIX
+nenenee	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+nently	14	gently	SONNET_FIX	FIX	FIX
+neously	14	simultaneously	SONNET_FIX	FIX	FIX
+nexation	14	annexation	SONNET_FIX	FIX	FIX
+niember	14	member	AUTO_SAFE	FIX	FIX
+nnee	14	knee	AUTO_SAFE	FIX	FIX
+nonaided	14		KEEP	KEEP	FIX
+nonclaiming	14		KEEP	KEEP	GARBAGE
+noncohabiting	14		KEEP	KEEP	KEEP
+nonconformities	14		KEEP	KEEP	KEEP
+nonconsumptive	14		KEEP	KEEP	GARBAGE
+nondistressed	14		KEEP	KEEP	FIX
+nonduplicative	14		KEEP	KEEP	GARBAGE
+nonlicensee	14		KEEP	KEEP	KEEP
+nonpark	14		KEEP	KEEP	FIX
+nonrefrigerated	14		KEEP	KEEP	FIX
+nulk	14	bulk	AUTO_SAFE	FIX	FIX
+ocss	14		GARBAGE_FLAG	GARBAGE	FIX
+ofteers	14	officers	SONNET_FIX	FIX	FIX
+onap	14		GARBAGE_FLAG	GARBAGE	FIX
+orany	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+ownec	14	owned	SONNET_FIX	FIX	FIX
+pauciflorus	14		KEEP	KEEP	GARBAGE
+pemhca	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+piperidy	14		GARBAGE_FLAG	GARBAGE	FIX
+plicant	14	applicant	SONNET_FIX	FIX	FIX
+plice	14	police	AUTO_SAFE	FIX	FIX
+ppoint	14	appoint	AUTO_SAFE	FIX	FIX
+pranted	14	granted	AUTO_SAFE	FIX	FIX
+praving	14	paving	AUTO_SAFE	FIX	FIX
+preemets	14	preempts	AUTO_SAFE	FIX	FIX
+prograra	14	program	AUTO_SAFE	FIX	FIX
+proqian	14	program	SONNET_FIX	FIX	GARBAGE
+protempore	14	pro-tempore	SONNET_FIX	FIX	KEEP
+quadriweekly	14		KEEP	KEEP	GARBAGE
+represcnicd	14	represented	AUTO_SAFE	FIX	FIX
+rernain	14	remain	AUTO_SAFE	FIX	FIX
+resewering	14		KEEP	FIX	FIX
+resoluti	14	resolution	SONNET_FIX	FIX	FIX
+retam	14	retain	SONNET_FIX	FIX	FIX
+reurement	14	requirement	SONNET_FIX	FIX	GARBAGE
+rohnerville	14	Rohnerville	SONNET_NAME	NAME	NAME
+roneovieri	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+sarily	14	necessarily	AUTO_SAFE	FIX	FIX
+sausal	14	Sausal	SONNET_NAME	NAME	GARBAGE
+shanock	14	Hancock	SONNET_NAME	NAME	NAME
+shect	14	sheet	AUTO_SAFE	FIX	FIX
+sials	14	serials	SONNET_FIX	FIX	FIX
+siaty-eight	14	sixty-eight	SONNET_FIX	FIX	FIX
+sicita	14	silica	AUTO_SAFE	FIX	FIX
+sixty-cighth	14	sixty-eighth	SONNET_FIX	FIX	GARBAGE
+snown	14	known	SONNET_FIX	FIX	FIX
+solstitialis	14		KEEP	KEEP	FIX
+soners	14	prisoners	SONNET_FIX	FIX	GARBAGE
+soupfin	14		KEEP	KEEP	FIX
+stepe	14	step	AUTO_SAFE	FIX	FIX
+tached	14	attached	SONNET_FIX	FIX	GARBAGE
+tamiasciurus	14		KEEP	KEEP	NAME
+tating	14	stating	SONNET_FIX	FIX	FIX
+taxdeeded	14		KEEP	KEEP	GARBAGE
+theretn	14	therein	SONNET_FIX	FIX	FIX
+tionality	14	nationality	SONNET_FIX	FIX	FIX
+tised	14	advertised	SONNET_FIX	FIX	FIX
+towit	14	to-wit	SONNET_FIX	FIX	KEEP
+twenty-sicth	14	twenty-sixth	AUTO_SAFE	FIX	FIX
+ulation	14	regulation	SONNET_FIX	FIX	GARBAGE
+vemiuta	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+vross	14	gross	AUTO_SAFE	FIX	FIX
+waurreas	14	whereas	SONNET_FIX	FIX	FIX
+wnting	14	writing	SONNET_FIX	FIX	FIX
+xhia	14		GARBAGE_FLAG	GARBAGE	FIX
+xil	14		GARBAGE_FLAG	GARBAGE	FIX
+xuia	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+xviti	14		GARBAGE_FLAG	GARBAGE	GARBAGE
+xxiiird	14		KEEP	KEEP	GARBAGE
+acent	13	adjacent	SONNET_FIX	FIX	FIX
+adcrc	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+amenae	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+anaes	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+appropnia	13	appropriation	SONNET_FIX	FIX	GARBAGE
+assesso	13	assessor	AUTO_SAFE	FIX	FIX
+awings	13	awnings	AUTO_SAFE	FIX	FIX
+bankruptev	13	bankruptcy	SONNET_FIX	FIX	FIX
+betes	13		KEEP	FIX	GARBAGE
+blarch	13	larch	AUTO_SAFE	FIX	FIX
+calhforma	13	california	SONNET_FIX	FIX	GARBAGE
+camsi	13		GARBAGE_FLAG	GARBAGE	NAME
+carbonitrile	13		KEEP	KEEP	GARBAGE
+cccceeeeeeee	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccceeeeeeeee	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+cccl	13		KEEP	KEEP	FIX
+cceeeeees	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccilts	13	gilts	SONNET_FIX	FIX	FIX
+cclvii	13		KEEP	KEEP	NAME
+cclxxii	13		KEEP	KEEP	KEEP
+ccxl	13		KEEP	KEEP	FIX
+ceeeeees	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+cercidium	13		KEEP	KEEP	GARBAGE
+chlorhexadol	13		KEEP	KEEP	GARBAGE
+chnical	13	technical	SONNET_FIX	FIX	FIX
+ciltapter	13	chapter	SONNET_FIX	FIX	GARBAGE
+cireu	13	circuit	SONNET_FIX	FIX	GARBAGE
+clescribed	13	described	AUTO_SAFE	FIX	FIX
+clxxxi	13		KEEP	KEEP	KEEP
+clxxxvi	13		KEEP	KEEP	KEEP
+coses	13	costs	SONNET_FIX	FIX	FIX
+cral	13	oral	AUTO_SAFE	FIX	FIX
+cuard	13	guard	SONNET_FIX	FIX	FIX
+cxciii	13		KEEP	KEEP	KEEP
+cxxii	13		KEEP	KEEP	KEEP
+cxxvii	13		KEEP	KEEP	KEEP
+czma	13		GARBAGE_FLAG	GARBAGE	NAME
+dainages	13	damages	AUTO_SAFE	FIX	FIX
+defmtion	13	definition	SONNET_FIX	FIX	FIX
+dend	13	deed	SONNET_FIX	FIX	FIX
+denomi	13	denominations	SONNET_FIX	FIX	GARBAGE
+deraigning	13		KEEP	FIX	FIX
+difenoxin	13		KEEP	KEEP	GARBAGE
+dntics	13	antics	SONNET_FIX	FIX	GARBAGE
+domiciliaries	13		KEEP	KEEP	GARBAGE
+duectors	13	directors	AUTO_SAFE	FIX	FIX
+ecpy	13	copy	SONNET_FIX	FIX	GARBAGE
+eereee	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+ejecucién	13	ejecucion	SONNET_FIX	FIX	GARBAGE
+eneeeeees	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+enenes	13		GARBAGE_FLAG	GARBAGE	FIX
+enllected	13	collected	AUTO_SAFE	FIX	FIX
+eount	13	count	AUTO_SAFE	FIX	FIX
+eqquipme	13	equipment	SONNET_FIX	FIX	GARBAGE
+ereeeee	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+esidence	13	residence	SONNET_FIX	FIX	FIX
+fauure	13	failure	AUTO_SAFE	FIX	FIX
+feederbus	13	feeder bus	SONNET_FIX	FIX	FIX
+fonstitu	13	constitute	SONNET_FIX	FIX	GARBAGE
+forzosa	13		KEEP	FIX	NAME
+frago	13	Frago	SONNET_NAME	NAME	NAME
+gomg	13	going	SONNET_FIX	FIX	GARBAGE
+gsmpbc	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+heensing	13	licensing	SONNET_FIX	FIX	GARBAGE
+ignated	13	designated	SONNET_FIX	FIX	FIX
+ilities	13	utilities	AUTO_SAFE	FIX	FIX
+incen	13	incentive	SONNET_FIX	FIX	GARBAGE
+includmg	13	including	AUTO_SAFE	FIX	FIX
+ineffeet	13	in effect	SONNET_FIX	FIX	GARBAGE
+ineludable	13	ineludible	AUTO_SAFE	FIX	FIX
+insuffi	13	insufficient	SONNET_FIX	FIX	GARBAGE
+invoicable	13	inviolable	AUTO_SAFE	FIX	FIX
+itera	13	inter	SONNET_FIX	FIX	FIX
+iterm	13	item	SONNET_FIX	FIX	FIX
+jahor	13	labor	AUTO_SAFE	FIX	FIX
+juty	13	duty	SONNET_FIX	FIX	FIX
+kapiloff	13	Kapiloff	SONNET_NAME	NAME	NAME
+larity	13	clarity	AUTO_SAFE	FIX	FIX
+liabili	13	liability	AUTO_SAFE	FIX	FIX
+loyment	13	employment	SONNET_FIX	FIX	GARBAGE
+lxxviii	13		KEEP	KEEP	KEEP
+melodeons	13		KEEP	KEEP	FIX
+monukka	13	Monukka	SONNET_NAME	NAME	GARBAGE
+morpheridine	13		KEEP	KEEP	GARBAGE
+naking	13	making	AUTO_SAFE	FIX	FIX
+nalorphine	13		KEEP	KEEP	FIX
+nanies	13	names	SONNET_FIX	FIX	NAME
+neous	13		GARBAGE_FLAG	GARBAGE	FIX
+newarticle	13	new article	SONNET_FIX	FIX	KEEP
+nmission	13	commission	SONNET_FIX	FIX	FIX
+nnes	13	ones	AUTO_SAFE	FIX	FIX
+nonowners	13		KEEP	KEEP	GARBAGE
+nonprepaid	13		KEEP	KEEP	KEEP
+nonsuitability	13		KEEP	KEEP	FIX
+nonuniformed	13		KEEP	KEEP	KEEP
+notee	13	notice	SONNET_FIX	FIX	FIX
+nount	13	mount	SONNET_FIX	FIX	FIX
+nscal	13	fiscal	SONNET_FIX	FIX	FIX
+ofivers	13	officers	SONNET_FIX	FIX	GARBAGE
+oflicio	13	officio	SONNET_FIX	FIX	GARBAGE
+oltice	13	office	AUTO_SAFE	FIX	FIX
+planada	13	Planada	SONNET_NAME	NAME	NAME
+pnty	13	pity	AUTO_SAFE	FIX	FIX
+providecl	13	provided	AUTO_SAFE	FIX	FIX
+publicad	13		GARBAGE_FLAG	GARBAGE	NAME
+puper	13	paper	AUTO_SAFE	FIX	FIX
+redaa	13		GARBAGE_FLAG	GARBAGE	FIX
+rereference	13	reference	AUTO_SAFE	FIX	FIX
+riore	13	more	AUTO_SAFE	FIX	FIX
+rnonth	13	month	AUTO_SAFE	FIX	FIX
+saltponds	13	Saltponds	SONNET_NAME	NAME	FIX
+sance	13	nuisance	SONNET_FIX	FIX	FIX
+scuate	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+sehoul	13	school	SONNET_FIX	FIX	NAME
+seruce	13	service	SONNET_FIX	FIX	FIX
+showmg	13	showing	AUTO_SAFE	FIX	FIX
+siaty-five	13	sixty-five	SONNET_FIX	FIX	GARBAGE
+sicty-one	13	sixty-one	SONNET_FIX	FIX	GARBAGE
+sints	13	stints	SONNET_FIX	FIX	GARBAGE
+slative	13	legislative	SONNET_FIX	FIX	GARBAGE
+srcerion	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+streetim	13	street	AUTO_SAFE	FIX	FIX
+stultorum	13		KEEP	KEEP	GARBAGE
+subboard	13		KEEP	FIX	GARBAGE
+subds	13	subdivisions	SONNET_FIX	FIX	FIX
+subescrow	13		KEEP	KEEP	GARBAGE
+subfranchisors	13		KEEP	KEEP	GARBAGE
+subregistrars	13		KEEP	KEEP	NAME
+sulfondiethylmethane	13		KEEP	KEEP	GARBAGE
+supnenor	13	superior	SONNET_FIX	FIX	GARBAGE
+survevors	13	surveyors	SONNET_FIX	FIX	FIX
+swect	13	select	SONNET_FIX	FIX	FIX
+tebama	13		GARBAGE_FLAG	GARBAGE	GARBAGE
+tecture	13	architecture	SONNET_FIX	FIX	FIX
+teeee	13		GARBAGE_FLAG	GARBAGE	FIX
+telrad	13	Telrad	SONNET_NAME	NAME	FIX
+thorize	13	authorize	SONNET_FIX	FIX	GARBAGE
+ticn	13	tion	SONNET_FIX	FIX	GARBAGE
+tioners	13	petitioners	SONNET_FIX	FIX	GARBAGE
+tionments	13	apportionments	SONNET_FIX	FIX	GARBAGE
+tisement	13	advertisement	SONNET_FIX	FIX	FIX
+tnvestiga	13	investigate	SONNET_FIX	FIX	GARBAGE
+uncremated	13		KEEP	KEEP	FIX
+unprofes	13	unprofessional	SONNET_FIX	FIX	FIX
+uorth	13	forth	SONNET_FIX	FIX	FIX
+venr	13	year	SONNET_FIX	FIX	GARBAGE
+viil	13	viii	SONNET_FIX	FIX	FIX
+wauercas	13	whereas	SONNET_FIX	FIX	GARBAGE
+wnght	13	wright	SONNET_FIX	FIX	KEEP
+xitia	13		GARBAGE_FLAG	GARBAGE	NAME
+zood	13	good	AUTO_SAFE	FIX	FIX
+acetyluria	12		KEEP	KEEP	KEEP
+adjutant-goneral	12	adjutant-general	SONNET_FIX	FIX	GARBAGE
+administrahon	12	administration	AUTO_SAFE	FIX	FIX
+afterbay	12		KEEP	KEEP	GARBAGE
+alisos	12	Alisos	SONNET_NAME	NAME	NAME
+annadel	12	Annadel	SONNET_NAME	NAME	NAME
+appropriamuch	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+atomey	12	attorney	SONNET_FIX	FIX	FIX
+ausencia	12		KEEP	KEEP	NAME
+beneficiating	12		KEEP	KEEP	KEEP
+benzethidine	12		KEEP	KEEP	GARBAGE
+bercin	12	Berlin	SONNET_NAME	NAME	NAME
+berrenda	12	Berrenda	SONNET_NAME	NAME	NAME
+betameprodine	12		KEEP	KEEP	GARBAGE
+betaprodine	12		KEEP	KEEP	GARBAGE
+beverwil	12	Beverwil	SONNET_NAME	NAME	NAME
+bifect	12	bisect	AUTO_SAFE	FIX	FIX
+blec	12		GARBAGE_FLAG	GARBAGE	FIX
+bufotenine	12		KEEP	KEEP	GARBAGE
+calrforma	12	california	SONNET_FIX	FIX	NAME
+camelorum	12		KEEP	KEEP	NAME
+cardaria	12		KEEP	KEEP	GARBAGE
+ccccx	12		KEEP	KEEP	GARBAGE
+ccci	12		KEEP	KEEP	FIX
+cccliv	12		KEEP	KEEP	GARBAGE
+cclxvi	12		KEEP	KEEP	NAME
+cclxxiv	12		KEEP	KEEP	NAME
+cclxxx	12		KEEP	KEEP	NAME
+ccxliv	12		KEEP	KEEP	GARBAGE
+ccxlviii	12		KEEP	KEEP	NAME
+ccxvi	12		KEEP	KEEP	GARBAGE
+ccxviii	12		KEEP	KEEP	NAME
+ccxxi	12		KEEP	KEEP	NAME
+ccxxvi	12		KEEP	KEEP	NAME
+ccxxx	12		KEEP	KEEP	GARBAGE
+cebt	12	debt	AUTO_SAFE	FIX	FIX
+ceeceeee	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceees	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+cerned	12	concerned	SONNET_FIX	FIX	GARBAGE
+changeot	12	change	AUTO_SAFE	FIX	FIX
+chitat	12	Chitat	SONNET_NAME	NAME	FIX
+cleath	12	death	SONNET_FIX	FIX	GARBAGE
+clxiii	12		KEEP	KEEP	NAME
+clxxiv	12		KEEP	KEEP	NAME
+collectod	12	collected	SONNET_FIX	FIX	FIX
+comcommission	12	commission	SONNET_FIX	FIX	GARBAGE
+commenda	12		KEEP	FIX	FIX
+comof	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+compensn	12	compensation	SONNET_FIX	FIX	GARBAGE
+conditiona	12	conditions	AUTO_SAFE	FIX	FIX
+contnbu	12	contribute	SONNET_FIX	FIX	GARBAGE
+cseeeee	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+culosis	12	tuberculosis	SONNET_FIX	FIX	FIX
+cuoap	12	chapter	SONNET_FIX	FIX	GARBAGE
+cxlvii	12		KEEP	KEEP	GARBAGE
+cxviii	12		KEEP	KEEP	NAME
+cxxxvii	12		KEEP	KEEP	GARBAGE
+cymatogaster	12		KEEP	KEEP	GARBAGE
+debellis	12	De Bellis	SONNET_NAME	NAME	NAME
+decded	12	decided	AUTO_SAFE	FIX	FIX
+demulsification	12		KEEP	KEEP	FIX
+dences	12	evidences	SONNET_FIX	FIX	GARBAGE
+dends	12	dividends	SONNET_FIX	FIX	FIX
+depredating	12		KEEP	FIX	FIX
+deukmebejian	12	Deukmejian	SONNET_NAME	NAME	NAME
+didate	12	candidate	SONNET_FIX	FIX	FIX
+dipipanone	12		KEEP	KEEP	GARBAGE
+duphcative	12	duplicative	SONNET_FIX	FIX	FIX
+ebild	12	child	SONNET_FIX	FIX	FIX
+ecceeee	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeeeeeeeeeeees	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeres	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+eftert	12	effect	SONNET_FIX	FIX	FIX
+eify	12	edify	AUTO_SAFE	FIX	FIX
+electroliers	12		KEEP	KEEP	FIX
+eold	12	sold	AUTO_SAFE	FIX	FIX
+equipimone	12	equipment	SONNET_FIX	FIX	GARBAGE
+ereed	12	creed	SONNET_FIX	FIX	FIX
+eseeeee	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+etce	12		KEEP	FIX	FIX
+ewep	12		GARBAGE_FLAG	GARBAGE	FIX
+excentive	12	executive	SONNET_FIX	FIX	FIX
+fenal	12	penal	AUTO_SAFE	FIX	FIX
+feso	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+fibng	12	filing	AUTO_SAFE	FIX	FIX
+firc	12	fire	AUTO_SAFE	FIX	FIX
+forins	12	florins	AUTO_SAFE	FIX	FIX
+frizzelle	12	Frizzelle	SONNET_NAME	NAME	KEEP
+furid	12	lurid	AUTO_SAFE	FIX	FIX
+ghway	12	highway	AUTO_SAFE	FIX	FIX
+gional	12	regional	AUTO_SAFE	FIX	FIX
+givea	12	given	AUTO_SAFE	FIX	FIX
+gressional	12	congressional	AUTO_SAFE	FIX	FIX
+guperin	12		GARBAGE_FLAG	GARBAGE	NAME
+herehv	12	hereby	AUTO_SAFE	FIX	FIX
+hollibaugh	12	Hollibaugh	SONNET_NAME	NAME	NAME
+icased	12	leased	SONNET_FIX	FIX	FIX
+iiome	12	home	SONNET_FIX	FIX	FIX
+imission	12	omission	SONNET_FIX	FIX	FIX
+immunohematology	12		KEEP	KEEP	KEEP
+imtative	12	imitative	AUTO_SAFE	FIX	FIX
+ineet	12	inlet	SONNET_FIX	FIX	GARBAGE
+inentioned	12	mentioned	SONNET_FIX	FIX	FIX
+intercommunications	12		KEEP	KEEP	FIX
+itled	12	entitled	SONNET_FIX	FIX	FIX
+ively	12	actively	SONNET_FIX	FIX	FIX
+joeated	12	located	AUTO_SAFE	FIX	FIX
+jurisdie	12	jurisdic	SONNET_FIX	FIX	FIX
+konocti	12	Konocti	SONNET_NAME	NAME	NAME
+landfarm	12		KEEP	KEEP	FIX
+legalmente	12		KEEP	KEEP	NAME
+levophenacylmorphan	12		KEEP	KEEP	GARBAGE
+limbrub	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+lodginghouses	12		KEEP	KEEP	KEEP
+makmg	12	making	AUTO_SAFE	FIX	FIX
+malimposed	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+melusion	12	conclusion	SONNET_FIX	FIX	FIX
+mereased	12	increased	SONNET_FIX	FIX	FIX
+methyprylon	12		KEEP	KEEP	GARBAGE
+meurring	12	recurring	AUTO_SAFE	FIX	FIX
+mishranded	12	misbranded	SONNET_FIX	FIX	FIX
+mitment	12	commitment	SONNET_FIX	FIX	FIX
+mmission	12	commission	SONNET_FIX	FIX	FIX
+mumepal	12	municipal	SONNET_FIX	FIX	FIX
+nanocuries	12		KEEP	KEEP	KEEP
+nenes	12		GARBAGE_FLAG	GARBAGE	FIX
+neumiller	12	Neumiller	SONNET_NAME	NAME	NAME
+nincty-seven	12	ninety-seven	AUTO_SAFE	FIX	FIX
+nonfictitious	12		KEEP	KEEP	KEEP
+nongynecologic	12		KEEP	KEEP	GARBAGE
+nonlevel-of-care	12		KEEP	KEEP	GARBAGE
+nonpro	12	nonprofit	SONNET_FIX	FIX	GARBAGE
+nonprogram	12		KEEP	KEEP	KEEP
+nonth	12	month	AUTO_SAFE	FIX	FIX
+normethadone	12		KEEP	KEEP	GARBAGE
+ocenr	12	owner	AUTO_SAFE	FIX	FIX
+offivio	12	officio	SONNET_FIX	FIX	GARBAGE
+ofticio	12	officio	SONNET_FIX	FIX	GARBAGE
+one-cighth	12	one-eighth	AUTO_SAFE	FIX	FIX
+ools	12	tools	AUTO_SAFE	FIX	FIX
+orev	12	over	SONNET_FIX	FIX	FIX
+orized	12	authorized	SONNET_FIX	FIX	GARBAGE
+ormed	12	formed	AUTO_SAFE	FIX	FIX
+oters	12	voters	AUTO_SAFE	FIX	FIX
+overscor	12		GARBAGE_FLAG	GARBAGE	FIX
+ownet	12	owner	AUTO_SAFE	FIX	FIX
+pensated	12	compensated	SONNET_FIX	FIX	GARBAGE
+perpen	12	perpendicular	SONNET_FIX	FIX	FIX
+phenadoxone	12		KEEP	KEEP	GARBAGE
+phenampromide	12		KEEP	KEEP	GARBAGE
+photostating	12		KEEP	FIX	FIX
+pitals	12	hospitals	SONNET_FIX	FIX	FIX
+pluns	12	plans	AUTO_SAFE	FIX	FIX
+pollu	12	pollution	SONNET_FIX	FIX	FIX
+preimprinted	12		KEEP	KEEP	KEEP
+presterilized	12		KEEP	KEEP	KEEP
+previnet	12	precinct	SONNET_FIX	FIX	FIX
+proheptazine	12		KEEP	KEEP	GARBAGE
+psychometrists	12		KEEP	KEEP	FIX
+pubheations	12	publications	SONNET_FIX	FIX	GARBAGE
+puen	12	pen	AUTO_SAFE	FIX	FIX
+pulgas	12	Pulgas	SONNET_NAME	NAME	GARBAGE
+reconditioners	12		KEEP	KEEP	FIX
+recoverv	12	recovery	AUTO_SAFE	FIX	FIX
+reeordation	12	recordation	SONNET_FIX	FIX	GARBAGE
+relending	12		KEEP	FIX	FIX
+reperforates	12	perforates	AUTO_SAFE	FIX	FIX
+rereee	12	referee	SONNET_FIX	FIX	GARBAGE
+reter	12	refer	AUTO_SAFE	FIX	FIX
+riw	12		GARBAGE_FLAG	GARBAGE	FIX
+rnnene	12	renee	SONNET_FIX	FIX	NAME
+rolicall	12	roll call	SONNET_FIX	FIX	GARBAGE
+sarae	12	Sarah	SONNET_NAME	NAME	NAME
+sceds	12	seeds	AUTO_SAFE	FIX	FIX
+screenees	12	screened	AUTO_SAFE	FIX	FIX
+scventy-five	12	seventy-five	AUTO_SAFE	FIX	FIX
+seld	12	held	AUTO_SAFE	FIX	FIX
+seore	12	score	SONNET_FIX	FIX	FIX
+sesees	12	series	AUTO_SAFE	FIX	FIX
+seveuty-five	12	seventy-five	SONNET_FIX	FIX	GARBAGE
+sewerline	12	sewer line	SONNET_FIX	FIX	GARBAGE
+shent	12	sent	AUTO_SAFE	FIX	FIX
+sicty-three	12	sixty-three	SONNET_FIX	FIX	GARBAGE
+ssioner	12	commissioner	SONNET_FIX	FIX	FIX
+ssment	12	assessment	SONNET_FIX	FIX	GARBAGE
+stationory	12	stationary	AUTO_SAFE	FIX	FIX
+stirpes	12		KEEP	KEEP	FIX
+subserip	12	subscript	SONNET_FIX	FIX	FIX
+tetera	12	cetera	SONNET_FIX	FIX	KEEP
+thionylchloride	12		KEEP	KEEP	KEEP
+thiosulfite	12		KEEP	KEEP	KEEP
+thirty-sizth	12	thirty-sixth	AUTO_SAFE	FIX	FIX
+thirtysiz	12	thirty-six	AUTO_SAFE	FIX	FIX
+threesixteenths	12		KEEP	KEEP	KEEP
+tlus	12	thus	AUTO_SAFE	FIX	FIX
+torca	12	Torca	SONNET_NAME	NAME	NAME
+truek	12	truck	AUTO_SAFE	FIX	FIX
+uame	12	same	AUTO_SAFE	FIX	FIX
+ucimc	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+uent	12	cent	AUTO_SAFE	FIX	FIX
+uine	12	line	AUTO_SAFE	FIX	FIX
+unplaceable	12	replaceable	AUTO_SAFE	FIX	FIX
+uous	12		GARBAGE_FLAG	GARBAGE	GARBAGE
+valleywide	12		KEEP	KEEP	KEEP
+vavable	12	payable	SONNET_FIX	FIX	GARBAGE
+vrand	12	grand	AUTO_SAFE	FIX	FIX
+waivets	12	waivers	AUTO_SAFE	FIX	FIX
+wcab	12		KEEP	KEEP	NAME
+wedworth	12	Wedworth	SONNET_NAME	NAME	FIX
+withdrawa	12	withdrawal	AUTO_SAFE	FIX	FIX
+wuenrcas	12	whereas	SONNET_FIX	FIX	GARBAGE
+ablic	11	public	SONNET_FIX	FIX	GARBAGE
+adineagle	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+administratior	11	administration	SONNET_FIX	FIX	FIX
+administraton	11	administration	AUTO_SAFE	FIX	FIX
+alfentanyl	11		KEEP	KEEP	FIX
+allylprodine	11		KEEP	KEEP	NAME
+andsale	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+appeai	11	appeal	AUTO_SAFE	FIX	FIX
+appeat	11	appeal	SONNET_FIX	FIX	FIX
+appheatin	11	application	SONNET_FIX	FIX	GARBAGE
+appneation	11	application	SONNET_FIX	FIX	GARBAGE
+appoi	11	appoint	AUTO_SAFE	FIX	FIX
+appropriafund	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+armv	11	army	AUTO_SAFE	FIX	FIX
+aspiran	11	aspirant	SONNET_FIX	FIX	FIX
+atives	11	natives	AUTO_SAFE	FIX	FIX
+banots	11	ballots	SONNET_FIX	FIX	GARBAGE
+beenme	11	become	AUTO_SAFE	FIX	FIX
+beheves	11	believes	SONNET_FIX	FIX	FIX
+beitigheimer	11	Beitigheimer	SONNET_NAME	NAME	NAME
+benzylmorphine	11		KEEP	KEEP	NAME
+bept	11	kept	AUTO_SAFE	FIX	FIX
+bergeant-at-arms	11	sergeant-at-arms	SONNET_FIX	FIX	KEEP
+blackeap	11	blackcap	AUTO_SAFE	FIX	FIX
+boomstops	11		GARBAGE_FLAG	GARBAGE	FIX
+borein	11	herein	AUTO_SAFE	FIX	FIX
+brundige	11	Brundige	SONNET_NAME	NAME	NAME
+btaty	11		GARBAGE_FLAG	GARBAGE	FIX
+cabforma	11	california	SONNET_FIX	FIX	GARBAGE
+cahforna	11	california	SONNET_FIX	FIX	GARBAGE
+cazouls	11	Cazouls	SONNET_NAME	NAME	NAME
+ccccce	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+cccceeeeeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+cccceeeeeeeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+cccci	11		KEEP	KEEP	NAME
+ccceeeees	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccclvi	11		KEEP	KEEP	GARBAGE
+cccxli	11		KEEP	KEEP	GARBAGE
+cccxlix	11		KEEP	KEEP	GARBAGE
+cceceeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+cclxix	11		KEEP	KEEP	NAME
+cclxvii	11		KEEP	KEEP	GARBAGE
+cclxxi	11		KEEP	KEEP	GARBAGE
+ccseee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccxlvi	11		KEEP	KEEP	GARBAGE
+ccxxvii	11		KEEP	KEEP	GARBAGE
+ccxxxiv	11		KEEP	KEEP	GARBAGE
+ceceeeeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+cedures	11	procedures	SONNET_FIX	FIX	GARBAGE
+ceseeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceseeeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceveee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+chuckawalla	11	chuckwalla	SONNET_FIX	FIX	NAME
+ciliapter	11	chapter	SONNET_FIX	FIX	FIX
+ciously	11	maliciously	SONNET_FIX	FIX	FIX
+cizht	11	eight	AUTO_SAFE	FIX	FIX
+claiin	11	claim	AUTO_SAFE	FIX	FIX
+clonitazene	11		KEEP	KEEP	NAME
+comter	11	counter	SONNET_FIX	FIX	GARBAGE
+constitulegislature	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+constituthereof	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+containec	11	contained	AUTO_SAFE	FIX	FIX
+cormer	11	corner	AUTO_SAFE	FIX	FIX
+coruner	11	coroner	SONNET_FIX	FIX	FIX
+cottection	11	collection	SONNET_FIX	FIX	FIX
+cxlviii	11		KEEP	KEEP	KEEP
+cxxxv	11		KEEP	KEEP	KEEP
+danugue	11	dengue	AUTO_SAFE	FIX	FIX
+demned	11	condemned	SONNET_FIX	FIX	FIX
+dened	11	denied	SONNET_FIX	FIX	FIX
+desomorphine	11		KEEP	KEEP	NAME
+diampromide	11		KEEP	KEEP	NAME
+diethyl-stilbestrol	11		KEEP	KEEP	KEEP
+dihydromorphine	11		KEEP	KEEP	NAME
+dimenoxadol	11		KEEP	KEEP	NAME
+dimepheptanol	11		KEEP	KEEP	NAME
+dimethylthiambutene	11		KEEP	KEEP	NAME
+dimout	11		KEEP	FIX	FIX
+disabil	11	disability	SONNET_FIX	FIX	FIX
+disin	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+ditures	11	expenditures	SONNET_FIX	FIX	FIX
+dxxx	11		KEEP	KEEP	GARBAGE
+easurer	11	treasurer	SONNET_FIX	FIX	GARBAGE
+eeceeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeceee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeeeeeeeeeeeees	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeeneees	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeere	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeers	11		GARBAGE_FLAG	GARBAGE	FIX
+eeneneee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeneneneeereees	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeseeeeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+egent	11	agent	AUTO_SAFE	FIX	FIX
+eluss	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+endum	11	referendum	SONNET_FIX	FIX	GARBAGE
+eneeeee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+enpy	11	enjoy	SONNET_FIX	FIX	FIX
+enues	11	venues	SONNET_FIX	FIX	FIX
+ethylmethylthiambutene	11		KEEP	KEEP	NAME
+etonitazene	11		KEEP	KEEP	NAME
+euarctos	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+exelu	11	exclude	SONNET_FIX	FIX	GARBAGE
+extraord	11	extraordinary	SONNET_FIX	FIX	GARBAGE
+eyele	11	eyelet	AUTO_SAFE	FIX	FIX
+falloux	11	fallout	SONNET_FIX	FIX	GARBAGE
+finel	11	final	AUTO_SAFE	FIX	FIX
+fned	11	fined	AUTO_SAFE	FIX	FIX
+foint	11	joint	AUTO_SAFE	FIX	FIX
+forty-sizth	11	forty-sixth	AUTO_SAFE	FIX	FIX
+francisev	11	francisco	SONNET_FIX	FIX	NAME
+freeho	11	freehold	SONNET_FIX	FIX	KEEP
+fulasz	11	Fulasz	SONNET_NAME	NAME	GARBAGE
+furethidine	11		KEEP	KEEP	NAME
+gabrielinos	11	Gabrielinos	SONNET_NAME	NAME	NAME
+gregate	11	aggregate	SONNET_FIX	FIX	GARBAGE
+habitues	11		KEEP	KEEP	FIX
+harotp	11	Harrop	SONNET_NAME	NAME	FIX
+hmuts	11	limits	SONNET_FIX	FIX	GARBAGE
+honeveutt	11	Honeycutt	SONNET_NAME	NAME	GARBAGE
+horough	11	borough	SONNET_FIX	FIX	FIX
+horticul	11	horticultural	SONNET_FIX	FIX	GARBAGE
+huld	11	held	AUTO_SAFE	FIX	FIX
+hurdygurdy	11		KEEP	KEEP	KEEP
+hydromorphinol	11		KEEP	KEEP	FIX
+hypsypops	11		KEEP	KEEP	GARBAGE
+iable	11	liable	AUTO_SAFE	FIX	FIX
+iacts	11	facts	SONNET_FIX	FIX	FIX
+icft	11	left	SONNET_FIX	FIX	FIX
+igation	11	litigation	SONNET_FIX	FIX	FIX
+ilome	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+imds	11	ids	SONNET_FIX	FIX	GARBAGE
+imestiga	11	investigation	SONNET_FIX	FIX	GARBAGE
+imown	11	known	SONNET_FIX	FIX	FIX
+incated	11	indicated	SONNET_FIX	FIX	FIX
+incidenta	11	incidental	AUTO_SAFE	FIX	FIX
+includec	11	included	SONNET_FIX	FIX	FIX
+insuret	11	insurer	SONNET_FIX	FIX	FIX
+isosafrole	11		KEEP	KEEP	FIX
+itation	11	citation	AUTO_SAFE	FIX	FIX
+jations	11	nations	AUTO_SAFE	FIX	FIX
+lamation	11	proclamation	SONNET_FIX	FIX	GARBAGE
+lardine	11	sardine	AUTO_SAFE	FIX	FIX
+levomoramide	11		KEEP	KEEP	NAME
+lompoe	11	Lompoc	SONNET_NAME	NAME	NAME
+lowis	11	lewis	SONNET_FIX	FIX	NAME
+macist	11	pharmacist	SONNET_FIX	FIX	FIX
+maics	11	mails	SONNET_FIX	FIX	GARBAGE
+mateh	11	match	AUTO_SAFE	FIX	FIX
+mches	11	inches	SONNET_FIX	FIX	FIX
+mcorporated	11	incorporated	AUTO_SAFE	FIX	FIX
+mehes	11	meshes	AUTO_SAFE	FIX	FIX
+mmors	11	minors	SONNET_FIX	FIX	GARBAGE
+modily	11	modify	AUTO_SAFE	FIX	FIX
+molera	11	Molera	SONNET_NAME	NAME	NAME
+molinera	11	Molinera	SONNET_NAME	NAME	NAME
+mulemen	11	muleteers	SONNET_FIX	FIX	FIX
+naiio	11	ratio	SONNET_FIX	FIX	FIX
+nasoni	11	Nasoni	SONNET_NAME	NAME	NAME
+needv	11	needy	SONNET_FIX	FIX	FIX
+nincty-three	11	ninety-three	AUTO_SAFE	FIX	FIX
+nonaccidentally	11		KEEP	KEEP	FIX
+noncontractual	11		KEEP	KEEP	KEEP
+nonevidentiary	11		KEEP	KEEP	FIX
+nonfeed	11	nonfood	SONNET_FIX	FIX	GARBAGE
+nonpaternity	11		KEEP	KEEP	GARBAGE
+nonpeace	11		KEEP	KEEP	GARBAGE
+nonprevailing	11		KEEP	KEEP	FIX
+nonrecordation	11		KEEP	KEEP	GARBAGE
+nonserialized	11		KEEP	KEEP	GARBAGE
+nonsevere	11		KEEP	KEEP	FIX
+norlevorphanol	11		KEEP	KEEP	NAME
+normorphine	11		KEEP	KEEP	FIX
+norpipanone	11		KEEP	KEEP	NAME
+notier	11	notice	SONNET_FIX	FIX	FIX
+offermg	11	offering	SONNET_FIX	FIX	FIX
+ofiee	11	office	AUTO_SAFE	FIX	FIX
+olty	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+operahon	11	operation	AUTO_SAFE	FIX	FIX
+opii	11		KEEP	FIX	FIX
+otatuule	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+ouses	11	houses	SONNET_FIX	FIX	FIX
+overscors	11		GARBAGE_FLAG	GARBAGE	FIX
+panariti	11	Panariti	SONNET_NAME	NAME	FIX
+parments	11	payments	AUTO_SAFE	FIX	FIX
+penalt	11	penalty	AUTO_SAFE	FIX	FIX
+petency	11	competency	SONNET_FIX	FIX	FIX
+phenylcyclohexylamine	11		KEEP	KEEP	FIX
+phenyleyclohexyl	11	phenylcyclohexyl	SONNET_FIX	FIX	FIX
+pierovich	11	Pierovich	SONNET_NAME	NAME	NAME
+piment	11	pigment	AUTO_SAFE	FIX	FIX
+pinate	11		GARBAGE_FLAG	GARBAGE	NAME
+plemental	11	supplemental	SONNET_FIX	FIX	FIX
+ploqtams	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+prescrip	11	prescription	SONNET_FIX	FIX	KEEP
+propionoxypiperidine	11		KEEP	KEEP	NAME
+ptojochs	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+pubile	11	public	SONNET_FIX	FIX	GARBAGE
+pubneation	11	publication	SONNET_FIX	FIX	GARBAGE
+putics	11	duties	AUTO_SAFE	FIX	FIX
+qoveinot	11	governor	SONNET_FIX	FIX	GARBAGE
+qualited	11	qualified	AUTO_SAFE	FIX	FIX
+racemoramide	11		KEEP	KEEP	NAME
+rainev	11	Rainey	SONNET_NAME	NAME	FIX
+redomestication	11		KEEP	KEEP	FIX
+reeviving	11	reviving	AUTO_SAFE	FIX	FIX
+relaundered	11	laundered	AUTO_SAFE	FIX	FIX
+renaity	11	penalty	AUTO_SAFE	FIX	FIX
+repackagers	11		KEEP	KEEP	FIX
+residentrun	11		GARBAGE_FLAG	GARBAGE	FIX
+retarned	11	returned	AUTO_SAFE	FIX	FIX
+rized	11	authorized	SONNET_FIX	FIX	FIX
+rubicundus	11		KEEP	KEEP	FIX
+saali	11	Saali	SONNET_NAME	NAME	NAME
+schrouder	11	Schrouder	SONNET_NAME	NAME	NAME
+seeton	11	Seeton	SONNET_NAME	NAME	NAME
+sercen	11	percent	AUTO_SAFE	FIX	FIX
+siaty-four	11	sixty-four	SONNET_FIX	FIX	GARBAGE
+sisquoc	11	Sisquoc	SONNET_NAME	NAME	NAME
+sisquoe	11	Sisquoc	SONNET_NAME	NAME	GARBAGE
+sment	11	assessment	SONNET_FIX	FIX	GARBAGE
+snecession	11	succession	SONNET_FIX	FIX	FIX
+soniat	11	Soniat	SONNET_NAME	NAME	NAME
+sorghums	11		KEEP	KEEP	FIX
+spicuously	11	conspicuously	SONNET_FIX	FIX	GARBAGE
+ssseee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+stons	11	stones	SONNET_FIX	FIX	FIX
+strl	11	still	SONNET_FIX	FIX	FIX
+subproducer	11		KEEP	KEEP	GARBAGE
+sultanina	11		KEEP	KEEP	FIX
+sulury	11	salary	SONNET_FIX	FIX	FIX
+sxorton	11	Norton	SONNET_NAME	NAME	NAME
+szco	11	such	AUTO_SAFE	FIX	FIX
+szcrton	11		GARBAGE_FLAG	GARBAGE	NAME
+tanster	11	transfer	SONNET_FIX	FIX	FIX
+tendentof	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+tequesquite	11	Tequesquite	SONNET_NAME	NAME	NAME
+thisact	11	this act	SONNET_FIX	FIX	GARBAGE
+tlle	11	title	SONNET_FIX	FIX	FIX
+tosue	11	issue	SONNET_FIX	FIX	NAME
+travelmg	11	traveling	SONNET_FIX	FIX	GARBAGE
+trimeperidine	11		KEEP	KEEP	FIX
+tularcitos	11	Tularcitos	SONNET_NAME	NAME	NAME
+tuled	11	ruled	AUTO_SAFE	FIX	FIX
+unappor	11	unapportioned	SONNET_FIX	FIX	FIX
+unauthor	11	unauthorized	SONNET_FIX	FIX	FIX
+unconstitu	11	unconstitutional	SONNET_FIX	FIX	GARBAGE
+unmediatel	11	immediately	SONNET_FIX	FIX	FIX
+ureeny	11	larceny	SONNET_FIX	FIX	GARBAGE
+usion	11		KEEP	FIX	FIX
+uthties	11	utilities	SONNET_FIX	FIX	GARBAGE
+vereee	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+voint	11	joint	AUTO_SAFE	FIX	FIX
+waueereas	11	whereas	SONNET_FIX	FIX	GARBAGE
+wcmis	11		GARBAGE_FLAG	GARBAGE	GARBAGE
+whorn	11	whom	SONNET_FIX	FIX	FIX
+wlio	11	who	SONNET_FIX	FIX	GARBAGE
+wuheerzeas	11	whereas	SONNET_FIX	FIX	GARBAGE
+zabalkanski	11	Zabalkanski	SONNET_NAME	NAME	NAME
+zabalkanskoi	11	Zabalkanskoi	SONNET_NAME	NAME	GARBAGE
+acetorphine	10		KEEP	KEEP	GARBAGE
+acetyldihydrocodeine	10		KEEP	KEEP	GARBAGE
+acetylmethadol	10		KEEP	KEEP	KEEP
+agneultural	10	agricultural	SONNET_FIX	FIX	GARBAGE
+allsuch	10	all such	AUTO_SAFE	FIX	FIX
+alphacetylmethadol	10		KEEP	KEEP	GARBAGE
+alphameprodine	10		KEEP	KEEP	GARBAGE
+alphamethadol	10		KEEP	KEEP	GARBAGE
+alpme	10	alpine	SONNET_FIX	FIX	FIX
+amdarit	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+aphelocoma	10		KEEP	KEEP	KEEP
+appointmer	10	appointment	AUTO_SAFE	FIX	FIX
+appropriaor	10	appropriator	AUTO_SAFE	FIX	FIX
+apprupria	10	appropriation	SONNET_FIX	FIX	GARBAGE
+arately	10	separately	SONNET_FIX	FIX	GARBAGE
+arklin	10	Arklin	SONNET_NAME	NAME	NAME
+assegs	10	assets	AUTO_SAFE	FIX	FIX
+assessincnt	10	assessment	SONNET_FIX	FIX	GARBAGE
+astrets	10	streets	AUTO_SAFE	FIX	FIX
+athletie	10	athletic	AUTO_SAFE	FIX	FIX
+bcedp	10		GARBAGE_FLAG	GARBAGE	FIX
+bermardino	10	Bernardino	SONNET_NAME	NAME	FIX
+betacetylmethadol	10		KEEP	KEEP	GARBAGE
+betamethadol	10		KEEP	KEEP	KEEP
+biect	10	object	SONNET_FIX	FIX	FIX
+borids	10	bonds	SONNET_FIX	FIX	GARBAGE
+brakeshoes	10		KEEP	KEEP	FIX
+btatz	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+camphorata	10		KEEP	KEEP	FIX
+ccccceeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccccceeeeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccccli	10		KEEP	KEEP	GARBAGE
+ccccxxi	10		KEEP	KEEP	GARBAGE
+ccceceeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccclix	10		KEEP	KEEP	GARBAGE
+ccclxix	10		KEEP	KEEP	GARBAGE
+ccclxvi	10		KEEP	KEEP	KEEP
+ccclxx	10		KEEP	KEEP	GARBAGE
+ccclxxiv	10		KEEP	KEEP	GARBAGE
+cccxl	10		KEEP	KEEP	GARBAGE
+cccxxxix	10		KEEP	KEEP	KEEP
+cceceeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+cclxxxix	10		KEEP	KEEP	KEEP
+cctp	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+ccxlv	10		KEEP	KEEP	GARBAGE
+ccxxix	10		KEEP	KEEP	KEEP
+ccxxxvi	10		KEEP	KEEP	GARBAGE
+ceceeeeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceeeeeeeeees	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceereee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+ceesee	10		GARBAGE_FLAG	GARBAGE	FIX
+certafeate	10	certificate	SONNET_FIX	FIX	GARBAGE
+cighicen	10	eighteen	AUTO_SAFE	FIX	FIX
+cilect	10	collect	AUTO_SAFE	FIX	FIX
+citiapter	10	chapter	SONNET_FIX	FIX	GARBAGE
+clairns	10	claims	SONNET_FIX	FIX	FIX
+clxxxiii	10		KEEP	KEEP	KEEP
+cnteria	10	criteria	AUTO_SAFE	FIX	FIX
+cobranza	10		KEEP	KEEP	NAME
+cobrarle	10		KEEP	KEEP	GARBAGE
+commls	10	commas	SONNET_FIX	FIX	GARBAGE
+compensi	10	compensatory	SONNET_FIX	FIX	FIX
+connei	10	Connei	SONNET_NAME	NAME	NAME
+controlvot	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+corinthe	10	Corinthe	SONNET_NAME	NAME	NAME
+coumy	10	county	AUTO_SAFE	FIX	FIX
+cseeeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+cuaprtter	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+cuaptterr	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+cunent	10	current	AUTO_SAFE	FIX	FIX
+curring	10	occurring	SONNET_FIX	FIX	FIX
+cyprenorphine	10		KEEP	KEEP	GARBAGE
+dehver	10	deliver	SONNET_FIX	FIX	NAME
+delinquenev	10	delinquency	SONNET_FIX	FIX	FIX
+dextromoramide	10		KEEP	KEEP	GARBAGE
+diserection	10	discretion	AUTO_SAFE	FIX	FIX
+dismissa	10	dismissal	AUTO_SAFE	FIX	FIX
+doara	10	Doara	SONNET_NAME	NAME	GARBAGE
+dreco	10	Greco	SONNET_NAME	NAME	FIX
+ducers	10	producers	SONNET_FIX	FIX	GARBAGE
+dustry	10	industry	SONNET_FIX	FIX	KEEP
+dxxiv	10		KEEP	KEEP	NAME
+eact	10	each	SONNET_FIX	FIX	FIX
+earricd	10	carried	AUTO_SAFE	FIX	FIX
+earu	10	earn	SONNET_FIX	FIX	KEEP
+eatches	10	catches	AUTO_SAFE	FIX	FIX
+eatehes	10	catches	SONNET_FIX	FIX	KEEP
+eaty	10	treaty	SONNET_FIX	FIX	KEEP
+eceeeeeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeceeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeeece	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeneeeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+eeneneeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+eenses	10	licenses	SONNET_FIX	FIX	FIX
+efectne	10	effective	SONNET_FIX	FIX	GARBAGE
+ehminated	10	eliminated	SONNET_FIX	FIX	FIX
+encinita	10	Encinita	SONNET_NAME	NAME	NAME
+eneneees	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+enneetennees	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+entty	10	entity	AUTO_SAFE	FIX	FIX
+enumera	10	enumeration	SONNET_FIX	FIX	FIX
+environmenta	10	environmental	AUTO_SAFE	FIX	FIX
+eommander-in-chief	10	commander-in-chief	SONNET_FIX	FIX	GARBAGE
+ercale	10	percale	SONNET_FIX	FIX	GARBAGE
+erintendent	10	superintendent	SONNET_FIX	FIX	GARBAGE
+erreca	10	Erreca	SONNET_NAME	NAME	NAME
+eseeeeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+eteeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+exeep	10	except	AUTO_SAFE	FIX	FIX
+extin	10	extinction	SONNET_FIX	FIX	FIX
+facturing	10	manufacturing	SONNET_FIX	FIX	FIX
+falureto	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+fecling	10	feeling	AUTO_SAFE	FIX	FIX
+federalaid	10	federal aid	SONNET_FIX	FIX	GARBAGE
+feneral	10	general	AUTO_SAFE	FIX	FIX
+fleishhacker	10	Fleishhacker	SONNET_NAME	NAME	NAME
+fompensa	10	compensation	SONNET_FIX	FIX	GARBAGE
+fourtenths	10	four-tenths	SONNET_FIX	FIX	FIX
+ftovis	10	Clovis	SONNET_NAME	NAME	NAME
+furty-second	10	forty-second	AUTO_SAFE	FIX	FIX
+gairdneri	10	Gairdneri	SONNET_NAME	NAME	NAME
+gcwr	10		KEEP	KEEP	GARBAGE
+gions	10	regions	SONNET_FIX	FIX	KEEP
+gueh	10	such	SONNET_FIX	FIX	FIX
+halepensis	10		KEEP	KEEP	GARBAGE
+haliolis	10	haliotis	SONNET_FIX	FIX	GARBAGE
+helding	10	holding	AUTO_SAFE	FIX	FIX
+hends	10	hands	AUTO_SAFE	FIX	FIX
+hereo	10	hereof	AUTO_SAFE	FIX	FIX
+hillegass	10	Hillegass	SONNET_NAME	NAME	NAME
+hnes	10	lines	SONNET_FIX	FIX	FIX
+hrearm	10	firearm	SONNET_FIX	FIX	FIX
+hydroxypethidine	10		KEEP	KEEP	GARBAGE
+iiouse	10	house	AUTO_SAFE	FIX	FIX
+ilege	10	privilege	SONNET_FIX	FIX	FIX
+ilevs	10	levies	SONNET_FIX	FIX	FIX
+imerest	10	interest	SONNET_FIX	FIX	FIX
+inacriminal	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+indebitatus	10		KEEP	KEEP	GARBAGE
+inen	10	linen	SONNET_FIX	FIX	FIX
+inguinale	10		KEEP	KEEP	FIX
+iorth	10	forth	SONNET_FIX	FIX	FIX
+itants	10	inhabitants	SONNET_FIX	FIX	FIX
+iwenty-five	10	twenty-five	SONNET_FIX	FIX	GARBAGE
+izes	10	sizes	AUTO_SAFE	FIX	FIX
+janded	10	landed	AUTO_SAFE	FIX	FIX
+jector	10	sector	AUTO_SAFE	FIX	FIX
+jeval	10		GARBAGE_FLAG	GARBAGE	FIX
+joeation	10	location	AUTO_SAFE	FIX	FIX
+jowing	10	following	SONNET_FIX	FIX	FIX
+lamanda	10	La Manda	SONNET_NAME	NAME	NAME
+lassom	10	lasso	AUTO_SAFE	FIX	FIX
+leghold	10		KEEP	KEEP	NAME
+lixe	10	line	AUTO_SAFE	FIX	FIX
+loyee	10	employee	SONNET_FIX	FIX	FIX
+mainta	10	maintain	SONNET_FIX	FIX	GARBAGE
+mamtenanee	10	maintenance	SONNET_FIX	FIX	GARBAGE
+marily	10	primarily	SONNET_FIX	FIX	NAME
+marvsville	10	Marysville	SONNET_NAME	NAME	NAME
+memillan	10	McMillan	SONNET_NAME	NAME	FIX
+merated	10	enumerated	AUTO_SAFE	FIX	FIX
+methyldesorphine	10		KEEP	KEEP	GARBAGE
+methyldihydromorphine	10		KEEP	KEEP	KEEP
+michillinda	10	Michillinda	SONNET_NAME	NAME	NAME
+milx	10	milk	AUTO_SAFE	FIX	FIX
+miscon	10	misconduct	SONNET_FIX	FIX	GARBAGE
+narnes	10	barnes	AUTO_SAFE	FIX	FIX
+ndred	10	hundred	AUTO_SAFE	FIX	FIX
+nearsite	10	nearside	AUTO_SAFE	FIX	FIX
+nincty-one	10	ninety-one	SONNET_FIX	FIX	GARBAGE
+nittee	10	committee	SONNET_FIX	FIX	FIX
+nonapplicability	10		KEEP	KEEP	FIX
+nonapplied	10		KEEP	KEEP	GARBAGE
+noncontracted	10		KEEP	KEEP	KEEP
+noncoterminous	10		KEEP	KEEP	KEEP
+noninvestment	10		KEEP	KEEP	GARBAGE
+nonminority	10		KEEP	KEEP	FIX
+nonprisoner	10		KEEP	KEEP	GARBAGE
+nonresi	10	nonresident	SONNET_FIX	FIX	GARBAGE
+nonschool-related	10		KEEP	KEEP	FIX
+nonurgency	10		KEEP	KEEP	KEEP
+noracymethadol	10		KEEP	KEEP	GARBAGE
+nostate	10		GARBAGE_FLAG	GARBAGE	FIX
+noties	10	notices	SONNET_FIX	FIX	FIX
+ofheers	10	officers	SONNET_FIX	FIX	FIX
+ofncer	10	officer	AUTO_SAFE	FIX	FIX
+oftcer	10	officer	AUTO_SAFE	FIX	FIX
+one-nalf	10	one-half	SONNET_FIX	FIX	GARBAGE
+onefifth	10	one-fifth	SONNET_FIX	FIX	KEEP
+ormance	10	performance	SONNET_FIX	FIX	FIX
+outstationed	10		KEEP	KEEP	FIX
+parvipinnis	10		KEEP	KEEP	KEEP
+peatn	10	death	SONNET_FIX	FIX	FIX
+peddar	10	pedlar	AUTO_SAFE	FIX	FIX
+peltee	10	Peltee	SONNET_NAME	NAME	FIX
+perent	10	percent	AUTO_SAFE	FIX	FIX
+phenoperidine	10		KEEP	KEEP	GARBAGE
+piperidyl	10		KEEP	KEEP	KEEP
+piritramide	10		KEEP	KEEP	GARBAGE
+pointments	10	appointments	SONNET_FIX	FIX	GARBAGE
+ponas	10	ponds	AUTO_SAFE	FIX	FIX
+portionments	10	apportionments	SONNET_FIX	FIX	GARBAGE
+predisciplinary	10		KEEP	KEEP	KEEP
+preter	10	prefer	AUTO_SAFE	FIX	FIX
+prmted	10	printed	AUTO_SAFE	FIX	FIX
+propietario	10		KEEP	KEEP	KEEP
+providel	10	provided	AUTO_SAFE	FIX	FIX
+qtams	10		GARBAGE_FLAG	GARBAGE	KEEP
+quencies	10	frequencies	SONNET_FIX	FIX	FIX
+quicting	10	quieting	AUTO_SAFE	FIX	FIX
+raake	10	rake	AUTO_SAFE	FIX	FIX
+recorda	10	records	AUTO_SAFE	FIX	FIX
+redlegged	10		KEEP	KEEP	KEEP
+reercation	10	recreation	AUTO_SAFE	FIX	FIX
+refor	10	reform	SONNET_FIX	FIX	FIX
+reir	10	their	SONNET_FIX	FIX	FIX
+relatamended	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+remair	10	remain	AUTO_SAFE	FIX	FIX
+remam	10	remain	SONNET_FIX	FIX	GARBAGE
+reneals	10	repeals	AUTO_SAFE	FIX	FIX
+repurchasable	10		KEEP	KEEP	FIX
+resewered	10		KEEP	FIX	FIX
+ributions	10	contributions	SONNET_FIX	FIX	GARBAGE
+rosemon	10	Rosemon	SONNET_NAME	NAME	NAME
+sanots	10	Santos	SONNET_NAME	NAME	NAME
+schco	10	school	SONNET_FIX	FIX	FIX
+seheol	10	school	SONNET_FIX	FIX	NAME
+sequit	10	sequitur	SONNET_FIX	FIX	FIX
+serees	10	series	AUTO_SAFE	FIX	FIX
+sesses	10		GARBAGE_FLAG	GARBAGE	FIX
+siaty-one	10	sixty-one	SONNET_FIX	FIX	GARBAGE
+siaty-six	10	sixty-six	SONNET_FIX	FIX	GARBAGE
+sicty-two	10	sixty-two	SONNET_FIX	FIX	FIX
+simuar	10	similar	SONNET_FIX	FIX	NAME
+somota	10	Sonoma	SONNET_NAME	NAME	NAME
+soventy-five	10	seventy-five	AUTO_SAFE	FIX	FIX
+sqgs	10		GARBAGE_FLAG	GARBAGE	FIX
+steth	10	Steth	SONNET_NAME	NAME	NAME
+stirhng	10	stirling	SONNET_FIX	FIX	FIX
+stvle	10	style	AUTO_SAFE	FIX	FIX
+stxty-three	10	sixty-three	SONNET_FIX	FIX	GARBAGE
+subcaps	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+subrentals	10		KEEP	KEEP	KEEP
+subsee	10	subsection	SONNET_FIX	FIX	FIX
+sufentanyl	10		KEEP	KEEP	GARBAGE
+superinper	10		GARBAGE_FLAG	GARBAGE	FIX
+sxcriox	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+tablish	10	establish	AUTO_SAFE	FIX	FIX
+tamaras	10	Tamaras	SONNET_NAME	NAME	NAME
+tariffing	10		KEEP	FIX	FIX
+taxlevy	10	tax levy	SONNET_FIX	FIX	GARBAGE
+temof	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+theiy	10	their	AUTO_SAFE	FIX	FIX
+therei	10	therein	AUTO_SAFE	FIX	FIX
+theret	10	thereto	AUTO_SAFE	FIX	FIX
+theve	10	there	AUTO_SAFE	FIX	FIX
+tiun	10	tion	SONNET_FIX	FIX	KEEP
+tmder	10	under	AUTO_SAFE	FIX	FIX
+tohowine	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+tornia	10	california	SONNET_FIX	FIX	NAME
+trammg	10	training	SONNET_FIX	FIX	FIX
+treasu	10	treasury	AUTO_SAFE	FIX	FIX
+tuting	10	constituting	SONNET_FIX	FIX	KEEP
+twenty-vighth	10	twenty-eighth	SONNET_FIX	FIX	GARBAGE
+twonty-four	10	twenty-four	AUTO_SAFE	FIX	FIX
+ually	10	usually	SONNET_FIX	FIX	FIX
+unior	10	junior	AUTO_SAFE	FIX	FIX
+usarse	10		KEEP	KEEP	GARBAGE
+vaeanev	10	vacancy	SONNET_FIX	FIX	GARBAGE
+vandation	10	foundation	SONNET_FIX	FIX	FIX
+veeee	10		GARBAGE_FLAG	GARBAGE	GARBAGE
+venrs	10	years	SONNET_FIX	FIX	FIX
+vider	10	provide	SONNET_FIX	FIX	FIX
+watil	10	until	SONNET_FIX	FIX	GARBAGE
+wluch	10	which	SONNET_FIX	FIX	FIX
+wueerzas	10	whereas	SONNET_FIX	FIX	GARBAGE
+wueerzeas	10	whereas	SONNET_FIX	FIX	GARBAGE
+wuheerreas	10	whereas	SONNET_FIX	FIX	GARBAGE
+xitb	10	with	SONNET_FIX	FIX	GARBAGE
+yrade	10	trade	SONNET_FIX	FIX	FIX
