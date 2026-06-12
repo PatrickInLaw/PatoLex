@@ -43,7 +43,7 @@ for g in ("Cnav.", "Crap. CONA", "CLUX XXAT"):
 
 print("\n== chapter_was_ocr_substituted (canonical F11 ingest guard) ==")
 try:
-    import ingest_clean as _clean
+    import ingest.ingest_clean as _clean   # moved to pipeline/ingest/ in the reorg
     sub = _clean.chapter_was_ocr_substituted
     check("clean arabic 38 trusts",      sub("38", 38), False)
     check("clean roman XII trusts",      sub("XII", 12), False)

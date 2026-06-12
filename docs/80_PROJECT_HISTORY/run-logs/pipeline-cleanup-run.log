@@ -15,3 +15,6 @@
 [2026-06-12 12:32 PT] STEP-B | committed adjudicate/verify/chapter (7884b10) | OK
 [2026-06-12 12:33 PT] STEP-B | moving analysis/ (recoverable_compose, triage_residual, garbage_page_cluster, substitution_sample, vocab_diff, singleton_decompose, singleton_fragment_analysis, build_corpus_confident, save_novel_candidates, size_candidates). from correction_passes import stays (resolves via pipeline/ root while engine still flat) | PENDING
 [2026-06-12 12:34 PT] STEP-B | analysis/ moved (10 files); smoke-net same 2 baseline, ZERO new -> clean | OK
+[2026-06-12 12:35 PT] STEP-B | committed analysis/ (46913a6) | OK
+[2026-06-12 12:36 PT] STEP-B | moving ingest/ CLEAN scripts only (ingest_clean, register_source_document, batch_ingest_born_digital, ingest_born_digital_prep, acquire_leginfo_pubinfo, resume_leginfo_pubinfo). DEFERRING parser scripts (ingest_from_ocr, run_parse_5090, parse_born_digital*) to Step C parser rebuild -- the 2 baseline violations stay until then | PENDING
+[2026-06-12 12:37 PT] STEP-B | net CAUGHT a new violation: test_chapter_parser imported ingest_clean -> fixed to import ingest.ingest_clean; re-ran net -> back to 2 baseline, clean | OK
