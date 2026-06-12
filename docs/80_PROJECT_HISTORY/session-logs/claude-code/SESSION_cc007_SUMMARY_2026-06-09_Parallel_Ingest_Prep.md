@@ -459,6 +459,14 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - edit-2 in decompose was infeasible (enumerated ~500k cands/token) → killed stuck 5090 python (PID 44860), re-ran without it.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Singleton tail decomposed" + "Correct correction-pass architecture").
 
+### Continuation 42 (2026-06-11) — Dict integration LIVE + tail decomposed RIGHT (Patrick: integrate, fix edit-2, done right)
+
+- **Dict integration DONE (names):** `build_dictionary` now loads `_vocab/dict_additions.txt` (5,438 DB-validated corpus-attested names) → 328,139→333,563. Reunifier + all passes benefit. Legal/corpus vocab NOT added — both heuristic curations failed (novel-filter kept `admunistra`/`aforesnid`; name-filter dropped real legislators & kept `aaad`). 3rd proof heuristics can't curate vocab → legal vocab needs LLM validation.
+- **Singleton decompose FIXED** (Patrick's 2 bugs: OVER_MERGE-before-EDIT1 order + permissive `known`=wf>0 false-splitting typos; plus edit-2 was removed). v2: integrated dict, reliability order, `strong_known` strict split, efficient edit-2 (pyspellchecker). Result: **GARBAGE 17.1%, EDIT1 36.3%, EDIT2 25.2%, OVER_MERGE 1.9% (was 38.5%), STANDALONE 19.4%.** → ~17% garbage, ~63% autocorrectable, ~19% harder typos. `applicatien`/`swearirg` now correctly EDIT1.
+- **"60% garbage" fully refuted; tail is overwhelmingly recoverable.** Error rate is very reducible via reunify→split→spell-1/2/3.
+- Scripts: `build_dict_additions.py`, `singleton_decompose.py` (5090 + scratch); `correction_passes.py` build_dictionary patched.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Dict integration LIVE + singleton tail decomposed RIGHT").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

@@ -333,6 +333,34 @@ can't do — measure its contents.)
    are highest-ROI; largely covered by Pass C + Sonnet but completeness UNVERIFIED.
 All emit reversible overlays; re-measure residual AFTER they run for the first real error rate.
 
+## Dict integration LIVE + singleton tail decomposed RIGHT (2026-06-11)
+**Dictionary integration (Patrick #4) — DONE for names.** `build_dictionary()` now loads
+`_vocab/dict_additions.txt` (5,438 DB-validated, corpus-attested names from `gazetteer_keep`) →
+dict 328,139 → 333,563. The reunifier + all correction passes that call `build_dictionary` now
+recognize these names. **Legal/corpus vocab NOT added** — both heuristic curation attempts failed:
+(a) the "genuine-novel" freq+edit filter kept fragments/legal-word-errors (`admunistra`,
+`aforesnid`, `actshall`); (b) an edit/affix filter on the names DROPPED real legislators
+(`ducheny`/`karnette`/`escutia`) and KEPT garbage (`aaad`/`aaca`). Lesson (3rd time): heuristics
+cannot separate real corpus vocab from systematic errors — the legal vocab needs an LLM validation
+pass. Names were addable only because they had real ground truth (census/GeoNames match).
+
+**Singleton tail decomposed RIGHT** (`singleton_decompose.py` v2: integrated dict, order
+GARBAGE→FRAG_join→EDIT1→EDIT2→strict-OVER_MERGE→FRAG_affix→STANDALONE, `strong_known` splits,
+efficient edit-2 via pyspellchecker):
+| bucket | % | note |
+|---|---|---|
+| GARBAGE (structural) | 17.1% | the real floor (was mis-claimed 60%) |
+| EDIT1 typo | 36.3% | was 15.7% — strict split stopped OVER_MERGE stealing typos |
+| EDIT2 typo | 25.2% | was 0 (edit-2 had been removed) |
+| OVER_MERGE | 1.9% | was 38.5% — strong_known split killed the false merges (real: `aprilnext`,`bondisue`) |
+| STANDALONE | 19.4% | mostly HARDER typos (`inaivtenance`→maintenance), edit-3/LLM; few real words |
+
+**Corrected conclusion: the tail is ~17% structural garbage, ~63% cleanly autocorrectable
+(edit-1/2 + real merges), ~19% harder typos. Genuine rare-real-words are a tiny sliver.** The
+error rate is therefore very reducible via the pass architecture (reunify → split → spell-1/2/3),
+not bound by garbage. (Two bugs Patrick caught fixed: classifier ORDER put OVER_MERGE before EDIT1,
+and permissive `known`=`wf>0` false-split typos; plus edit-2 had been dropped.)
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

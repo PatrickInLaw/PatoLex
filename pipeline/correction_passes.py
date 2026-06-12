@@ -163,6 +163,25 @@ def build_dictionary():
         print("[WARN] wordfreq not available; using static dict only", file=sys.stderr)
 
     word_set |= LEGAL_SUPPLEMENT
+
+    # VALIDATED corpus-vocabulary layer (Patrick: start from the corpus's own words). Names that
+    # are corpus-attested + matched a real name list, plus genuine-novel corpus terms that are NOT
+    # within edit-2 of a common English word (so systematic OCR errors like secrion/sball are
+    # excluded). Built by build_dict_additions.py -> _vocab/dict_additions.txt. Loaded if present.
+    _add_path = os.path.join(OUT_DIR, "dict_additions.txt") if "OUT_DIR" in globals() else \
+                r"C:\Users\patolex\PatoLex-scratch\_vocab\dict_additions.txt"
+    try:
+        if os.path.exists(_add_path):
+            with open(_add_path, encoding="utf-8") as _f:
+                _adds = set(w.strip().lower() for w in _f if w.strip())
+            before = len(word_set)
+            word_set |= _adds
+            print(f"[DICT] corpus-vocab additions: {len(_adds):,} loaded (+{len(word_set)-before:,} new)")
+        else:
+            print("[DICT] no dict_additions.txt (corpus-vocab layer absent)")
+    except Exception as _e:
+        print(f"[WARN] dict_additions load failed: {_e}", file=sys.stderr)
+
     print(f"[DICT] Static dict size: {len(word_set):,}")
     sys.stdout.flush()
     return word_set, spell, has_wordfreq, wf_fn
