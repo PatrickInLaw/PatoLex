@@ -12,3 +12,6 @@
 [NOTE] run-log discipline corrected (Patrick): append-only LIVE with real timestamps as work happens, not batched after.
 [2026-06-12 12:30 PT] STEP-B | git mv adjudicate/ (5 files), verify/ (3), chapter/ (4) -- standalone clusters, zero import fixes expected | OK
 [2026-06-12 12:31 PT] STEP-B | smoke-net after adjudicate/verify/chapter: same 2 baseline violations, ZERO new -> clean | OK
+[2026-06-12 12:32 PT] STEP-B | committed adjudicate/verify/chapter (7884b10) | OK
+[2026-06-12 12:33 PT] STEP-B | moving analysis/ (recoverable_compose, triage_residual, garbage_page_cluster, substitution_sample, vocab_diff, singleton_decompose, singleton_fragment_analysis, build_corpus_confident, save_novel_candidates, size_candidates). from correction_passes import stays (resolves via pipeline/ root while engine still flat) | PENDING
+[2026-06-12 12:34 PT] STEP-B | analysis/ moved (10 files); smoke-net same 2 baseline, ZERO new -> clean | OK
