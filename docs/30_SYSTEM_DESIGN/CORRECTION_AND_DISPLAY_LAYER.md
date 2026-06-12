@@ -301,6 +301,38 @@ re-OCR floor), small remainder real-words. This is the most promising rate-reduc
 it as: guarded corpus+English-weighted autocorrect on singletons → apply as reversible layer →
 re-measure residual → the deep-garbage 60% defines the true unrecoverable floor.
 
+## Singleton tail decomposed — "60% garbage" was WRONG; it's ~17% (2026-06-11)
+Patrick challenged the "60% deep garbage" claim (it was built on the weak proxy "no edit-1 to an
+English word = garbage", which conflates garbage with fragments, over-merges, and edit-2 typos).
+Measured properly (`singleton_decompose.py`, 6,000 sample, context-aware, first-match wins):
+- **GARBAGE (structural) = 17.4%** — the SOLID number (char-salad, repeat-runs); NOT 60%.
+- EDIT1 typo = 15.7% (solid, recoverable).
+- OVER_MERGE = 38.5% **(inflated — unreliable)**: examples are mostly typos (`applicatien`,
+  `swearirg`, `ternories`) that `splittable()` falsely split because `known()`=permissive `wf>0`.
+- STANDALONE = 28.3% **(mislabeled)**: mostly edit-2 typos (`cunstructcd`→constructed,
+  `eonsohdated`→consolidated, `mployces`→employees) and fragments (`maiunicipali`=municipality).
+- FRAG by context ≈ 0% **(artifact)**: fragments hide in the above because the context-fragment
+  test needs the join in the ENGLISH dict (the dict gap) and an unknown neighbour.
+**Honest conclusion:** garbage ≈ 17% (reliable); the other ≈ 83% is recoverable-error territory
+(typos edit-1/2, fragments, over-merges) — exact split fuzzy until the dict includes validated
+corpus vocab + names and the dedicated passes (reunify / split / spell-1-2-3) run. The tail is
+NOT mostly garbage; it is mostly recoverable. (Lesson: don't label a bucket by what one test
+can't do — measure its contents.)
+
+## Correct correction-pass architecture (Patrick, 2026-06-11)
+1. **Dict integration FIRST** — add validated corpus vocab + corpus-attested names
+   (`gazetteer_keep` 5,438, NOT the raw 370k) to `build_dictionary`. Currently only the 319-name
+   `ca_gazetteer` is integrated; the 370k gazetteer and corpus-confident vocab are standalone,
+   never wired in. #1/#2/#5 all depend on this.
+2. **Reunify (fragments)** — exists (`line_split_reunify.py` v3); gains coverage once the dict
+   has corpus-word join targets. Orphaned fragments (other half missing/garbled) stay stuck.
+3. **Split (over-merges)** — NEW pass, inverse of reunify; only split tokens not themselves known.
+4. **Spell edit-1/2/3** — edit-1 high-precision auto; edit-2 auto-with-dominance; edit-3
+   flag/LLM only. Singletons were skipped by the freq≥2 passes — this is their pass.
+5. **Systematic-error sweep** — high-freq consistently-broken corpus words (`secrion`→section)
+   are highest-ROI; largely covered by Pass C + Sonnet but completeness UNVERIFIED.
+All emit reversible overlays; re-measure residual AFTER they run for the first real error rate.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

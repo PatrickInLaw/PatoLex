@@ -452,6 +452,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Corrects my "tail intractable" claim:** ~25-35% recoverable typos, ~60% deep unrecoverable garbage (re-OCR floor), small real-word remainder. Most promising rate-reducer found.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Singleton autocorrect").
 
+### Continuation 41 (2026-06-11) — "60% garbage" REFUTED (it's ~17%) + pass architecture
+
+- Patrick challenged "60% deep garbage" (built on weak proxy: no-edit-1 = garbage). Measured (`singleton_decompose.py`, 6k, context): **GARBAGE structural = 17.4%** (solid), EDIT1 = 15.7%, OVER_MERGE 38.5% (INFLATED — permissive known() false-splits typos), STANDALONE 28.3% (mislabeled — mostly edit-2 typos + fragments), FRAG ≈0% (artifact — needs corpus-word dict). **Tail is ~17% garbage, ~83% recoverable.** My 60% was wrong.
+- Patrick's 5 points = correct pass architecture: (1) dict integration FIRST (validated corpus vocab + gazetteer_keep, NOT raw 370k; currently only 319-name ca_gazetteer wired in — the rest are standalone, never integrated — HONEST gap), (2) reunify frags, (3) NEW split pass for over-merges, (4) spell edit-1/2/3 (singletons skipped by freq≥2 passes), (5) systematic-error sweep (largely done, unverified).
+- edit-2 in decompose was infeasible (enumerated ~500k cands/token) → killed stuck 5090 python (PID 44860), re-ran without it.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Singleton tail decomposed" + "Correct correction-pass architecture").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
