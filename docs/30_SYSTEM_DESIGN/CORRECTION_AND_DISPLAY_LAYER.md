@@ -399,6 +399,29 @@ also exactly what produces the defensible error number. NOTE: the standalone pas
 so far (reunify 15,434; splitter 4,888 @ ~50%; autocorrect TBD) are ISOLATED-on-raw numbers and will
 change under the cascade.
 
+## Cascade RESULT + autocorrect-precision caveat (2026-06-11, `correction_cascade.py`)
+First full ordered-cascade run over 133.7M tokens (reunify → autocorrect-e1 → split → sonnet),
+`_cascade/cascade_report.json`:
+- **raw 1.1042% flagged (1,476,105) → after 0.4153% (554,230) = 62.5% relative reduction.**
+- Raw 1.10% ≈ the old baseline 1.14% (metrics align), and **0.42% beats the old Pass-ABC 0.56%** —
+  the ordered cascade outperforms the prior pipeline.
+- Stage corrections: reunify_break 225,418 / autocorrect_e1 647,402 / sonnet 41,113 / split 4,805 /
+  reunify_space 623 / reunify_xpage 244. (edit-2 deferred — needs SymSpell.)
+
+**CAVEAT — 0.42% flagged is NOT the true error rate.** Spot-check of autocorrect-e1 (1905, n=35):
+~80% correct (`juagment`→judgment, `eorporation`→corporation, `wuereas`→whereas) but ~15-20% WRONG,
+and a wrong autocorrect turns a VISIBLE error into an INVISIBLE one (looks right, is wrong) — worse
+for a legal corpus. Error classes:
+- over-merge grabbed before split (`stateboard`→skateboard, should be "state board");
+- orphaned fragment mis-fixed (`ferred`→feared [referred], `urer`→user [treasurer], `examina`→examine);
+- Roman numeral corrupted (`cxiii`→xiii).
+**Implications:** (1) tighten autocorrect guards — protect Roman numerals, raise the margin, and
+skip tokens that are an affix-of-a-common-word (likely fragments) [the same guard the splitter uses];
+consider running split BEFORE autocorrect for over-merge-shaped tokens. (2) The flagged rate is a
+proxy; the DEFENSIBLE number needs a validation SAMPLE judged against ground truth (image), measuring
+BOTH residual-visible errors AND autocorrect-introduced invisible errors. The audit trail
+(`_cascade/audit/{vol}.tsv`) makes every change reviewable for exactly this.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

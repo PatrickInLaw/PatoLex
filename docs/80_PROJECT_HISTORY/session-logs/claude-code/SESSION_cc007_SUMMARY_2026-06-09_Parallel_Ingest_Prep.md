@@ -522,6 +522,13 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Built **`correction_cascade.py`** — runs the cascade per-volume in order, measures flagged-rate raw vs after, with run-log heartbeats, per-volume corrected/audit/counts persistence + DONE markers (resumable). Autocorrect is EDIT-1-only in the cascade (edit-2 brute force is intractable corpus-wide → deferred, needs SymSpell). Running now.
 - NEXT: cascade numbers (raw vs post-cascade flagged rate) + then a validation SAMPLE (LLM-judged) for the true defensible error rate.
 
+### Continuation 46 (2026-06-11) — Cascade RAN: 1.10% → 0.42% flagged (62.5%); autocorrect-precision caveat
+
+- Full cascade over 133.7M tokens (`cascade_report.json`): **raw 1.1042% flagged → 0.4153% after = 62.5% relative reduction.** Raw 1.10% ≈ old baseline 1.14% (comparable); **0.42% beats old Pass-ABC 0.56%.** Stages: reunify_break 225,418 / autocorrect_e1 647,402 / sonnet 41,113 / split 4,805.
+- **CAVEAT (verified by spot-check, not assumed):** autocorrect-e1 ~80% precise (juagment→judgment ✓) but ~15-20% WRONG — over-merge grabbed before split (stateboard→skateboard), orphaned fragments mis-fixed (ferred→feared=referred, urer→user=treasurer), Roman numeral corrupted (cxiii→xiii). A wrong autocorrect = VISIBLE error → INVISIBLE error (worse for legal). So 0.42% flagged ≠ true error rate.
+- NEXT: (1) tighten autocorrect (protect roman numerals, affix-of-word fragments, raise margin; consider split-before-autocorrect); (2) validation SAMPLE judged vs ground-truth image for the defensible number (measures residual-visible + autocorrect-invisible errors). Audit trail `_cascade/audit/{vol}.tsv` makes every change reviewable.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Cascade RESULT + autocorrect-precision caveat").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
