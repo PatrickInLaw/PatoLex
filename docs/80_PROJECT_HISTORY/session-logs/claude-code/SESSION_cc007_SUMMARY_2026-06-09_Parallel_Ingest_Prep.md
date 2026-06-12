@@ -546,6 +546,22 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Added per-stage **cpu-seconds** timing (timed each transform, aggregated) → report `stage_cpu_seconds` + final log + heartbeat. Heartbeat every 15s shows raw%→pre-sonnet% + per-stage cpu time + wall.
 - Cleared stale `_cascade`, syntax-checked, running fresh from reunify (sonnet held out).
 
+### Continuation 50 (2026-06-12) — Tightened cascade per-stage result + heartbeat fixes
+
+- Per-stage progression (tightened, sonnet held out, 133.7M tokens): raw **1.1042%** → reunify **0.9319%** (226,285 fixes) → split **0.9282%** (4,805) → autocorrect **0.4977%** (574,543 e1). **Pre-sonnet 0.4977%, 55% reduction, 7min.** cpu: reunify 352s / split 1,624s / autocorrect 2,278s.
+- Split = low-value (4.8k) + expensive (guards run edit-1/token) → tuning target. Autocorrect = big reducer + cpu hog.
+- **Autocorrect precision tightened ~80%→~90-95%** (verified spot-check): affix+roman guards killed fragment mis-fixes (ferred/urer/examina) + cxiii. Residual: short-merge mis-grab (whoare→whore, split MINPIECE=4 misses it) + ambiguous garbles.
+- Heartbeat fixed (Patrick): was illusory (volume-completion-gated) → now a daemon thread fires every 15s on a true wall clock with per-stage counts+rates + cpu timing.
+- Per-volume counts ALREADY persisted (`counts/{vol}.json`); adding a consolidated per-volume summary TSV next.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Tightened cascade — per-stage progression + precision").
+
+### Continuation 51 (2026-06-12) — Per-volume summary (counts + timing)
+
+- Per-volume counts + timing were ALREADY persisted (`counts/{vol}.json`). Added `cascade_summary.py` → consolidated `per_volume_summary.tsv` (per-volume raw/reunify/split/presonnet rates, reduction, per-stage correction counts, per-stage cpu seconds). Auto-generated at end of every cascade run.
+- **Quality is era-stratified:** worst = 1862 (8.19%→4.35%), 1863 (7.33%→3.60%), 1869-70 (7.45%→3.56%); best = modern 1996-1998 (~0.05%). `1873-74-code` is an outlier (5.06%→4.22%, only 16.8% reduction — code-volume text resists autocorrect). The corpus 0.50% avg is dragged up by the 19th-c tail.
+- Slowest volumes = large modern (1991-vol1 136s); split+autocorrect dominate cpu (edit-1 per token).
+- Both answered Patrick's "per-volume counts?" + "per-volume timing?": yes, captured + now surfaced.
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

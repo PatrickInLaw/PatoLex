@@ -422,6 +422,28 @@ proxy; the DEFENSIBLE number needs a validation SAMPLE judged against ground tru
 BOTH residual-visible errors AND autocorrect-introduced invisible errors. The audit trail
 (`_cascade/audit/{vol}.tsv`) makes every change reviewable for exactly this.
 
+## Tightened cascade — per-stage progression + precision (2026-06-12)
+Restructured harness (`correction_cascade.py`): per-stage persisted outputs (`out_{stage}/{vol}.json`),
+per-stage audit, per-stage flagged measurement + cpu timing, `CASCADE_FROM=` resume, true
+time-based heartbeat (daemon thread). Tightened cascade (split-before-autocorrect; autocorrect
+guards: skip Roman numerals + affix-of-word fragments; margin 0.5/zipf 3.3), **Sonnet held out**:
+
+| stage | flagged | rate | corrections | cpu |
+|---|---|---|---|---|
+| raw | 1,476,105 | 1.1042% | — | — |
+| after reunify | 1,243,595 | 0.9319% | 226,285 | 352s |
+| after split | 1,238,790 | 0.9282% | 4,805 | 1,624s |
+| after autocorrect | 664,247 | **0.4977%** | 574,543 (edit-1) | 2,278s |
+
+**Pre-Sonnet = 0.4977% (55% relative reduction), 7 min wall.** Findings: reunify does the structural
+bulk cheaply; **split is low-value (4,805) + expensive (guards run edit-1 per token)** — a tuning
+target; autocorrect is the big reducer + cpu hog.
+**Autocorrect precision after tightening ≈ 90-95%** (spot-check, up from ~80%): the affix/roman
+guards eliminated the fragment-mis-fix class (`ferred`/`urer`/`examina`) and `cxiii`. Residual
+errors: short-function-word over-merges autocorrect mis-grabs because split's MINPIECE=4 misses
+them (`whoare`→whore = "who are") + ambiguous garbles (`dolge`/`trpam`). Next options: handle the
+short-merge class, OR add Sonnet + run the ground-truth validation sample for the defensible rate.
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),

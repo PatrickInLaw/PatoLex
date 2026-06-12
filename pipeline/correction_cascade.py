@@ -334,6 +334,12 @@ def main():
     rlog("RATE", f"total reduction = {report['reduction_pct_relative']}% relative  (pre-sonnet)")
     rlog("TIMING", f"stage cpu-seconds: {dict(report['stage_cpu_seconds'])}  | wall={report['wall_seconds']}s")
     rlog("STAGES", json.dumps(dict(agg)))
+    try:
+        from cascade_summary import build_summary
+        sp, srows = build_summary(CASCADE)
+        rlog("SUMMARY", f"per-volume summary ({len(srows)} vols) -> {sp}")
+    except Exception as _e:
+        rlog("SUMMARY", f"per-volume summary failed: {_e}", "WARN")
     rlog("DONE", f"-> {os.path.join(CASCADE, 'cascade_report.json')}")
 
 if __name__ == "__main__":
