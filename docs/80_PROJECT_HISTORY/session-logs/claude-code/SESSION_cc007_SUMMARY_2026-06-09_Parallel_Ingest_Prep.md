@@ -414,6 +414,12 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Gap exposed:** reunify still misses margin-interleaved/cross-page fragments; recoverable by neighbour-concat + dict-check (Patrick's method). Extend before re-measuring.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("The residual is measured PRE-overlay").
 
+### Continuation 36 (2026-06-11) — REAL post-overlay number (0.50%) + reunify gap owned
+
+- **Post-overlay residual (`post_overlay.py`): 0.5014%** (663,833 occ), down only from 0.5568%. Overlays removed 73,282 occ (sonnet 58,700 + linesplit 4,138 + names 10,444). Remaining: 0.0741% TRUE garbage (98k) + 0.4273% UNRESOLVED (565k = rare-real-words + unadjudicated freq2-9/singletons + uncaught fragments). NOT a final error rate; the 0.43% mass is unprocessed.
+- **Reunify gap owned (Patrick: I told you to handle line wraps + margin notes — why fail?):** `line_split_reunify.py` DOES implement LOOKAHEAD=3 + margin handling (11,156 emitted, 1,507 margin) — so not ignored — but it's INCOMPLETE: misses (1) cross-page splits (scans per-page), (2) same-line spurious-space splits (`superin tendent` — line-oriented pass can't see mid-line space), (3) gaps >3 lines. **Real failure: declared done without verifying completeness vs the residual.** Fix: add cross-page + same-line space-rejoin + larger lookahead, re-run, RE-MEASURE.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("The REAL number" + "Reunify gap").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

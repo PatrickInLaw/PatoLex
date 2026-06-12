@@ -172,6 +172,40 @@ BEFORE the line-reunify (and Sonnet text, and chapter) overlays were applied.**
   concatenation + dictionary check Patrick described (a fragment + its real neighbour → a real word).
   Worth extending the reunify pass to the missed cases before the residual is re-measured.
 
+## The REAL number — residual AFTER overlays (2026-06-11, `post_overlay.py`)
+Applying every computed overlay (Sonnet text-fix + line-reunify + gazetteer-KEEP) to the
+post-ABC residual (467,978 types / 737,115 occ = the 0.5568% figure):
+| disposition | types | occ |
+|---|---|---|
+| FIXED_sonnet | 1,704 | 58,700 |
+| FIXED_linesplit | 840 | 4,138 |
+| NOT_ERROR_name (gazetteer) | 5,228 | 10,444 |
+| UNRESOLVED_still_suspect | 378,379 | 565,729 |
+| TRUE_GARBAGE_unrecoverable | 81,827 | 98,104 |
+
+**Post-overlay residual = 0.5014%** (663,833 occ) — down only from 0.5568%. Of that:
+**0.0741% (98k occ) is confirmed unrecoverable garbage**, and **0.4273% (565k occ) is
+"unresolved still-suspect"** — a MIX, NOT a measured error rate: it contains (a) rare REAL words
+the gazetteer misses, (b) freq 2–9 + singleton typos never adjudicated, and (c) fragment classes
+the reunify doesn't cover (below). The true error rate sits between 0.07% and 0.50% and is not
+yet pinned, because the 0.43% mass is unprocessed.
+
+## Reunify gap (Patrick directed margin/line-wrap handling — it's implemented but INCOMPLETE)
+`line_split_reunify.py` DOES look beyond adjacency (`LOOKAHEAD=3`, emits margin + blank-gap
+splits — 11,156 total, 1,507 margin). But the residual still carries high-freq fragments
+(`superin` 464, `pensation` 346, `priation` 210, `retary` 169…), so classes slip through:
+1. **Cross-page splits** — the pass scans `consensus_text` PER PAGE, so a word broken across a
+   page boundary (`superin-` end of page N / `tendent` top of N+1) can never be joined.
+2. **Same-line spurious-space splits** — `superin tendent` / `com pensation` on ONE line is a
+   mid-word space insertion, not a line break; the line-oriented reunify can't see it. Needs a
+   space-rejoin pass (adjacent same-line tokens whose concatenation is a known word, neither half
+   known).
+3. **Gaps > 3 lines** (long margin notes) exceed `LOOKAHEAD`.
+**Honest failure:** the reunify was declared done without verifying its completeness against the
+residual — the directed margin/line-wrap work exists but covers only the per-page line-break case.
+Fix: sample the uncovered fragments to confirm classes, add cross-page + same-line space-rejoin +
+larger lookahead, re-run, then RE-MEASURE the residual (the number above is not final).
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),
