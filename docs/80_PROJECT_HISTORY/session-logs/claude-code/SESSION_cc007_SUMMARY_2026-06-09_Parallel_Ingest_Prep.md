@@ -467,6 +467,15 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Scripts: `build_dict_additions.py`, `singleton_decompose.py` (5090 + scratch); `correction_passes.py` build_dictionary patched.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Dict integration LIVE + singleton tail decomposed RIGHT").
 
+### Continuation 43 (2026-06-11) — Hans review of dict-integration + reunifier; CRITICAL fix
+
+- Ran Hans on the two pipeline changes (build_dictionary additions + reunifier multi-fragment/fuzzy).
+- **CRITICAL C2-1 (real, verified):** shortest-first MAXFRAG greedy emitted the shorter sub-word and stranded the rest (`dep art ment`→emits `depart`, strands `ment` instead of `department`). FIXED → **longest-first** (only takes a longer run if it IS a real word). Verified: `spacesplit3` now appears (3-fragment recovered).
+- **C2-3 (major):** `_insert1_known` returned arbitrary first match → now returns None if AMBIGUOUS (>1 strong word). fuzzy 131→121. **C2-4:** lower bound 6→5 (catches `ageny`→agency). **C1-1:** removed dead `globals()` guard. **C1-4:** dict_additions committed for auditability + dropped 3-char name tokens (len≥4 → 5,425).
+- Hans's CRITICAL on build_dictionary (C1-4) downgraded on verify: names only affect `is_known`, not `is_common` (de-merge unchanged); coincidental-name risk is the known small contamination; mitigated by len≥4 + committing the file. Hans also caught my doc overclaim conflating the 319 ca_gazetteer with the 5,425 dict_additions — corrected.
+- Dict integration visibly helps reunifier: name-fragments now rejoin (`covaru+bias`→covarubias, `hy+desville`→hydesville). Corrections 15,647→15,434 (len≥4 + longest-first).
+- Durable: design doc updated. NEXT: LLM validation of corpus legal-vocab candidates (running).
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

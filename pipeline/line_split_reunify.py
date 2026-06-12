@@ -82,14 +82,20 @@ _ALPHA = "abcdefghijklmnopqrstuvwxyz"
 def _insert1_known(s):
     """Is s exactly ONE inserted character away from a strongly-known word? Recovers the common
     OCR failure where a character is DROPPED at the split point (philade+phia -> 'philadephia',
-    +l -> 'philadelphia'). Returns the recovered word or None. Bounded length to cap compute."""
-    if len(s) < 6 or len(s) > 18:
+    +l -> 'philadelphia'). Returns the UNIQUE recovered word, or None if zero OR AMBIGUOUS
+    (>1 distinct strong word) -- a flagged suggestion must be unambiguous (Hans C2-3).
+    Lower bound 5 so 5-char joins like 'ageny'->'agency' are not skipped (Hans C2-4)."""
+    if len(s) < 5 or len(s) > 18:
         return None
+    found = set()
     for pos in range(len(s) + 1):
         for c in _ALPHA:
-            if _strong_known(s[:pos] + c + s[pos:]):
-                return s[:pos] + c + s[pos:]
-    return None
+            cand = s[:pos] + c + s[pos:]
+            if _strong_known(cand):
+                found.add(cand)
+                if len(found) > 1:
+                    return None  # ambiguous -> do not guess
+    return next(iter(found)) if found else None
 
 def _pagekey(k):
     m = _DIGITS.search(str(k))
@@ -164,27 +170,37 @@ def _scan_file(path):
             while i < len(low) - 1:
                 emitted = False
                 maxL = min(MAXFRAG, len(low) - i)
-                for L in range(2, maxL + 1):
-                    run = low[i:i + L]
+                # LONGEST-first (Hans C2-1): a 3-fragment word ("dep art ment"->department) must
+                # win over the shorter sub-word ("dep"+"art"->depart) that would strand "ment".
+                # The _strong_known guard means we only take a longer run if it IS a real word.
+                def _valid_run(run):
                     if any(len(c) < 2 for c in run):
+                        return False
+                    if len("".join(run)) < 5:
+                        return False
+                    if all(_known(c) for c in run):
+                        return False  # all real words -> never fuse
+                    if any((not _known(c)) and len(c) < 3 for c in run):
+                        return False  # an unknown piece too short -> noise
+                    return True
+                for L in range(maxL, 1, -1):
+                    run = low[i:i + L]
+                    if not _valid_run(run):
                         continue
                     joined = "".join(run)
-                    if len(joined) < 5:
-                        continue
-                    if all(_known(c) for c in run):
-                        continue  # all real words -> never fuse
-                    if any((not _known(c)) and len(c) < 3 for c in run):
-                        continue  # an unknown piece too short -> noise
-                    head = run[0]; tail = "".join(run[1:])
                     if _strong_known(joined):
-                        out.append((vol, pk, "SPACESPLIT", f"spacesplit{L}", 0, head, tail, joined, ""))
+                        out.append((vol, pk, "SPACESPLIT", f"spacesplit{L}", 0, run[0], "".join(run[1:]), joined, ""))
                         counts[("SPACESPLIT", f"spacesplit{L}")] += 1
                         i += L; emitted = True; break
-                    # only attempt fuzzy when the whole run is fragments (no real word inside)
-                    if not any(_known(c) for c in run):
-                        fz = _insert1_known(joined)
+                if not emitted:
+                    # fuzzy (flag-only): longest-first, ALL-fragment runs only (no real word inside)
+                    for L in range(maxL, 1, -1):
+                        run = low[i:i + L]
+                        if not _valid_run(run) or any(_known(c) for c in run):
+                            continue
+                        fz = _insert1_known("".join(run))
                         if fz:
-                            out.append((vol, pk, "FUZZY_REVIEW", f"fuzzy{L}", 0, head, tail, fz, joined))
+                            out.append((vol, pk, "FUZZY_REVIEW", f"fuzzy{L}", 0, run[0], "".join(run[1:]), fz, "".join(run)))
                             counts[("FUZZY_REVIEW", f"fuzzy{L}")] += 1
                             i += L; emitted = True; break
                 if not emitted:

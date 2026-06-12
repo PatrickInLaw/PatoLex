@@ -168,8 +168,7 @@ def build_dictionary():
     # are corpus-attested + matched a real name list, plus genuine-novel corpus terms that are NOT
     # within edit-2 of a common English word (so systematic OCR errors like secrion/sball are
     # excluded). Built by build_dict_additions.py -> _vocab/dict_additions.txt. Loaded if present.
-    _add_path = os.path.join(OUT_DIR, "dict_additions.txt") if "OUT_DIR" in globals() else \
-                r"C:\Users\patolex\PatoLex-scratch\_vocab\dict_additions.txt"
+    _add_path = os.path.join(OUT_DIR, "dict_additions.txt")  # OUT_DIR is a module constant (line 34)
     try:
         if os.path.exists(_add_path):
             with open(_add_path, encoding="utf-8") as _f:

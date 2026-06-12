@@ -15,7 +15,9 @@ for i, ln in enumerate(open(fp, encoding="utf-8")):
     if i == 0:
         continue
     p = ln.rstrip("\n").split("\t")
-    if p and p[0] and p[0].isalpha() and len(p[0]) >= 3:
+    # len>=4: 3-char name tokens are a reunifier noise-floor risk (Hans C1-4) and few real
+    # distinctive names are 3 chars; drop them.
+    if p and p[0] and p[0].isalpha() and len(p[0]) >= 4:
         names.add(p[0].lower())
 
 with open(os.path.join(VOCAB, "dict_additions.txt"), "w", encoding="utf-8") as f:
