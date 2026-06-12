@@ -576,6 +576,15 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - Final pre-sonnet residual: **0.0453% garbage floor + 0.4482% recoverable + 4,906 valid Romans** (of 0.4971% flagged). Run wall 6.6min (split+autocorrect are the cpu-heavy stages; from-split doesn't save much). Timer heartbeat confirmed firing.
 - Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Garbage filter refined + INTEGRATED into the cascade").
 
+### Continuation 54 (2026-06-12) — Gazetteer onto 5090 + reunify A4 positional within-window matcher (Patrick)
+
+- **"wtf about the gazetteer":** audited which artifacts live on which box. `dict_additions.txt` + `validated_legal_vocab.txt` were already on the 5090 in `_vocab/` (built there); only `name_gazetteer.txt` (3,356,144 B, built on the 5080) was missing → that's why NAMELIKE came back 0. scp'd it over; removed the dead path-override line in `recoverable_compose.py`; re-ran → NAMELIKE now 259 types / 2,557 occ (0.4%). Note: gazetteer membership is a triage HINT, not exoneration — it also catches OCR errors that collide with the name list (`sheritt`, `wilham`), per the dictionary-membership lesson.
+- **Patrick caught a real miss:** the reunify stage was NOT the design we agreed. The `LOOKAHEAD=6` I'd wired was a 6-**line/page** boundary window (last-tok-of-line + first-tok-of-later-line) + same-line adjacency — NOT the agreed **within-~6-words positional** partner search. FRAGMENT bucket (8.7%) was the evidence.
+- **Built A4** in `stage_reunify`: reading-order token flatten; unknown affix-anchor scans `FRAG_WINDOW=6` tokens in the right direction (suffix→back, prefix→forward); guards: anchor non-word, join `strong_known`, **test join before the known-partner check** (the tail half is usually a real word: `incorpo|rated`), real word between halves stops the search, nearest-first. Micro-tested 4 cases (fwd-gap, back-gap, real-word block, out-of-window) before the full run.
+- **Result (full re-run from reunify, 205 vols, 449s wall): `reunify_window` = 6,681 joins, sampled 30/30 correct.** after-reunify 0.9319→**0.9268%**, **pre-Sonnet 0.4971→0.4921%**, recoverable 0.4482→**0.4431%**, reduction 55.1→**55.5%**. Honest scope: ~13% of the FRAGMENT bucket; rest need partner >6 away / OCR-corrupted partner / genuinely orphaned.
+- **Launch lesson:** OpenSSH-on-Windows reaps the process tree when the SSH command returns — `Start-Process` detach died (0 python, empty stdout). `Win32_Process.Create` spawns a truly detached process that survives. Use that (or a Scheduled Task) for long 5090 jobs.
+- Durable: `CORRECTION_AND_DISPLAY_LAYER.md` ("Reunify A4 — positional within-window fragment matcher").
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.

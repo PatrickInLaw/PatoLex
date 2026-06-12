@@ -47,6 +47,7 @@ HEAD_HYPHEN = re.compile(r"([A-Za-z\xc0-\xff]{2,})-[ \t\r]*$")
 ALPHA = "abcdefghijklmnopqrstuvwxyz"
 LOOKAHEAD = 6
 MAXFRAG = 4
+FRAG_WINDOW = 6      # A4 positional reunify: search +/- this many tokens (reading order) for a fragment's partner
 _DIGITS = re.compile(r"(\d+)")
 
 def pt():
@@ -124,14 +125,16 @@ def _edit1_known(w):
     if v is None:
         v = any(known(c) for c in _edits1(w)); _C_E1[w] = v
     return v
+def _is_prefix_frag(s):                                   # some common word STARTS with s -> s is a HEAD
+    i = bisect.bisect_left(_SORTED, s)
+    return i < len(_SORTED) and _SORTED[i].startswith(s) and len(_SORTED[i]) >= len(s) + 2
+def _is_suffix_frag(s):                                    # some common word ENDS with s -> s is a TAIL
+    r = s[::-1]; j = bisect.bisect_left(_SORTED_REV, r)
+    return j < len(_SORTED_REV) and _SORTED_REV[j].startswith(r) and len(_SORTED_REV[j]) >= len(s) + 2
 def _affix_of_common(s):
     v = _C_AFF.get(s)
     if v is None:
-        i = bisect.bisect_left(_SORTED, s)
-        v = (i < len(_SORTED) and _SORTED[i].startswith(s) and len(_SORTED[i]) >= len(s) + 2)
-        if not v:
-            r = s[::-1]; j = bisect.bisect_left(_SORTED_REV, r)
-            v = j < len(_SORTED_REV) and _SORTED_REV[j].startswith(r) and len(_SORTED_REV[j]) >= len(s) + 2
+        v = _is_prefix_frag(s) or _is_suffix_frag(s)
         _C_AFF[s] = v
     return v
 def _best_correction(tok):
@@ -255,6 +258,50 @@ def stage_reunify(vol_pages, audit, cnt):
                     lines[-1][0][-1] = j; nlines[0][0] = nlines[0][0][1:]
                     audit.append((pk, "reunify_xpage", last + "|" + tail, j)); cnt["reunify_xpage"] += 1
                 break
+    # A4 positional within-window fragment reunify (the RANGE matcher: partner anywhere within FRAG_WINDOW
+    # tokens in reading order, not just at a line/page boundary). Suffix-frags look BACK for a head; prefix-
+    # frags look FORWARD for a tail. Join only if strong_known and partner is itself a non-word; a real word
+    # between the two halves stops the search (won't bridge across a legitimate word).
+    flat = []                                          # reading-order refs into the live token lists
+    for pk, lines in vol_pages:
+        for ln in lines:
+            toks = ln[0]
+            for idx in range(len(toks)):
+                flat.append((pk, toks, idx))
+    n = len(flat)
+    for i in range(n):
+        pk_i, toks_i, idx_i = flat[i]
+        t = toks_i[idx_i]
+        if t is None or len(t) < 3 or known(t): continue
+        joined = False
+        if _is_suffix_frag(t):                         # t is a TAIL -> scan back for a head
+            for d in range(1, FRAG_WINDOW + 1):
+                j = i - d
+                if j < 0: break
+                _pj, tj, ij = flat[j]
+                h = tj[ij]
+                if h is None: continue                 # consumed slot -> treat as gap, keep scanning
+                if len(h) >= 2 and strong_known(h + t):  # the partner may itself be a real word (re|store)
+                    tj[ij] = h + t; toks_i[idx_i] = None
+                    audit.append((pk_i, "reunify_window", h + "+" + t, h + t)); cnt["reunify_window"] += 1
+                    joined = True; break
+                if known(h): break                     # join failed AND it's a real word -> boundary, stop
+        if joined: continue
+        if _is_prefix_frag(t):                         # t is a HEAD -> scan forward for a tail
+            for d in range(1, FRAG_WINDOW + 1):
+                k = i + d
+                if k >= n: break
+                _pk, tk, ik = flat[k]
+                tail = tk[ik]
+                if tail is None: continue
+                if len(tail) >= 2 and strong_known(t + tail):  # tail half is commonly a real word (incorpo|rated)
+                    toks_i[idx_i] = t + tail; tk[ik] = None
+                    audit.append((pk_i, "reunify_window", t + "+" + tail, t + tail)); cnt["reunify_window"] += 1
+                    break
+                if known(tail): break                  # join failed AND it's a real word -> boundary, stop
+    for pk, lines in vol_pages:                        # drop the consumed (None) slots
+        for ln in lines:
+            ln[0] = [x for x in ln[0] if x is not None]
 
 def stage_split(vol_pages, audit, cnt):
     for pk, lines in vol_pages:
@@ -283,7 +330,7 @@ def stage_autocorrect(vol_pages, audit, cnt):
                     toks[ti] = r[0]; audit.append((pk, f"autocorrect_e{r[1]}", t, r[0])); cnt[f"autocorrect_e{r[1]}"] += 1
 
 _TRANSFORM = {"reunify": stage_reunify, "split": stage_split, "autocorrect": stage_autocorrect}
-_STAGE_KEYS = {"reunify": ("reunify_space", "reunify_break", "reunify_xpage"),
+_STAGE_KEYS = {"reunify": ("reunify_space", "reunify_break", "reunify_xpage", "reunify_window"),
                "split": ("split",), "autocorrect": ("autocorrect_e1", "autocorrect_e2")}
 
 def _process_volume(arg):

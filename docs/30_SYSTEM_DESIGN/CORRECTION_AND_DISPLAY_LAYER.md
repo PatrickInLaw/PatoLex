@@ -476,6 +476,29 @@ by the exact rule Patrick flagged; refined = 0.0453%. Long-decomposition: split 
 (+785 run-ons). Final residual (pre-sonnet): **0.0453% garbage floor + 0.4482% recoverable + 4,906
 valid Romans**, of 0.4971% flagged.
 
+## Reunify A4 — positional within-window fragment matcher (Patrick directed; 2026-06-12)
+Patrick caught that the reunify stage was NOT what we designed: the `LOOKAHEAD=6` I'd wired was a
+**6-*line* / 6-*page*** window with the join hardwired to line/page **boundaries** (last-token-of-line
++ first-token-of-a-later-line), plus same-line *adjacent* merges. We had agreed reunify should move
+**past adjacency** and use **ranges (within ~6 words) + positional cues** to find a fragment's partner
+*wherever it sits* — the agreed design was not built. The FRAGMENT bucket (8.7% of recoverable, 51,781
+occ) was the direct evidence: orphans whose partner isn't a line/page boundary token slipped through.
+**Fix — `stage_reunify` A4 (`correction_cascade.py`):** flatten the volume to a reading-order token
+stream; for each unknown anchor that is an affix-of-a-common-word, scan `FRAG_WINDOW=6` tokens in the
+correct direction (suffix-fragment looks BACK for a head; prefix-fragment looks FORWARD for a tail).
+Guards making it high-precision: anchor must be a non-word; the join must be `strong_known`; the partner
+half may itself be a real word (`incorpo|rated`, `supervi|sion`) — so the join is tested *before* any
+"partner is a known word" check; a real word strictly between the halves **stops** the search (won't
+bridge a legitimate word); nearest-first; consumed slots are dropped.
+**Result (full re-run from reunify, 205 vols, 449s wall):** `reunify_window` = **6,681 joins**;
+sampled 30/30 correct (`trans+ferred`, `appro+priated`, `cor+poration`, `treas+urer`, `con+stitution`).
+Every downstream number improved: after-reunify 0.9319%→**0.9268%**, **pre-Sonnet 0.4971%→0.4921%**,
+recoverable 0.4482%→**0.4431%** of corpus, relative reduction 55.1%→**55.5%**.
+**Honest scope:** A4 recovered ~13% of the FRAGMENT bucket (6,681 of ~51,781). The rest remain because
+the partner is >6 tokens away, was OCR-corrupted (so head+tail ≠ `strong_known`), or is genuinely
+orphaned (no partner in the volume). Lesson re-learned: *don't conflate "I added a window" with "I added
+THE window we designed" — verify the built behavior against the agreed spec, not the label.*
+
 ## Cross-refs
 `CROWDSOURCE_CORRECTION.md` (community tier), `SCHEMA_DESIGN` / `docs/40_SCHEMA/`
 (event-sourced model), the correction pipeline (`pipeline/correction_passes.py`),
