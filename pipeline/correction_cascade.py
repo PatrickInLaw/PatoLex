@@ -27,7 +27,7 @@ _cascade/
   done_{stage}/{vol}.marker
   cascade-run.log  cascade_report.json
 """
-import os, sys, re, json, glob, time, bisect
+import os, sys, re, json, glob, time, bisect, threading
 from collections import Counter
 from datetime import datetime, timezone, timedelta
 import multiprocessing as mp
@@ -282,25 +282,40 @@ def main():
     rlog("SCAN", f"{len(files)} volumes")
     nw = max(2, min(12, (os.cpu_count() or 4) - 2))
     keys = ["raw", "reunify", "split", "autocorrect"]
-    F = {k: 0 for k in keys}; T = {k: 0 for k in keys}; agg = Counter(); tim = Counter(); done = 0
-    t0 = time.time(); last = time.time()
+    F = {k: 0 for k in keys}; T = {k: 0 for k in keys}; agg = Counter(); tim = Counter()
+    state = {"done": 0}
+    lock = threading.Lock()
+    t0 = time.time()
+    n_files = len(files)
+
+    # TRUE time-based heartbeat: a daemon thread fires every 15s on a wall clock, independent of
+    # volume completion (so a single slow volume can't silence it), with per-stage flagged counts+rates.
+    hb_stop = threading.Event()
+    def _heartbeat():
+        while not hb_stop.wait(15):
+            with lock:
+                seg = " | ".join(
+                    f"{('raw' if k=='raw' else 'aft-'+k[:4])} {F[k]:,}={100.0*F[k]/max(1,T[k]):.3f}%"
+                    for k in keys if T[k])
+                tstr = " ".join(f"{s}={tim[s]:.0f}s" for s in STAGES if tim[s])
+                d = state["done"]
+            rlog("HEARTBEAT", f"{d}/{n_files} vols | {seg} | stage-cpu[{tstr}] | wall={time.time()-t0:.0f}s")
+    hb = threading.Thread(target=_heartbeat, daemon=True); hb.start()
+
     ctx = mp.get_context("spawn")
     args = [(p, CASCADE_FROM) for p in files]
     with ctx.Pool(nw, initializer=_init) as pool:
         for res in pool.imap_unordered(_process_volume, args, chunksize=1):
-            done += 1
-            if res:
-                for k in keys:
-                    if k in res["meas"]:
-                        F[k] += res["meas"][k][0]; T[k] += res["meas"][k][1]
-                for k, v in res["stages"].items(): agg[k] += v
-                for k, v in res.get("timings", {}).items(): tim[k] += v
-            now = time.time()
-            if now - last >= 15 or done == len(files):
-                rr = 100.0 * F["raw"] / max(1, T["raw"]); ar = 100.0 * F["autocorrect"] / max(1, T["autocorrect"])
-                tstr = " ".join(f"{s}={tim[s]:.0f}s" for s in STAGES if tim[s])
-                rlog("CASCADE", f"{done}/{len(files)} vols | raw {rr:.3f}% -> pre-sonnet {ar:.3f}% | stage-cpu[{tstr}] | wall={now-t0:.0f}s", "HEARTBEAT")
-                last = now
+            with lock:
+                state["done"] += 1
+                if res:
+                    for k in keys:
+                        if k in res["meas"]:
+                            F[k] += res["meas"][k][0]; T[k] += res["meas"][k][1]
+                    for k, v in res["stages"].items(): agg[k] += v
+                    for k, v in res.get("timings", {}).items(): tim[k] += v
+    hb_stop.set(); hb.join(timeout=2)
+    done = state["done"]
     def rate(k): return round(100.0 * F[k] / max(1, T[k]), 4)
     prog = {("raw" if k == "raw" else "after_" + k): {"flagged": F[k], "total": T[k], "rate_pct": rate(k)} for k in keys}
     report = {"generated": pt(), "from_stage": CASCADE_FROM, "volumes": done, "sonnet_applied": False,
