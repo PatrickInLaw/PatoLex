@@ -622,6 +622,17 @@ Patrick pushed back on "flag is enough": the existing F11 handling DETECTS garbl
 - **Step D:** snapshot 197 current `parsed_acts_fixed.json` into git FIRST → re-parse all 1850-1999 parallel → git-diff old-vs-new → mass-ingest.
 - **Decision (Patrick):** continue in THIS session — a fresh session flushes the context that makes the sensitive steps safe. Keep run/session logs current as the compaction safety net.
 
+### Continuation 58 (2026-06-12) — Step B reorg DONE (engine package validated) + Step C config route + PARALLEL parser
+
+(Live progress also in `docs/80_PROJECT_HISTORY/run-logs/pipeline-cleanup-run.log` — run logs are append-only/live.)
+
+- **Step B repo reorg COMPLETE for the flat-root files**, each move smoke-net-validated (`pipeline/tests/smoke_imports.py`), history preserved via `git mv`. New structure (maps to the 4 open-source repo seams): `ocr/ ingest/ chapter/ verify/ analysis/ adjudicate/ runners/ correction_support/ ocrcorrect/ tests/`. The flat dump is gone.
+- **Engine → `ocrcorrect/` package — GOLDEN-MASTER OK.** Cascade runs as `python -m ocrcorrect.correction_cascade` (PYTHONPATH=scratch on patolex); multiprocessing-spawn workers re-import the package cleanly; reproduces the locked numbers EXACTLY. All intra+cross imports absolute `from ocrcorrect.X import`. The net caught one real breakage live (`test_chapter_parser`→`ingest_clean`) and I fixed it.
+- **Step C decomposed (Patrick): NOT the 3060 now (serve local), 3060 = later one-line cutover.**
+  - **C1 config route — `pipeline/config.py`:** ONE `LOCATION_ROOT` + a location REGISTRY + ONE accessor `path_for(name, *subpath)`. Relative defaults join the root; an absolute value auto-overrides (relocate one folder). No convenience constants/back-compat (Patrick: we're rewriting). Move-all = 1 line, move-one-folder = 1 line.
+  - **C2 parallel parser:** `ingest_from_ocr` moved to `ingest/` + DE-HARDCODED onto `config` (parse LOGIC untouched); NEW `ingest/parse_all.py` = `ProcessPoolExecutor` parallel driver, config-driven, eliminates the `run_parse_5090` monkeypatch, aggregates per-volume `parsed_acts` into `parse_output_dir` (git-versionable). Archived the sequential drivers. **VALIDATED: re-parsed 1862 in parallel -> output BYTE-IDENTICAL (sha256 065A1F26), date-clamp active.** smoke-net FULLY GREEN (0 violations, 93 names).
+- **NEXT (Patrick directed, my order):** finalize C3 (git-version the parse outputs) → de-hardcode the CASCADE onto `config` (golden-master-gated) → de-hardcode EVERYTHING. **No Step D / mass-ingest now — ingest comes much later, text cleanup isn't finished.**
+
 ## Lessons / Notes
 - `pipeline/sql/live_queue_snapshot.json` is **stale** (dated 2026-06-02) — trust the git log and live `production_queue_state.json`, not that file.
 - `low_conf_rate` in completeness-report.json is NOT a reliable quality score — it conflates docTR-empty (text fine) with old-typeface 3-engine disagreement (text noisy but legible) under an uncalibrated 0.75 threshold. Read actual `consensus_text` to judge quality, not the metric.
