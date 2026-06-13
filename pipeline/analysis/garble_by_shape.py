@@ -11,7 +11,7 @@ Run from the repo with the python that has the ocrcorrect deps (the one that ran
 import os, glob, json, re
 from collections import Counter, defaultdict
 import config
-from analysis import noctx_garble_breakdown as nb   # reuse _init (dictionary) + _page_garble
+from analysis import roster_detect as nb   # reuse _init (dictionary+gazetteer) + _page_garble
 
 CASCADE  = config.path_for("cascade_dir")
 OUTCTX   = os.path.join(CASCADE, "out_context")
