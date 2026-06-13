@@ -52,7 +52,7 @@ def _colloc(c, prev, nxt):
     return math.log(_BIG.get((prev,c),0)+1) + math.log(_BIG.get((c,nxt),0)+1)
 
 def _extract(fp):
-    vol = os.path.basename(os.path.dirname(os.path.dirname(fp)))
+    vol = os.path.basename(fp)[:-5] if fp.endswith(".json") else os.path.basename(fp)   # out_context/{vol}.json
     out = []
     try:
         d = json.load(open(fp, encoding="utf-8", errors="replace"))
