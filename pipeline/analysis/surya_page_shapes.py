@@ -168,6 +168,10 @@ def main():
     ap.add_argument("--maxpages", type=int, default=0)
     ap.add_argument("--reuse", action="store_true", help="load existing PNG instead of re-rendering")
     ap.add_argument("--bench", action="store_true", help="measure VRAM/RAM/throughput on the slice, then report")
+    ap.add_argument("--vram-frac", type=float, default=0.22,
+                    help="HARD cap: max fraction of total GPU memory this process may allocate (torch caching "
+                         "allocator). A track that exceeds it OOMs ITSELF (catchable) instead of spiking the "
+                         "whole GPU. Stacking rule: (#tracks_on_this_gpu) * vram-frac must stay <= ~0.80.")
     a = ap.parse_args()
 
     if os.path.isdir(a.input):
@@ -179,6 +183,13 @@ def main():
           f"(render-threads={a.render_threads}, batch={a.batch}, zoom={a.zoom})", flush=True)
 
     import torch
+    torch.backends.cudnn.benchmark = False   # avoid the large transient cuDNN-workspace VRAM spike when
+                                             # stacking multiple tracks on one GPU (keeps footprint ~steady)
+    if a.vram_frac and a.vram_frac > 0 and torch.cuda.is_available():
+        torch.cuda.set_per_process_memory_fraction(a.vram_frac, 0)   # HARD ceiling -- OOM self, never the GPU
+        total_gb = torch.cuda.get_device_properties(0).total_memory / 1e9
+        print(f"VRAM HARD CAP: {a.vram_frac:.2f} of {total_gb:.1f}GB = {a.vram_frac*total_gb:.1f}GB max for this "
+              f"track (plus ~1-2GB CUDA context). Keep #tracks*frac <= ~0.80.", flush=True)
     from surya.layout import LayoutPredictor
     try:
         import psutil; proc = psutil.Process()

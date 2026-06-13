@@ -49,6 +49,10 @@ def parse_label(txt):
     return "OTHER", 1 << 30
 
 def main():
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
     import torch
     from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
     print(f"loading {MODEL} (downloads ~16GB on first run)...", flush=True)
@@ -59,7 +63,7 @@ def main():
     model.eval()
 
     fine_ok = 0; bin_ok = 0; n = 0
-    print(f"\n{'file':<24}{'truth':<11}{'vlm':<11}{'fine':<6}{'binОК':<7} reason")
+    print(f"\n{'file':<24}{'truth':<11}{'vlm':<11}{'fine':<6}{'binOK':<7} reason")
     for fn, (truth, desc) in GT.items():
         fp = os.path.join(SPOT, fn)
         if not os.path.exists(fp):
