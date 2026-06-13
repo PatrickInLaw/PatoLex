@@ -24,8 +24,9 @@ import config
 CASCADE   = config.path_for("cascade_dir")
 STAGE_OUT = os.path.join(CASCADE, "out_context")
 CORPUS_FREQ = config.path_for("cascade_dir", "corpus_freq.json")
-OUT_VOL  = os.path.join(CASCADE, "noctx_dist_by_volume.tsv")
-OUT_PAGE = os.path.join(CASCADE, "noctx_dist_by_page.tsv")
+BODY_ONLY = os.environ.get("BODY_ONLY", "1") == "1"   # restrict to page_classification body pages
+OUT_VOL  = os.path.join(CASCADE, "noctx_dist_body_by_volume.tsv" if BODY_ONLY else "noctx_dist_by_volume.tsv")
+OUT_PAGE = os.path.join(CASCADE, "noctx_dist_body_by_page.tsv" if BODY_ONLY else "noctx_dist_by_page.tsv")
 _ROMAN   = re.compile(r"^[ivxlcdm]+$")
 _YEAR    = re.compile(r"(\d{4})")
 
@@ -53,13 +54,28 @@ def _has_candidate(t):
 
 def _analyze(fp):
     vol = os.path.basename(fp)[:-5] if fp.endswith(".json") else os.path.basename(fp)
+    body = None                            # set of body pidx (0-based) when classification available
+    if BODY_ONLY:
+        cls_path = config.path_for("data_root", vol, "page_classification.json")
+        if os.path.exists(cls_path):
+            try:
+                body = {p - 1 for p in json.load(open(cls_path, encoding="utf-8")).get("body", [])}
+            except Exception:
+                body = None
+    has_cls = body is not None
     tot = 0; recov = 0; frag = 0; nocand = 0
     page = Counter()                       # pk -> not_routed count
     try:
         d = json.load(open(fp, encoding="utf-8", errors="replace"))
     except Exception:
-        return vol, tot, recov, frag, nocand, page
+        return vol, tot, recov, frag, nocand, page, has_cls
     for pk, lines in d.items():
+        if body is not None:
+            try:
+                if int(pk) not in body:
+                    continue               # skip front-matter / index / empty pages
+            except Exception:
+                pass
         for toks in lines:
             for t in toks:
                 tot += 1
@@ -72,21 +88,26 @@ def _analyze(fp):
                     pass                    # routed (weak/no_ctx)
                 else:
                     nocand += 1; page[pk] += 1
-    return vol, tot, recov, frag, nocand, page
+    return vol, tot, recov, frag, nocand, page, has_cls
 
 def main():
     files = sorted(glob.glob(os.path.join(STAGE_OUT, "*.json")))
     nw = max(2, min(8, (os.cpu_count() or 4) - 2))
     print(f"analyzing not-routed residual over {len(files)} volumes, {nw} workers...", flush=True)
     t0 = time.time()
-    rows = []; page_rows = []
+    rows = []; page_rows = []; no_cls = []
     ctx = mp.get_context("spawn")
     with ctx.Pool(nw, initializer=_init) as pool:
-        for vol, tot, recov, frag, nocand, page in pool.imap_unordered(_analyze, files, chunksize=1):
+        for vol, tot, recov, frag, nocand, page, has_cls in pool.imap_unordered(_analyze, files, chunksize=1):
             nr = frag + nocand
             rows.append((vol, tot, recov, frag, nocand, nr))
             for pk, c in page.items():
                 page_rows.append((vol, pk, c))
+            if BODY_ONLY and not has_cls:
+                no_cls.append(vol)
+    if BODY_ONLY:
+        print(f"BODY-ONLY mode: {len(rows)-len(no_cls)} vols filtered to body pages; "
+              f"{len(no_cls)} vols had NO page_classification (counted full): {no_cls[:8]}")
 
     rows.sort(key=lambda r: -r[5])
     with open(OUT_VOL, "w", encoding="utf-8") as f:
