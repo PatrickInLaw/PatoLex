@@ -941,3 +941,45 @@ the next integration step (post-reset).
 resumable. (2) 3060 PatoLexQueue has the seeded manifest. (3) To make workers queue-driven: install ODBC Driver
 18 + pyodbc in the surya-venv, set PATOLEX_QUEUE_DSN (Server=100.113.254.6\SQLEXPRESS;Database=PatoLexQueue;
 User Id=PatitoSync;Password=<WCM>;...), wrap surya_page_shapes as the `shape` role in queue_worker_sql.py.
+
+---
+
+## Continuation 67 — 2026-06-13 (LIVE: page-shape factory running on 3060 queue + 5090 workers)
+
+**STATUS: RUNNING autonomously, survives the 5080 reset.** Full queue-driven build, on Patrick's preferred 3060.
+
+**WHAT IS LIVE:**
+- 3060 `PatoLexQueue` (PK_XPS\SQLEXPRESS): schema_shape_ext applied -> `shape` pass on dbo.ocr_queue +
+  dbo.volume_manifest, BOTH system-versioned TEMPORAL (full change audit: dbo.ocr_queue_History,
+  dbo.volume_manifest_History) + dbo.state_history (semantic transitions, who+when). Seeded 205 volumes
+  (volume_manifest=205, ocr_queue shape_state='pending'=205; prep/ocr='na' -- shape-only run).
+- 5090 workers: 4x shape_worker_sql.py (reuses queue_worker_sql lease/heartbeat/fence), launched by a
+  **SYSTEM Scheduled Task `PatoLexShapeWorkers`** (schtasks, /ru SYSTEM) so they survive SSH disconnect +
+  the 5080 reset. Each claims a volume (lowest-year-first), runs surya_page_shapes (render + Surya layout,
+  PNGs persisted, --reuse resumable), VRAM hard-capped 0.15/worker. VERIFIED: GPU ~10.5GB/4 models (safe),
+  16 python procs, claiming + processing 1861/1862/1863/1863-64 first.
+- Connection: PatitoSync (db_owner of PatoLexQueue), DSN in C:\Users\patolex\.patolex_queue_dsn.txt on the
+  5090 (gitignored; written via SSH stdin, never logged). Secret in WCM `PatitoSql_PatitoQBCache_PatitoSync`.
+
+**WHY THE FIRST LAUNCH FAILED (fixed):** SSH-launched Start-Process workers were orphan-killed when the SSH
+session closed (0 python procs). Fix = SYSTEM Scheduled Task. The lease queue made this safe -- the 4 claimed
+rows were just reset working->pending and re-claimed. (Lesson reaffirmed: launch via Scheduled Task, not SSH.)
+
+**MANIFEST DELIVERABLE:** docs/30_SYSTEM_DESIGN/sources/volume_manifest.tsv (205 rows; 79 explicit / 28 derived
+/ 98 normalized-matched; 0 missing). Ambiguous (flagged): 1929 (28 vs 29 Chapters), 1949 (_prior).
+
+**MONITOR (from any box that can reach the 3060 SQL, e.g. via PatitoSync):**
+  SELECT shape_state, COUNT(*) FROM dbo.ocr_queue GROUP BY shape_state;       -- progress
+  SELECT TOP 20 * FROM dbo.state_history ORDER BY id DESC;                    -- who/when
+  outputs: render PNGs -> C:\Users\patolex\PatoLex-scratch\page-renders\<vol>\ ;
+           per-volume shape map -> ...\page-shapes\<vol>.shapes.tsv
+
+**RESTART / RESUME:** workers survive the 5080 reset (SYSTEM procs on the 5090). If the 5090 REBOOTS, re-run:
+  schtasks /run /tn PatoLexShapeWorkers   (on the 5090 as patolex; --reuse skips done renders, queue skips done).
+A crashed worker's lease expires in 45 min -> auto re-claim. To add capacity: re-run the launcher with more
+-Workers (keep #workers * vram-frac <= 0.80).
+
+**KNOWN FOLLOW-UPS (post-reset, not blocking):** (1) 5090-reboot auto-resume = add an ONSTART trigger to the
+task. (2) sha256/page_count columns in volume_manifest are NULL (populate from prep STAGE-0 or a backfill).
+(3) the SQL-queue now also unblocks the deferred FULL OCR flow (prep/ocr/tess/doctr/surya/consensus passes
+already in the schema) -- same factory, enable passes + point manifest at a corpus.
