@@ -892,3 +892,52 @@ the GPU). VERIFIED with a tight 0.1s VRAM sampler: 3 capped tracks (frac 0.18) p
 duplicate/variant PDFs (e.g. 1927 two versions); must map the 205 production-* volumes to the CORRECT PDF, not
 glob all archive PDFs. (2) cross-box render CONSOLIDATION (per-box local vs SMB share). (3) storage ~50GB for
 ~200k pages. (4) time ~1.5h on 5090 alone at 4-5 tracks. (5) 5080 participation gated on resource-check + ask.
+
+---
+
+## Continuation 66 — 2026-06-13 (Page-shape factory: architecture + autonomous launch ahead of 5080 reset)
+
+**CONTEXT:** The 5080 (PKs_2025_Alien, this session host) resets ~21:30 UTC 2026-06-13; Patrick away. Goal: get the
+page-shape render RUNNING on the 5090 (off-box, survives the reset) + record the durable SQL portion on the 3060.
+
+**THE FACTORY (architecture, decided):**
+- PURPOSE: classify EVERY corpus page by visual SHAPE (Surya layout) -> BODY vs INDEX_TOC / TABLE_ROSTER /
+  DIVIDER / PICTURE. Replaces token heuristics (which can't tell a garbled index from statute text). Bake-off:
+  Surya layout 7/7 on hard ground-truth incl. the garbled 1873-74 code index; Qwen2-VL-7B also 7/7 binary but
+  16GB/slower -> Surya is the workhorse, VLM a future tiebreaker.
+- COMPUTE: 5090 (RTX 5090, 24c/64GB/32GB-VRAM). surya_page_shapes.py renders each page (PyMuPDF, surya-venv:
+  C:\Users\patolex\PatoLex-scratch\ocr-engines\surya-venv\Scripts\python.exe) -> Surya layout -> dominant
+  label. PERSISTS every PNG to render-root (resumable, --reuse). Multi-PROCESS sharded (threads plateau on
+  GIL/PNG-encode). Measured: ~8 pg/s/track; 4-5 tracks ~30-34 pg/s.
+- VRAM SAFETY (CRITICAL -- a >32GB spike TDR-resets the 5090): cudnn.benchmark=False + per-process hard cap
+  (set_per_process_memory_fraction). VERIFIED: 3 capped tracks peak 8.2 GiB (tight 0.1s sampler). Stacking rule
+  #tracks*vram-frac <= 0.80. Use --vram-frac 0.15 for 4-5 tracks.
+- QUEUE / MANIFEST host = **the 3060 (PK_XPS\SQLEXPRESS, 100.113.254.6)** -- Patrick's rock-solid box. ACCESS
+  SOLVED: login = **PatitoSync** (NOT sa), secret in WCM target `PatitoSql_PatitoQBCache_PatitoSync`, read via
+  ~/.claude/scripts/CredStore.ps1 Get-CredSecret. PatitoSync is **db_owner of PatoLexQueue** (can build+seed);
+  it is NOT sysadmin/dbcreator (cannot CREATE DATABASE -- but PatoLexQueue already exists). DB `PatoLexQueue`
+  already has dbo.ocr_queue + dbo.state_history (empty) from the cc002 schema.sql build. TCP 1433 reachable
+  5080->3060 AND 5090->3060. (sa cred in WCM is the 5090's, REJECTED by the 3060; do not reuse.)
+- DATA: corpus = 205 processed volumes = 328,628 cascade content pages (out_context). Source PDFs in
+  C:\Users\patolex\PatoLex-scratch\chief-clerk-archive (422 PDFs incl dupes+modern). Manifest rule
+  (pipeline/sql/seed_ocr_queue.py pdf_name_for): explicit `pdf` from queue snapshots else `<label>_Statutes.pdf`.
+  Provenance fully reconstructed (run-logs): 12 initial download fails -> 64 re-downloaded+verified; only perm
+  404 = 1855_Index.pdf (body intact). Ambiguous variants: 1929 (28 vs 29 Chapters), 1949 (_prior). NNChapters
+  variants are SEPARATE volumes (pamphlet vs bound), not dupes.
+
+**SSH to 5090:** ssh -i C:\Users\PatrickKolasinski\.ssh\patolex_5090 patolex@100.70.54.56 (repo at C:\github\PatoLex).
+**No SSH to 3060** (port 22 timed out) -- SQL-only access via PatitoSync over TCP.
+
+**Scoping insight:** shape-classification pays off most on the GARBLED early scans. 1850s-1940s = ~75k pages
+(<1h on 5090 alone); the 1950s-1990s clean modern bulk is the other ~254k (~2-2.5h). 5080-as-worker upside is
+marginal (~20-50 min) and not worth loading the DB box -- 5090-only recommended for this one-time run.
+
+**LAUNCHED (this continuation):** autonomous 5090 render via Scheduled Task (off-box, survives 5080 reset),
+N capped tracks over the 205-volume manifest, persisting renders + per-volume shape TSVs, heartbeat run-log.
+3060 PatoLexQueue seeded with the manifest as the durable record. SQL-queue-DRIVEN worker (pyodbc on 5090) is
+the next integration step (post-reset).
+
+**RESUME AFTER RESET:** (1) check the 5090 render run-log + Scheduled Task; renders persist so it's --reuse
+resumable. (2) 3060 PatoLexQueue has the seeded manifest. (3) To make workers queue-driven: install ODBC Driver
+18 + pyodbc in the surya-venv, set PATOLEX_QUEUE_DSN (Server=100.113.254.6\SQLEXPRESS;Database=PatoLexQueue;
+User Id=PatitoSync;Password=<WCM>;...), wrap surya_page_shapes as the `shape` role in queue_worker_sql.py.
