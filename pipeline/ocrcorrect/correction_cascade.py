@@ -38,9 +38,14 @@ import config  # SINGLE source of truth for data paths (the 3060 cutover knob); 
 SCRATCH = config.path_for("data_root")
 VOCAB   = config.path_for("vocab_dir")
 CASCADE = config.path_for("cascade_dir")
-STAGES  = ["reunify", "split", "autocorrect"]
 CASCADE_FROM = os.environ.get("CASCADE_FROM", "reunify")
 APPLY_SYMSPELL = os.environ.get("CASCADE_APPLY_SYMSPELL", "0") == "1"  # default OFF: SymSpell routes to adjudication, not auto-apply
+# Gated heuristic post-autocorrect stage(s). Each only JOINS STAGES when its flag is ON, so the DEFAULT
+# config == the golden-master deterministic floor (reunify->split->autocorrect). mojibake = constrained-
+# position fix (the non-ASCII char MARKS the error span); high-precision -> auto-applyable. Runs AFTER the
+# unifier, so a residual bad char is real damage (not a join seam reunify would have closed).
+APPLY_MOJIBAKE = os.environ.get("CASCADE_APPLY_MOJIBAKE", "0") == "1"
+STAGES  = ["reunify", "split", "autocorrect"] + (["mojibake"] if APPLY_MOJIBAKE else [])
 for sub in ["audit", "counts"] + ["out_" + s for s in STAGES] + ["done_" + s for s in STAGES]:
     os.makedirs(os.path.join(CASCADE, sub), exist_ok=True)
 LOG = os.path.join(CASCADE, "cascade-run.log")
@@ -73,8 +78,11 @@ _GARBAGE_SHAPED = lambda t: False             # repeat4/cons5/novowel shape test
 _CORPUS_FREQ_PATH = os.path.join(CASCADE, "corpus_freq.json")
 _GAZETTEER_PATH = os.path.join(SCRATCH, "name_gazetteer.txt")
 _C_BC = {}; _C_E1 = {}; _C_AFF = {}; _C_SPLIT = {}
+_CF = {}                                          # raw corpus_freq dict -- mojibake fix scoring target
+_NONASCII_TOK = re.compile(r"[^\x00-\x7f]")        # token carries a mojibake / U+FFFD replacement char
+from ocrcorrect.mojibake_fix import mojibake_candidates as _moji_cands, choose_fix as _moji_choose
 def _init():
-    global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV, _SYM, _NAMES, _GARBAGE_SHAPED
+    global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV, _SYM, _NAMES, _GARBAGE_SHAPED, _CF
     from ocrcorrect.dictionary import build_dictionary, build_sorted_common
     ws, _spell, has_wf, wf = build_dictionary()
     _WS = frozenset(ws); _HASWF = has_wf; _WF = wf
@@ -88,6 +96,7 @@ def _init():
     if os.path.exists(_CORPUS_FREQ_PATH):     # build the edit-2 index from the corpus-native freq model
         from ocrcorrect.symspell_e2 import SymSpellE2, load_target_freq
         _SYM = SymSpellE2(load_target_freq(_CORPUS_FREQ_PATH))
+        _CF = json.load(open(_CORPUS_FREQ_PATH, encoding="utf-8"))   # raw counts for mojibake scoring
 
 def known(t): return (t in _WS) or (_HASWF and _WF(t, "en") > 0)
 def zipf(t): return _ZIPF(t, "en")
@@ -335,9 +344,31 @@ def stage_autocorrect(vol_pages, audit, cnt):
                 if r:
                     toks[ti] = r[0]; audit.append((pk, f"autocorrect_e{r[1]}", t, r[0])); cnt[f"autocorrect_e{r[1]}"] += 1
 
-_TRANSFORM = {"reunify": stage_reunify, "split": stage_split, "autocorrect": stage_autocorrect}
+def _moji_score(w): return _CF.get(w, 0) * 100.0 + zipf(w)   # corpus count dominates; zipf breaks ties
+
+def stage_mojibake(vol_pages, audit, cnt):
+    """Constrained-position mojibake fix: substitute ONLY the non-ASCII span and keep a fix only when it
+    yields a KNOWN, UNAMBIGUOUS word (the bad char marks exactly where the damage is, so far higher
+    precision than blind edit-1). Pure core lives in mojibake_fix.py (unit-tested)."""
+    for pk, lines in vol_pages:
+        for ln in lines:
+            toks = ln[0]
+            for ti in range(len(toks)):
+                t = toks[ti]
+                if not _NONASCII_TOK.search(t) or known(t):
+                    continue
+                cs = _moji_cands(t, known)
+                if not cs:
+                    continue
+                fix, _amb = _moji_choose(cs, _moji_score)
+                if fix is not None and fix != t:
+                    toks[ti] = fix; audit.append((pk, "mojibake", t, fix)); cnt["mojibake"] += 1
+
+_TRANSFORM = {"reunify": stage_reunify, "split": stage_split, "autocorrect": stage_autocorrect,
+              "mojibake": stage_mojibake}
 _STAGE_KEYS = {"reunify": ("reunify_space", "reunify_break", "reunify_xpage", "reunify_window"),
-               "split": ("split",), "autocorrect": ("autocorrect_e1", "autocorrect_es1", "autocorrect_es2")}
+               "split": ("split",), "autocorrect": ("autocorrect_e1", "autocorrect_es1", "autocorrect_es2"),
+               "mojibake": ("mojibake",)}
 
 def _process_volume(arg):
     path, from_stage = arg
