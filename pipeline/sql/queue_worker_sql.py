@@ -62,6 +62,9 @@ PASS = {
     # page-shape classification (Surya layout) -- independent pass, claimable whenever pending.
     # Driven by shape_worker_sql.py (reuses this module's claim/lease/fence primitives), NOT this main loop.
     "shape":     {"gate": "1=1",                                                         "buffered": False},
+    # procedural text-reconcile of the shape non-body flags -- claimable once shape is done.
+    # Driven by reconcile_worker_sql.py (on the 5080, CPU/text).
+    "reconcile": {"gate": "shape_state='done'",                                          "buffered": False},
 }
 
 RUN_LOG = Path(os.environ.get("PATOLEX_RUN_LOG", "")) if os.environ.get("PATOLEX_RUN_LOG") else None
