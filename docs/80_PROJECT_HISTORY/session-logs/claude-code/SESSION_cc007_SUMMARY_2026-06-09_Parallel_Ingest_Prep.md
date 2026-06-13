@@ -1007,3 +1007,42 @@ NOT safe to blindly EXCLUDE from ingestion -- a slice of "non-body" is appropria
 is over-counted. Before non-body gates ingestion: verify the flagged set (rule: keep pages with a "STATUTES OF
 CALIFORNIA" running head or high dollar-amount density; or a VLM/Sonnet tiebreaker). Always second-check conf<~0.6.
 Tools: analysis/shape_summary.py (--sample-class for spot-check pools); validated renders in adjudicate/_spotval.
+
+---
+
+## Continuation 69 — 2026-06-13 (VLM tiebreaker test + procedural reconcile pass LIVE on the 5080)
+
+**VLM tiebreaker TESTED (local Qwen2-VL-7B on the 5090):** ran the SAME 12 disputed pages through the local 7B
+(paused the shape workers first for VRAM safety: stop_shape_workers_5090.ps1 -> run -> restart via schtasks).
+Result: the 7B agreed with the strong cloud model on ALL 12, INCLUDING all 3 of Surya's errors (the 2 low-conf +
+the high-conf 0.997 appropriations v05). => the LOCAL 7B is a viable tiebreaker, no cloud/API cost. Tool:
+analysis/vlm_classify.py (dir classifier).
+
+**3060 SSH ENABLED (Patrick ran enable_ssh_3060.ps1) + creds in WCM.** patolex is admin on the 3060 (key in
+administrators_authorized_keys). SSH tested OK (3060 default remote shell = PowerShell, NOT cmd like the 5090).
+Stored in Windows Credential Manager for all repo agents: `PatoLex_SSH_patolex_key` (private key),
+`PatoLex_SSH_hosts` (JSON map). Doc: docs/60_OPERATIONS/SSH_ACCESS.md. Memory: ssh-and-queue-creds-in-wcm.
+
+**Validation finding drove a better design (Patrick): procedurally trim before the VLM.** The page OCR text is
+the cheap signal -- if a page already has chapter/law text, it's BODY, no VLM needed. (Checked: per-PAGE text is
+NOT in Postgres -- the DB has act-level enactment/provision text + printed-page-range provenance only; the
+per-page token stream is the cascade out_context. Pulled out_context to the 5080.)
+
+**RECONCILE pass BUILT + LIVE on the 5080 (CPU/text, off the live 5090 results):**
+- analysis/shape_reconcile.py: for each Surya non-body page, RESCUE->body if text has statute signals (enacting
+  clause / chapter+section / appropriations money-prose), CONFIRM->nonbody if index header + no body signal,
+  else AMBIGUOUS->VLM. Validated on 6 known pages: rescued the v05 appropriations false-positive deterministically,
+  ZERO wrong decisions (decisive when clear, AMBIGUOUS otherwise).
+- Queue: reconcile pass added to dbo.ocr_queue (sql/reconcile_ext.sql, gate shape_state='done'), worker
+  sql/reconcile_worker_sql.py (reuses queue_worker_sql lease machinery; pulls each shape TSV from the 5090 via
+  scp, reads local out_context, appends ambiguous pages to _cascade/vlm_worklist.tsv), launcher
+  sql/launch_reconcile_5080.ps1 (DSN from WCM). Running as 5080-reconcile-0.
+- RUNNING TOTALS (27 vols): rescued 268 (statute pages recovered from wrongful exclusion), confirmed 325,
+  ambiguous->VLM 630. ~48% of non-body resolved deterministically; VLM set ~halved (more on clean modern vols).
+
+**PIPELINE NOW:** Surya shape (5090 GPU) -> procedural reconcile (5080 CPU, live) -> VLM tiebreaker (the small
+ambiguous residual). Shape ~75/205 done. ETA ~3h, all crash-safe + reboot-proof on the 5090/3060.
+
+**OPEN:** (1) optionally wire the VLM tiebreaker as a final queue pass that auto-drains vlm_worklist.tsv on the
+5090. (2) backfill volume_manifest sha256/page_count (source_document has them for the 69 ingested). (3) the
+3060 is now SSH-reachable -> can host the SMB source/render store (full durable hub) when wanted.
