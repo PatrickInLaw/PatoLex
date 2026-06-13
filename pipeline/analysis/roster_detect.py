@@ -181,6 +181,8 @@ def _debug():
         fp = os.path.join(STAGE_OUT, v + ".json")
         d = json.load(open(fp, encoding="utf-8", errors="replace"))
         for pk in pks:
+            if pk not in d:
+                print(f"\n{v} pk={pk}  (not a page key in this volume -- skipped)"); continue
             s = _page_signals(d[pk])
             g = _page_garble(s["flat"])
             is_index, rule = _classify(s, g / s["n"])
