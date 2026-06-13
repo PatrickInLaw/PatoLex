@@ -12,14 +12,24 @@ This detector adds two garble-tolerant signals that survive name garbling:
                         adjacent surname is mangled; rosters are dense with "... <name> Sacramento ..." etc.
   * SHORT-LINE ratio -- roster/index rows are short (Name | County | Residence; or Title .... page-no),
                         unlike running statute prose.
+CALIBRATION (2026-06-13, against confirmed rosters 1863 pk36 / 1862 pk34 + body 1863 pk20):
+  rosters have short_line_ratio ~0.02 (LOW -- OCR collapsed the table columns into long garble runs),
+  but stat_frac == 0.0 (no statute keywords), garble_frac ~0.33, and the column-header tokens SURVIVE
+  cleanly in the head ("name counties represented residence"). The body page has stat_frac 0.088 and
+  garble_frac 0.05. So the discriminators are HEADER MARKERS + zero statute keywords + high garble --
+  NOT short lines or county density.
+
 A page is INDEX/ROSTER if ANY of:
-  R1 markers   : marker token in head + very low statute-keyword density          (original)
-  R2 gaz-names : gazetteer name-frac > 0.35 + ~no statute keywords                (original)
-  R3 county+short (garble-tolerant): short_line_ratio >= SLR and county_frac >= CF and stat_frac < ST
-  R4 index-short (tables/indexes)  : short_line_ratio >= SLR_HI and stat_frac < ST and many numeric tokens
+  R1 markers   : >=2 roster/index header tokens in head AND statute-keyword density < ST_M   (column headers
+                 like name/counties/represented/residence, or index/officers/members/contents/roster/assembly)
+  R2 gaz-names : gazetteer name-frac > 0.35 + ~no statute keywords                            (original)
+  R3 fingerprint (garble-tolerant): garble_frac >= GF and name_frac >= NF and county_frac >= CF
+                 and stat_frac < ST -- a name/county-flavored page that's mostly un-correctable + no legal prose.
+                 (Deliberately requires the name+county fingerprint so a badly-OCR'd STATUTE page -- which we
+                  DO want to re-OCR, not exclude -- is NOT swept in just for being garbled.)
 
 Run from the repo:  python -m analysis.roster_detect
-  DEBUG_PAGES="production-1863:36,production-1862:34,production-1863:10"  -> dump signals for those pages, no full run
+  DEBUG_PAGES="production-1863:36,production-1862:34,production-1863:20"  -> dump signals for those pages, no full run
   SAMPLE_N=5  -> also write spot_sample.tsv (random flagged + high-garble-body pages, pre-1914 _Statutes only)
 Writes: <cascade_dir>/roster_pages.tsv  + real_garble_by_volume_v2.tsv  + spot_sample.tsv
 """
@@ -37,15 +47,19 @@ OUT_VOL   = os.path.join(CASCADE, "real_garble_by_volume_v2.tsv")
 OUT_SAMP  = os.path.join(CASCADE, "spot_sample.tsv")
 _ROMAN    = re.compile(r"^[ivxlcdm]+$")
 _NUMERIC  = re.compile(r"^\d+$")
-_MARKERS  = {"index", "officers", "members", "contents", "roster", "list", "assembly", "senate"}
+# roster/index header tokens (column headers + section titles) -- survive OCR even when the names below garble
+_MARKERS  = {"index", "officers", "members", "contents", "roster", "list", "assembly", "senate",
+             "name", "names", "counties", "represented", "residence", "residences", "district", "districts",
+             "post", "office", "nativity", "occupation"}
 _STATKW   = {"section", "chapter", "approved", "whereas", "act", "shall", "enact", "provided", "sec", "title"}
 
-# tunables (env-overridable) for the garble-tolerant signals
-SLR    = float(os.environ.get("ROSTER_SLR", "0.55"))   # R3 short-line ratio floor
-CF     = float(os.environ.get("ROSTER_CF",  "0.018"))  # R3 county-frac floor
-ST     = float(os.environ.get("ROSTER_ST",  "0.004"))  # statute-kw density ceiling
-SLR_HI = float(os.environ.get("ROSTER_SLR_HI", "0.70"))# R4 short-line ratio floor (numeric index/TOC)
-NUMF   = float(os.environ.get("ROSTER_NUMF", "0.12"))  # R4 numeric-token frac floor
+# tunables (env-overridable)
+MARK_MIN = int(os.environ.get("ROSTER_MARK_MIN", "2"))    # R1 min distinct header markers in head
+ST_M     = float(os.environ.get("ROSTER_ST_M", "0.008"))  # R1 statute-kw ceiling
+GF       = float(os.environ.get("ROSTER_GF",  "0.15"))    # R3 garble-frac floor
+NF       = float(os.environ.get("ROSTER_NF",  "0.18"))    # R3 name-frac floor
+CF       = float(os.environ.get("ROSTER_CF",  "0.012"))   # R3 county-frac floor
+ST       = float(os.environ.get("ROSTER_ST",  "0.005"))   # R3 statute-kw ceiling
 
 DEBUG_PAGES = os.environ.get("DEBUG_PAGES", "")
 SAMPLE_N    = int(os.environ.get("SAMPLE_N", "0"))
@@ -108,16 +122,15 @@ def _page_signals(lines):
         "flat": flat,
     }
 
-def _classify(s):
+def _classify(s, garble_frac):
     """return (is_index, rule) where rule names the trigger ('-' if body)."""
-    if (s["head"] & _MARKERS) and s["stat_frac"] < 0.006:
+    if len(s["head"] & _MARKERS) >= MARK_MIN and s["stat_frac"] < ST_M:
         return True, "R1_marker"
     if s["name_frac"] > 0.35 and s["stat_frac"] < 0.003:
         return True, "R2_gazname"
-    if s["short_line_ratio"] >= SLR and s["county_frac"] >= CF and s["stat_frac"] < ST:
-        return True, "R3_county_short"
-    if s["short_line_ratio"] >= SLR_HI and s["num_frac"] >= NUMF and s["stat_frac"] < ST:
-        return True, "R4_index_short"
+    if (garble_frac >= GF and s["name_frac"] >= NF and s["county_frac"] >= CF
+            and s["stat_frac"] < ST):
+        return True, "R3_fingerprint"
     return False, "-"
 
 def _page_garble(flat):
@@ -146,8 +159,8 @@ def _analyze(fp):
         s = _page_signals(lines)
         if s is None:
             continue
-        is_index, rule = _classify(s)
         g = _page_garble(s["flat"])
+        is_index, rule = _classify(s, g / s["n"])
         if is_index:
             idx_pages += 1; garble_idx += g
         else:
@@ -169,11 +182,12 @@ def _debug():
         d = json.load(open(fp, encoding="utf-8", errors="replace"))
         for pk in pks:
             s = _page_signals(d[pk])
-            is_index, rule = _classify(s)
             g = _page_garble(s["flat"])
-            print(f"\n{v} pk={pk}  n={s['n']} garble={g}  -> {'INDEX/ROSTER' if is_index else 'BODY'} ({rule})")
-            print(f"   short_line_ratio={s['short_line_ratio']:.3f}  county_frac={s['county_frac']:.4f}  "
-                  f"stat_frac={s['stat_frac']:.4f}  name_frac={s['name_frac']:.4f}  num_frac={s['num_frac']:.4f}")
+            is_index, rule = _classify(s, g / s["n"])
+            print(f"\n{v} pk={pk}  n={s['n']} garble={g} garble_frac={g/s['n']:.3f}  "
+                  f"-> {'INDEX/ROSTER' if is_index else 'BODY'} ({rule})")
+            print(f"   markers={sorted(s['head'] & _MARKERS)}  short_line_ratio={s['short_line_ratio']:.3f}  "
+                  f"county_frac={s['county_frac']:.4f}  stat_frac={s['stat_frac']:.4f}  name_frac={s['name_frac']:.4f}")
             print(f"   head: {' '.join(s['flat'][:24])}")
 
 def main():
