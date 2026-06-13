@@ -190,7 +190,18 @@ def _debug():
                   f"-> {'INDEX/ROSTER' if is_index else 'BODY'} ({rule})")
             print(f"   markers={sorted(s['head'] & _MARKERS)}  short_line_ratio={s['short_line_ratio']:.3f}  "
                   f"county_frac={s['county_frac']:.4f}  stat_frac={s['stat_frac']:.4f}  name_frac={s['name_frac']:.4f}")
-            print(f"   head: {' '.join(s['flat'][:24])}")
+            # --- TOC/index probe signals ---
+            flat = s["flat"]; n = s["n"]
+            act_frac  = sum(1 for t in flat if t in ("act","acts")) / n
+            num_frac  = s["num_frac"]
+            toc_words = sum(1 for t in flat if t in ("page","pages","pago","chap","chapter","contents","index","table","title"))/n
+            # "an act" bigram count (TOC entries each start "An Act ...")
+            an_act = sum(1 for i in range(n-1) if flat[i]=="an" and flat[i+1]=="act")
+            lines = d[pk]; nl = sum(1 for ln in lines if ln) or 1
+            tail_num = sum(1 for ln in lines if ln and _NUMERIC.match(ln[-1])) / nl
+            print(f"   act_frac={act_frac:.4f}  an_act={an_act}  num_frac={num_frac:.4f}  "
+                  f"toc_words={toc_words:.4f}  tail_num_line_frac={tail_num:.3f}")
+            print(f"   head: {' '.join(flat[:24])}")
 
 def main():
     if DEBUG_PAGES:
