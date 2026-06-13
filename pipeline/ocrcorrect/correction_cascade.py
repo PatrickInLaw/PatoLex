@@ -376,15 +376,29 @@ def stage_mojibake(vol_pages, audit, cnt):
                 if fix is not None and fix != t:
                     toks[ti] = fix; audit.append((pk, "mojibake", t, fix)); cnt["mojibake"] += 1
 
-def _ctx_ambig_cands(t):
-    """>=2 known edit-1 candidates (zipf>=3.0), strongest first -- the ambiguous cases strict-e1 declined."""
-    cs = sorted({c for c in _edits1(t) if known(c) and zipf(c) >= 3.0}, key=lambda c: -zipf(c))
-    return cs[:6] if len(cs) >= 2 else None
+import math
+CTX_MARGIN = 1.0     # collocation log-score dominance over the runner-up to APPLY (~2.7x); else route to Sonnet
+
+def _colloc(cand, prev, nxt):
+    return math.log(_BIG.get((prev, cand), 0) + 1) + math.log(_BIG.get((cand, nxt), 0) + 1)
+
+def _tail_candidates(t):
+    """Full candidate set for a flagged token: edit-1 known words UNION the SymSpell corpus edit-2 candidate."""
+    cands = {c for c in _edits1(t) if known(c)}
+    if _SYM is not None and len(t) >= 5:
+        r = _SYM.lookup(t)
+        if r:
+            cands.add(r[0])
+    return cands
 
 def stage_context(vol_pages, audit, cnt):
-    """Corpus-collocation disambiguation: for an edit-1-AMBIGUOUS flagged token, pick the candidate whose
-    (prev,cand)/(cand,next) corpus bigrams clearly dominate (context_resolve.resolve). Skips fragments
-    (affix-of-common = reunify's job, where an orphan half would be mis-mapped). Needs the prebuilt _BIG."""
+    """Broadened collocation SIEVE layer. For every still-flagged token (guards inherited: known/roman/
+    affix-fragment/garbage already skipped), score edit-1 + SymSpell-edit-2 candidates by corpus collocation
+    and:
+      - APPLY the clear winner (margin >= CTX_MARGIN)                  -> deterministic, the strong band,
+      - else if there IS a collocation signal but it's weak           -> emit 'context_weak' = Sonnet worklist,
+      - else (no signal / no candidate)                               -> leave flagged (deep tail).
+    Needs the prebuilt _BIG collocation model."""
     if _BIG is None:
         return
     for pk, lines in vol_pages:
@@ -394,20 +408,25 @@ def stage_context(vol_pages, audit, cnt):
                 t = toks[ti]
                 if len(t) < 4 or known(t) or is_roman(t) or _affix_of_common(t) or _GARBAGE_SHAPED(t):
                     continue
-                cands = _ctx_ambig_cands(t)
+                cands = _tail_candidates(t)
                 if not cands:
                     continue
                 prev = toks[ti - 1] if ti > 0 else ""
                 nxt = toks[ti + 1] if ti + 1 < len(toks) else ""
-                pick, status = _ctx_resolve(cands, prev, nxt, _BIG)
-                if status == "resolved" and pick and pick != t:
-                    toks[ti] = pick; audit.append((pk, "context", t, pick)); cnt["context"] += 1
+                scored = sorted(((c, _colloc(c, prev, nxt)) for c in cands), key=lambda x: -x[1])
+                best, bs = scored[0]
+                runner = scored[1][1] if len(scored) > 1 else 0.0
+                if bs > 0.0 and bs - runner >= CTX_MARGIN:
+                    if best != t:
+                        toks[ti] = best; audit.append((pk, "context", t, best)); cnt["context"] += 1
+                elif bs > 0.0:
+                    audit.append((pk, "context_weak", t, "|".join(sorted(cands)[:6]))); cnt["context_weak"] += 1
 
 _TRANSFORM = {"reunify": stage_reunify, "split": stage_split, "autocorrect": stage_autocorrect,
               "mojibake": stage_mojibake, "context": stage_context}
 _STAGE_KEYS = {"reunify": ("reunify_space", "reunify_break", "reunify_xpage", "reunify_window"),
                "split": ("split",), "autocorrect": ("autocorrect_e1", "autocorrect_es1", "autocorrect_es2"),
-               "mojibake": ("mojibake",), "context": ("context",)}
+               "mojibake": ("mojibake",), "context": ("context", "context_weak")}
 
 def _process_volume(arg):
     path, from_stage = arg
