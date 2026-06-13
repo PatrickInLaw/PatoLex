@@ -751,3 +751,39 @@ when the cascade is re-run on the verified-complete corpus. The re-PARSE itself 
 
 **Open:** back to TEXT CLEANUP — heuristic long-tail first (context_resolve + singleton autocorrect + mojibake),
 THEN Sonnet on the genuinely-ambiguous residual, THEN the defensible ground-truth error rate.
+
+---
+
+## Continuation 62 — 2026-06-13 (one-sieve context heuristic + Sonnet capture + names-vs-garble split)
+
+**TEXT CLEANUP advanced (heuristic-first, per Patrick).** Broadened `stage_context` in the cascade into ONE sieve
+(not separate scorer processes): score every guarded token by collocation log(count(prev,cand)+1)+log(count(cand,
+next)+1); strong winner (margin>=1.0) is applied, weak band routed to Sonnet. Added a gated `stage_mojibake`.
+Built `build_collocation_model.py` (3,006,242 known-known bigrams -> collocation_bigrams.pkl).
+
+**Sieve-by-sieve.** mojibake +1,149 ; broadened context applied +263,213. Recoverable residual 591,385 -> 332,493.
+
+**Sonnet capture (approach B, occurrence-level, context-enriched). Output captured so tokens never re-run:**
+- weak band: 9,254 fixed / 4,811 NONE  (`adjudicate/context_weak_adjudicated.tsv`)
+- no_ctx band: 104,973 occ -> 89,279 fixed / 15,694 NONE  (`adjudicate/noctx_adjudicated.tsv`),
+  full count + column-integrity verified (caught + redid garbage chunks 005/052/075 via 500-row halves).
+
+**Not-routed residual = 199,761** (fragment 52,929 + no_candidate 146,832). Distributed by year/volume/page
+(`noctx_distribution.py`). Body-only filter made ~no difference — the worst pages are ink-DENSE.
+
+**FINDING — worst pages are member/officer ROSTER tables, not statute body.** Visual inspection (my engine) of the
+two worst pages (production-1863 pk36, production-1862 pk34, rendered fresh from chief-clerk-archive PDFs) = "LIST OF
+OFFICERS / MEMBERS OF ASSEMBLY" Name/County/Residence tables. So a large share of `no_candidate` "garble" is
+correctly-transcribed proper NAMES, not OCR error.
+
+**FINDING — the name-dictionary expansion was a curated SEED, not the full roster.** `build_dictionary()` loads
+`CA_NAME_TOKENS` (58 counties complete + a curated cities/features/legislators SEED — its docstring says
+"not exhaustive") plus `dict_additions.txt` (~5,926 corpus-attested validated names). The full ~370k
+`name_gazetteer.txt` of personal surnames was NEVER loaded. That is exactly why roster-page surnames land in
+`no_candidate`. Wrote `analysis/noctx_garble_breakdown.py` to (a) check no_candidate against the full 370k gazetteer
+(names vs genuine char-salad) and (b) classify/exclude INDEX/ROSTER pages (marker tokens + low statute-keyword
+density). REAL re-OCR target = garble on NON-index pages.
+
+**Open:** run noctx_garble_breakdown on the 5090 -> names-vs-garble split + index-page count + real-garble
+distribution; decide whether to wire the full gazetteer into build_dictionary; then apply both adjudication
+overlays to the corpus + measure the defensible ground-truth error rate.
