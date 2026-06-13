@@ -59,6 +59,9 @@ PASS = {
     "doctr":     {"gate": "prep_state='done'",                                           "buffered": False},
     "surya":     {"gate": "prep_state='done'",                                           "buffered": False},
     "consensus": {"gate": "tess_state='done' AND doctr_state='done' AND surya_state='done'", "buffered": False},
+    # page-shape classification (Surya layout) -- independent pass, claimable whenever pending.
+    # Driven by shape_worker_sql.py (reuses this module's claim/lease/fence primitives), NOT this main loop.
+    "shape":     {"gate": "1=1",                                                         "buffered": False},
 }
 
 RUN_LOG = Path(os.environ.get("PATOLEX_RUN_LOG", "")) if os.environ.get("PATOLEX_RUN_LOG") else None
