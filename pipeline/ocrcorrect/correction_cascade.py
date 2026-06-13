@@ -45,7 +45,13 @@ APPLY_SYMSPELL = os.environ.get("CASCADE_APPLY_SYMSPELL", "0") == "1"  # default
 # position fix (the non-ASCII char MARKS the error span); high-precision -> auto-applyable. Runs AFTER the
 # unifier, so a residual bad char is real damage (not a join seam reunify would have closed).
 APPLY_MOJIBAKE = os.environ.get("CASCADE_APPLY_MOJIBAKE", "0") == "1"
-STAGES  = ["reunify", "split", "autocorrect"] + (["mojibake"] if APPLY_MOJIBAKE else [])
+# context = corpus-collocation disambiguation of edit-1-AMBIGUOUS flagged tokens (>=2 known candidates):
+# pick the candidate whose (prev,cand)/(cand,next) bigrams clearly dominate. Needs the prebuilt collocation
+# model (build_collocation_model.py). Measured 77.4% resolution; GATED until a precision spot-check clears it.
+APPLY_CONTEXT  = os.environ.get("CASCADE_APPLY_CONTEXT", "0") == "1"
+STAGES  = (["reunify", "split", "autocorrect"]
+           + (["mojibake"] if APPLY_MOJIBAKE else [])
+           + (["context"] if APPLY_CONTEXT else []))
 for sub in ["audit", "counts"] + ["out_" + s for s in STAGES] + ["done_" + s for s in STAGES]:
     os.makedirs(os.path.join(CASCADE, sub), exist_ok=True)
 LOG = os.path.join(CASCADE, "cascade-run.log")
@@ -80,9 +86,12 @@ _GAZETTEER_PATH = os.path.join(SCRATCH, "name_gazetteer.txt")
 _C_BC = {}; _C_E1 = {}; _C_AFF = {}; _C_SPLIT = {}
 _CF = {}                                          # raw corpus_freq dict -- mojibake fix scoring target
 _NONASCII_TOK = re.compile(r"[^\x00-\x7f]")        # token carries a mojibake / U+FFFD replacement char
+_BIG = None                                        # corpus collocation bigram model (context stage; None if off)
+_COLLOC_PATH = os.path.join(CASCADE, "collocation_bigrams.pkl")
 from ocrcorrect.mojibake_fix import mojibake_candidates as _moji_cands, choose_fix as _moji_choose
+from ocrcorrect.context_resolve import resolve as _ctx_resolve
 def _init():
-    global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV, _SYM, _NAMES, _GARBAGE_SHAPED, _CF
+    global _WS, _HASWF, _WF, _ZIPF, _SORTED, _SORTED_REV, _SYM, _NAMES, _GARBAGE_SHAPED, _CF, _BIG
     from ocrcorrect.dictionary import build_dictionary, build_sorted_common
     ws, _spell, has_wf, wf = build_dictionary()
     _WS = frozenset(ws); _HASWF = has_wf; _WF = wf
@@ -97,6 +106,9 @@ def _init():
         from ocrcorrect.symspell_e2 import SymSpellE2, load_target_freq
         _SYM = SymSpellE2(load_target_freq(_CORPUS_FREQ_PATH))
         _CF = json.load(open(_CORPUS_FREQ_PATH, encoding="utf-8"))   # raw counts for mojibake scoring
+    if APPLY_CONTEXT and os.path.exists(_COLLOC_PATH):    # corpus collocation model for the context stage
+        import pickle
+        _BIG = pickle.load(open(_COLLOC_PATH, "rb"))
 
 def known(t): return (t in _WS) or (_HASWF and _WF(t, "en") > 0)
 def zipf(t): return _ZIPF(t, "en")
@@ -364,11 +376,38 @@ def stage_mojibake(vol_pages, audit, cnt):
                 if fix is not None and fix != t:
                     toks[ti] = fix; audit.append((pk, "mojibake", t, fix)); cnt["mojibake"] += 1
 
+def _ctx_ambig_cands(t):
+    """>=2 known edit-1 candidates (zipf>=3.0), strongest first -- the ambiguous cases strict-e1 declined."""
+    cs = sorted({c for c in _edits1(t) if known(c) and zipf(c) >= 3.0}, key=lambda c: -zipf(c))
+    return cs[:6] if len(cs) >= 2 else None
+
+def stage_context(vol_pages, audit, cnt):
+    """Corpus-collocation disambiguation: for an edit-1-AMBIGUOUS flagged token, pick the candidate whose
+    (prev,cand)/(cand,next) corpus bigrams clearly dominate (context_resolve.resolve). Skips fragments
+    (affix-of-common = reunify's job, where an orphan half would be mis-mapped). Needs the prebuilt _BIG."""
+    if _BIG is None:
+        return
+    for pk, lines in vol_pages:
+        for ln in lines:
+            toks = ln[0]
+            for ti in range(len(toks)):
+                t = toks[ti]
+                if len(t) < 4 or known(t) or is_roman(t) or _affix_of_common(t) or _GARBAGE_SHAPED(t):
+                    continue
+                cands = _ctx_ambig_cands(t)
+                if not cands:
+                    continue
+                prev = toks[ti - 1] if ti > 0 else ""
+                nxt = toks[ti + 1] if ti + 1 < len(toks) else ""
+                pick, status = _ctx_resolve(cands, prev, nxt, _BIG)
+                if status == "resolved" and pick and pick != t:
+                    toks[ti] = pick; audit.append((pk, "context", t, pick)); cnt["context"] += 1
+
 _TRANSFORM = {"reunify": stage_reunify, "split": stage_split, "autocorrect": stage_autocorrect,
-              "mojibake": stage_mojibake}
+              "mojibake": stage_mojibake, "context": stage_context}
 _STAGE_KEYS = {"reunify": ("reunify_space", "reunify_break", "reunify_xpage", "reunify_window"),
                "split": ("split",), "autocorrect": ("autocorrect_e1", "autocorrect_es1", "autocorrect_es2"),
-               "mojibake": ("mojibake",)}
+               "mojibake": ("mojibake",), "context": ("context",)}
 
 def _process_volume(arg):
     path, from_stage = arg
