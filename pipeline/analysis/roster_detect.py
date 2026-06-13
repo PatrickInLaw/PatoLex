@@ -111,8 +111,18 @@ def _page_signals(lines):
     nonempty = [toks for toks in lines if toks]
     nl = len(nonempty) or 1
     short = sum(1 for toks in nonempty if 2 <= len(toks) <= 6)
+    # TOC column-header "TITLE OF ACT" surviving in the head (page numbers are stripped from the
+    # token stream, so this header is the only reliable table-of-acts/contents signal). Guarded by a
+    # minimum count of "an act" entries so a lone prose mention doesn't trigger.
+    h = flat[:20]
+    an_act = sum(1 for i in range(len(flat)-1) if flat[i] == "an" and flat[i+1] == "act")
+    toc_header = an_act >= 5 and any(
+        h[i] == "title" and ("act" in h[i+1:i+3] or "acts" in h[i+1:i+3])
+        for i in range(len(h)-1)
+    )
     return {
         "n": n,
+        "toc_header": toc_header,
         "head": set(flat[:40]),
         "name_frac": (sum(1 for t in flat if t in _GAZ) / n) if _GAZ else 0.0,
         "county_frac": sum(1 for t in flat if t in _COUNTY) / n,
@@ -131,6 +141,11 @@ def _classify(s, garble_frac):
     if (garble_frac >= GF and s["name_frac"] >= NF and s["county_frac"] >= CF
             and s["stat_frac"] < ST):
         return True, "R3_fingerprint"
+    # R4 TABLE-OF-ACTS / CONTENTS: page numbers are stripped from the token stream, so the only
+    # surviving TOC signal is the column header "TITLE OF ACT" (+ chap/page) in the head. NOTE: this
+    # cannot catch a TOC/index whose header was itself garbled (e.g. a code index OCR'd to noise).
+    if s["toc_header"]:
+        return True, "R4_toc_header"
     return False, "-"
 
 def _page_garble(flat):
