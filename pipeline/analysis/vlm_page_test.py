@@ -7,7 +7,7 @@ model on first run. Scores against the same 7 ground-truth pages as the Surya te
 binary BODY-vs-exclude decision that matters for ingestion).
 
 Run with the surya venv python:
-  C:\Users\patolex\PatoLex-scratch\ocr-engines\surya-venv\Scripts\python.exe <thisfile> [spot_dir]
+  C:/Users/patolex/PatoLex-scratch/ocr-engines/surya-venv/Scripts/python.exe <thisfile> [spot_dir]
 """
 import os, sys, re
 from PIL import Image

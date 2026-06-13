@@ -8,7 +8,7 @@ ingestion: BODY (ingest) vs NON-BODY (exclude). Mapping: a page whose region ARE
 BODY; dominated by Table/List-item/Page-header (or mostly Title/Section-header with little Text) => NON-BODY.
 
 Run with the surya venv python:
-  C:\Users\patolex\PatoLex-scratch\ocr-engines\surya-venv\Scripts\python.exe <thisfile> [spot_dir]
+  C:/Users/patolex/PatoLex-scratch/ocr-engines/surya-venv/Scripts/python.exe <thisfile> [spot_dir]
 """
 import os, sys
 from collections import defaultdict
