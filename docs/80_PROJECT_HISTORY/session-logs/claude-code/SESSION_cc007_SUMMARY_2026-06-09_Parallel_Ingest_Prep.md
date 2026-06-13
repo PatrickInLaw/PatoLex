@@ -983,3 +983,27 @@ A crashed worker's lease expires in 45 min -> auto re-claim. To add capacity: re
 task. (2) sha256/page_count columns in volume_manifest are NULL (populate from prep STAGE-0 or a backfill).
 (3) the SQL-queue now also unblocks the deferred FULL OCR flow (prep/ocr/tess/doctr/surya/consensus passes
 already in the schema) -- same factory, enable passes + point manifest at a corpus.
+
+---
+
+## Continuation 68 — 2026-06-13 (Option A: validate + summarize the page-shape output)
+
+**shape_summary.py** (corpus + per-era body-vs-nonbody rollup, runs on partial output). Early read (49 vols /
+51,316 pp): 96.5% BODY, 3.5% non-body; non-body share decays by era (1860s-80s 7-9% -> 1910s-30s <2%), and it
+independently re-finds the known roster/Code volumes (1862, 1863-64, 1880_Code, 1873-74_Code).
+
+**FINDING -- blind Sonnet validation of 12 REAL auto-classified pages (6 INDEX_TOC + 6 TABLE_ROSTER, incl 2
+low-conf ~0.515): body-vs-exclude precision 9/12 (75%), 3 FALSE POSITIVES (statute pages flagged non-body):**
+- 2 low-confidence (~0.515) -- expected margin noise.
+- 1 HIGH-confidence (0.997!): a 1931 APPROPRIATIONS act (Chico State Teachers College $ line-items) labeled
+  TableOfContents -- appropriations' item->dollar columns mimic a TOC's title->page. Same failure mode as the
+  earlier heuristic R2; Surya is far better but still trips on appropriations layout.
+- Also: Surya's `Table` label conflates member-rosters with tables-of-acts (agent called all the TABLE_ROSTER
+  samples INDEX_TOC) -> the roster-vs-TOC SUB-label is unreliable, but both are non-body so body-vs-exclude is
+  unaffected.
+
+**HOW TO USE (durable):** Surya page-shape = excellent high-RECALL candidate detector for non-body pages, but
+NOT safe to blindly EXCLUDE from ingestion -- a slice of "non-body" is appropriations body, so the 3.5% non-body
+is over-counted. Before non-body gates ingestion: verify the flagged set (rule: keep pages with a "STATUTES OF
+CALIFORNIA" running head or high dollar-amount density; or a VLM/Sonnet tiebreaker). Always second-check conf<~0.6.
+Tools: analysis/shape_summary.py (--sample-class for spot-check pools); validated renders in adjudicate/_spotval.
