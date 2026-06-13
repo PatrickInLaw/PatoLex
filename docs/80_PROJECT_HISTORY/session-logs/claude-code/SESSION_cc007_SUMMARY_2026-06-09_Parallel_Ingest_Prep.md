@@ -787,3 +787,38 @@ density). REAL re-OCR target = garble on NON-index pages.
 **Open:** run noctx_garble_breakdown on the 5090 -> names-vs-garble split + index-page count + real-garble
 distribution; decide whether to wire the full gazetteer into build_dictionary; then apply both adjudication
 overlays to the corpus + measure the defensible ground-truth error rate.
+
+---
+
+## Continuation 63 — 2026-06-13 (gazetteer split MEASURED + roster detector + blind visual spot-check)
+
+**Gazetteer split (ran noctx_garble_breakdown on 5090).** Checking the 146,832 no_candidate tokens against the
+FULL ~370k name_gazetteer rescued only **195**. Loading the full gazetteer into build_dictionary would clean
+~nothing — the residual "names" are OCR-MANGLED (no clean gazetteer match); clean common names were already
+filtered as known/edit-1 upstream. So no_candidate is genuinely ~146.6k garble. v1 index/roster classifier:
+8,200 pages / 18,738 garble excluded / 127,899 REAL re-OCR target.
+
+**Garble-tolerant roster detector (roster_detect.py).** v1 missed the confirmed garbled rosters. DEBUG
+calibration: rosters have LOW short-line ratio (OCR collapsed table cols into garble runs), stat_frac==0, garble
+~0.33, and clean surviving column-headers (name/counties/represented/residence). Rebuilt the detector on those
+signatures (R1 header-markers, R2 inherited gaz-name-density, R3 garble-fingerprint). v2: 8,533 pages / 20,718
+excluded / **125,919** target. R1 caught 1,200 garbled-roster pages v1 missed (1862 pk34, 1863 pk36, 1869-70 pk49
+all now flag).
+
+**BLIND Sonnet visual spot-check (5 random + 2 controls) — the detector is NOT reliable yet. FINDING:**
+- ✅ R1 garbled-MEMBER-ROSTER detection works (1862 pk34 = "LIST OF OFFICERS" confirmed).
+- ❌ R2 (inherited clean-gaz-name density) has FALSE POSITIVES on name/place-dense STATUTES: a 1913
+  appropriations act and an 1869-70 metes-and-bounds street act both flagged as "index." Clean (≈0 garble) so they
+  don't move the re-OCR count, but they'd be WRONG to drop from INGESTION.
+- ❌ TABLE-OF-CONTENTS / TABLE-OF-ACTS / CODE-INDEX pages are MISSED (called body): they quote act titles, so they
+  carry statute keywords ("act","title","section") → stat_frac high → look like body. 1862 pk9 (CONTENTS),
+  1863 pk26 (TABLE OF ACTS), 1873-74-code pk485 (INDEX TO POLITICAL CODE) all missed.
+- **IMPLICATION:** both stratified "heavy-garble body" random draws turned out to be TOC/index pages → the
+  125,919 re-OCR target is INFLATED by garble on table-of-contents/index pages that index statutes (full of act
+  titles) but are themselves not ingestable statute text. The real target is lower.
+- **VERDICT:** garbled-member-roster exclusion (R1) is reliable; the broader index/TOC/front-matter exclusion is
+  NOT heuristically reliable (R2 over- and the TOC family under-fires). "Reliably exclude index pages" bar NOT met
+  by heuristics alone. Options: (B) add a line-structure TOC detector (title + trailing page-number), or (A) a
+  cheap VLM/visual pass over the ~8.5k candidate pages (reliable; estimate cost + ask first). Patrick decides.
+
+**Open:** decide A vs B for index/TOC exclusion; do NOT use R2's page list for ingestion gating until tightened.
