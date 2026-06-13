@@ -65,8 +65,10 @@ def main():
                 override[lab] = {"pdf": r.get("pdf"), "year": r.get("year") or r.get("yr")}
 
     # archive PDF index for normalized-name fallback matching (labels were derived from these filenames)
-    archive_pdfs = [os.path.basename(p) for p in
-                    glob.glob(os.path.join(a.archive, "*.pdf")) + glob.glob(os.path.join(a.archive, "*.PDF"))]
+    # dedupe (Windows glob is case-insensitive -> *.pdf and *.PDF return the SAME files twice)
+    archive_pdfs = list({os.path.basename(p).lower(): os.path.basename(p) for p in
+                         glob.glob(os.path.join(a.archive, "*.pdf")) +
+                         glob.glob(os.path.join(a.archive, "*.PDF"))}.values())
     norm_index = {}
     for fn in archive_pdfs:
         norm_index.setdefault(_norm(os.path.splitext(fn)[0]), []).append(fn)

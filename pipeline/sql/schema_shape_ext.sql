@@ -31,7 +31,25 @@ IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name='ix_shape' AND object_id=OBJ
     CREATE INDEX ix_shape ON dbo.ocr_queue(yr, id) WHERE shape_state='pending';
 GO
 
-/* ---- authoritative source manifest (the "which PDF is each volume" record of truth) ---- */
+/* ---- CHANGE AUDIT: make dbo.ocr_queue a system-versioned TEMPORAL table -----------------
+   Every UPDATE/DELETE is captured in dbo.ocr_queue_History with SysStartTime/SysEndTime, so you can ask
+   "what did this row look like / when did it change" via FOR SYSTEM_TIME. (Complements dbo.state_history,
+   which logs the semantic pass transitions with who+when.) NOTE: heartbeats also version rows -- expected. */
+IF COL_LENGTH('dbo.ocr_queue','SysStartTime') IS NULL
+BEGIN
+    ALTER TABLE dbo.ocr_queue ADD
+        SysStartTime datetime2(7) GENERATED ALWAYS AS ROW START HIDDEN NOT NULL
+            CONSTRAINT DF_ocrq_SysStart DEFAULT sysutcdatetime(),
+        SysEndTime   datetime2(7) GENERATED ALWAYS AS ROW END   HIDDEN NOT NULL
+            CONSTRAINT DF_ocrq_SysEnd   DEFAULT CONVERT(datetime2(7), '9999-12-31 23:59:59.9999999'),
+        PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime);
+END
+GO
+IF OBJECTPROPERTY(OBJECT_ID('dbo.ocr_queue'),'TableTemporalType') = 0
+    ALTER TABLE dbo.ocr_queue SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.ocr_queue_History));
+GO
+
+/* ---- authoritative source manifest (record of truth), system-versioned from creation ---- */
 IF OBJECT_ID('dbo.volume_manifest','U') IS NULL
 BEGIN
     CREATE TABLE dbo.volume_manifest (
@@ -40,10 +58,13 @@ BEGIN
         yr          int           NOT NULL,
         sha256      char(64)      NULL,
         page_count  int           NULL,
-        source      nvarchar(20)  NOT NULL,                                   -- explicit | derived
+        source      nvarchar(20)  NOT NULL,                                   -- explicit | derived | matched
         note        nvarchar(400) NULL,                                       -- provenance / ambiguous flag
         corpus      nvarchar(60)  NOT NULL DEFAULT 'patolex-historical',
-        created_at  datetime2     NOT NULL DEFAULT sysutcdatetime()
-    );
+        created_at  datetime2     NOT NULL DEFAULT sysutcdatetime(),
+        SysStartTime datetime2(7) GENERATED ALWAYS AS ROW START NOT NULL,
+        SysEndTime   datetime2(7) GENERATED ALWAYS AS ROW END   NOT NULL,
+        PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime)
+    ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.volume_manifest_History));
 END
 GO
