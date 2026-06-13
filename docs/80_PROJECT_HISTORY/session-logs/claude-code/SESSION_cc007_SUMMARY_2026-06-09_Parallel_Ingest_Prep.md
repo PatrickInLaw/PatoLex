@@ -856,3 +856,39 @@ stack) has a LAYOUT model that labels Table/Title/Text/Page-header regions -- th
 for R2. No ollama installed. Nothing launched (estimate-first + Patrick decides).
 
 **Open:** decide R2's fate (drop vs replace-with-Surya-layout/VLM = path A); verify parsed_acts retains numbers.
+
+---
+
+## Continuation 65 — 2026-06-13 (Surya layout page-shape classifier: bake-off, threading, cross-box, VRAM SAFETY)
+
+**Page-type classification SOLVED by visual layout, not tokens.** Bake-off on the 7 ground-truth pages:
+- Surya layout (already installed in surya-venv: surya-ocr 0.13.0, torch 2.7+cu128, RTX 5090): **7/7** body-vs-
+  non-body. Native `TableOfContents` label nails CONTENTS/TABLE OF ACTS/CODE-INDEX (incl. the heavily-GARBLED
+  1873-74 code index at 0.991) AND keeps the appropriations + survey statutes as BODY (fixing both R2 false-
+  positives). It reads SHAPE, so garbled scans don't fool it.
+- The token heuristics (roster_detect R1-R4) and R2 are now superseded for this purpose by Surya layout.
+
+**surya_page_shapes.py — per-page SHAPE classifier for the whole corpus.** Renders each source-PDF page
+(PyMuPDF, in surya-venv) -> Surya layout -> dominant region label + coarse class (BODY/INDEX_TOC/TABLE_ROSTER/
+DIVIDER_TITLE/PICTURE/MARGIN). Full 1862 volume (660pp): 610 BODY, 26 INDEX_TOC, 19 Table/roster, 4 divider,
+1 picture. **PERSISTS every render** to render-root/<vol>/<pidx>.png (resumable; ~257 KB/page) so we never lose
+renders again. Multi-process SHARDABLE (--shard i --nshards N at volume level) for cross-box (5080+5090) runs.
+
+**Threading vs processes:** render+PNG-encode is GIL-bound, so THREADS plateau (1 proc 8 threads = 7.4 pg/s).
+PROCESSES scale: 2 procs x 4 threads = 8.5 pg/s each (~17 agg); 3 procs ~23 pg/s agg. GPU is NOT the bottleneck
+(util ~16-28%); CPU render is. 5090 box = 24 cores, 64GB RAM, 32GB VRAM.
+
+**VRAM SAFETY (Patrick: a >32GB spike would TDR-reset the 5090 = catastrophic).** Observed a 22.7GB transient
+with 2 uncapped concurrent tracks = cuDNN autotuning workspace. FIX: `torch.backends.cudnn.benchmark=False`
+(removes the autotune spike) + `set_per_process_memory_fraction` HARD CAP (a track OOMs ITSELF, catchable, never
+the GPU). VERIFIED with a tight 0.1s VRAM sampler: 3 capped tracks (frac 0.18) peaked at **8.2 GiB total**
+(~2.7 GiB/track incl context), 24 GiB headroom. Per-track torch reserved 1.67 GB. Spike GONE.
+
+**Sizing:** safe to run ~4-5 tracks on the 5090 (vram-frac 0.15, render-threads 4): measured peak would be
+~11-14 GiB (hard-capped regardless), ~30-40 pg/s aggregate. 5080 only after a resource check + explicit ask
+(RAM-constrained, runs DB/PatoAudio).
+
+**OPEN before any corpus-wide launch (do NOT auto-run):** (1) vol->source-PDF RESOLVER -- the archive has
+duplicate/variant PDFs (e.g. 1927 two versions); must map the 205 production-* volumes to the CORRECT PDF, not
+glob all archive PDFs. (2) cross-box render CONSOLIDATION (per-box local vs SMB share). (3) storage ~50GB for
+~200k pages. (4) time ~1.5h on 5090 alone at 4-5 tracks. (5) 5080 participation gated on resource-check + ask.
