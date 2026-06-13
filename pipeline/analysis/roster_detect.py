@@ -251,8 +251,11 @@ def main():
     for r in flagged:
         garble_by_rule[r[2]] += r[3]
     print("\n  flagged-by-rule (pages):  ", dict(by_rule))
-    print("  garble-excluded-by-rule:  ", dict(garble_by_rule),
-          "  <- R2 ~0 garble => count-irrelevant; R1/R3/R4 carry the real exclusions")
+    print("  garble-excluded-by-rule:  ", dict(garble_by_rule))
+    print("  NOTE: R1(roster-header)+R4(table-of-acts-header)+R3 are spot-check-VALIDATED and reliable. "
+          "R2(gaz-name-density) is the INHERITED blunt rule -- it carries ~half the excluded garble but "
+          "misfires on name/place-dense STATUTES (appropriations, surveys); its page list is NOT safe for "
+          "ingestion gating and its exclusions should be re-judged by a visual/layout pass, not trusted.")
 
     rows = sorted(vol_real.items(), key=lambda kv: -kv[1])
     with open(OUT_VOL, "w", encoding="utf-8") as f:

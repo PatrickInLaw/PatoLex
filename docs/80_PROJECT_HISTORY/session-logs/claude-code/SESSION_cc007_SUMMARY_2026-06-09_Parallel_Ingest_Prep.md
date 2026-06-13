@@ -822,3 +822,37 @@ all now flag).
   cheap VLM/visual pass over the ~8.5k candidate pages (reliable; estimate cost + ask first). Patrick decides.
 
 **Open:** decide A vs B for index/TOC exclusion; do NOT use R2's page list for ingestion gating until tightened.
+
+---
+
+## Continuation 64 — 2026-06-13 (B: table-of-acts detector; R2 unreliable; 5090 VLM feasible)
+
+**FINDING — page numbers are STRIPPED from the cascade token stream (out_context).** num_frac==0 and
+tail_num_line_frac==0 on every page incl. TOCs. The correction-cascade substrate is lowercased-alpha only (you
+can't spell-correct a digit). Consequence: the TOC's defining title->page-number structure is invisible to
+heuristics, and on token-frequency features a TABLE OF ACTS is statistically identical to a page of short acts
+(act_frac 0.050 vs 0.050, an_act 28 vs 25, stat_frac 0.081 vs 0.088). TODO: verify parsed_acts (the INGEST
+substrate) still retains section/chapter numbers -- this strip is in the OCR-correction copy, must confirm it
+is not also true of the ingest path.
+
+**B delivered (R4_toc_header).** The only surviving TOC signal is the column header "TITLE OF ACT" in the head.
+R4 = "title" + "act/acts" in first 20 tokens, guarded by an_act>=5. Validated: 1862 pk9 (CONTENTS) + 1863 pk26
+(TABLE OF ACTS) now flag; body page 1863 pk20 stays body. As predicted it CANNOT catch a garbled-header index
+(1873-74-code pk485 "INDEX TO POLITICAL CODE" -> OCR "section gc amence" -> slips).
+
+**v3 detector:** 9,029 index/roster pages / 23,656 garble excluded / REAL re-OCR target **122,981**
+(v1 127,899 -> v2 125,919 -> v3 122,981). garble-excluded-by-rule: R1=8,799 (1,200pp), R4=2,938 (496pp),
+R3=514 (9pp), **R2=11,405 (7,324pp)**.
+
+**FINDING — R2 (inherited gaz-name-density) is unreliable AND material.** Corrected an earlier wrong claim
+("R2 ~0 garble"): R2 carries ~HALF the excluded garble (11,405). But the spot-check showed R2 misfires on
+name/place-dense STATUTES (1913 appropriations, 1869-70 survey). So R2's page list is NOT safe for ingestion
+gating and its 11,405 garble exclusion is suspect. Trustworthy exclusions = R1+R4+R3 = 12,251 garble on ~1,705
+pages. Re-OCR target uncertainty band = R2's 11,405 (≈123k trusting R2 .. ≈134k dropping it).
+
+**A (visual pass) feasibility — CONDITION MET.** 5090 = RTX 5090, 32GB VRAM, idle (1.9GB used). A 7B VLM does
+~1-2s/page -> ~9k pages = a few hours one-time, not a furnace. Even lighter: Surya (already installed in the OCR
+stack) has a LAYOUT model that labels Table/Title/Text/Page-header regions -- the natural reliable replacement
+for R2. No ollama installed. Nothing launched (estimate-first + Patrick decides).
+
+**Open:** decide R2's fate (drop vs replace-with-Surya-layout/VLM = path A); verify parsed_acts retains numbers.
