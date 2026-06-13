@@ -198,7 +198,7 @@ def main():
     files = sorted(glob.glob(os.path.join(STAGE_OUT, "*.json")))
     nw = max(2, min(8, (os.cpu_count() or 4) - 2))
     print(f"roster-detect over {len(files)} volumes, {nw} workers "
-          f"(SLR={SLR} CF={CF} ST={ST} SLR_HI={SLR_HI} NUMF={NUMF})...", flush=True)
+          f"(MARK_MIN={MARK_MIN} ST_M={ST_M} GF={GF} NF={NF} CF={CF} ST={ST})...", flush=True)
     t0 = time.time()
     G_real=0; G_idx=0; G_gidx=0; G_gbody=0; vol_real={}; all_rows=[]
     ctx = mp.get_context("spawn")
