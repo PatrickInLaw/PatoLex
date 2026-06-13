@@ -52,8 +52,9 @@ def main():
     import torch
     from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
     print(f"loading {MODEL} (downloads ~16GB on first run)...", flush=True)
-    model = Qwen2VLForConditionalGeneration.from_pretrained(
-        MODEL, torch_dtype=torch.bfloat16, device_map="cuda")
+    # no device_map (avoids the accelerate dep / mutating the OCR venv) -- load then move to cuda
+    model = Qwen2VLForConditionalGeneration.from_pretrained(MODEL, torch_dtype=torch.bfloat16)
+    model.to("cuda")
     processor = AutoProcessor.from_pretrained(MODEL)
     model.eval()
 

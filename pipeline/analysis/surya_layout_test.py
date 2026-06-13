@@ -27,8 +27,9 @@ GT = {
     "c2_187374code_485.png": ("NONBODY",  "INDEX TO POLITICAL CODE"),
 }
 
-NONBODY_LABELS = {"Table", "List-item", "List", "Page-header", "Page-footer", "Table-of-contents"}
-STRUCT_TITLE   = {"Title", "Section-header", "Caption"}
+# Surya 0.13 layout label strings (CamelCase, no hyphens)
+NONBODY_LABELS = {"Table", "TableOfContents", "ListItem", "List", "PageHeader", "PageFooter", "Form"}
+STRUCT_TITLE   = {"Title", "SectionHeader", "Caption"}
 
 def classify(layout_result, page_area):
     area = defaultdict(float)
