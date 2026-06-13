@@ -247,7 +247,12 @@ def main():
         for r in sorted(flagged, key=lambda r: -r[3]):
             f.write("\t".join(str(x) for x in r) + "\n")
     by_rule = Counter(r[2] for r in flagged)
-    print("\n  flagged-by-rule:", dict(by_rule))
+    garble_by_rule = Counter()
+    for r in flagged:
+        garble_by_rule[r[2]] += r[3]
+    print("\n  flagged-by-rule (pages):  ", dict(by_rule))
+    print("  garble-excluded-by-rule:  ", dict(garble_by_rule),
+          "  <- R2 ~0 garble => count-irrelevant; R1/R3/R4 carry the real exclusions")
 
     rows = sorted(vol_real.items(), key=lambda kv: -kv[1])
     with open(OUT_VOL, "w", encoding="utf-8") as f:
