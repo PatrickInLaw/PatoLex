@@ -1046,3 +1046,38 @@ ambiguous residual). Shape ~75/205 done. ETA ~3h, all crash-safe + reboot-proof 
 **OPEN:** (1) optionally wire the VLM tiebreaker as a final queue pass that auto-drains vlm_worklist.tsv on the
 5090. (2) backfill volume_manifest sha256/page_count (source_document has them for the 69 ingested). (3) the
 3060 is now SSH-reachable -> can host the SMB source/render store (full durable hub) when wanted.
+
+---
+
+## Continuation 70 — 2026-06-14 (VLM tiebreaker wired + garble-payoff measured; pipeline ~done)
+
+**VLM tiebreaker WIRED as the final queue pass.** Page-level dbo.vlm_queue (sql/vlm_queue.sql); 5080 loader
+sql/load_vlm_queue.py (--watch, feeds vlm_queue from reconcile's growing vlm_worklist.tsv); self-gating VLM
+worker sql/vlm_worker_sql.py on the 5090 (waits until shape has no pending/working before loading the 7B ->
+NO VRAM contention with shape; drains vlm_queue using the persisted render PNGs; hard --vram-frac cap). Launcher
++ SYSTEM task PatoLexVLM (ONSTART). VERIFIED self-gating works (idled while shape ran).
+
+**PIPELINE STATUS (00:44 UTC):** Stage 1 shape 205/205 DONE. Stage 2 reconcile 205/205 DONE (corpus totals:
+rescued 10,317 statute pages recovered from wrongful exclusion, confirmed 637, ambiguous 14,290). Stage 3 VLM
+running (~4,422 done / 9,855 pending, GPU 96%). FINDING: of the adjudicated ambiguous pages, **80% are BODY**
+(garbled statute, not rosters) -> garbled statute dominates the "couldn't-decide" bucket.
+
+**PAYOFF METRIC -- how much long-tail garble the page-shape work removes (analysis/garble_by_shape.py).**
+FIRST ran it against RAW Surya labels (overcount: 22.8%) -- WRONG, lumped rescued+ambiguous as removed. Patrick
+caught it -> redid vs the RECONCILED labels (149 vols): garble on BODY 110,287; NON-BODY confirmed (removed
+deterministically) 2,732 (2.0%); AMBIGUOUS (pending VLM) 24,678. So deterministic removal is small (~2%) because
+garbled rosters lack the clean index header the reconcile confirms on; up to ~20% MAX if VLM confirmed all
+ambiguous as non-body -- but the VLM shows only ~20% of ambiguous are non-body, so the TRUE removal is modest.
+Per-era still confirms Patrick's "bulk of garble is early": 1860s 52% / 1870s 60% of those years' garble sits on
+non-body+ambiguous pages. CONCLUSION: most of the garbled long tail is real statute text that still needs
+cleaning; the page-shape work cleanly sets aside the genuine roster/index garble (heaviest early-era).
+
+**LESSONS (Patrick feedback, saved to memory):** (1) distribute-load-by-current-utilization -- pick the host
+by what's idle NOW, not a fixed rule; 5090 (24c/64GB) often idle + stronger; 5080 set up as an analysis OPTION
+(wordfreq/pyspellchecker + gazetteer/corpus_freq/page-shapes local). (2) use the PROCESSED (reconciled) labels,
+not raw, when the refined data already exists.
+
+**OPEN:** (1) when VLM finishes (~03:00-03:30 UTC), run the garble-WEIGHTED final join (garble x final label incl
+VLM verdicts) for the exact %-of-tail-removed. (2) optional roster-confirm rule in reconcile (Name/County/
+Residence header) to move garbled rosters from pending-VLM to deterministically-removed + shrink VLM load.
+(3) 12 VLM rows failed (minor -- check renders). (4) 3060 SMB hub still available to stand up.
