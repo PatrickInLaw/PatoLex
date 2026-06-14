@@ -1081,3 +1081,24 @@ not raw, when the refined data already exists.
 VLM verdicts) for the exact %-of-tail-removed. (2) optional roster-confirm rule in reconcile (Name/County/
 Residence header) to move garbled rosters from pending-VLM to deterministically-removed + shrink VLM load.
 (3) 12 VLM rows failed (minor -- check renders). (4) 3060 SMB hub still available to stand up.
+
+---
+
+## Continuation 71 — 2026-06-14 (VLM value VALIDATED by visual spot-check)
+
+**Is the VLM adding value? YES -- validated.** Cross-tab (vlm_queue done): of Surya's TABLE_ROSTER *ambiguous*
+flags, ~91% the VLM overturns to BODY; INDEX_TOC ~84% to BODY. Visual spot-check (my engine) of 7 pages
+(5 TABLE_ROSTER->BODY early-garbled + 2 ->ROSTER): 6/7 clearly correct, 1 borderline hybrid; the VLM is NOT
+defaulting to BODY (it correctly kept the 2 real rosters as ROSTER).
+
+**FINDING (durable) -- WHY Surya over-flags on this corpus:** Surya's false-positive TABLE_ROSTER flags are
+STATUTE pages that contain an EMBEDDED table/form/schedule -- a prescribed property-statement form (1865-66 p739),
+structured joint resolutions (1887 p303), etc. The layout model sees the grid and says "roster," but it's statute
+body with a table IN it. The VLM reads the page image and correctly recovers it. Genuine rosters (LIST OF OFFICERS,
+commissioners directories) the VLM correctly calls ROSTER. NOTE: the "ambiguous" pages have CLEAN images -- the
+ambiguity came from garbled OCR TEXT, not bad scans -- which is exactly why a VISUAL model is the right tool.
+
+**Net:** Surya non-body detection is reliable on clean pages (7/7 bake-off) but noisy on embedded-table statute
+pages; reconcile (text) + VLM (image) correct it. True genuine non-body across the corpus is small (~2,500 pages);
+most of the garbled long tail is REAL statute text that still needs cleaning. The VLM earns its keep as the
+image-based corrector of Surya's garbled-page errors.
