@@ -26,6 +26,27 @@ Across 205 volumes, 328,628 pages, **158,188 garbled tokens**:
 | **Total removed** | **24,032** | **15.2%** |
 | Still ambiguous (12 failed-render pages) | 33 | 0.0% |
 
+### Full sieve — every layer, exact (`pipeline/analysis/full_sieve.py`)
+Single-pass join of raw Surya class × reconcile decision × VLM verdict, per page, into six disjoint
+categories (pages + garble). Cross-checks against the queue. Run on the 5080 with
+`PATOLEX_SHAPES=...\page-shapes-5090` (full 205 shape TSVs pulled from the 5090).
+
+```
+TOTAL                                 158,188 garble  (328,628 text pages)
+ Surya BODY ................. 118,114 ( 303,670 pg)  -> kept
+ Surya NON-BODY .............  40,074 (  24,958 pg)  -> reconcile
+   rescued -> BODY ..........   4,899 (  10,317 pg)  -> kept (Surya wrong)
+   confirmed -> REMOVED .....   3,274 (     637 pg)  ✂ deterministic
+   ambiguous -> VLM .........  31,901 (  14,004 pg)  -> VLM
+     VLM kept -> BODY .......  11,110 (  12,123 pg)  -> kept
+     VLM REMOVED ............  20,758 (   1,869 pg)  ✂ roster/index/reprint
+     VLM failed (residual) ..      33 (      12 pg)
+FINAL  kept 134,123 (84.8%) / removed 24,032 (15.2%) / residual 33
+```
+- **Garble density: removed pages 9.6 tok/pg vs kept body 0.4 tok/pg — 23× denser.** 0.76% of pages hold 15.2% of garble.
+- **Surya alone would have wrongly removed 16,009 garble tokens of real statute** (4,899 rescued + 11,110 VLM-recovered) — the two downstream stages exist to recover exactly this.
+- Page universe = text-bearing pages only (textless blanks carry no garble; ~286 ambiguous blanks excluded from the denominator).
+
 ### By era (removed % of that era's garble)
 1860s **51.8%**, 1870s **59.2%**, 1880s 5.8%, 1890s 4.0%, 1900s 5.2%, 1910s 2.9%, 1920s 0.0%, 1930s 2.5%, 1940s 0.0%, 1950s 1.9%, 1960s 0.2%, 1970s 3.1%, 1980s 5.7%, 1990s **25.4%**.
 

@@ -1126,3 +1126,18 @@ removable garble than the deterministic pass (13.1% vs 2.1%) — earns its keep.
 
 **Remaining/deferred:** optional roster-confirm rule in reconcile; backfill volume_manifest sha256/page_count;
 3060 SMB hub; the full OCR flow (inert ocr_queue passes) as the future new-corpus engine.
+
+---
+
+## Continuation 73 — 2026-06-14 (FULL sieve, all 3 layers, no approximation)
+
+Patrick: do it right, no gaps. Pulled all 205 shape TSVs + manifest from the 5090 to the 5080
+(`page-shapes-5090/`), wrote **`pipeline/analysis/full_sieve.py`** — single-pass per-page join of raw Surya
+class × reconcile decision × VLM verdict into 6 disjoint categories (pages + garble), cross-checks the queue.
+
+COMPLETE SIEVE (158,188 garble / 328,628 text pages): Surya BODY 118,114 (303,670pg kept) | Surya NON-BODY
+40,074 (24,958pg) -> {rescued->body 4,899/10,317pg; confirmed->REMOVED 3,274/637pg; ambiguous->VLM 31,901/14,004pg}
+-> VLM {kept-body 11,110/12,123pg; REMOVED 20,758/1,869pg; failed 33/12pg}. FINAL kept 134,123 (84.8%) /
+removed 24,032 (15.2%). **Garble density: removed 9.6 tok/pg vs body 0.4 — 23x denser** (0.76% of pages = 15.2%
+of garble). Surya-alone would have wrongly removed 16,009 garble of real statute (rescued+VLM-recovered) — the
+two downstream stages exist to recover exactly that. Full numbers in PAGE_SHAPE_CLASSIFICATION.md (Full sieve sec).
