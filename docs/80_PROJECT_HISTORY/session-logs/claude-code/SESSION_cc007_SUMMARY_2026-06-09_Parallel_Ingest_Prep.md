@@ -1102,3 +1102,27 @@ ambiguity came from garbled OCR TEXT, not bad scans -- which is exactly why a VI
 pages; reconcile (text) + VLM (image) correct it. True genuine non-body across the corpus is small (~2,500 pages);
 most of the garbled long tail is REAL statute text that still needs cleaning. The VLM earns its keep as the
 image-based corrector of Surya's garbled-page errors.
+
+---
+
+## Continuation 72 — 2026-06-14 (VLM DONE; garble-weighted FINAL number computed)
+
+**3060 came back online (it was offline ~12h, 8mi away). Pipeline COMPLETE — all 3 stages done.**
+vlm_queue: 14,278 done / 12 failed / 0 pending / 0 working. Verdict split: BODY 12,098 (85%), INDEX_TOC 1,699,
+ROSTER 363, OTHER 107, REPRINT 11.
+
+**Updated `pipeline/analysis/garble_by_shape.py`** to fold VLM verdicts into AMBIGUOUS pages (BODY/OTHER -> kept;
+INDEX_TOC/ROSTER/REPRINT -> removed; OTHER conservatively NOT removed). Verdicts exported from vlm_queue to
+`_cascade/vlm_verdicts.tsv` (14,278 rows); script reads it via `load_vlm_verdicts()`, gated by `PATOLEX_USE_VLM=1`.
+Ran on the 5080 (idle; gazetteer/reconciled/out_context all local).
+
+**FINAL NUMBER (durable, now in `docs/30_SYSTEM_DESIGN/PAGE_SHAPE_CLASSIFICATION.md`):** 205 vols, 328,628 pages,
+158,188 garbled tokens. REMOVED 24,032 = **15.2%** (deterministic 2.1% + VLM 13.1%). Remains on BODY (real
+cleaning target) 134,123 = **84.8%**. By era: 1860s 51.8%, 1870s 59.2%, 1990s 25.4%, 1920s-1960s ~0-2%.
+
+**HEADLINE:** ~85% of the garbled long tail is REAL statute text needing cleaning/re-OCR. VLM found ~6x more
+removable garble than the deterministic pass (13.1% vs 2.1%) — earns its keep. Removal concentrated in early era
+(1860s-70s rosters/indexes) + a 1990s index spike. cc007 page-shape effort COMPLETE.
+
+**Remaining/deferred:** optional roster-confirm rule in reconcile; backfill volume_manifest sha256/page_count;
+3060 SMB hub; the full OCR flow (inert ocr_queue passes) as the future new-corpus engine.

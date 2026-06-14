@@ -18,8 +18,12 @@ OUTCTX   = os.path.join(CASCADE, "out_context")
 SHAPES   = os.environ.get("PATOLEX_SHAPES", os.path.join(os.path.dirname(CASCADE), "page-shapes"))
 RECONCILED = os.environ.get("PATOLEX_RECONCILED", os.path.join(CASCADE, "reconciled"))
 MANIFEST = os.path.join(CASCADE, "manifest.tsv")
+VLM_VERDICTS = os.environ.get("PATOLEX_VLM_VERDICTS", os.path.join(CASCADE, "vlm_verdicts.tsv"))
 NONBODY  = {"INDEX_TOC", "TABLE_ROSTER", "DIVIDER_TITLE", "PICTURE", "MARGIN"}
 USE_RECONCILED = os.environ.get("PATOLEX_USE_RECONCILED", "1") == "1"   # prefer the post-reconcile labels
+USE_VLM  = os.environ.get("PATOLEX_USE_VLM", "1") == "1"   # fold VLM verdicts into AMBIGUOUS pages
+# VLM verdicts that mean "non-body, never ingested" -> removed. BODY/OTHER stay (conservative: OTHER is not removed).
+VLM_REMOVE = {"INDEX_TOC", "ROSTER", "REPRINT"}
 _YEAR    = re.compile(r"(\d{4})")
 
 def load_pdfbase_to_label():
@@ -60,6 +64,22 @@ def read_reconciled(fp):
                     pass
     return d
 
+def load_vlm_verdicts():
+    """vlm_verdicts.tsv: label, pidx, verdict -> {(label,pidx): verdict}. Exported from PatoLexQueue.vlm_queue."""
+    v = {}
+    if not os.path.exists(VLM_VERDICTS):
+        return v
+    with open(VLM_VERDICTS, encoding="utf-8") as f:
+        f.readline()
+        for line in f:
+            p = line.rstrip("\n").split("\t")
+            if len(p) >= 3:
+                try:
+                    v[(p[0], int(p[1]))] = p[2]
+                except ValueError:
+                    pass
+    return v
+
 def main():
     nb._init()
     if USE_RECONCILED:
@@ -72,6 +92,12 @@ def main():
         labels = [p2l.get(os.path.basename(f)[:-len(".shapes.tsv")], os.path.basename(f)[:-len(".shapes.tsv")]) for f in files]
         print(f"joining {len(files)} RAW-shape volumes with per-page garble...", flush=True)
 
+    vlm = load_vlm_verdicts() if (USE_RECONCILED and USE_VLM) else {}
+    if USE_RECONCILED and USE_VLM:
+        print(f"folding in {len(vlm):,} VLM verdicts (AMBIGUOUS -> BODY or REMOVED_VLM)...", flush=True)
+
+    # buckets: BODY (real target) | NONBODY_DET (reconcile-confirmed removed) |
+    #          NONBODY_VLM (VLM-confirmed removed) | AMBIGUOUS (no verdict residual)
     g = Counter(); by_era = defaultdict(Counter); pages = Counter()
     for fp, label in zip(files, labels):
         oc = os.path.join(OUTCTX, "production-" + label + ".json")
@@ -91,25 +117,36 @@ def main():
             cls = lab.get(pidx, "BODY")
             if USE_RECONCILED:
                 bucket = cls if cls in ("BODY", "NONBODY", "AMBIGUOUS") else "BODY"
+                if bucket == "NONBODY":
+                    bucket = "NONBODY_DET"
+                elif bucket == "AMBIGUOUS" and USE_VLM:
+                    verdict = vlm.get((label, pidx))
+                    if verdict in VLM_REMOVE:
+                        bucket = "NONBODY_VLM"
+                    elif verdict is not None:   # BODY / OTHER -> real text (kept)
+                        bucket = "BODY"
+                    # else: no verdict (failed page) -> stays AMBIGUOUS
             else:
-                bucket = "NONBODY" if cls in NONBODY else "BODY"
+                bucket = "NONBODY_DET" if cls in NONBODY else "BODY"
             gr = nb._page_garble([t for ln in lines for t in ln])
             g[bucket] += gr; pages[bucket] += 1; by_era[era][bucket] += gr
 
     tot = sum(g.values())
-    print(f"\n=== GARBLE BY {'RECONCILED' if USE_RECONCILED else 'RAW-SHAPE'} LABEL ({sum(pages.values()):,} pages) ===")
-    print(f"  garble on BODY (real cleaning/re-OCR target):        {g['BODY']:,}")
-    print(f"  garble on NON-BODY confirmed (REMOVED, deterministic): {g['NONBODY']:,}")
-    if USE_RECONCILED:
-        print(f"  garble on AMBIGUOUS (pending VLM verdict):            {g['AMBIGUOUS']:,}")
+    removed = g['NONBODY_DET'] + g['NONBODY_VLM']
+    print(f"\n=== GARBLE BY FINAL LABEL ({sum(pages.values()):,} pages) ===")
+    print(f"  garble on BODY (real cleaning/re-OCR target):          {g['BODY']:,}")
+    print(f"  garble REMOVED, deterministic (reconcile non-body):    {g['NONBODY_DET']:,}")
+    if USE_RECONCILED and USE_VLM:
+        print(f"  garble REMOVED, VLM (roster/index/reprint):            {g['NONBODY_VLM']:,}")
+        print(f"  garble still AMBIGUOUS (no VLM verdict, failed pages): {g['AMBIGUOUS']:,}")
     print(f"  total garble: {tot:,}")
-    print(f"  REMOVED so far: {g['NONBODY']:,} ({100.0*g['NONBODY']/max(1,tot):.1f}%)"
-          + (f"  + up to {g['AMBIGUOUS']:,} more pending VLM ({100.0*(g['NONBODY']+g['AMBIGUOUS'])/max(1,tot):.1f}% max)" if USE_RECONCILED else ""))
-    print("\n=== by era (removed / pending / total) ===")
+    print(f"  TOTAL REMOVED: {removed:,} ({100.0*removed/max(1,tot):.1f}%)  "
+          f"[det {100.0*g['NONBODY_DET']/max(1,tot):.1f}% + VLM {100.0*g['NONBODY_VLM']/max(1,tot):.1f}%]")
+    print(f"  REMAINS on BODY (real cleaning target): {g['BODY']:,} ({100.0*g['BODY']/max(1,tot):.1f}%)")
+    print("\n=== by era (removed[det+vlm] / total, removed%) ===")
     for era in sorted(by_era):
-        e = by_era[era]; t = sum(e.values())
-        amb = f"  pending {e['AMBIGUOUS']:,}" if USE_RECONCILED else ""
-        print(f"  {era}: removed {e['NONBODY']:,}{amb}  of {t:,}")
+        e = by_era[era]; t = sum(e.values()); rm = e['NONBODY_DET'] + e['NONBODY_VLM']
+        print(f"  {era}: removed {rm:,} of {t:,} ({100.0*rm/max(1,t):.1f}%)")
 
 if __name__ == "__main__":
     main()
