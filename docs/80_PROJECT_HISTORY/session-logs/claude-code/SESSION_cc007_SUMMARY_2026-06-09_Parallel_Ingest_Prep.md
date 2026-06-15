@@ -1164,3 +1164,22 @@ confirm), parsed ~1990 (~82%) -> ~430 acts present-in-text-but-unparsed (parse d
 and can't tell misnumber from missing -> needs external per-session chapter-count oracle. **Ingest readiness:
 NOT READY for OCR era** — would under-populate mid-century ~15-20%. Need parser completion/renumber pass +
 external chapter-count oracle + (sync 13 vols, skip-list digests, DB backup) before the one-pass ingest.
+
+---
+
+## Continuation 75 — 2026-06-14 (Gate 2 oracle built + measured BEFORE-completeness 79.6%)
+
+Patrick: run both gates in background. **Gate 2 DONE** (subagent): authoritative per-session chapter-count oracle
+`docs/30_SYSTEM_DESIGN/sources/ca_chapter_counts.tsv` (215 sessions 1850-2024, +NOTES.md), validated vs anchors
+1957=2424 & 1996=1171. Source: CA Chief Clerk archive (1850-2008) + SoS bill-chapters PDFs (2009-24). Method =
+highest chapter number per session ToC. Numbering is per-session/per-year, never per-biennium; 1946-66 even-year
+budget sessions legitimately tiny (1964=1ch).
+
+Built `pipeline/analysis/chapter_vs_oracle.py` (join our parse vs oracle, oracle total as cap). **MEASURED
+BEFORE-recovery completeness: OCR era 1861-1999 = 72,562/91,153 = 79.6%, missing ~18,591.** Systematic (most
+sessions 70-88%) -> parser under-extraction, not random. 1996-99=100% (clean OCR), 1861=47%/1915=33% (worst).
+Caveats: 1850-60 from original ingest (not in 197-vol parse set, scored separately); biennial 2-session volumes
+(1907-09) minor noise; garbled high ch# neutralized by oracle cap.
+
+**Gate 1 (parser recovery) STILL RUNNING** in background — producing diagnose_*/recover_acts/validate_recovery
+(uncommitted, for review). When it lands: Hans-review its code, then re-run chapter_vs_oracle.py for the AFTER number.

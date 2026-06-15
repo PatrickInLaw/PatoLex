@@ -20,6 +20,20 @@ The old `completeness-report.json` counted 122,475 "gaps" — meaningless, domin
 - **Modern (1991→present):** authoritative leginfo data already in Postgres; 1996 OCR cross-validates. Effectively complete (modulo per-year trailing-tail verification).
 - **OCR era (≈1850–1990):** all OCR pages present, but current parse extracts only ~80–85% of true chapters as cleanly-numbered acts (calibrated on 1957 = 82%). The already-ingested 1850–1876 segment carries the same chapter-number OCR noise (e.g. DB shows 1863 max chapter 1120, 1869-70 max 1092 — impossible, OCR errors in already-loaded data).
 
+## MEASURED completeness vs the authoritative oracle (2026-06-14, "before recovery")
+Gate 2 produced an authoritative per-session chapter-count oracle: `docs/30_SYSTEM_DESIGN/sources/ca_chapter_counts.tsv`
+(215 sessions 1850–2024, validated against 1957=2424 and 1996=1171; method = highest chapter number in the
+session ToC). `pipeline/analysis/chapter_vs_oracle.py` joins our parse against it (oracle total as the cap).
+
+**Result (OCR era 1861–1999): 72,562 of 91,153 authoritative chapters parsed = 79.6% complete; ~18,591 missing.**
+- The deficit is systematic (most sessions 70–88%), not random → parser under-extraction on noisy OCR, consistent
+  with the 1957 calibration (79% here). 1996–1999 = 100% (clean OCR); earliest hand-set volumes worst (1861 47%, 1915 33%).
+- Caveats: 1850–1860 came from the ORIGINAL 1850–75 ingest (not the 197-vol parse set) → not scored here, scored
+  separately; a few biennial volumes spanning two sessions (e.g. 1907-09) add minor per-session noise; OCR-garbled
+  high chapter numbers (e.g. 90623) are neutralized by the oracle cap.
+- This is the BEFORE-recovery baseline. After the Gate-1 parser completion/renumber pass, re-run chapter_vs_oracle.py
+  to measure how much of the 18,591 is recovered.
+
 ## Ingestion readiness: NOT READY (OCR era)
 Ingesting the mid-century parse as-is would under-populate it by ~15–20% and carry chapter-number noise. Before full ingestion:
 1. **Parser completion/repair pass for the OCR era** — recover the ~15–20% of acts the segmenter misses + a chapter-number reconstruction pass (re-number from sequence/page order, since OCR pages are complete).
