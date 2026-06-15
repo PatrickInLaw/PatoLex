@@ -1183,3 +1183,30 @@ Caveats: 1850-60 from original ingest (not in 197-vol parse set, scored separate
 
 **Gate 1 (parser recovery) STILL RUNNING** in background — producing diagnose_*/recover_acts/validate_recovery
 (uncommitted, for review). When it lands: Hans-review its code, then re-run chapter_vs_oracle.py for the AFTER number.
+
+---
+
+## Continuation 76-78 — 2026-06-14 (Gate 1 recovery, 2x Hans, GO)
+
+**Gate 1 DONE** (recover_acts.py): tolerant page-top CHAPTER-header detector + session-wide renumber-by-sequence
+(LIS anchors + deterministic fill). 1957 confident distinct 1629->2284 of 2424. Root cause = page-top header loss,
+NOT OCR (pages complete). Early era (pre-1880, 1863) unhelped -> needs separate header-free detector (out of scope).
+
+**Process correction (Patrick):** commit working code BEFORE editing. I'd held Gate 1 uncommitted then dispatched
+fixes -> baseline lost. Committed C76 (bundled, acknowledged). Saved memory [[commit-before-editing]]. Going fwd:
+produce->commit->edit->commit.
+
+**Hans #1** found CRITICAL-1 (fill-from-false-split wrong #), CRITICAL-2 (cross-session merge), MAJOR-1 (quoted-title
+split), MAJOR-2 (rescue index). **Fixed** (witness-disagree demote->flagged; cross-session guard; quote guard;
+sorted rescue sweep). Post-fix: 1957 92.8%, 0 dup, 35 demoted->flagged (correct renumbers w/ OCR-wrong headers).
+Guard tests 13/13.
+
+**Hans #2** = NO-GO on ONE claim: cross-session guard should key LEGISLATURE_MAP[label][1] not [0]. **VERIFIED HANS
+WRONG** against the map + oracle: [0]=specific session ("1957 Regular Session"), [1]=biennium ("1957-58"). CA
+numbers chapters 1..N PER SESSION (each regular+extra restarts at 1); [1] would MERGE independent sequences (1949
+Reg/1950 Reg/1950 3rd Extra) and corrupt. [0] is correct. Did NOT change it; added a comment + audit-note locking
+it in, + minor right-curly-quote chars to the title guard (Hans-endorsed). Tests 13/13. **VERDICT: GO** (caveats:
+pre-1880 unhelped; flagged residue must be reviewed not dropped; ambiguous chapter_int_final=0 must be filtered).
+
+**NEXT (needs Patrick go + box check):** full ~200-vol recovery run (driver must group labels by [0]-session) ->
+re-run chapter_vs_oracle.py for the AFTER-recovery corpus completeness number.

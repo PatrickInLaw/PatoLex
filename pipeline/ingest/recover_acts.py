@@ -88,7 +88,7 @@ BODYREF_CUE = re.compile(
     r"|doing\s+of\s+an\s+act", re.I)
 # Opening-quote characters: an "An act" preceded by one of these is the quoted
 # TITLE of an act being amended/cited, not a new act start (MAJOR-1).
-_OPEN_QUOTES = "\"'“‘„‚«‹`"
+_OPEN_QUOTES = "\"'“‘„‚«‹`’”›»"   # incl. right-curly/guillemet variants some OCR emits for an opener
 # Witness header: a readable, ARABIC "CHAPTER <n>" / "CHAP. <n>" numeral that the
 # printer set as the act's OWN leading header line. Anchored to the START of the line
 # (^) on purpose -- a CHAPTER token mid-line is a BODY reference ("...to amend Chapter
@@ -342,10 +342,17 @@ def process_session(labels, true_total=None):
     """Process ALL physical volumes of one session as a single page-ordered stream,
     renumber session-wide, then write one parsed_acts_recovered.json per volume."""
     # CRITICAL-2 cross-session guard: renumber-by-sequence is only valid WITHIN a
-    # single legislative session (chapters run 1..N per session). Key each label by
-    # its LEGISLATURE_MAP SESSION value (the tuple's first element) -- NOT the year
-    # prefix, since e.g. "1957-vol1-56chapters" is the 1956 session. Reject loudly
-    # if the labels span more than one distinct session (or any unmapped label).
+    # single legislative session, because CA numbers chapters 1..N PER SESSION and
+    # EVERY session -- each Regular AND each Extraordinary session -- restarts at 1.
+    # Key each label by LEGISLATURE_MAP[label][0], the SPECIFIC-SESSION name (e.g.
+    # "1957 Regular Session", "1950 3rd Extraordinary Session") -- NOT the year prefix
+    # ("1957-vol1-56chapters" is the 1956 session). Do NOT use [1] (the biennium, e.g.
+    # "1949-50"): a biennium holds SEVERAL independent chapter sequences (1949 Regular,
+    # 1950 Regular, 1950 3rd Extra ...), and keying on it would MERGE them and corrupt
+    # the renumber. Co-session volumes (1957 vol1+vol2) share [0] and are allowed.
+    # Reject loudly on >1 distinct session or any unmapped label.
+    # (Audit note 2026-06-14: a 2nd-pass auditor claimed [1] was the correct key. It is
+    #  NOT -- verified against LEGISLATURE_MAP + the chapter-count oracle; [0] is right.)
     if not labels:
         raise SystemExit("recover_acts: no volume labels given")
     sess_of = {}
