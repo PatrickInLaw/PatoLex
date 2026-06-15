@@ -1210,3 +1210,17 @@ pre-1880 unhelped; flagged residue must be reviewed not dropped; ambiguous chapt
 
 **NEXT (needs Patrick go + box check):** full ~200-vol recovery run (driver must group labels by [0]-session) ->
 re-run chapter_vs_oracle.py for the AFTER-recovery corpus completeness number.
+
+---
+
+## Continuation 79 — 2026-06-14 (full-corpus recovery run -> 88.7% complete)
+
+Built recover_all.py (group volumes by [0]-session, run process_session each, aggregate -> chapters_recovered.tsv).
+Ran on the 5090 (idle, more headroom): 205 vols / 108 sessions, 0 failed, 86,584 acts (was 76,691). Pulled TSV,
+re-measured vs oracle.
+
+**RESULT: corpus 1861-1999 = 79.6% -> 88.7% complete (72,562 -> 80,893 of 91,154; missing 18,591 -> 10,261).
+~8,300 acts recovered (~45% of gap), precision-clean.** Chaptered era 1880-1999 ~91% (1957 79->94%, modern 100%).
+Pre-1880 (1861-77) ~56% UNCHANGED -> needs separate header-free detector (next follow-on). Recovery data in
+scratch (parsed_acts_recovered.json + chapters_recovered.tsv), not committed (data not code). recover_all.py
+committed C79. Still NOT ingest-ready: early-era detector + flagged-residue review + DB backup remain.

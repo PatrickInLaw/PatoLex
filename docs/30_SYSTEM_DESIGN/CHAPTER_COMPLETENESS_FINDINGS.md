@@ -34,6 +34,20 @@ session ToC). `pipeline/analysis/chapter_vs_oracle.py` joins our parse against i
 - This is the BEFORE-recovery baseline. After the Gate-1 parser completion/renumber pass, re-run chapter_vs_oracle.py
   to measure how much of the 18,591 is recovered.
 
+## AFTER-recovery completeness (2026-06-14, full-corpus run)
+`pipeline/ingest/recover_all.py` ran the Hans-audited recovery+renumber (recover_acts.py) over all 205 volumes /
+108 sessions on the 5090 (0 failed), output to new `parsed_acts_recovered.json` per volume + `chapters_recovered.tsv`
+(86,584 acts, up from 76,691). Re-measured with chapter_vs_oracle.py:
+
+**Corpus (1861–1999): 72,562 → 80,893 of 91,154 = 79.6% → 88.7% complete; missing 18,591 → 10,261 (~8,300 acts
+recovered, ~45% of the gap), precision-clean (uncertain renumbers demoted to flagged, not ingested).**
+- **Chaptered era (1880–1999): ~91% complete** — the segment the pass targets. 1957 79→94%, 1880 79→94%, 1959 80→96%,
+  1947 86→95%; modern 1996–99 = 100%.
+- **Pre-1880 (1861–1877): ~56%, unchanged** — those volumes have no per-act CHAPTER headers in the OCR; the
+  header-recovery pass cannot help them. **Next follow-on: a header-free (date + "An act" sequence) detector for 1850–1879.**
+- Residual noisy chaptered sessions (1915 35%, 1933 72%, 1987–88 83%) are targeted-cleanup candidates.
+- Recovery data lives in PatoLex-scratch (parsed_acts_recovered.json, chapters_recovered.tsv) — not committed (data, not code).
+
 ## Ingestion readiness: NOT READY (OCR era)
 Ingesting the mid-century parse as-is would under-populate it by ~15–20% and carry chapter-number noise. Before full ingestion:
 1. **Parser completion/repair pass for the OCR era** — recover the ~15–20% of acts the segmenter misses + a chapter-number reconstruction pass (re-number from sequence/page order, since OCR pages are complete).
