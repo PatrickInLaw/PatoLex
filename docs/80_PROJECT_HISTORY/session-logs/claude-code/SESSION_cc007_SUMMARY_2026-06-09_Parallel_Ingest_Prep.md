@@ -1141,3 +1141,26 @@ COMPLETE SIEVE (158,188 garble / 328,628 text pages): Surya BODY 118,114 (303,67
 removed 24,032 (15.2%). **Garble density: removed 9.6 tok/pg vs body 0.4 — 23x denser** (0.76% of pages = 15.2%
 of garble). Surya-alone would have wrongly removed 16,009 garble of real statute (rescued+VLM-recovered) — the
 two downstream stages exist to recover exactly that. Full numbers in PAGE_SHAPE_CLASSIFICATION.md (Full sieve sec).
+
+---
+
+## Continuation 74 — 2026-06-14 (garble metric reconciled + chapter completeness + ingest readiness)
+
+**Garble number correction (Patrick: "I thought we were at 0.04%"):** he was RIGHT. Two metrics conflated.
+Authoritative corpus GARBAGE floor = **0.045%** (cascade `garbage_pct_of_corpus`, 60,404 irreducible salad tokens).
+My page-shape `_page_garble` (134,123/136.9M = 0.10%) is the BROADER no_candidate bucket (unknown, no-candidate,
+not garbage-shaped) — includes real rare terms, NOT all garbage. Mislabeled it "garbage"; corrected.
+
+**Parse coverage (Patrick: why local when SSH to 5090?):** he was right — zero true missing data. The 13
+"unparsed" 1996-99 vols have OCR locally AND are parsed on the 5090; their OCR synced ~90min AFTER cc009's parse.
+Fix = re-parse on 5080 or pull from 5090. 1998-vol6 = non-statute BILL CHAPTERS digest -> SKIP_LABELS.
+
+**CHAPTER COMPLETENESS (new durable doc CHAPTER_COMPLETENESS_FINDINGS.md):** built extract_chapters.py +
+chapter_completeness.py (suffix-aware session grouping, drop 0.7% provably-corrupt nums, triage). Findings:
+(1) NO source lost (OCR page-complete). (2) Parser CORRECT on clean OCR: 1996 = 1..1171, matches authoritative
+leginfo max 1171 exactly. (3) Parser UNDER-EXTRACTS on noisy OCR: 1957 true=2424 chapters (web+our OCR headers
+confirm), parsed ~1990 (~82%) -> ~430 acts present-in-text-but-unparsed (parse deficiency, NOT lost, NOT re-OCR).
+(4) Internal sequence canNOT certify alone: blind to trailing truncation (1997 clean 1..951 but real max higher)
+and can't tell misnumber from missing -> needs external per-session chapter-count oracle. **Ingest readiness:
+NOT READY for OCR era** — would under-populate mid-century ~15-20%. Need parser completion/renumber pass +
+external chapter-count oracle + (sync 13 vols, skip-list digests, DB backup) before the one-pass ingest.
