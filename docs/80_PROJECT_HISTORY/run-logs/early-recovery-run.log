@@ -1,0 +1,2 @@
+[2026-06-14 00:00 PT] START | Early-era (1850-1879) header-free act recovery task | OK
+[2026-06-14 00:00 PT] STEP1 | Reading recover_acts.py + ingest_clean.py to characterize existing detectors | OK
