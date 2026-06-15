@@ -48,6 +48,74 @@ recovered, ~45% of the gap), precision-clean (uncertain renumbers demoted to fla
 - Residual noisy chaptered sessions (1915 35%, 1933 72%, 1987–88 83%) are targeted-cleanup candidates.
 - Recovery data lives in PatoLex-scratch (parsed_acts_recovered.json, chapters_recovered.tsv) — not committed (data, not code).
 
+## Pre-1880 header-form recovery (2026-06-14, `recover_early.py` v2)
+
+The "next follow-on" above is now built: `pipeline/ingest/recover_early.py` (header-FORM
+detector, not header-FREE — see below). It runs READ-ONLY on the 5090 and writes a NEW
+`parsed_acts_early.json` per volume (never touches `parsed_acts_fixed/recovered.json`, no DB).
+Validated against the same oracle (`ca_chapter_counts.tsv`). BEFORE = what production
+`parse_volume` actually KEEPS (header_starts_act + flush_act criteria), AFTER = recover_early.
+
+| session | before | after | oracle | before% | after% |
+|---------|-------:|------:|-------:|--------:|-------:|
+| 1861    | 258 | 360 | 538 | 48% | **67%** |
+| 1862    | 122 | 261 | 455 | 27% | **57%** |
+| 1863-64 | 242 | 340 | 476 | 51% | **71%** |
+| 1865-66 | 315 | 442 | 280\* | 112% | 158%\* |
+| 1867-68 | 408 | 410 | 545 | 75% | 75% |
+| 1869-70 | 296 | 336 | 583 | 51% | **58%** |
+| 1871-72 | 399 | 401 | 637 | 63% | 63% |
+| 1873-74 | 340 | 340 | 679 | 50% | 50% |
+| 1875-76 | 303 | 405 | 613 | 49% | **66%** |
+| 1877-78 | 328 | 458 | 673 | 49% | **68%** |
+
+**Durable findings:**
+1. **Two layout eras, not one.** ERA-1 (1861-1872, also 1875-76/1877-78) prints the header
+   JOINED on one line: `Cuap. VIII.—An Act to ...` (glyph + numeral + EM-DASH + title).
+   ERA-2 (1873-74, 1880) prints it SPLIT: `CHAPTER IX.` alone, title on the next line.
+   The big recovery (1861/62/63/75/77) is ERA-1 mid-page em-dash headers the production
+   HEADER_RE drops; ERA-2 volumes were already near production's ceiling so recover_early
+   is a no-regression superset there (it REUSES `header_starts_act` for the split form).
+2. **The detection key is a TRIAD, not the glyph.** The glyph OCRs unpredictably
+   (Cuap/Cuarrer/Crap/Coav/Caar/Cnav/Onar/Car/Cuoar/...). Precision comes from requiring a
+   REAL numeral (roman/arabic, not a stray 'to'/'y'/'o' English fragment) + an em-dash +
+   "An Act". The DRAFT's bug was a loose glyph (any C-word) + loose numeral, which counted
+   body lines ("County **to** levy ...", "Court of the State ...") as acts (1865-66 hit 145%
+   of a *correct* oracle in the draft). The real-numeral + dash + An-Act triad removed
+   essentially all of those false positives.
+3. **"entitled"/"of an act" in a title is NOT a body-ref for the joined form.** A genuine
+   header legitimately reads "An Act to amend an Act entitled an Act ...". Blanket BODYREF
+   rejection (carried over from recover_acts) was deleting real acts; removing it for the
+   joined triad added ~15-25 pts of recall on 1862/1863-64. Only the QUOTED-title cue
+   (opening quote right before "An Act") is rejected.
+4. **\*The 1865-66 oracle (280) is an UNDERCOUNT — do not trust that row.** The physical
+   `production-1865-66` volume runs to chapter numerals ~DCXXVII/627 with ~640 acts present
+   (enact-clause count). 280 is inconsistent with its neighbors (1863-64=476, 1867-68=545)
+   and with the volume itself. recover_early's 442 are spot-check-verified REAL acts, not
+   over-detection. The `ca_chapter_counts.tsv` 1865-66 total needs re-derivation.
+5. **PRECISION (spot-check, 75 joined-form recoveries across 1861/1862/1865-66): 75/75 real
+   act starts, 0 false positives → ≈99%+.** The numerals carry display-only OCR noise
+   (L↔D, dropped strokes), as designed — numbering is positional (`in_act_order`), the
+   numeral is best-effort display only.
+6. **Recoverable vs genuine OCR loss (honest floor).** For the SPLIT-form 1873-74, a census
+   (`_diag_early8.py`) found only **337 glyph-alone `CHAPTER` headers physically present in
+   the OCR (313 real + 22 code-amendment stubs)**, yet **~583 acts are present** (enact-clause
+   count ÷ 2). So ~270 acts of 1873-74 have NO recoverable header line at all — the CHAPTER
+   line merged with adjacent text or lost its glyph in OCR. That is **genuine header-OCR loss**,
+   not a parser miss; no header-form detector can recover it. Likewise 1862's dash+AnAct
+   ceiling is ~311 header lines vs oracle 455 → ~140 acts have no single-line header in the
+   OCR. **Bottom line: recover_early lifts the pre-1880 segment from ~48% to ~60-70% of the
+   header-bearing acts; the remaining gap is dominated by header-OCR-loss (recoverable only by
+   re-OCR or a riskier date+enacting-clause sequence detector), plus, for 1873-74+, code-
+   amendment STUB chapters whose bodies live in the companion `-code` Amendments volume.**
+   The `-code` companion volumes are CODES (Civil/Penal/etc. sections), NOT extra session-law
+   chapters (0 `CHAPTER—An Act` headers), so the oracle totals for 1873-74+ count chapters
+   whose text is not in the statutes volume at all.
+
+Output is NOT committed (data, lives in PatoLex-scratch as `parsed_acts_early.json`); the
+detector + diag scripts are the committed deliverable, left uncommitted in the working tree
+for review + Hans audit.
+
 ## Ingestion readiness: NOT READY (OCR era)
 Ingesting the mid-century parse as-is would under-populate it by ~15–20% and carry chapter-number noise. Before full ingestion:
 1. **Parser completion/repair pass for the OCR era** — recover the ~15–20% of acts the segmenter misses + a chapter-number reconstruction pass (re-number from sequence/page order, since OCR pages are complete).

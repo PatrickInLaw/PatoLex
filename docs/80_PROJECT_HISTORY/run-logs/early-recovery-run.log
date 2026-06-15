@@ -1,2 +1,11 @@
 [2026-06-14 00:00 PT] START | Early-era (1850-1879) header-free act recovery task | OK
 [2026-06-14 00:00 PT] STEP1 | Reading recover_acts.py + ingest_clean.py to characterize existing detectors | OK
+[2026-06-14 01:10 PT] STEP2 | Read draft recover_early.py + all _diag_early*.py + ingest_from_ocr parser; ran draft --score on 5090 | OK
+[2026-06-14 01:10 PT] FINDING | Draft over-detected (1865-66=145%) via loose glyph: any C-word (County/Court/cisco) + non-numeral token ('to','y','o') counted as acts; under-detected era-1 (1861 55%,1862 50%) | WARN
+[2026-06-14 01:40 PT] STEP3 | Diagnosed via portable _diag_early5/6/7/8.py: precision fix = TRIAD (real numeral + em-dash + An Act); era-1 JOINED vs era-2 SPLIT layouts; "entitled" in title is NOT a body-ref | OK
+[2026-06-14 02:10 PT] STEP4 | Rewrote detect_starts: union of production header_starts_act (split form, no-regression) + joined em-dash triad (loose glyph + real numeral, quoted-title rejected); honest production-KEPT baseline | OK
+[2026-06-14 02:30 PT] RESULT | AFTER>=BEFORE all sessions. Gains: 1861 48->67, 1862 27->57, 1863-64 51->71, 1875-76 49->66, 1877-78 49->68; split-form 1867-73 unchanged (already at ceiling) | OK
+[2026-06-14 02:30 PT] PRECISION | Spot-check 75 joined-form recoveries (1861/1862/1865-66): 75/75 real act starts, 0 FP -> ~99%+ | OK
+[2026-06-14 02:40 PT] FINDING | 1865-66 oracle=280 is WRONG (volume has ~640 acts, numerals to DCXXVII); 1873-74+ have CODE-AMENDMENT STUB chapters (body in companion -code Amendments vol); ~270 of 1873-74's acts have NO recoverable header line (genuine OCR loss) | WARN
+[2026-06-14 02:45 PT] OUTPUT | Wrote parsed_acts_early.json for 10 sessions (NEW files, parsed_acts_fixed/recovered.json untouched, no DB); findings -> docs/30_SYSTEM_DESIGN/CHAPTER_COMPLETENESS_FINDINGS.md | OK
+[2026-06-14 02:45 PT] DONE | Left uncommitted for review + Hans audit per constraints | OK
