@@ -19,10 +19,14 @@ LAYOUT REALITY of 1861-1879 statutes (verified from real OCR -- see the diag
      a chapter glyph + a roman/arabic numeral + an EM-DASH + the "An Act" title,
      all on a single line. The glyph OCRs every which way (Cuap/Cuarrer/Crap/
      Coav/Caar/Cnav/Onar/Car/Cuoar/...), so we do NOT trust the glyph spelling.
-     The PRECISION GUARANTEE is the TRIAD: a leading C-word + a REAL numeral
-     (roman/arabic, not a stray English word) + an em-dash + "An Act". A prose
-     line ("County to levy ...", "Court of the State ...") never has that triad,
-     so the loose glyph is safe.
+     The PRECISION CUE is the TRIAD: a leading C-word + a REAL numeral
+     (roman/arabic, not a stray English word) + an em-dash + "An Act". The triad
+     plus the downstream SANITY gate (enacting-clause / [Approved] date required,
+     see process_session) make body-line false positives EMPIRICALLY UNOBSERVED
+     (75/75 joined-form spot-check, 0 false positives -- see
+     CHAPTER_COMPLETENESS_FINDINGS.md), not a structural impossibility: a prose
+     line that happened to read C-word + numeral + em-dash + "An Act" AND carried
+     an enacting clause would slip through. None has been seen in the early era.
 
   ERA-2  SPLIT form (1873-74, 1880):
      "CHAPTER IX."            (glyph + numeral alone on its own line)
@@ -237,9 +241,17 @@ def detect_starts(lines):
     starts = []
     last = -10
     for i in sorted(merged):
-        if i - last < MIN_GAP:
-            continue
         tok, form = merged[i]
+        # PRECISION-FIRST DEDUP (AFTER >= BEFORE invariant):
+        # A baseline (B) start is a production-found act and must ALWAYS pass
+        # through -- never let the MIN_GAP filter drop one (that was the
+        # regression Hans MAJOR-1 found: two B-starts <MIN_GAP apart silently
+        # lost the second). Only the NEW joined-form (A) starts may be
+        # suppressed by MIN_GAP. (A-starts that sit inside a B-start's dedup
+        # window were already removed when merging above; this clause only
+        # collapses two A-starts that crowd each other or an A crowding a B.)
+        if form == "A" and i - last < MIN_GAP:
+            continue
         starts.append((i, tok, form))
         last = i
     return starts
@@ -350,6 +362,10 @@ def baseline_count(label):
 _ORACLE = {
     '1850': 146, '1851': 139, '1852': 202, '1853': 180, '1854': 71, '1855': 231,
     '1856': 152, '1857': 277, '1858': 358, '1859': 330, '1860': 455, '1861': 538,
+    # NOTE: '1863' standalone is NOT a separate oracle session -- ca_chapter_counts.tsv
+    # has only "1863-64 Regular Session" (476). The bare '1863': 476 entry is a
+    # convenience ALIAS (476 copied from 1863-64), not an independently-derived count;
+    # do not treat it as a distinct session total.
     '1862': 455, '1863': 476, '1863-64': 476, '1865-66': 280, '1867-68': 545,
     '1869-70': 583, '1871-72': 637, '1873-74': 679, '1875-76': 613, '1877-78': 673,
 }

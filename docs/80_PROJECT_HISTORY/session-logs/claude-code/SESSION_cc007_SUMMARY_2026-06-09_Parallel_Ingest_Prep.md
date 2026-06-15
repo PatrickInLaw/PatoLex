@@ -1224,3 +1224,31 @@ re-measured vs oracle.
 Pre-1880 (1861-77) ~56% UNCHANGED -> needs separate header-free detector (next follow-on). Recovery data in
 scratch (parsed_acts_recovered.json + chapters_recovered.tsv), not committed (data not code). recover_all.py
 committed C79. Still NOT ingest-ready: early-era detector + flagged-residue review + DB backup remain.
+
+---
+
+## Continuation 80-83 — 2026-06-14 (early-era header-FORM detector built, audited, fixed)
+
+**PROCESS (Patrick x2):** (1) commit baseline BEFORE editing; (2) I ORCHESTRATE + REVIEW, do not write code. Both
+now habit. I'd nearly spawned a from-scratch builder without checking what exists — Patrick stopped me. Inventory:
+ONE parser (ingest_from_ocr.parse_volume, header-based) + recover_acts (page-top) + ingest_clean (ingest-only).
+NO header-free/mid-page detector existed -> early-era detector is net-new and needed. (The killed builder had
+already drafted recover_early.py; committed it as WIP baseline C81 before finishing.)
+
+**Root cause of early-era ~50%:** pre-1880 volumes pack MULTIPLE acts per page; header/page-top-only detection
+misses mid-page act starts. **recover_early.py** (header-FORM detector, C82): triad = glyph + REAL numeral +
+em-dash + "An Act", UNION with production header_starts_act for the split form (no regression). Validated vs
+oracle: 1861 48->67%, 1862 27->57%, 1863-64 51->71%, 1875-76 49->66%, 1877-78 49->68%. Precision 75/75.
+**HONEST FLOOR:** remaining early gap is mostly GENUINE OCR LOSS (headers physically merged/missing -- 1873-74
+has ~337 header lines for ~583 acts) -> re-OCR territory, not parser-fixable. 1850-1860 has NO OCR on the 5090.
+
+**Hans on recover_early:** NO-GO on MAJOR-1 (dedup dropped a baseline act when 2 B-starts <MIN_GAP apart =
+regression). FIXED (C83): baseline starts always pass; only joined-form A-starts gap-filtered. +regression test
+6/6 PASS, --score confirms AFTER>=BEFORE every session, numbers unchanged. MAJOR-2 doc wording (empirical not
+structural), MAJOR-3 diag fix, MINOR-4 oracle alias noted. No CRITICAL, no fabrication, no DB/overwrite.
+
+**DATA FINDINGS:** oracle 1865-66=280 is WRONG (~640 actual) -> re-derive before scoring that segment; 1873-74+
+have code-stub chapters (body in companion Amendments volume). Output parsed_acts_early.json (new files only).
+
+**CORPUS STATE:** chaptered 1880-1999 ~91%; early 1861-79 ~57-71% where headers survive (rest = OCR loss);
+1850-60 OCR not present. NOT ingest-ready (by design): flagged-residue review + oracle fixes + DB backup remain.

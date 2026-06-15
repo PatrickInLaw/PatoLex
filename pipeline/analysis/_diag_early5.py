@@ -30,7 +30,7 @@ def main():
         starts = RE.detect_starts(lines)
         print(f"{label}: {len(starts)} raw starts")
         prev = 0
-        for k, (li, tok) in enumerate(starts):
+        for k, (li, tok, _form) in enumerate(starts):   # detect_starts -> (i, tok, form)
             s = lines[li][1].strip()
             num = RE.parse_chapter_numeral(tok)
             flag = ""
@@ -69,10 +69,13 @@ def main():
                 lines.append(ln)
         n_enact = sum(1 for t in lines if RE.ENACT.search(t))
         n_appr = sum(1 for t in lines if RE.APPROVED.search(t) or RE.APPROVED_DATE.search(t))
-        n_chap = sum(1 for t in lines if RE.CHAP_MARKER.match(t.strip()))
+        # RE.CHAP_MARKER was removed when recover_early moved to the FORMA triad +
+        # production header_starts_act union; count joined-form (FORMA) header lines
+        # instead so --enact still runs.
+        n_chap = sum(1 for t in lines if RE.FORMA.match(t.strip()))
         n_anact = sum(1 for t in lines if RE.AN_ACT_STRICT.search(t) or RE.AN_ACT_FUZZY.search(t))
         print(f"{label}: enact_lines={n_enact} approved_lines={n_appr} "
-              f"chap_markers={n_chap} an_act_lines={n_anact} total_lines={len(lines)}")
+              f"forma_header_lines={n_chap} an_act_lines={n_anact} total_lines={len(lines)}")
 
 if __name__ == "__main__":
     main()

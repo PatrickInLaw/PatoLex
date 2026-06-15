@@ -94,7 +94,11 @@ Validated against the same oracle (`ca_chapter_counts.tsv`). BEFORE = what produ
    and with the volume itself. recover_early's 442 are spot-check-verified REAL acts, not
    over-detection. The `ca_chapter_counts.tsv` 1865-66 total needs re-derivation.
 5. **PRECISION (spot-check, 75 joined-form recoveries across 1861/1862/1865-66): 75/75 real
-   act starts, 0 false positives → ≈99%+.** The numerals carry display-only OCR noise
+   act starts, 0 false positives → ≈99%+.** This is an EMPIRICAL result, not a structural
+   guarantee: the triad + the SANITY enacting-clause/[Approved] gate make body-line false
+   positives **unobserved** (75/75), not impossible — a prose line carrying both the
+   C-word+numeral+em-dash+"An Act" pattern AND an enacting clause would slip through; none
+   has been seen in the early era. The numerals carry display-only OCR noise
    (L↔D, dropped strokes), as designed — numbering is positional (`in_act_order`), the
    numeral is best-effort display only.
 6. **Recoverable vs genuine OCR loss (honest floor).** For the SPLIT-form 1873-74, a census
