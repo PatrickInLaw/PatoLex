@@ -1252,3 +1252,30 @@ have code-stub chapters (body in companion Amendments volume). Output parsed_act
 
 **CORPUS STATE:** chaptered 1880-1999 ~91%; early 1861-79 ~57-71% where headers survive (rest = OCR loss);
 1850-60 OCR not present. NOT ingest-ready (by design): flagged-residue review + oracle fixes + DB backup remain.
+
+---
+
+## Continuation 85 — 2026-06-15 (storage consolidation + offsite backup; new durable doc STORAGE_AND_BACKUP.md)
+
+**Correction (mine):** the "1850-60 OCR not present" above was WRONG -- I'd only checked the 5090 (which starts 1861).
+The 1850-1860 OCR was on the 5080 all along (production-1850..1860, ocr_consensus present). Patrick rightly called
+the recurring data-location confusion -> drove the consolidation.
+
+**Built single-source-of-truth + tiered offsite backup (doc: docs/60_OPERATIONS/STORAGE_AND_BACKUP.md):**
+5090 = HOT/canonical (active corpus, local SSD); 3060 F: SSD `plwarm` = WARM offsite backup; 3060 D: HDD `plcold`
+= COLD archive (page-renders). Topology: 5080 at HOME, 5090+3060 in OFFICE on one gigabit switch (192.168.1.x).
+Measured: WAN ~7 MB/s (3060, DERP-relayed); LAN 58.5 MB/s over the 5090's Wi-Fi (its wired NIC is UNPLUGGED ->
+wire it for ~110 MB/s gigabit).
+
+**Credential fix:** the 3060 `patolex` SMB password was generated-at-setup + never recorded (Patrick: SSH-key-only
+automation acct, he uses AzureAD; AutoAdminLogon=0 -> reboot-safe). Reset it (authorized) + recorded as
+`PATOLEX_3060_PASSWORD` in PatoLex-secrets.env. cmdkey can't persist from an SSH logon -> backup script reads pw
+from STDIN (transient), never a plaintext file (classifier-blocked that, correctly).
+
+**Executed:** gathered early decade 1850-1860 5080->5090 (canonical now 1850-1999); ran pl_backup.ps1 (robocopy
+/E/Z COPY-ONLY) 5090->3060. RESULT: WARM 529.6 GB (0 failures, SHA256 hash-verified sample), COLD 84.88 GiB renders
+(exact size match). Early decade 1852-1860 missed the first warm pass (gather raced robocopy) -> incremental re-run
+folded them in + re-verified. NOTHING DELETED (5090 = full canonical). Done hours before Patrick's morning deadline.
+
+**Open:** wire the 5090 (gigabit); fold pubinfo_* (leginfo XML, 5080-only) into canonical+backup if wanted; optional
+5090 render-cleanup to reclaim space (deletion -> explicit go only); durable SYSTEM-task backup needs DPAPI cred.
