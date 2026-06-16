@@ -2,6 +2,14 @@
 
 **Question:** are any acts/chapters missing in the parsed corpus, and is it ready for ingestion?
 
+> ## ⚑ ROOT-CAUSE UPDATE (2026-06-16) — the early-era "OCR loss" is a CONSENSUS BUG, NOT lost data (visual diagnosis)
+> A vision-model pass over the actual page scans **overturns the earlier "genuine OCR loss / re-OCR territory" conclusion** (which was inferred from text-census heuristics WITHOUT looking at the images — it was wrong).
+> **Finding:** the 1861–1865-66 volumes print "CHAP." headers in an **italic/display typeface** that **Tesseract** misreads (`Chap.`→`Cuap./Crap./Cnap.`…), while **Surya AND DocTR read them correctly**. The token-majority **consensus then picked Tesseract's garbage over the two correct engines**, so **zero** headers survived into the consensus text (e.g. 1862: 0 in consensus, but Surya read 236, DocTR 174). The scans are CLEAN; the headers are LEGIBLE; **the correct headers already exist in the `surya_text` field of the existing OCR JSON.**
+> **Fix is CHEAP — no re-scan, no re-OCR:** re-run consensus for the ~6 affected early volumes with Tesseract down-weighted/excluded on header lines (Surya+DocTR agree), or extract the `CHAP…` headers directly from `surya_text` and patch the consensus, then re-parse. This should also kill the 1865-66 OVER-extraction (the phantom 442-vs-280 was Tesseract's garbled numbers; Surya's are clean).
+> **Affected:** 1861, 1862, 1863, 1863-64, 1865-66 (italic era); **check 1850–1860 (likely same typeface).** 1867-68+ switched to upright Roman type → all engines correct, no problem. The earlier "1873-74 has ~270 genuinely-lost headers" claim (finding #6) is also suspect — the visual pass found 1873-74 headers read correctly by all engines.
+> **Implication:** the early-era gap is largely **cheaply recoverable from data we already have**, not a re-OCR/re-scan campaign. Lesson: validate OCR findings against the IMAGES, and consensus voting can let one garbling engine override correct ones for a given typeface.
+
+
 **Tools (committed):** `pipeline/analysis/extract_chapters.py` (emits a small TSV of chapter_int/iso_date/source_page per act from the 197-volume aggregated parse on the 5090) → `pipeline/analysis/chapter_completeness.py` (per-session gap triage). Input: `chapters.tsv` (76,691 acts).
 
 ## Method (fixes the old report's false positives)

@@ -1300,3 +1300,21 @@ be reviewed at ingest, not dropped.
 
 **Still running:** Agent B (visual OCR root-cause diagnosis: are early-era chapter headers legible-in-scan-but-OCR-lost
 [-> re-OCR fixes] or scan-degraded [-> re-scan]). Report pending.
+
+---
+
+## Continuation 87 — 2026-06-16 (BIG: early-era "OCR loss" is a CONSENSUS BUG, cheaply fixable -- corrects my earlier call)
+
+Agent B (vision pass over the actual scans) **overturns my earlier "early era = genuine OCR loss / re-OCR territory"
+call** (which came from text-census heuristics that never looked at the images). ROOT CAUSE: 1861/1862/1863/1863-64/
+1865-66 print "CHAP." headers in an ITALIC display typeface that **Tesseract misreads** (Chap->Cuap/Crap/Cnap), while
+**Surya AND DocTR read them correctly**; the token-majority CONSENSUS then picked Tesseract's garble over the 2 correct
+engines -> ~0 headers in the consensus text (1862: 0 consensus vs Surya 236). **Scans clean, headers legible, correct
+headers ALREADY in the surya_text field.** 1867-68+ = upright Roman, fine.
+
+**FIX = CHEAP, no re-scan/no re-OCR:** re-run consensus for the ~5-6 early italic volumes with Tesseract down-weighted
+on header lines, OR extract CHAP headers from surya_text + patch consensus, then re-parse. Also kills the 1865-66
+over-extraction (phantom 442-vs-280 = Tesseract garbled numerals; Surya's are clean). CHECK 1850-1860 (likely same).
+
+Recorded: CHAPTER_COMPLETENESS_FINDINGS.md (ROOT-CAUSE UPDATE banner) + memory [[early-era-headers-consensus-bug]].
+LESSON: validate OCR findings against IMAGES; consensus can let one garbling engine override correct ones per typeface.
