@@ -1318,3 +1318,37 @@ over-extraction (phantom 442-vs-280 = Tesseract garbled numerals; Surya's are cl
 
 Recorded: CHAPTER_COMPLETENESS_FINDINGS.md (ROOT-CAUSE UPDATE banner) + memory [[early-era-headers-consensus-bug]].
 LESSON: validate OCR findings against IMAGES; consensus can let one garbling engine override correct ones per typeface.
+
+---
+
+## Continuation 88 — 2026-06-16 (acquisition gap DEBUNKED — source is complete; early-consensus bounded; oracle issues)
+
+**"MISSING VOLUMES / ACQUISITION GAP" = FALSE (4th false missing-data alarm this session).** A subagent claimed
+1915-1949 are missing Vol2/Vol3 scans (~4,880 acts, "never acquired"). VERIFIED WRONG: (a) Chief Clerk source says
+1915 was published as ONE volume (Chapters 1-771); (b) our 1915 Vol1 OCR has 1,922 pages with parsed chapters to
+768; (c) 1931/1933 OCR maxchapter = oracle EXACTLY (1220/1059), 1941/1949 reach/exceed oracle. **The full chapter
+range is present in OCR we possess — these are single-volume sessions, fully on disk. The gap is EXTRACTION, not
+acquisition.** Pattern: every "missing data" claim (1850-60, 1865-66, "OCR loss", "missing volumes") dissolved into
+recoverable-from-data-we-have. NEW RULE: verify any "missing" claim against the SOURCE extent + the OCR content
+before reporting. **Bottom line: corpus SOURCE is COMPLETE — no re-acquire/re-scan needed anywhere.**
+
+**Early-era consensus fix (pass #2, recover_early_consensus.py) — REAL but BOUNDED.** Census: the clean glyph is
+gone from consensus (Tesseract garbled), but the loose triad SURVIVES, so recover_early already caught most from
+consensus; preferring Surya adds +8-22 pts on worst italic volumes (1862 57->75%, 1863 63->85%), ~180-220 acts.
+NOT a full fix; a genuine header-OCR-loss residual remains. ALSO surfaced ORACLE-reliability issues: 1852/53/54
+over-extract their oracle (totals too low); 1865-66 ambiguous (clerk says Statutes 1-280 but our OCR shows a clean
+run past 280 — needs the volume ToC; don't trust 280 or 442). -> early-era oracle entries need an audit.
+
+**Cheap cleanups done** (C86): flagged residue = 4,166/86,584 (~4.8%, review-at-ingest); 1880-1999 gap = ~46%
+misnumbered (renumber) + ~54% un-extracted-but-present (needs a DETECTION pass, not just renumber).
+
+**Pass #3 (renumber_repair.py) DONE — small safe top-up.** Reconciliation: the "~4,093 misnumbered" was the
+PRE-recover_acts raw count; recover_acts already demotes garbled numbers to flagged, so 0 CONFIDENT acts are
+out-of-range/dup. Real pool = 3,469 flagged; only **+257 safely position-recoverable** (89.49->89.78%, +0.3pts),
+~3,200 stay flagged (gap doesn't close = the un-extracted-acts problem, NOT renumbering). Agent self-ran Hans
+(0 critical, 2 major + 4 minor fixed). So renumbering is NOT the chaptered lever -> a DETECTION pass is.
+
+**Committed this UCP:** session log + findings doc + recover_early_consensus.py (pass #2) + renumber_repair.py
+(pass #3, self-Hans'd) + diagnostics + run-logs. PENDING: my own Hans-review of recover_early_consensus.py (pass #2
+didn't self-audit); audit early oracle (1852-54, 1865-66 vs actual ToCs); build the chaptered DETECTION pass
+(recover the ~54% un-extracted-but-present acts); then re-measure the whole corpus.
