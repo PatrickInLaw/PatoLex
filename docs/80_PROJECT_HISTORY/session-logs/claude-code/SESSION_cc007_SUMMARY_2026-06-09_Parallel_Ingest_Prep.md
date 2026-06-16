@@ -1279,3 +1279,24 @@ folded them in + re-verified. NOTHING DELETED (5090 = full canonical). Done hour
 
 **Open:** wire the 5090 (gigabit); fold pubinfo_* (leginfo XML, 5080-only) into canonical+backup if wanted; optional
 5090 render-cleanup to reclaim space (deletion -> explicit go only); durable SYSTEM-task backup needs DPAPI cred.
+
+---
+
+## Continuation 86 — 2026-06-16 (cheap cleanups + corrections; see CHAPTER_COMPLETENESS_FINDINGS.md)
+
+**1865-66 oracle CORRECTION (own it):** I'd reported the oracle had errors incl 1865-66. WRONG. Chief Clerk archive
+confirms 1865-66 Statutes = Chapters 1-280; the "~640" was OCR-garble inflation from the early-era worker, which I
+propagated. Oracle 280 is RIGHT (no change). The real issue it exposed: recover_early OVER-extracts garbled volumes
+(1865-66: 442 vs 280) -> early-era recovery PRECISION needs re-examination (contradicts its 75/75 spot-check).
+
+**9% (1880-1999) decomposed (Agent):** ~10.1% gap = ~54% GENUINELY ABSENT (4,777; dominated by UN-PARSED vol2/vol3
+of multi-volume sessions e.g. 1915/17/19/21 have only vol1) + ~46% MISNUMBERED-but-present (4,093; cheap renumber).
+-> NEW completeness gap: MISSING VOLUMES (not just header-loss); needs a check of which multi-vol sessions lack later
+volumes + whether scans were acquired. Also found a measurement BUG in chapter_vs_oracle.py: biennial spanning labels
+(1900-01/1907-09/1910-11) mis-bucketed -> 1901/1909/1911 falsely 100% absent; biennium-bucketing recovers 1,442 acts.
+
+**Flagged residue:** 4,166 of 86,584 (~4.8%) in flagged_acts (uncertain renumber); early-era heavy (1870s 25%); must
+be reviewed at ingest, not dropped.
+
+**Still running:** Agent B (visual OCR root-cause diagnosis: are early-era chapter headers legible-in-scan-but-OCR-lost
+[-> re-OCR fixes] or scan-degraded [-> re-scan]). Report pending.

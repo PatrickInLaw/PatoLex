@@ -88,11 +88,17 @@ Validated against the same oracle (`ca_chapter_counts.tsv`). BEFORE = what produ
    rejection (carried over from recover_acts) was deleting real acts; removing it for the
    joined triad added ~15-25 pts of recall on 1862/1863-64. Only the QUOTED-title cue
    (opening quote right before "An Act") is rejected.
-4. **\*The 1865-66 oracle (280) is an UNDERCOUNT — do not trust that row.** The physical
-   `production-1865-66` volume runs to chapter numerals ~DCXXVII/627 with ~640 acts present
-   (enact-clause count). 280 is inconsistent with its neighbors (1863-64=476, 1867-68=545)
-   and with the volume itself. recover_early's 442 are spot-check-verified REAL acts, not
-   over-detection. The `ca_chapter_counts.tsv` 1865-66 total needs re-derivation.
+4. **\*CORRECTED 2026-06-16: the 1865-66 oracle (280) is RIGHT, not an undercount.** The CA
+   Chief Clerk archive page explicitly states the 1865-66 Statutes = **Chapters 1–280** (with
+   SEPARATE resolution series: Assembly 1–35, Senate 1–41). The earlier "~640 acts / numerals
+   to DCXXVII" claim was **OCR-garble inflation** (the same garbled-high-number effect that
+   produced impossible values like 90623 in the chaptered era) — NOT real chapters. **This means
+   recover_early OVER-extracted 1865-66 (442 distinct chapter_int vs a true 280): ~160 phantom/
+   false-split acts (or resolution/amendment contamination).** That contradicts finding #5's
+   "75/75, 0 false positives" — the 75-sample spot-check did not catch this systematic
+   over-extraction. **PRECISION of recover_early needs re-examination before its early-era output
+   is trusted** (a confidently-wrong/duplicated act is worse than a flagged gap). Do NOT change
+   ca_chapter_counts.tsv — 280 is correct.
 5. **PRECISION (spot-check, 75 joined-form recoveries across 1861/1862/1865-66): 75/75 real
    act starts, 0 false positives → ≈99%+.** This is an EMPIRICAL result, not a structural
    guarantee: the triad + the SANITY enacting-clause/[Approved] gate make body-line false
@@ -119,6 +125,30 @@ Validated against the same oracle (`ca_chapter_counts.tsv`). BEFORE = what produ
 Output is NOT committed (data, lives in PatoLex-scratch as `parsed_acts_early.json`); the
 detector + diag scripts are the committed deliverable, left uncommitted in the working tree
 for review + Hans audit.
+
+## Cheap-cleanup pass (2026-06-16) — what the gaps actually are
+
+**1880–1999 gap decomposed (≈10.1% / 8,870 "missing" chapter-slots):**
+- **~54% (4,777) GENUINELY ABSENT** — and the dominant cause is **entire UN-PARSED vol2/vol3 of multi-volume
+  sessions** (e.g. 1915/1917/1919/1921 have only `-vol1-chapters` present; 1915 N=771, only ~350 acts = vol1).
+  This is a **missing-VOLUMES problem, not OCR header-loss** → must determine which multi-vol sessions are missing
+  later volumes and whether those scans were ever acquired/OCR'd. **NEW completeness gap, needs follow-up.**
+- **~46% (4,093) MISNUMBERED-but-present** — acts extracted but with garbled/out-of-range/duplicate chapter
+  numbers (2,835 out-of-range + 574 in-range dupes confirmed). Recoverable by a better renumber pass (cheap).
+- Verdict: NOT mostly a numbering problem — real extraction loss (missing volumes) is the larger share.
+
+**Measurement bug found in `chapter_vs_oracle.py`:** its session key = leading 4 digits of the label, which
+mis-buckets biennial spanning labels (`1900-01`, `1907-09`, `1910-11`) → oracle sessions 1901/1909/1911 (1,757 ch)
+falsely showed as 100% absent. Biennium-bucketing (Agent's `gap_biennium.py`) recovers 1,442 acts. **Fix
+chapter_vs_oracle.py to bucket by biennium before re-quoting any per-session early/biennial numbers.**
+
+**Flagged-act residue (must be reviewed at ingest, never silently dropped):** 4,166 of 86,584 acts (~4.8%) are in
+`flagged_acts` (uncertain renumber / witness-disagree / ambiguous). Era-skewed: 1870s ~25%, 1860s ~11%, 1910s ~13–16%;
+modern ~1.5–2%. These are mostly real acts with a low-confidence chapter number, recoverable on review.
+
+**Oracle 1865-66 = 280 CONFIRMED correct** (Chief Clerk archive) — see finding #4 above; earlier "undercount" claim
+withdrawn. The actionable item it surfaced: **recover_early over-extracts on garbled volumes (1865-66: 442 vs 280)
+→ early-era recovery precision needs re-examination.**
 
 ## Ingestion readiness: NOT READY (OCR era)
 Ingesting the mid-century parse as-is would under-populate it by ~15–20% and carry chapter-number noise. Before full ingestion:
