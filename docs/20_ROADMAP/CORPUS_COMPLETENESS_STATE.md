@@ -32,8 +32,8 @@ The raw ~88.7%-complete figure conflated FOUR different things. Separating them 
 | Pass | File | Result | State |
 |---|---|---|---|
 | Chaptered renumber | `renumber_repair.py` | +257 safe position renumbers (+0.3 pts); self-Hans'd | done (small top-up) |
-| Early consensus (Surya headers) | `recover_early_consensus.py` | +~180–220 acts on italic volumes (bounded) | Hans NO-GO → **fixed (backfill positioning + positional substitution), pending re-Hans** |
-| Chaptered detection | `recover_chaptered.py` | 1933 70→82%; redirect-stubs flagged; noise excluded | Hans cond. NO-GO → **fixed (confident+flagged dedup floor, 0 dups verified), pending re-Hans** |
+| Early consensus (Surya headers) | `recover_early_consensus.py` | +~180–220 acts on italic volumes (bounded) | **GO (re-Hans cleared 2026-06-16; precision-first)** |
+| Chaptered detection | `recover_chaptered.py` | 1933 70→82%; redirect-stubs flagged; noise excluded | **GO (re-Hans cleared 2026-06-16; 0 dups across combined set)** |
 | Garbled-header / numeral repair | — | the residual lever | **not yet built** |
 | Early-era over-extraction tightening | — | exclude resolutions/special-acts/bleed | **not yet built** |
 
