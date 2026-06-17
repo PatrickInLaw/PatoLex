@@ -166,6 +166,11 @@ def assigned(a):
 
 def is_real_act(a):
     """A real act body (not a TOC/index fragment). Enactment clause is the strong signal."""
+    # BODY-SUBSTANCE GUARD: a TOC/index line can spuriously carry has_enact (or the
+    # an-act+approved pair), so require a non-trivial body. 200 chars is far below any
+    # real act body yet well above a single TOC/index fragment line -> precision-safe.
+    if len((a.get("text") or "").strip()) < 200:
+        return False
     return bool(a.get("has_enact")) or (bool(a.get("has_an_act")) and bool(a.get("has_approved")))
 
 
@@ -267,7 +272,26 @@ def position_fill(stream, N, certify_log):
     and >=1, pairing the i-th page-ordered candidate to the i-th open slot. WITNESS GUARD:
     if any candidate prints a clean in-range own numeral != its slot, abort the WHOLE gap.
     SPILLOVER GUARD: a candidate whose body holds >1 chapter header is never filled.
-    Returns count certified."""
+    Returns count certified.
+
+    RESIDUAL RISK (MAJOR-5B -- stale-N / R2 tail-fill):
+    -------------------------------------------------------------------------------
+    R2 fills open slots between confident anchors. The frame's TAIL bound is the oracle
+    N: the synthetic high anchor is (len(stream), N+1), so the gap between the LAST real
+    anchor and N+1 is framed entirely by the oracle. If the oracle N is STALE or WRONG
+    for a session, that tail gap could fill candidates into slots that do not correspond
+    to real chapters (slots N_real+1 .. N_stale would be fabricated). The same staleness
+    also affects the in-range test (1<=v<=N) elsewhere. This risk is BOUNDED by, in order:
+      (a) the WITNESS GUARD below -- any candidate that prints a clean in-range own
+          numeral contradicting its assigned slot (or witnesses that disagree among
+          themselves) aborts the WHOLE gap, so a fabricated tail run is killed the moment
+          one real numeral is read;
+      (b) the EXACT #candidates == #open_slots (and >=1) requirement -- a partial/loose
+          match never fills, so a tail with the wrong count is skipped entirely;
+      (c) the oracle itself having been AUDITED 2026-06-16 (ca_chapter_counts.tsv), so a
+          stale N is unlikely for the covered sessions.
+    No further code change for 5B -- the tail frame behavior is as described above.
+    -------------------------------------------------------------------------------"""
     if N is None:
         return 0
     # 1) anchors from confident acts, unique in-range numbers
@@ -289,8 +313,19 @@ def position_fill(stream, N, certify_log):
             continue
         mono.append((pos, num))
     anchors_sorted = mono
-    taken = {num for _, num in anchors_sorted}
+    taken = {num for _, num in anchors_sorted}      # monotonic-unique anchors -> position FRAME only
     anchor_positions = {pos for pos, _ in anchors_sorted}
+    # FIX (b): the position frame uses only monotonic-unique anchors, but an OPEN slot must
+    # never reuse a chapter number held by ANY confident act in the session -- including a
+    # confident act that is NOT a clean monotonic anchor (e.g. a number R1 just certified
+    # on a real body, while a separate TOC line carrying the same number is still flagged).
+    # Without this, that held number looks "open" in the gap and R2 would fill the duplicate.
+    all_taken = set()
+    for a in stream:
+        if a.get("confident"):
+            n = assigned(a)
+            if 1 <= n <= N:
+                all_taken.add(n)
 
     def is_cand(i):
         if i in anchor_positions:
@@ -298,7 +333,11 @@ def position_fill(stream, N, certify_log):
         a = stream[i]
         if a.get("confident"):
             return False                       # never touch a confident act
-        if not a.get("has_an_act"):
+        # FIX (a): a fill candidate must be a REAL act body (enacting/approval evidence +
+        # the 200-char body guard), NOT merely an `has_an_act` line. A TOC / index title
+        # line ("Chapter 105 .- An Act for...") carries has_an_act=True but is_real_act=False,
+        # so it must never be eligible to fill an open slot.
+        if not is_real_act(a):
             return False
         if chapter_header_count(a.get("text", "")) > 1:
             return False                       # spillover -> ambiguous
@@ -310,24 +349,25 @@ def position_fill(stream, N, certify_log):
         cand = [i for i in range(lo_pos + 1, hi_pos) if is_cand(i)]
         if not cand:
             continue
-        open_slots = [n for n in range(lo_num + 1, hi_num) if n not in taken]
+        # open slots = numbers in the gap NOT used by the frame anchors AND not held by
+        # ANY confident act in the session (FIX (b): all_taken, not just the anchor `taken`).
+        open_slots = [n for n in range(lo_num + 1, hi_num)
+                      if n not in taken and n not in all_taken]
         if len(cand) != len(open_slots) or len(open_slots) < 1:
             continue
-        # witness guard: a clean in-range own numeral must not contradict the slot
+        # witness guard: ALL clean in-range own numerals must agree with each other AND
+        # with the slot. Collect every clean in-range witness (not just the first) so a
+        # second witness contradicting the slot -- or two witnesses disagreeing among
+        # themselves -- aborts the gap (mirrors R1's all-witnesses-agree logic).
         conflict = False
         for i, slot in zip(cand, open_slots):
             a = stream[i]
-            w = None
             rn = raw_numeral(a)
             hn = header_numeral(a.get("text", ""))
             ci = a.get("chapter_int") if isinstance(a.get("chapter_int"), int) else None
-            for cw in (rn, hn, ci):
-                if cw and 1 <= cw <= N:
-                    w = cw
-                    if w != slot:
-                        conflict = True
-                    break
-            if conflict:
+            wits = [cw for cw in (rn, hn, ci) if cw and 1 <= cw <= N]
+            if wits and (len(set(wits)) > 1 or any(w != slot for w in wits)):
+                conflict = True
                 break
         if conflict:
             continue
@@ -343,6 +383,7 @@ def position_fill(stream, N, certify_log):
                              "lo_anchor": lo_num, "hi_anchor": hi_num,
                              "gap_open_slots": len(open_slots)}
             taken.add(slot)
+            all_taken.add(slot)
             certify_log.append((a, slot, "R2"))
             certified += 1
     return certified
@@ -479,22 +520,6 @@ def main():
         stream.sort(key=lambda a: (label_order.get(a["_label"], 9999),
                                    a.get("source_page", 0)))
 
-        def restore_sacred():
-            """Re-assert every originally-confident act to its original number/status.
-            rr.repair_session is allowed to DEMOTE confident dups/out-of-range; we forbid
-            that for certification, so we undo any such change after each rr pass."""
-            for a in stream:
-                if a.get("_orig_confident"):
-                    a["confident"] = True
-                    n = a["_orig_num"]
-                    a["chapter_int_final"] = n
-                    a["chapter_int"] = n
-                    a["chapter"] = str(n)
-                    if a.get("_orig_status"):
-                        a["renumber_status"] = a["_orig_status"]
-                    # an rr _repair stamp on a sacred act is spurious; drop it
-                    if a.get("_certify", {}) and a["_certify"].get("rule") == "R2_position_fill":
-                        a["_certify"] = None
         # N: take the oracle for any member label (all share session)
         N = None
         for lbl, _, _, _ in members:
@@ -566,6 +591,38 @@ def main():
                 precision_problems.append((sk, bucket, n, a.get("source_page")))
             else:
                 seen[n] = (a.get("source_page"), introduced)
+
+    # PRECISION WRITE-GATE (CRITICAL-3B): compute the PASS condition from the fully
+    # populated evidence lists BEFORE writing anything. If precision fails, we must NOT
+    # write certified outputs -- a wrong chapter number must never reach disk.
+    pp_counts = Counter(p[1] for p in precision_problems)
+    precision_pass = (pp_counts.get("introduced_dup", 0) == 0
+                      and pp_counts.get("introduced_oor", 0) == 0
+                      and len(sacred_violations) == 0)
+
+    if not precision_pass:
+        # Emit the audit report so the failure is inspectable, then abort WITHOUT writing
+        # any certified per-volume outputs.
+        print("PRECISION GATE FAILED -- no certified outputs written.", file=sys.stderr)
+        print("  introduced_dup = %d" % pp_counts.get("introduced_dup", 0), file=sys.stderr)
+        print("  introduced_oor = %d" % pp_counts.get("introduced_oor", 0), file=sys.stderr)
+        print("  sacred_violations = %d" % len(sacred_violations), file=sys.stderr)
+        for sv in sacred_violations[:10]:
+            print("    sacred_violation: %r" % (sv,), file=sys.stderr)
+        report = {"precision": {
+            "PASS": False,
+            "introduced_duplicate_confident": pp_counts.get("introduced_dup", 0),
+            "introduced_out_of_range_confident": pp_counts.get("introduced_oor", 0),
+            "sacred_violations_confident_demoted_or_renumbered": len(sacred_violations),
+            "sacred_violation_examples": sacred_violations[:10],
+            "introduced_examples": [p for p in precision_problems
+                                    if p[1].startswith("introduced")][:10],
+        }, "totals": {"volumes_written": 0}, "GATE": "FAILED"}
+        OUT_AUDIT.mkdir(exist_ok=True)
+        (OUT_AUDIT / ("report_dry.json" if dry else "report.json")).write_text(
+            json.dumps(report, indent=2), encoding="utf-8")
+        print(json.dumps(report, indent=2))
+        sys.exit(2)
 
     # WRITE certified outputs per volume (split stream back by _label)
     written = []
