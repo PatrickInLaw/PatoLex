@@ -22,14 +22,58 @@ def parse_type(s):
     if "extra" in l: return "extra1"
     return "regular"
 
-def parse_session_year(label):
-    # NNchapters suffix -> real statute year (1900s); else leading 4-digit year
+def parse_session_year(label, oracle_reg_years=None):
+    # NNchapters suffix -> real statute year (1900s); else leading 4-digit year.
     m = re.search(r"(\d{2})chapters", label.lower())
     if m: return 1900 + int(m.group(1))
+
+    # Spanning biennial labels "YYYY-YY" (e.g. 1900-01, 1906-07, 1907-09, 1910-11):
+    # the PHYSICAL volume holds the SECOND (odd) year's Regular Session statutes, so
+    # the leading 4 digits (the even/first year) mis-file the chapters. Remap to the
+    # odd-suffix year (century-prefix + "-YY") whenever THAT year's Regular Session is a
+    # key in the oracle. For 20th-c. biennial volumes the odd-suffix year's regular session
+    # IS an oracle key (1901/1907/1909/1911), so they remap. Pre-1900 "YYYY-YY" labels are
+    # genuine single-session names already keyed by their (odd) START year, and their
+    # even/odd SUFFIX year (1864, 1866, ...) is NOT a regular oracle session, so the test
+    # is false and they are left untouched -- start-year behavior preserved.
+    # Note 1907-09: BOTH 1907 and 1909 are oracle regular sessions; the suffix-year rule
+    # correctly resolves the volume to 1909 (max-chapter ~729 = oracle 1909 N=729, not the
+    # 1907 N=539). Verified by max-chapter match: 1900-01 max~274->1901(N=275),
+    # 1906-07 max~539->1907, 1907-09 max~729->1909, 1910-11 bulk->1911(N=753).
+    # See gap_biennium prototype (5090).
+    sp = re.match(r"^(\d{4})-(\d{2})(?:$|-)", label)
+    if sp and oracle_reg_years is not None:
+        start = int(sp.group(1))
+        odd = int(sp.group(1)[:2] + sp.group(2))
+        if odd != start and odd in oracle_reg_years:
+            return odd
+
     m = re.match(r"(\d{4})", label)
     return int(m.group(1)) if m else 0
 
+
+def _selftest():
+    # The 4 known 20th-century spanning labels must bucket to the ODD (second) year;
+    # pre-1900 "YYYY-YY" labels and plain labels must keep their leading-year behavior.
+    oracle_reg = {1901, 1907, 1909, 1911,  # 20th-c. odd regular sessions
+                  1863, 1865, 1867, 1885}  # pre-1900 start-year regular sessions
+    cases = {
+        "1900-01": 1901, "1906-07": 1907, "1907-09": 1909, "1910-11": 1911,
+        "1863-64": 1863, "1865-66": 1865, "1867-68": 1867, "1885-86": 1885,
+        "1913-statutes": 1913, "1927-vol1-26chapters": 1926, "1907": 1907,
+    }
+    bad = []
+    for lab, want in cases.items():
+        got = parse_session_year(lab, oracle_reg)
+        if got != want:
+            bad.append(f"{lab}: got {got}, want {want}")
+    if bad:
+        raise AssertionError("parse_session_year self-test FAILED: " + "; ".join(bad))
+    print("parse_session_year self-test OK (4 spanning labels bucket to odd year)")
+
 def main():
+    if len(sys.argv) >= 2 and sys.argv[1] == "--selftest":
+        _selftest(); return
     chap_tsv, oracle_tsv = sys.argv[1], sys.argv[2]
 
     # oracle: (year,type) -> total
@@ -42,6 +86,10 @@ def main():
             y = int(re.match(r"(\d{4})", p[0]).group(1))
             oracle[(y, p[2].strip())] = int(p[3])
 
+    # set of years that have a Regular Session in the oracle -- used to remap the spanning
+    # biennial labels (YYYY-YY) onto the odd (second) year they actually cover.
+    oracle_reg_years = {y for (y, t) in oracle if t == "regular"}
+
     # our parse: (year,type) -> set of chapter ints
     got = defaultdict(set)
     with open(chap_tsv, encoding="utf-8") as f:
@@ -49,7 +97,7 @@ def main():
         for line in f:
             p = line.rstrip("\n").split("\t")
             if len(p) < 4 or not p[3].isdigit(): continue
-            key = (parse_session_year(p[0]), parse_type(p[0]))
+            key = (parse_session_year(p[0], oracle_reg_years), parse_type(p[0]))
             got[key].add(int(p[3]))
 
     rows = []

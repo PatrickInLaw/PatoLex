@@ -1,0 +1,6 @@
+[2026-06-16 22:40 PT] DIAG  | chapter_vs_oracle.py buckets parse sessions by leading 4 digits of vol label; spanning biennial labels 1900-01/1906-07/1907-09/1910-11 mis-filed to even/first year | OK
+[2026-06-16 22:45 PT] DIAG  | Confirmed via chapters_recovered.tsv max-chapter match: 1900-01 max274->1901(N275), 1906-07 max539->1907, 1907-09 max729->1909, 1910-11 bulk->1911(N753) | OK
+[2026-06-16 22:50 PT] FIX   | pipeline/analysis/chapter_vs_oracle.py: parse_session_year() now takes oracle_reg_years; remaps YYYY-YY span labels to odd-suffix year when that yr's regular session is an oracle key; pre-1900 span labels untouched (suffix yr not an oracle reg session). Added comment + --selftest | OK
+[2026-06-16 22:52 PT] TEST  | Local self-test PASS (4 spanning labels bucket to odd year; pre-1900 + plain labels unchanged) | OK
+[2026-06-16 23:00 PT] VALID | 5090 before/after vs chapters_recovered.tsv + repo oracle: 1901 0%->91.6%, 1907 73.5%->90.7%, 1909 0%->74.1%, 1911 0%->52.5%; phantom 1900/1906/1910 regular buckets (no oracle N) zeroed; 1813 rows re-bucketed, 1280 net in-range chapters moved to correct odd-year reg sessions; ONLY 7 keys changed, all in target biennia | OK
+[2026-06-16 23:02 PT] NOTE  | Left UNCOMMITTED for review per task. No DB writes. Temp scripts cleaned up (local + 5090 scratch). | OK
