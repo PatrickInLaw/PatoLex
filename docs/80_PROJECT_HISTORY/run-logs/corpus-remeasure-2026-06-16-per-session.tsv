@@ -1,0 +1,110 @@
+year	type	oracle_label	oracle_N	conf_have	all_have	conf_miss	over_ceiling	max_conf	files	gap_garbled	gap_noise	gap_uncertain
+1850	regular	1850 Regular Session	146	0	103	146	2	0	early_v2	145	0	1
+1851	regular	1851 Regular Session	139	0	119	139	1	0	early_v2	139	0	0
+1852	regular	1852 Regular Session	202	0	170	202	7	0	early_v2	202	0	0
+1853	regular	1853 Regular Session	180	0	172	180	6	0	early_v2	180	0	0
+1854	regular	1854 Regular Session	174	0	75	174	0	0	early_v2	125	0	49
+1855	regular	1855 Regular Session	231	0	176	231	0	0	early_v2	227	0	4
+1856	regular	1856 Regular Session	152	0	123	152	0	0	early_v2	151	0	1
+1857	regular	1857 Regular Session	277	0	218	277	0	0	early_v2	275	0	2
+1858	regular	1858 Regular Session	358	0	304	358	2	0	early_v2	358	0	0
+1859	regular	1859 Regular Session	330	0	275	330	3	0	early_v2	330	0	0
+1860	regular	1860 Regular Session	455	0	252	455	1	0	early_v2	405	0	50
+1861	regular	1861 Regular Session	538	0	369	538	6	0	early_v2	538	0	0
+1862	regular	1862 Regular Session	455	0	309	455	11	0	early_v2	455	0	0
+1863	regular	1863-64 Regular Session	476	0	418	476	41	0	early_v2	476	0	0
+1865	regular	1865-66 Regular Session	280	0	196	280	266	0	early_v2	280	0	0
+1867	regular	1867-68 Regular Session	545	445	449	100	0	544	recovered	99	0	1
+1869	regular	1869-70 Regular Session	583	278	283	305	1	583	recovered	305	0	0
+1871	regular	1871-72 Regular Session	637	449	452	188	0	637	recovered	188	0	0
+1873	regular	1873-74 Regular Session	679	365	376	314	1	920	recovered	302	0	12
+1875	regular	1875-76 Regular Session	613	294	354	319	0	612	recovered	317	0	2
+1877	regular	1877-78 Regular Session	673	324	378	349	0	673	recovered	346	0	3
+1880	regular	1880 Regular Session	126	115	119	11	0	126	recovered	10	0	1
+1881	regular	1881 Regular Session	77	72	72	5	0	77	recovered	5	0	0
+1883	regular	1883 Regular Session	23	17	17	6	65	96	recovered	6	0	0
+1885	regular	1885 Regular Session	169	144	144	25	0	169	chaptered_v2	25	0	0
+1887	regular	1887 Regular Session	51	49	49	2	120	185	recovered	2	0	0
+1889	regular	1889 Regular Session	290	237	238	53	1	290	recovered	53	0	0
+1891	regular	1891 Regular Session	280	256	256	24	0	280	recovered	24	0	0
+1893	regular	1893 Regular Session	244	226	226	18	0	242	chaptered_v2	16	0	2
+1895	regular	1895 Regular Session	223	212	212	11	0	223	recovered	11	0	0
+1897	regular	1897 Regular Session	278	270	270	8	0	277	recovered	7	0	1
+1899	regular	1899 Regular Session	253	213	213	40	0	253	recovered	40	0	0
+1901	regular	1901 Regular Session	275	252	252	23	0	274	recovered	22	0	1
+1903	regular	1903 Regular Session	385	351	351	34	0	385	recovered	34	0	0
+1905	regular	1905 Regular Session	613	531	531	82	0	613	chaptered_v2	82	0	0
+1907	regular	1907 Regular Session	539	482	489	57	0	539	recovered	55	0	2
+1909	regular	1909 Regular Session	729	527	540	202	0	729	recovered	202	0	0
+1911	regular	1911 Regular Session	753	387	395	366	3	751	recovered	361	0	5
+1913	regular	1913 Regular Session	699	506	530	193	0	698	recovered	191	0	2
+1915	regular	1915 Regular Session	771	278	278	493	0	768	chaptered_v2	490	0	3
+1917	regular	1917 Regular Session	803	658	669	145	4	802	recovered	144	0	1
+1919	regular	1919 Regular Session	669	439	442	230	5	669	recovered	230	0	0
+1921	regular	1921 Regular Session	915	670	679	245	2	915	recovered	245	0	0
+1923	regular	1923 Regular Session	479	361	376	118	3	479	recovered	118	0	0
+1925	regular	1925 Regular Session	480	443	443	37	0	479	chaptered_v2	36	0	1
+1927	regular	1927 Regular Session	898	813	842	85	2	898	recovered	85	0	0
+1929	regular	1929 Regular Session	891	710	717	181	0	890	recovered	180	0	1
+1931	regular	1931 Regular Session	1220	992	992	228	2	1220	chaptered_v2	228	0	0
+1933	regular	1933 Regular Session	1059	866	866	193	2	1059	chaptered_v2	193	0	0
+1935	regular	1935 Regular Session	853	678	697	175	2	853	recovered	175	0	0
+1937	regular	1937 Regular Session	933	784	784	149	3	933	chaptered_v2	149	0	0
+1939	regular	1939 Regular Session	1124	860	875	264	1	1124	recovered	264	0	0
+1941	regular	1941 Regular Session	1284	872	880	412	1	1279	recovered	407	0	5
+1943	regular	1943 Regular Session	1137	833	836	304	0	1135	recovered	302	0	2
+1945	regular	1945 Regular Session	1527	1276	1276	251	13	2338	chaptered_v2	250	0	1
+1947	regular	1947 Regular Session	1577	1465	1504	112	2	1577	recovered	112	0	0
+1948	regular	1948 Regular (Budget) Session	38	34	34	4	0	38	recovered	4	0	0
+1949	regular	1949 Regular Session	1603	1398	1406	205	1	1602	recovered	204	0	1
+1950	regular	1950 Regular (Budget) Session	6	6	6	0	67	74	recovered	0	0	0
+1951	regular	1951 Regular Session	1765	1416	1442	349	3	1765	recovered	349	0	0
+1952	regular	1952 Regular (Budget) Session	14	14	14	0	20	34	recovered	0	0	0
+1953	regular	1953 Regular Session	1895	1716	1754	179	1	1894	recovered	178	0	1
+1954	regular	1954 Regular (Budget) Session	10	10	10	0	48	66	recovered	0	0	0
+1955	regular	1955 Regular Session	1966	1829	1852	137	0	1965	recovered	136	0	1
+1956	regular	1956 Regular (Budget) Session	13	13	13	0	44	67	recovered	0	0	0
+1957	regular	1957 Regular Session	2424	2249	2285	175	0	2424	recovered	175	0	0
+1958	regular	1958 Regular (Budget) Session	10	10	10	0	89	104	recovered	0	0	0
+1959	regular	1959 Regular Session	2195	2086	2114	109	0	2195	recovered	109	0	0
+1960	regular	1960 Regular (Budget) Session	14	14	14	0	63	81	recovered	0	0	0
+1961	regular	1961 Regular Session	2232	1951	1982	281	0	2232	recovered	281	0	0
+1962	regular	1962 Regular (Budget) Session	12	12	12	0	49	67	recovered	0	0	0
+1963	regular	1963 Regular Session	2181	2048	2103	133	0	2181	recovered	133	0	0
+1964	regular	1964 Regular (Budget) Session	1	1	1	0	141	151	recovered	0	0	0
+1965	regular	1965 Regular Session	2070	1958	2008	112	0	2070	recovered	112	0	0
+1966	regular	1966 Regular (Budget) Session	9	7	7	2	0	7	recovered	0	0	2
+1967	regular	1967 Regular Session	1725	1639	1671	86	0	1724	recovered	85	0	1
+1968	regular	1968 Regular Session	1474	1325	1355	149	0	1473	recovered	148	0	1
+1969	regular	1969 Regular Session	1619	1485	1511	134	0	1619	recovered	134	0	0
+1970	regular	1970 Regular Session	1628	1522	1542	106	0	1628	recovered	106	0	0
+1971	regular	1971 Regular Session	1821	1501	1520	320	0	1820	recovered	319	0	1
+1972	regular	1972 Regular Session	1442	1430	1436	12	0	1442	recovered	12	0	0
+1973	regular	1973 Regular Session	1218	1179	1180	39	0	1216	recovered	37	0	2
+1974	regular	1974 Regular Session	1545	1456	1461	89	0	1545	recovered	89	0	0
+1975	regular	1975 Regular Session	1280	1253	1258	27	0	1280	recovered	27	0	0
+1976	regular	1976 Regular Session	1487	1463	1471	24	0	1487	recovered	24	0	0
+1977	regular	1977 Regular Session	1261	1205	1207	56	0	1261	recovered	56	0	0
+1978	regular	1978 Regular Session	1432	1396	1405	36	1	1482	recovered	35	0	1
+1979	regular	1979 Regular Session	1207	1115	1128	92	0	1204	recovered	89	0	3
+1980	regular	1980 Regular Session	1381	1366	1367	15	0	1381	recovered	15	0	0
+1981	regular	1981 Regular Session	1186	1128	1135	58	0	1186	recovered	58	0	0
+1982	regular	1982 Regular Session	1644	1426	1433	218	0	1644	recovered	218	0	0
+1983	regular	1983 Regular Session	1327	1223	1224	104	0	1327	recovered	104	0	0
+1984	regular	1984 Regular Session	1760	1745	1748	15	0	1760	recovered	15	0	0
+1985	regular	1985 Regular Session	1607	1520	1520	87	0	1607	recovered	87	0	0
+1986	regular	1986 Regular Session	1521	1458	1460	63	0	1521	recovered	63	0	0
+1987	regular	1987 Regular Session	1504	1239	1245	265	0	1504	recovered	263	0	2
+1988	regular	1988 Regular Session	1647	1370	1372	277	0	1647	recovered	277	0	0
+1989	regular	1989 Regular Session	1467	1371	1372	96	0	1437	recovered	66	0	30
+1990	extra1	1990 First Extra Session	37	35	35	2	0	37	recovered	2	0	0
+1990	regular	1990 Regular Session	1707	1640	1640	67	0	1707	recovered	67	0	0
+1991	regular	1991 Regular Session	1231	1212	1212	19	0	1231	recovered	19	0	0
+1992	regular	1992 Regular Session	1374	1364	1365	10	0	1374	recovered	10	0	0
+1993	regular	1993 Regular Session	1307	1289	1291	18	0	1307	recovered	18	0	0
+1994	regular	1994 Regular Session	1299	1289	1291	10	0	1299	recovered	10	0	0
+1995	regular	1995 Regular Session	982	972	973	10	0	982	recovered	10	0	0
+1996	regular	1996 Regular Session	1171	1171	1171	0	0	1171	recovered	0	0	0
+1997	regular	1997 Regular Session	951	951	951	0	0	951	recovered	0	0	0
+1998	regular	1998 Regular Session	1080	1080	1080	0	0	1080	recovered	0	0	0
+1999	regular	1999 Regular Session	1025	1025	1025	0	0	1025	recovered	0	0	0

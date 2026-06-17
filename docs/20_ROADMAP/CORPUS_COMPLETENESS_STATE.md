@@ -22,6 +22,13 @@ The raw ~88.7%-complete figure conflated FOUR different things. Separating them 
 | **Genuine OCR-garbled headers** | real acts whose `CHAPTER n` header is broken in OCR (e.g. "CHAPTER 12"→"G JAC TET 12") | numeral/header repair vs the page-complete OCR, or targeted re-OCR of the worst pages | **the one big lever not yet built** |
 | **Oracle errors** | wrong denominators (1854) | authoritative re-derivation | **DONE** |
 
+## 3a. MEASURED completeness (2026-06-16 re-measure — `corpus-remeasure-2026-06-16.md`)
+First trustworthy number after the recovery passes, vs the CORRECTED oracle, biennium-correct (OCR corpus 1850–1999):
+- **84.4% confident / 88.7% all-extracted** — ~80,600 of 95,555 chapters. Per era: 1880-99 90%, 1950-79 93%, 1980-99 95%; weakest 1860-79 (36% conf, the italic consensus bug) + 1900-19 (71%).
+- **Residual = 14,940 chapters, and 98.7% are GARBLED HEADERS, not missing content — "missing headers, not pages."** The text is present in the OCR; only the `CHAPTER n` token is lost. Split: **~4,138 already-parsed-but-flagged (need CERTIFICATION)** + **~10,603 interior numeral loss (need header/numeral repair)** + ~200 genuinely uncertain + ~0 over-extraction noise.
+- **=> literal 100% is achievable entirely from data on disk** (certify 4,138 + repair 10,603 garbled headers); no re-OCR of pages, no re-acquisition.
+- Two tool findings: (1) `chapter_vs_oracle.py` biennium-bucketing BUG mis-files 1900-01/1906-07/1907-09/1910-11 (the odd-year session) — fix placed ~2,300 chapters; (2) `early_v2` certifies 0 (all flagged) — its acts need certification, so use best-of(recovered, early_v2) on the confident count, not early_v2 alone. (3) scope: production-* = 1850–1999; 2000–2024 = separate leginfo path (84.4% is the OCR figure; 67.7% vs the full 1850–2024 oracle).
+
 ## 4. State by era
 - **Modern (1991→present):** from California's structured leginfo data; authoritative; in the Postgres DB. Effectively complete.
 - **Chaptered OCR (1880–1999):** source complete; OCR holds the full chapter range. Gap = redirect-stubs (recovered, flagged — text lives in the companion Codes volume) + misnumbering (renumber-repairable) + garbled headers (residual) + noise (resolutions/body-refs, excludable). Upright-Roman headers read fine; the misses are gate/parse failures, not OCR loss, except the garbled-header slice.
