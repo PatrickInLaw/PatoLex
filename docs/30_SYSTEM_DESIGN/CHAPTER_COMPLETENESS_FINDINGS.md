@@ -308,6 +308,74 @@ can fix. Output (`parsed_acts_repaired.json`, 183 files) lives in PatoLex-scratc
 5090, uncommitted; the tool + scratch audit scripts are left in the working tree for
 review + Hans.
 
+## Chaptered-era redirect-stub recovery (2026-06-16, `pipeline/ingest/recover_chaptered.py` v2)
+
+Implements the recommendation in `run-logs/chaptered-detection-diag.md`: the production
+parser and `recover_acts` keep an act only when an **enacting clause** ("People of the
+State of California" / "do enact as follow") is present. A large chaptered-era class lacks
+it by design — the **redirect-stub**: `CHAPTER n` / "An act to amend §X of the Y Code" /
+`[Approved <date>]` / "Note.—For text see Stats. 19xx, Ch. m". The body lives in the Codes
+volume; only a pointer is printed here. These were silently dropped (1933: ~94 in one
+volume). The v2 detector replaces the enacting-clause gate with an **approval-footer
+witness** (`[Approved …]` / "Filed with Secretary of State" / "In effect"), detects starts
+**only at a LINE-HEAD uppercase `CHAPTER <arabic>`** (never mid-sentence — this also kills
+the body-cross-reference false "misses"), widens the "An Act" lookahead past Note/margin
+lines, tolerates a trailing garbled glyph on the numeral, and **excludes resolutions**
+(Concurrent/Constitutional Resolutions — no "An Act", and their chapter numbers restart at
+1 in a separate section, so counting them would corrupt numbering).
+
+**Durable findings:**
+- **Additive / non-regressing by construction.** A line-head-arabic detector ALONE
+  *regressed* 1931 (80%→71%): 1931's gap is OCR **header garble** (e.g. "CHAPTER 12" OCR'd
+  as "G JAC TET 12,"; some headers absent entirely), which the An-Act-opener + positional
+  approach (`recover_acts`) recovers but a clean-arabic-header detector cannot. v2 therefore
+  starts from the BEFORE `parsed_acts_recovered.json` confident set as a **FLOOR** and ADDS
+  only line-head approval-witness acts whose clean numeral is **not** already present.
+  Guarantees AFTER ⊇ BEFORE.
+- **Redirect-stub note OCRs wildly** (Norz/Notze/NoTE/Nore/Notre/Nonrr/Norr); the precise,
+  low-false-positive cue is the "(For text) see Stats. 19xx Ch." pointer. v2 flags these as
+  `status="codes_redirect"` (real chapters, counted, marked for later text-join) only when
+  the note is present AND there is no enacting clause.
+- **OCR-garbled numerals are quarantined, not trusted.** An addition whose numeral exceeds
+  `1.25 × before_max + 50` is kept (it is a real act) but routed to `flagged_acts` with
+  `chapter_number_suspect=True`, so a garbled "3501" in a 1220-chapter volume can never
+  inflate the distinct-confidence count or duplicate.
+
+**MEASURED (BEFORE = recovered confident, AFTER = chaptered_v2 confident, distinct-in-[1,N], oracle N):**
+| session | N | before | after | redirect-stubs | dup | num-suspect |
+|---|--:|--:|--:|--:|--:|--:|
+| 1931 Reg | 1220 | 977 (80%) | 993 (81%) | 0 | 0 | 2 |
+| 1933 Reg | 1059 | 742 (70%) | **869 (82%)** | 82 | 1 | 2 |
+| 1915 Reg (vol1) | 771 | 263 (34%) | 282 (37%) | 0 | 0 | 1 |
+| 1925 Reg (vol1) | 480 | 432 (90%) | 444 (92%) | 0 | 1 | 1 |
+| 1945 Reg (vol1) | 1527 | 1255 (82%) | 1278 (84%) | 0 | 0 | 5 |
+| 1885-86 / 1893 / 1905 | — | — | (no change) | 0 | 0 | 0 |
+
+**Scope boundary:** the detector helps the **arabic-numeral chaptered era (~1910s–1990s)**.
+Pre-~1910 volumes (1885/1893/1905) print roman-numeral "CHAP." headers the arabic HEAD_RE
+does not match — the detector is a correct no-op there (BEFORE passes through unchanged).
+
+**Precision (PASS):** 0 duplicate chapter numbers in any AFTER confident set (verified off
+the written files); 25-act spot-check on 1933 + 18-act on 1931 — every sampled NEW addition
+is a real distinct line-head "An act …" (redirect-stubs carry an_act+approval+note+no-enact;
+new-chaptered carry an_act+approval, often a "Stats 19xx," margin note that broke the
+production header walk). `parsed_acts_recovered.json` files untouched (read-only).
+
+**Honest gap statement (1933):** AFTER closes 70%→82% (+127, of which 82 are redirect-stubs
+the prior parser discarded). Of the residual 276 missing-from-[1,1059], **~234 have NO
+recognizable "CHAPTER n" anywhere in the OCR** (numeral garbled or header lost) — out of
+scope for a precision-first text detector (needs numeral-repair / re-OCR, NOT guessing).
+~43 of the remaining "missing" have a loose header but are resolutions or Agricultural-Code
+**internal** chapters (correctly excluded). ~80 resolutions per volume are excluded and are
+**not** real statute misses. Net: the **redirect-stub + production-header-walk-miss** slice
+of the chaptered gap is now genuinely closed at high precision; the **header-garble/absent
+slice is not**, and is the next lever (numeral repair against the page-complete OCR).
+
+Output: `parsed_acts_chaptered_v2.json` per volume (NEW file) in PatoLex-scratch on the
+5090, uncommitted. Tool + scratch diag scripts left in the working tree for review + Hans.
+The prior sequence-numbering draft of this file is preserved as
+`pipeline/ingest/_archived_recover_chaptered_v1_seqnum.py.txt`.
+
 ## Ingestion readiness: NOT READY (OCR era)
 Ingesting the mid-century parse as-is would under-populate it by ~15–20% and carry chapter-number noise. Before full ingestion:
 1. **Parser completion/repair pass for the OCR era** — recover the ~15–20% of acts the segmenter misses + a chapter-number reconstruction pass (re-number from sequence/page order, since OCR pages are complete).

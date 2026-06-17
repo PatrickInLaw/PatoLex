@@ -1,0 +1,396 @@
+"""recover_chaptered.py -- ADDITIVE act-start recovery for the CHAPTERED era
+(~1880-1999, primary payoff 1900s-1940s). Recovers acts that are PRESENT IN THE
+OCR TEXT but the production parser (ingest_from_ocr.parse_volume) never extracted,
+because its start signal -- HEADER_RE matching a clean 'CHAPTER <arabic>' line with
+'An Act' within 4 non-empty lines -- fails on noisy early-chaptered OCR.
+
+DIAGNOSIS (STEP 1, see docs/.../run-logs/chaptered-recovery-run.log and the durable
+finding in CHAPTER_COMPLETENESS_FINDINGS.md). For three probe sessions:
+  1931 (oracle 1220): production header+AnAct pairs = 896; real act-starts present
+       in text (strict 'An act' with a chapter header above + enacting clause below)
+       ~= 1003 (+13 garbled 'An act') -> ~120 recoverable acts present-but-missed.
+  1933 (oracle 1059): production 802; present ~833 (+2) -> ~33 recoverable.
+  1985 (oracle 1607): production 1383 >= present ~1336 -> ~0 lost acts; the gap to
+       oracle is concurrent/constitutional RESOLUTIONS (no 'An act'/enacting clause)
+       which are NOT recoverable acts and must NOT be fabricated.
+  Dominant failure modes for the recoverable acts:
+    * header-side garble: the 'CHAPTER <n>' header line is present but HEADER_RE
+      rejects it -- the numeral OCR'd as roman/letters not in HEADER_RE's token
+      class, or a trailing quote/text pushed past HEADER_RE's '$' anchor
+      ("CHAPTER 423."" -> rejected), or the header shares a line.
+    * 'An act' past the 4-non-empty-line lookahead window.
+    * 'An act' itself garbled past AN_ACT_RE ('Anact','ain act','An ael','Aniact').
+
+DETECTOR (precision-first; a fabricated/mis-split act is worse than a missed one):
+  An act STARTS at line i when ALL hold:
+    (1) line i OPENS with an act opener: AN_ACT_RE (production strict) OR a small
+        tolerant garble set (ANACT_TOL). The opener must begin the line (no text
+        before it except light punctuation) and must NOT be preceded by an opening
+        quote (quoted-title rejection, recover_acts MAJOR-1 / recover_early).
+    (2) the opener line is NOT a body citation -- BODYREF_CUE ('of an act',
+        'entitled', 'said act', 'provisions of ... act', 'under an act', ...) on the
+        line rejects it (recover_acts is_real_act_start guard).
+    (3) a CHAPTER-HEADER line sits within HDR_ABOVE lines above (tolerant glyph +
+        a real numeral). This is the act-header CONTEXT that separates a genuine
+        act start from a mid-prose 'an act' -- the same structural cue production
+        relies on, just tolerant to header garble.
+    (4) an ENACTING CLAUSE ('People of the State of California' / 'do enact as
+        follows', tolerant) appears within ENACT_BELOW lines after i. SANITY gate.
+  We then UNION these starts with the production baseline starts (header_starts_act),
+  dedup by MIN_GAP in reading order with the BASELINE winning every tie -- so the
+  output is a guaranteed SUPERSET of production (AFTER >= BEFORE; no act dropped).
+
+NUMBERING (precision-first):
+  * If the act's own chapter header (the closest tolerant header line at/above the
+    start) yields a CLEAN ARABIC numeral, that is the chapter number (witness).
+  * Else number BY SEQUENCE over the session using the SAME proven machinery as
+    recover_acts.renumber_by_sequence (LIS anchors over confident arabic-numbered
+    acts; deterministic inter-anchor fill only when count==span; self_numbered
+    rescue; witness-disagreement demotion). Acts that cannot be deterministically
+    numbered are flagged (chapter_int=0 stays flagged), NEVER guessed.
+
+OUTPUT: ONE production-<label>/parsed_acts_chaptered_v2.json per physical volume
+  (NEW FILE -- never overwrites parsed_acts_fixed.json / parsed_acts_recovered.json /
+  parsed_acts_early.json). Same record shape as the production parser plus:
+     origin            : 'baseline' | 'recovered'
+     renumber_status   : anchor|filled|self_numbered|kept_parsed|ambiguous|demoted_*
+     chapter_int_final : chosen chapter number (0 if undetermined)
+
+READ-ONLY w.r.t. the DB and every existing file. Writes only parsed_acts_chaptered_v2.json.
+
+USAGE (pass ALL physical volumes of one session together for session-wide numbering):
+  python -m ingest.recover_chaptered 1931-vol1-chapters
+  python -m ingest.recover_chaptered --true 1607 1985-vol1-chapters 1985-vol2 1985-vol3
+  python -m ingest.recover_chaptered --score 1933-vol1-chapters    # detect + score vs oracle
+"""
+from __future__ import annotations
+import sys, re, json
+from pathlib import Path
+import importlib.util
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # pipeline/ on path
+import config
+
+ROOT = Path(config.path_for("data_root"))
+
+# ---- reuse the production parser + the recover_acts renumber machinery verbatim ----
+_ING = Path(__file__).resolve().parent / "ingest_from_ocr.py"
+_spec = importlib.util.spec_from_file_location("ingest_from_ocr_rc", str(_ING))
+ing = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(ing)
+
+_REC = Path(__file__).resolve().parent / "recover_acts.py"
+_rspec = importlib.util.spec_from_file_location("recover_acts_rc", str(_REC))
+rec = importlib.util.module_from_spec(_rspec)
+_rspec.loader.exec_module(rec)
+
+# ---- tunables (precision over recall) ---------------------------------------
+HDR_ABOVE = 5            # max lines above the opener to find its chapter header
+ENACT_BELOW = 25         # lines after the opener to find an enacting clause
+MIN_GAP = 3              # min reading-order distance between two accepted starts
+SANITY_MIN_TEXT = 60     # matches production flush_act >=60 floor
+CA_HARD_CEILING = 2500   # reuse recover_acts ceiling
+
+# tolerant chapter-header glyph at line start (numeral optional here -- presence of
+# the glyph is the context cue; the numeral is read separately for the witness).
+TOL_HDR = re.compile(r"^[^A-Za-z0-9]{0,4}(?:CHAP(?:TER|T|\.)?)\b", re.I)
+# clean ARABIC chapter numeral on an own-header line (the trustworthy witness).
+ARABIC_HDR = re.compile(r"^[^A-Za-z0-9]{0,4}CHAP(?:TER|T\.?|\.)?\s*([0-9]{1,4})\b", re.I)
+# tolerant 'An act' opener (garble set): An/Au/Ani/ain + act/aet/aci/acl/aor
+ANACT_TOL = re.compile(
+    r"^[\s.,;:'\"\[\(]{0,4}(?:A[nui]{1,2}|ain)\s*[. ]?a[ceon][tilr]\b", re.I)
+ENACT_TOL = re.compile(
+    r"[Pp]e[oe]ple\s+of\s+the\s+[Ss]tate\s+of\s+Calif"
+    r"|do\s+enact\s+as\s+follow", re.I)
+# body-citation cues that disqualify an opener (reuse recover_acts.BODYREF_CUE shape)
+BODYREF_CUE = rec.BODYREF_CUE
+_OPEN_QUOTES = rec._OPEN_QUOTES
+
+
+def load_lines(label):
+    p = ROOT / ("production-" + label) / "ocr_consensus" / "page_ocr_results.json"
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    pages = {int(k): v for k, v in raw.items()}
+    out = []
+    for pidx in sorted(pages):
+        for k, ln in enumerate(pages[pidx].get("consensus_text", "").split("\n")):
+            out.append((pidx, ln, k))
+    return out
+
+
+def _opener_match(line):
+    """Return the regex match for an act opener at the START of the line, or None.
+    Strict AN_ACT_RE is tried first; the tolerant garble set only if strict misses."""
+    s = line
+    m = ing.AN_ACT_RE.search(s)
+    if m:
+        # must start the line (light leading punctuation/space allowed)
+        head = s[:m.start()].strip(" \t.,:;\"'`-[(")
+        if head:
+            return None
+        return m
+    mt = ANACT_TOL.match(s.strip())
+    if mt:
+        return mt
+    return None
+
+
+def _is_real_opener(line):
+    """Precision filter: opener begins the line, not quoted, not a body citation."""
+    m = _opener_match(line)
+    if not m:
+        return False
+    # quoted-title rejection (MAJOR-1): opening quote right before the opener
+    raw_head = line[:m.start()].rstrip(" \t") if hasattr(m, "start") else ""
+    # ANACT_TOL was matched on stripped line; recompute on the raw line for quote check
+    if raw_head and raw_head[-1] in _OPEN_QUOTES:
+        return False
+    if BODYREF_CUE.search(line):
+        return False
+    return True
+
+
+def _hdr_above(lines, i, k=HDR_ABOVE):
+    """closest tolerant chapter-header line index within k above i (incl i-1..), or None."""
+    for j in range(i - 1, max(-1, i - 1 - k), -1):
+        if TOL_HDR.match(lines[j][1].strip()):
+            return j
+    return None
+
+
+def _enact_below(lines, i, k=ENACT_BELOW):
+    n = len(lines)
+    for j in range(i, min(n, i + k)):
+        if ing.ENACT_MARKER_RE.search(lines[j][1]) or ENACT_TOL.search(lines[j][1]):
+            return True
+    return False
+
+
+def _arabic_witness(lines, hdr_idx, start_i):
+    """clean arabic chapter number from the act's own header, or None."""
+    if hdr_idx is not None:
+        m = ARABIC_HDR.match(lines[hdr_idx][1].strip())
+        if m:
+            v = int(m.group(1))
+            if 1 <= v <= CA_HARD_CEILING:
+                return v
+    return None
+
+
+def baseline_starts(lines):
+    plain = [(p, t) for (p, t, k) in lines]
+    out = []
+    for i in range(len(plain)):
+        ok, tok = ing.header_starts_act(plain, i)
+        if ok:
+            out.append((i, tok))
+    return out
+
+
+def recovered_starts(lines, baseline_idx):
+    """Indices of MISSED act-starts the tolerant detector finds (precision gates)."""
+    out = []
+    n = len(lines)
+    for i in range(n):
+        line = lines[i][1]
+        if not _opener_match(line):
+            continue
+        if i in baseline_idx:
+            continue
+        if any((i + d) in baseline_idx for d in range(-MIN_GAP, MIN_GAP + 1)):
+            continue
+        if not _is_real_opener(line):
+            continue
+        hdr_idx = _hdr_above(lines, i)
+        if hdr_idx is None:
+            continue                       # require chapter-header context (precision)
+        if not _enact_below(lines, i):
+            continue                       # SANITY gate
+        out.append((i, hdr_idx))
+    return out
+
+
+def build_act(lines, start_i, end_i, witness, volume_year, label, origin):
+    buf = [lines[j][1] for j in range(start_i, end_i)]
+    start_page = lines[start_i][0]
+    full = "\n".join(buf).strip()
+    chap_int = witness if (witness and 1 <= witness <= CA_HARD_CEILING) else 0
+    title = ""
+    for line in buf:
+        if ing.AN_ACT_RE.search(line) or ANACT_TOL.match(line.strip()):
+            title = re.sub(r"\s+", " ", line).strip()[:500]
+            break
+    if not title and buf:
+        title = re.sub(r"\s+", " ", buf[0]).strip()[:300]
+    iso_date, approved_str = ing.parse_act_date(full, volume_year=volume_year)
+    body_text = re.sub(r"[ \t]+", " ", full)
+    return {
+        "chapter": str(chap_int), "chapter_int": chap_int,
+        "chapter_raw": str(witness) if witness else "",
+        "title": title,
+        "approved_date": approved_str, "iso_date": iso_date,
+        "text": body_text[:6000], "source_page": start_page + 1,
+        "confident": False,
+        "has_enact": bool(ing.has_enact_marker(full) or ENACT_TOL.search(full)),
+        "has_an_act": bool(ing.AN_ACT_RE.search(full) or ANACT_TOL.search(full)),
+        "_volume": label,
+        "_own_header_witness": witness,
+        "origin": origin,
+    }
+
+
+def process_session(labels, true_total=None, write=True):
+    if not labels:
+        raise SystemExit("recover_chaptered: no volume labels given")
+    # cross-session guard (same as recover_acts): one legislative session only.
+    sess_of = {}
+    for label in labels:
+        if label not in ing.LEGISLATURE_MAP:
+            raise SystemExit(f"recover_chaptered: label {label!r} not in LEGISLATURE_MAP "
+                             f"-- cannot verify session; refusing to run.")
+        sess_of[label] = ing.LEGISLATURE_MAP[label][0]
+    distinct = sorted(set(sess_of.values()))
+    if len(distinct) > 1:
+        detail = ", ".join(f"{lb}->{sess_of[lb]}" for lb in labels)
+        raise SystemExit("recover_chaptered: refusing to renumber across >1 session: "
+                         f"{distinct}: {detail}. Run each session separately.")
+
+    acts = []
+    per_vol_meta = {}
+    for label in labels:
+        lines = load_lines(label)
+        volume_year = int(re.match(r"(\d{4})", label).group(1))
+        bstarts = baseline_starts(lines)
+        bidx = {i for (i, _t) in bstarts}
+        rstarts = recovered_starts(lines, bidx)
+        per_vol_meta[label] = {"baseline_starts": len(bstarts),
+                               "recovered_starts": len(rstarts)}
+        merged = []
+        for (i, tok) in bstarts:
+            wit = ing.parse_chapter_number(tok) if tok else 0
+            merged.append((i, wit if 1 <= wit <= CA_HARD_CEILING else None, "baseline"))
+        for (i, hdr_idx) in rstarts:
+            wit = _arabic_witness(lines, hdr_idx, i)
+            merged.append((i, wit, "recovered"))
+        merged.sort(key=lambda x: x[0])
+        for k, (si, wit, origin) in enumerate(merged):
+            ei = merged[k + 1][0] if k + 1 < len(merged) else len(lines)
+            r = build_act(lines, si, ei, wit, volume_year, label, origin)
+            if len(r["text"]) < SANITY_MIN_TEXT or not r["has_enact"]:
+                continue
+            hdr0 = re.sub(r"\s+", " ", lines[si][1]).strip()
+            if re.search(r"\b(?:Approved|Passed)\b", hdr0, re.I) and origin == "baseline":
+                continue
+            acts.append(r)
+
+    rstats = rec.renumber_by_sequence(acts, true_total=true_total)
+
+    # reuse recover_acts' self_numbered rescue + witness demotion logic by calling the
+    # same finalize path it uses inline. We replicate the rescue/demote here using the
+    # witness we stored (_own_header_witness), mirroring recover_acts exactly.
+    import bisect
+    determined = {idx: a["chapter_int_final"] for idx, a in enumerate(acts)
+                  if a["renumber_status"] in ("anchor", "filled")}
+    det_nums = set(determined.values())
+    det_positions = sorted(determined.keys())
+    rescued = 0
+    for idx in [i for i, a in enumerate(acts) if a["renumber_status"] == "ambiguous"]:
+        a = acts[idx]
+        own = a.get("chapter_int", 0)
+        if not (1 <= own <= CA_HARD_CEILING) or own in det_nums:
+            continue
+        p = bisect.bisect_left(det_positions, idx)
+        lo = determined[det_positions[p - 1]] if p > 0 else 0
+        hi = determined[det_positions[p]] if p < len(det_positions) else CA_HARD_CEILING + 1
+        if lo < own < hi:
+            a["renumber_status"] = "self_numbered"
+            a["chapter_int_final"] = own
+            a["chapter"] = str(own)
+            det_nums.add(own); determined[idx] = own; bisect.insort(det_positions, idx)
+            rescued += 1
+    rstats["self_numbered"] = rescued
+
+    witness_demoted = 0
+    for a in acts:
+        if a["renumber_status"] not in ("anchor", "filled", "self_numbered"):
+            continue
+        wit = a.get("_own_header_witness")
+        if wit is None or not (1 <= wit <= CA_HARD_CEILING):
+            continue
+        if wit != a.get("chapter_int_final", 0):
+            a["renumber_status"] = "demoted_witness_disagree"
+            a["_witness_disagree"] = {"assigned": a.get("chapter_int_final", 0),
+                                      "header_says": wit}
+            witness_demoted += 1
+    rstats["witness_demoted"] = witness_demoted
+
+    out_by_vol = {lb: {"confident_acts": [], "flagged_acts": []} for lb in labels}
+    for a in acts:
+        cf = (a.get("has_an_act")
+              and 1 <= a.get("chapter_int_final", 0) <= CA_HARD_CEILING
+              and a.get("renumber_status") in ("anchor", "filled", "self_numbered"))
+        a["confident"] = bool(cf)
+        a["chapter_int"] = a.get("chapter_int_final", a.get("chapter_int", 0))
+        a["chapter"] = str(a["chapter_int"])
+        a.pop("_own_header_witness", None)
+        bucket = "confident_acts" if cf else "flagged_acts"
+        out_by_vol[a["_volume"]][bucket].append(a)
+
+    written = []
+    for label in labels:
+        d = out_by_vol[label]
+        meta = dict(per_vol_meta[label])
+        meta.update({"label": label, "session": labels,
+                     "confident": len(d["confident_acts"]),
+                     "flagged": len(d["flagged_acts"]),
+                     "renumber_session": rstats})
+        out_path = ROOT / ("production-" + label) / "parsed_acts_chaptered_v2.json"
+        if write:
+            out_path.write_text(json.dumps({
+                "confident_acts": d["confident_acts"],
+                "flagged_acts": d["flagged_acts"],
+                "_recovery_meta": meta,
+            }, indent=2, ensure_ascii=False), encoding="utf-8")
+        written.append((label, meta, out_path))
+        print(f"{label}: baseline={meta['baseline_starts']} recovered={meta['recovered_starts']}"
+              f" -> confident={meta['confident']} flagged={meta['flagged']}"
+              + (f" | wrote {out_path.name}" if write else " | (dry-run)"))
+    print(f"SESSION {labels}: anchors={rstats['anchors']} filled={rstats['filled']}"
+          f" self_numbered={rstats['self_numbered']} ambiguous={rstats['ambiguous']}"
+          f" witness_demoted={rstats['witness_demoted']} total_acts={len(acts)}")
+    return acts, rstats, written
+
+
+# authoritative chaptered-era totals for --score convenience (oracle subset).
+_ORACLE = {
+    "1931-vol1-chapters": 1220, "1933-vol1-chapters": 1059,
+}
+
+
+def _score(acts, labels, true_total):
+    N = true_total
+    if N is None:
+        N = _ORACLE.get(labels[0])
+    if not N:
+        print("(no oracle total for scoring; pass --true N)")
+        return
+    confident_nums = {a["chapter_int"] for a in acts
+                      if a.get("confident") and 1 <= a.get("chapter_int", 0) <= N}
+    print(f"\nSCORE vs oracle N={N}: confident-numbered-in-range={len(confident_nums)}"
+          f" -> {100.0*len(confident_nums)/N:.1f}% (dups not possible: set)")
+
+
+def main():
+    args = sys.argv[1:]
+    true_total = None
+    score = False
+    if "--score" in args:
+        score = True; args.remove("--score")
+    if "--true" in args:
+        k = args.index("--true"); true_total = int(args[k + 1]); del args[k:k + 2]
+    acts, rstats, _ = process_session(args, true_total=true_total)
+    if score:
+        _score(acts, args, true_total)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,6 @@
+[2026-06-16 11:20 PT] SETUP  | Read recover_acts.py + ingest_from_ocr.py detector (HEADER_RE, header_starts_act, ENACT_MARKER_RE, flush_act, parse_volume) | OK
+[2026-06-16 11:25 PT] SSH    | Connected 5090 (raw IP), data root C:\Users\patolex\PatoLex-scratch; live pipeline code only archived on 5090, scp'd current ingest_from_ocr.py + diag scripts to _diag_tmp | OK
+[2026-06-16 11:35 PT] DIAG   | Ran diag_chaptered_miss.py on 1931-vol1-chapters + 1933-vol1-chapters: reproduced production header walk, listed missing chapters, classified failure modes | OK
+[2026-06-16 11:45 PT] DIAG   | Ran diag_dropped_probe.py: of acts where header_starts_act FIRES, 1933 drops 94 via no_enact_marker, 1931 drops 7; confirmed root cause via diag_ctx.py | OK
+[2026-06-16 11:50 PT] FINDING| Dominant 1933 miss = redirect-stub acts ("Note.--For text see Stats. 1933 Ch. N") with NO enacting clause -> has_enact_marker fails -> flush_act drops. 1931 dominant miss = resolutions (no "An Act") + shares_line body merges + garbled header glyphs. Wrote findings doc. | OK
+[2026-06-16 11:52 PT] CLEANUP| Removed _diag_tmp on 5090. Diagnosis complete, STOP (no build). | OK

@@ -1,0 +1,8 @@
+[2026-06-16 10:00 PT] STEP1-DIAG | chaptered-era detection-gap diagnosis started; data+exec on 5090, repo C:/github/PatoLex | OK
+[2026-06-16 10:05 PT] STEP1-DIAG | git pull blocked by 11 untracked scratch files (pipeline/analysis/_*.py, recover_early_consensus.py, renumber_repair.py); did NOT force-move (classifier flagged as out-of-scope); proceeded at HEAD 8bc1731 which contains the detectors under study | WARN
+[2026-06-16 10:20 PT] STEP1-DIAG | labels confirmed: 1931-vol1-chapters (oracle 1220), 1933-vol1-chapters (oracle 1059), 1985-vol1..3 (oracle 1607) | OK
+[2026-06-16 10:30 PT] STEP1-DIAG | diag_chaptered_gap.py 1931: prod kept-in-range=862/1220 (70.7%); sample modes no_header_found 13, header_re_no_match 7, an_act_not_near 4, flush_dropped 1 | OK
+[2026-06-16 10:40 PT] STEP1-DIAG | probe: missing arabic numerals (125,256,293,340,730) have NO 'chap <n>' token -> header numeral OCR-garbled, not arabic-clean | OK
+[2026-06-16 10:50 PT] STEP1-DIAG | census_anact 1931: HEADER_RE lines=1073, prod header+anact pairs=896, strict-AnAct-with-hdr-above-and-enact-below=1003, garbled-AnAct=13 -> ~120 recoverable acts present-in-text; gap to 1220 partly resolutions/constitutional amdts (ch 3,42 = Concurrent Resolutions, no enacting clause, correctly excluded) | OK
+[2026-06-16 11:00 PT] STEP1-DIAG | census_anact 1933: prod pairs=802, strict-with-ctx=833, garbled=2 -> ~33 recoverable | OK
+[2026-06-16 11:00 PT] STEP1-DIAG | census_anact 1985(3vol): prod pairs=1383 >= strict-with-ctx=1336 -> ~0 lost acts; 1985 gap to 1607 is resolutions/amendments not OCR-lost acts. The detection gap is concentrated in the EARLY-MID chaptered era (1900s-1940s, worse OCR), NOT the 1980s | OK
