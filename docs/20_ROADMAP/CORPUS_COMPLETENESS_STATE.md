@@ -31,6 +31,17 @@ A numeral-repair pass re-measured residual against the FULL oracle and reported 
 ## 3c. Certify precision gate caught C97-shipped duplicates (2026-06-16 evening)
 The Hans-fix write-gate on `certify_chapters.py` (abort + `sys.exit(2)` on precision PASS=False) now **correctly blocks** on **3 introduced duplicate confident chapters in session 1853** (ch 105/107/140). Root cause: 1853's **table-of-contents front matter (pages 9–11)** is parsed as acts and certified to the SAME numbers as the real act bodies (pages 151/152/197, roman headers `CHAPTER CV/CVII/CXL`). **The pre-gate C97 certify run had NO write-gate, so it almost certainly shipped these dups silently into `production-1853/parsed_acts_certified.json`** — the early-era certified output must be re-generated after the TOC/dup fix (a manifestation of the known early-era over-extraction, §4). Fix in progress: R2 `is_cand` must require `is_real_act` (not just `has_an_act`), and open-slots must exclude EVERY number already held by a confident act, not just monotonic anchors.
 
+## 3g. CAPSTONE residual decomposition (2026-06-17, `_residual_decomposition.md`) — the definitive "what's left"
+At 92.7% (missing 6,962), the residual decomposes (biennium-correct, corpus-wide) into:
+| category | chapters | note |
+|---|---|---|
+| (i) still-text-recoverable | **3,030 (43.5%)** | a header exists in SOME engine but precision-gated recovery didn't take it — **upper bound** on what's *safely* recoverable (many failed the body-witness gate → needs_review; relaxing precision is NOT advised) |
+| (ii) genuine re-OCR | **3,920 (56.3%)** | no engine has a regex-detectable header — but an **UPPER BOUND** (conservative regex misses spaced/garbled headers the body-witness logic can anchor). **Honest range ~1,100–3,920.** |
+| (iii) oracle-suspect | 12 | implausibly-low chaptered-era "regular" oracle rows |
+| (iv) floor over-extraction | 687 phantom / 10 sessions | precision/"garbage", NOT coverage |
+- **(iii) and (iv) are the SAME artifact** — the even-year low-N oracle rows (1964 N=1, 1958 N=10, 1887=51, 1883=23): the floor parsed acts against these bogus low-N rows. So part of the 687 is the **bundling artifact** (real extra-session acts vs a budget-only N — NOT garbage), part is genuine early over-extraction (1865-66 class). Fixing the oracle rows resolves both.
+- **BOTTOM LINE:** realistic coverage **~95.9%** if (i)+(iii)+(iv) are addressed (text re-extraction + oracle-row fix + over-extraction cleanup); the **irreducible re-OCR floor is ~1,100–3,920 chapters** — i.e. literal 100% requires a real re-OCR pass with a DIFFERENT engine/preprocessing (the existing 3 engines never read those headers), not more text extraction. This is the honest answer to "is every chapter there": **~93% present now, ~96% reachable cheaply, the last ~4% needs re-OCR (engine TBD).**
+
 ## 3f. Residual recovery sizing — 84% CHEAP, ~16% re-OCR (2026-06-17, `_residual_sizing.md`)
 Diagnostic over 8 of the worst sessions (2,118 missing chapters), splitting the residual by recovery mechanism. **The expensive re-OCR lever is the MINORITY and likely not needed at scale.**
 | bucket | mechanism | share of sampled residual |

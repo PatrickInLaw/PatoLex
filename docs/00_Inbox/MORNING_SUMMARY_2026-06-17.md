@@ -23,6 +23,9 @@ The recurring "~20,000 missing chapters" (incl. an agent's "22,197 unparsed volu
 - `certify_chapters.py` — flagged→confident certification; fixed a duplicate-emission bug the pre-gate C97 run had shipped silently; write-gate + R2 fixes. +3,213, 0 dup.
 - `recover_multiengine_headers.py` (NEW) — recovers parser-missed acts by reading clean `CHAPTER N.` / `CHAP. <ROMAN>.` headers from the independent surya/doctr/tess OCR fields where the token-majority *consensus* was garbled. Modern arabic + early roman modes. Two+ Hans passes each; key lessons: **consensus_text is NOT an independent OCR witness** (don't let it vote in cross-engine agreement), and a 0-duplicate self-check does **not** prove correctness (a false-positive header can emit a unique wrong-location number) — so every emission requires a colocated real-act body witness.
 
+## The honest "is every chapter there?" answer (capstone decomposition — §3g)
+**~93% present now (92.7%), ~95.9% reachable cheaply, the last ~4% needs re-OCR.** The remaining 6,962 missing = **3,030 still-text-recoverable** (a header exists in some engine; safe-recoverable count is lower — many failed the precision gate) + **~1,100–3,920 genuine re-OCR** (no engine ever read the header → needs a *different* engine/preprocessing, not more text extraction) + **~700 oracle-row / over-extraction artifact** (the even-year low-N rows — fixing the oracle resolves it). So: literal 100% is **not** reachable from the existing OCR alone; it requires a targeted re-OCR pass with a new engine (e.g. a VLM) on the ~1k–4k genuinely-headerless chapters.
+
 ## What remains (toward 100% + ingest-readiness) — all need YOUR call
 The cheap, high-confidence text-recovery levers are DONE (92.7%, missing 6,962). Everything left is a decision for you — I deliberately did **not** launch any of these unsupervised:
 
