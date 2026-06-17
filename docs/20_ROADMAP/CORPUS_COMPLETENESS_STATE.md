@@ -22,6 +22,15 @@ The raw ~88.7%-complete figure conflated FOUR different things. Separating them 
 | **Genuine OCR-garbled headers** | real acts whose `CHAPTER n` header is broken in OCR (e.g. "CHAPTER 12"→"G JAC TET 12") | numeral/header repair vs the page-complete OCR, or targeted re-OCR of the worst pages | **the one big lever not yet built** |
 | **Oracle errors** | wrong denominators (1854) | authoritative re-derivation | **DONE** |
 
+## 3b. CAUTION on residual sizing (2026-06-16 evening — bucketing artifact, 5th false alarm)
+A numeral-repair pass re-measured residual against the FULL oracle and reported "residual 33,886, of which **22,197 = whole unparsed volumes**" (naming 1956 @2.4%, 1960 @3.4%, 1954, 1962). **This was VERIFIED FALSE — it is the biennium/label bucketing artifact again (the 5th "missing/unparsed" alarm to dissolve this campaign).** Direct probe of the 5090 store:
+- There is **no `production-1956/1954/1960/1962` dir** because those are **even-year special/budget sessions whose statutes are physically bound in the adjacent ODD-year volume**, labeled with a `NNchapters` suffix that encodes the TRUE statute year: **1954→`production-1955-vol1-54chapters`, 1956→`production-1957-vol1-56chapters`, 1960→`production-1961-vol1-60chapters`, 1962→`production-1963-vol1-62chapters`, 1952→`-1953-...-52chapters`, 1958→`-1959-...-58chapters`.** The statutes ARE present and parsed.
+- The pass's NEW `residual_profile.py` keyed sessions off the leading 4 digits of the label and never decoded the `NNchapters` suffix — **it reintroduced the exact biennium bug C96 fixed in `chapter_vs_oracle.py`.** Its 71.33% / 33,886-residual / 22,197-"unparsed" / 11,109-"interior" numbers are therefore **untrustworthy for sizing the re-OCR pass.** The `recover_lost_header.py` *recovery itself* (+578 acts, 0 dups introduced, 20/20 spot-check correct) is valid; only its *measurement* is tainted.
+- **RULE for any re-OCR sizing: measure with the biennium-correct `chapter_vs_oracle.py` (C96 fix), against the OCR-scope oracle (1850–1999), NOT a fresh year-keyed tool.** `NNchapters` suffix = true statute year; even years = special/budget sessions bound in the odd-year volume.
+
+## 3c. Certify precision gate caught C97-shipped duplicates (2026-06-16 evening)
+The Hans-fix write-gate on `certify_chapters.py` (abort + `sys.exit(2)` on precision PASS=False) now **correctly blocks** on **3 introduced duplicate confident chapters in session 1853** (ch 105/107/140). Root cause: 1853's **table-of-contents front matter (pages 9–11)** is parsed as acts and certified to the SAME numbers as the real act bodies (pages 151/152/197, roman headers `CHAPTER CV/CVII/CXL`). **The pre-gate C97 certify run had NO write-gate, so it almost certainly shipped these dups silently into `production-1853/parsed_acts_certified.json`** — the early-era certified output must be re-generated after the TOC/dup fix (a manifestation of the known early-era over-extraction, §4). Fix in progress: R2 `is_cand` must require `is_real_act` (not just `has_an_act`), and open-slots must exclude EVERY number already held by a confident act, not just monotonic anchors.
+
 ## 3a. MEASURED completeness (2026-06-16 re-measure — `corpus-remeasure-2026-06-16.md`)
 First trustworthy number after the recovery passes, vs the CORRECTED oracle, biennium-correct (OCR corpus 1850–1999):
 - **84.4% confident / 88.7% all-extracted** — ~80,600 of 95,555 chapters. Per era: 1880-99 90%, 1950-79 93%, 1980-99 95%; weakest 1860-79 (36% conf, the italic consensus bug) + 1900-19 (71%).
@@ -41,8 +50,9 @@ First trustworthy number after the recovery passes, vs the CORRECTED oracle, bie
 | Chaptered renumber | `renumber_repair.py` | +257 safe position renumbers (+0.3 pts); self-Hans'd | done (small top-up) |
 | Early consensus (Surya headers) | `recover_early_consensus.py` | +~180–220 acts on italic volumes (bounded) | **GO (re-Hans cleared 2026-06-16; precision-first)** |
 | Chaptered detection | `recover_chaptered.py` | 1933 70→82%; redirect-stubs flagged; noise excluded | **GO (re-Hans cleared 2026-06-16; 0 dups across combined set)** |
-| Garbled-header / numeral repair | — | the residual lever | **not yet built** |
-| Early-era over-extraction tightening | — | exclude resolutions/special-acts/bleed | **not yet built** |
+| Flagged→confident certification | `certify_chapters.py` | R1 own-clean-header + R2 position-fill; ~3,170 certified in C97 BUT precision gate now FAILS on 3 introduced dups in 1853 (TOC contamination) | **write-gate added (Hans CRITICAL-3B); TOC/dup fix IN PROGRESS — must re-run** |
+| Garbled-header / numeral repair | `recover_lost_header.py` | header-independent boundary (An-Act+Approved) + position-number; **+578 acts, 0 dups, 20/20 spot-check** (arabic 1907–1989; roman early era = 0, future ext) | **GO on recovery; needs Hans; residual SIZING from same pass is bucketing-tainted (§3b)** |
+| Early-era over-extraction tightening | — | exclude resolutions/special-acts/**TOC front matter**/bleed (the 1853 dup is this) | **not yet built (now has a concrete first target: TOC entries)** |
 
 ## 6. Process lessons (hard-won this session — adopted as rules)
 1. **Verify "missing data" against the SOURCE extent + the OCR content before reporting it.** Four "missing"/"acquisition-gap" alarms this session ALL dissolved into recoverable-from-data-we-have. Never infer "missing" from a folder listing or a leading-digit label.

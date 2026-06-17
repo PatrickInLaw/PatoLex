@@ -59,3 +59,38 @@ resolutions/volume excluded are NOT real statute misses.
 - `pipeline/analysis/_probe_chaptered*.py`, `_diag_chaptered*.py`, `_diag_gap_region.py`,
   `_diag_stub_notes.py`, `_score_chaptered_v2.py`, `_precision_chaptered_v2.py`.
 - `parsed_acts_chaptered_v2.json` per volume (PatoLex-scratch on 5090).
+
+---
+
+## Evening work-units (2026-06-16, autonomous run toward 100% coverage)
+
+**Certify Hans-fix + precision gate (work-unit on `certify_chapters.py`).** Applied the 4
+Hans NO-GO fixes (write-gate aborting `sys.exit(2)` on precision PASS=False [CRITICAL-3B];
+R2 all-witness guard [MAJOR-2A]; 200-char `is_real_act` body guard [MAJOR-1C]; R2 stale-N
+docstring [MAJOR-5B]). The data lives ONLY on the 5090 (`C:/github/PatoLex`, scratch
+`C:/Users/patolex/PatoLex-scratch`); verification runs over SSH. Running `--dry` now
+**correctly FAILS** the gate on **3 introduced duplicate confident chapters in 1853**
+(ch 105/107/140) — the volume's **TOC front matter (pp.9–11)** parsed as acts and certified
+to the same numbers as the real bodies (pp.151/152/197, roman `CHAPTER CV/CVII/CXL`). The
+**pre-gate C97 run had no gate and shipped these dups silently** → early-era certified output
+must be re-generated after the fix. Dispatched a fix worker (R2 `is_cand`→require `is_real_act`;
+open-slots exclude ALL confident-held numbers, not just anchors). **Durable:** `CORPUS_COMPLETENESS_STATE.md` §3c.
+
+**Numeral-repair / lost-header recovery (`recover_lost_header.py`, built on 5090).** Header-
+independent boundary (An-Act + `[Approved…]`) + position numbering. **+578 acts recovered,
+0 dups introduced corpus-wide, 20/20 spot-check correct** (arabic 1907–1989; roman early era
+= 0, future extension). Recovery is GO (pending Hans). **BUT its residual SIZING is tainted:**
+
+**5th false "unparsed volumes" alarm — RESOLVED as a bucketing artifact (durable §3b).** The
+pass's NEW `residual_profile.py` reported "22,197 whole unparsed volumes" (1956/1954/1960/1962
+@ ~2–3%). VERIFIED FALSE by direct 5090 probe: those are **even-year special/budget sessions
+bound in the adjacent ODD-year volume**, labeled with a `NNchapters` suffix encoding the true
+year (1954→`production-1955-vol1-54chapters`, 1956→`-1957-...-56chapters`, 1960→`-1961-...-60chapters`,
+1962→`-1963-...-62chapters`). The new tool keyed off the leading 4 digits and **reintroduced the
+biennium bug C96 fixed in `chapter_vs_oracle.py`.** ⇒ Re-OCR sizing MUST use the biennium-correct
+`chapter_vs_oracle.py`, not a fresh year-keyed tool. Recovery is valid; the 71.33%/33,886/11,109
+numbers are not.
+
+### Left for review + Hans (this work-unit)
+- `pipeline/ingest/certify_chapters.py` (Hans fixes + TOC/dup fix in progress) — local 5080 + scp'd to 5090, uncommitted.
+- `pipeline/ingest/recover_lost_header.py` + `pipeline/analysis/residual_*.py` etc. (uncommitted on 5090; `residual_profile.py` has the biennium bug — do not trust its sizing).
