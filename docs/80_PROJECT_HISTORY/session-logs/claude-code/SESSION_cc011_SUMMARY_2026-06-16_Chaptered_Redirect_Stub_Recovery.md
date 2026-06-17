@@ -94,3 +94,9 @@ numbers are not.
 ### Left for review + Hans (this work-unit)
 - `pipeline/ingest/certify_chapters.py` (Hans fixes + TOC/dup fix in progress) — local 5080 + scp'd to 5090, uncommitted.
 - `pipeline/ingest/recover_lost_header.py` + `pipeline/analysis/residual_*.py` etc. (uncommitted on 5090; `residual_profile.py` has the biennium bug — do not trust its sizing).
+
+### Hans review outcomes (2026-06-17)
+- **certify_chapters.py — CONDITIONAL GO → cleared.** 1853 TOC dup fix precision-clean; 0 introduced dups corpus-wide; 3,213 certified. Applied hardening MAJOR-1 (`all_taken.add(slot)`) + MAJOR-3 (delete dead `restore_sacred`). 200-char `is_real_act` guard empirically validated (drops exactly 1 act corpus-wide, a flagged 1861 garble) — well-calibrated.
+- **recover_lost_header.py — NO-GO (hardening, not a live precision hole).** +578/0-dup recovery is sound; queued fixes: re-run overwrite guard (CRITICAL silent-clobber), exclude flagged-act numbers from open-slots, `<` not `<=` page filter, real `volume_year` for iso_date. **SCOPE: it's garbled-NUMERAL repair (glyph present), NOT truly-lost-glyph headers — those are the real re-OCR population.**
+- **Measurement bug located:** `residual_after_certify.py` `__noleg__` bucketing (not `residual_profile.py`); `LEG` confirmed to contain the `NNchapters` labels, so even-year volumes ARE mapped/present. Agent's "unparsed" sizing = artifact.
+- Durable: `CORPUS_COMPLETENESS_STATE.md` §3d (review outcomes + residual decomposition refinement: numeral-garbled-glyph-present vs glyph-entirely-lost vs mis-keyed-present).
