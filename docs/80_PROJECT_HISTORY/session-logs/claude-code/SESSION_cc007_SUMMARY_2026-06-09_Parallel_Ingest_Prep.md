@@ -1374,3 +1374,25 @@ series-namespacing at ingest). 1852/1853 correct (single series; our parse over-
 280" was Resolutions + bleed from the 1867-68 vol. -> oracle now trustworthy; our EARLY parse OVER-extracts
 (counts resolutions/special-acts/garble as statutes) = a precision issue for the recovery passes. ca_chapter_counts.tsv
 + NOTES updated. (Also swept repo-root scratch _b64.txt/_diag_1931.json out to scratch.)
+
+---
+
+## Continuation 92-93 — 2026-06-16 (Hans fixes on both v2 scripts committed; re-Hans running; consolidated STATE doc)
+
+**Consolidated doc (C91):** docs/20_ROADMAP/CORPUS_COMPLETENESS_STATE.md — the durable "state of the corpus + path
+to ingest-ready" snapshot (verified truths, 4-way gap decomposition, era state, passes, lessons, plan, open decisions).
+
+**Hans fixes (C92):** fix worker corrected all 6 defects. recover_early_consensus: backfill now at positional intercept
+(backfill_zero_body=0), substitution only on unambiguous positional match. recover_chaptered: dedup floor unions
+confident+flagged (1933 leak 3->0, 0 dups across combined set, after>=before), Title-case "Chapter" rejected, redirect
+regex anchored on NOTE-family. Unit tests 9/9+8/8, compile clean, new-files-only. **RE-HANS running** to confirm.
+
+**REMAINING to ingest-ready (per Patrick's bar = corpus COMPLETE + garbage as clean as possible):**
+1. re-Hans clears the 2 fixed scripts.
+2. BUILD the OCR-garbled-header repair (the residual lever — chapters whose CHAPTER token is broken in OCR) + tighten
+   early-era over-extraction (exclude resolutions/special-acts/bleed).
+3. CORPUS-WIDE RE-MEASURE vs corrected oracle -> the per-session completeness number (proves how many chapters are
+   present; identifies the truly-unrecoverable garbled residual = targeted re-OCR / manual).
+4. CORRECTION-CASCADE improvement pass for the "garbage words" (no_candidate residual ~0.1% body; LLM adjudication
+   per opensource-ocr-engine-plan) -> "as clean as they can be".
+5. Then ingest prep (flagged residue, redirect-stubs, 1854 dual-series, DB backup, one-pass ingest).
