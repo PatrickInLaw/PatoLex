@@ -91,11 +91,15 @@ it **matches the oracle** — confirming the denominator for these sessions.
 
 | volume(s) | oracle N | status | likely cause / next step |
 |---|---|---|---|
-| 1850, 1851, 1852, 1853, 1854 | 146–231 | no index entries found | different early index layout — regex/format work or targeted re-OCR |
-| 1861 | 538 | union cov 0.45 | catastrophic index-page OCR — candidate for re-OCR |
-| 1873-74-code, 1875-76-code, 1877-78-code | — | cov 0.17–0.31 | CODE-amendment volumes (different structure); low priority |
-| 1883-84 (non-regular) | 23 | cov 0.38 | the amendments sibling of 1883-84-regular |
-| 1893 | 244 | union cov 0.73 | borderline (just under gate; index N 242 ≈ oracle 244 — likely MATCH with a small nudge) |
+**Read directly 2026-06-17 (no guessing):**
+
+| volume(s) | oracle N | what the pages actually show | path |
+|---|---|---|---|
+| 1850–1854 | 146–231 | **no front index in OCR** (body starts at Chapter 1); but the **body carries `Chapter N.`/`Chap. N.` headers** | derive count from the **BODY** (same as modern self-index), not the index |
+| 1861 | 538 | **32 index pages, legible**; the leftmost **chapter-number column failed to OCR** on pg3+ (titles + page-nums survive) — NOT garbage | count the `An Act` lines across the 32 pages, or column-aware re-OCR |
+| **1873-74-code** (+ -76, -78) | — | **"Amendments to the Codes"** — real code-amendment acts organized BY CODE; act numbers reach **817 > main vol's 679** | **NOT exclude.** Determine numbering: continuous (⇒ oracle undercounts the session) vs separate (⇒ own rows). Investigate. |
+| 1893 | 244 | **READ: index reaches ch242 → resolutions.** 242 vs 244 = −2 OCR clip | **MATCH** — no oracle change |
+| 1883-84 (non-regular) | 23 | amendments sibling of 1883-84-regular | same -code question as above |
 
 ---
 
