@@ -4,7 +4,7 @@
 ---
 
 ## 1. The one-paragraph truth
-**The source corpus is COMPLETE and verified — every volume is acquired and on disk, the OCR is page-complete, and the authoritative chapter-count oracle is now trustworthy.** Nothing needs re-acquiring or re-scanning. **As of 2026-06-17 the OCR corpus (1850–1999) measures 91.2% complete (confident), biennium-correct, after certify (+3,213) and multi-engine header recovery (+3,413) — modern eras 85–99%, early era 1850–79 still 62.5% and now the #1 lever (§3a).** The corpus is NOT yet ingest-ready, but every remaining gap is a **parse/OCR-extraction problem recoverable from data we already hold** — the genuine residual is 42 regular sessions / 8,155 chapters of garbled-or-lost headers, concentrated in 1850s–70s + 1909–45. We are validating and refining extraction, not chasing missing material.
+**The source corpus is COMPLETE and verified — every volume is acquired and on disk, the OCR is page-complete, and the authoritative chapter-count oracle is now trustworthy.** Nothing needs re-acquiring or re-scanning. **As of 2026-06-17 the OCR corpus (1850–1999) measures 92.5% complete (confident), biennium-correct, after certify (+3,213) + modern multi-engine (+3,413) + early-era roman multi-engine (+~1,224) recovery — all Hans-gated, 0-dup. Missing 7,185 (§3a).** The corpus is NOT yet ingest-ready, but every remaining gap is a **parse/OCR-extraction problem recoverable from data we already hold** — the genuine residual is 42 regular sessions / 8,155 chapters of garbled-or-lost headers, concentrated in 1850s–70s + 1909–45. We are validating and refining extraction, not chasing missing material.
 
 ## 2. What is VERIFIED solid
 - **Source acquisition is complete.** Spot-verified against the CA Chief Clerk archive: 1915–1949 are single-volume sessions (no missing "Vol 2"); multi-volume sessions from 1951 on have every volume. The OCR for sampled sessions runs to the full oracle chapter count (1931 OCR→1220=oracle; 1933→1059=oracle).
@@ -60,7 +60,10 @@ The single most clarifying result of the campaign. The "missing ~20k chapters" t
 
 ## 3a. MEASURED completeness
 
-### ★★ CURRENT (2026-06-17, after multi-engine header recovery) — `_remeasure_multiengine.md`
+### ★★★ CURRENT (2026-06-17, after EARLY-ERA roman multi-engine recovery) — `chapter_vs_oracle.py` on `_chapters_all_v3.tsv`
+**OCR corpus (1850–1999) = 92.5% complete (confident), biennium-correct.** 88,370 / 95,555; missing 7,185. The early-era roman pass (Hans-cleared, +1,300 raw / ~+1,224 measured distinct, 0 dup, 0 legal-word-glyph) lifted 1850–79 substantially (per-session: 1869-70 50→79%, 1877-78 48→72%, 1871-72 72→88%, several 1850s sessions now 95–99%; weakest remaining early = 1865-66, capped at oracle 280 because its certified FLOOR is over-extracted to 463 — a pre-ingest floor-cleanup item, §4, not a recovery defect). Cumulative session gains, all precision-clean/Hans-gated/0-dup: **certify +3,213, modern multi-engine +3,413, early-era multi-engine +~1,224.**
+
+### ★★ prior (2026-06-17, after modern multi-engine only) — `_remeasure_multiengine.md`
 **OCR corpus (1850–1999) = 91.2% complete (confident), biennium-correct.** 87,146 / 95,555; missing 8,409 (down from 11,822). The multi-engine pass (§3f/§3g) folded in **+3,413 distinct chapters** (3,554 raw, 141 capped out-of-range), all 0-dup. Floor-only re-reproduced the 87.6% baseline exactly (method validated).
 | era | floor % | + multi-engine % | gain |
 |---|---|---|---|
