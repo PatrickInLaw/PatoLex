@@ -381,3 +381,34 @@ Ingesting the mid-century parse as-is would under-populate it by ~15–20% and c
 1. **Parser completion/repair pass for the OCR era** — recover the ~15–20% of acts the segmenter misses + a chapter-number reconstruction pass (re-number from sequence/page order, since OCR pages are complete).
 2. **Acquire an external per-session chapter-count oracle** to certify completeness (separate "missing" from "misnumbered"/"trailing-truncated").
 3. Carry-overs: re-parse the 13 timing-stale 1996–99 volumes on the 5080 (OCR present; already parsed on the 5090), add non-statute "BILL CHAPTERS" digests (e.g. 1998-vol6) to `SKIP_LABELS`, back up the DB before the one-pass ingest.
+
+## Hans-fix findings (2026-06-16, recover_early_consensus.py + recover_chaptered.py)
+
+**Early-era substitution numerals are roman-OCR noise on BOTH engines, not wrong-act
+swaps — chapter_int is DISPLAY-ONLY.** When `recover_early_consensus.corrected_lines()`
+substitutes a garbled-glyph consensus header (`Cuap. ILV.`) with the clean engine read
+(`CHAP. IV.`), the two `parse_chapter_numeral()` values can differ wildly (e.g. 54 vs 4).
+Inspection (`_inspect_sub_swaps.py`, 1865-66) showed every such "mismatch" is the **same
+act** (identical "An Act to amend an Act entitled…" titles) — the divergence is roman-
+numeral mis-parse on *both* surya and consensus, not a positional misalignment. This is
+the structural reason the early detector keys identity on **positional `in_act_order`**, not
+`chapter_int`. The substitution's job is glyph repair (make the header detectable), not
+numbering. Substitution is gated to an **unambiguous positional match** (mutual-nearest,
+within `_POS_TOL`, with a runner-up gap) and otherwise leaves consensus unchanged.
+
+**Backfilled early headers must be inserted at their positional intercept, not appended.**
+End-of-page-block append put a genuinely-dropped header *after* its own body → zero body →
+`SANITY_MIN_TEXT` drop, with the previous act swallowing the body. Positional-intercept
+insert (before the first consensus line at/after the engine header's mapped position) yields
+**0 zero-body backfills** across 1861/1862/1863-64/1865-66 and real acts (76/163/75/71).
+
+**Chaptered dedup floor must include flagged-before chapters.** `_load_before()` reading
+only `confident_acts` let a chapter already present as a *flagged* before-act be re-emitted
+as a brand-new confident act — a duplicate across the combined record set. Unioning
+`flagged_acts` chapter_ints into the dedup floor fixed it: 1933 went from leaking 3 such
+chapters (182, 328, 878) to 0. The confident floor (for AFTER≥BEFORE) stays confident-only.
+
+**The 1933 redirect "Note" pointer frequently truncates at a page break** — requiring a
+"Ch. n" target on the same OCR line drops ~7 genuine redirect-stubs per volume. Anchor the
+note on a NOTE-family token (`No`+≥2 letters, which excludes the 2-letter body abbreviation
+"No.") + "(For text) see/Xce Stats. 19xx"; do **not** require the chapter pointer.

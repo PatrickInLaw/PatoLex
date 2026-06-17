@@ -156,23 +156,52 @@ def census(label: str) -> dict:
 # Returns ([(page_index, line_text, source), ...], n_substituted, n_backfilled).
 # ---------------------------------------------------------------------------
 def _page_engine_headers(page):
-    """Ordered list of (line_text, numeral, engine) clear headers for the page,
-    SURYA preferred then DocTR backfill (DocTR header added only if no Surya
-    header reads the same numeral on the page)."""
+    """POSITIONALLY-ordered list of clear headers for the page, as
+    (line_text, numeral, engine, eng_idx, n_eng_lines).
+
+    Each header carries its LINE INDEX within its own engine line-stream
+    (`eng_idx`) and that stream's length (`n_eng_lines`) so a caller can map the
+    header to a comparable position in the consensus line-stream. SURYA is
+    preferred; a DocTR header is added only when no Surya header on the page reads
+    the SAME numeral. The merged list is sorted by NORMALIZED line position
+    (eng_idx / n_eng_lines) so headers are in true reading order across engines,
+    NOT surya-then-doctr scan order (MAJOR-A1/A2)."""
+    surya_lines = _engine_lines(page, "surya_text")
+    doctr_lines = _engine_lines(page, "doctr_text")
+    n_surya = len(surya_lines)
+    n_doctr = len(doctr_lines)
+
     surya = []
-    for ln in _engine_lines(page, "surya_text"):
+    for idx, ln in enumerate(surya_lines):
         num = header_numeral(ln)
         if num is not None:
-            surya.append((ln.strip(), num, "surya"))
-    surya_nums = {re_early.parse_chapter_numeral(n) for _, n, _ in surya}
+            surya.append((ln.strip(), num, "surya", idx, n_surya))
+    surya_nums = {re_early.parse_chapter_numeral(n) for _, n, _, _, _ in surya}
+
     doctr = []
-    for ln in _engine_lines(page, "doctr_text"):
+    for idx, ln in enumerate(doctr_lines):
         num = header_numeral(ln)
         if num is not None:
             v = re_early.parse_chapter_numeral(num)
             if v not in surya_nums:        # only DocTR headers Surya missed
-                doctr.append((ln.strip(), num, "doctr"))
-    return surya + doctr
+                doctr.append((ln.strip(), num, "doctr", idx, n_doctr))
+
+    merged = surya + doctr
+    # sort by NORMALIZED position so cross-engine headers interleave correctly.
+    merged.sort(key=lambda h: (h[3] / max(1, h[4] - 1)))
+    return merged
+
+
+def _norm_pos(idx: int, n_lines: int) -> float:
+    """Normalized [0,1] line position within a stream of n_lines lines."""
+    return idx / max(1, n_lines - 1)
+
+
+# How close (in normalized page position) an engine header and a consensus header
+# must sit to be confidently the SAME header for substitution. The early pages
+# carry ~15-40 lines; 0.18 is ~3-7 lines of slack -- generous enough for engine
+# line-break drift, tight enough that two distinct headers on a page don't alias.
+_POS_TOL = 0.18
 
 
 def corrected_lines(label: str):
@@ -183,34 +212,81 @@ def corrected_lines(label: str):
     for pidx in sorted(pages):
         page = pages[pidx]
         cons_lines = _engine_lines(page, "consensus_text")
-        eng_hdrs = _page_engine_headers(page)        # ordered clean headers
+        n_cons = len(cons_lines)
+        eng_hdrs = _page_engine_headers(page)        # POSITIONALLY ordered
 
         # indices of consensus header lines (in page order)
         cons_hdr_idx = [i for i, ln in enumerate(cons_lines)
                         if header_numeral(ln) is not None]
 
-        # (1) SUBSTITUTE each consensus header with the positionally-matched
-        #     clean engine header (by order among the page's headers).
+        # Map each engine header to a target consensus line position from its own
+        # normalized position. Used both for unambiguous substitution matching and
+        # for positional backfill insertion.
+        eng_targets = []
+        for clean_line, num, eng, eidx, en in eng_hdrs:
+            epos = _norm_pos(eidx, en)
+            tgt = int(round(epos * max(0, n_cons - 1)))
+            eng_targets.append((clean_line, num, eng, epos, tgt))
+
+        # (1) SUBSTITUTE -- only on an UNAMBIGUOUS positional match (MAJOR-A1/A2).
+        #     For each consensus header, find the engine header whose normalized
+        #     position is nearest. Substitute the clean engine line ONLY when that
+        #     nearest engine header is (a) within _POS_TOL, (b) uniquely nearest
+        #     (no other engine header within _POS_TOL of this consensus header),
+        #     and (c) not already claimed by a closer consensus header. Otherwise
+        #     LEAVE the consensus header unchanged (prefer the possibly-garbled-
+        #     glyph consensus numeral over a wrong-rank substitution).
+        cons_pos = [_norm_pos(ci, n_cons) for ci in cons_hdr_idx]
         used_eng = set()
-        for rank, ci in enumerate(cons_hdr_idx):
-            if rank < len(eng_hdrs):
-                clean_line, _num, _eng = eng_hdrs[rank]
-                cons_lines[ci] = clean_line
-                used_eng.add(rank)
-                n_sub += 1
-            # if consensus has MORE headers than the engines saw, leave the
-            # consensus header as-is (rare; engine under-read this page).
+        for ci_rank, ci in enumerate(cons_hdr_idx):
+            cpos = cons_pos[ci_rank]
+            # candidate engine headers within tolerance, not yet used
+            cands = [(abs(epos - cpos), e_rank)
+                     for e_rank, (_l, _n, _e, epos, _t) in enumerate(eng_targets)
+                     if e_rank not in used_eng and abs(epos - cpos) <= _POS_TOL]
+            if not cands:
+                continue                       # no confident match -> keep consensus
+            cands.sort()
+            best_d, best_rank = cands[0]
+            # ambiguity guard: if a second engine header is essentially as close,
+            # the positional match is NOT unambiguous -> do not substitute.
+            if len(cands) > 1 and (cands[1][0] - best_d) < 0.04:
+                continue
+            # also require THIS consensus header to be the engine header's nearest
+            # consensus partner (mutual nearest) so two consensus headers don't both
+            # grab the same engine header from opposite sides.
+            epos = eng_targets[best_rank][3]
+            nearest_cons = min(range(len(cons_pos)),
+                               key=lambda r: abs(cons_pos[r] - epos))
+            if nearest_cons != ci_rank:
+                continue
+            clean_line = eng_targets[best_rank][0]
+            cons_lines[ci] = clean_line
+            used_eng.add(best_rank)
+            n_sub += 1
 
-        # emit (possibly-substituted) consensus lines in order
-        for ln in cons_lines:
-            out.append((pidx, ln, "consensus/clean"))
-
-        # (2) BACKFILL the shortfall: engine headers with no consensus twin
-        #     (ranks beyond the number of consensus headers on this page).
-        for rank in range(len(cons_hdr_idx), len(eng_hdrs)):
-            clean_line, _num, eng = eng_hdrs[rank]
-            out.append((pidx, clean_line, eng + "/backfill"))
+        # (2) BACKFILL the genuinely-dropped headers (CRITICAL-A1): every engine
+        #     header NOT matched to a consensus header is a header consensus lost.
+        #     Insert it at its POSITIONAL INTERCEPT -- immediately BEFORE the first
+        #     consensus line at-or-after its mapped target index -- so a dropped
+        #     header lands ahead of the body text it heads (not appended at the end
+        #     of the page, where recover_early would give it zero body).
+        inserts = {}   # consensus-line insertion index -> [header lines]
+        for e_rank, (clean_line, num, eng, epos, tgt) in enumerate(eng_targets):
+            if e_rank in used_eng:
+                continue
+            ins_at = min(max(tgt, 0), n_cons)   # before the line at tgt
+            inserts.setdefault(ins_at, []).append((clean_line, eng))
             n_backfill += 1
+
+        # emit consensus lines, splicing backfilled headers at their intercepts
+        for i, ln in enumerate(cons_lines):
+            for clean_line, eng in inserts.get(i, []):
+                out.append((pidx, clean_line, eng + "/backfill"))
+            out.append((pidx, ln, "consensus/clean"))
+        # any header whose intercept is at/after the last line -> end of page block
+        for clean_line, eng in inserts.get(n_cons, []):
+            out.append((pidx, clean_line, eng + "/backfill"))
     return out, n_sub, n_backfill
 
 
@@ -325,7 +401,6 @@ def main():
         if do_score:
             before = baseline_consensus_count(label)
             bpct = (100.0 * before / N) if N else 0.0
-            n_a = sum(1 for _ in ())  # placeholder; read from file meta
             meta = json.loads(out_path.read_text(encoding="utf-8")).get("_early_meta", {})
             print(f"{label:<10}{before:>8}{kept:>8}{N:>8}{bpct:>5.0f}%{apct:>5.0f}%"
                   f"{meta.get('form_a_joined', 0):>6}{meta.get('form_b_split', 0):>6}"

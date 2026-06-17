@@ -98,12 +98,20 @@ APPROVAL_RE = re.compile(
     r"|In\s+effe[ce]t\b"
     r"|Approved\s+by\s+(?:the\s+)?Governor", re.I)
 # Redirect-stub "Note" line. The leading "Note" token OCRs wildly in this era
-# (Norz / Notze / NoTE / Nore / Notre / Nonrr / Norr / Nortre ...), so match a short
-# N-leading token followed by punctuation/dash and a "(For text) see Stats. 19xx Ch."
-# pointer. The "see Stats ... Ch." pointer is the precise, low-false-positive cue.
+# (Norz / Notze / NoTE / Nore / Notre / Nonrr / Norr / Nortre ...) -- but every misread
+# is a "No"+>=2-letters token, NOT the body footnote abbreviation "No." (number). The
+# prior `\bN[A-Za-z]{1,5}` latitude admitted "No. ... see Stats. ..." body footnotes
+# as redirect notes (MAJOR-B3). FIX: anchor strictly on a genuine NOTE-family token --
+# "No" + 2-5 MORE letters (Note/NoTE/Norz/Notze/Nore/Notre/Norr/Norte/...) -- so the
+# bare 2-letter "No." abbreviation can never anchor a match. The "(For text) see/Xce
+# Stats. 19xx" pointer is kept as the precise cue ("Xce" is the common OCR read of
+# "See"); a chapter "Ch. n" pointer is NOT required because it frequently sits on the
+# next OCR line (page-break truncation) -- requiring it dropped 7 genuine 1933
+# redirect-stubs. "No. see Stats." no longer matches (No. carries no Note-family tail).
 REDIRECT_NOTE_RE = re.compile(
-    r"\bN[A-Za-z]{1,5}\.?\s*[.\-—–~]*\s*(?:[xXsS]ce|[sS]ee|For\s+text\s+see)\s+Stats\.?\s*,?\s*\d"
-    r"|For\s+text\s+see\s+Stats\.?\s*,?\s*\d", re.I)
+    r"\bNo[A-Za-z]{2,5}\.?\s*[.\-—–~]*\s*(?:For\s+text\s+)?(?:[Xx]ce|[sS]ee)"
+    r"\s+Stats\.?\s*,?\s*\d{2,4}",
+    re.I)
 RESOLUTION_RE = re.compile(
     r"Concurrent\s+Resolution"
     r"|Constitutional\s+Amendment"
@@ -129,19 +137,30 @@ def is_header_line(s: str):
     if not m:
         return None
     glyph = m.group(1)
-    # CASE GUARD: a real printed header sets "CHAPTER" in uppercase; a body cross-
-    # reference reads lowercase "chapter". HEAD_RE's class is broad, so re-check: the
-    # glyph's leading C must be uppercase AND the glyph must be all-caps-dominant.
+    # CASE GUARD: a real printed header sets "CHAPTER" in uppercase; a body / citation
+    # cross-reference reads lowercase or Title-case "Chapter" ("...repeal Chapter 32,
+    # Statutes of 1911..."). HEAD_RE's class is broad, so re-check the ORIGINAL glyph
+    # casing -- the .upper() allowlist alone let Title-case "Chapter" (which uppercases
+    # to the allowed "CHAPTER") slip through (MAJOR-B1).
     if not glyph[:1].isupper():
         return None
-    gu = glyph.upper().rstrip(".")
+    gbare = glyph.rstrip(".")
+    gu = gbare.upper()
+    # uppercase-dominance of the PRINTED glyph (all letters upper, or all-but-one for a
+    # single OCR-lowercased stroke). This is the real header signal.
+    _letters = [c for c in gbare if c.isalpha()]
+    _upper_dominant = bool(_letters) and \
+        sum(1 for c in _letters if c.isupper()) >= len(_letters) - 1
+    # accept ONLY when the printed glyph is uppercase-dominant OR is exactly the
+    # uppercase canonical "CHAPTER"/"CHAP" -- a Title-case "Chapter" citation is rejected
+    # even though it uppercases into the allowlist.
+    _exact_caps = gbare in ("CHAPTER", "CHAP")
+    if not (_upper_dominant or _exact_caps):
+        return None
     if gu not in {g.rstrip(".") for g in _GLYPH_OK}:
-        # be permissive for OCR garble but require: short, CH-leading, and the printed
-        # glyph mostly uppercase (rejects "Chapter" Title-case body lines too).
+        # OCR-garble path: be permissive but require short + CH-leading (dominance
+        # already enforced above).
         if len(glyph) > 7 or not gu.startswith("CH"):
-            return None
-        letters = [c for c in glyph if c.isalpha()]
-        if letters and sum(1 for c in letters if c.isupper()) < len(letters) - 1:
             return None
     num = int(m.group(2))
     trailing = (m.group(3) or "").strip()
@@ -241,16 +260,28 @@ def build_act(lines, start_i, end_i, chapter_int, chapter_raw, volume_year, labe
 
 
 def _load_before(label):
-    """Existing BEFORE set: confident acts from parsed_acts_recovered.json (the best
-    prior parse). Returns (list_of_acts, set_of_distinct_chapter_ints). If the file is
-    absent (early-only volumes), returns ([], set())."""
+    """Existing BEFORE set from parsed_acts_recovered.json (the best prior parse).
+    Returns (confident_acts_list, dedup_chapter_int_set).
+
+    The first element is the CONFIDENT floor only (used as the AFTER >= BEFORE
+    confident base). The SECOND element -- the dedup floor -- includes the
+    chapter_ints of BOTH confident_acts AND flagged_acts (CRITICAL-B1): a chapter
+    already present as a FLAGGED before-act must not be re-emitted here as a brand-
+    new confident act. If the file is absent (early-only volumes), returns
+    ([], set())."""
     p = ROOT / ("production-" + label) / "parsed_acts_recovered.json"
     if not p.exists():
         return [], set()
     d = json.loads(p.read_text(encoding="utf-8"))
     acts = d.get("confident_acts", [])
-    nums = {a["chapter_int"] for a in acts
-            if isinstance(a.get("chapter_int"), int) and a["chapter_int"] > 0}
+    flagged = d.get("flagged_acts", [])
+
+    def _ints(seq):
+        return {a["chapter_int"] for a in seq
+                if isinstance(a.get("chapter_int"), int) and a["chapter_int"] > 0}
+
+    # dedup floor = confident numbers UNION flagged numbers
+    nums = _ints(acts) | _ints(flagged)
     return acts, nums
 
 
