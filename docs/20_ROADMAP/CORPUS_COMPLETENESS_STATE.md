@@ -4,7 +4,7 @@
 ---
 
 ## 1. The one-paragraph truth
-**The source corpus is COMPLETE and verified — every volume is acquired and on disk, the OCR is page-complete, and the authoritative chapter-count oracle is now trustworthy.** Nothing needs re-acquiring or re-scanning. The corpus is NOT yet ingest-ready, but every remaining gap is a **parse/OCR-extraction problem recoverable from data we already hold** — plus a bounded slice of genuinely OCR-garbled headers. We are validating and refining extraction, not chasing missing material.
+**The source corpus is COMPLETE and verified — every volume is acquired and on disk, the OCR is page-complete, and the authoritative chapter-count oracle is now trustworthy.** Nothing needs re-acquiring or re-scanning. **As of 2026-06-17 the OCR corpus (1850–1999) measures 87.6% complete (confident) / 88.8% all-extracted, biennium-correct (§3a).** The corpus is NOT yet ingest-ready, but every remaining gap is a **parse/OCR-extraction problem recoverable from data we already hold** — the genuine residual is 42 regular sessions / 8,155 chapters of garbled-or-lost headers, concentrated in 1850s–70s + 1909–45. We are validating and refining extraction, not chasing missing material.
 
 ## 2. What is VERIFIED solid
 - **Source acquisition is complete.** Spot-verified against the CA Chief Clerk archive: 1915–1949 are single-volume sessions (no missing "Vol 2"); multi-volume sessions from 1951 on have every volume. The OCR for sampled sessions runs to the full oracle chapter count (1931 OCR→1220=oracle; 1933→1059=oracle).
@@ -45,7 +45,26 @@ The single most clarifying result of the campaign. The "missing ~20k chapters" t
 - **Measurement-tool bug, precise location:** the bucketing fault is in `residual_after_certify.py` (`__noleg__` bucketing when a label isn't in `LEGISLATURE_MAP`), NOT `residual_profile.py` (which does no label parsing). `LEG` was verified to CONTAIN the `NNchapters` labels (`1957-vol1-56chapters`→`1956 Regular Session`), so the even-year volumes ARE mapped — confirming §3b that they're present, and that the agent's "unparsed" sizing is the artifact.
 
 ## 3a. MEASURED completeness
-**2026-06-17 (post-certify, Hans-cleared, certify's internal totals — NOTE: denominator-deflated, see §3e):** certify non-dry run wrote 208 volumes, precision PASS, 3,213 flagged→confident (R1 2,979 + R2 234), **0 introduced dups corpus-wide.** Per-era distinct-confident vs certify's oracle_N: early **1850–79 26.5%→62.2%** (cert +2,895 — the early era was almost entirely flagged pre-cert), 1880–99 89.3%, 1900–49 66.9%, 1950–88 70.0%, 1989–99 87.6%. Internal total 84,363 / 118,206 = **71.37% — UNDERSTATED** because certify's even-year `NNchapters` denominators are inflated (§3e); true coverage is mid-to-high 80s. Authoritative re-measure via `chapter_vs_oracle.py` pending.
+
+### ★ AUTHORITATIVE (2026-06-17, `chapter_vs_oracle.py` biennium-correct, post-certify) — `_corpus_completeness_report.md`
+**The OCR-built historical corpus (1850–1999) is 87.6% complete (confident) / 88.8% all-extracted.** (83,733 of 95,555 confident; 84,895 all-extracted.) The earlier certify-internal 71.37% was the even-year denominator artifact (§3e); this is the real number, measured with the tool that keys by year+type. Self-test PASS; 216 of 222 volumes had a usable parse (the 6 without = `production-2000-vol1..6`, born-digital, no chapter-parse stage).
+
+| era | oracle_N | have | confident % |
+|---|---:|---:|---:|
+| 1850–79 | 8,123 | 5,075 | **62.5%** (weakest — italic consensus bug) |
+| 1880–99 | 2,123 | 1,816 | 85.5% |
+| 1900–19 | 6,399 | 4,465 | 69.8% |
+| 1920–49 | 16,440 | 13,133 | 79.9% |
+| 1950–88 | 50,535 | 45,845 | 90.7% |
+| 1989–99 | 13,856 | 13,399 | 96.7% |
+| 2000–24 | 21,681 | 0 | non-OCR (leginfo XML → DB, separate path) |
+
+Quality rises monotonically with era. Against the FULL 119,157 oracle, confident = 70.3% — the 23.6k difference is **entirely the 2000–24 modern era (DB, not OCR)**, not loss.
+
+**Genuine residual = 42 regular sessions below 85%, 8,155 chapters** (even-year budget sessions excluded). Top targets by absolute missing: **1915 (N771/have278/miss493 — 36%, the worst outlier)**, 1941 (miss401), 1911 (miss359), 1951 (miss341), 1971 (miss317), 1873 (303), 1877 (299), 1869 (295), 1943 (290), 1988 (276)… concentrated in **1850s–70s (early italic era) + 1909–45**. This is the real re-OCR/repair work-list.
+**False-alarm confirmations:** 2000–24 "no parse" = born-digital/DB era (2000 dirs exist, OCR done, no parse stage; 2001+ are leginfo-XML, not OCR) — NOT data loss. Even-year no-oracle-match labels (1928/1934/1938/1942/1946) = budget/extra spillover bound in odd-year volumes — harmless.
+
+### certify-internal totals (2026-06-17, post-certify — denominator-deflated, see §3e): certify non-dry run wrote 208 volumes, precision PASS, 3,213 flagged→confident (R1 2,979 + R2 234), **0 introduced dups corpus-wide.** Per-era distinct-confident vs certify's oracle_N: early **1850–79 26.5%→62.2%** (cert +2,895 — the early era was almost entirely flagged pre-cert), 1880–99 89.3%, 1900–49 66.9%, 1950–88 70.0%, 1989–99 87.6%. Internal total 84,363 / 118,206 = **71.37% — UNDERSTATED** because certify's even-year `NNchapters` denominators are inflated (§3e); true coverage is mid-to-high 80s. Authoritative re-measure via `chapter_vs_oracle.py` pending.
 
 **2026-06-16 re-measure (superseded framing — `corpus-remeasure-2026-06-16.md`):**
 First trustworthy number after the recovery passes, vs the CORRECTED oracle, biennium-correct (OCR corpus 1850–1999):
