@@ -11,6 +11,15 @@
   the prior Hans tier + 6-16 "confirmed correct" were the 1887 flip-flop repeating.** Held: 1863 (session-identity
   — `production-1863` index 538 vs the single oracle row `1863-64=476`; possible missing 14th-session row, not a
   wrong value). Details + remaining tiers: `docs/30_SYSTEM_DESIGN/sources/ORACLE_DISCREPANCY_EARLY_2026-06-17.md`.
+- **cc013 — 1860 over-count corrected (455→385); code amendments confirmed already-counted.** A duplicate-title
+  test proved the early-index **page-number contamination** failure mode: in 1860, 20/22 of the spurious "800s"
+  index entries are duplicate titles of low chapters (page numbers misread as chapter numbers), so the real
+  count is the dense run ~385 — **oracle 455→385** (total 119,737→119,667). Same artifact ruled the 1863 800s
+  contamination (18/20 dups; 14th-session count ≈538, ADD pending a session-key disambiguation). **Code
+  amendments (`-code` volumes) share the general-statutes chapter sequence** (main body roman headers run to
+  673≈oracle 679; `-code` numbers fall within 1–679) — they're **already counted in the oracle**, so no
+  undercount and no separate rows; "are all code changes counted?" = **yes**. Reliable early counts require a
+  **dense-continuous-from-1** index run; gappy indexes need body- or hand-reading.
 - **cc013 — modern era is self-indexing; no CONTENTS-page acquisition needed.** The modern body (`CHAPTER N`)
   re-derives the count and matches the oracle (1931=1220, 1945≈1527); new tool `derive_modern_from_body.py`.
   We hold every modern source PDF (chief-clerk-archive, 1861–2000); absent CONTENTS pages are an OCR-scope

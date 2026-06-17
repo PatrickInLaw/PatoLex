@@ -30,11 +30,12 @@ Verified by reading the actual `An Act` index lines (continuous real-act run pas
 **⏸ HELD — identity resolved, COUNT is not.** Approval-year histograms settle the identity: `production-1863`
 = acts approved **1863** (586 hits) = the **14th session (1863)**, which has **NO oracle row** (the single
 `1863-64 = 476` row belongs to the 15th session, matched by `production-1863-64`, approved 1864). So this is an
-oracle *addition*, not a correction. **BUT the count is NOT reliably ~538.** Structural read (2026-06-17): the
-index is a dense run 1→538, **then a gap, then a scattered 800s block (803–891), 983, 4148.** Those high numbers
-are likely the **page-number column misread as chapter numbers** — but possibly real acts whose chapter number
-was lost. So the true count is unresolved (538 ≤ N ≤ ~?). **Do NOT add a row until the 800s block is read
-page-by-page and classified (contamination vs real acts).** Not applied.
+oracle *addition*, not a correction. **COUNT now RESOLVED ≈ 538:** the duplicate-title test proved **18/20** of
+the 800s entries are page-number contamination (duplicate titles of low chapters), so the dense run ~538 is the
+real count. **ADD still held for a MECHANICAL reason, not a data one:** appending a second `session_year=1863
+regular` row would collide with the existing `1863-64` row in `find_oracle_match` (which keys on leading year +
+regular) and could mis-map `production-1863` ↔ `production-1863-64`. **Needs a matching-disambiguation decision
+(by session_label, or set the 15th to session_year 1864) before the row is added.** Ready to apply once that's settled.
 
 > Audit note: the `source_url` for the 3 edited rows still points to the clerk archive (which undercounts).
 > Values were overridden from the printed-volume index; the clerk URLs are retained as the original (now
@@ -81,7 +82,7 @@ over-count; the other two are index under-reads where the oracle is probably rig
 
 | volume | oracle N | index N | check result | recommendation |
 |---|---|---|---|---|
-| **1860** | 455 | 385 | **HELD 2026-06-17 — structural read found the same contamination:** dense run 1→385, gap to 730, scattered 800s block (800–954) + garbles (1999, 3605). The from-1 top of 385 is NOT a trustworthy count; the 800s may be page-number contamination (⇒ ~385 over-count) OR real acts with lost chapter numbers (⇒ oracle 455 may be right). | **NOT safe to edit.** Needs the 800s block read page-by-page. (My earlier "over-count confirmed" was from too narrow a read — retracted.) |
+| **1860** | ~~455~~ **385** | 385 | **✅ APPLIED 2026-06-17. Contamination PROVEN:** the duplicate-title test shows **20/22** of the 800s entries are duplicate titles of low chapters (page-number contamination), not real acts. Real count = the dense run ~385. (±~10: index dense-runs slightly over-read; historical ~374.) | oracle 455→385 applied (−70; total 119,667) |
 | 1856 | 152 | 99 | body cross-check hints ch ~150; index just truncated at 99 | **NO ACTION** — oracle ~152 probably right (index under-read) |
 | 1871-72 | 637 | 412 | huge gap; index OCR cut at 412 | **NO ACTION** — index under-read, oracle 637 likely right |
 | 1880-code | 126 | 121 | −5, OCR clipped last few | NO ACTION |
@@ -108,7 +109,7 @@ it **matches the oracle** — confirming the denominator for these sessions.
 |---|---|---|---|
 | 1850–1854 | 146–231 | **no front index in OCR** (body starts at Chapter 1); but the **body carries `Chapter N.`/`Chap. N.` headers** | derive count from the **BODY** (same as modern self-index), not the index |
 | 1861 | 538 | **32 index pages, legible**; the leftmost **chapter-number column failed to OCR** on pg3+ (titles + page-nums survive) — NOT garbage | count the `An Act` lines across the 32 pages, or column-aware re-OCR |
-| **1873-74-code** (+ -76, -78) | — | **"Amendments to the Codes"** — real code-amendment acts organized BY CODE; act numbers reach **817 > main vol's 679** | **NOT exclude.** Determine numbering: continuous (⇒ oracle undercounts the session) vs separate (⇒ own rows). Investigate. |
+| **1873-74-code** (+ -76, -78) | — | **RESOLVED 2026-06-17:** the code amendments are numbered in the **SAME chapter sequence as the general statutes**, so they're **already counted in the main oracle row.** Proof: main statutes *body* runs from-1 to **673 ≈ oracle 679** (body uses roman `CHAPTER I…`), and the `-code` chapter numbers fall **within 1–679** (the four above — 804/817/830/848 — are the same page-number contamination). | **No undercount; no separate rows.** Code changes ARE counted (answers "full code coverage?" = yes). Exclude `-code` from the *comparison* only to avoid **double-counting**, not because they're irrelevant. |
 | 1893 | 244 | **READ: index reaches ch242 → resolutions.** 242 vs 244 = −2 OCR clip | **MATCH** — no oracle change |
 | 1883-84 (non-regular) | 23 | amendments sibling of 1883-84-regular | same -code question as above |
 
