@@ -4,7 +4,7 @@
 ---
 
 ## 1. The one-paragraph truth
-**The source corpus is COMPLETE and verified — every volume is acquired and on disk, the OCR is page-complete, and the authoritative chapter-count oracle is now trustworthy.** Nothing needs re-acquiring or re-scanning. **As of 2026-06-17 the OCR corpus (1850–1999) measures 87.6% complete (confident) / 88.8% all-extracted, biennium-correct (§3a).** The corpus is NOT yet ingest-ready, but every remaining gap is a **parse/OCR-extraction problem recoverable from data we already hold** — the genuine residual is 42 regular sessions / 8,155 chapters of garbled-or-lost headers, concentrated in 1850s–70s + 1909–45. We are validating and refining extraction, not chasing missing material.
+**The source corpus is COMPLETE and verified — every volume is acquired and on disk, the OCR is page-complete, and the authoritative chapter-count oracle is now trustworthy.** Nothing needs re-acquiring or re-scanning. **As of 2026-06-17 the OCR corpus (1850–1999) measures 91.2% complete (confident), biennium-correct, after certify (+3,213) and multi-engine header recovery (+3,413) — modern eras 85–99%, early era 1850–79 still 62.5% and now the #1 lever (§3a).** The corpus is NOT yet ingest-ready, but every remaining gap is a **parse/OCR-extraction problem recoverable from data we already hold** — the genuine residual is 42 regular sessions / 8,155 chapters of garbled-or-lost headers, concentrated in 1850s–70s + 1909–45. We are validating and refining extraction, not chasing missing material.
 
 ## 2. What is VERIFIED solid
 - **Source acquisition is complete.** Spot-verified against the CA Chief Clerk archive: 1915–1949 are single-volume sessions (no missing "Vol 2"); multi-volume sessions from 1951 on have every volume. The OCR for sampled sessions runs to the full oracle chapter count (1931 OCR→1220=oracle; 1933→1059=oracle).
@@ -60,8 +60,21 @@ The single most clarifying result of the campaign. The "missing ~20k chapters" t
 
 ## 3a. MEASURED completeness
 
-### ★ AUTHORITATIVE (2026-06-17, `chapter_vs_oracle.py` biennium-correct, post-certify) — `_corpus_completeness_report.md`
-**The OCR-built historical corpus (1850–1999) is 87.6% complete (confident) / 88.8% all-extracted.** (83,733 of 95,555 confident; 84,895 all-extracted.) The earlier certify-internal 71.37% was the even-year denominator artifact (§3e); this is the real number, measured with the tool that keys by year+type. Self-test PASS; 216 of 222 volumes had a usable parse (the 6 without = `production-2000-vol1..6`, born-digital, no chapter-parse stage).
+### ★★ CURRENT (2026-06-17, after multi-engine header recovery) — `_remeasure_multiengine.md`
+**OCR corpus (1850–1999) = 91.2% complete (confident), biennium-correct.** 87,146 / 95,555; missing 8,409 (down from 11,822). The multi-engine pass (§3f/§3g) folded in **+3,413 distinct chapters** (3,554 raw, 141 capped out-of-range), all 0-dup. Floor-only re-reproduced the 87.6% baseline exactly (method validated).
+| era | floor % | + multi-engine % | gain |
+|---|---|---|---|
+| 1850–79 | 62.5% | **62.5%** (UNTOUCHED — early roman era, out of this pass's scope) | 0 |
+| 1880–99 | 90.2% | 90.2% | 0 |
+| 1900–19 | 71.6% | **84.8%** | +821 |
+| 1920–49 | 82.0% | **89.2%** | +1,149 |
+| 1950–88 | 92.6% | **95.3%** | +1,381 |
+| 1989–99 | 98.3% | **98.8%** | +62 |
+- **The early era 1850–79 (62.5%, 3,048 missing) is now the single largest deficit** — and the multi-engine framework hasn't run there yet. Per §3f sizing it's largely CHEAP (surya/doctr read the roman `CHAP. <ROMAN>` headers; consensus picked Tesseract's garble). **Highest-value next lever = a roman-numeral-aware early-era multi-engine pass.**
+- **Updated residual = 29 regular sessions <85%, 4,407 chapters.** Top: 1915 (56%/340 — still has a tail), 1941 (76%/309), 1873/1877/1869/1875/1860 (early), 1988 (84%/262); 12 of top 20 are pre-1880; 1854 worst at 26%.
+
+### ★ baseline (2026-06-17, certify only, pre-multi-engine) — `_corpus_completeness_report.md`
+**87.6% complete (confident) / 88.8% all-extracted.** (83,733 of 95,555 confident; 84,895 all-extracted.) The earlier certify-internal 71.37% was the even-year denominator artifact (§3e); this is the real number, measured with the tool that keys by year+type. Self-test PASS; 216 of 222 volumes had a usable parse (the 6 without = `production-2000-vol1..6`, born-digital, no chapter-parse stage).
 
 | era | oracle_N | have | confident % |
 |---|---:|---:|---:|
