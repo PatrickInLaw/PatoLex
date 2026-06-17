@@ -19,6 +19,40 @@ numbered 1..N with no gaps, so the last chapter number IS the count.
 - **Statutes of 1957, Regular Session = 2,424** ✔ (Chief Clerk page states "Chapters 1401–2424").
 - **Statutes of 1996, Regular Session = 1,171** ✔ (Chief Clerk page states regular-session statute chapters run to 1171; vols 1–5).
 
+## Verified corrections / confirmations — early annual sessions (2026-06-16)
+
+A verification pass re-checked the suspect early entries (1850–1879) against the
+PRIMARY source (CA Assembly Chief Clerk archive volume titles) plus scanned-volume
+cross-checks (archive.org Google digitizations; the Chief Clerk full-volume PDFs).
+Result: **one correction (1854), all other suspects confirmed unchanged.**
+
+| Session | Old | New | Confidence | Evidence |
+|---------|-----|-----|-----------|----------|
+| 1854 Regular | 71 | **174** | high | Chief Clerk 1854 page lists the volume as TWO separately-numbered series: **Laws 1–71** and **Special Laws 1–103**. Confirmed against the scanned original (archive.org `statutescalifor05greggoog`, a Google digitization of the 1854 Fifth Session print volume): general laws "LAWS OF CALIFORNIA" run Ch. 1–71, then "SPECIAL ACTS" restart at Ch. 1 and run to Ch. 103. Total statutes = 71 + 103 = **174**. The old `71` captured only the general-laws series. |
+| 1852 Regular | 202 | 202 (unchanged) | high | Chief Clerk page: single Statutes series **1–202** (Resolutions 1–29 separate). The parse's ~274 is a parse artifact, NOT a true higher count — the authoritative max is 202. |
+| 1853 Regular | 180 | 180 (unchanged) | high | Chief Clerk page: single Statutes series **1–180** (Resolutions 1–22 separate). Parse's ~301 is a parse artifact; authoritative max is 180. |
+| 1865-66 Regular | 280 | 280 (unchanged) | high | **Conflict resolved.** Chief Clerk page AND full-volume PDF (TOC at p.89) AND independent Google Books scan (`id=EPk4AQAAMAAJ`, J. Winchester 1866) all confirm the Statutes series ends at **Ch. 280**. The OCR run past 280 (283…307) is spurious. The volume has NO separate "Amendments to the Codes" numbered series (the four codes were not enacted until 1872); the only other numbered series are **Assembly Resolutions 1–35** and **Senate Resolutions 1–41** — the most likely source of the stray >280 numerals (or bleed-in from the following 1867-68 volume, which is 545). |
+
+**1850, 1851, 1855 spot-checked and confirmed single-series** (146 / 139 / 231) — no
+dual-series structure, oracle correct. No other 1850–1879 "parse > oracle" structural
+discrepancies found.
+
+### IMPORTANT structural caveat for 1854 (breaks the "max chapter = count" rule)
+
+1854 is the ONE early year where the "highest chapter number = total count" method
+does **not** apply, because the volume uses **two independent chapter sequences that
+both start at 1** (general Laws 1–71 and Special Acts 1–103). Chapters 1–71 exist in
+*both* series. For the corpus completeness check this means:
+- The expected 1854 enactment count is the **sum** of the two series = **174**, not a
+  single max.
+- Any ingest of 1854 acts MUST namespace chapter numbers by series (general vs.
+  special) to avoid collisions — a bare "Chapter 5, 1854" is ambiguous.
+- This is the likely cause of the parse's ~117: the parser caught the 71 general laws
+  plus part of the special acts but conflated/dropped some due to the restart-at-1.
+
+(This dual-series pattern was checked for and NOT found in 1850/51/52/53/55, so 1854
+appears to be an isolated case among the annual-session years.)
+
 ## Sources (in priority order)
 
 1. **CA Assembly Chief Clerk historical archive** — PRIMARY for **1850–2008**.

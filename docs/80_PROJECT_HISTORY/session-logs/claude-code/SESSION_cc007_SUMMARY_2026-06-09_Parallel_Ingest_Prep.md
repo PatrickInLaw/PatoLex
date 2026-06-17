@@ -1352,3 +1352,25 @@ out-of-range/dup. Real pool = 3,469 flagged; only **+257 safely position-recover
 (pass #3, self-Hans'd) + diagnostics + run-logs. PENDING: my own Hans-review of recover_early_consensus.py (pass #2
 didn't self-audit); audit early oracle (1852-54, 1865-66 vs actual ToCs); build the chaptered DETECTION pass
 (recover the ~54% un-extracted-but-present acts); then re-measure the whole corpus.
+
+---
+
+## Continuation 89-91 — 2026-06-16 (chaptered detection built; Hans NO-GO on both v2 scripts; oracle audited)
+
+**Chaptered detection (recover_chaptered.py, C89):** diagnosis = parser gates on enacting clause -> drops REAL
+redirect-stub acts (text in Codes vol); part of "gap" is NOT real (resolutions + mid-sentence chapter body-refs).
+Built line-head detection + approval-footer witness + redirect-stub flag + resolution exclusion. 1933 70->82%.
+Residual = genuine OCR-garbled headers (~234/276 of 1933 misses have no recognizable CHAPTER token) -> next lever
+= numeral repair / targeted re-OCR.
+
+**Hans on BOTH v2 scripts = NO-GO** (precision defects): recover_early_consensus backfill appends headers AFTER
+page body -> dropped-header acts get no body (inert) + prev act inflated (CRITICAL-A1) + unverified substitution
+ordering. recover_chaptered _load_before reads only confident_acts -> flagged-before chapters can re-emit as
+confident = DUPLICATES (CRITICAL-B1). FIX PASS DISPATCHED (a032a8c, running).
+
+**Oracle audit DONE (authoritative):** 1854 WRONG 71->174 (dual series: Laws 1-71 + Special Acts 1-103; needs
+series-namespacing at ingest). 1852/1853 correct (single series; our parse over-extracts = artifact). **1865-66 =
+280 CONFIRMED, conflict resolved**: codes weren't enacted until 1872 so NO code-amendments series; the "run past
+280" was Resolutions + bleed from the 1867-68 vol. -> oracle now trustworthy; our EARLY parse OVER-extracts
+(counts resolutions/special-acts/garble as statutes) = a precision issue for the recovery passes. ca_chapter_counts.tsv
++ NOTES updated. (Also swept repo-root scratch _b64.txt/_diag_1931.json out to scratch.)
