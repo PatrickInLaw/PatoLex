@@ -98,6 +98,42 @@ modern oracle undercounts — the modern oracle is validated by the body.**
 
 ---
 
+---
+
+## Update 2026-06-17 (afternoon) — discrepancy table, oracle edits, holds
+
+**Delivered:**
+- **Discrepancy table** `docs/30_SYSTEM_DESIGN/sources/ORACLE_DISCREPANCY_EARLY_2026-06-17.md` (6 tiers).
+- **Engine-union recall fix (analysis)** across 41 early volumes — recovered 1855/1857/1862/1869-70/1875-76/
+  1877-78 from NO_INDEX to oracle MATCH. Canonical-tool merge owes Hans ×2 (deferred, classifier outage).
+- **APPLIED 3 Patrick-approved oracle undercount corrections** to `ca_chapter_counts.tsv`: 1865-66 280→650,
+  1887 51→188, 1883 23→96. Total **119,157→119,737 (+580)**. **Validated:** all 3 have dense-continuous
+  index runs 1→N (structural check) — the edits stand.
+
+**Held (no guessing — rigor over the table's optimism):**
+- **1863** = a real MISSING session (14th, 1863; identity confirmed by approval-year histogram), but its index
+  is gappy with an 800s block → COUNT unresolved (page-number contamination suspected). Do NOT add a row yet.
+- **1860** over-count NOT confirmed after a full structural read (same 800s contamination); earlier "confirmed"
+  RETRACTED. Held.
+- **Method finding:** early index-derived counts are only trustworthy when **dense-continuous-from-1**; gappy
+  indexes suffer **page-number-column contamination** — a precision gate to add in the Hans-gated merge.
+
+**Tier 6 read directly (Patrick corrected my "exclude" call):** 1893 = MATCH (index 242 → resolutions, oracle
+244, −2 clip); 1861 = 32 legible index pages with the chapter-number COLUMN dropped pg3+ (count `An Act` lines
+or column-aware re-OCR); **1873-74-code = "Amendments to the Codes" — real code-amendment acts, MUST be counted
+not excluded** (numbers reach 817 > main 679 → possible systematic code-amendment undercount; investigate
+continuous-vs-separate numbering); 1850-54 = no front index but body has `Chapter N` headers → derive from body.
+
+## Open Items at Close (updated)
+
+| Item | Priority |
+|------|----------|
+| **1873-74-code numbering** — continuous vs separate (possible corpus-wide code-amendment undercount) | HIGH |
+| **1863 / 1860** — read the 800s blocks page-by-page (contamination vs real acts) before any oracle edit | HIGH |
+| 1850-54 body-derivation + 1861 An-Act line count | MED |
+| Engine-union → canonical `rederive_index_counts.py` + **Hans ×2** | MED (classifier up) |
+| Modern body-sweep biennium keying (polish; modern oracle already validated) | LOW |
+
 ## Lessons Learned
 
 - **READ THE VOLUME — again.** The 1865-66 "artifact" was a real undercount; the prior

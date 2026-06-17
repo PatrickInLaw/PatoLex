@@ -27,17 +27,28 @@ Verified by reading the actual `An Act` index lines (continuous real-act run pas
 | **1887** (`1887 regular`) | 51 | **188** | +137 | 0.89 | ✅ APPLIED — acts continue past 51 (ch53 "Branch State Normal School") to 188 |
 | **1883** (`1883 regular`) | 23 | **96** | +73 | 0.99 | ✅ APPLIED — acts continue past 23 to 96 (resolves the handoff "amendments?" caution by reading) |
 
-**⏸ HELD → DISAMBIGUATED 2026-06-17 — the oracle is MISSING an entire session (the 14th, 1863).**
-Approval-year histograms settle the identity: `production-1863` = acts approved **1863** (586 hits, ~0 in
-1864) = the **14th session (1863)**, index→**~538**; `production-1863-64` = acts approved **1864** (799 hits)
-= the **15th session (1863-64)** = the existing oracle row `1863-64 = 476`, which it MATCHes. So the 538 is a
-**distinct session with NO oracle row**, not a wrong value in the 476 row. **Recommended action: ADD a row
-`1863 Regular Session / 1863 / regular / ~538` (the 14th session)** — an oracle *addition* (~+538 to the
-denominator), NOT a correction. Pending Patrick's go + a tail read to confirm the exact count.
+**⏸ HELD — identity resolved, COUNT is not.** Approval-year histograms settle the identity: `production-1863`
+= acts approved **1863** (586 hits) = the **14th session (1863)**, which has **NO oracle row** (the single
+`1863-64 = 476` row belongs to the 15th session, matched by `production-1863-64`, approved 1864). So this is an
+oracle *addition*, not a correction. **BUT the count is NOT reliably ~538.** Structural read (2026-06-17): the
+index is a dense run 1→538, **then a gap, then a scattered 800s block (803–891), 983, 4148.** Those high numbers
+are likely the **page-number column misread as chapter numbers** — but possibly real acts whose chapter number
+was lost. So the true count is unresolved (538 ≤ N ≤ ~?). **Do NOT add a row until the 800s block is read
+page-by-page and classified (contamination vs real acts).** Not applied.
 
 > Audit note: the `source_url` for the 3 edited rows still points to the clerk archive (which undercounts).
 > Values were overridden from the printed-volume index; the clerk URLs are retained as the original (now
 > superseded) source. Consider updating those URLs/confidence in a follow-up.
+
+**Validation (2026-06-17):** structural check confirms all 3 applied rows have a **dense, continuous index run
+1→N** (1865-66: 1→650 then clearly-separable contamination above it; 1887: 1→188 clean; 1883: 2→96 clean) —
+unlike the gappy 1860/1863 indexes. The edits stand.
+
+> **METHOD CAVEAT (important for the canonical-tool hardening):** an early-era index-derived count is only
+> trustworthy when the run is **dense-continuous-from-1**. Gappy indexes with a high (800s/900s) block suffer
+> **page-number-column contamination** (the right-hand page number misread as the leading chapter number) and
+> their from-1 max is NOT a reliable count — they must be hand-read. The Hans-gated `rederive_index_counts.py`
+> merge should add a "dense-continuous-from-1" precision gate that demotes contaminated indexes to NO_INDEX.
 
 ---
 
@@ -70,7 +81,7 @@ over-count; the other two are index under-reads where the oracle is probably rig
 
 | volume | oracle N | index N | check result | recommendation |
 |---|---|---|---|---|
-| **1860** | 455 | 385 | **page read CONFIRMED 2026-06-17:** index tail ch382→ch385 then resolutions markers (pg17-19); nothing 386-455 | **OVER-COUNT confirmed (~385).** Recommend oracle 455→385 (downward); awaiting Patrick's explicit go before editing. |
+| **1860** | 455 | 385 | **HELD 2026-06-17 — structural read found the same contamination:** dense run 1→385, gap to 730, scattered 800s block (800–954) + garbles (1999, 3605). The from-1 top of 385 is NOT a trustworthy count; the 800s may be page-number contamination (⇒ ~385 over-count) OR real acts with lost chapter numbers (⇒ oracle 455 may be right). | **NOT safe to edit.** Needs the 800s block read page-by-page. (My earlier "over-count confirmed" was from too narrow a read — retracted.) |
 | 1856 | 152 | 99 | body cross-check hints ch ~150; index just truncated at 99 | **NO ACTION** — oracle ~152 probably right (index under-read) |
 | 1871-72 | 637 | 412 | huge gap; index OCR cut at 412 | **NO ACTION** — index under-read, oracle 637 likely right |
 | 1880-code | 126 | 121 | −5, OCR clipped last few | NO ACTION |
