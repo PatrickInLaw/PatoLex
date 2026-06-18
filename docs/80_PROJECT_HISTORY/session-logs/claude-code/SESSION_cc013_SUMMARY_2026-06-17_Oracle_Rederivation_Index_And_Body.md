@@ -134,6 +134,35 @@ continuous-vs-separate numbering); 1850-54 = no front index but body has `Chapte
 | Engine-union → canonical `rederive_index_counts.py` + **Hans ×2** | MED (classifier up) |
 | Modern body-sweep biennium keying (polish; modern oracle already validated) | LOW |
 
+---
+
+## Update 2026-06-18 — A/B resolved, session-number remodel (P0/P1)
+
+- **A (code amendments):** the 1873-74 `-code` volume shares the **same chapter sequence** as the general
+  statutes (main body roman headers → 673 ≈ oracle 679; `-code` numbers within 1–679). Already counted; no
+  undercount; no separate rows. "Are code changes counted?" = **yes.**
+- **B (held volumes resolved by duplicate-title test):** 1860's & 1863's "800s" index entries are
+  **page-number contamination** (1860: 20/22 dup titles; 1863: 18/20) — proven, not guessed.
+  **Applied 1860 455→385** (oracle total **119,667**). 1863 = the **14th session** (~538), held only on a
+  matcher mechanic.
+- **Session-number remodel (Patrick: stop year-keying, model the canonical session):** plan written
+  (`docs/30_SYSTEM_DESIGN/SESSION_NUMBER_REMODEL_PLAN.md`). P0/P1 built `build_session_reference.py`
+  (corpus-derived, 61/222 ordinals). **1863 = 14th confirmed by the ordinal sequence (13↔15).** Modern era
+  (~1905+) uses year-pair + extra/special, not ordinals → two-form (or continuous-ordinal) canonical id.
+- **Method finding:** reliable early counts require a **dense-continuous-from-1** index run; gappy indexes
+  suffer page-number contamination (precision gate for the canonical-tool merge).
+- **Delegation (2026-06-18):** Patrick will NOT review the canonical-id table — I + Hans auditors drive the
+  remodel (P2→P5) to completion, Hans-gating each phase.
+
+## Open Items at Close (updated 2026-06-18)
+
+| Item | Priority |
+|------|----------|
+| **Remodel P2** — finalize `canonical_id` for every session (correct OCR ordinals via sequence; modern year-pair) | HIGH |
+| **Remodel P3–P5** — add oracle columns, rewrite matchers, re-measure, add 1863 row — **Hans ×2** | HIGH |
+| Engine-union → canonical `rederive_index_counts.py` + Hans ×2 (separate change) | MED |
+| 1861 (32 legible index pages, column dropped) / 1850-54 body-derivation — Tier-6 tail | LOW |
+
 ## Lessons Learned
 
 - **READ THE VOLUME — again.** The 1865-66 "artifact" was a real undercount; the prior
