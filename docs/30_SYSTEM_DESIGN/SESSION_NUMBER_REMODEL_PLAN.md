@@ -38,15 +38,35 @@ not formula'd (the existing `1849+N` in the code is itself a hack and is wrong f
 extraction must handle de-hyphenation, engine-union, title-page targeting, and modern phrasing; (c) **extra-
 ordinary/special sessions** need a sub-designator in the model.
 
+## 3a. P0/P1 build results (2026-06-18) — `build_session_reference.py`
+Web sources didn't yield a machine-readable list (official PDF is image-only; Wikipedia overview lacks it), so
+per Patrick's fallback the reference is built **from the corpus's own declared ordinals** (the authoritative
+source for what we hold). Tool `pipeline/analysis/build_session_reference.py` (READ-ONLY; de-hyphenation +
+engine-union + 1..99 parser); output `_session_reference.tsv`. **Resolved 61/222 ordinals directly.** Findings:
+- **Historical era (1850–~1903): the ordinal sequence is clean and self-correcting.** 1850=1 … 1862=13 …
+  1863-64=15 → **1863 = the 14th session** (proven by the sequence even though 1863's title page didn't OCR —
+  independently confirms the missing-14th-session conclusion). OCR misreads (1855/1861/1873-74) are corrected
+  by the monotonic sequence; `ordinal_not_read` gaps fill by interpolation.
+- **Two-form canonical id, split ~1905.** From ~1905 the legislature uses **year-pair session naming
+  ("1993-94 Regular Session") + extraordinary/special designations**, NOT ordinals (the extractor returns no
+  ordinal but catches "1st/4th Extraordinary," "Special Session"). Both forms are the legislature's own identity.
+- **Exposes more year-keying damage:** `production-1900-01` declares the **34th session** (= 1901 Regular, 275)
+  but is currently matched to "1900 Extra Session = 15." The ordinal model fixes it.
+- **Re-confirms 1873-74-code = 20th session** (same as the main volume) → code amendments share the session.
+
 ## 4. Target data model (additive oracle columns)
 Add to `ca_chapter_counts.tsv` (keep existing columns for back-compat during transition):
 - `session_number` — the regular-session ordinal (int): 1, 7, 14, 15, 49, …
 - `session_kind` — `regular` | `extraordinary`
 - `extra_ordinal` — for `extraordinary`, which one (1, 2, …); `0`/blank for regular
-- `canonical_id` — derived join key, e.g. `S14` (14th regular), `S56X1` (56th legislature, 1st extra)
+- `canonical_id` — derived join key, **two-form by era** (both the legislature's own identity):
+  - historical (1850–~1903): ordinal — `S14` (14th regular), `S15`, …
+  - modern (~1905+): year-pair + kind — `1993-94R` (regular), `1994X1` (1994 1st extraordinary), `1999SP` (special)
 - (existing `session_year` retained as descriptive `years`)
 
 **Join key = `canonical_id`.** The 14th and 15th sessions become `S14` and `S15` — distinct rows, no collision.
+For modern volumes the join uses the year-pair + extraordinary/special designation the volume declares (which is
+also what retires the biennium-bucketing artifact — even-year extra sessions get their own `…X1`/`SP` id).
 
 ## 5. Establishing the numbers (the bulk of the work — two cross-checked sources)
 1. **READ each volume's declared ordinal** with a hardened extractor (de-hyphenation, engine-union over the 4
