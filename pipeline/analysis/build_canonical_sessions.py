@@ -28,7 +28,11 @@ def main():
     scratch = args.scratch.replace("\\", "/").rstrip("/")
     oracle = R.load_oracle(args.oracle)
 
-    # declared ordinals from the corpus: leading-year -> declared session_number
+    # declared ordinals from the corpus -> declared session_number, REGULAR sessions
+    # only. Keyed by EVERY year a volume's label spans (Hans CRITICAL-3: the oracle's
+    # session_year uses the START year for some biennia (1863-64->1863) and the END
+    # year for others (1873-74->1874), so a single leading-year key silently lost
+    # anchors -- register both years to match either convention).
     declared = {}
     ref_path = os.path.join(scratch, "_session_reference.tsv")
     if os.path.exists(ref_path):
@@ -39,13 +43,20 @@ def main():
                 num = c.get("session_number", "")
                 if not num.isdigit():
                     continue
-                m = re.match(r"production-(\d{4})", c["label"])
-                if m:
-                    y = int(m.group(1))
-                    # keep the first/lowest declared per year (anchor); prefer the
-                    # plain "production-YYYY"/"-YY" volumes over -code which is +1 era-shifted
-                    if y not in declared or "code" not in c["label"]:
-                        declared[y] = int(num)
+                phrase = (c.get("ordinal_phrase") or "").lower()
+                if "extraordinary" in phrase or "special" in phrase:
+                    continue  # Hans MAJOR-4: an extra-session ordinal, NOT the regular sequence
+                m = re.match(r"production-(\d{4})(?:-(\d{2}))?", c["label"])
+                if not m:
+                    continue
+                y0 = int(m.group(1))
+                years = [y0] + ([(y0 // 100) * 100 + int(m.group(2))] if m.group(2) else [])
+                n = int(num)
+                for y in years:
+                    # OCR reads ordinals one LOW (Fifth<Sixth, Eleventh<Twelfth,
+                    # Nineteenth<Twentieth -- all Hans's examples). On a per-year
+                    # disagreement keep the larger reading (the conflict list still prints).
+                    declared[y] = max(declared.get(y, 0), n)
 
     def yr(r):
         try:
@@ -53,7 +64,10 @@ def main():
         except ValueError:
             return 0
 
-    regulars = sorted([r for r in oracle if r.get("session_type") == "regular"], key=yr)
+    # Hans MINOR-2: secondary key on label so ordering is deterministic once the
+    # missing 14th (session_year=1863, tying the 1863-64 row) is added.
+    regulars = sorted([r for r in oracle if r.get("session_type") == "regular"],
+                      key=lambda r: (yr(r), r.get("session_label", "")))
     extras = [r for r in oracle if r.get("session_type") != "regular"]
 
     rows, conflicts = [], []
@@ -66,9 +80,12 @@ def main():
             conflicts.append((r.get("session_label"), y, d, i))
         rows.append([f"S{i}", "regular", str(i), str(y), r.get("session_label", ""),
                      r.get("total_chapters", ""), "" if d is None else str(d), status])
+    from collections import Counter
+    xcount = Counter()
     for r in extras:
         y = yr(r)
-        rows.append([f"{y}X", "extra/special", "", str(y), r.get("session_label", ""),
+        xcount[y] += 1  # Hans MINOR-3: unique id per year (was a bare {y}X collision)
+        rows.append([f"{y}X{xcount[y]}", "extra/special", "", str(y), r.get("session_label", ""),
                      r.get("total_chapters", ""), "", "extra"])
 
     out = os.path.join(scratch, "_canonical_sessions.tsv")

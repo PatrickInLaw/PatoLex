@@ -54,6 +54,26 @@ engine-union + 1..99 parser); output `_session_reference.tsv`. **Resolved 61/222
   but is currently matched to "1900 Extra Session = 15." The ordinal model fixes it.
 - **Re-confirms 1873-74-code = 20th session** (same as the main volume) → code amendments share the session.
 
+## 3b. P2 validation, Hans-audited (2026-06-18) — `build_canonical_sessions.py`
+P2 walks the 133 regular oracle rows chronologically, assigns ordinals, validates vs the corpus-declared
+ordinals. **Hans's first audit found the validation OVERSTATED** and three real flaws — all fixed:
+- **CRITICAL (join):** declared ordinals were keyed by the label's *leading* year, but the oracle's
+  `session_year` uses the START year for some biennia (1863-64→1863) and the END for others (1873-74→1874),
+  so biennial anchors (1877-78, **1900-01→34th**) were silently lost → "ok" meant "no anchor," not "confirmed."
+  Fixed by registering each ordinal under *both* years of the label.
+- **MAJOR (extra captures):** modern extraordinary-session ordinals ("1st/4th Extraordinary") were polluting the
+  declared map. Fixed by excluding `extraordinary|special` phrases.
+- **MINORs fixed:** deterministic sort tie-break (for when the 14th row is added), unique extra `canonical_id`s.
+
+**Post-fix result (much stronger):** the **`+1` offset is now anchored CONTINUOUSLY from 1863-64 (15) through
+1945 (56)** — ~30 anchors at nearly every biennium — the signature of exactly **one missing regular session,
+the 14th (1863)**. The duplicate-"19th" anomaly resolved correctly (1873-74 = 20, the code volume's reading;
+the main volume's "19" was an OCR one-low). Remaining non-`+1` conflicts are all OCR one-low/garble (1855, 1861,
+1937→"52"). **Honest caveat (Hans):** 1947+ has NO ordinal anchors (modern volumes use year-pair naming), so
+"only one missing session" is *confirmed 1863–1945, unverified after* — which is fine, since the modern era is
+identified by year-pair, not ordinal. The missing-14th conclusion also rests on an *independent* proof (the
+index-read duplicate-title test), so it does not depend on P2.
+
 ## 4. Target data model (additive oracle columns)
 Add to `ca_chapter_counts.tsv` (keep existing columns for back-compat during transition):
 - `session_number` — the regular-session ordinal (int): 1, 7, 14, 15, 49, …
