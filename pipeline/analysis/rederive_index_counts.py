@@ -153,9 +153,16 @@ def label_to_year_key(label):
 # Hard-code BOTH directions so _canon_decode is independent of TSV row order:
 #   bare/production-1863      -> S14  (14th regular session, 538 chapters)
 #   bare/production-1863-64   -> S15  (15th regular session, 476 chapters)
+#
+# 1949 First Extraordinary Session: label ends in `-prior`, which makes
+# parse_type() return "prior" -> year-decode fallback hits (1949, regular) = S59.
+# The volume's title page declares "First Extraordinary Session"; oracle 1949X1 N=16.
+# Mirrors the fix in chapter_vs_oracle._FALLBACK_1863 and build_volume_canonical_map.SPECIAL_VOLUMES.
 _SPECIAL_1863 = {
     "production-1863": "S14", "1863": "S14",
     "production-1863-64": "S15", "1863-64": "S15",
+    "production-1949-vol1-49chapters-prior": "1949X1",
+    "1949-vol1-49chapters-prior": "1949X1",
 }
 _SHARED_SESSION_SUFFIXES = ("-code", "-regular")
 

@@ -47,6 +47,14 @@ import chapter_vs_oracle as C  # parse_session_year / parse_type
 # The one volume whose ordinal did not OCR and whose year collides with the 15th.
 SPECIAL_1863 = {"1863": "S14"}
 
+# The 1949 First Extraordinary Session volume.  Its label ends in `-prior`, which
+# makes parse_type() return "prior" -> the fallback is (1949, regular) = S59.
+# The title page declares "First Extraordinary Session", so it belongs to 1949X1
+# (oracle: N=16).  Hard-code the bare label so all resolution paths agree.
+SPECIAL_VOLUMES = {
+    "1949-vol1-49chapters-prior": "1949X1",
+}
+
 # Suffixes that mark a volume sharing the MAIN volume's session (same canonical_id).
 SHARED_SESSION_SUFFIXES = ("-code", "-regular")
 
@@ -97,7 +105,11 @@ def resolve_label(label, by_year_type, reg_years, canonical_ids):
     Resolve a BARE volume label (no `production-` prefix) -> (canonical_id, basis).
     Returns (None, reason) when unresolved.
     """
-    # 1. special case -- S14 is the RESERVED canonical id for the missing 14th
+    # 1a. special-volume overrides (volumes whose type-suffix misleads parse_type).
+    if label in SPECIAL_VOLUMES:
+        return SPECIAL_VOLUMES[label], "special-volume(%s)" % label
+
+    # 1b. special case -- S14 is the RESERVED canonical id for the missing 14th
     # session (its oracle row is added in P5), so it is NOT yet in canonical_ids;
     # the reservation is by design, so assign it unconditionally.
     if label in SPECIAL_1863:

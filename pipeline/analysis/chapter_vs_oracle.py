@@ -134,17 +134,28 @@ def load_volume_map(path):
     return m
 
 
-# Hard-coded 1863 overrides for the no-map fallback path.
-# Both 1863 regular sessions share session_year=1863 in the oracle, so the
+# Hard-coded overrides for the no-map fallback path.
+#
+# 1863: Both regular sessions share session_year=1863 in the oracle, so the
 # (year, type) dict holds only ONE entry for (1863, "regular") -- last-writer-wins
 # is order-dependent and silently wrong for whichever row comes first.  Mirror
 # build_volume_canonical_map.py's SPECIAL_1863 intent so the fallback is
 # order-independent and always resolves correctly:
 #   1863 / production-1863     -> S14  (14th regular session, 538 chapters)
 #   1863-64 / production-1863-64 -> S15 (15th regular session, 476 chapters)
+#
+# 1949 First Extraordinary Session: the label ends in `-prior`, which makes
+# parse_type() return "prior" -> year-decode fallback hits (1949, regular) = S59
+# (N=1603). The volume is actually the First Extraordinary Session (title page:
+# "First Extraordinary Session of the Legislature"), oracle row 1949X1 N=16.
+# Hard-code the bare and production-prefixed forms so both the map path and the
+# no-map fallback path resolve to 1949X1.
 _FALLBACK_1863 = {
     "1863": "S14", "production-1863": "S14",
     "1863-64": "S15", "production-1863-64": "S15",
+    # 1949 First Extra Session -- `-prior` suffix misleads parse_type to "prior"
+    "1949-vol1-49chapters-prior": "1949X1",
+    "production-1949-vol1-49chapters-prior": "1949X1",
 }
 
 
@@ -159,11 +170,13 @@ def label_to_canonical(label, vol_map, by_year_type, reg_years):
          (decoded type, then the regular row, then the sole/first extra row).
     Returns canonical_id or None.
 
-    KNOWN ISSUE (pre-existing, not introduced here; parity guard = 0 diffs):
-      `1949-vol1-49chapters-prior` resolves to S59 (1949 Regular, N=?) via the
-      NNchapters decode (49chapters -> year 1949 -> regular row).  The volume is
-      actually the 1st Extraordinary Session of 1949 (should be 1949X1, N=16).
-      The old code made the same wrong match; we carry it forward unchanged.
+    FIXED (cc012): `1949-vol1-49chapters-prior` previously resolved to S59
+      (1949 Regular, N=1603) via the NNchapters decode (49chapters -> year 1949)
+      + parse_type returning "prior" -> regular-row fallback.  The volume is the
+      1949 First Extraordinary Session (title page: "First Extraordinary Session
+      of the Legislature"; oracle row 1949X1, N=16).  Now fixed via _FALLBACK_1863
+      override (both bare and production-prefixed forms) so all resolution paths
+      agree -- map path, no-map fallback path, and rederive_index_counts._canon_decode.
     """
     bare = strip_production(label)
     if bare in vol_map:
