@@ -122,6 +122,10 @@ also what retires the biennium-bucketing artifact — even-year extra sessions g
 - **P5** — re-measure; validate controls + applied edits; add the 1863 (14th) row; confirm the biennium
   artifact is gone.
 
+## Known issues (carried forward, not fixed here)
+
+- **1949X1 wrong match:** `1949-vol1-49chapters-prior` resolves to S59 (1949 Regular) via the NNchapters decode, but the volume is actually the 1st Extraordinary Session of 1949 (correct key: 1949X1, N=16).  Pre-existing in the old code; parity guard = 0 diffs.  Will be fixed when P5 re-measures with the full canonical map (the volume will get its own map entry).
+
 ## 9. Open questions for Patrick
 1. **Reference table source** — OK to web-fetch California's official legislative-session list, or provide one?
 2. **Modern-era identification** — confirm the modern volumes carry a usable ordinal (1931/1945 do; 1957/1999

@@ -148,21 +148,104 @@ def label_to_year_key(label):
     return int(m.group(1))
 
 
+# One-off: the bare 1863 volume (the 14th regular session; its ordinal did not
+# OCR) shares its leading year with the 15th (1863-64), so a year key collides
+# them. Canonical S14 is RESERVED for it (its oracle row is added in P5).
+_SPECIAL_1863 = {"production-1863": "S14", "1863": "S14"}
+_SHARED_SESSION_SUFFIXES = ("-code", "-regular")
+
+
+def _canon_decode(label, oracle_rows):
+    """
+    Resolve a production/bare label -> canonical_id using the same year/biennium/
+    NNchapters decode the completeness tool uses, then look up the matching
+    oracle row's canonical_id. Returns canonical_id or None. READ-ONLY; relies on
+    chapter_vs_oracle's parse primitives (imported lazily to avoid a load-time
+    cycle). Honors the 1863 special case and the shared-session suffixes so a
+    -code / -regular volume inherits its main volume's canonical_id.
+    """
+    try:
+        import chapter_vs_oracle as _C
+    except Exception:
+        return None
+    bare = label[len("production-"):] if label.startswith("production-") else label
+
+    # Build the year/type -> canonical_id index FIRST. If the oracle carries no
+    # canonical_id column at all (legacy oracle), bail out so the caller uses the
+    # original year fallback -- including for the 1863 special case, which a
+    # legacy oracle cannot represent (no S14). Behavior on the legacy oracle is
+    # therefore unchanged.
+    by_year_type = {}
+    reg_years = set()
+    for r in oracle_rows:
+        ym = re.match(r"(\d{4})", r.get("session_year", "") or "")
+        cid = (r.get("canonical_id", "") or "").strip()
+        if not ym or not cid:
+            continue
+        y = int(ym.group(1))
+        t = (r.get("session_type", "") or "").strip()
+        by_year_type[(y, t)] = cid
+        if t == "regular":
+            reg_years.add(y)
+    if not by_year_type:           # legacy oracle (no canonical_id) -> caller falls back
+        return None
+
+    if label in _SPECIAL_1863 or bare in _SPECIAL_1863:
+        return _SPECIAL_1863.get(label) or _SPECIAL_1863.get(bare)
+
+    for suf in _SHARED_SESSION_SUFFIXES:
+        if bare.endswith(suf):
+            return _canon_decode(bare[: -len(suf)], oracle_rows)
+
+    year = _C.parse_session_year(bare, reg_years)
+    typ = _C.parse_type(bare)
+    if (year, typ) in by_year_type:
+        return by_year_type[(year, typ)]
+    if (year, "regular") in by_year_type:
+        return by_year_type[(year, "regular")]
+    extras = sorted(t for (y, t) in by_year_type if y == year and t != "regular")
+    if extras:
+        pick = "extra1" if "extra1" in extras else extras[0]
+        return by_year_type[(year, pick)]
+    return None
+
+
 def find_oracle_match(label, oracle_rows):
     """
-    Map a production label to the most plausible oracle row (REGULAR session
-    preferred). Returns (oracle_session_key, oracle_N, year) or (None,None,yr).
+    Map a production label to the most plausible oracle row. Returns
+    (oracle_session_key, oracle_N, year) or (None, None, yr).
 
-    Precision-first matching: by leading year + 'regular' session type. Extra/
-    special sessions and multi-volume splits are matched only on the regular
-    row of that year (the dominant statutes volume). We do NOT try to resolve
-    extra-session volumes here -- those are reported with the regular-row
-    oracle for context and flagged accordingly downstream if ambiguous.
+    P4: when the oracle carries a `canonical_id` column, the label is resolved to
+    its canonical session id (which separates the two 1863 regular sessions a year
+    key collides) and matched to THAT row -- the source-grounded join key. The
+    year is still returned (third element) for callers that use it descriptively.
+
+    If canonical resolution is unavailable (legacy oracle with no canonical_id
+    column, or an unrecognized label), it falls back to the original precision-
+    first year match: leading year + 'regular' session type, with the second year
+    of a two-year label tried as a fallback. This keeps behavior identical on the
+    legacy oracle and for every non-collision volume.
     """
     year = label_to_year_key(label)
+
+    # --- canonical path (preferred when the oracle has canonical_id) ----------
+    cid = _canon_decode(label, oracle_rows)
+    if cid is not None:
+        row = next((r for r in oracle_rows
+                    if (r.get("canonical_id", "") or "").strip() == cid), None)
+        if row is not None:
+            try:
+                n = int(row.get("total_chapters", "") or 0)
+            except ValueError:
+                n = None
+            return (row.get("session_label"), n, year)
+        # cid resolved but has no row yet (S14 -- reserved, added in P5): report
+        # the canonical id as the key, no N. Callers treat None N as "no count".
+        return (cid, None, year)
+
+    # --- legacy year fallback (unchanged) -------------------------------------
     if year is None:
         return (None, None, None)
-    # Candidate rows for this year.
     cands = [r for r in oracle_rows if r.get("session_year") == str(year)]
     if not cands:
         # try the *second* year for two-year labels like 1865-66 -> 1866 oracle
