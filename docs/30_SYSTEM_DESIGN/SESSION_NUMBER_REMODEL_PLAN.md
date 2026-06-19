@@ -65,11 +65,16 @@ ordinals. **Hans's first audit found the validation OVERSTATED** and three real 
   declared map. Fixed by excluding `extraordinary|special` phrases.
 - **MINORs fixed:** deterministic sort tie-break (for when the 14th row is added), unique extra `canonical_id`s.
 
-**Post-fix result (much stronger):** the **`+1` offset is now anchored CONTINUOUSLY from 1863-64 (15) through
-1945 (56)** — ~30 anchors at nearly every biennium — the signature of exactly **one missing regular session,
-the 14th (1863)**. The duplicate-"19th" anomaly resolved correctly (1873-74 = 20, the code volume's reading;
-the main volume's "19" was an OCR one-low). Remaining non-`+1` conflicts are all OCR one-low/garble (1855, 1861,
-1937→"52"). **Honest caveat (Hans):** 1947+ has NO ordinal anchors (modern volumes use year-pair naming), so
+**Post-fix result (much stronger):** the **`+1` offset is anchored at ~28 points across 1863-64 (15) → 1945
+(56)** — *every anchored biennium shows +1* — the signature of exactly **one missing regular session, the 14th
+(1863)**. It is NOT literally every year: 1865-66/1867-68/1869-70, 1881, and 1905-1913 have no readable ordinal
+(no anchor, interpolated), and **1937** ("Fifty-Second" OCR'd "Firry-SEcOND" → parser mis-grabbed "2") was a
+garbage anchor — **2nd-Hans-flagged, now excluded by a magnitude gate** (|declared−assigned|>2 → OCR_GARBAGE,
+not a real anchor; chosen over Hans's `session_kind` filter, which would have dropped ~8 *legitimate* modern
+anchors that P1 mis-labeled "extra"). The 1855/1861 conflicts are OCR one-low (−1); the duplicate-"19th"
+resolved correctly (1873-74 = 20, the code volume's reading). **2nd Hans pass verdict: the four fixes pass and
+the "one missing 14th session" conclusion is SOUND** (arithmetic verified; the +1 cannot be a 2-missing or
+duplicate-row artifact given the clean 1850-1862 anchors). **Honest caveat (Hans):** 1947+ has NO ordinal anchors (modern volumes use year-pair naming), so
 "only one missing session" is *confirmed 1863–1945, unverified after* — which is fine, since the modern era is
 identified by year-pair, not ordinal. The missing-14th conclusion also rests on an *independent* proof (the
 index-read duplicate-title test), so it does not depend on P2.

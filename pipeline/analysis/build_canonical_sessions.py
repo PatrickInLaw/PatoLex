@@ -70,14 +70,22 @@ def main():
                       key=lambda r: (yr(r), r.get("session_label", "")))
     extras = [r for r in oracle if r.get("session_type") != "regular"]
 
-    rows, conflicts = [], []
+    rows, conflicts, garbage = [], [], []
     for i, r in enumerate(regulars, 1):
         y = yr(r)
         d = declared.get(y)
         status = "ok"
         if d is not None and d != i:
-            status = f"CONFLICT(declared={d}, assigned={i})"
-            conflicts.append((r.get("session_label"), y, d, i))
+            # Hans 2nd pass: a declared ordinal WILDLY off its chronological position is
+            # OCR garbage (e.g. 1937 "Fifty-Second" OCR'd "Firry-SEcOND" -> parser grabbed
+            # the substring "second"=2), NOT a real anchor. Gate at |diff|>2 so a genuine
+            # +1 (missing-14th offset) or even a real +2 still shows as a CONFLICT.
+            if abs(d - i) > 2:
+                status = f"OCR_GARBAGE(declared={d}, assigned={i})"
+                garbage.append((r.get("session_label"), y, d, i))
+            else:
+                status = f"CONFLICT(declared={d}, assigned={i})"
+                conflicts.append((r.get("session_label"), y, d, i))
         rows.append([f"S{i}", "regular", str(i), str(y), r.get("session_label", ""),
                      r.get("total_chapters", ""), "" if d is None else str(d), status])
     from collections import Counter
@@ -101,8 +109,11 @@ def main():
     print(f"declared-ordinal ANCHORS confirming the sequence: {len(anchors)}")
     print("  sample anchors:", [(a[0], a[1]) for a in anchors[:6]], "...",
           [(a[0], a[1]) for a in anchors[-4:]])
-    print(f"\nCONFLICTS (declared != assigned -> investigate): {len(conflicts)}")
+    print(f"\nCONFLICTS (declared != assigned, |diff|<=2 -> real anchors of the offset): {len(conflicts)}")
     for lbl, y, d, a in conflicts:
+        print(f"   {lbl} (year {y}): declared={d} assigned={a}  diff={d-a:+d}")
+    print(f"\nOCR_GARBAGE (declared wildly off position -> excluded, not a real anchor): {len(garbage)}")
+    for lbl, y, d, a in garbage:
         print(f"   {lbl} (year {y}): declared={d} assigned={a}  diff={d-a:+d}")
     print(f"\nWROTE {out}")
 
