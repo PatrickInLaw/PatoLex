@@ -1,0 +1,9 @@
+[2026-06-19 cc014] PHASE START | Hans found denominator-validation hole: "any signal within +-BAND = CONFIRMED" rubber-stamps undercounts. Fix + corpus-wide re-run. READ-ONLY oracle. | OK
+[2026-06-19 cc014] READ | Sweep logic, recover_multiengine_headers.py body-witness gate, body/early/floor/vmap TSVs. | OK
+[2026-06-19 cc014] BUILD | _overread_witness_check.py (4 named candidates) then _overread_corpuswide.py (auto-derive all cov>=0.75 over-reads). Reuses scan_page_headers+body_witness+is_resolution_near. | OK
+[2026-06-19 cc014] VERIFY S47/1927 | body robust_max=910 is TESS-ONLY garble of 510/506/507/556; surya+doctr read 5xx at same line positions (_s47_findhigh.py). NO real statute > 898 -> CONFIRMED (reverses brief premise). | OK
+[2026-06-19 cc014] VERIFY S45/1923 | 486/487 = tess garbles of 436/437 (surya+doctr read 436/437) -> CONFIRMED. 1938X1 27-32=resolutions -> CONFIRMED. S20/S9/S24/S29 no witnessed real statute -> CONFIRMED. | OK
+[2026-06-19 cc014] POLICY | Budget-bundle S58-S74 over-reads are bundled EXTRA-session statutes (verified 1950-vol1 holds budget+1950-1st-extra) -> remain UNPARSEABLE, not DISCREPANT. | OK
+[2026-06-19 cc014] RECLASSIFY | _reclassify_status.py: 0 flips. CONFIRMED 104 / DISCREPANT 0 / UNPARSEABLE 12 / NOT-VALIDATED 100. Trust 78.02% (unchanged). Completeness 92.1% unaffected (caps at N). | OK
+[2026-06-19 cc014] DOC | Updated ORACLE_VALIDATION_SWEEP_2026-06-19.md: methodology note, new cross-check rule, witness-verified empty discrepancy table, S47 worked, bundle non-flip, caveat #3. Session log cc014 written. | OK
+[2026-06-19 cc014] PHASE DONE | Methodology hole fixed; corpus-wide re-run finds 0 discrepant rows, now witness-verified. No git commit (per instruction). | OK
