@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-06-19
+
+- **cc013 — session-number remodel: oracle re-keyed on canonical session id; the missing 14th session (1863) added.**
+  *(Orchestrated via subagents — opus implementation, sonnet fixes — with 4 adversarial "Hans" gates.)* Replaced the
+  year-based session matching (a proxy hack that caused the **1863/1864 collision** and the recurring **biennium-bucketing
+  bug**) with a canonical session-number key. The oracle (`ca_chapter_counts.tsv`) gains `session_number` / `session_kind`
+  / `canonical_id` columns; the matchers (`chapter_vs_oracle.py`, `find_oracle_match`, new `build_volume_canonical_map.py`)
+  key on `canonical_id`, falling back to legacy `(year,type)` only when the oracle has no canonical column.
+  **Added the missing 14th session — `1863 Regular Session`, 538 chapters, `S14`** — established two independent ways: the
+  printed-index read (duplicate-title test, 18/20 of the 800s entries are page-number contamination) AND the ordinal-sequence
+  `+1` offset (~28 anchors 1863-64→1945, twice-Hans-audited). `1863-64 Regular Session` → `S15` (476). **Denominator
+  119,667 → 120,205** (216 rows, contiguous `S1..S134`). The biennium-bucketing bug class is retired (even-year extra
+  sessions get their own `{year}X{n}` ids; the 6 NNchapters extra volumes that were silently dropped now bucket correctly).
+  Reversible — pre-change backup at `project-archives/ca_chapter_counts_PRE_CANONICAL_2026-06-19.tsv`. Plan + full audit
+  trail: `docs/30_SYSTEM_DESIGN/SESSION_NUMBER_REMODEL_PLAN.md`. Known issue carried forward: `1949-vol1-49chapters-prior`
+  resolves to S59 (1949 Regular) but is the 1st Extraordinary (pre-existing, parity 0-diff).
+
 ## 2026-06-17
 
 - **cc013 — oracle denominator corrected from printed-volume indices (3 early-era undercounts).** Re-derived

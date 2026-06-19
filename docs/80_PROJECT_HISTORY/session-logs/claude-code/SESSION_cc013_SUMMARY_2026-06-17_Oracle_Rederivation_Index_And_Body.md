@@ -173,6 +173,26 @@ continuous-vs-separate numbering); 1850-54 = no front index but body has `Chapte
 | Engine-union → canonical `rederive_index_counts.py` + Hans ×2 (separate change) | MED |
 | 1861 (32 legible index pages, column dropped) / 1850-54 body-derivation — Tier-6 tail | LOW |
 
+---
+
+## Update 2026-06-19 — remodel EXECUTED (P3–P5), orchestrated
+
+The session-number remodel is **live**, done as an orchestration: I briefed subagents (opus for the careful
+implementation, sonnet for narrow fixes) and gated each phase with Hans, rather than hand-coding it.
+- **P3:** canonical columns (`session_number`/`session_kind`/`canonical_id`) backfilled into a draft oracle;
+  validated at offset 0 (43 anchors). S14 reserved for 1863.
+- **P4 (opus subagent):** rewrote `chapter_vs_oracle.py` + `find_oracle_match` + new `build_volume_canonical_map.py`
+  to key on `canonical_id`. **Parity guard: 0 diffs vs legacy on all 222 volumes.** Hans found 2 legacy-path
+  CRITICALs → sonnet fixed.
+- **P5 (opus subagent):** went live (draft→oracle) + added the **1863/S14 row (538)**. Total **119,667→120,205**,
+  216 rows. Final Hans gate cleared the DATA (contiguous S1..S134, 4 prior edits intact, reversible) but found 2
+  collision bugs in map-BYPASS paths → sonnet fixed (`_SPECIAL_1863` both-directions; `_FALLBACK_1863` + missing-map
+  warning). 5/5 re-verified.
+- **Result:** oracle keyed on canonical session id; **1863 collision fixed (S14≠S15)**; biennium-bucketing bug class
+  retired; denominator 120,205; reversible via backup. 4 Hans gates total.
+- **Orchestration lesson (Patrick):** stay in the orchestrator lane — delegate drafting/coding to subagents, keep
+  my context for briefing / review / gating / go-no-go. I was doing implementation myself for too long.
+
 ## Lessons Learned
 
 - **READ THE VOLUME — again.** The 1865-66 "artifact" was a real undercount; the prior

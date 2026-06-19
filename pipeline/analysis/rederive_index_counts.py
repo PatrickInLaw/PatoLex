@@ -148,10 +148,15 @@ def label_to_year_key(label):
     return int(m.group(1))
 
 
-# One-off: the bare 1863 volume (the 14th regular session; its ordinal did not
-# OCR) shares its leading year with the 15th (1863-64), so a year key collides
-# them. Canonical S14 is RESERVED for it (its oracle row is added in P5).
-_SPECIAL_1863 = {"production-1863": "S14", "1863": "S14"}
+# One-off: the two 1863 regular sessions share session_year=1863 in the oracle,
+# so a (year, type) dict key collides them (last-writer-wins is order-dependent).
+# Hard-code BOTH directions so _canon_decode is independent of TSV row order:
+#   bare/production-1863      -> S14  (14th regular session, 538 chapters)
+#   bare/production-1863-64   -> S15  (15th regular session, 476 chapters)
+_SPECIAL_1863 = {
+    "production-1863": "S14", "1863": "S14",
+    "production-1863-64": "S15", "1863-64": "S15",
+}
 _SHARED_SESSION_SUFFIXES = ("-code", "-regular")
 
 

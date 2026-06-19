@@ -1,7 +1,9 @@
 # Plan: model sessions by their CANONICAL SESSION NUMBER, not by folder-year
 
-**Status:** PLAN (2026-06-18, cc013). No code/oracle moved yet. For Patrick's review before execution.
-This is denominator + schema code → **Hans ×2** when built.
+**Status:** ✅ **EXECUTED & LIVE (2026-06-19, cc013).** P0–P5 complete, orchestrated via subagents with 4 Hans gates
+(P2 ×2, P4, P5). Oracle is canonical-keyed; the missing 14th session (1863, S14, 538) is added; denominator
+**119,667 → 120,205**. Reversible (backup `project-archives/ca_chapter_counts_PRE_CANONICAL_2026-06-19.tsv`). The phase
+sections below are the design/audit record. This is denominator + schema code — it received the Hans ×2 gating.
 
 ## 1. Problem
 The oracle (`ca_chapter_counts.tsv`) and the matchers (`find_oracle_match`, `chapter_vs_oracle.py`) key a

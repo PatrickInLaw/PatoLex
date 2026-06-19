@@ -134,11 +134,28 @@ def load_volume_map(path):
     return m
 
 
+# Hard-coded 1863 overrides for the no-map fallback path.
+# Both 1863 regular sessions share session_year=1863 in the oracle, so the
+# (year, type) dict holds only ONE entry for (1863, "regular") -- last-writer-wins
+# is order-dependent and silently wrong for whichever row comes first.  Mirror
+# build_volume_canonical_map.py's SPECIAL_1863 intent so the fallback is
+# order-independent and always resolves correctly:
+#   1863 / production-1863     -> S14  (14th regular session, 538 chapters)
+#   1863-64 / production-1863-64 -> S15 (15th regular session, 476 chapters)
+_FALLBACK_1863 = {
+    "1863": "S14", "production-1863": "S14",
+    "1863-64": "S15", "production-1863-64": "S15",
+}
+
+
 def label_to_canonical(label, vol_map, by_year_type, reg_years):
     """
     Resolve a parsed-chapter volume label -> canonical_id.
       1. exact lookup in the volume map (bare label, `production-` stripped);
-      2. fallback: year/biennium/NNchapters decode -> oracle row's canonical_id
+      2. 1863 special-case override (see _FALLBACK_1863 above): two regular
+         sessions share session_year=1863; year-keying alone cannot separate
+         them, so the override fires before the year-decode fallback;
+      3. fallback: year/biennium/NNchapters decode -> oracle row's canonical_id
          (decoded type, then the regular row, then the sole/first extra row).
     Returns canonical_id or None.
 
@@ -151,6 +168,11 @@ def label_to_canonical(label, vol_map, by_year_type, reg_years):
     bare = strip_production(label)
     if bare in vol_map:
         return vol_map[bare]
+    # 1863 two-regular-session override (must precede the year-decode fallback).
+    if label in _FALLBACK_1863:
+        return _FALLBACK_1863[label]
+    if bare in _FALLBACK_1863:
+        return _FALLBACK_1863[bare]
     year = parse_session_year(bare, reg_years)
     typ = parse_type(bare)
     if (year, typ) in by_year_type:
@@ -247,6 +269,21 @@ def main():
                 vm_path = cand
                 break
     vol_map = load_volume_map(vm_path)
+
+    # BUG 2(b): warn loudly when the oracle is canonical but no volume map was
+    # loaded.  The fallback (year/biennium decode) handles most volumes correctly
+    # but cannot separate the two 1863 regular sessions without the map; the
+    # hardcoded _FALLBACK_1863 override in label_to_canonical partially compensates,
+    # but any OTHER future collision would be silent.  Make the degraded state
+    # visible so a missing map is never a quiet source of wrong denominators.
+    if has_canonical and not vol_map:
+        print(
+            "WARNING: canonical oracle but no _volume_canonical_map.tsv found -- "
+            "volume->canonical resolution is degraded (using year/biennium fallback; "
+            "1863 S14/S15 is covered by a hardcoded override but other collisions "
+            "would be silent).  Run build_volume_canonical_map.py to generate the map.",
+            file=sys.stderr,
+        )
 
     # our parse: canonical_id -> set of chapter ints
     got = defaultdict(set)
