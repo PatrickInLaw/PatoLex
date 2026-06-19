@@ -193,6 +193,26 @@ implementation, sonnet for narrow fixes) and gated each phase with Hans, rather 
 - **Orchestration lesson (Patrick):** stay in the orchestrator lane — delegate drafting/coding to subagents, keep
   my context for briefing / review / gating / go-no-go. I was doing implementation myself for too long.
 
+## State at close (2026-06-19) — what remains / next
+
+**Where we are:** the chapter-completeness *denominator* (the oracle) is now on a sound, canonical footing —
+session-number-keyed, early-era undercounts corrected (1865-66/1887/1883/1863 + the missing 14th session), 1860
+over-count fixed, modern era validated via body-self-index. Denominator = **120,205**. Latest measured OCR-scope
+completeness ≈ **92%** (~89,136 / 96,821), but this should be **re-run against the corrected canonical oracle** for
+the first truly trustworthy per-era/per-session number.
+
+**Next (in priority order):**
+1. **Re-measure** completeness vs the canonical oracle → first trustworthy %, per era + per session; locate the real gaps.
+2. **Denominator long tail:** Tier-6 (1861 — 32 legible index pages, chapter-number column dropped → count `An Act`
+   lines or column-aware re-OCR; 1850–54 — derive from body `Chapter N` headers); fix the `1949-prior`→S59 known issue;
+   sweep any remaining discrepancies the canonical re-measure surfaces.
+3. **Engine-union merge** into canonical `rederive_index_counts.py` (Hans-gated) — currently applied in analysis only.
+4. **Recover the missing chapters** (~7–8%): (a) still-text-recoverable (a header exists in some engine → engine-union /
+   lenient printed-number read); (b) genuine re-OCR for the truly headerless (no engine ever read it → a NEW engine, VLM
+   candidate, thermally-guarded on the 5090) — Patrick-gated, GPU-heavy.
+5. **Merge + archive** the staged recovery outputs into one authoritative parse per volume; then (separately, Patrick-gated,
+   NOT yet) ingest. Modern 2000+ is the leginfo-XML path, not OCR.
+
 ## Lessons Learned
 
 - **READ THE VOLUME — again.** The 1865-66 "artifact" was a real undercount; the prior
