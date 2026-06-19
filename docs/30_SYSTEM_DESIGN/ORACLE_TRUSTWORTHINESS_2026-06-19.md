@@ -42,3 +42,26 @@ Cross-validate EVERY row against its own volume, then measure against the result
 
 Tools already exist (`rederive_index_counts.py` + engine-union, `derive_modern_from_body.py`) — this is running them
 comprehensively + reconciling, orchestrated via subagents with Hans gating the reconciliation.
+
+## STATUS — pass EXECUTED (cc013 sweep → cc014 witness-verified → cc015 budget range-split)
+
+The pass above has been run and is recorded in `sources/ORACLE_VALIDATION_SWEEP_2026-06-19.md`. Result:
+
+- **OCR-era regular sessions (1850–1999): 105 / 109 volume-CONFIRMED (96.3% by row, 97.0% by chapter); 0 DISCREPANT.**
+- **Full denominator: 78.1% volume-CONFIRMED, 0 DISCREPANT, 2.4% UNPARSEABLE, 19.5% NOT-VALIDATED** (the latter is
+  overwhelmingly the born-digital 2000–2024 era, out of OCR scope — denominator-trustworthy on its own SOS source).
+- **No oracle row is contradicted by its own volume** — every apparent over-read was scanned chapter-by-chapter with the
+  production cross-engine + body-witness gate and shown to be contamination / a resolution / a single-engine digit-garble /
+  a **bundled foreign-session statute**. This is *witness-verified*, not rule-dependent.
+- **The 9 even-year budget bundles** (budget session + that year's extra bound on one cid) are resolved by
+  **range-based attribution** (`pipeline/analysis/split_budget_bundle.py`): the budget session = the volume's first
+  statute-body run; its witness-checked ceiling = the budget oracle N for 8 of 9. **S74 (1964, oracle 1) is the lone
+  exception** — its volume binds the 151-chapter 1964 First Extra, not a 1-chapter budget run, so the budget statute is
+  not isolable.
+- **Residual UNPARSEABLE (4 rows): S5/1854, S54/1941, S74/1964, S99/1989** — all parse-recall / missing-OCR-content
+  under-reads (the OCR'd volume stops short of the oracle ceiling or doesn't isolate the session), oracle uncontradicted,
+  no witnessed over-read. These 4 = 2,926 chapters (2.4% of the denominator). They are *unverified*, **not** wrong.
+
+**Remaining to close the loop:** (1) a DB-side completeness + denominator pass for the born-digital 2000–2024 era
+(no DB driver on the 5090 sweep host); (2) re-OCR of the S5/S99/S54 tails (and the 1927 body, the S47 contamination
+source) would let the self-index reach the oracle ceiling and retire the 4-row residual.

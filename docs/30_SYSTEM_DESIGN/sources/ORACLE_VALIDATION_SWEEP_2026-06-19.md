@@ -1,4 +1,4 @@
-# Oracle Cross-Validation Sweep — per-row denominator validation + completeness (2026-06-19, cc013; methodology corrected cc014)
+# Oracle Cross-Validation Sweep — per-row denominator validation + completeness (2026-06-19, cc013; methodology corrected cc014; budget-bundle range-split cc015)
 
 **READ-ONLY analysis. The oracle (`ca_chapter_counts.tsv`) is NOT modified. Oracle edits are Patrick's call.**
 
@@ -23,6 +23,32 @@ This pass turns the chapter-count oracle from "spot-checked" into "volume-valida
 > row flipped — but the *basis* is now sound. Artifacts: `_overread_corpuswide.py` / `.tsv` / `.log`,
 > `_overread_witness_check.py`, `_overread_seqcheck.py`, `_overread_context.py`, `_s47_findhigh.py`,
 > `_s45_deepcheck.py`, `_reclassify_status.py`.
+
+> **cc015 budget-bundle range-split (2026-06-19).** The 12 UNPARSEABLE rows the cc014 sweep left were resolved by a
+> **range-based attribution** of the even-year budget bundles + a targeted look at the 3 near-confirms. The 9 even-year
+> budget volumes bind a tiny budget/regular session AND that year's extra session(s) onto one `canonical_id`; both
+> sessions number their chapters from CHAPTER 1, so a whole-volume self-index can't isolate the budget count. The new
+> matcher `pipeline/analysis/split_budget_bundle.py` segments each budget volume's cross-engine `CHAPTER N.` header
+> sequence into monotonic RUNS (a run breaks at a downward numbering reset), classifies each run as statute-BODY vs
+> RESOLUTION dominant, and attributes the BUDGET session to the **FIRST statute-body run** (the budget statutes print
+> first, right after the title page). **Result: 8 of the 9 budget rows CONFIRM — the first body run's witness-checked
+> ceiling equals the budget oracle N exactly** (S58 1..38, S60 1..6, S62 1..14, S64 1..10, S66 1..13, S68 1..10,
+> S70 1..13≈14, S72 1..12). **S74 (1964 budget, oracle 1) stays UNPARSEABLE** — its volume (`1965-vol1-64chapters`)
+> binds the **151-chapter 1964 First Extra** (title page p103 reads "PASSED AT THE 1964 FIRST EXTRAORDINARY SESSION"),
+> not a 1-chapter budget run; the single budget statute is not isolable. The corpus-wide over-read sweep
+> (`_overread_corpuswide.py`) was made **budget-aware**: over-reads on a budget cid are bundled **foreign extra-session**
+> statutes (a different session bound into the same volume), so budget cids are excluded from the DISCREPANT decision
+> (status `BUDGET_BUNDLE`) — **0 DISCREPANT corpus-wide still holds.** The 3 near-confirms were re-examined and all stay
+> UNPARSEABLE as **parse-recall / missing-OCR-content gaps with the oracle uncontradicted** (no witnessed over-read):
+> **S5/1854** roman body reaches 101 then the volume jumps to the resolutions appendix (ch 102–174 absent from the OCR'd
+> volume); **S54/1941** cross-engine body reaches ch1279 (3-engine + An-Act witness) with the tail headers lost;
+> **S99/1989** cross-engine body reaches ch1437 (3-engine + An-Act witness, vol3) and vol3 *continues* to p2174 with a
+> real act approved by the Governor Oct 2 1989, so ch1438–1467 are present but their CHAPTER headers didn't OCR cleanly.
+> **New OCR-era regular tally: 105/109 CONFIRMED (96.3% by row, 97.0% by chapter); UNPARSEABLE down 12 → 4 (S5, S54,
+> S74, S99); DISCREPANT still 0.** New/edited artifacts: `pipeline/analysis/dump_budget_bundle_sequence.py`,
+> `pipeline/analysis/split_budget_bundle.py` (with `--selftest`), `_budget_bundle_split.tsv`, `_reclassify_budget_split.py`,
+> `_rollup_after_split.py`, the budget-aware `_overread_corpuswide.py`, and the probes `_probe_s5*.py` / `_probe_s54.py` /
+> `_probe_s99*.py` / `_probe_1964budget.py`.
 
 ## Method (derivation signals + trust gate)
 
@@ -59,24 +85,30 @@ note this is *unverified*, **not** a contradiction of the oracle); **NOT-VALIDAT
 
 ## TASK A — per-row validation status (216 rows)
 
+**cc015 (budget-bundle range-split applied):**
+
 | status | count | share of rows |
 |---|---:|---:|
-| **CONFIRMED** | **104** | 48% |
+| **CONFIRMED** | **112** | 52% |
 | **DISCREPANT** | **0** | 0% |
-| **UNPARSEABLE** | **12** | 6% |
+| **UNPARSEABLE** | **4** | 2% |
 | **NOT-VALIDATED** | **100** | 46% |
 
-By era × status:
+By era × status (cc015):
 
 | era | CONFIRMED | DISCREPANT | UNPARSEABLE | NOT-VALIDATED | total |
 |---|---:|---:|---:|---:|---:|
-| 1850–1899 (early OCR) | 32 | 0 | 1 | 2 | 35 |
-| 1900–1949 (mid OCR) | 30 | 0 | 2 | 19 | 51 |
-| 1950–1999 (late OCR) | 42 | 0 | 9 | 42 | 93 |
+| 1850–1899 (early OCR) | 32 | 0 | 1 (S5) | 2 | 35 |
+| 1900–1949 (mid OCR) | 31 | 0 | 1 (S54) | 19 | 51 |
+| 1950–1999 (late OCR) | 49 | 0 | 2 (S74, S99) | 42 | 93 |
 | 2000–2024 (born-digital) | 0 | 0 | 0 | 37 | 37 |
 
-By kind: **regular** 97 CONFIRMED / 0 DISCREPANT / 12 UNPARSEABLE / 25 NOT-VALIDATED (134 rows);
+By kind: **regular** 105 CONFIRMED / 0 DISCREPANT / 4 UNPARSEABLE / 25 NOT-VALIDATED (134 rows);
 **extra/special** 7 CONFIRMED / 0 DISCREPANT / 0 UNPARSEABLE / 75 NOT-VALIDATED (82 rows).
+**OCR-era regular (1850–1999): 105 / 109 CONFIRMED = 96.3% by row, 97.0% by chapter.**
+
+*(Prior cc013/cc014 tally, superseded: 104 CONFIRMED / 12 UNPARSEABLE. The 8 budget bundles
+S58–S72 flipped to CONFIRMED via range-split; S74/S5/S54/S99 remain the 4-row residual.)*
 
 The 4 previously-corrected undercounts (S16 1865-66=650, S27 1887=188, S25 1883=96) + the added 14th session
 (S14 1863=538) + the 1860 fix (S11=385) + 1862 (S13=455) **all return CONFIRMED**, as expected — the volume's
@@ -111,38 +143,50 @@ derivation appeared to over-read was scanned chapter-by-chapter for a *real stat
   witnessed real statute above N (S24/S29 small over-reads resolve to within the parse's near-support of N; S9 +2 is
   an index over-read with no body witness above 358).
 
-**Budget-bundle rows (S58–S74) are a deliberate non-flip.** The witness gate *does* find real statutes above their tiny
-oracle N in the even-year "NNchapters" volumes (e.g. S60/1950: ch 7–74 real statutes over oracle 6) — but those acts
-belong to the **bundled extra session** physically bound into the same volume on the same `canonical_id` (verified in
-`_overread_corpuswide.log`: 1950-vol1-chapters holds the 6-chapter budget run *and* the 74-chapter 1950 First Extra run,
-both starting at 1). They are the documented **bundling artifact**, not an undercount of the budget session, so they
-correctly **remain UNPARSEABLE** (see the UNPARSEABLE table) rather than becoming DISCREPANT. *(Precision rule: a
+**Budget-bundle rows (S58–S74) — cc014 non-flip, cc015 RESOLVED by range-split.** The witness gate *does* find real
+statutes above their tiny oracle N in the even-year "NNchapters" volumes (e.g. S60/1950: ch 7–74 real statutes over
+oracle 6) — but those acts belong to the **bundled extra session** physically bound into the same volume on the same
+`canonical_id` (verified in `_overread_corpuswide.log`: 1950-vol1-chapters holds the 6-chapter budget run *and* the
+74-chapter 1950 First Extra run, both starting at 1). cc014 correctly kept these out of DISCREPANT (precision rule: a
 DISCREPANT verdict requires a real statute above N **that belongs to the session the cid denotes** — bundled foreign-
-session statutes do not qualify.)*
+session statutes do not qualify) but left them UNPARSEABLE. **cc015's range-split now isolates the budget session as the
+first statute-body run and CONFIRMS 8 of the 9** (the first-body-run ceiling = budget oracle N exactly); the
+over-read sweep marks these `BUDGET_BUNDLE` (excluded from DISCREPANT, validated separately by `split_budget_bundle.py`),
+so **0 DISCREPANT still holds and the bundles are now volume-CONFIRMED, not merely unverified.**
 
 **No edit is implied by this sweep.** (Contrast the earlier `ORACLE_DISCREPANCY_EARLY_2026-06-17.md`, which *did*
 surface real undercounts — those were already applied to the oracle and now reproduce as CONFIRMED.)
 
-### UNPARSEABLE rows (12) — denominator NOT independently confirmed (still trusted from the clerk source)
+### CONFIRMED via range-split (cc015) — the 8 budget bundles
 
-| canonical_id | session | oracle N | derived | why unparseable |
+The even-year budget volumes bind the budget session + that year's extra(s) on one cid. `split_budget_bundle.py`
+attributes the budget session to the **first statute-body run** (range-based split); its witness-checked ceiling
+equals the budget oracle N. **8 of 9 CONFIRM** (the extra session + resolutions split off by chapter-number range):
+
+| canonical_id | session | oracle N | first-body-run ceiling | Δ | verdict |
+|---|---|---:|---:|---:|---|
+| S58 | 1948 Regular (Budget) | 38 | 38 | 0 | CONFIRMED |
+| S60 | 1950 Regular (Budget) | 6 | 6 | 0 | CONFIRMED |
+| S62 | 1952 Regular (Budget) | 14 | 14 | 0 | CONFIRMED |
+| S64 | 1954 Regular (Budget) | 10 | 10 | 0 | CONFIRMED |
+| S66 | 1956 Regular (Budget) | 13 | 13 | 0 | CONFIRMED |
+| S68 | 1958 Regular (Budget) | 10 | 10 | 0 | CONFIRMED |
+| S70 | 1960 Regular (Budget) | 14 | 13 | −1 | CONFIRMED (±1 OCR clip) |
+| S72 | 1962 Regular (Budget) | 12 | 12 | 0 | CONFIRMED |
+
+### UNPARSEABLE residual (4, cc015) — denominator NOT independently confirmed (oracle UNCONTRADICTED, 0 over-read)
+
+| canonical_id | session | oracle N | derived | why unparseable (verified) |
 |---|---|---:|---:|---|
-| S58 | 1948 Regular (Budget) | 38 | — | even-year budget volume bundles budget+extra sessions |
-| S60 | 1950 Regular (Budget) | 6 | — | budget bundle |
-| S62 | 1952 Regular (Budget) | 14 | — | budget bundle |
-| S64 | 1954 Regular (Budget) | 10 | — | budget bundle |
-| S66 | 1956 Regular (Budget) | 13 | — | budget bundle |
-| S68 | 1958 Regular (Budget) | 10 | — | budget bundle |
-| S70 | 1960 Regular (Budget) | 14 | — | budget bundle |
-| S72 | 1962 Regular (Budget) | 12 | — | budget bundle |
-| S74 | 1964 Regular (Budget) | 1 | — | budget bundle |
-| S5 | 1854 Regular | 174 | 101 | early: no parseable front index (body-header derivation needed, not done here) |
-| S54 | 1941 Regular | 1284 | 1279 | body ceiling 1279 vs 1284 — under-read by 5, just outside ±3 (near-confirm) |
-| S99 | 1989 Regular | 1467 | 1437 | parse reaches a dense 1437; final 30 chapters (1438–1467) not parsed (completeness gap, not a count conflict) |
+| S74 | 1964 Regular (Budget) | 1 | — | `1965-vol1-64chapters` binds the 151-ch **1964 First Extra** (title page p103: "PASSED AT THE 1964 FIRST EXTRAORDINARY SESSION"), not a 1-chapter budget run; the single budget statute is not isolable |
+| S5 | 1854 Regular | 174 | 101 | roman body reaches **101** (cov-dense from 1), then the volume jumps to the JOINT/CONCURRENT RESOLUTIONS appendix (p219–230) — ch 102–174 are **absent from the OCR'd volume** (partial scan); parse-recall gap |
+| S54 | 1941 Regular | 1284 | 1279 | cross-engine body reaches **ch1279** (3-engine + An-Act witness, p2826); ch1280–1284 lost to tail header dropout (volume continues to p3154); ch1281 is a single-engine garble (rejected) — gap of 5 |
+| S99 | 1989 Regular | 1467 | 1437 | cross-engine body reaches **ch1437** (3-engine + An-Act witness, vol3 p2162); vol3 *continues* to p2174 with a real act (Approved Gov Oct 2 1989), so ch1438–1467 are **present** but their CHAPTER headers didn't OCR cleanly — gap of 30 |
 
-These 12 sum to **3,043 chapters (2.5% of the denominator)**. The 9 budget rows are tiny (1–38 each, 108
-chapters total); S54 and S99 are near-confirms where the parse stops a few chapters below the oracle ceiling.
-None contradicts the oracle — they are simply *not independently re-derived* by this pass.
+These 4 sum to **2,926 chapters (2.4% of the full denominator)**. S74 is tiny (1 ch); S5/S54/S99 are parse-recall
+under-reads where the volume's content stops a few/many chapters below the oracle ceiling. **None contradicts the
+oracle** (cross-engine max ≤ oracle N in every case — no witnessed over-read) — they are simply *not independently
+re-derived* because the OCR'd volume is missing the tail content (S5, S99, S54) or the session isn't isolable (S74).
 
 ---
 
@@ -182,12 +226,17 @@ Measured by `chapter_vs_oracle.py` against the LIVE canonical oracle + `_volume_
 
 ### Denominator confirmation (all 216 rows, total 120,205 chapters)
 
+**cc015 (after budget-bundle range-split):**
+
 | validation status | chapters | share of full denominator |
 |---|---:|---:|
-| **CONFIRMED** (volume-confirmed) | **93,780** | **78.0%** |
+| **CONFIRMED** (volume-confirmed) | **93,897** | **78.1%** |
 | DISCREPANT | 0 | 0.0% |
-| UNPARSEABLE (unverified, OCR era) | 3,043 | 2.5% |
+| UNPARSEABLE (unverified, OCR era — S5/S54/S74/S99) | 2,926 | 2.4% |
 | NOT-VALIDATED | 23,382 | 19.5% |
+
+*(cc013/cc014 was 93,780 CONFIRMED / 3,043 UNPARSEABLE; the budget range-split moved the
+8 small budget bundles from UNPARSEABLE to CONFIRMED — 117 chapters — leaving the 4-row residual.)*
 
 The 19.5% NOT-VALIDATED splits into two very different buckets:
 
@@ -222,9 +271,14 @@ The 19.5% NOT-VALIDATED splits into two very different buckets:
 1. **Born-digital era is unmeasured here** (no DB access on the sweep host). The headline 92.1% completeness is
    **OCR-era 1850–1999 only**; a separate DB-side pass is needed for 2000–2024 completeness + denominator
    confirmation against SOS totals.
-2. **Budget-bundle UNPARSEABLE (9 rows)** rests on the volume-map collapsing even-year budget+extra volumes onto
-   one `canonical_id`. The *count* is unverified, but the bundling itself is a known modelling choice, not a bug
-   surfaced here.
+2. **Budget-bundle (cc015 RESOLVED).** The 9 budget rows that were UNPARSEABLE are now range-split: 8 CONFIRM (first
+   statute-body run = budget oracle N, witness-checked), S74 stays UNPARSEABLE (151-ch First Extra bound, not isolable).
+   **Re-verify target for Hans:** run `pipeline/analysis/split_budget_bundle.py` (it has a `--selftest`) and confirm each
+   first-body-run ceiling equals the budget oracle N; confirm the over-read sweep marks budget cids `BUDGET_BUNDLE`
+   (excluded from DISCREPANT because the high chapters are the bundled EXTRA session). The over-read EVIDENCE for the
+   non-flip is in `_overread_corpuswide.log` (e.g. S60/1950: ch 7–74 are real 1950-First-Extra statutes on pages 172–289,
+   AFTER the budget run's ch 1–6 on pages 2–109). Confirm S74's volume title page (`_probe_1964budget.py`, p103) reads
+   "PASSED AT THE 1964 FIRST EXTRAORDINARY SESSION" — proving its 151-ch body run is the extra session, not the budget.
 3. **"No DISCREPANT" is now witness-verified (cc014), not rule-dependent.** The old caveat — that the result rested on
    "any confirming signal wins" and a contaminated signal landing near N could mask a discrepancy — is **resolved**. Every
    trustworthy over-read (S47 1927, S45 1923, S20 1873-74, 1938X1, S9, S24, S29) was scanned chapter-by-chapter for a
@@ -234,8 +288,14 @@ The 19.5% NOT-VALIDATED splits into two very different buckets:
    tess reads 9xx (they do), and confirm the budget-bundle non-flip policy (S58–S74 over-reads are bundled extra-session
    statutes — they stay UNPARSEABLE). A future re-OCR of the 1927 body would let the body self-index report 556/506/507/510
    instead of 900/906/907/910 and remove this contamination at the source.
-4. **S54 (1941, −5) and S99 (1989, −30)** are flagged UNPARSEABLE but are really near-confirm under-reads; they
-   are not evidence the oracle is wrong, only that the parse stops just short.
+4. **S54 (1941, −5), S99 (1989, −30), S5 (1854, −73)** are flagged UNPARSEABLE but are near-confirm / parse-recall
+   under-reads, **not** evidence the oracle is wrong. cc015 verified each: S54 cross-engine body reaches ch1279
+   (3-engine + An-Act witness, `_probe_s54.py`); S99 reaches ch1437 and vol3 *continues* to p2174 with a real
+   Gov-approved act, so ch1438–1467 exist but their headers didn't OCR (`_probe_s99*.py`); S5 reaches ch101 then the
+   volume jumps to the resolutions appendix — ch102–174 are absent from the OCR'd volume (`_probe_s5*.py`). All have
+   cross-engine max ≤ oracle N (**no over-read**), so the oracle is uncontradicted. **Re-verify for Hans:** confirm none
+   of the three produces a witnessed real statute ABOVE its oracle N (they do not — the residual is recall, not a
+   conflict).
 
 ---
 
