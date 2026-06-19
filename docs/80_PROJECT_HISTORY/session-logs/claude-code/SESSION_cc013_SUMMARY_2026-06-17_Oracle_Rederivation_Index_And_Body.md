@@ -153,6 +153,16 @@ continuous-vs-separate numbering); 1850-54 = no front index but body has `Chapte
   suffer page-number contamination (precision gate for the canonical-tool merge).
 - **Delegation (2026-06-18):** Patrick will NOT review the canonical-id table — I + Hans auditors drive the
   remodel (P2→P5) to completion, Hans-gating each phase.
+- **P2 + Hans (2026-06-18):** `build_canonical_sessions.py` assigns ordinals to the 133 regular rows +
+  validates vs corpus-declared ordinals. **Hans's 1st audit caught a real join bug** (declared keyed by
+  leading-year, but the oracle's `session_year` uses START year for some biennia / END for others →
+  biennial anchors like 1877-78 and 1900-01→34th silently lost), plus overreach and unfiltered
+  extraordinary-session captures — **all fixed**. Re-run: the **`+1` offset is anchored CONTINUOUSLY
+  1863-64 (15) → 1945 (56), ~30 anchors** → single missing 14th session strongly supported; the duplicate-"19th"
+  resolved correctly (1873-74 = 20). Honest caveat (Hans): 1947+ has no ordinal anchors (modern year-pair
+  regime) → "one missing session" confirmed 1863–1945, unverified after. Plan §3b.
+- **Next:** fresh 2nd Hans pass on the corrected P2 (twice-for-denominator), then P3→P5 (oracle schema
+  columns + matcher rewrite + add the 1863 row), each Hans-gated.
 
 ## Open Items at Close (updated 2026-06-18)
 
