@@ -10,7 +10,7 @@ Single source of truth + tiered offsite backup for the PatoLex corpus data (OCR 
 ## Tiers
 | Tier | Location | Holds | Why |
 |------|----------|-------|-----|
-| **HOT / canonical** | **5090** local SSD (`C:\Users\patolex\PatoLex-scratch`, 1.8 TB / ~318 GB free) | active corpus: `production-*/ocr_consensus` + `parsed_acts*`, `_cascade` | GPU work reads local SSD at full speed; the single source of truth |
+| **HOT / canonical** | **5090** local SSD (`C:\PatoLex-scratch` — relocated 2026-06-19 out of the `patolex` user profile so any account can read/write it; resolved machine-wide via `PATOLEX_LOCATION_ROOT` / `config.py`; 1.8 TB / ~318 GB free) | active corpus: `production-*/ocr_consensus` + `parsed_acts*`, `_cascade` | GPU work reads local SSD at full speed; the single source of truth |
 | **WARM / backup** | **3060 `F:` SSD** share `\\192.168.1.78\plwarm` (F:\PatoLex, 2 TB / ~1 TB free) | full replica of the active corpus | offsite (8 mi) DR replica; SSD |
 | **COLD / archive** | **3060 `D:` HDD** share `\\192.168.1.78\plcold` (D:\PatoLexCold, 1 TB / ~855 GB free) | `page-renders` (regenerable) and other keep-but-slow data | cheap bulk; HDD speed irrelevant (WAN/Wi-Fi-bound) |
 
