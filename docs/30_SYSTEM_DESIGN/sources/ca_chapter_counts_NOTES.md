@@ -81,10 +81,15 @@ appears to be an isolated case among the annual-session years.)
 - **1850–1863: annual sessions**, single-year volumes.
 
 - **1863/64–1905/06: biennial sessions**, one combined volume per two-year session.
-  Rows are keyed to the session label (e.g. `1863-64`, `1865-66`). The session that
-  met Dec 1863–Apr 1864 appears in the archive under both a standalone `1863` page and
-  a `1863-64` page with the **same** 476-chapter count — these are one session; the
-  TSV keeps a single row (`1863-64`, 476) to avoid double-counting.
+  Rows are keyed to the session label (e.g. `1863-64`, `1865-66`).
+  **CORRECTION (2026-06-20):** `1863` and `1863-64` are NOT one session — they are TWO
+  distinct sessions, verified from the official volumes' own title pages: the **14th Session
+  (1863)** met Jan 5–Apr 27, 1863 and has **536 statutes** (`1863_Statutes.pdf`, 863 pp, `S14`);
+  the **15th Session (1863-64)** met Dec 1863–Apr 1864 and has **476 statutes**
+  (`1863-64_Statutes.pdf`, 644 pp, `S15`). The TSV correctly keeps BOTH rows. The earlier
+  "one session, 476" claim came from the clerk's web archive-list **metadata**, which
+  erroneously shows "Statutes 1-476" on the `1863` page too (the same metadata bug that shows
+  1860 as "1-455" when the actual volume is 371) — see `EARLY_ERA_TOA_SWEEP_2026-06-20.md`.
 
 - **1880 transition:** California shifted to odd-year regular sessions; 1880 was a
   one-off. From 1881 onward regular sessions are odd years (1881, 1883, 1885 ...).
