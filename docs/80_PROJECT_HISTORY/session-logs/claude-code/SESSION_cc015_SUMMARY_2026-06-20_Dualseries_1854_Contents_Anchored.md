@@ -51,6 +51,14 @@
 - **Born-digital 2009–2024 diagnosed (DEFERRED per Patrick — finish OCR era first).** DB real data stops at 2024 (junk dates 1831/2030 = OCR mis-attribution); 2025 not ingested, 2026 in-progress. The 2009–2024 ~10% gap is SCATTERED missing chapters (2024 missing 98 of 1017 — not a tail) → a Gate-F ingest skip, not a source gap. Later fix: re-run/extend Gate-F ingest 2009–2026 from CA SOS.
 - **NEXT (active): close the 1900–1999 OCR ~8% parse-recall gap** — OCR header dropout (bodies present in OCR, page-top "CHAPTER N" header didn't OCR → parser missed the chapter). Worst: 1915 (56%), 1919 (58%), 1941 (76%), 1943 (83%). Use the existing header-recovery pipeline (`pipeline/ingest/recover_*.py`; LESSON_2026-06-14).
 
+## cc015 — 1900–1999 parse-recall gap: best-of MERGE (IN PROGRESS)
+
+- **Diagnosis:** the modern-OCR "8% gap" was largely **unmerged parse passes** — certified / chaptered_v2 / repaired / recovered / multiengine / lostheader each catch a DIFFERENT subset; none was ever unioned. (1915: certified alone 278/771 = 36%; union 482.)
+- **`pipeline/ingest/merge_passes.py` (NEW):** per-volume best-of merge — for each chapter №, the act from the highest-precedence pass; capped at oracle N; precision filter (low-pass add needs page-monotonicity OR a real "An act" title). **Result: 1900–1999 raw union ≈ 95.5%** (79,821/83,550 mapped), up from the measured ~88–92%. Additive `parsed_acts_merged.json` per volume.
+- **Hans verdict on the raw merge: UNSOUND** — OCR digit-garble **same-act duplicates** (one act under two chapter numbers): 5 proven in 1915 (203≡208, 296≡256, 438≡488, 610≡619, 636≡686), similar elsewhere incl. the *trusted* passes. ~1% inflation → would become 2 DB rows per statute at ingest.
+- **Auto-dedup FAILED (documented honestly):** title-similarity over-flags boilerplate (2,556 flagged, mostly two-different-acts-on-one-page false positives); page-arithmetic "which twin to keep" picked the garble twice. Switched to **flag-only** (no wrong removals). True completeness ≈ 94–94.5%.
+- **NEXT (active): OCR-header dedup** — the reliable fix: read each conflict page's actual `CHAPTER N` header (both numbers present → two real acts, keep both; only one present → collapse the digit-garble twin). Ground-truth based, Hans-gateable.
+
 ## Open Items at Close
 
 - **NEXT:** point the contents/index-anchoring method at the next target — the other residual rows / the modern-era **NO_INDEX denominator gap** (now solvable on-box: all `*_Index.pdf` are local).
