@@ -17,5 +17,11 @@
 - Source PDFs (653, incl. indexes): **`C:\PatoLex-scratch\chief-clerk-archive`**
 - Repo: `C:\github\PatoLex` · Oracle (read-only): `C:\github\PatoLex\docs\30_SYSTEM_DESIGN\sources\ca_chapter_counts.tsv`
 
+## Postgres DB access (5090 → 5080, set up 2026-06-20)
+The system-of-record `patolex` Postgres lives on the **5080** (DB `patolex`, 35,332 enactments; 7-table event-sourced schema: `enactment`, `provision`, `provision_version`, `source_document`, `change_event`, `designation_history`, `lineage_edge`). It is now reachable from the 5090 **over the Tailnet only**:
+- 5080 PG `listen_addresses = *`; added `pg_hba.conf` rule `host patolex postgres 100.64.0.0/10 scram-sha-256` (reloaded); Windows Firewall rule **"PatoLex PG Tailnet"** allows inbound TCP **5432 from `100.64.0.0/10` only**. Verified live (returns 35,332 enactments).
+- **The DSN lives in the 5090's gitignored `C:\github\PatoLex\.env.local`** (`DATABASE_URL` + `PATOLEX_PG_DSN`), pointing at the **5080's Tailscale IP `100.108.42.91:5432/patolex`** (user `postgres`). The credential is NOT in git — read it from `.env.local`. Sanity check: `select count(*) from enactment` → 35332.
+- If a connection times out later, the 5080 session can re-check the firewall rule + `pg_hba.conf` + that PG is running.
+
 ## What did NOT change
 All corpus-completeness content in `HANDOFF_5090_OPUS_2026-06-17.md` remains valid: the tools (`certify_chapters.py`, `recover_multiengine_headers.py`, `recover_lost_header.py`, `chapter_vs_oracle.py`, `rederive_index_counts.py`), the 92.7% measurement, the residual decomposition, the lessons, and the oracle-error findings. Only the **scratch path** and the **"source location / 5090 has the canonical set" claims** are superseded by this doc.
