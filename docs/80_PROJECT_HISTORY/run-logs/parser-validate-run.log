@@ -7,3 +7,8 @@
 [2026-06-02 00:35 PT] TASK-B | Characterized 1875-76-code (120pp). Code-amendment acts: 'Chap N.-An Act to amend section(s) <spelled> of the <Code> Code' + per-Sec directives w/ 'said Code' anaphora. Existing parser: 68 conf/4 flagged but semantically wrong (mints act_sections) | OK
 [2026-06-02 00:40 PT] TASK-B | Design doc written: CODE_AMENDMENT_PARSE_DESIGN_2026-06-02.md (Method A: directive->change_event on 1872 baseline provision). 7 open questions incl 1872-baseline blocker | OK
 [2026-06-02 00:42 PT] DONE | Throwaway scripts removed. No DB writes, no ingest, no queue touched | OK
+[2026-06-20 06:30 PT] MODERN-PRIMARY-SRC | Belt-and-suspenders 1900-1999 denominator spot-check: opened actual scanned *_Chapters.pdf bodies (1915/1925/1935/1945/1965/1975) read-only | OK
+[2026-06-20 06:30 PT] FINDING | Modern volumes append separate RESOLUTION/ConstAmend CHAPTER 1..N series + relocate long flagship acts -> physical tail header != body max; "last CHAPTER N" unreliable as denominator. Recorded in LESSON_2026-06-20_dualseries addendum | OK
+[2026-06-20 06:30 PT] DENOM | No contradicting/over-read modern denominator found (no early-era-style oracle error); body-OCR derivation (MAX-over-volume + range-split) confirmed sound | OK
+[2026-06-20 06:30 PT] COMPLETENESS | Modern parse completeness ~92% (capped distinct/oracle); per-year zero/over-read rows are mostly label->session mapping artifacts not true gaps | WARN
+[2026-06-20 06:30 PT] DB | No psycopg/psycopg2/asyncpg/pg8000, no psql on PATH -> Task3 born-digital DB count OUT-OF-SCOPE (expected; 2000-2024 already NOT-VALIDATED in oracle status) | OK
