@@ -1,0 +1,5 @@
+[2026-06-20 00:00 PT] INIT | visual-1947 campaign started | OK
+[2026-06-20 00:00 PT] STEP-0 | ran _residual_manifest.py 1947 -> missing_count=0, present=1577 | OK
+[2026-06-20 00:00 PT] RESULT | 1947 already at 100% chapter coverage -- no visual recovery required | OK
+[2026-06-20 00:00 PT] OUTPUT | wrote empty parsed_acts_visual.json to C:\PatoLex-scratch\production-1947-vol1-chapters\ (verified=0, targeted=0) | OK
+[2026-06-20 00:00 PT] DONE | campaign complete -- 0 missing, 0 image-verified, 0 not_found, 0 mismatches | OK
