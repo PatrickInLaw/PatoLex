@@ -73,3 +73,53 @@ verification witness only.
 **2 not_found scan-gap** (906, 907 on un-scanned printed leaf 1648). Outputs:
 `C:\PatoLex-scratch\production-1970-vol1-chapters\parsed_acts_visual.json` and
 `...\production-1970-vol2-chapters\parsed_acts_visual.json`.
+
+## Reinforcement from the 1959 campaign (2026-06-21) — OCR-text-only "gap" calls are NOT trustworthy
+
+1959 had 7 residual-missing chapters (857, 1000, 1001 in vol1-59chapters; 1332, 2123, 2128,
+2159 in vol2-chapters). A first pass that relied **only on OCR text** (searching all 4 engines
+for `CHAPTER NNN`) concluded **5 legislative gaps + 2 scan gaps, 0 verified**. Image
+verification proved that conclusion almost entirely **WRONG**: **6 of the 7 were actually
+present** and image-verified; only **1** (ch1001) is a real scan gap.
+
+Every false "gap" had the same root cause flagged in the campaign brief: the page-top
+**running head was systematically OCR-garbled/dropped**, so a text search for the heading
+found nothing even though the chapter is plainly on the page. Three sub-patterns:
+
+- **Dense multi-chapter pages** (ch857: ch857+858+859 all on one printed page; ch1332, ch2128
+  share their page with the next chapter). OCR latched onto one heading and dropped the
+  others.
+- **Long preceding act** (ch2123 follows the ~13-page Nevada County Water Agency act; ch2159
+  follows a long B&P-Code act) — the missing heading sits deep in a run of body pages.
+- **Last chapter of a volume** (ch1000 is the final chapter of vol1-59chapters, printed pages
+  3021–3022) — easy to mistake for "volume ends at ch999."
+
+Additional correctness traps seen in 1959:
+- The residual manifest's neighbor pages came from the **same garbled OCR** and were
+  cross-contaminated / out of order (e.g. ch856 and ch858 reported at swapped pages around
+  ch857). **Do not trust manifest neighbor pages to bound the search — render and read.**
+- A claimed "pattern of legislative gaps 848–896" was a pure OCR artifact; those chapters are
+  present on dense multi-chapter pages.
+
+**Hardened rule:** never emit `legislative_gap` (or `not_found`) from OCR text absence alone.
+A residual-missing chapter is only a gap after the **page image** at the expected location has
+been rendered and read and the heading is confirmed absent AND the printed running-head page
+numbers are sequential across the boundary (ruling out a scan gap). In practice, mid-century
+"missing" chapters are overwhelmingly **present-but-header-garbled**, not gaps.
+
+### 1959 image-to-source mapping note
+1959 volumes use the OCR `page_1indexed` convention (consensus JSON key + 1 = `page_1indexed`,
+= PDF page index + 1). The printed page number drifts far from `page_1indexed` (e.g. ch1000 at
+`page_1indexed` 2430 is printed page **3021**). Records use `source_page` = `page_1indexed`;
+the printed number is a verification witness only. vol1-59chapters has `pages_raw/`;
+vol2-chapters does **not** — pages were rendered on demand from
+`chief-clerk-archive/1959_Vol2_Chapters.pdf` (PyMuPDF, PDF idx = consensus key) to temp images
+under `C:\PatoLex-scratch`.
+
+## Result for 1959
+
+7 residual-missing → **6 image_verified** (857, 1000, 1332, 2123, 2128, 2159),
+**0 legislative_gap**, **1 not_found scan-gap** (1001, between vol1-59's last chapter ch1000
+and vol2's first chapter ch1002 — no available PDF covers it). Outputs:
+`C:\PatoLex-scratch\production-1959-vol1-59chapters\parsed_acts_visual.json` (857, 1000, 1001)
+and `...\production-1959-vol2-chapters\parsed_acts_visual.json` (1332, 2123, 2128, 2159).

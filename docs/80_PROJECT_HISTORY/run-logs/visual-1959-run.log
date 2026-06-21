@@ -1,0 +1,29 @@
+[2026-06-21 14:39 PT] VISUAL-1959 | Visual recovery pass START | OK
+[2026-06-21 14:39 PT] VISUAL-1959 | Chapter 857: not found after searching 37 pages | WARN
+[2026-06-21 14:39 PT] VISUAL-1959 | Chapter 1000: not found after searching 2427 pages | WARN
+[2026-06-21 14:39 PT] VISUAL-1959 | Chapter 1001: not found after searching 2427 pages | WARN
+[2026-06-21 14:39 PT] VISUAL-1959 | Chapter 1332: No CHAPTER 1332 text found in 3-page range [583,585] -- likely legislative gap | WARN
+[2026-06-21 14:39 PT] VISUAL-1959 | Chapter 2123: not found after searching 32 pages | WARN
+[2026-06-21 14:39 PT] VISUAL-1959 | Chapter 2128: not found after searching 21 pages | WARN
+[2026-06-21 14:39 PT] VISUAL-1959 | Chapter 2159: not found after searching 36 pages | WARN
+[2026-06-21 14:39 PT] VISUAL-1959 | Visual recovery pass COMPLETE: 0 verified, 1 gaps, 6 not found | OK
+[2026-06-21 14:43 PT] VISUAL-1959 | Visual recovery pass v2 START (post-diagnostic, manually-confirmed results) | OK
+[2026-06-21 14:43 PT] VISUAL-1959 | Visual recovery v2 COMPLETE: 0 verified, 5 legislative gaps, 2 scan gaps (ch1000/1001 between vol1-59 and vol2) | OK
+[2026-06-21 14:44 PT] VISUAL-1959 | Visual recovery pass v2 START (post-diagnostic, manually-confirmed results) | OK
+[2026-06-21 14:44 PT] VISUAL-1959 | Chapter 857: legislative_gap | OK
+[2026-06-21 14:44 PT] VISUAL-1959 | Chapter 1000: not_found_needs_reocr | WARN
+[2026-06-21 14:44 PT] VISUAL-1959 | Chapter 1001: not_found_needs_reocr | WARN
+[2026-06-21 14:44 PT] VISUAL-1959 | Chapter 1332: legislative_gap | OK
+[2026-06-21 14:44 PT] VISUAL-1959 | Chapter 2123: legislative_gap | OK
+[2026-06-21 14:44 PT] VISUAL-1959 | Chapter 2128: legislative_gap | OK
+[2026-06-21 14:44 PT] VISUAL-1959 | Chapter 2159: legislative_gap | OK
+[2026-06-21 14:44 PT] VISUAL-1959 | Visual recovery v2 COMPLETE: 0 verified, 5 legislative gaps, 2 scan gaps (ch1000/1001 between vol1-59 and vol2) | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | v3 START (IMAGE verification -- OCR-only v2 was unreliable; running heads systematically garbled, exactly the warned failure mode) | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | Chapter 857: IMAGE-VERIFIED (PDF idx 2304, printed 2306, p1idx 2305) 'An act to add Sec 65020.1/65020.2 Government Code, Local Planning Advisory Committee' -- v2 'legislative_gap' was WRONG (dense multi-ch page) | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | Chapter 1000: IMAGE-VERIFIED (PDF idx 2429, printed 3021, p1idx 2430) 'An act to amend Sec 86 Agricultural Code, district agricultural associations' -- v2 'not_found' was WRONG (last ch of vol1-59, garbled head) | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | Chapter 1001: confirmed SCAN GAP -- vol1-59 ends at ch1000 (printed 3022, last page), vol2 starts at ch1002; ch1001 absent from all available PDFs -> not_found_needs_reocr | WARN
+[2026-06-21 15:10 PT] VISUAL-1959 | Chapter 1332: IMAGE-VERIFIED (PDF idx 584, printed 3606, p1idx 585) 'An act to amend Sec 22717/add 22650.5 Water Code, irrigation districts' -- v2 'legislative_gap' was WRONG | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | Chapter 2123: IMAGE-VERIFIED (PDF idx 1957, printed 4979, p1idx 1958) 'An act to create Sierra County Flood Control and Water Conservation District' -- v2 'legislative_gap' was WRONG | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | Chapter 2128: IMAGE-VERIFIED (PDF idx 2008, printed 5030, p1idx 2009) 'An act to add Sec 12627.3/12627.4 Water Code, water seepage and erosion' (ch2128 top of page, ch2129 below) -- v2 'legislative_gap' was WRONG | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | Chapter 2159: IMAGE-VERIFIED (PDF idx 2205, printed 5227, p1idx 2206) 'An act amending B&P Code, Collection Agency Act' -- v2 'legislative_gap' was WRONG; ch2160 also present | OK
+[2026-06-21 15:10 PT] VISUAL-1959 | v3 COMPLETE: 6 IMAGE-VERIFIED (857,1000,1332,2123,2128,2159), 1 scan gap (1001 -> not_found_needs_reocr), 0 legislative gaps. NO true legislative gaps in 1959 sample. | OK
