@@ -1,8 +1,47 @@
-# OCR-Era Per-Year Recall Recovery — Campaign Working Doc
+# OCR-Era Per-Year Recall Recovery — Campaign Working Doc + AUTONOMOUS CONTROL
 
 **Status:** ACTIVE (cc015+). **Goal (Patrick, GATE):** 100% per-year chapter coverage for the OCR era
 (1850–1999) before the project moves forward. "Any omissions will break the entire project." Worst
 year first (1915), polish the approach to completion, then generalize to all OCR years.
+
+---
+## ⚙️ AUTONOMOUS CAMPAIGN CONTROL (read FIRST on any heartbeat / after compaction / crash)
+
+**Authorized 2026-06-20 ~22:12 PT by Patrick to run AUTONOMOUSLY overnight while he sleeps (back
+before 8am PT). Directive: drive to (A) full ALGORITHMIC run across all OCR years, then (B) full
+VISUAL run. Do NOT ask for authorization — figure it out. NO irreversible changes (additive files
+only; NO DB writes, NO overwrites of existing parse files, NO deletes). Communicate milestones via
+Telegram: `powershell C:/GitHub/PatoLex/.claude/scripts/telegram.ps1 send "..."`.**
+
+### Heartbeats (set this session)
+- **One-shot ~03:13 PT (June 21)** — safety wakeup: if stalled/out of tokens, resume per CURRENT
+  STATE below; if A done and B not, start B; if both done, write final report + Telegram.
+- **Recurring every ~20 min (:09/:29/:49)** — ucp nudge: commit+push progress; relaunch dead
+  subagents; when the whole campaign is done, CronDelete both jobs + Telegram "complete" + stop.
+- (Session-only crons: they fire while this Claude process is alive — covers token-window
+  exhaustion. If the process fully crashes, Patrick restarts and this doc is the resume point.)
+
+### CURRENT STATE  ← keep this line block updated every checkpoint
+- **Phase A (algorithmic, all OCR years): IN PROGRESS** — Phase-A subagent launched 2026-06-20 ~22:15 PT.
+  1915 done standalone (62%→96.0%). Other years pending the subagent's run.
+- **Phase B (visual residual): NOT STARTED.**
+- Master run log: `docs/80_PROJECT_HISTORY/run-logs/ocr-recall-campaign-run.log`.
+- Recovery tool: `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`).
+
+### RESUME PROTOCOL (if you wake up unsure where you are)
+1. Read CURRENT STATE above + the master run log (tail it) + any per-agent run logs in run-logs/.
+2. `git log --oneline -15` to see what's committed; check `TaskList` for live/dead subagents.
+3. Re-measure the truth: `python pipeline/analysis/_recall_allyears.py` (per-year before/after table,
+   written by Phase A). If it doesn't exist yet, Phase A hasn't finished — continue/relaunch it.
+4. Continue the lowest-numbered incomplete phase. ucp after each meaningful step.
+
+### GUARDRAILS (non-negotiable)
+- Additive only. Never overwrite `parsed_acts_*.json` inputs or write to Postgres. `clauserec` files
+  are new/additive. The recovery is DRAFT and NOT yet wired into the merge or ingest.
+- Every recovered chapter must be TEXT- or IMAGE-verified (alignment checkpoint, or on-page read).
+  Never assert a chapter is "missing"/needs re-OCR from a heuristic — prove absence on the page image.
+- Subagents MUST write a timestamped run log so progress is visible and resumable.
+---
 
 ## The premise (PROVEN on-page — do not re-litigate)
 The per-year shortfall is **parse-recall**, NOT missing source. Every sampled "missing" 1915 chapter's

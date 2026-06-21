@@ -1,0 +1,7 @@
+OCR-ERA PER-YEAR RECALL RECOVERY — MASTER CAMPAIGN RUN LOG
+Format: [YYYY-MM-DD HH:MM PT] PHASE | Description | OK/WARN/FAIL
+Control doc: docs/30_SYSTEM_DESIGN/OCR_RECALL_RECOVERY.md
+
+[2026-06-20 22:14 PT] SETUP | Autonomous campaign authorized by Patrick (overnight, back before 8am). Goal: A) full algorithmic run all OCR years, B) full visual run. Worst year 1915 already 62%->96.0% (committed 5f3c3ac). | OK
+[2026-06-20 22:14 PT] SETUP | Heartbeats set: one-shot 03:13 PT (safety wakeup) + recurring ~20min (ucp nudge). Telegram via .claude/scripts/telegram.ps1. | OK
+[2026-06-20 22:15 PT] SETUP | Wrote control doc autonomous section + this run log + pipeline/analysis/_recall_allyears.py (per-year before/after scoreboard). | OK
