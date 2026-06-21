@@ -1,0 +1,14 @@
+[2026-06-21 00:00 PT] START | VISUAL-recovery 1895, single early-era volume production-1895, additive only | OK
+[2026-06-21 00:05 PT] MANIFEST | _residual_manifest.py 1895: N=223 present=215 missing=8 -> [58,131,152,153,162,178,179,222] | OK
+[2026-06-21 00:08 PT] IMAGES | Volume production-1895 has NO pages_raw/ -- no page images. OCR-text fallback engaged (printed_number_confirmed=false) | WARN
+[2026-06-21 00:20 PT] MINE | Mined ocr_consensus/page_ocr_results.json across 4 engines, +/-15 page buffer per missing ch. Numerals ROMAN (LVIII..CCXXII) | OK
+[2026-06-21 00:22 PT] CH58 | LVIII page 110 doctr+surya -- admission to practice law (CCP s.276) | OK
+[2026-06-21 00:22 PT] CH131 | CXXXI page 176 -- Whittier/Preston School commitments; doctr correct, surya/tess garbled numeral, body multi-engine | OK
+[2026-06-21 00:22 PT] CH152 | CLII page 213 doctr+surya -- municipal corporations s.752 amend | OK
+[2026-06-21 00:22 PT] CH153 | CLIII page 213 doctr+surya -- James A. Kearney claim | OK
+[2026-06-21 00:22 PT] CH162 | CLXII page 220 doctr+surya -- unfinished county buildings | OK
+[2026-06-21 00:22 PT] CH178 | CLXXVIII page 259 doctr+surya -- Berkeley town court | OK
+[2026-06-21 00:22 PT] CH179 | CLXXIX page 260 doctr+surya -- Salinas City reincorporation taxes | OK
+[2026-06-21 00:22 PT] CH222 | CCXXII page 399 doctr+surya -- Law Revision Commission | OK
+[2026-06-21 00:25 PT] WRITE | parsed_acts_visual.json written (no prior file -> fresh, not merge). 8 recovered_acts, all ocr_text_verified, printed_number_confirmed=false | OK
+[2026-06-21 00:25 PT] DONE | targeted=8 verified=8 legislative_gap=0 not_found=0. draft=true | OK

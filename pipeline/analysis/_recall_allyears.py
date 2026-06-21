@@ -37,7 +37,8 @@ def distinct(path, key, N, only_status=None):
                 st = a.get("status")
                 if st == "legislative_gap":
                     leggap.add(n)
-                elif only_status is None or st == only_status:
+                elif only_status is None or st == only_status or (
+                        isinstance(only_status, (tuple, list)) and st in only_status):
                     out.add(n)
     return out, leggap
 
