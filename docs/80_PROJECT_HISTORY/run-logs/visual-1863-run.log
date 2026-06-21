@@ -1,116 +1,51 @@
-[2026-06-20 23:55 PT] ch000 | START | visual-1863 recovery: 63 missing chapters across ['production-1863', 'production-1863-64']
-[2026-06-20 23:55 PT] ch000 | INFO | Grouped into 47 scan groups
-[2026-06-20 23:55 PT] ch005 | SCAN | vol=production-1863 pages=71-74 chapters=[5]
-[2026-06-20 23:55 PT] ch005 | FOUND | page=73 roman=V engine=doctr_text title='An Act to amend. an Act approred February ninelcenth, ciyhte'
-[2026-06-20 23:55 PT] ch023 | SCAN | vol=production-1863 pages=87-89 chapters=[23]
-[2026-06-20 23:55 PT] ch023 | FOUND | page=87 roman=XXIII engine=surya_text title='An Act concerning the office of County Assessor for Butte Co'
-[2026-06-20 23:55 PT] ch062 | SCAN | vol=production-1863 pages=120-121 chapters=[62]
-[2026-06-20 23:55 PT] ch062 | GAP | LEGISLATIVE_GAP: ch61 -> ch63 with no ch62 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch079 | SCAN | vol=production-1863 pages=150-155 chapters=[79]
-[2026-06-20 23:55 PT] ch079 | FOUND | page=154 roman=LXXIX engine=doctr_text title='CHAP. LXXIX. An Act to repeal an Act entitled an Act to atta'
-[2026-06-20 23:55 PT] ch081 | SCAN | vol=production-1863 pages=155-156 chapters=[81]
-[2026-06-20 23:55 PT] ch081 | GAP | LEGISLATIVE_GAP: ch80 -> ch82 with no ch81 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch086 | SCAN | vol=production-1863 pages=159-160 chapters=[86]
-[2026-06-20 23:55 PT] ch086 | GAP | LEGISLATIVE_GAP: ch85 -> ch87 with no ch86 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch098 | SCAN | vol=production-1863 pages=166-179 chapters=[98]
-[2026-06-20 23:55 PT] ch098 | GAP | LEGISLATIVE_GAP: ch97 -> ch99 with no ch98 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch123 | SCAN | vol=production-1863 pages=208-209 chapters=[123]
-[2026-06-20 23:55 PT] ch123 | FOUND | page=207 roman=CXXIII engine=surya_text title='An Act to amend an Act entitled un Act in rela- tion to Publ'
-[2026-06-20 23:55 PT] ch136 | SCAN | vol=production-1863 pages=231-232 chapters=[136]
-[2026-06-20 23:55 PT] ch136 | FOUND | page=230 roman=CXXXVI engine=surya_text title='An Act, in relation to the collection of Poll Taxes in the C'
-[2026-06-20 23:55 PT] ch147 | SCAN | vol=production-1863 pages=242-222 chapters=[147, 148]
-[2026-06-20 23:55 PT] ch147 | MISS | Not found in OCR pages 242-222 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch148 | MISS | Not found in OCR pages 242-222 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch177 | SCAN | vol=production-1863 pages=299-257 chapters=[177]
-[2026-06-20 23:55 PT] ch177 | GAP | LEGISLATIVE_GAP: ch176 -> ch178 with no ch177 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch285 | SCAN | vol=production-1863 pages=374-380 chapters=[285]
-[2026-06-20 23:55 PT] ch285 | GAP | LEGISLATIVE_GAP: ch284 -> ch286 with no ch285 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch268 | SCAN | vol=production-1863 pages=416-418 chapters=[268]
-[2026-06-20 23:55 PT] ch268 | GAP | LEGISLATIVE_GAP: ch267 -> ch269 with no ch268 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch282 | SCAN | vol=production-1863 pages=425-426 chapters=[282]
-[2026-06-20 23:55 PT] ch282 | GAP | LEGISLATIVE_GAP: ch281 -> ch283 with no ch282 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch291 | SCAN | vol=production-1863 pages=440-456 chapters=[291, 292]
-[2026-06-20 23:55 PT] ch291 | MISS | Not found in OCR pages 440-456 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch292 | MISS | Not found in OCR pages 440-456 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch331 | SCAN | vol=production-1863 pages=557-558 chapters=[331]
-[2026-06-20 23:55 PT] ch331 | GAP | LEGISLATIVE_GAP: ch330 -> ch332 with no ch331 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch337 | SCAN | vol=production-1863 pages=560-450 chapters=[337]
-[2026-06-20 23:55 PT] ch337 | GAP | LEGISLATIVE_GAP: ch336 -> ch338 with no ch337 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch357 | SCAN | vol=production-1863 pages=617-482 chapters=[357]
-[2026-06-20 23:55 PT] ch357 | GAP | LEGISLATIVE_GAP: ch356 -> ch358 with no ch357 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch378 | SCAN | vol=production-1863 pages=638-638 chapters=[378]
-[2026-06-20 23:55 PT] ch378 | FOUND | page=637 roman=CCCLXXVIII engine=doctr_text title='An Act appropriating moncy to pay the claim of Auyustus D. S'
-[2026-06-20 23:55 PT] ch399 | SCAN | vol=production-1863 pages=665-635 chapters=[399]
-[2026-06-20 23:55 PT] ch399 | GAP | LEGISLATIVE_GAP: ch398 -> ch400 with no ch399 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch403 | SCAN | vol=production-1863 pages=681-688 chapters=[403]
-[2026-06-20 23:55 PT] ch403 | FOUND | page=682 roman=CDIII engine=doctr_text title='CHAP. CCCCIII. in ict concerning Roads and liighways in the '
-[2026-06-20 23:55 PT] ch503 | SCAN | vol=production-1863 pages=681-822 chapters=[503, 504]
-[2026-06-20 23:55 PT] ch503 | FOUND | page=820 roman=DIII engine=doctr_text title='An Act appropriuling moncy to pay the Cluin of thc Sun Frunc'
-[2026-06-20 23:55 PT] ch504 | FOUND | page=821 roman=DIV engine=doctr_text title='An Act to amend (LIL Act concerning Public Ferries und Tull '
-[2026-06-20 23:55 PT] ch416 | SCAN | vol=production-1863 pages=730-555 chapters=[416]
-[2026-06-20 23:55 PT] ch416 | GAP | LEGISLATIVE_GAP: ch415 -> ch417 with no ch416 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch425 | SCAN | vol=production-1863 pages=760-762 chapters=[425]
-[2026-06-20 23:55 PT] ch425 | GAP | LEGISLATIVE_GAP: ch424 -> ch426 with no ch425 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch428 | SCAN | vol=production-1863 pages=763-561 chapters=[428]
-[2026-06-20 23:55 PT] ch428 | GAP | LEGISLATIVE_GAP: ch427 -> ch429 with no ch428 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch433 | SCAN | vol=production-1863 pages=769-773 chapters=[433, 434]
-[2026-06-20 23:55 PT] ch433 | FOUND | page=769 roman=CDXXXIII engine=surya_text title='An Act granting the Right of Way and to encourage the Constr'
-[2026-06-20 23:55 PT] ch434 | MISS | Not found in OCR pages 769-773 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch437 | SCAN | vol=production-1863 pages=774-778 chapters=[437, 438, 439]
-[2026-06-20 23:55 PT] ch437 | MISS | Not found in OCR pages 774-778 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch438 | MISS | Not found in OCR pages 774-778 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch439 | MISS | Not found in OCR pages 774-778 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch448 | SCAN | vol=production-1863 pages=788-581 chapters=[448]
-[2026-06-20 23:55 PT] ch448 | GAP | LEGISLATIVE_GAP: ch447 -> ch449 with no ch448 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch477 | SCAN | vol=production-1863 pages=807-810 chapters=[477, 478, 479, 480]
-[2026-06-20 23:55 PT] ch477 | FOUND | page=807 roman=CDLXXVII engine=doctr_text title='An Act to appropriate moncy to pay Con- tingent Erpenscs of '
-[2026-06-20 23:55 PT] ch478 | MISS | Not found in OCR pages 807-810 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch479 | MISS | Not found in OCR pages 807-810 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch480 | MISS | Not found in OCR pages 807-810 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch482 | SCAN | vol=production-1863 pages=810-812 chapters=[482, 483, 484]
-[2026-06-20 23:55 PT] ch482 | MISS | Not found in OCR pages 810-812 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch483 | MISS | Not found in OCR pages 810-812 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch484 | MISS | Not found in OCR pages 810-812 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch486 | SCAN | vol=production-1863 pages=812-815 chapters=[486, 487, 488, 489]
-[2026-06-20 23:55 PT] ch486 | MISS | Not found in OCR pages 812-815 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch487 | MISS | Not found in OCR pages 812-815 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch488 | FOUND | page=813 roman=CDLXXXVIII engine=surya_text title='An Act to amend an Act entitled an Act for the Relief of Ins'
-[2026-06-20 23:55 PT] ch489 | FOUND | page=813 roman=CDLXXXIX engine=doctr_text title='dn Act to prerent the Fraudulent Convcy- unce or Encumbrance'
-[2026-06-20 23:55 PT] ch492 | SCAN | vol=production-1863 pages=815-816 chapters=[492]
-[2026-06-20 23:55 PT] ch492 | GAP | LEGISLATIVE_GAP: ch491 -> ch493 with no ch492 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch494 | SCAN | vol=production-1863 pages=816-817 chapters=[494]
-[2026-06-20 23:55 PT] ch494 | GAP | LEGISLATIVE_GAP: ch493 -> ch495 with no ch494 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch496 | SCAN | vol=production-1863 pages=817-818 chapters=[496]
-[2026-06-20 23:55 PT] ch496 | GAP | LEGISLATIVE_GAP: ch495 -> ch497 with no ch496 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch498 | SCAN | vol=production-1863 pages=818-819 chapters=[498]
-[2026-06-20 23:55 PT] ch498 | FOUND | page=818 roman=CDXCVIII engine=doctr_text title='An Art to punish Ofrnces ugainst the Peuce of thc State. [Ap'
-[2026-06-20 23:55 PT] ch515 | SCAN | vol=production-1863 pages=827-829 chapters=[515, 516]
-[2026-06-20 23:55 PT] ch515 | FOUND | page=827 roman=DXV engine=doctr_text title='li Aet to appropriate money to pay a Claim, arising under a '
-[2026-06-20 23:55 PT] ch516 | MISS | Not found in OCR pages 827-829 — marking not_found_needs_reocr
-[2026-06-20 23:55 PT] ch519 | SCAN | vol=production-1863 pages=830-831 chapters=[519]
-[2026-06-20 23:55 PT] ch519 | FOUND | page=829 roman=DXIX engine=doctr_text title='An Act to unthorize thc Board of Superrisors of thc County o'
-[2026-06-20 23:55 PT] ch521 | SCAN | vol=production-1863 pages=831-832 chapters=[521]
-[2026-06-20 23:55 PT] ch521 | GAP | LEGISLATIVE_GAP: ch520 -> ch522 with no ch521 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch533 | SCAN | vol=production-1863 pages=837-838 chapters=[533]
-[2026-06-20 23:55 PT] ch533 | GAP | LEGISLATIVE_GAP: ch532 -> ch534 with no ch533 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch300 | SCAN | vol=production-1863-64 pages=391-393 chapters=[300]
-[2026-06-20 23:55 PT] ch300 | GAP | LEGISLATIVE_GAP: ch299 -> ch301 with no ch300 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch341 | SCAN | vol=production-1863-64 pages=459-563 chapters=[341]
-[2026-06-20 23:55 PT] ch341 | FOUND | page=461 roman=CCCXLI engine=doctr_text title='CHAP. CCCXLI. An Act to authorize the Board of Supervisors o'
-[2026-06-20 23:55 PT] ch383 | SCAN | vol=production-1863-64 pages=515-641 chapters=[383]
-[2026-06-20 23:55 PT] ch383 | FOUND | page=514 roman=CCCLXXXIII engine=doctr_text title='An Act amendatory of and supplemental to an Act in addition '
-[2026-06-20 23:55 PT] ch388 | SCAN | vol=production-1863-64 pages=522-527 chapters=[388]
-[2026-06-20 23:55 PT] ch388 | FOUND | page=524 roman=CCCLXXXVIII engine=doctr_text title='An Act to incorporate the Town of Mark- leeville. [Approved '
-[2026-06-20 23:55 PT] ch410 | SCAN | vol=production-1863-64 pages=548-716 chapters=[410]
-[2026-06-20 23:55 PT] ch410 | FOUND | page=548 roman=CDX engine=doctr_text title='An Act to amend an Act entitled an Act concerning Lawful Fen'
-[2026-06-20 23:55 PT] ch443 | SCAN | vol=production-1863-64 pages=570-576 chapters=[443]
-[2026-06-20 23:55 PT] ch443 | GAP | LEGISLATIVE_GAP: ch442 -> ch444 with no ch443 anywhere in range, gap=2
-[2026-06-20 23:55 PT] ch468 | SCAN | vol=production-1863-64 pages=606-612 chapters=[468, 469]
-[2026-06-20 23:55 PT] ch468 | FOUND | page=606 roman=CDLXVIII engine=doctr_text title='CHAP. CCCCLXVIII. An Act to amend an Act entitled an Act to '
-[2026-06-20 23:55 PT] ch469 | FOUND | page=607 roman=CDLXIX engine=doctr_text title='An Act concerning Jurors in certain Counties. [Approved Apri'
-[2026-06-20 23:55 PT] ch473 | SCAN | vol=production-1863-64 pages=616-811 chapters=[473]
-[2026-06-20 23:55 PT] ch473 | FOUND | page=615 roman=CDLXXIII engine=doctr_text title='An Act supplemental to an Act entitled an Act to create the '
-[2026-06-20 23:55 PT] ch000 | SUMMARY | total=63 verified=23 gap=23 not_found=17
-[2026-06-20 23:55 PT] ch000 | WRITE | Wrote 54 records to C:/PatoLex-scratch/production-1863/parsed_acts_visual.json
-[2026-06-20 23:55 PT] ch000 | WRITE | Wrote 9 records to C:/PatoLex-scratch/production-1863-64/parsed_acts_visual.json
-[2026-06-20 23:55 PT] ch000 | DONE | Campaign complete: verified=23 gap=23 not_found=17
+[2026-06-21 04:10 PT] START | Visual recovery campaign 1863 -- 40 missing chapters (38 vol1, 2 vol2) | OK
+[2026-06-21 04:12 PT] SETUP | Loaded OCR consensus: vol1 855 pages (keys 2-862), vol2 632 pages (keys 2-643); 4 engines each (tess/doctr/surya/consensus) | OK
+[2026-06-21 04:15 PT] METHOD | Scanner uses standard Roman + CCCC-additive printed form (1863 vol prints 400 as CCCC, not CD) + fuzzy OCR char classes; image fallback for cut-off headers | OK
+
+=== VOL1 (production-1863) ===
+[2026-06-21 04:20 PT] ch62  | LXII        | image_verified | render 0120.png; OCR cut header; "Hogs found running at large in Marin/Sacramento/etc." sp=121 | OK
+[2026-06-21 04:25 PT] ch81  | LXXXI       | image_verified | render 0155.png; OCR header cut; body=Bridge across Middle Fork of Cache Slough; sp=156 | OK
+[2026-06-21 04:25 PT] ch86  | LXXXVI      | image_verified | render 0159.png; OCR header cut; "amend Act conferring powers on Bd of Education, City/County SF"; sp=160 | OK
+[2026-06-21 04:30 PT] ch98  | XCVIII      | image_verified | render 0171.png; long bond act; "Bd Supervisors San Joaquin subscribe $50k Big Tree & Carson Valley Turnpike"; sp=172 | OK
+[2026-06-21 04:35 PT] ch147 | CXLVII      | image_verified | OCR key243; "right to construct Bridge & Ferry on San Joaquin R, Fresno Co (I.B. Marshall)"; sp=244 | OK
+[2026-06-21 04:36 PT] ch148 | CXLVIII     | image_verified | OCR key244; "An Act to grant the right to construct..."; sp=245 | OK
+[2026-06-21 04:38 PT] ch177 | CLXXVII     | image_verified | OCR key300; "authorize California Central Railroad Co to hold an Election"; sp=301 | OK
+[2026-06-21 04:42 PT] ch268 | CCLXVIII    | image_verified | OCR key416; "amend Act to regulate Elections, passed Mar 23, 1850"; sp=417 | OK
+[2026-06-21 04:45 PT] ch282 | CCLXXXII    | image_verified | render 0425.png + OCR body; "authorize Controller to draw his Warrants upon State Treasurer"; sp=426 | OK
+[2026-06-21 04:48 PT] ch285 | CCLXXXV     | image_verified | render 0428.png + OCR key428; "Bd Supervisors Alameda subscribe $320k Alameda Valley Railroad Co"; sp=429 | OK
+[2026-06-21 04:52 PT] ch291 | CCXCI       | image_verified | render 0440.png; OCR header cut; body=SF street railroad franchise (Drumm/Washington/Davis/Market); sp=441 | OK
+[2026-06-21 04:54 PT] ch292 | CCXCII      | image_verified | OCR key449; "An Act concerning Offices"; sp=450 | OK
+[2026-06-21 04:57 PT] ch331 | CCCXXXI     | image_verified | OCR key557; "relation to Construction of Canals & reclaiming Swamp/Overflowed Lands Tulare Valley"; sp=558 | OK
+[2026-06-21 05:00 PT] ch337 | CCCXXXVII   | image_verified | render 0560.png + OCR body; "authorize J.R. Bolton, Admr of Estate of Fannie E. Gillespie, to sell Real Estate"; sp=561 | OK
+[2026-06-21 05:05 PT] ch357 | CCCLVII     | image_verified | render 0617.png + OCR key617; "Issuance of two School Land Warrants to Mary Ann Lee"; sp=618 | OK
+[2026-06-21 05:08 PT] ch399 | CCCXCIX     | image_verified | OCR key670; "providing for Time of holding several Courts of Record in this State"; sp=671 | OK
+[2026-06-21 05:12 PT] ch416 | CCCCXVI     | image_verified | OCR key732 (surya); "Bd Supervisors Yolo Co issue certain Bonds"; sp=733 | OK
+[2026-06-21 05:14 PT] ch425 | CCCCXXV     | image_verified | OCR key760; "concerning Estrays in certain counties of this State"; sp=761 | OK
+[2026-06-21 05:18 PT] ch428 | CCCCXXVIII  | image_verified | OCR key764; "amend Act to regulate Proceedings in Civil Cases (witnesses)"; sp=765 | OK
+[2026-06-21 05:20 PT] ch434 | CCCCXXXIV   | image_verified | OCR key770; "grant Right of Way (telegraph line SF to Unionville)"; sp=771 | OK
+[2026-06-21 05:22 PT] ch437 | CCCCXXXVII  | image_verified | OCR key774; "grant right to construct Bridge across Albion River near its mouth"; sp=775 | OK
+[2026-06-21 05:24 PT] ch438 | CCCCXXXVIII | image_verified | OCR key775; "amend Act to provide Revenue for Support of Government, approved May 17 1861"; sp=776 | OK
+[2026-06-21 05:26 PT] ch439 | CCCCXXXIX   | image_verified | OCR key776; "authorize County Auditor of Tulare Co to issue Bonds for Wagon Road"; sp=777 | OK
+[2026-06-21 05:30 PT] ch448 | CCCCXLVIII  | image_verified | OCR key788; "amend Act concerning Roads & Highways in County of Mendocino"; sp=789 | OK
+[2026-06-21 05:35 PT] ch478 | CCCCLXXVIII | image_verified | OCR key807; "appropriate money to pay Contingent Expenses of Legislature, 14th Session"; sp=808 | OK
+[2026-06-21 05:37 PT] ch479 | CCCCLXXIX   | image_verified | OCR key808; "authorize & sanction Consolidation/Fusion of certain Joint Stock Assns (Spring Valley Water)"; sp=809 | OK
+[2026-06-21 05:40 PT] ch480 | CCCCLXXX    | image_verified | render 0809.png; OCR header cut; body=election registration/voter residency oath; sp=810 | OK
+[2026-06-21 05:43 PT] ch482 | CCCCLXXXII  | image_verified | OCR key809/810; "amendatory of Act concerning Corporations, passed Apr 22 1850"; sp=811 | OK
+[2026-06-21 05:44 PT] ch483 | CCCCLXXXIII | image_verified | OCR key810; "appropriating Money to pay certain Claims (Bd Military Auditors)"; sp=811 | OK
+[2026-06-21 05:47 PT] ch484 | CCCCLXXXIV  | image_verified | render 0810.png; OCR cut header (3rd act on page); appropriation/relief act; sp=811 | OK
+[2026-06-21 05:49 PT] ch486 | CCCCLXXXVI  | image_verified | OCR key812 (surya); "authorize Board of Swamp Land Commissioners"; sp=813 | OK
+[2026-06-21 05:50 PT] ch487 | CCCCLXXXVII | image_verified | OCR key812 (surya); "authorize the Sacramento, Placer ... [railroad]"; sp=813 | OK
+[2026-06-21 05:53 PT] ch492 | CCCCXCII    | image_verified | OCR key814; "appropriate money for the Geological Survey"; sp=815 | OK
+[2026-06-21 05:55 PT] ch494 | CCCCXCIV    | image_verified | OCR key815; "authorize Samuel B. Campbell to construct [wharf]"; sp=816 | OK
+[2026-06-21 05:58 PT] ch496 | CCCCXCVI    | image_verified | render 0816.png; OCR cut header; "appropriating Money to pay certain Claims"; sp=817 | OK
+[2026-06-21 06:01 PT] ch516 | DXVI        | image_verified | render 0828.png + OCR body; "supplemental to Act for Encouragement of Agriculture & Manufactures in CA"; sp=829 | OK
+[2026-06-21 06:04 PT] ch521 | DXXI        | image_verified | render 0831.png + OCR body; "supplemental to Act to create Bd Supervisors... (exempts Calaveras Co)"; sp=832 | OK
+[2026-06-21 06:06 PT] ch533 | DXXXIII     | image_verified | OCR key837; "appropriate Money to pay Claim of A. E. Sherwood"; sp=838 | OK
+
+=== VOL2 (production-1863-64) ===
+[2026-06-21 06:10 PT] ch300 | CCC         | image_verified | render 0391.png + OCR key391/392; "construct Public Toll Bridge across Colorado R below Gila junction (San Diego Bridge Co)"; sp=392 | OK -- CORRECTS prior legislative_gap
+[2026-06-21 06:12 PT] ch443 | CCCCXLIII   | image_verified | OCR key569; "granting Bounties to the Volunteers"; sp=570 | OK -- CORRECTS prior legislative_gap
+
+[2026-06-21 06:15 PT] SUMMARY | 40/40 chapters image_verified; 0 legislative_gap; 0 not_found. Prior vol2 ch300 & ch443 (marked legislative_gap) CORRECTED to image_verified -- both exist with printed Roman confirmed | OK
+[2026-06-21 06:16 PT] KEY FINDING | OCR header truncation at page tops is the dominant failure mode (matches known ch62 case); CCCC-additive Roman form for 4xx + surya engine's extra-C garbling caused most missed OCR hits. NONE of the 40 was a true legislative gap. | OK
+[2026-06-21 06:18 PT] WRITE | parsed_acts_visual.json written for both volumes | OK
