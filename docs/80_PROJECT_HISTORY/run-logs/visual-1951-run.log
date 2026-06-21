@@ -12,3 +12,6 @@
 [2026-06-21 00:11 PT] OUTPUT-VOL1 | Written C:\PatoLex-scratch\production-1951-vol1-chapters\parsed_acts_visual.json: 6 acts (2 legislative_gap, 4 not_found_needs_reocr), printed_number_confirmed=False (no images) | WARN
 [2026-06-21 00:12 PT] COMPLETE | 11 targeted: 5 image_verified (all vol2), 2 legislative_gap (654, 655 -- inverted range, no text found), 4 not_found_needs_reocr (435, 756, 829, 831 -- vol1 images missing from disk) | WARN
 [2026-06-21 00:13 PT] NOTE | Vol1 pages_raw images MUST be recovered for 435, 756, 829, 831 confirmation. The printed PDFs or a re-scan of the raw images from the original source is required. The OCR text is sufficient to locate the pages but not to confirm printed chapter numbers. | WARN
+[2026-06-21 15:18 PT] VISUAL-RECOVERY-1951 | ch654=legislative_gap(image_verified) ch655=image_verified(p1712) | targeted=2 verified=1 legislative_gap=1 not_found=0 | OK
+[2026-06-21 15:18 PT] VERIFY | _residual_manifest.py 1951 post-write: missing=1 [654 only] -- ch655 recognized as recovered, ch654 confirmed legislative_gap | OK
+[2026-06-21 15:18 PT] COMPLETE | 1951 visual recovery DONE. targeted=2 (654,655). Outcome: ch654=legislative_gap(image_verified), ch655=image_verified(source_page=1712, title confirmed). Residual missing=1 (654, never enacted). | OK
