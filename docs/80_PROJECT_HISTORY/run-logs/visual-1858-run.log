@@ -1,0 +1,58 @@
+[2026-06-20 23:11 PT] VISUAL-1858 | START 1858 visual recovery -- 26 missing chapters | OK
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch. 53 (pages [58, 59]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch. 55 (pages [59, 60]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch. 67 (pages [72, 78]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch. 68 (pages [72, 78]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch. 78 (pages [82, 84]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch. 83 (pages [85, 86]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.117 (pages [113, 114]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.132 (pages [121, 122]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.139 (pages [125, 126]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.141 VERIFIED: CXLI==141 page=127 title=An Act relating to the Thirteenth Judicial District, and to  | OK
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.163 (pages [142, 142]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.168 (pages [143, 144]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.173 (pages [145, 147]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.181 (pages [153, 154]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.187 (pages [160, 165]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.196 VERIFIED: CXCVI==196 page=179 title=An Act the better to enable the Collection of Judg- ments in | OK
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.247 (pages [226, 227]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.277 (pages [255, 259]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.282 VERIFIED: CCLXXXII==282 page=271 title=An Act amendatory of an Act entitled “An Act to declare Feat | OK
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.287 VERIFIED: CCLXXXVII==287 page=274 title=An Act to authorize the Judges of the Supreme Court to emplo | OK
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.301 (pages [285, 310]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.330 (pages [335, 336]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.333 (pages [336, 337]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.336 (pages [338, 343]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.338 (pages [343, 345]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Ch.347 (pages [349, 350]): NOT FOUND in OCR text | WARN
+[2026-06-20 23:11 PT] VISUAL-1858 | Output written: C:\PatoLex-scratch\production-1858\parsed_acts_visual.json | OK
+[2026-06-20 23:11 PT] VISUAL-1858 | SUMMARY: targeted=26 verified=4 not_found=22 mismatches=0 | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | START 1858 visual recovery v2 -- 26 missing chapters | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch. 53 MISMATCH: found=54(LIV) expected=53(LIII) method=positional sp=59 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch. 55 (LV) VERIFIED: raw='1V' sp=59 title=An Act to amend an Act entitled an Act to regulate Fees [arabic_lookup] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch. 67 MISMATCH: found=69(LXIX) expected=67(LXVII) method=positional sp=78 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch. 68 MISMATCH: found=70(LXX) expected=68(LXVIII) method=positional sp=78 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch. 78 MISMATCH: found=29(XXIX) expected=78(LXXVIII) method=positional sp=44 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch. 83 MISMATCH: found=84(LXXXIV) expected=83(LXXXIII) method=positional sp=86 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.117 MISMATCH: found=119(CXIX) expected=117(CXVII) method=positional sp=115 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.132 (CXXXII) VERIFIED: raw='CXXXII' sp=122 title=An Act authorizing the Treasurer of State to [text_search] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.139 (CXXXIX) pages=[125, 126]: NOT FOUND by any method | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.141 (CXLI) VERIFIED: raw='CXLI' sp=127 title=An Act relating to the Thirteenth Judicial District, [arabic_lookup] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.163 (CLXIII) pages=[142, 142]: NOT FOUND by any method | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.168 (CLXVIII) pages=[143, 144]: NOT FOUND by any method | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.173 (CLXXIII) pages=[145, 147]: NOT FOUND by any method | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.181 MISMATCH: found=185(CLXXXV) expected=181(CLXXXI) method=positional sp=159 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.187 (CLXXXVII) VERIFIED: raw='CLXXXVII' sp=165 title=An Act concerning the collection of Poll- [text_search] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.196 (CXCVI) VERIFIED: raw='CXCVI' sp=176 title=An Act amendatory of and supplementary to an Act enti- [text_search] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.247 (CCXLVII) VERIFIED: raw='CCXLVII' sp=227 title=An Act to incorporate the Town of Coloma. [text_search] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.277 MISMATCH: found=326(CCLXXVIL) expected=277(CCLXXVII) method=positional sp=255 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.282 (CCLXXXII) VERIFIED: raw='CCLXXXII' sp=271 title=An Act amendatory of an Act entitled “An [arabic_lookup] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.287 (CCLXXXVII) VERIFIED: raw='CCLXXXVII' sp=274 title=An Act to authorize the Judges of the [arabic_lookup] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.301 MISMATCH: found=351(CCCIL) expected=301(CCCI) method=positional sp=310 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.330 MISMATCH: found=331(CCCXXXI) expected=330(CCCXXX) method=positional sp=336 | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.333 (CCCXXXIII) pages=[336, 337]: NOT FOUND by any method | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.336 (CCCXXXVI) VERIFIED: raw='CCCXXXVI' sp=345 title=An Act to audit and allow the Claim of [text_search] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.338 (CCCXXXVIII) VERIFIED: raw='CCCXXXVIII' sp=345 title=An Act to audit and allow the Claim of [text_search] | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | Ch.347 (CCCXLVII) pages=[349, 350]: NOT FOUND by any method | WARN
+[2026-06-20 23:13 PT] VISUAL-1858 | Output written: C:\PatoLex-scratch\production-1858\parsed_acts_visual.json | OK
+[2026-06-20 23:13 PT] VISUAL-1858 | DONE: targeted=26 verified=10 mismatches=10 not_found=6 | OK

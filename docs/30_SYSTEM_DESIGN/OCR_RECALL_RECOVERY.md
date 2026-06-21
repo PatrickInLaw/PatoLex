@@ -40,14 +40,20 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
   roman-header-direct: recover each pre-1900 chapter whose printed ROMAN header "CHAP. <roman>"
   survived OCR (validated by a nearby clause/An-act), number read off the numeral. Safe by
   construction, lower recall. **HONEST corpus = 98.3%, residual 1,546.** Re-Hans RUNNING (a2b2af51).
-- **Phase B (visual) — RUNNING & WORKING.** Method proven: read pages_raw PNGs, confirm printed
-  chapter#. DONE: **1915 = 100%** (31/31 verified), **1937 = 100%** (19/19). RUNNING: 1941 (af2255a3),
-  1939 (a8cc3da7). Each visual agent: `python pipeline/analysis/_residual_manifest.py <year>` then
-  image-verify each missing chapter → additive `<vol>/parsed_acts_visual.json` + `visual-<year>-run.log`.
-- **Background:** 1910-1999 recover re-run (b7inme498) to apply the body-dup guard consistently.
-- **NEXT loop:** as each visual agent finishes → bank (commit run log) + re-measure + launch next
-  residual year. Residual leaders to target: early 1862/1861/1860/1854(dual-series)/1850 + modern
-  1987/1971/1989/1933/1943/1929 + the long 15-35 tail. ~3-4 visual agents in flight max (be reasonable).
+- **Algorithmic HARDENED via 3 Hans rounds** (early-era was the trouble): roman-direct now requires
+  CANONICAL roman + SEQUENCE-POSITION sanity (rejects insert-L misparses + body-citation ghosts);
+  modern body-dup guard REMOVED (over-rejected code-amendment gaps; checkpoint validation is the
+  sound guard). Honest corpus ~97.9%, residual ~1844. 1915 control steady at 96% algorithmic.
+- **Phase B (visual) — WORKING, the reliable closer (image-confirms each printed chapter#).**
+  DONE 100%: **1915** (31/31), **1937** (19/19), **1939** (33/33, found 11 positional off-by-ones),
+  **1941** (37/37). Early-era proof **1858**: 26 missing → 20 recovered + 6 not_found (re-OCR cands)
+  — early-era visual WORKS but harder (more garble). RUNNING: 1971 (a4f90337), 1943 (ac11a821),
+  1933 (aec2d747). Each: `_residual_manifest.py <year>` → image-verify → additive
+  `<vol>/parsed_acts_visual.json` + `visual-<year>-run.log`.
+- **Background:** final modern recover re-run (bkhwloi1a) for consistency (guard removed).
+- **NEXT loop:** as each visual agent finishes → bank its run log + re-measure + launch next residual
+  year (≤3-4 in flight). Targets: modern 1987(big,4vol)/1989/1982/1929 + the 15-35 tail, then early
+  years (1850-1862 via roman-aware visual). not_found chapters = re-OCR candidates (defer).
 - Recovery tool: `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`).
 
 ### RESUME PROTOCOL (if you wake up unsure where you are)
