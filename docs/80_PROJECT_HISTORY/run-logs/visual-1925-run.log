@@ -1,0 +1,11 @@
+[2026-06-21 00:00 PT] INIT | Visual recovery campaign for 1925 (2 missing chapters: 31, 425) | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1925 -> N=480 present=478 missing=2 [31, 425] | OK
+[2026-06-21 00:02 PT] IMAGE-CHECK | pages_raw/ confirmed present (1422 pages); key=0..1422 (0-indexed), page_1indexed field matches source page | OK
+[2026-06-21 00:03 PT] CH31-OCR | Search range source pages 46-62 (keys 43-61); OCR consensus text captured act title at key=61 but missed 'CHAPTER 31' running head -- running-head miss confirmed | WARN
+[2026-06-21 00:04 PT] CH31-IMAGE | Read page_0061.png (source page 62, key=61); 'CHAPTER 31' printed heading clearly visible at top of page | OK
+[2026-06-21 00:05 PT] CH31-RECORD | Chapter 31: 'An act authorizing the state director of institutions...Los Angeles county.' Approved April 1, 1925. source_page=62, status=image_verified | OK
+[2026-06-21 00:06 PT] CH425-OCR | Search range source pages 923-926 (keys 922-925); OCR text showed Ch.424 on key=922 and what appeared to be Ch.425 content on key=923 but header missed | WARN
+[2026-06-21 00:07 PT] CH425-IMAGE | Read page_0923.png (source page 924, key=923); 'CHAPTER 425' printed heading clearly visible at top of page | OK
+[2026-06-21 00:08 PT] CH425-RECORD | Chapter 425: 'An act to promote the development of the California egg industry...repealing all acts and parts of acts in conflict herewith.' Approved May 23, 1925. source_page=924, status=image_verified | OK
+[2026-06-21 00:09 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1925-vol1-chapters\parsed_acts_visual.json (2 recovered, 0 legislative_gap, 0 not_found) | OK
+[2026-06-21 00:10 PT] SUMMARY | 1925 visual recovery COMPLETE: targeted=2 verified=2 legislative_gap=0 not_found=0. Both misses are OCR running-head misses -- chapter heading present in print, not captured by any OCR engine. | OK
