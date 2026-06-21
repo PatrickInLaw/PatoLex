@@ -1,0 +1,66 @@
+[2026-06-21 00:00 PT] INIT | visual-1982 campaign started | 58 missing chapters across 5 volumes | OK
+[2026-06-21 00:00 PT] PLAN | vol1=5 missing (ch29,304,305,307,327), vol2=4 (ch395,686,745,746), vol3=3 (ch793,1088,1229), vol4=44 (ch1238-1508), vol5=2 (ch1522,1548) | OK
+[2026-06-21 00:30 PT] VOL1/CH29 | source_page=54, image_verified=True, CHAPTER 29 confirmed on page_0054.png | OK
+[2026-06-21 00:30 PT] VOL1/CH304 | source_page=961, image_verified=True, CHAPTER 304 confirmed on page_0961.png (OCR missed header) | OK
+[2026-06-21 00:30 PT] VOL1/CH305 | source_page=966, image_verified=True, CHAPTER 305 confirmed on page_0966.png (OCR missed header) | OK
+[2026-06-21 00:30 PT] VOL1/CH307 | source_page=973, image_verified=True, CHAPTER 307 confirmed on page_0973.png (OCR missed header) | OK
+[2026-06-21 00:35 PT] VOL2/CH327 | source_page=2 (vol2), image_verified=True, CHAPTER 327 confirmed on page_0002.png (omnibus act, swamps vol1/vol2 boundary) | OK
+[2026-06-21 00:35 PT] VOL2/CH395 | source_page=308 (vol2), image_verified=True, CHAPTER 395 confirmed on page_0308.png | OK
+[2026-06-21 00:35 PT] VOL2/CH686 | source_page=1385 (vol2), image_verified=True, CHAPTER 686 confirmed on page_1385.png | OK
+[2026-06-21 00:35 PT] VOL2/CH745 | source_page=1513 (vol2), image_verified=True, CHAPTER 745 confirmed on page_1513.png (OCR missed header) | OK
+[2026-06-21 00:35 PT] VOL3/CH746 | source_page=2 (vol3), image_verified=True, CHAPTER 746 confirmed on page_0002.png | OK
+[2026-06-21 00:40 PT] VOL3/CH793 | source_page=113 (vol3), image_NOT_available (vol3 has no pages_raw), OCR-confirmed by position (between ch792 p110 and ch794 p114), all 3 engines agree on act text | WARN
+[2026-06-21 00:40 PT] VOL3/CH1088 | source_page=1002 (vol3), image_NOT_available, OCR-confirmed by position (between ch1087 p1000 and ch1089 p1009), all 3 engines agree on act text | WARN
+[2026-06-21 00:40 PT] NOTE | ch1229 manifest-vol=vol3 but actual act found in vol4 page 2; image confirmed CHAPTER 1229 on vol4/page_0002.png | WARN
+[2026-06-21 00:45 PT] VOL4/CH1229 | source_page=2 (vol4), image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1238 | source_page=28, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1255 | source_page=65, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1256 | source_page=75, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1262 | source_page=97, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1269 | source_page=146, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1274 | source_page=171, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1275 | source_page=174, image_verified=True (multi-chapter page with ch1276) | OK
+[2026-06-21 00:45 PT] VOL4/CH1282 | source_page=206, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1301 | source_page=269, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1304 | source_page=274, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1306 | source_page=278, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1309 | source_page=285, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1319 | source_page=338, image_verified=True (multi-chapter page, CHAPTER 1319 and 1320 both start here) | OK
+[2026-06-21 00:45 PT] VOL4/CH1322 | source_page=347, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1328 | source_page=364, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1334 | source_page=410, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1339 | source_page=440, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1343 | source_page=475, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1344 | source_page=483, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1348 | source_page=502, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1350 | source_page=507, image_verified=True (multi-chapter page with ch1351) | OK
+[2026-06-21 00:45 PT] VOL4/CH1363 | source_page=533, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1372 | source_page=715, image_verified=True (multi-chapter page: ch1372+ch1373 both start page 715) | OK
+[2026-06-21 00:45 PT] VOL4/CH1374 | source_page=719, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1384 | source_page=746, image_verified=True (multi-chapter page with ch1385) | OK
+[2026-06-21 00:45 PT] VOL4/CH1392 | source_page=771, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1393 | source_page=772, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1405 | source_page=825, image_verified=True (multi-chapter page with ch1406) | OK
+[2026-06-21 00:45 PT] VOL4/CH1414 | source_page=871, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1416 | source_page=882, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1424 | source_page=918, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1431 | source_page=936, image_verified=True (multi-chapter page with ch1432) | OK
+[2026-06-21 00:45 PT] VOL4/CH1442 | source_page=972, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1447 | source_page=983, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1448 | source_page=991, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1452 | source_page=1016, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1453 | source_page=1029, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1468 | source_page=1123, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1469 | source_page=1128, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1477 | source_page=1152, image_verified=True (multi-chapter page with ch1478) | OK
+[2026-06-21 00:45 PT] VOL4/CH1497 | source_page=1265, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1500 | source_page=1289, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1503 | source_page=1298, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL4/CH1508 | source_page=1317, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL5/CH1522 | source_page=9, image_verified=True | OK
+[2026-06-21 00:45 PT] VOL5/CH1548 | source_page=138, image_verified=True | OK
+[2026-06-21 00:50 PT] SUMMARY | 58 total missing: 56 image_verified + 2 OCR-only (vol3 ch793/ch1088 no images available) | 0 legislative_gap | 2 not_found_needs_reocr (vol3 only) | Writing output files | OK
+[2026-06-21 00:55 PT] OUTPUT | vol1: parsed_acts_visual.json (4 acts) | vol2: parsed_acts_visual.json (5 acts incl ch327+ch746 boundary crosses) | vol3: parsed_acts_visual.json (3 acts, 2 need reocr) | vol4: parsed_acts_visual.json (44 acts) | vol5: parsed_acts_visual.json (2 acts) | OK
+[2026-06-21 00:55 PT] NOTE | Vol3 pages_raw/pages_prep_gray directories do NOT exist -- image files were never extracted or were deleted. Ch793 and ch1088 cannot be image-verified until vol3 images are re-extracted. | WARN
+[2026-06-21 00:55 PT] NOTE | Multiple OCR misread patterns found: (1) page 945 vol1 OCR read 'CHAPTER 306' when image shows 'CHAPTER 300' -- misread last digit; (2) multiple chapter headers missed entirely (all 3 engines); (3) vol boundary crossings where chapter starts in different vol than lo_ch (ch327: vol1->vol2, ch746: vol2->vol3, ch1229: vol3->vol4). | WARN
+[2026-06-21 00:55 PT] COMPLETE | 1982 visual recovery campaign done | OK
