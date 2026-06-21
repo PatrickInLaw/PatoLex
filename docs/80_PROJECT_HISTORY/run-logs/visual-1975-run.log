@@ -1,0 +1,13 @@
+[2026-06-21 PT] INIT | VISUAL-recovery campaign for year 1975 launched | OK
+[2026-06-21 PT] MANIFEST | _residual_manifest.py 1975 -> N=1280 present=1278 missing=2: chapters [939, 1239] | OK
+[2026-06-21 PT] VERIFY_IMAGES | pages_raw/ confirmed present in both vol1 and vol2; mapping formula page_{source_page-1:04d}.png verified | OK
+[2026-06-21 PT] CH939_OCR | OCR key 2068 (page_1indexed=2069) -> tess/doctr/surya all found 'CHAPTER 939' + title in body; running head missed on separate pages | OK
+[2026-06-21 PT] CH939_IMAGE | image page_2068.png (source_page 2069) visually confirmed: running head '[Ch. 939]' + 'CHAPTER 939' heading + full title | OK
+[2026-06-21 PT] CH939_TITLE | "An act making an appropriation for local assistance to cities and counties for park and recreation purposes; and in this connection to amend and supplement the Budget Act of 1975 (Chapter 176, Statutes of 1975), by adding Section 2.5A thereto." | OK
+[2026-06-21 PT] CH939_WRITE | C:\PatoLex-scratch\production-1975-vol1-chapters\parsed_acts_visual.json written (1 act, status=image_verified) | OK
+[2026-06-21 PT] CH1239_SCAN | Scanned OCR pages 526-542 in vol2; CHAPTER heading absent from OCR for pages 528-538; page 527 has ch 1237+1238; page 539 has ch 1240 | OK
+[2026-06-21 PT] CH1239_OCR | OCR key 530 (page_1indexed=531) -> tess/doctr/surya captured full multi-code act title (Education/Fish/Ag/Govt/Military/Resources/PUC/SH/Water Codes) but NO chapter number in OCR (running head miss) | WARN
+[2026-06-21 PT] CH1239_IMAGE | image page_0530.png (source_page 531) visually confirmed: running head '[Ch. 1239]' + 'CHAPTER 1239' heading + full title | OK
+[2026-06-21 PT] CH1239_TITLE | "An act to amend Sections 23151 and 24503 of, and to repeal Section 23152 of, the Education Code, to amend Section 1348 of the Fish and Game Code, [... multi-code omnibus act relating to acquisition of property for public use]" | OK
+[2026-06-21 PT] CH1239_WRITE | C:\PatoLex-scratch\production-1975-vol2-chapters\parsed_acts_visual.json written (1 act, status=image_verified) | OK
+[2026-06-21 PT] COMPLETE | 1975 visual recovery done: targeted=2, verified=2, legislative_gap=0, not_found=0 | OK
