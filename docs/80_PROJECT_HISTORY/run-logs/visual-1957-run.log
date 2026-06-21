@@ -1,0 +1,19 @@
+[2026-06-21 00:00 PT] INIT | visual-recovery worker for year 1957 | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1957 -> 11 missing: [176, 275, 684, 815, 816, 1042, 1043, 1044, 1045, 1047, 1049] | OK
+[2026-06-21 00:02 PT] VOL-CHECK | production-1957-vol1-57chapters: pages_raw/ confirmed present with PNG files (page_0000.png through 2190+) | OK
+[2026-06-21 00:02 PT] VOL-CHECK | production-1957-vol2-57chapters: no missing chapters in this vol (all missing are in vol1-57chapters) | OK
+[2026-06-21 00:02 PT] VOL-CHECK | production-1957-vol1-56chapters: no missing chapters in this vol | OK
+[2026-06-21 00:03 PT] OCR-STRUCT | Confirmed: OCR dict keys are 1-indexed strings '1'-'2190'; key K -> pages_raw/page_{K:04d}.png; source_page = K+1 (per page_1indexed field) | OK
+[2026-06-21 00:04 PT] CH-176 | OCR key 279 / page_0279.png: 'Ch. 176]' running head + 'CHAPTER 176' heading visible. Title: amend Sec. 9143 Gov.Code (Legislative Budget Committee/Legislative Auditor). printed_number_confirmed=true | OK
+[2026-06-21 00:05 PT] CH-275 | OCR key 382 / page_0382.png: 'CHAPTER 275' heading visible (end of prior act on same page). Title: amend Sec. 23600 Gov.Code (county seats). printed_number_confirmed=true | OK
+[2026-06-21 00:06 PT] CH-684 | OCR key 1334 / page_1334.png: '[Ch. 684' running head + 'CHAPTER 684' heading. Title: add Sec. 20229 Gov.Code (SERS investments in real property). Also ch.685 on same page. printed_number_confirmed=true | OK
+[2026-06-21 00:07 PT] CH-815 | OCR key 1487 / page_1487.png: 'Ch. 815]' running head + 'CHAPTER 815' heading. Title: amend Civil Code 3063/3467/3468, PubRes 3423, repeal Gov.Code 27245/27253/27255 (recordation of instruments). Long act spans pages 1487-1490. printed_number_confirmed=true | OK
+[2026-06-21 00:08 PT] CH-816 | OCR key 1491 / page_1491.png: 'Ch. 816]' running head + 'CHAPTER 816' heading. Title: amend Gov.Code 16303/16304, add 16304.1 (reversion of appropriations). printed_number_confirmed=true | OK
+[2026-06-21 00:09 PT] CH-1042 | OCR key 1731 / page_1731.png: 'Ch. 1042]' running head + 'CHAPTER 1042' heading. Title: add Ed.Code 14745.7 (school district retirement systems). Also ch.1043 on same page. printed_number_confirmed=true | OK
+[2026-06-21 00:09 PT] CH-1043 | Same page_1731.png: 'CHAPTER 1043' heading. Title: add H&S Code 11161.1 (prescriptions for narcotics). printed_number_confirmed=true | OK
+[2026-06-21 00:10 PT] CH-1044 | OCR key 1732 / page_1732.png: '[Ch. 1044' running head + 'CHAPTER 1044' heading. Title: amend Veh.Code 428/428.5 (liens on vehicles). printed_number_confirmed=true | OK
+[2026-06-21 00:10 PT] CH-1045 | OCR key 1733 / page_1733.png: 'Ch. 1045]' running head + 'CHAPTER 1045' heading. Title: add Gov.Code 69505/69506 (expenses of superior court judges). Also ch.1046 on same page. printed_number_confirmed=true | OK
+[2026-06-21 00:11 PT] CH-1047 | OCR key 1734 / page_1734.png: 'CHAPTER 1047' heading. Title: add Veh.Code 139.56 (California Highway Patrol employees). Also ch.1048 on same page. printed_number_confirmed=true | OK
+[2026-06-21 00:12 PT] CH-1049 | OCR key 1735 / page_1735.png: 'Ch. 1049]' running head + 'CHAPTER 1049' heading. Title: amend Marin County Flood Control District Act (Ch.666/1953). Long act spans pages 1735+. printed_number_confirmed=true | OK
+[2026-06-21 00:13 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1957-vol1-57chapters\parsed_acts_visual.json | OK
+[2026-06-21 00:13 PT] SUMMARY | targeted=11, verified=11, legislative_gap=0, not_found=0. All 11 chapters image-confirmed. Root cause: OCR engines systematically miss running heads ('Ch. NNN]') and sometimes bold 'CHAPTER NNN' headings on act-start pages. Multi-chapter pages: 279, 382, 1334, 1731, 1733, 1734. | OK
