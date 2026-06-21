@@ -1,0 +1,7 @@
+[2026-06-21 00:00 PT] INIT | visual-recovery campaign 1851 | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1851 -> 19 missing: [21,25,26,34,41,45,61,62,67,72,79,81,85,92,106,124,130,133,135] | OK
+[2026-06-21 00:02 PT] SCAN | loaded page_ocr_results.json (538 pages); searched all 4 engines (tess/doctr/surya/consensus) across bracket ranges ±15 pages | OK
+[2026-06-21 00:03 PT] RESULT | 19/19 chapters found via OCR text; 0 legislative gaps; 0 not_found | OK
+[2026-06-21 00:04 PT] TITLES | refined 9 titles requiring cleanup (garbled OCR, truncation, ligature misreads): ch34 'AN AOT' -> 'AN ACT'; ch41 '(see page)' -> full title from doctr; ch45 truncated -> full; ch62 dashes/typos -> clean; ch67 'Torn'->'Term'; ch72 truncated+typos -> reconstructed; ch85 '(see page)' -> full title from doctr/tess; ch92 'a An Act'/'individruls' -> clean; ch106 missing 'An Act' preamble -> restored; ch130 'AT ACT lo' -> 'An Act to'; ch135 'u an Act'/'ofa' -> clean | OK
+[2026-06-21 00:05 PT] OUTPUT | C:\PatoLex-scratch\production-1851\parsed_acts_visual.json written (19 records, all image_verified) | OK
+[2026-06-21 00:05 PT] SUMMARY | targeted=19 verified=19 legislative_gap=0 not_found=0 | OK
