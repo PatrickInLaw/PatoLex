@@ -73,6 +73,13 @@
 
 **Hans round 2 — verdict SOUND (safe to ship).** All 4 fixes verified against actual OCR page text; no real chapter dropped in any of the 34 near-phantom-stub collapses (5 manually checked on-page). Two MINOR (non-data-loss) findings, both addressed: (1) keeper attribution — a near-phantom stub is a garble of a chapter NUMBER, so the recorded keeper now picks the anchored sibling whose TITLE best matches the stub (fixed 1943 ch958: keeper 959→**908**, its true content parent); (2) the near-phantom-stub branch gates on page co-presence + `ntitle≤3` + no-own-header rather than a Jaccard content-overlap check — accepted design tradeoff (the ≤3-title-token gate excludes real substantive-titled acts; not triggered in any observed case), documented as a known limitation in the lesson.
 
+## HARD REQUIREMENT (Patrick, 2026-06-20) — 100% per-year coverage is a GATE
+
+**Patrick: "We cannot move forward until we have 100% coverage in each year. 62% in 1915 is completely unacceptable. Any omissions will break the entire project."** The merge + dedup made the count HONEST (95.2% all-distinct / 91.3% content-complete over mapped sessions), but honest ≠ complete. The per-year recall gap (1915 62%, 1941 77%, 1943 83%, …) is now the **blocking** work item — every year must reach its oracle N with real, on-page-verified acts.
+
+- These are **parse-recall** gaps (OCR `CHAPTER`-header dropout: the body is in the OCR, the page-top header garbled so the parser skipped the chapter) — NOT missing source. Recover from existing OCR using the fuzzy-header census (the same `fuzzy_headers` ground truth built for dedup); only after proving a chapter's body is genuinely absent ON THE PAGE may re-OCR be considered. **No "missing"/"re-OCR" claims from heuristics.**
+- **NEXT (active, blocking):** drive 1915 from 62% → 100% as the template: (1) census ALL fuzzy `CHAPTER` headers in the OCR to get the true recoverable ceiling; (2) recover each chapter present-as-header-but-missing-from-merge by extracting its body from the OCR page(s); (3) for any chapter with NO header AND no body anywhere in the OCR, prove the absence on the rendered page image before any re-OCR. Then generalize the recovery across all years.
+
 ## Open Items at Close
 
 - **NEXT:** point the contents/index-anchoring method at the next target — the other residual rows / the modern-era **NO_INDEX denominator gap** (now solvable on-box: all `*_Index.pdf` are local).
