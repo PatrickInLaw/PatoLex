@@ -1,0 +1,10 @@
+[2026-06-21 00:00 PT] START | Visual recovery worker: 1976 campaign | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1976 -> 1 missing chapter: [1010] at page_range [22, 2221] in production-1976-vol2 | OK
+[2026-06-21 00:02 PT] IMAGES | production-1976-vol2/pages_raw/ exists, 2222 images (page_0000.png - page_0221.png) | OK
+[2026-06-21 00:03 PT] OCR-SEARCH | Searched page_ocr_results.json (2220 entries) for CHAPTER 1009/1010/1011 | OK
+[2026-06-21 00:04 PT] OCR-HIT | Ch 1009 at key 21 (page_1indexed=22); Ch 1010 at key 23 (page_1indexed=24); Ch 1011 at key 2220 (page_1indexed=2221) | OK
+[2026-06-21 00:05 PT] IMAGE-VERIFY | Read page_0023.png: running head "CHAPTER 1010*" confirmed, statutes page 2384, title "An act to repeal and reenact the Education Code, relating to education law." | OK
+[2026-06-21 00:06 PT] BOUNDARY-CHECK | Read page_0022.png: running head "Ch. 1009 ]" confirmed at statutes page 2383 -- correct boundary | OK
+[2026-06-21 00:07 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1976-vol2\parsed_acts_visual.json (1 recovered act, image_verified) | OK
+[2026-06-21 00:08 PT] SUMMARY | targeted=1 verified=1 legislative_gap=0 not_found=0 | OK
+[2026-06-21 00:08 PT] NOTE | Ch 1010 is the complete Education Code recodification (Ch. 1010, 1976 Stats.) -- massive act spanning OCR keys 23 to ~2101+. Missing from baseline because OCR text omitted running head on act-start page; body-witness heuristic failed. Image is ground truth: chapter confirmed. | OK
