@@ -1,0 +1,11 @@
+[2026-06-21 00:00 PT] INIT | Visual recovery worker started for 1880 | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1880 -> N=126 present=120 missing=6 | OK
+[2026-06-21 00:01 PT] MANIFEST | Missing chapters: [37, 38, 43, 86, 122, 123]; all in production-1880 | OK
+[2026-06-21 00:02 PT] IMAGES | pages_raw absent; pages_prep_gray path in OCR JSON is stale old path; using OCR-text fallback (doctr+surya consensus) | WARN
+[2026-06-21 00:03 PT] CH37 | Page 73 -- doctr+surya both show CHAPTER XXXVII; title confirmed: "An Act to amend an Act entitled an Act regulating the sale of mineral lands belonging to the State" | OK
+[2026-06-21 00:03 PT] CH38 | Page 73 -- doctr+surya both show CHAPTER XXXVIII at bottom of page 73; title confirmed: "An Act to repeal an Act entitled 'An Act in relation to the office of Court Commissioner of San Joaquin County'" | OK
+[2026-06-21 00:04 PT] CH43 | Page 80 -- doctr+surya both show CHAPTER XLIII at top; title confirmed: "An Act to amend an Act entitled 'An Act to provide for the building of a school house in Modesto School District'" | OK
+[2026-06-21 00:04 PT] CH86 | Page 128 -- doctr+surya both show CHAPTER LXXXVI; title confirmed: "An Act to amend an Act entitled 'An Act concerning actions for libel and slander'" | OK
+[2026-06-21 00:05 PT] CH122 | Page 183 -- doctr+surya both show CHAPTER CXXII; title: "An Act to declare the Klamath River navigable" | OK
+[2026-06-21 00:05 PT] CH123 | Page 183 -- doctr+surya both show CHAPTER CXXIII; title: "An Act prescribing the form of complaint in actions to recover delinquent taxes" | OK
+[2026-06-21 00:06 PT] OUTPUT | Writing parsed_acts_visual.json for production-1880: 6 targeted, 6 ocr_text_verified, 0 legislative_gap, 0 not_found | OK
