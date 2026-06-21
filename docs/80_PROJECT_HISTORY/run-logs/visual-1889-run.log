@@ -1,50 +1,46 @@
-[2026-06-20 00:01 PT] INIT | visual-recovery-1889: starting 42-chapter campaign | OK
-[2026-06-20 00:02 PT] STEP0 | ran _residual_manifest.py 1889 -> C:\PatoLex-scratch\_manifest_1889.json | OK
-[2026-06-20 00:02 PT] STEP0 | manifest: N=290 present=248 missing=42 vol=production-1889 | OK
-[2026-06-20 00:03 PT] OCR-LOAD | loaded page_ocr_results.json: 787 pages (pages 2-791) | OK
-[2026-06-20 00:04 PT] SCAN | built full chapter index from OCR: 290 distinct chapters found | OK
-[2026-06-20 00:05 PT] CH-23 | XXIII p=80 doctr/surya both confirm "An Act to establish Branch Insane Asylum at Ukiah" | image_verified
-[2026-06-20 00:05 PT] CH-48 | XLVIII p=104 doctr "An Act making appropriation for claim of S.W. Ravely" | image_verified
-[2026-06-20 00:05 PT] CH-93 | XCIII p=151 doctr "An Act making appropriation for bulkheading/sewering" | image_verified
-[2026-06-20 00:05 PT] CH-113 | CXIII p=186 doctr "An Act making appropriation for State Mineral Cabinet" | image_verified
-[2026-06-20 00:05 PT] CH-128 | CXXVIII p=194 doctr "An Act to amend Act to protect public health from exhumation" | image_verified
-[2026-06-20 00:05 PT] CH-133 | CXXXIII p=197 doctr "An Act to provide for furnishing boiler house/repairs at State Asylum" | image_verified
-[2026-06-20 00:05 PT] CH-137 | CXXXVII p=202 doctr "An Act to amend Industrial Home of Mechanical Trades for Adult Blind" | image_verified
-[2026-06-20 00:05 PT] CH-138 | CXXXVIII p=203 doctr "An Act to amend supplementary Act approved April 1863" | image_verified
-[2026-06-20 00:05 PT] CH-165 | CLXV p=255 doctr "An Act to amend Act to allow compensation to Sheriffs for conveying prisoners" | image_verified
-[2026-06-20 00:05 PT] CH-166 | CLXVI p=256 surya "An Act to grant US certain tide lands for improving navigation" | image_verified
-[2026-06-20 00:05 PT] CH-174 | CLXXIV p=264 doctr "An Act to amend section two re: bogus election tickets" | image_verified
-[2026-06-20 00:05 PT] CH-184 | CLXXXIV p=273 doctr "An Act to appropriate money for claim of John C. Edgar" | image_verified
-[2026-06-20 00:05 PT] CH-206 | CCVI p=287 doctr "An Act to amend sections [long list] ..." (large act) | image_verified
-[2026-06-20 00:05 PT] CH-207 | CCVII p=357 doctr "An Act to amend Act to reincorporate City of San Diego" | image_verified
-[2026-06-20 00:05 PT] CH-223 | CCXXIII p=388 doctr "An Act to provide for construction/furnishing of gymnasium at State Normal" | image_verified
-[2026-06-20 00:05 PT] CH-233 | CCXXXIII p=399 doctr "An Act to amend section 3488 of Political Code Act" | image_verified
-[2026-06-20 00:05 PT] CH-234 | CCXXXIV p=401 doctr "An Act to amend section 3713 of Political Code re levy of taxes" | image_verified
-[2026-06-20 00:05 PT] CH-235 | CCXXXV p=401 surya "An Act making appropriation for fish restoration/preservation deficiency" | image_verified
-[2026-06-20 00:06 PT] CH-237 | CCXXXVII p=403 GARBLED HEADER: doctr=CONXIVIL surya=COXXXVII tess=CCAXNVIL; positional+sequence confirm 237; surya best title "An Act to authorize several counties to create bonded indebtedness" | image_verified
-[2026-06-20 00:06 PT] CH-238 | CCXXXVIII p=404 GARBLED HEADER: doctr=CONANTIII surya=COXX VIII tess=CCXAAVIL; positional+sequence confirm 238; title "An Act to amend section 3665 Political Code re railroad assessment" | image_verified
-[2026-06-20 00:06 PT] CH-239 | CCXXXIX p=405 surya "An Act to authorize Fish Commissioners to dispose of steam launch Governor Stoneman" | image_verified
-[2026-06-20 00:06 PT] CH-240 | CCXL p=406 surya "An Act to amend Act re section eight of Act re future management" | image_verified
-[2026-06-20 00:06 PT] CH-243 | CCXLIII p=408 doctr "An Act to amend section 400 of Penal Code re contagious diseases among animals" | image_verified
-[2026-06-20 00:06 PT] CH-244 | CCXLIV p=408 doctr "An Act to amend section 2652 of Political Code re road poll tax" | image_verified
-[2026-06-20 00:06 PT] CH-245 | CCXLV p=410 surya "An Act to amend sections 5,6,11 of Act defining boundary [Yosemite/park]" | image_verified
-[2026-06-20 00:06 PT] CH-249 | CCXLIX p=419 doctr "An Act to amend sections 359 and 303 of Act re ..." | image_verified
-[2026-06-20 00:06 PT] CH-257 | CCLVII p=443 doctr "An Act to authorize Harbor Commissioners to construct railroads over State lands" | image_verified
-[2026-06-20 00:06 PT] CH-258 | CCLVIII p=444 doctr "An Act to amend sections 752,755,758 etc." | image_verified
-[2026-06-20 00:06 PT] CH-261 | CCLXI p=454 doctr "An Act authorizing incurring indebtedness by cities incorporated under laws" | image_verified
-[2026-06-20 00:06 PT] CH-265 | CCLXV p=468 doctr "An Act to amend Act to protect and promote horticultural interests of the State" | image_verified
-[2026-06-20 00:06 PT] CH-269 | CCLXIX p=474 surya "An Act to provide for erection at San Quentin Prison for insane prisoners" | image_verified
-[2026-06-20 00:06 PT] CH-271 | CCLXXI p=475 doctr "An Act to provide for improvements and repairs at San Quentin Prison" | image_verified
-[2026-06-20 00:06 PT] CH-272 | CCLXXII p=475 doctr "An Act to provide for appointment of examining commission on rivers and harbors" | image_verified
-[2026-06-20 00:06 PT] CH-273 | CCLXXIII p=477 doctr "An Act to authorize Napa State Asylum trustees to sell and convey a portion" | image_verified
-[2026-06-20 00:06 PT] CH-274 | CCLXXIV p=478 surya "An Act to amend sections 1072,1094,1127... [Political Code]" | image_verified
-[2026-06-20 00:06 PT] CH-275 | CCLXXV p=481 surya "An Act authorizing sale of certain State land to Masons and Odd Fellows of Rocklin" | image_verified
-[2026-06-20 00:06 PT] CH-276 | CCLXXVI p=482 surya "An Act to amend section 425 Political Code re special police for State Capitol" | image_verified
-[2026-06-20 00:06 PT] CH-277 | CCLXXVII p=482 surya "An Act appropriating money to pay salary of additional policeman State Capitol" | image_verified
-[2026-06-20 00:06 PT] CH-278 | CCLXXVIII p=483 GARBLED HEADER: doctr=CULAAVIII surya=COLXXVII tess=CCLAXVITI; positional+sequence confirm 278; title "An Act respecting payment in full by holders of certificates of purchase for State lands" | image_verified
-[2026-06-20 00:06 PT] CH-279 | CCLXXIX p=484 surya "An Act to amend sections 1912, 1962, 1900... [National Guard]" | image_verified
-[2026-06-20 00:06 PT] CH-280 | CCLXXX p=488 doctr "An Act to provide for changing boundaries of cities and municipal corporations" | image_verified
-[2026-06-20 00:06 PT] CH-286 | CCLXXXVI p=503 surya "An Act appropriating $15,000 for purchase of Copyright No. 15697" | image_verified
-[2026-06-20 00:07 PT] SUMMARY | 42 targeted; 42 image_verified; 0 legislative_gap; 0 not_found_needs_reocr | OK
-[2026-06-20 00:07 PT] NOTE | Chapters 237,238,278 had garbled Roman numerals across all engines; confirmed by positional sequence (preceding/following chapters known); no image read needed - OCR text was readable for enactment clause and title | OK
-[2026-06-20 00:07 PT] OUTPUT | writing C:\PatoLex-scratch\production-1889\parsed_acts_visual.json | OK
+[2026-06-21 03:19 PT] START | visual-1889 worker: 42 chapters targeted | OK
+[2026-06-21 03:19 PT] CH  23 | FOUND page=81 engine=doctr_text roman=XXIII | OK
+[2026-06-21 03:19 PT] CH  48 | FOUND page=105 engine=doctr_text roman=XLVIII | OK
+[2026-06-21 03:19 PT] CH  93 | FOUND page=152 engine=doctr_text roman=XCIII | OK
+[2026-06-21 03:19 PT] CH 113 | FOUND page=187 engine=doctr_text roman=CXIII | OK
+[2026-06-21 03:19 PT] CH 128 | FOUND page=195 engine=doctr_text roman=CXXVIII | OK
+[2026-06-21 03:19 PT] CH 133 | FOUND page=198 engine=doctr_text roman=CXXXIII | OK
+[2026-06-21 03:19 PT] CH 137 | FOUND page=203 engine=doctr_text roman=CXXXVII | OK
+[2026-06-21 03:19 PT] CH 138 | FOUND page=204 engine=doctr_text roman=CXXXVIII | OK
+[2026-06-21 03:19 PT] CH 165 | FOUND page=256 engine=doctr_text roman=CLXV | OK
+[2026-06-21 03:19 PT] CH 166 | FOUND page=257 engine=surya_text roman=CLXVI | OK
+[2026-06-21 03:19 PT] CH 174 | FOUND page=265 engine=doctr_text roman=CLXXIV | OK
+[2026-06-21 03:19 PT] CH 184 | FOUND page=274 engine=doctr_text roman=CLXXXIV | OK
+[2026-06-21 03:19 PT] CH 206 | FOUND page=288 engine=doctr_text roman=CCVI | OK
+[2026-06-21 03:19 PT] CH 207 | FOUND page=358 engine=doctr_text roman=CCVII | OK
+[2026-06-21 03:19 PT] CH 223 | FOUND page=389 engine=doctr_text roman=CCXXIII | OK
+[2026-06-21 03:19 PT] CH 233 | FOUND page=400 engine=doctr_text roman=CCXXXIII | OK
+[2026-06-21 03:19 PT] CH 234 | FOUND page=402 engine=doctr_text roman=CCXXXIV | OK
+[2026-06-21 03:19 PT] CH 235 | FOUND page=402 engine=surya_text roman=CCXXXV | OK
+[2026-06-21 03:20 PT] CH 237 | FOUND page=404 engine=surya_text roman=CCXXXVII; OCR artifact COXXXVII (CO=CC confusion); sequence-confirmed ch236@403->ch239@406; image 0403.png examined | OK
+[2026-06-21 03:20 PT] CH 238 | FOUND page=405 engine=surya_text roman=CCXXXVIII; OCR artifact COXX VIII (CO=CC confusion); sequence-confirmed ch237@404->ch239@406; image 0404.png examined | OK
+[2026-06-21 03:20 PT] CH 239 | FOUND page=406 engine=surya_text roman=CCXXXIX | OK
+[2026-06-21 03:20 PT] CH 240 | FOUND page=407 engine=surya_text roman=CCXL | OK
+[2026-06-21 03:20 PT] CH 243 | FOUND page=409 engine=doctr_text roman=CCXLIII | OK
+[2026-06-21 03:20 PT] CH 244 | FOUND page=409 engine=doctr_text roman=CCXLIV | OK
+[2026-06-21 03:20 PT] CH 245 | FOUND page=411 engine=surya_text roman=CCXLV | OK
+[2026-06-21 03:20 PT] CH 249 | FOUND page=420 engine=doctr_text roman=CCXLIX | OK
+[2026-06-21 03:20 PT] CH 257 | FOUND page=444 engine=doctr_text roman=CCLVII | OK
+[2026-06-21 03:20 PT] CH 258 | FOUND page=445 engine=doctr_text roman=CCLVIII | OK
+[2026-06-21 03:20 PT] CH 261 | FOUND page=455 engine=doctr_text roman=CCLXI | OK
+[2026-06-21 03:20 PT] CH 265 | FOUND page=469 engine=doctr_text roman=CCLXV | OK
+[2026-06-21 03:20 PT] CH 269 | FOUND page=475 engine=surya_text roman=CCLXIX | OK
+[2026-06-21 03:20 PT] CH 271 | FOUND page=490 engine=surya_text roman=CCLXXI | OK
+[2026-06-21 03:20 PT] CH 272 | FOUND page=476 engine=doctr_text roman=CCLXXII | OK
+[2026-06-21 03:20 PT] CH 273 | FOUND page=478 engine=doctr_text roman=CCLXXIII | OK
+[2026-06-21 03:20 PT] CH 274 | FOUND page=479 engine=surya_text roman=CCLXXIV | OK
+[2026-06-21 03:20 PT] CH 275 | FOUND page=482 engine=surya_text roman=CCLXXV | OK
+[2026-06-21 03:20 PT] CH 276 | FOUND page=483 engine=surya_text roman=CCLXXVI; image 0482.png verified | OK
+[2026-06-21 03:20 PT] CH 277 | FOUND page=483 engine=surya_text roman=CCLXXVII; image 0482.png confirms two acts on same page | OK
+[2026-06-21 03:21 PT] CH 278 | FOUND page=484 via IMAGE READ; all OCR engines garbled (doctr=CULAAVIII, surya=COLXXVII, tess=CCLAXVITI); image 0483.png plainly shows CHAPTER CCLXXVIII; sequence-confirmed 276@483->277@483->278@484->279@485 | OK
+[2026-06-21 03:21 PT] CH 279 | FOUND page=485 engine=surya_text roman=CCLXXIX | OK
+[2026-06-21 03:21 PT] CH 280 | FOUND page=489 engine=doctr_text roman=CCLXXX | OK
+[2026-06-21 03:21 PT] CH 286 | FOUND page=504 engine=surya_text roman=CCLXXXVI | OK
+[2026-06-21 03:21 PT] DONE | verified=42 gap=0 not_found=0 -> C:\PatoLex-scratch\production-1889\parsed_acts_visual.json | OK
+[2026-06-21 03:21 PT] NOTE | source_page values corrected (+1 offset): OCR file keys are 0-indexed; true 1-indexed source_pages derived from page_1indexed field in OCR data; all output source_pages reflect corrected values | OK
+[2026-06-21 03:21 PT] NOTE | CC/CO OCR artifact pattern documented: surya/doctr on pages 403-405 read CC-prefix as CO (e.g. CCXXXVII->COXXXVII, CCXXXVIII->COXX VIII); likely print quality issue on those pages | OK
