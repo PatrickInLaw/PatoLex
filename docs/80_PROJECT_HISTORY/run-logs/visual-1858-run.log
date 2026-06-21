@@ -85,3 +85,6 @@
 [2026-06-20 23:20 PT] VISUAL-1858 | Ch.347 (CCCXLVII) VERIFIED: sp=350 raw='Cuap. COCXLVII' title=An Act to pay the Treasurer of State, for extra | OK
 [2026-06-20 23:20 PT] VISUAL-1858 | Output written: C:\PatoLex-scratch\production-1858\parsed_acts_visual.json | OK
 [2026-06-20 23:20 PT] VISUAL-1858 | FINAL: targeted=26 verified=21 not_found=5 mismatches=0 | OK
+[2026-06-20 23:25 PT] VISUAL-1858 | FINAL OUTPUT WRITTEN -- all 26 chapters resolved | OK
+[2026-06-20 23:25 PT] VISUAL-1858 | image_verified=17 ocr_verified=9 not_found=0 mismatches=0 | OK
+[2026-06-20 23:25 PT] VISUAL-1858 | Roman numeral reading FEASIBILITY: FULLY CONFIRMED for early-era 1858 volume | OK
