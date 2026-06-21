@@ -45,11 +45,12 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
   modern body-dup guard REMOVED (over-rejected code-amendment gaps; checkpoint validation is the
   sound guard). Honest corpus ~97.9%, residual ~1844. 1915 control steady at 96% algorithmic.
 - **Phase B (visual) — WORKING, the reliable closer (image-confirms each printed chapter#).**
-  DONE 100%: **1915** (31/31), **1937** (19/19), **1939** (33/33, found 11 positional off-by-ones),
-  **1941** (37/37). Early-era proof **1858**: 26 missing → 20 recovered + 6 not_found (re-OCR cands)
-  — early-era visual WORKS but harder (more garble). RUNNING: 1971 (a4f90337), 1943 (ac11a821),
-  1933 (aec2d747). Each: `_residual_manifest.py <year>` → image-verify → additive
-  `<vol>/parsed_acts_visual.json` + `visual-<year>-run.log`.
+  DONE 100% (image-verified): **1915, 1937, 1939, 1941, 1933** (modern) + **1858** (early, 26/26 —
+  early-era roman-visual FULLY CONFIRMED). RUNNING: 1971 (a4f90337), 1943 (ac11a821), 1929 (a8da1a75).
+  Each agent: `_residual_manifest.py <year>` → image-verify each missing chapter → additive
+  `<vol>/parsed_acts_visual.json` + `visual-<year>-run.log`. Honest corpus 98.0%, residual ~1772.
+  NEXT residual targets (completable, ≤45): 1903(23) 1891(18) 1855(42) 1857(44) 1859(35) 1943-rest,
+  then BIG multi-vol (1987/1988/1989/1982) which should be SPLIT one-agent-per-volume to complete.
 - **Background:** final modern recover re-run (bkhwloi1a) for consistency (guard removed).
 - **NEXT loop:** as each visual agent finishes → bank its run log + re-measure + launch next residual
   year (≤3-4 in flight). Targets: modern 1987(big,4vol)/1989/1982/1929 + the 15-35 tail, then early
