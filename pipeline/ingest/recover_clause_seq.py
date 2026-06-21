@@ -278,36 +278,21 @@ def recover_volume(D, N):
                 return re.sub(r"\s+", " ", lines[j][1]).strip()[:300]
         return ""
 
-    def _act_tok(a, b):  # word tokens in lines[a:b] -- the act body for distinctness checks
-        return set(re.findall(r"[a-z]{4,}", " ".join(lines[j][1] for j in range(a, min(b, len(lines)))).lower()))
-
     def try_fill(c_lo, l_lo, c_hi, l_hi, bnd_list, status):
         """If exactly one boundary per chapter in [c_lo,c_hi) AND every present chapter aligns to its
-        positional boundary (within 2pp) AND no two ADJACENT acts in the gap are body-duplicates,
-        return the recovered records for the missing slots; else None. The body-duplicate guard is
-        the Hans fix: if act i's body ~= act i-1's body, a boundary was missed (the two 'acts' are one
-        act detected twice), the sequence is shifted, and a slot would inherit its neighbor's body
-        under a WRONG number -- reject the whole gap."""
+        positional boundary (within 2pp), return the recovered records for the missing slots; else
+        None. The CHECKPOINT test (present chapters in the gap must land on their known page) is the
+        sound, Hans-validated (1915) guard against anchor-shift / missed-boundary errors. (A body-
+        duplicate guard was tried and REMOVED: even its bounded form over-rejected modern code-
+        amendment gaps where adjacent acts legitimately share boilerplate >0.7 Jaccard, e.g. 1987
+        lost ~100 valid recoveries; the early era no longer uses this fill path at all -- it uses
+        roman_recover -- so the guard protected nothing it needed to.)"""
         span = c_hi - c_lo
         rng = bnd_list[bisect.bisect_right(bnd_list, l_lo):bisect.bisect_left(bnd_list, l_hi)]
         if len(rng) != span:
             return None
         for c in range(c_lo + 1, c_hi):
             if c in present and c in present_page and abs(lines[rng[c - c_lo]][0] - present_page[c]) > 2:
-                return None
-        # body-duplicate guard (the Hans fix, BOUNDED form). Each act spans its boundary to the next,
-        # so these windows do NOT bleed across acts. If two ADJACENT in-gap acts are body-duplicates,
-        # one act was detected twice (a spurious extra boundary), the sequence is shifted, and a slot
-        # would inherit a neighbor's body under a WRONG number -> reject the gap. (An earlier version
-        # also compared each slot to a 70-line ANCHOR window; that window BLED across acts and
-        # false-rejected ~100+ valid recoveries in multi-vol modern years, so it was removed -- the
-        # checkpoint test above already catches anchor-shift gaps wherever present chapters bracket.)
-        ends = rng[1:] + [l_hi]
-        act_tok = [_act_tok(rng[k], ends[k]) for k in range(len(rng))]
-        def dup(a, b):
-            return len(a) >= 8 and len(b) >= 8 and len(a & b) / len(a | b) > 0.7
-        for k in range(1, len(act_tok)):
-            if dup(act_tok[k], act_tok[k - 1]):
                 return None
         recs = []
         for slot in range(c_lo + 1, c_hi):
