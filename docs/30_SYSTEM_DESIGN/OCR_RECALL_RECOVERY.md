@@ -31,13 +31,13 @@ Then Hans-SOUND → wire into the merge/ingest → generalize to every OCR year.
   order. Each recovered act = real buffer text → text-verified.
 
 ## Current numbers — 1915 (N=771)
-- Merge (post-dedup): 477 (62%). **Stage-1 recover_clause_seq.py: 727 (94.3%)**, 250 recovered, 158
-  gaps filled, 26 ambiguous, 44 slots unfilled. **All fills alignment-VALIDATED** (every present
-  chapter in a filled gap lands on its known page within 2pp — guards against false+missed boundary
-  pairs that cancel in the count).
+- Merge (post-dedup): 477 (62%). **Stage-1+2 recover_clause_seq.py: 740 (96.0%)**, 263 recovered, 167
+  gaps filled (9 via the gap-local loose pass), 17 ambiguous, ~31 slots unfilled. **All fills
+  alignment-VALIDATED** (every present chapter in a filled gap lands on its known page within 2pp).
 - Progression: 85.7% (line-level) → 87.3% (+Theil-Sen anchor slope filter, +tighter clause) → 95.3%
-  (+per-chapter checkpoint alignment) → **94.3% (+checkpoint VALIDATION rejecting 8 broken-alignment
-  gaps — lower but correct)**.
+  (+per-chapter checkpoint alignment) → 94.3% (+checkpoint VALIDATION rejecting broken-alignment gaps)
+  → **96.0% (+Stage-2 gap-local LOOSE pass: under-filled gaps retried with the 'An act' title signal
+  scoped to the gap, still checkpoint-gated)**.
 
 ## DONE in Stage-1 polish (this session)
 - [x] **Anchor-slope outliers** → Theil-Sen robust line fit + residual filter (`theil_sen_filter`);

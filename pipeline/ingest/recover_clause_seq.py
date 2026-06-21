@@ -150,12 +150,17 @@ def recover_volume(D, N):
                     anchor[c] = p
     anchors = lis_anchors(theil_sen_filter(sorted(anchor.items())))
 
-    # boundaries (global line index), deduped to one per act head
-    bnds, last = [], -DEDUP_WIN
-    for i in range(len(lines)):
-        win = lines[i][1] + " " + (lines[i + 1][1] if i + 1 < len(lines) else "")
-        if is_boundary(win) and i - last >= DEDUP_WIN:
-            bnds.append(i); last = i
+    # boundaries (global line index), deduped to one per act head. STRICT (clause/approval) for the
+    # main pass; LOOSE (also a garbled 'An act <verb>' title) reserved for under-filled gaps only.
+    def detect(loose):
+        out, last = [], -DEDUP_WIN
+        for i in range(len(lines)):
+            win = lines[i][1] + " " + (lines[i + 1][1] if i + 1 < len(lines) else "")
+            if (is_boundary(win) or (loose and ANACT.search(win))) and i - last >= DEDUP_WIN:
+                out.append(i); last = i
+        return out
+    bnds = detect(False)
+    bnds_loose = detect(True)
 
     # anchor header line index (first line on its page matching a fuzzy 'CHAPTER <c>')
     def anchor_line(c, p):
@@ -180,46 +185,50 @@ def recover_volume(D, N):
                 return re.sub(r"\s+", " ", lines[j][1]).strip()[:300]
         return ""
 
-    recovered, fillable, ambiguous = [], 0, 0
+    def try_fill(c_lo, l_lo, c_hi, l_hi, bnd_list, status):
+        """If exactly one boundary per chapter in [c_lo,c_hi) AND every present chapter aligns to its
+        positional boundary (within 2pp), return the recovered records for the missing slots; else
+        None. The checkpoint test is what makes a relaxed boundary set safe to use."""
+        span = c_hi - c_lo
+        rng = bnd_list[bisect.bisect_right(bnd_list, l_lo):bisect.bisect_left(bnd_list, l_hi)]
+        if len(rng) != span:
+            return None
+        for c in range(c_lo + 1, c_hi):
+            if c in present and c in present_page and abs(lines[rng[c - c_lo]][0] - present_page[c]) > 2:
+                return None
+        recs = []
+        for slot in range(c_lo + 1, c_hi):
+            if slot in present:
+                continue
+            bi = rng[slot - c_lo]
+            body = " ".join(lines[j][1] for j in range(bi, min(len(lines), bi + BODY_LINES)))
+            recs.append({
+                "chapter": str(slot), "chapter_int": slot, "chapter_int_final": slot,
+                "chapter_raw": "(seq-clause)", "title": title_near(bi),
+                "text": re.sub(r"[ \t]+", " ", body)[:6000], "source_page": lines[bi][0],
+                "lo_anchor": c_lo, "hi_anchor": c_hi, "origin": "clause_seq", "status": status,
+            })
+        return recs
+
+    recovered, fillable, ambiguous, loose_fills = [], 0, 0, 0
     for (c_lo, _, l_lo), (c_hi, _, l_hi) in zip(aline, aline[1:]):
-        slots = [s for s in range(c_lo + 1, c_hi) if s not in present]
-        if not slots:
+        if not [s for s in range(c_lo + 1, c_hi) if s not in present]:
             continue
-        span = c_hi - c_lo  # acts c_lo..c_hi-1 (anchor_lo + every chapter, present or missing, below c_hi)
-        lo_i = bisect.bisect_right(bnds, l_lo)
-        hi_i = bisect.bisect_left(bnds, l_hi)
-        rng = bnds[lo_i:hi_i]
-        # exactly one act-boundary per chapter in [c_lo, c_hi): rng[i] is chapter c_lo+i. Present
-        # chapters act as alignment CHECKPOINTS -- validate each present chapter's positional
-        # boundary lands on its known source_page (within tol); if any checkpoint is off, a false +
-        # missed boundary canceled in the count and the alignment is broken -> do NOT fill.
-        checkpoints_ok = True
-        if len(rng) == span:
-            for c in range(c_lo + 1, c_hi):
-                if c in present and c in present_page:
-                    bp = lines[rng[c - c_lo]][0]
-                    if abs(bp - present_page[c]) > 2:
-                        checkpoints_ok = False
-                        break
-        if len(rng) == span and checkpoints_ok:
-            fillable += 1
-            for slot in slots:
-                bi = rng[slot - c_lo]
-                pg = lines[bi][0]
-                body = " ".join(lines[j][1] for j in range(bi, min(len(lines), bi + BODY_LINES)))
-                recovered.append({
-                    "chapter": str(slot), "chapter_int": slot, "chapter_int_final": slot,
-                    "chapter_raw": "(seq-clause)", "title": title_near(bi),
-                    "text": re.sub(r"[ \t]+", " ", body)[:6000], "source_page": pg,
-                    "lo_anchor": c_lo, "hi_anchor": c_hi,
-                    "origin": "clause_seq", "status": "seq_assigned_clause",
-                })
-        else:
+        recs = try_fill(c_lo, l_lo, c_hi, l_hi, bnds, "seq_assigned_clause")
+        if recs is None:  # Stage-2: retry under-filled gaps with the LOOSE boundary set (gap-local)
+            recs = try_fill(c_lo, l_lo, c_hi, l_hi, bnds_loose, "seq_assigned_loose")
+            if recs is not None:
+                loose_fills += 1
+        if recs is None:
             ambiguous += 1
+        else:
+            fillable += 1
+            recovered.extend(recs)
 
     out = {"recovered_acts": recovered,
            "_clauserec_meta": {"N": N, "present_before": len(present), "anchors_lis": len(aline),
                                "boundaries": len(bnds), "gaps_fillable": fillable,
+                               "gaps_loose_filled": loose_fills,
                                "gaps_ambiguous": ambiguous, "recovered": len(recovered),
                                "after": len(present) + len(recovered),
                                "pct_after": round(100 * (len(present) + len(recovered)) / N, 1),
