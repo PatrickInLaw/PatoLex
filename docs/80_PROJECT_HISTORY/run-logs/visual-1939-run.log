@@ -1,0 +1,44 @@
+[2026-06-20 00:00 PT] INIT | visual-1939 campaign started | 33 missing chapters | OK
+[2026-06-20 00:00 PT] MANIFEST | vol=production-1939-vol1-chapters pages=3270 images=3271 | OK
+[2026-06-20 00:00 PT] OCR-STRUCT | dict keyed by page_1indexed, consensus_text present, 3270 pages | OK
+[2026-06-20 00:05 PT] LOCATE | OCR batch scan for all 33 chapters complete | OK
+[2026-06-20 00:05 PT] NOTE | Ch37@3160, Ch40@3166, Ch44@473(statute)+3168(resolution), Ch49@3177 - resolution types found | OK
+[2026-06-20 00:05 PT] NOTE | Ch257,Ch258 not in OCR scan of pg1512 - OCR complete misses, found via image | OK
+[2026-06-20 00:05 PT] NOTE | Ch634 OCR reads '6384' (OCR error for '634') at pg2064 | OK
+[2026-06-20 00:05 PT] NOTE | Ch920,Ch935,Ch946,Ch1045 not found in all-OCR scan - confirmed via images | OK
+[2026-06-20 00:10 PT] IMAGE-CH32 | source_page=333 image=page_0332 CHAPTER 32 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH33 | source_page=341 image=page_0340 CHAPTER 33 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH34 | source_page=348 image=page_0347 CHAPTER 34 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH35 | source_page=363 image=page_0362 CHAPTER 35 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH36 | source_page=374 image=page_0373 CHAPTER 36 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH37 | source_page=3160 image=page_3159 CHAPTER 37 (resolution) confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH38 | source_page=397 image=page_0396 CHAPTER 38 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH39 | source_page=413 image=page_0412 CHAPTER 39 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH40 | source_page=3166 image=page_3165 CHAPTER 40 (resolution) confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH42 | source_page=440 image=page_0439 CHAPTER 42 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH43 | source_page=446 image=page_0445 CHAPTER 43 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH44 | source_page=473 image=page_0472 CHAPTER 44 confirmed (OCR missed header; Ch44+Ch45 on same page) | OK
+[2026-06-20 00:10 PT] IMAGE-CH46 | source_page=474 image=page_0473 CHAPTER 46 confirmed (OCR missed header; Ch46+Ch47+Ch48 on same page) | OK
+[2026-06-20 00:10 PT] IMAGE-CH49 | source_page=3177 image=page_3176 CHAPTER 49 (resolution) confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH154 | source_page=1275 image=page_1274 CHAPTER 154 confirmed | OK
+[2026-06-20 00:10 PT] IMAGE-CH239 | source_page=1499 image=page_1498 CHAPTER 239 confirmed (positional said ch240 - image correct) | OK
+[2026-06-20 00:10 PT] IMAGE-CH257 | source_page=1513 image=page_1512 CHAPTER 257 confirmed (OCR missed header entirely) | OK
+[2026-06-20 00:10 PT] IMAGE-CH258 | source_page=1514 image=page_1513 CHAPTER 258 confirmed (OCR missed header entirely) | OK
+[2026-06-20 00:10 PT] IMAGE-CH272 | source_page=1523 image=page_1522 CHAPTER 272 confirmed (positional said ch273 - image correct) | OK
+[2026-06-20 00:10 PT] IMAGE-CH375 | source_page=1711 image=page_1710 CHAPTER 375 confirmed (positional said ch376 - image correct) | OK
+[2026-06-20 00:10 PT] IMAGE-CH382 | source_page=1717 image=page_1716 CHAPTER 382 confirmed (positional said pg1720/ch383 - 3 pages off) | OK
+[2026-06-20 00:10 PT] IMAGE-CH418 | source_page=1753 image=page_1752 CHAPTER 418 confirmed (OCR no_match, image shows Ch418+Ch419 on same page) | OK
+[2026-06-20 00:10 PT] IMAGE-CH566 | source_page=1971 image=page_1970 CHAPTER 566 confirmed (positional said ch567 - image correct) | OK
+[2026-06-20 00:10 PT] IMAGE-CH572 | source_page=1981 image=page_1980 CHAPTER 572 confirmed (positional said ch573 - image correct) | OK
+[2026-06-20 00:10 PT] IMAGE-CH595 | source_page=2009 image=page_2008 CHAPTER 595 confirmed (positional said pg2010/ch596 - 1 page off) | OK
+[2026-06-20 00:10 PT] IMAGE-CH634 | source_page=2064 image=page_2063 CHAPTER 634 confirmed (OCR misread '634' as '6384') | OK
+[2026-06-20 00:10 PT] IMAGE-CH920 | source_page=2591 image=page_2590 CHAPTER 920 confirmed (not in OCR scan; image clear) | OK
+[2026-06-20 00:10 PT] IMAGE-CH935 | source_page=2638 image=page_2637 CHAPTER 935 confirmed (not in OCR scan; image clear) | OK
+[2026-06-20 00:10 PT] IMAGE-CH946 | source_page=2661 image=page_2660 CHAPTER 946 confirmed (not in OCR scan; image clear) | OK
+[2026-06-20 00:10 PT] IMAGE-CH1044 | source_page=2876 image=page_2875 CHAPTER 1044 STATUTES 1939 confirmed (referendum chapter) | OK
+[2026-06-20 00:10 PT] IMAGE-CH1045 | source_page=2888 image=page_2887 CHAPTER 1045 confirmed (not in OCR scan; image clear) | OK
+[2026-06-20 00:10 PT] IMAGE-CH1095 | source_page=3028 image=page_3027 CHAPTER 1095 confirmed (positional said ch1096 - image correct) | OK
+[2026-06-20 00:10 PT] IMAGE-CH1103 | source_page=3038 image=page_3037 CHAPTER 1103 confirmed (positional said pg3039/ch1104 - 1 page off) | OK
+[2026-06-20 00:15 PT] OUTPUT | wrote C:\PatoLex-scratch\production-1939-vol1-chapters\parsed_acts_visual.json | OK
+[2026-06-20 00:15 PT] SUMMARY | targeted=33 verified=33 not_found=0 printed_number_mismatches=11 resolution_chapters=4 | OK
+[2026-06-20 00:15 PT] DONE | 1939 visual recovery complete - all 33 chapters image-verified | OK

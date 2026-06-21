@@ -265,15 +265,15 @@ def recover_volume(D, N):
         for c in range(c_lo + 1, c_hi):
             if c in present and c in present_page and abs(lines[rng[c - c_lo]][0] - present_page[c]) > 2:
                 return None
-        # body-duplicate guard (the Hans fix). Each act spans its boundary to the next. The dominant
-        # failure: the gap's first boundary(s) are the LOWER ANCHOR's own approval+clause, so a slot
-        # inherits the anchor's body under the wrong number. Reject the gap if (a) any two ADJACENT
-        # in-gap acts are body-duplicates, or (b) a recovered slot's body duplicates the bracketing
-        # ANCHOR's body. Jaccard on >=8-token act bodies; >0.7 = same text.
+        # body-duplicate guard (the Hans fix, BOUNDED form). Each act spans its boundary to the next,
+        # so these windows do NOT bleed across acts. If two ADJACENT in-gap acts are body-duplicates,
+        # one act was detected twice (a spurious extra boundary), the sequence is shifted, and a slot
+        # would inherit a neighbor's body under a WRONG number -> reject the gap. (An earlier version
+        # also compared each slot to a 70-line ANCHOR window; that window BLED across acts and
+        # false-rejected ~100+ valid recoveries in multi-vol modern years, so it was removed -- the
+        # checkpoint test above already catches anchor-shift gaps wherever present chapters bracket.)
         ends = rng[1:] + [l_hi]
         act_tok = [_act_tok(rng[k], ends[k]) for k in range(len(rng))]
-        lo_tok = _act_tok(l_lo, rng[0] if rng else l_hi) or _act_tok(l_lo, min(l_lo + BODY_LINES, l_hi))
-        hi_tok = _act_tok(l_hi, min(l_hi + BODY_LINES, len(lines)))
         def dup(a, b):
             return len(a) >= 8 and len(b) >= 8 and len(a & b) / len(a | b) > 0.7
         for k in range(1, len(act_tok)):
@@ -284,9 +284,6 @@ def recover_volume(D, N):
             if slot in present:
                 continue
             bi = rng[slot - c_lo]
-            stok = act_tok[slot - c_lo]
-            if dup(stok, lo_tok) or dup(stok, hi_tok):  # slot duplicates a bracketing anchor's act
-                return None
             body = " ".join(lines[j][1] for j in range(bi, min(len(lines), bi + BODY_LINES)))
             recs.append({
                 "chapter": str(slot), "chapter_int": slot, "chapter_int_final": slot,

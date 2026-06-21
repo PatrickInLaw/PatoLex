@@ -1,0 +1,40 @@
+[2026-06-20 00:00 PT] INIT | 1941 visual recovery -- 37 missing chapters, vol=production-1941-vol1-41chapters | OK
+[2026-06-20 00:00 PT] SETUP | OCR consensus loaded, page_1indexed mapping confirmed (key+1=page_1indexed, image=page_{p-1:04d}.png) | OK
+[2026-06-20 00:01 PT] ch3 | source_page=3, printed=402, image=page_0002.png | OK
+[2026-06-20 00:02 PT] ch5 | source_page=5, printed=404, image=page_0004.png | OK
+[2026-06-20 00:03 PT] ch18 | source_page=33, printed=432, image=page_0032.png | OK
+[2026-06-20 00:04 PT] ch19 | source_page=34, printed=433, image=page_0033.png | OK
+[2026-06-20 00:05 PT] ch20 | source_page=35, printed=434, image=page_0034.png | OK
+[2026-06-20 00:06 PT] ch30 | source_page=70, printed=469, image=page_0069.png | OK
+[2026-06-20 00:07 PT] ch31 | source_page=72, printed=471, image=page_0071.png | OK
+[2026-06-20 00:08 PT] ch32 | source_page=73, printed=472, image=page_0072.png | OK
+[2026-06-20 00:09 PT] ch36 | source_page=133, printed=532, image=page_0132.png | OK
+[2026-06-20 00:10 PT] ch45 | source_page=233, printed=632, image=page_0232.png | OK
+[2026-06-20 00:11 PT] ch69 | source_page=341, printed=740, image=page_0340.png | OK
+[2026-06-20 00:12 PT] ch73 | source_page=347, printed=746, image=page_0346.png | OK
+[2026-06-20 00:13 PT] ch76 | source_page=351, printed=750, image=page_0350.png | OK
+[2026-06-20 00:14 PT] ch212 | source_page=883, printed=1282, image=page_0882.png | OK
+[2026-06-20 00:15 PT] ch213 | source_page=884, printed=1283, image=page_0883.png | OK
+[2026-06-20 00:16 PT] ch352 | source_page=1241, printed=1640, image=page_1240.png | OK
+[2026-06-20 00:17 PT] ch485 | source_page=1392, printed=1791, image=page_1391.png | OK
+[2026-06-20 00:18 PT] ch600 | source_page=1585, printed=1984, image=page_1584.png | OK
+[2026-06-20 00:19 PT] ch601 | source_page=1649, printed=2048, image=page_1648.png | OK
+[2026-06-20 00:20 PT] ch652 | source_page=1705, printed=2104, image=page_1704.png | OK
+[2026-06-20 00:21 PT] ch755 | source_page=1892, printed=2291, image=page_1891.png | OK
+[2026-06-20 00:22 PT] ch879 | source_page=2059, printed=2458, image=page_2058.png | OK
+[2026-06-20 00:23 PT] ch880 | source_page=2060, printed=2459, image=page_2059.png | OK
+[2026-06-20 00:24 PT] ch943 | source_page=2141, printed=2540, image=page_2140.png | OK
+[2026-06-20 00:25 PT] ch945 | source_page=2142, printed=2541, image=page_2141.png | OK
+[2026-06-20 00:26 PT] ch946 | source_page=2143, printed=2542, image=page_2142.png | OK
+[2026-06-20 00:27 PT] ch1046 | source_page=2312, printed=2711, image=page_2311.png | OK
+[2026-06-20 00:28 PT] ch1048 | source_page=2313, printed=2712, image=page_2312.png | OK
+[2026-06-20 00:29 PT] ch1049 | source_page=2313, printed=2712, image=page_2312.png | OK
+[2026-06-20 00:30 PT] ch1053 | source_page=2320, printed=2719, image=page_2319.png | OK
+[2026-06-20 00:31 PT] ch1176 | source_page=2533, printed=2932, image=page_2532.png | OK
+[2026-06-20 00:32 PT] ch1241 | source_page=2720, printed=3119, image=page_2719.png | OK
+[2026-06-20 00:33 PT] ch1242 | source_page=2725, printed=3124, image=page_2724.png | OK
+[2026-06-20 00:34 PT] ch1243 | source_page=2727, printed=3126, image=page_2726.png | OK
+[2026-06-20 00:35 PT] ch1282 | source_page=2829, printed=3228, image=page_2828.png | OK
+[2026-06-20 00:36 PT] ch1283 | source_page=2831, printed=3230, image=page_2830.png | OK
+[2026-06-20 00:37 PT] ch1284 | source_page=2833, printed=3232, image=page_2832.png | OK
+[2026-06-20 00:38 PT] SUMMARY | 37 targeted, 37 image-verified, 0 not_found, 0 printed-number mismatches | OK
