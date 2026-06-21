@@ -19,3 +19,4 @@
 [2026-06-21 09:13 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1965-vol2\parsed_acts_visual.json (6 acts: 5 image_verified, 1 ocr_text_verified) | OK
 [2026-06-21 09:13 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1965-vol3-chapters\parsed_acts_visual.json (1 act: 1 image_verified) | OK
 [2026-06-21 09:14 PT] SUMMARY | 1965 visual recovery: 7 targeted, 6 image_verified, 1 ocr_text_verified, 0 legislative_gap, 0 not_found | OK
+[2026-06-21 PT] VERIFY | Re-run of campaign agent: manifest _residual_manifest.py 1965 -> N=2070 present=2070 missing=0. Both visual JSONs verified intact (vol2: 6 acts, vol3-chapters: 1 act). Image mapping confirmed (page_0253.png for ch689, page_0648.png for ch1936). Full coverage achieved. | OK
