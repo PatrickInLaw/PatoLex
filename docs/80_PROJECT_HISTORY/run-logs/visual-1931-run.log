@@ -1,0 +1,13 @@
+[2026-06-21 00:00 PT] INIT | visual-recovery worker started for year 1931 | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1931: N=1220 present=1218 missing=2 chapters=[173, 1085] | OK
+[2026-06-21 00:02 PT] VOLUME | production-1931-vol1-chapters; pages_raw confirmed present | OK
+[2026-06-21 00:03 PT] MAPPING | page_image_pattern: page_{source_page-1:04d}.png confirmed vs known ch=172 at source_page=248 -> page_0247.png shows CHAPTER 172 | OK
+[2026-06-21 00:04 PT] CH173 | Neighbors: ch=171@p247, ch=174@p249. Checked OCR pages 247-250: no CHAPTER 173 running head in any engine | WARN (running heads systematically OCR-missed)
+[2026-06-21 00:05 PT] CH173 | Read image page_0248.png (source_page=249, printed page 248): CHAPTER 173 confirmed visually | OK
+[2026-06-21 00:06 PT] CH173 | Title: An act to amend sections 3.625, 3.632 and 3.634 of the School Code, relating to home instructors for physically handicapped persons. | OK
+[2026-06-21 00:07 PT] CH1085 | Neighbors: ch=1083@p2292, ch=1086@p2298. Scanned OCR pages 2292-2298: no CHAPTER 1085 header in any engine | WARN
+[2026-06-21 00:08 PT] CH1084 | NOTE: ch=1084 appears in parsed_acts_recovered.json at source_page=2208 (wrong - page 2208 is CHAPTER 1055); read image page_2294.png: CHAPTER 1084 confirmed at printed page 2294 (source_page 2295) -- this is a pre-existing parse error, not in scope of this recovery | WARN
+[2026-06-21 00:09 PT] CH1085 | Read image page_2295.png (source_page=2296, printed page 2295): CHAPTER 1085 confirmed visually | OK
+[2026-06-21 00:10 PT] CH1085 | Title: An act to add a new section to be numbered 10 to chapter 326, statutes of 1925 (San Diego State Teachers College boundary readjustment) | OK
+[2026-06-21 00:11 PT] OUTPUT | Writing parsed_acts_visual.json (no prior file; fresh write) | OK
+[2026-06-21 00:12 PT] COMPLETE | targeted=2 verified=2 legislative_gap=0 not_found=0 | OK
