@@ -44,10 +44,14 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
   CANONICAL roman + SEQUENCE-POSITION sanity (rejects insert-L misparses + body-citation ghosts);
   modern body-dup guard REMOVED (over-rejected code-amendment gaps; checkpoint validation is the
   sound guard). Honest corpus ~97.9%, residual ~1844. 1915 control steady at 96% algorithmic.
-- **Phase B (visual) — WORKING WELL, the reliable closer (image+multi-engine confirms each printed
-  chapter#). ~13 YEARS DONE 100%** (image-verified, see master run log for the live list): modern
-  1915/1933/1937/1939/1941/1943/1971 + early 1852/1855/1857/1858 (+1929 & 1859 each have 1 documented
-  re-OCR/re-scan gap). Corpus ~98.2%, residual ~1640 and dropping. RUNNING: 1850, 1863, 1889 (early).
+- **Phase B (visual) — WORKING WELL. ~20 YEARS DONE 100%** (image+multi-engine verified): modern
+  1915/1929/1933/1937/1939/1941/1943/1971 + early 1850/1852/1855/1857/1858/1859/1863/1889/1891/1899/
+  1903/1905. Corpus **98.6%, residual 1294**. A few documented re-OCR/SCAN-GAP chapters (physical
+  pages absent, defer): 1905 ch389-397 (pp497-519), 1929 ch881, 1859 ch51. Confirmed LEGISLATIVE GAPS
+  (never enacted, reduce effN): only ~4 left after the 1863 retry corrected its false ones. RUNNING:
+  1885, 1887. **Session-limit hit ~3am killed 3 agents -> relaunched clean post-3:10 reset; the killed
+  1863 run's 21 'legislative_gap' were FALSE (cause: roman 400 printed CCCC-additive, not CD — new
+  lesson).** Scoreboard counts ONLY image_verified; legislative_gap reduces effN.
 - **DURABLE FINDINGS:** (a) root cause = OCR skips page-top CHAPTER headers (running-header zone) →
   image/multi-engine verify is essential. (b) **LEGISLATIVE GAPS**: some oracle chapters were NEVER
   ENACTED (printed volume skips the number, e.g. 1857 ch54/ch232) → oracle N OVER-counts; visual
