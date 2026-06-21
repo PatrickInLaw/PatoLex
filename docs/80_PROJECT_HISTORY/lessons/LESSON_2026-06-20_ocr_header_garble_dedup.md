@@ -21,6 +21,15 @@ They are the same phenomenon viewed from two sides. Treating them with number/re
 
 The data is present until proven absent **on the actual page**. A chapter number that looks "missing" or "duplicated" in the parse is, far more often than not, an OCR-garbled `CHAPTER` header — recover/keep it; do not assert absence or re-OCR from a regex. Every automated collapse must be logged with its page + evidence so an auditor can re-check it against the scanned page.
 
+## Page-image lookup: the `source_page` ↔ filename off-by-one (verified twice)
+
+When a visual-recovery pass locates a chapter and you need to open the scanned page to confirm a garbled header, watch the indexing. In `ocr_consensus/page_ocr_results.json`:
+
+- The **dict key `K`** (the string the entries are keyed by) maps directly to the page-image basename: **`pages_raw/page_{K:04d}.png`** (same basename in `pages_prep_gray/`). The entry's own `img_path` field confirms this — key `"193"` carries `…/page_0193.png`.
+- The entry's **`page_1indexed` field is `K + 1`** (e.g. key `"193"` → `page_1indexed: 194`). It is NOT the image index.
+
+So if your manifest/recovery uses the **dict key** as `source_page` (the 1907 and 1979 passes both did), the correct image is **`page_{source_page:04d}.png`** — **not** `page_{source_page-1:04d}.png`. Both candidate files exist on disk, so a wrong `-1` does not error; it silently points one printed page too early. Verified empirically for 1907: `page_0193.png` is printed page 142 = `CHAPTER 94`, while `page_0192.png` is printed page 141 (the ch92/93 sewage act). Two independent visual-recovery agents (1979, then 1907) hit this same off-by-one — always confirm the mapping by reading one known page before trusting a batch of `img_path`s.
+
 ## Where it lives
 
 - Implementation: `pipeline/ingest/merge_passes.py` (`fuzzy_headers`, `_editle2`, `_has_own_garbled_header`, `dedup_header`, `merge_dir`). Collapses logged in each volume's `parsed_acts_merged.json` → `_merge_meta.collapsed_pairs` / `flagged_for_review`.

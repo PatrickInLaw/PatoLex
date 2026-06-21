@@ -23,3 +23,6 @@
 [2026-06-21 04:37 PT] PATTERN  | Root cause: OCR reads CH as CI, CIT, CII, CIL in ~10/15 chapters (running header zone corruption) | WARN
 [2026-06-21 04:37 PT] OUTPUT   | parsed_acts_visual.json written: 15 acts, 15 image_verified, 0 gap, 0 not_found | OK
 [2026-06-21 04:38 PT] COMPLETE | 1907 visual recovery: 15/15 verified, 0 legislative gaps, 0 unresolved | OK
+[2026-06-21 05:05 PT] FIX      | Off-by-one in img_path corrected: source_page (= OCR dict key K) maps to page_{K:04d}.png, NOT K-1. Verified by Read of page_0193.png = printed p142 CHAPTER 94 (and page_0192.png = p141, ch92/93 sewage act). Matches 1979 agent finding. | WARN
+[2026-06-21 05:06 PT] FIX      | Regenerated parsed_acts_visual.json; all 15 img_path now point to correct page_NNNN.png; stale 'Image page_NNNN.png' note suffix stripped | OK
+[2026-06-21 05:07 PT] VERIFY   | All 15 img_path validated: basename == page_{source_page:04d}.png and file exists | OK
