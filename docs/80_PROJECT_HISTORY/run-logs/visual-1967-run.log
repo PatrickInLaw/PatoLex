@@ -1,0 +1,12 @@
+[2026-06-21 00:00 PT] START | Visual recovery campaign for year 1967 | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1967: N=1725 present=1723 missing=2 -> _manifest_1967.json | OK
+[2026-06-21 00:01 PT] MISSING | chapters=[901, 1540], both in production-1967-vol2 | OK
+[2026-06-21 00:02 PT] IMAGES | vol2 has no pages_raw; extracting from chief-clerk-archive/1967_Vol2.pdf (2015 pages) via PyMuPDF | OK
+[2026-06-21 00:03 PT] CH901 | page_range=[495,496]; OCR page 496 (idx 495) has act text for Ed Code 9353.5 with no chapter header; ch900 on p495, ch902 on p496 => multi-ch page | OK
+[2026-06-21 00:04 PT] CH901-IMAGE | Extracted PDF page 495 (0-indexed) -> tmp_1967_p496.png; image shows 'CH. 901' running head clearly | OK
+[2026-06-21 00:04 PT] CH901-VERIFIED | Chapter 901 confirmed: Ed Code 9353.5, textbook specs, Approved July 24 1967, source_page=496, multi-ch page with ch902 | OK
+[2026-06-21 00:05 PT] CH1540 | page_range=[1809,1814]; checked OCR pages 1810-1813; p1810 has act text for Gov Code 8523/12070 with garbled CHAPTER header (OCR read '1','1') | OK
+[2026-06-21 00:06 PT] CH1540-IMAGE | Extracted PDF page 1809 (0-indexed) -> tmp_1967_p1810.png; image shows 'Ch. 1540' running head clearly | OK
+[2026-06-21 00:06 PT] CH1540-VERIFIED | Chapter 1540: Gov Code 8523 + Art.7 12070 executive reorganization, Approved Aug 30 1967, source_page=1810, spans pages 1810-1813 | OK
+[2026-06-21 00:07 PT] OUTPUT | Writing parsed_acts_visual.json to production-1967-vol2 (2 verified, 0 gap, 0 not_found) | OK
+[2026-06-21 00:07 PT] COMPLETE | 1967 visual recovery: targeted=2, verified=2 (both image_verified), legislative_gap=0, not_found=0 | OK
