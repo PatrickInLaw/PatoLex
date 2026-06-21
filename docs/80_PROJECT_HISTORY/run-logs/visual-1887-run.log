@@ -1,0 +1,7 @@
+
+[2026-06-21 PT] VISUAL | 1887 missing ch recovery: targeted=17 verified=17 gap=0 not_found=0 | OK
+  All 17 chapters located via OCR engine text (doctr+surya high-conf CHAPTER ROMAN headers).
+  Ch 31 and ch 143/145 confirmed visually via PNG images (0076.png, 0209.png).
+  Notable: ch 79=Assembly CA No. 16, ch 83=Senate CA No. 2 (constitutional amendments, valid session acts).
+  Ch 145 had spurious surya hit on p196 (actually ch 127); correct page is 210.
+  Output: C:/PatoLex-scratch/production-1887/parsed_acts_visual.json
