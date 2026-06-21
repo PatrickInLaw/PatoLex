@@ -8,3 +8,6 @@ Control doc: docs/30_SYSTEM_DESIGN/OCR_RECALL_RECOVERY.md
 [2026-06-20 22:16 PT] PHASE-A | Launched Phase-A subagent (Sonnet, id a6df9a2f): merge + recover_clause_seq across all OCR years + scoreboard + run log phase-a-algorithmic-run.log. | OK
 [2026-06-20 22:17 PT] SETUP | Telegram comms: PowerShell TOOL is broken here (exit 1 on all cmds). WORKING route = Bash -> powershell.exe -File telegram.ps1. Verified (msg 1189). Campaign-start msg sent. | OK
 [2026-06-20 22:17 PT] SETUP | Infra committed f7c0988 + pushed. Awaiting Phase-A completion. | OK
+[2026-06-20 22:23 PT] PHASE-A | DONE. Corpus 94.3%->97.9%, residual 1873 ch (mapped). recover_clause_seq applied all OCR years. | OK
+[2026-06-20 22:23 PT] PHASE-A | SPLIT: modern 1900-99 recovered well (resid ~470, per-yr 14-51). Early 1850-99 ZERO recovery (~1400 resid; no per-act CHAPTER headers -> no anchors). 1903/1905 also 0-recovery anomalies. 17 biennium years unmapped (wt 6211). | WARN
+[2026-06-20 22:24 PT] PHASE-A-EARLY | NEXT: assess Contents/Table-of-Acts anchored recovery for 1850-1899 (the dominant residual). Diagnose 1861 (worst, 161 resid). | OK

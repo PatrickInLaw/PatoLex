@@ -25,10 +25,18 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
   exhaustion. If the process fully crashes, Patrick restarts and this doc is the resume point.)
 
 ### CURRENT STATE  ← keep this line block updated every checkpoint
-- **Phase A (algorithmic, all OCR years): IN PROGRESS** — Phase-A subagent launched 2026-06-20 ~22:15 PT.
-  1915 done standalone (62%→96.0%). Other years pending the subagent's run.
-- **Phase B (visual residual): NOT STARTED.**
-- Master run log: `docs/80_PROJECT_HISTORY/run-logs/ocr-recall-campaign-run.log`.
+- **Phase A (algorithmic clause_seq, all OCR years): DONE** (subagent a6df9a2f, ~22:23 PT). Corpus
+  **94.3% → 97.9%**, residual **1,873** chapters (mapped years). Scoreboard: `python
+  pipeline/analysis/_recall_allyears.py` → `C:\PatoLex-scratch\_recall_allyears.json`. Run log:
+  `run-logs/phase-a-algorithmic-run.log`.
+- **KEY SPLIT:** modern 1900–1999 recovered well (per-year residual mostly 14–51; total ~470) → Phase
+  B visual. **Early era 1850–1899 = ZERO recovery** (~1,400 residual): no per-act `CHAPTER` headers
+  pre-1900 → no anchor backbone for clause_seq. Needs a DIFFERENT anchor source = the printed Table of
+  Acts / Contents (chapter→title→page; we have these PDFs locally). Also 1903 (33) & 1905 (83) are
+  1900s years with zero recovery → investigate (likely missing/odd structure).
+- **17 unmapped biennium-named years** (1866…1964; oracle weight 6,211) not measured — real scope gap.
+- **Phase A-early (Contents-anchored recovery for 1850–1899): NEXT / IN PROGRESS.**
+- **Phase B (visual residual, modern tail 1900–1999): NOT STARTED.**
 - Recovery tool: `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`).
 
 ### RESUME PROTOCOL (if you wake up unsure where you are)

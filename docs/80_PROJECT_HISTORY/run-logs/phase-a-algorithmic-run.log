@@ -1,0 +1,26 @@
+# Phase-A Algorithmic Recall Recovery — All OCR Years
+# Campaign: drive each OCR year (1850-1999) toward oracle chapter count via clause-seq recovery
+# Method: header-independent (enactment-clause / approval-bracket + LIS anchor backbone + checkpoint fill)
+# Tuned/validated on 1915 (62%->96%, zero wrong fills)
+# Additive only: NO Postgres writes, NO overwrites, NO deletes
+# Run log format: [YYYY-MM-DD HH:MM PT] step | detail | OK/WARN/FAIL
+
+[2026-06-20 22:16 PT] INIT | Phase-A subagent started; run log created | OK
+[2026-06-20 22:16 PT] INIT | Scripts verified: merge_passes.py, recover_clause_seq.py, _recall_allyears.py all present | OK
+[2026-06-20 22:17 PT] MERGE-18xx | merge_passes.py "production-18*" complete | 38 volumes, 9008 merged chapter-acts; 576 dups collapsed | OK
+[2026-06-20 22:18 PT] MERGE-19xx | merge_passes.py "production-19*" complete | 178 volumes, 80758 merged chapter-acts; 302 dups collapsed, 1133 pairs flagged | OK
+[2026-06-20 22:19 PT] RECOVER-18xx | recover_clause_seq.py "production-18*" complete | 28 dirs processed; ALL recovered=0 fill=0 (zero recovery on 1800s -- expected, different structure) | WARN
+[2026-06-20 22:20 PT] RECOVER-19xx | recover_clause_seq.py "production-19*" complete | 178 dirs processed | OK
+[2026-06-20 22:20 PT] RECOVER-19xx | Notable recoveries: 1915:263 1941:253 1931:165 1943:163 1988v2:159 1945:114 | OK
+[2026-06-20 22:21 PT] SCOREBOARD | _recall_allyears.py complete; JSON written to C:\PatoLex-scratch\_recall_allyears.json | OK
+[2026-06-20 22:21 PT] SCOREBOARD | CORPUS BEFORE: 84653/89803 = 94.3% | OK
+[2026-06-20 22:21 PT] SCOREBOARD | CORPUS AFTER:  87930/89803 = 97.9%  RESIDUAL=1873 chapters | OK
+[2026-06-20 22:21 PT] SCOREBOARD | Unmapped (biennium-named, not measured): 1866,1868,1870,1872,1874,1876,1878,1901,1909,1911,1952,1954,1956,1958,1960,1962,1964 (weight 6211) | WARN
+[2026-06-20 22:21 PT] FLAG | ANOMALOUS YEARS (after-pct < 70% or 0 or structural mismatch): | WARN
+[2026-06-20 22:21 PT] FLAG | 1854: after=55.2% -- deep early era, different act structure, zero recovery | WARN
+[2026-06-20 22:21 PT] FLAG | 1860: after=68.5% -- sub-70%, zero recovery from clause_seq | WARN
+[2026-06-20 22:21 PT] FLAG | 1899: after=68.0% -- sub-70%, zero recovery | WARN
+[2026-06-20 22:21 PT] FLAG | 1800s BLOCK (all): ALL 1800s years show recovered=0 fill=0 -- clause_seq algorithm finds no enactment-clause anchors; different act structure in pre-1900 era | WARN
+[2026-06-20 22:21 PT] FLAG | Zero-vol dirs (no chapters at all, 0%): 1927-vol1-26chapters, 1929-vol1-28chapters, 1935-vol1-34chapters, 1943-vol1-42chapters, 1947-vol1-46chapters, 1949-vol1-49chapters-prior, 1951-vol1-50chapters, etc. -- prior-session numbering volumes | WARN
+[2026-06-20 22:21 PT] FLAG | Patrick target "< 100 pages residual": TOTAL RESIDUAL=1873 -- FAR above target; significant work remains, especially in 1800s era and some large 1900s years | WARN
+[2026-06-20 22:22 PT] PHASE-A | All steps complete. Run log current. No Postgres writes, no overwrites, no deletes. | OK
