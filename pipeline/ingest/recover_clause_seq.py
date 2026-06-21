@@ -53,12 +53,47 @@ ENACTg = re.compile(r"[eco]n[ae]ct\w{0,2}\s+as\s+follow", re.I)
 PEOPLE = re.compile(r"p[eco]ople\s+of\s+the\s+stat\w{0,2}\s+of\s+calif", re.I)
 APPR = re.compile(r"appr[oc]ved\b", re.I)
 INEFF = re.compile(r"in\s+[eco]ff[eco]ct", re.I)
-ANACT = re.compile(r"\b[A4][nm]\s*a[ce]t\b|\bcl[il]n\s+act\b|\bln\s+act\b", re.I)
+# 'An act' title (heavily garbled in this corpus: 'ln act','Anact','clin act','Anoacl','An aet'),
+# confirmed by a following title verb so body prose doesn't match.
+ANACT = re.compile(r"\b([A4cl][nmli]{0,3}\s*a[ce]t|\bln\s+act|\banoac[lt])\b[^.]{0,40}?"
+                   r"\b(to|for|author|provid|amend|appropriat|relat|establ|creat|requir|reg)", re.I)
 
 
 def is_boundary(win):
-    return bool(ENACT.search(win) or ENACTg.search(win) or PEOPLE.search(win)
-               or (APPR.search(win) and INEFF.search(win)))
+    # An act head fires on the enactment clause (strong 'enact as follow' OR 'people of the State of
+    # Calif' CONFIRMED by a nearby 'enact'/'follow' -- bare 'people of the State' is a body citation,
+    # e.g. 'payable to the people of the State of California') OR the head approval bracket 'Approved
+    # <date> ... In effect ...'. The 'An act' title is NOT used: it over-fires on amendment
+    # cross-references ("an act entitled 'An act to ...'"), which broke the boundary counts.
+    clause = ENACT.search(win) or ENACTg.search(win) or (
+        PEOPLE.search(win) and re.search(r"en[ae]ct|follow", win, re.I))
+    return bool(clause or (APPR.search(win) and INEFF.search(win)))
+
+
+def theil_sen_filter(items):
+    """Drop magnitude-wrong anchors (stray garbled 'CHAPTER n' headers on a far page) that LIS keeps
+    because they are page-monotonic. chapter->page is ~linear over a volume; fit a robust Theil-Sen
+    line (median pairwise slope + median intercept) and drop anchors whose page residual is a gross
+    outlier. Items: [(chapter, page)] sorted by chapter."""
+    n = len(items)
+    if n < 6:
+        return items
+    cs = [c for c, _ in items]
+    ps = [p for _, p in items]
+    slopes = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            if cs[j] != cs[i]:
+                slopes.append((ps[j] - ps[i]) / (cs[j] - cs[i]))
+    slopes.sort()
+    b = slopes[len(slopes) // 2]
+    inter = sorted(ps[k] - b * cs[k] for k in range(n))
+    a = inter[n // 2]
+    res = [abs(ps[k] - (a + b * cs[k])) for k in range(n)]
+    sres = sorted(res)
+    mad = sres[len(sres) // 2] or 1.0
+    thr = max(25.0, 5 * mad)
+    return [items[k] for k in range(n) if res[k] <= thr]
 
 
 def load_lines(D):
@@ -103,15 +138,17 @@ def recover_volume(D, N):
     if not os.path.exists(mpath):
         return None
     merged = json.load(open(mpath, encoding="utf-8"))["merged_acts"]
-    present, anchor = set(), {}
+    present, anchor, present_page = set(), {}, {}
     for a in merged:
         c = a.get("chapter_int_final") or a.get("chapter_int") or a.get("chapter")
         p = a.get("source_page")
         if isinstance(c, int) and 1 <= c <= N:
             present.add(c)
-            if isinstance(p, int) and c in ph.get(p, (set(), []))[0]:
-                anchor[c] = p
-    anchors = lis_anchors(sorted(anchor.items()))
+            if isinstance(p, int):
+                present_page[c] = p
+                if c in ph.get(p, (set(), []))[0]:
+                    anchor[c] = p
+    anchors = lis_anchors(theil_sen_filter(sorted(anchor.items())))
 
     # boundaries (global line index), deduped to one per act head
     bnds, last = [], -DEDUP_WIN
@@ -148,12 +185,26 @@ def recover_volume(D, N):
         slots = [s for s in range(c_lo + 1, c_hi) if s not in present]
         if not slots:
             continue
+        span = c_hi - c_lo  # acts c_lo..c_hi-1 (anchor_lo + every chapter, present or missing, below c_hi)
         lo_i = bisect.bisect_right(bnds, l_lo)
         hi_i = bisect.bisect_left(bnds, l_hi)
         rng = bnds[lo_i:hi_i]
-        if len(rng) - 1 == len(slots) and slots:   # anchor-lo clause + one per missing act
+        # exactly one act-boundary per chapter in [c_lo, c_hi): rng[i] is chapter c_lo+i. Present
+        # chapters act as alignment CHECKPOINTS -- validate each present chapter's positional
+        # boundary lands on its known source_page (within tol); if any checkpoint is off, a false +
+        # missed boundary canceled in the count and the alignment is broken -> do NOT fill.
+        checkpoints_ok = True
+        if len(rng) == span:
+            for c in range(c_lo + 1, c_hi):
+                if c in present and c in present_page:
+                    bp = lines[rng[c - c_lo]][0]
+                    if abs(bp - present_page[c]) > 2:
+                        checkpoints_ok = False
+                        break
+        if len(rng) == span and checkpoints_ok:
             fillable += 1
-            for slot, bi in zip(slots, rng[1:]):
+            for slot in slots:
+                bi = rng[slot - c_lo]
                 pg = lines[bi][0]
                 body = " ".join(lines[j][1] for j in range(bi, min(len(lines), bi + BODY_LINES)))
                 recovered.append({
