@@ -1,0 +1,17 @@
+[2026-06-21 00:00 PT] INIT | Visual recovery worker for 1973 started | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1973: N=1218 present=1211 missing=7 [1141,1151,1153,1190,1191,1207,1218] | OK
+[2026-06-21 00:01 PT] VOLUME | All 7 missing chapters in production-1973-vol2-chapters | OK
+[2026-06-21 00:02 PT] IMAGE-CHECK | pages_raw/ not present in vol2; source PDF located: chief-clerk-archive/1973_Vol2_Chapters.pdf (1071 pages) | WARN
+[2026-06-21 00:03 PT] OCR-SCAN | Loaded page_ocr_results.json (OCR keys 2-1070, 1066 entries). Initial text search: ch1191 partial hit in body text (page 224); all others not found as CHAPTER headers in OCR text | OK
+[2026-06-21 00:04 PT] MERGED-ACTS | Confirmed page zones from parsed_acts_merged.json (90 acts, ch1122-1217): ch1140@57->ch1142@59; ch1150@94->ch1152@97; ch1152@97->ch1154@108; ch1189@214->ch1192@239; ch1206@316->ch1208@417; ch1217@649 (last) | OK
+[2026-06-21 00:05 PT] OCR-DEEP | Deep text scan found all chapter titles: ch1141 (key 58/surya), ch1151 (key 95/doctr), ch1153 (key 100/doctr), ch1190 (key 218/doctr), ch1191 (key 224 - CHAPTER 1191 + An act... found in surya/doctr), ch1207 (key 366/surya - 101-page omnibus act), ch1218 (key 650/doctr) | OK
+[2026-06-21 00:06 PT] IMG-EXTRACT | Extracted 12 PNG images from PDF using PyMuPDF at 2x zoom (864x1272): page_0057-0058 (ch1141 zone), page_0093-0095 (ch1151 zone), page_0098-0101 (ch1153 zone), page_0217-0218/0222-0224 (ch1190/1191), page_0364-0366 (ch1207), page_0648-0650 (ch1218) | OK
+[2026-06-21 00:07 PT] CONFIRM ch1141 | page_0058.png: 'CHAPTER 1141' header visible; title: An act to add Sections 20750.29, 20750.32, 20750.87 and 20862.5 to the Government Code, relating to Public Employees Retirement System. source_page=59 | OK
+[2026-06-21 00:08 PT] CONFIRM ch1151 | page_0095.png: 'CHAPTER 1151' header visible; title: An act to amend Section 11161.5 of the Penal Code, relating to minors. source_page=96 | OK
+[2026-06-21 00:09 PT] CONFIRM ch1153 | page_0100.png: 'CHAPTER 1153' header visible; title: An act to amend Section 1202.5 of the Public Utilities Code...relating to streets and highways. source_page=101 | OK
+[2026-06-21 00:10 PT] CONFIRM ch1190 | page_0218.png: 'CHAPTER 1190' header visible; title: An act to amend Sections 456, 531.2, 532...relating to property taxation. source_page=219 | OK
+[2026-06-21 00:11 PT] CONFIRM ch1191 | page_0224.png: 'CHAPTER 1191' header visible; title: An act to amend Sections 16701...relating to child care...urgency thereof. source_page=225 | OK
+[2026-06-21 00:12 PT] CONFIRM ch1207 | page_0366.png: 'CHAPTER 1207' header visible; 101-page omnibus act re manpower programs amending Unemployment Insurance Code + 7 other codes. source_page=367 | OK
+[2026-06-21 00:13 PT] CONFIRM ch1218 | page_0650.png: 'CHAPTER 1218' header visible; title: An act to add and repeal Section 22348 of the Vehicle Code, relating to vehicle speeds...urgency. source_page=651 | OK
+[2026-06-21 00:14 PT] WRITE | parsed_acts_visual.json written to production-1973-vol2-chapters/ (7 recovered_acts, all image_verified, 0 legislative_gap, 0 not_found) | OK
+[2026-06-21 00:14 PT] COMPLETE | 1973 visual recovery: targeted=7 verified=7 legislative_gap=0 not_found=0 | OK
