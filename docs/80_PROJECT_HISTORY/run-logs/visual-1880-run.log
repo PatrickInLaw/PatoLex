@@ -9,3 +9,13 @@
 [2026-06-21 00:05 PT] CH122 | Page 183 -- doctr+surya both show CHAPTER CXXII; title: "An Act to declare the Klamath River navigable" | OK
 [2026-06-21 00:05 PT] CH123 | Page 183 -- doctr+surya both show CHAPTER CXXIII; title: "An Act prescribing the form of complaint in actions to recover delinquent taxes" | OK
 [2026-06-21 00:06 PT] OUTPUT | Writing parsed_acts_visual.json for production-1880: 6 targeted, 6 ocr_text_verified, 0 legislative_gap, 0 not_found | OK
+[2026-06-21 00:10 PT] IMAGE-VERIFY-PASS | Second pass: extracted page images from 1880_Statutes.pdf via PyMuPDF at 150 DPI to C:\PatoLex-scratch\_temp_1880\ to upgrade ocr_text_verified -> image_verified | OK
+[2026-06-21 00:11 PT] OFFSET-CAL | Empirically confirmed source_page = PDF_idx_0based + 1. ch=2 (source_page=49) at PDF idx 048; ch=36 (source_page=73) at PDF idx 072. Prior run used OCR-key (0-indexed) for source_page -- off by 1 | WARN
+[2026-06-21 00:12 PT] IMG-CH37 | PDF idx 073 (source_page 74): 'CHAPTER XXXVII.' at page top, printed page '26'. image_verified. source_page corrected 73->74 | OK
+[2026-06-21 00:13 PT] IMG-CH38 | PDF idx 073 (source_page 74): 'CHAPTER XXXVIII.' on same page as ch.37. image_verified. source_page corrected 73->74 | OK
+[2026-06-21 00:14 PT] IMG-CH43 | PDF idx 080 (source_page 81): 'CHAPTER XLIII.' at page top, printed page '33'. image_verified. source_page corrected 80->81 | OK
+[2026-06-21 00:15 PT] IMG-CH86 | PDF idx 128 (source_page 129): 'CHAPTER LXXXV.' and 'CHAPTER LXXXVI.' on same page. image_verified. source_page corrected 128->129 | OK
+[2026-06-21 00:16 PT] IMG-CH122 | PDF idx 183 (source_page 184): 'CHAPTER CXXII.' at top. Short act (Klamath River). image_verified. source_page corrected 183->184 | OK
+[2026-06-21 00:17 PT] IMG-CH123 | PDF idx 183 (source_page 184): 'CHAPTER CXXIII.' on same page as ch.122. image_verified. source_page corrected 183->184 | OK
+[2026-06-21 00:18 PT] MANIFEST-FINAL | _residual_manifest.py 1880 -> N=126 present=126 missing=0. Coverage intact after source_page corrections | OK
+[2026-06-21 00:19 PT] COMPLETE | 1880 image-verification pass DONE. 6/6 image_verified, 0 legislative_gap, 0 not_found. _visual_meta.draft=false. Output: C:\PatoLex-scratch\production-1880\parsed_acts_visual.json | OK
