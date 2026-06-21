@@ -1,0 +1,62 @@
+[2026-06-21 03:57 PT] VISUAL-1983 | START visual recovery 1983
+[2026-06-21 03:57 PT] VISUAL-1983 | Missing chapters: [103, 199, 200, 316, 317, 318, 325, 354, 355, 362, 374, 376, 532, 533, 534, 715]
+[2026-06-21 03:57 PT] VISUAL-1983 | Loading OCR for production-1983-vol1-chapters
+[2026-06-21 03:57 PT] VISUAL-1983 |   Loaded 1600 pages
+[2026-06-21 03:57 PT] VISUAL-1983 | Loading OCR for production-1983-vol2
+[2026-06-21 03:57 PT] VISUAL-1983 |   Loaded 1796 pages
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 103: scanning pages 267-270 (between ch 102 and 104)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 103: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 103' in pages 267-270 (span=3); found chapters in vicinity: [1, 4, 5, 6, 69, 102, 104, 105, 106, 107, 109, 111, 588, 591, 837, 950, 1196]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 199: scanning pages 653-661 (between ch 198 and 201)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 199: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 199' in pages 653-661 (span=8); found chapters in vicinity: [1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 16, 24, 196, 197, 198, 201, 202, 203, 204, 205]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 200: scanning pages 653-661 (between ch 198 and 201)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 200: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 200' in pages 653-661 (span=8); found chapters in vicinity: [1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 16, 24, 196, 197, 198, 201, 202, 203, 204, 205]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 316: scanning pages 919-925 (between ch 315 and 319)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 316: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 316' in pages 919-925 (span=6); found chapters in vicinity: [1, 2, 3, 8, 10, 310, 311, 312, 313, 314, 315, 319, 320, 321, 322, 323, 502, 523, 796, 1201]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 317: scanning pages 919-925 (between ch 315 and 319)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 317: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 317' in pages 919-925 (span=6); found chapters in vicinity: [1, 2, 3, 8, 10, 310, 311, 312, 313, 314, 315, 319, 320, 321, 322, 323, 502, 523, 796, 1201]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 318: scanning pages 919-925 (between ch 315 and 319)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 318: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 318' in pages 919-925 (span=6); found chapters in vicinity: [1, 2, 3, 8, 10, 310, 311, 312, 313, 314, 315, 319, 320, 321, 322, 323, 502, 523, 796, 1201]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 325: scanning pages 1105-1514 (between ch 324 and 326)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 325: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 325' in pages 1105-1514 (span=409); found chapters in vicinity: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 20, 28, 49, 89, 100, 138, 142, 161, 204]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 354: scanning pages 1557-1560 (between ch 353 and 356)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 354: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 354' in pages 1557-1560 (span=3); found chapters in vicinity: [3, 4, 5, 16, 20, 254, 333, 351, 353, 356, 357, 358, 359, 360, 361, 363, 1165, 1280, 1286]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 355: scanning pages 1557-1560 (between ch 353 and 356)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 355: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 355' in pages 1557-1560 (span=3); found chapters in vicinity: [3, 4, 5, 16, 20, 254, 333, 351, 353, 356, 357, 358, 359, 360, 361, 363, 1165, 1280, 1286]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 362: scanning pages 1569-1570 (between ch 361 and 363)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 362: LEGISLATIVE_GAP -- No 'CHAPTER 362' in pages 1569-1570 (span=1); ch 361 and 363 both present; likely not enacted.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 374: scanning pages 1590-1591 (between ch 373 and 375)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 374: LEGISLATIVE_GAP -- No 'CHAPTER 374' in pages 1590-1591 (span=1); ch 373 and 375 both present; likely not enacted.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 376: scanning pages 1591-1596 (between ch 375 and 377)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 376: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 376' in pages 1591-1596 (span=5); found chapters in vicinity: [4, 5, 370, 371, 372, 373, 375, 377, 378, 379, 380]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 532: scanning pages 685-703 (between ch 531 and 535)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 532: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 532' in pages 685-703 (span=18); found chapters in vicinity: [1, 2, 3, 4, 5, 6, 7, 8, 13, 526, 527, 528, 529, 530, 531, 535, 536, 537, 1329]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 533: scanning pages 685-703 (between ch 531 and 535)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 533: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 533' in pages 685-703 (span=18); found chapters in vicinity: [1, 2, 3, 4, 5, 6, 7, 8, 13, 526, 527, 528, 529, 530, 531, 535, 536, 537, 1329]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 534: scanning pages 685-703 (between ch 531 and 535)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 534: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 534' in pages 685-703 (span=18); found chapters in vicinity: [1, 2, 3, 4, 5, 6, 7, 8, 13, 526, 527, 528, 529, 530, 531, 535, 536, 537, 1329]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Chapter 715: scanning pages 1106-1109 (between ch 714 and 716)
+[2026-06-21 03:57 PT] VISUAL-1983 |   ch 715: NOT_FOUND_NEEDS_REOCR -- No 'CHAPTER 715' in pages 1106-1109 (span=3); found chapters in vicinity: [1, 3, 4, 5, 9, 10, 45, 709, 710, 711, 712, 713, 714, 716, 717, 719, 720, 721]; needs image inspection.
+[2026-06-21 03:57 PT] VISUAL-1983 | Wrote C:\PatoLex-scratch\production-1983-vol1-chapters\parsed_acts_visual.json
+[2026-06-21 03:57 PT] VISUAL-1983 | Wrote C:\PatoLex-scratch\production-1983-vol2\parsed_acts_visual.json
+[2026-06-21 03:57 PT] VISUAL-1983 | DONE -- targeted=16 verified=0 legislative_gap=2 not_found=14
+[2026-06-21 04:10 PT] VISUAL-1983 | IMAGE PASS START -- reviewing all 16 missing chapters via page PNG files | OK
+[2026-06-21 04:10 PT] VISUAL-1983 | Root cause: modern-era 'CHAPTER NNN' is in RUNNING-HEADER ZONE only; body text starts at SECTION 1. OCR text search blind to running headers. All 14 'not_found' + 2 'legislative_gap' sent to image review. | WARN
+[2026-06-21 04:11 PT] VISUAL-1983 | Ch 103: CONFIRMED page_0269.png (source_page 270) -- air pollution (HSC 43107.5). Multi-chapter page with 104. | OK
+[2026-06-21 04:11 PT] VISUAL-1983 | Ch 199: CONFIRMED page_0654.png (source_page 655) -- Penal Code 602 trespass. | OK
+[2026-06-21 04:12 PT] VISUAL-1983 | Ch 200: CONFIRMED page_0657.png (source_page 658) -- Govt Code 6254 public records. | OK
+[2026-06-21 04:12 PT] VISUAL-1983 | Ch 316: CONFIRMED page_0921.png (source_page 922) -- B&P Code 4046 pharmacists. | OK
+[2026-06-21 04:13 PT] VISUAL-1983 | Ch 317: CONFIRMED page_0922.png (source_page 923) -- Ed Code 76140 community colleges. | OK
+[2026-06-21 04:13 PT] VISUAL-1983 | Ch 318: CONFIRMED page_0924.png (source_page 925) -- public social services appropriation. Multi-chapter page with 319. | OK
+[2026-06-21 04:14 PT] VISUAL-1983 | Ch 325: CONFIRMED page_1513.png (source_page 1514) -- PUC 7552 railroad corps. NOTE: Budget Act (Ch 324) consumed pages 1105-1513 explaining the huge gap. Multi-chapter page with 326. | OK
+[2026-06-21 04:14 PT] VISUAL-1983 | Ch 354: CONFIRMED page_1557.png (source_page 1558) -- Insurance Code 1800 bail bonds. Multi-chapter page with 355. | OK
+[2026-06-21 04:14 PT] VISUAL-1983 | Ch 355: CONFIRMED page_1557.png (source_page 1558) -- B&P Code boxing. Same page as 354. | OK
+[2026-06-21 04:15 PT] VISUAL-1983 | Ch 362: CONFIRMED page_1569.png (source_page 1570) -- B&P Code 19161.3 flammability. Script had wrongly called legislative_gap; image overrides. Multi-chapter with 363. | OK
+[2026-06-21 04:15 PT] VISUAL-1983 | Ch 374: CONFIRMED page_1590.png (source_page 1591) -- B&P Code 20027 franchises. Script had wrongly called legislative_gap; image overrides. Multi-chapter with 375. | OK
+[2026-06-21 04:15 PT] VISUAL-1983 | Ch 376: CONFIRMED page_1593.png (source_page 1594) -- B&P Code 4505 psychiatric technicians. | OK
+[2026-06-21 04:16 PT] VISUAL-1983 | Vol2 Ch 532: CONFIRMED page_0698.png (source_page 699) -- higher ed employer-employee relations. | OK
+[2026-06-21 04:16 PT] VISUAL-1983 | Vol2 Ch 533: CONFIRMED page_0699.png (source_page 700) -- chiropractic initiative amendment. | OK
+[2026-06-21 04:16 PT] VISUAL-1983 | Vol2 Ch 534: CONFIRMED page_0701.png (source_page 702) -- Govt Code 31459/53601.1 local government. | OK
+[2026-06-21 04:17 PT] VISUAL-1983 | Vol2 Ch 715: CONFIRMED page_1107.png (source_page 1108) -- Financial Code 14860 trusts. | OK
+[2026-06-21 04:17 PT] VISUAL-1983 | IMAGE PASS DONE -- targeted=16 verified=16 legislative_gap=0 not_found=0 | OK
+[2026-06-21 04:17 PT] VISUAL-1983 | Wrote C:\PatoLex-scratch\production-1983-vol1-chapters\parsed_acts_visual.json (12 acts, all image_verified) | OK
+[2026-06-21 04:17 PT] VISUAL-1983 | Wrote C:\PatoLex-scratch\production-1983-vol2\parsed_acts_visual.json (4 acts, all image_verified) | OK
