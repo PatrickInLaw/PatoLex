@@ -1,0 +1,7 @@
+[2026-06-21 00:00 PT] START | VISUAL-recovery campaign 1963 | OK
+[2026-06-21 00:00 PT] MANIFEST | _residual_manifest.py 1963 -> 1 missing chapter: [1174], vol=production-1963-vol2-chapters, page_range=[168,170] | OK
+[2026-06-21 00:00 PT] IMAGE-CHECK | pages_raw/ exists, 2494 images; pages 0167/0168/0169.png all present | OK
+[2026-06-21 00:00 PT] OCR-SCAN | key=168 (source_page=169): consensus='CHAPTER J174' (1->J OCR corruption in Tesseract); docTR='CHAPTER 1174' CORRECT; surya='CHAPTER 1174' CORRECT | OK
+[2026-06-21 00:00 PT] IMAGE-READ | page_0168.png visually confirmed: running head [Ch. 1174], chapter heading CHAPTER 1174, title matches all engines | OK
+[2026-06-21 00:01 PT] WRITE | C:\PatoLex-scratch\production-1963-vol2-chapters\parsed_acts_visual.json written (1 act, image_verified) | OK
+[2026-06-21 00:01 PT] COMPLETE | 1963 visual recovery done: targeted=1, verified=1, legislative_gap=0, not_found=0 | OK
