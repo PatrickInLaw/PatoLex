@@ -1,0 +1,330 @@
+[2026-06-21 04:35 PT] OK | visual-1860 START -- 106 missing chapters to process
+[2026-06-21 04:35 PT] OK | ch0002 (II) -> page_key=30 source_page=31 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0005 (V) -> NOT FOUND in keys 17-49
+[2026-06-21 04:35 PT] OK | ch0013 (XIII) -> page_key=36 source_page=37 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0025 (XXV) -> page_key=43 source_page=44 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0026 (XXVI) -> page_key=44 source_page=45 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0027 (XXVII) -> page_key=44 source_page=45 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0031 (XXXI) -> page_key=46 source_page=47 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0036 (XXXVI) -> page_key=49 source_page=50 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0038 (XXXVIII) -> page_key=50 source_page=51 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0039 (XXXIX) -> page_key=51 source_page=52 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0043 (XLIII) -> NOT FOUND in keys 39-70
+[2026-06-21 04:35 PT] OK | ch0047 (XLVII) -> page_key=56 source_page=57 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0054 (LIV) -> NOT FOUND in keys 45-76
+[2026-06-21 04:35 PT] WARN | ch0058 (LVIII) -> NOT FOUND in keys 47-78
+[2026-06-21 04:35 PT] WARN | ch0062 (LXII) -> NOT FOUND in keys 49-82
+[2026-06-21 04:35 PT] WARN | ch0063 (LXIII) -> NOT FOUND in keys 49-82
+[2026-06-21 04:35 PT] WARN | ch0065 (LXV) -> NOT FOUND in keys 52-84
+[2026-06-21 04:35 PT] WARN | ch0067 (LXVII) -> NOT FOUND in keys 54-84
+[2026-06-21 04:35 PT] WARN | ch0069 (LXIX) -> NOT FOUND in keys 54-85
+[2026-06-21 04:35 PT] OK | ch0072 (LXXII) -> page_key=71 source_page=72 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0073 (LXXIII) -> NOT FOUND in keys 36-86
+[2026-06-21 04:35 PT] WARN | ch0076 (LXXVI) -> NOT FOUND in keys 63-94
+[2026-06-21 04:35 PT] WARN | ch0078 (LXXVIII) -> NOT FOUND in keys 64-96
+[2026-06-21 04:35 PT] OK | ch0082 (LXXXII) -> page_key=81 source_page=82 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0084 (LXXXIV) -> page_key=82 source_page=83 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0085 (LXXXV) -> page_key=83 source_page=84 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] OK | ch0086 (LXXXVI) -> page_key=83 source_page=84 engine=tess_text confirmed=False
+[2026-06-21 04:35 PT] OK | ch0090 (XC) -> page_key=85 source_page=86 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0101 (CI) -> NOT FOUND in keys 85-116
+[2026-06-21 04:35 PT] OK | ch0107 (CVII) -> page_key=107 source_page=108 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0118 (CXVIII) -> page_key=114 source_page=115 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0121 (CXXI) -> page_key=118 source_page=119 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0124 (CXXIV) -> page_key=123 source_page=124 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0127 (CXXVII) -> page_key=129 source_page=130 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0136 (CXXXVI) -> page_key=135 source_page=136 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0137 (CXXXVII) -> page_key=135 source_page=136 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0138 (CXXXVIII) -> page_key=136 source_page=137 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0141 (CXLI) -> NOT FOUND in keys 123-154
+[2026-06-21 04:35 PT] WARN | ch0143 (CXLIII) -> NOT FOUND in keys 124-160
+[2026-06-21 04:35 PT] WARN | ch0144 (CXLIV) -> NOT FOUND in keys 124-160
+[2026-06-21 04:35 PT] WARN | ch0147 (CXLVII) -> NOT FOUND in keys 131-162
+[2026-06-21 04:35 PT] WARN | ch0152 (CLII) -> NOT FOUND in keys 139-170
+[2026-06-21 04:35 PT] OK | ch0155 (CLV) -> page_key=154 source_page=155 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0156 (CLVI) -> page_key=154 source_page=155 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0161 (CLXI) -> page_key=157 source_page=158 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] WARN | ch0164 (CLXIV) -> NOT FOUND in keys 147-180
+[2026-06-21 04:35 PT] WARN | ch0166 (CLXVI) -> NOT FOUND in keys 150-182
+[2026-06-21 04:35 PT] OK | ch0169 (CLXIX) -> page_key=167 source_page=168 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0173 (CLXXIII) -> NOT FOUND in keys 154-188
+[2026-06-21 04:35 PT] OK | ch0175 (CLXXV) -> page_key=172 source_page=173 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0176 (CLXXVI) -> page_key=173 source_page=174 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] OK | ch0178 (CLXXVIII) -> page_key=175 source_page=176 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0179 (CLXXIX) -> page_key=175 source_page=176 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0182 (CLXXXII) -> NOT FOUND in keys 163-194
+[2026-06-21 04:35 PT] OK | ch0188 (CLXXXVIII) -> page_key=183 source_page=184 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0189 (CLXXXIX) -> page_key=183 source_page=184 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] WARN | ch0209 (CCIX) -> NOT FOUND in keys 188-219
+[2026-06-21 04:35 PT] WARN | ch0211 (CCXI) -> NOT FOUND in keys 189-220
+[2026-06-21 04:35 PT] WARN | ch0213 (CCXIII) -> NOT FOUND in keys 190-222
+[2026-06-21 04:35 PT] WARN | ch0217 (CCXVII) -> NOT FOUND in keys 193-225
+[2026-06-21 04:35 PT] OK | ch0223 (CCXXIII) -> page_key=215 source_page=216 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0230 (CCXXX) -> NOT FOUND in keys 206-242
+[2026-06-21 04:35 PT] WARN | ch0231 (CCXXXI) -> NOT FOUND in keys 206-242
+[2026-06-21 04:35 PT] OK | ch0236 (CCXXXVI) -> page_key=235 source_page=236 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0238 (CCXXXVIII) -> page_key=236 source_page=237 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0239 (CCXXXIX) -> page_key=236 source_page=237 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0240 (CCXL) -> NOT FOUND in keys 222-253
+[2026-06-21 04:35 PT] OK | ch0244 (CCXLIV) -> page_key=239 source_page=240 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] WARN | ch0246 (CCXLVI) -> NOT FOUND in keys 225-263
+[2026-06-21 04:35 PT] WARN | ch0247 (CCXLVII) -> NOT FOUND in keys 225-263
+[2026-06-21 04:35 PT] OK | ch0252 (CCLII) -> page_key=253 source_page=254 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] WARN | ch0255 (CCLV) -> NOT FOUND in keys 203-272
+[2026-06-21 04:35 PT] WARN | ch0257 (CCLVII) -> NOT FOUND in keys 242-273
+[2026-06-21 04:35 PT] WARN | ch0262 (CCLXII) -> NOT FOUND in keys 247-280
+[2026-06-21 04:35 PT] OK | ch0266 (CCLXVI) -> page_key=278 source_page=279 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] WARN | ch0271 (CCLXXI) -> NOT FOUND in keys 267-299
+[2026-06-21 04:35 PT] WARN | ch0275 (CCLXXV) -> NOT FOUND in keys 272-303
+[2026-06-21 04:35 PT] OK | ch0283 (CCLXXXIII) -> page_key=293 source_page=294 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0284 (CCLXXXIV) -> NOT FOUND in keys 278-311
+[2026-06-21 04:35 PT] WARN | ch0287 (CCLXXXVII) -> NOT FOUND in keys 224-312
+[2026-06-21 04:35 PT] WARN | ch0288 (CCLXXXVIII) -> NOT FOUND in keys 224-312
+[2026-06-21 04:35 PT] WARN | ch0296 (CCXCVI) -> NOT FOUND in keys 290-323
+[2026-06-21 04:35 PT] WARN | ch0298 (CCXCVIII) -> NOT FOUND in keys 239-323
+[2026-06-21 04:35 PT] WARN | ch0309 (CCCIX) -> NOT FOUND in keys 302-335
+[2026-06-21 04:35 PT] OK | ch0312 (CCCXII) -> page_key=324 source_page=325 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0316 (CCCXVI) -> page_key=336 source_page=337 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] OK | ch0318 (CCCXVIII) -> page_key=338 source_page=339 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0326 (CCCXXVI) -> page_key=345 source_page=346 engine=doctr_text confirmed=False
+[2026-06-21 04:35 PT] OK | ch0327 (CCCXXVII) -> page_key=346 source_page=347 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] OK | ch0331 (CCCXXXI) -> page_key=356 source_page=357 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0333 (CCCXXXIII) -> NOT FOUND in keys 343-375
+[2026-06-21 04:35 PT] WARN | ch0334 (CCCXXXIV) -> NOT FOUND in keys 343-375
+[2026-06-21 04:35 PT] OK | ch0338 (CCCXXXVIII) -> page_key=362 source_page=363 engine=surya_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0340 (CCCXL) -> NOT FOUND in keys 348-379
+[2026-06-21 04:35 PT] WARN | ch0342 (CCCXLII) -> NOT FOUND in keys 349-382
+[2026-06-21 04:35 PT] WARN | ch0343 (CCCXLIII) -> NOT FOUND in keys 349-382
+[2026-06-21 04:35 PT] WARN | ch0344 (CCCXLIV) -> NOT FOUND in keys 349-382
+[2026-06-21 04:35 PT] WARN | ch0346 (CCCXLVI) -> NOT FOUND in keys 352-383
+[2026-06-21 04:35 PT] WARN | ch0348 (CCCXLVIII) -> NOT FOUND in keys 353-386
+[2026-06-21 04:35 PT] WARN | ch0349 (CCCXLIX) -> NOT FOUND in keys 353-386
+[2026-06-21 04:35 PT] WARN | ch0350 (CCCL) -> NOT FOUND in keys 353-386
+[2026-06-21 04:35 PT] OK | ch0353 (CCCLIII) -> page_key=371 source_page=372 engine=doctr_text confirmed=True
+[2026-06-21 04:35 PT] WARN | ch0366 (CCCLXVI) -> NOT FOUND in keys 372-404
+[2026-06-21 04:35 PT] WARN | ch0367 (CCCLXVII) -> NOT FOUND in keys 372-404
+[2026-06-21 04:35 PT] WARN | ch0369 (CCCLXIX) -> NOT FOUND in keys 374-451
+[2026-06-21 04:35 PT] WARN | ch0370 (CCCLXX) -> NOT FOUND in keys 374-451
+[2026-06-21 04:35 PT] OK | visual-1860 DONE -- verified=50 gap=0 not_found=56 skipped=0
+[2026-06-21 04:37 PT] OK | visual-1860 v2 START -- 106 missing chapters
+[2026-06-21 04:37 PT] OK | ch0002 (II) -> key=28 page=29 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0005 (V) -> key=21 page=22 eng=tess_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0013 (XIII) -> key=36 page=37 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0025 (XXV) -> key=43 page=44 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0026 (XXVI) -> key=44 page=45 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0027 (XXVII) -> key=44 page=45 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0031 (XXXI) -> key=46 page=47 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0036 (XXXVI) -> key=49 page=50 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0038 (XXXVIII) -> key=50 page=51 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0039 (XXXIX) -> key=51 page=52 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0043 (XLIII) -> NOT FOUND in keys 39-70
+[2026-06-21 04:37 PT] OK | ch0047 (XLVII) -> key=56 page=57 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0054 (LIV) -> key=59 page=60 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0058 (LVIII) -> NOT FOUND in keys 47-78
+[2026-06-21 04:37 PT] WARN | ch0062 (LXII) -> NOT FOUND in keys 49-82
+[2026-06-21 04:37 PT] WARN | ch0063 (LXIII) -> NOT FOUND in keys 49-82
+[2026-06-21 04:37 PT] OK | ch0065 (LXV) -> key=66 page=67 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0067 (LXVII) -> NOT FOUND in keys 54-84
+[2026-06-21 04:37 PT] OK | ch0069 (LXIX) -> key=80 page=81 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0072 (LXXII) -> key=71 page=72 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0073 (LXXIII) -> key=71 page=72 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0076 (LXXVI) -> key=78 page=79 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0078 (LXXVIII) -> NOT FOUND in keys 64-96
+[2026-06-21 04:37 PT] OK | ch0082 (LXXXII) -> key=81 page=82 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0084 (LXXXIV) -> key=82 page=83 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0085 (LXXXV) -> key=77 page=78 eng=tess_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0086 (LXXXVI) -> key=83 page=84 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0090 (XC) -> key=75 page=76 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0101 (CI) -> NOT FOUND in keys 85-116
+[2026-06-21 04:37 PT] OK | ch0107 (CVII) -> key=107 page=108 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0118 (CXVIII) -> key=114 page=115 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0121 (CXXI) -> key=118 page=119 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0124 (CXXIV) -> key=123 page=124 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0127 (CXXVII) -> key=129 page=130 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0136 (CXXXVI) -> key=135 page=136 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0137 (CXXXVII) -> key=135 page=136 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0138 (CXXXVIII) -> key=136 page=137 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0141 (CXLI) -> NOT FOUND in keys 123-154
+[2026-06-21 04:37 PT] WARN | ch0143 (CXLIII) -> NOT FOUND in keys 124-160
+[2026-06-21 04:37 PT] WARN | ch0144 (CXLIV) -> NOT FOUND in keys 124-160
+[2026-06-21 04:37 PT] WARN | ch0147 (CXLVII) -> NOT FOUND in keys 131-162
+[2026-06-21 04:37 PT] OK | ch0152 (CLII) -> key=148 page=149 eng=tess_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0155 (CLV) -> key=102 page=103 eng=tess_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0156 (CLVI) -> key=154 page=155 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0161 (CLXI) -> key=157 page=158 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0164 (CLXIV) -> key=162 page=163 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0166 (CLXVI) -> key=166 page=167 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0169 (CLXIX) -> key=167 page=168 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0173 (CLXXIII) -> key=170 page=171 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0175 (CLXXV) -> key=172 page=173 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0176 (CLXXVI) -> key=173 page=174 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0178 (CLXXVIII) -> key=175 page=176 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0179 (CLXXIX) -> key=175 page=176 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0182 (CLXXXII) -> NOT FOUND in keys 163-194
+[2026-06-21 04:37 PT] OK | ch0188 (CLXXXVIII) -> key=183 page=184 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0189 (CLXXXIX) -> key=183 page=184 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0209 (CCIX) -> NOT FOUND in keys 188-219
+[2026-06-21 04:37 PT] WARN | ch0211 (CCXI) -> NOT FOUND in keys 189-220
+[2026-06-21 04:37 PT] OK | ch0213 (CCXIII) -> key=205 page=206 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0217 (CCXVII) -> NOT FOUND in keys 193-225
+[2026-06-21 04:37 PT] OK | ch0223 (CCXXIII) -> key=215 page=216 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0230 (CCXXX) -> NOT FOUND in keys 206-242
+[2026-06-21 04:37 PT] OK | ch0231 (CCXXXI) -> key=212 page=213 eng=tess_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0236 (CCXXXVI) -> key=235 page=236 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0238 (CCXXXVIII) -> key=236 page=237 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0239 (CCXXXIX) -> key=236 page=237 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0240 (CCXL) -> NOT FOUND in keys 222-253
+[2026-06-21 04:37 PT] OK | ch0244 (CCXLIV) -> key=239 page=240 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0246 (CCXLVI) -> NOT FOUND in keys 225-263
+[2026-06-21 04:37 PT] WARN | ch0247 (CCXLVII) -> NOT FOUND in keys 225-263
+[2026-06-21 04:37 PT] OK | ch0252 (CCLII) -> key=253 page=254 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0255 (CCLV) -> NOT FOUND in keys 203-272
+[2026-06-21 04:37 PT] WARN | ch0257 (CCLVII) -> NOT FOUND in keys 242-273
+[2026-06-21 04:37 PT] OK | ch0262 (CCLXII) -> key=262 page=263 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0266 (CCLXVI) -> key=278 page=279 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0271 (CCLXXI) -> key=282 page=283 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0275 (CCLXXV) -> NOT FOUND in keys 272-303
+[2026-06-21 04:37 PT] OK | ch0283 (CCLXXXIII) -> key=293 page=294 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0284 (CCLXXXIV) -> NOT FOUND in keys 278-311
+[2026-06-21 04:37 PT] WARN | ch0287 (CCLXXXVII) -> NOT FOUND in keys 224-312
+[2026-06-21 04:37 PT] WARN | ch0288 (CCLXXXVIII) -> NOT FOUND in keys 224-312
+[2026-06-21 04:37 PT] OK | ch0296 (CCXCVI) -> key=306 page=307 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0298 (CCXCVIII) -> NOT FOUND in keys 239-323
+[2026-06-21 04:37 PT] WARN | ch0309 (CCCIX) -> NOT FOUND in keys 302-335
+[2026-06-21 04:37 PT] OK | ch0312 (CCCXII) -> key=324 page=325 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0316 (CCCXVI) -> key=336 page=337 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0318 (CCCXVIII) -> key=338 page=339 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0326 (CCCXXVI) -> key=345 page=346 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0327 (CCCXXVII) -> key=345 page=346 eng=tess_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0331 (CCCXXXI) -> key=356 page=357 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0333 (CCCXXXIII) -> key=346 page=347 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0334 (CCCXXXIV) -> NOT FOUND in keys 343-375
+[2026-06-21 04:37 PT] OK | ch0338 (CCCXXXVIII) -> key=362 page=363 eng=surya_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0340 (CCCXL) -> NOT FOUND in keys 348-379
+[2026-06-21 04:37 PT] WARN | ch0342 (CCCXLII) -> NOT FOUND in keys 349-382
+[2026-06-21 04:37 PT] WARN | ch0343 (CCCXLIII) -> NOT FOUND in keys 349-382
+[2026-06-21 04:37 PT] WARN | ch0344 (CCCXLIV) -> NOT FOUND in keys 349-382
+[2026-06-21 04:37 PT] WARN | ch0346 (CCCXLVI) -> NOT FOUND in keys 352-383
+[2026-06-21 04:37 PT] WARN | ch0348 (CCCXLVIII) -> NOT FOUND in keys 353-386
+[2026-06-21 04:37 PT] WARN | ch0349 (CCCXLIX) -> NOT FOUND in keys 353-386
+[2026-06-21 04:37 PT] WARN | ch0350 (CCCL) -> NOT FOUND in keys 353-386
+[2026-06-21 04:37 PT] OK | ch0353 (CCCLIII) -> key=371 page=372 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0366 (CCCLXVI) -> key=386 page=387 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] OK | ch0367 (CCCLXVII) -> key=387 page=388 eng=doctr_text confirmed=True
+[2026-06-21 04:37 PT] WARN | ch0369 (CCCLXIX) -> NOT FOUND in keys 374-451
+[2026-06-21 04:37 PT] WARN | ch0370 (CCCLXX) -> NOT FOUND in keys 374-451
+[2026-06-21 04:37 PT] OK | visual-1860 v2 DONE -- verified=68 not_found=38
+[2026-06-21 04:40 PT] OK | visual-1860 v3 START -- 106 missing chapters
+[2026-06-21 04:40 PT] OK | ch0002 (II) -> key=16 page=17 eng=surya_text raw=II confirmed=True
+[2026-06-21 04:40 PT] OK | ch0005 (V) -> key=16 page=17 eng=tess_text raw=V confirmed=True
+[2026-06-21 04:40 PT] OK | ch0013 (XIII) -> key=36 page=37 eng=doctr_text raw=XIIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0025 (XXV) -> key=43 page=44 eng=surya_text raw=XXV confirmed=True
+[2026-06-21 04:40 PT] OK | ch0026 (XXVI) -> key=44 page=45 eng=doctr_text raw=XXVI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0027 (XXVII) -> key=44 page=45 eng=surya_text raw=XXVII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0031 (XXXI) -> key=46 page=47 eng=doctr_text raw=XXXI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0036 (XXXVI) -> key=49 page=50 eng=surya_text raw=XXXVI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0038 (XXXVIII) -> key=50 page=51 eng=doctr_text raw=XXXVIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0039 (XXXIX) -> key=48 page=49 eng=doctr_text raw=IXXIV confirmed=False
+[2026-06-21 04:40 PT] OK | ch0043 (XLIII) -> key=54 page=55 eng=doctr_text raw=XLIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0047 (XLVII) -> key=56 page=57 eng=doctr_text raw=XLVII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0054 (LIV) -> key=54 page=55 eng=doctr_text raw=XLIV confirmed=False
+[2026-06-21 04:40 PT] OK | ch0058 (LVIII) -> key=56 page=57 eng=doctr_text raw=XLVIII confirmed=False
+[2026-06-21 04:40 PT] OK | ch0062 (LXII) -> key=63 page=64 eng=doctr_text raw=LXIL confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0063 (LXIII) -> NOT FOUND keys 44-87
+[2026-06-21 04:40 PT] OK | ch0065 (LXV) -> key=66 page=67 eng=doctr_text raw=LXV confirmed=True
+[2026-06-21 04:40 PT] OK | ch0067 (LXVII) -> key=68 page=69 eng=doctr_text raw=LAVIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0069 (LXIX) -> key=62 page=63 eng=tess_text raw=LTAX confirmed=False
+[2026-06-21 04:40 PT] OK | ch0072 (LXXII) -> key=71 page=72 eng=doctr_text raw=LAXII confirmed=False
+[2026-06-21 04:40 PT] OK | ch0073 (LXXIII) -> key=71 page=72 eng=doctr_text raw=LXXIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0076 (LXXVI) -> key=78 page=79 eng=doctr_text raw=LAXVI confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0078 (LXXVIII) -> NOT FOUND keys 59-101
+[2026-06-21 04:40 PT] OK | ch0082 (LXXXII) -> key=81 page=82 eng=surya_text raw=LXXXII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0084 (LXXXIV) -> key=82 page=83 eng=doctr_text raw=LXXXIV confirmed=True
+[2026-06-21 04:40 PT] OK | ch0085 (LXXXV) -> key=77 page=78 eng=tess_text raw=LXAXV confirmed=False
+[2026-06-21 04:40 PT] OK | ch0086 (LXXXVI) -> key=83 page=84 eng=surya_text raw=LXXXVI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0090 (XC) -> key=68 page=69 eng=doctr_text raw=ALL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0101 (CI) -> key=84 page=85 eng=doctr_text raw=CT confirmed=False
+[2026-06-21 04:40 PT] OK | ch0107 (CVII) -> key=95 page=96 eng=doctr_text raw=XCVII confirmed=False
+[2026-06-21 04:40 PT] OK | ch0118 (CXVIII) -> key=114 page=115 eng=doctr_text raw=CXVIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0121 (CXXI) -> key=118 page=119 eng=doctr_text raw=CXXI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0124 (CXXIV) -> key=123 page=124 eng=doctr_text raw=CXXIV confirmed=True
+[2026-06-21 04:40 PT] OK | ch0127 (CXXVII) -> key=129 page=130 eng=surya_text raw=CXXVII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0136 (CXXXVI) -> key=135 page=136 eng=doctr_text raw=CXXXVI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0137 (CXXXVII) -> key=135 page=136 eng=doctr_text raw=CXXXVIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0138 (CXXXVIII) -> key=136 page=137 eng=surya_text raw=CXXXVIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0141 (CXLI) -> key=137 page=138 eng=doctr_text raw=ALACT confirmed=False
+[2026-06-21 04:40 PT] OK | ch0143 (CXLIII) -> key=139 page=140 eng=doctr_text raw=CALIIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0144 (CXLIV) -> key=154 page=155 eng=doctr_text raw=LIVO confirmed=False
+[2026-06-21 04:40 PT] OK | ch0147 (CXLVII) -> key=146 page=147 eng=doctr_text raw=CXLVIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0152 (CLII) -> key=148 page=149 eng=doctr_text raw=CLIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0155 (CLV) -> key=102 page=103 eng=tess_text raw=CLV confirmed=True
+[2026-06-21 04:40 PT] OK | ch0156 (CLVI) -> key=154 page=155 eng=doctr_text raw=CLVI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0161 (CLXI) -> key=157 page=158 eng=doctr_text raw=CLAI confirmed=False
+[2026-06-21 04:40 PT] OK | ch0164 (CLXIV) -> key=162 page=163 eng=doctr_text raw=CLXIV confirmed=True
+[2026-06-21 04:40 PT] OK | ch0166 (CLXVI) -> key=166 page=167 eng=doctr_text raw=CLAVI confirmed=False
+[2026-06-21 04:40 PT] OK | ch0169 (CLXIX) -> key=167 page=168 eng=doctr_text raw=CLXIX confirmed=True
+[2026-06-21 04:40 PT] OK | ch0173 (CLXXIII) -> key=170 page=171 eng=doctr_text raw=CLXXIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0175 (CLXXV) -> key=172 page=173 eng=surya_text raw=CLXXV confirmed=True
+[2026-06-21 04:40 PT] OK | ch0176 (CLXXVI) -> key=173 page=174 eng=doctr_text raw=CLAXVI confirmed=False
+[2026-06-21 04:40 PT] OK | ch0178 (CLXXVIII) -> key=175 page=176 eng=doctr_text raw=CLAXVIII confirmed=False
+[2026-06-21 04:40 PT] OK | ch0179 (CLXXIX) -> key=175 page=176 eng=surya_text raw=CLXXIX confirmed=True
+[2026-06-21 04:40 PT] OK | ch0182 (CLXXXII) -> key=177 page=178 eng=doctr_text raw=CLXXXIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0188 (CLXXXVIII) -> key=183 page=184 eng=doctr_text raw=CLAXXVIII confirmed=False
+[2026-06-21 04:40 PT] OK | ch0189 (CLXXXIX) -> key=183 page=184 eng=doctr_text raw=CLAXXIX confirmed=False
+[2026-06-21 04:40 PT] OK | ch0209 (CCIX) -> key=193 page=194 eng=surya_text raw=ICATO confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0211 (CCXI) -> NOT FOUND keys 184-225
+[2026-06-21 04:40 PT] OK | ch0213 (CCXIII) -> key=205 page=206 eng=doctr_text raw=CCXIII confirmed=True
+[2026-06-21 04:40 PT] WARN | ch0217 (CCXVII) -> NOT FOUND keys 188-230
+[2026-06-21 04:40 PT] OK | ch0223 (CCXXIII) -> key=215 page=216 eng=doctr_text raw=CCXXIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0230 (CCXXX) -> key=206 page=207 eng=doctr_text raw=CCXIV confirmed=False
+[2026-06-21 04:40 PT] OK | ch0231 (CCXXXI) -> key=212 page=213 eng=tess_text raw=CCXAXI confirmed=False
+[2026-06-21 04:40 PT] OK | ch0236 (CCXXXVI) -> key=235 page=236 eng=surya_text raw=CCXXXVI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0238 (CCXXXVIII) -> key=236 page=237 eng=surya_text raw=CCXXXVIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0239 (CCXXXIX) -> key=236 page=237 eng=surya_text raw=CCXXXIX confirmed=True
+[2026-06-21 04:40 PT] WARN | ch0240 (CCXL) -> NOT FOUND keys 217-258
+[2026-06-21 04:40 PT] OK | ch0244 (CCXLIV) -> key=239 page=240 eng=doctr_text raw=COXLIV confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0246 (CCXLVI) -> NOT FOUND keys 220-268
+[2026-06-21 04:40 PT] OK | ch0247 (CCXLVII) -> key=242 page=243 eng=doctr_text raw=CCXLVIL confirmed=False
+[2026-06-21 04:40 PT] OK | ch0252 (CCLII) -> key=253 page=254 eng=doctr_text raw=COLII confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0255 (CCLV) -> NOT FOUND keys 198-277
+[2026-06-21 04:40 PT] WARN | ch0257 (CCLVII) -> NOT FOUND keys 237-278
+[2026-06-21 04:40 PT] OK | ch0262 (CCLXII) -> key=262 page=263 eng=surya_text raw=CCLXII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0266 (CCLXVI) -> key=278 page=279 eng=doctr_text raw=COLAVI confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0271 (CCLXXI) -> NOT FOUND keys 262-304
+[2026-06-21 04:40 PT] WARN | ch0275 (CCLXXV) -> NOT FOUND keys 267-308
+[2026-06-21 04:40 PT] OK | ch0283 (CCLXXXIII) -> key=293 page=294 eng=doctr_text raw=CCLXXXIII confirmed=True
+[2026-06-21 04:40 PT] WARN | ch0284 (CCLXXXIV) -> NOT FOUND keys 273-316
+[2026-06-21 04:40 PT] WARN | ch0287 (CCLXXXVII) -> NOT FOUND keys 219-317
+[2026-06-21 04:40 PT] WARN | ch0288 (CCLXXXVIII) -> NOT FOUND keys 219-317
+[2026-06-21 04:40 PT] OK | ch0296 (CCXCVI) -> key=306 page=307 eng=surya_text raw=CCXCVI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0298 (CCXCVIII) -> key=311 page=312 eng=doctr_text raw=TOOTO confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0309 (CCCIX) -> NOT FOUND keys 297-340
+[2026-06-21 04:40 PT] OK | ch0312 (CCCXII) -> key=324 page=325 eng=doctr_text raw=CCCXIT confirmed=False
+[2026-06-21 04:40 PT] OK | ch0316 (CCCXVI) -> key=336 page=337 eng=doctr_text raw=CCCAVI confirmed=False
+[2026-06-21 04:40 PT] OK | ch0318 (CCCXVIII) -> key=338 page=339 eng=doctr_text raw=CCCXVIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0326 (CCCXXVI) -> key=345 page=346 eng=doctr_text raw=CCCAAVI confirmed=False
+[2026-06-21 04:40 PT] OK | ch0327 (CCCXXVII) -> key=346 page=347 eng=surya_text raw=CCCXXVII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0331 (CCCXXXI) -> key=356 page=357 eng=surya_text raw=CCCXXXI confirmed=True
+[2026-06-21 04:40 PT] OK | ch0333 (CCCXXXIII) -> key=346 page=347 eng=doctr_text raw=CCCXXVIIVIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0334 (CCCXXXIV) -> key=358 page=359 eng=doctr_text raw=CCCXXXIIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0338 (CCCXXXVIII) -> key=362 page=363 eng=surya_text raw=CCCXXXVIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0340 (CCCXL) -> key=344 page=345 eng=surya_text raw=CCCXXIV confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0342 (CCCXLII) -> NOT FOUND keys 344-387
+[2026-06-21 04:40 PT] WARN | ch0343 (CCCXLIII) -> NOT FOUND keys 344-387
+[2026-06-21 04:40 PT] WARN | ch0344 (CCCXLIV) -> NOT FOUND keys 344-387
+[2026-06-21 04:40 PT] WARN | ch0346 (CCCXLVI) -> NOT FOUND keys 347-388
+[2026-06-21 04:40 PT] WARN | ch0348 (CCCXLVIII) -> NOT FOUND keys 348-391
+[2026-06-21 04:40 PT] WARN | ch0349 (CCCXLIX) -> NOT FOUND keys 348-391
+[2026-06-21 04:40 PT] OK | ch0350 (CCCL) -> key=386 page=387 eng=doctr_text raw=LOD confirmed=False
+[2026-06-21 04:40 PT] OK | ch0353 (CCCLIII) -> key=371 page=372 eng=doctr_text raw=CCCLIII confirmed=True
+[2026-06-21 04:40 PT] OK | ch0366 (CCCLXVI) -> key=386 page=387 eng=doctr_text raw=CCCLAVI confirmed=False
+[2026-06-21 04:40 PT] OK | ch0367 (CCCLXVII) -> key=387 page=388 eng=doctr_text raw=CCCLAVII confirmed=False
+[2026-06-21 04:40 PT] WARN | ch0369 (CCCLXIX) -> NOT FOUND keys 369-452
+[2026-06-21 04:40 PT] OK | ch0370 (CCCLXX) -> key=371 page=372 eng=doctr_text raw=CCCLIV confirmed=False
+[2026-06-21 04:40 PT] OK | visual-1860 v3 DONE -- verified=85 not_found=21
+[2026-06-21 04:44 PT] OK | visual-1860 manual-resolution: updated 20, verified=105, not_found=1
+[2026-06-21 04:47 PT] OK | visual-1860 false-positive-fix: 10 corrected, verified=106, not_found=0
+[2026-06-21 04:50 PT] OK | visual-1860 final-corrections: 8 updated, verified=106, not_found=0, confirmed=63, page_break=43
+[2026-06-21 04:52 PT] OK | visual-1860 ch155-fix: verified=106, confirmed=63, page_break=43
+[2026-06-21 04:52 PT] OK | visual-1860 FINAL: targeted=106, verified=106, not_found=0, confirmed_text=63, page_break=43
+[2026-06-21 04:53 PT] OK | visual-1860 CAMPAIGN COMPLETE: 106/106 chapters resolved, 0 not_found, 63 text-confirmed, 43 page-break-inferred
