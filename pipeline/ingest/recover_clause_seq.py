@@ -109,6 +109,50 @@ def load_lines(D):
     return out
 
 
+# ---- EARLY-ERA roman-header-direct recovery (pre~1900: per-act headers are ROMAN, "CHAP. CCLXXXV")
+_RVAL = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+_ROMAN_HDR = re.compile(r"^[^A-Za-z0-9]{0,4}([A-Za-z]{3,8})\.?\s+([IVXLCDMivxlcdm]{1,15})[\.\s,]")
+_CLAUSE_VAL = re.compile(r"en[ae]ct\w{0,2}\s+as\s+follow|p[eco]ople\s+of\s+the\s+stat", re.I)
+
+def roman_int(s):
+    s = s.upper()
+    if not s or any(c not in _RVAL for c in s):
+        return None
+    tot = prev = 0
+    for ch in reversed(s):
+        v = _RVAL[ch]; tot += -v if v < prev else v; prev = max(prev, v)
+    return tot
+
+def roman_recover(lines, N, present):
+    """Recover each chapter whose printed ROMAN act-header ('CHAP. <roman>') survived OCR and is NOT
+    already present, validated by an enactment clause / 'An act' within 25 lines. The chapter number
+    is read DIRECTLY off the roman header (numeral-verified -- no sequence inference, no body-dup
+    risk). Returns recovered records. Lower recall than sequence-fill but SAFE by construction; the
+    chapters whose roman header is too garbled fall to the visual pass."""
+    recs, seen = [], set()
+    for i, (pg, ln) in enumerate(lines):
+        m = _ROMAN_HDR.match(ln)
+        if not m:
+            continue
+        w = m.group(1).upper()
+        if not (mp._editle2(w, "CHAP") or mp._editle2(w, "CHAPTER") or mp._editle2(w, "CAP")):
+            continue
+        c = roman_int(m.group(2))
+        if not c or not (1 <= c <= N) or c in present or c in seen:
+            continue
+        window = " ".join(lines[j][1] for j in range(i, min(len(lines), i + 25)))
+        if not (_CLAUSE_VAL.search(window) or ANACT.search(window)):
+            continue
+        seen.add(c)
+        body = " ".join(lines[j][1] for j in range(i, min(len(lines), i + BODY_LINES)))
+        t = re.sub(r"\s+", " ", ln).strip()[:300]
+        recs.append({"chapter": str(c), "chapter_int": c, "chapter_int_final": c,
+                     "chapter_raw": "(roman)", "title": t, "text": re.sub(r"[ \t]+", " ", body)[:6000],
+                     "source_page": pg, "origin": "roman_header", "status": "roman_header_verified",
+                     "backbone": "roman-header-direct (early)"})
+    return recs
+
+
 def lis_anchors(anchor_items):
     """Longest subsequence with strictly increasing page (anchor_items sorted by chapter asc)."""
     if not anchor_items:
@@ -168,18 +212,16 @@ def recover_volume(D, N):
     # unchanged (adding present-chapter anchors there was tested and REGRESSED 1915 96->94.7%). The
     # downstream checkpoint validation still guards every fill, so a year with garbage present-pages
     # (e.g. 1860, 5% clause-alignment) simply recovers little -- never wrongly.
+    # EARLY/HEADERLESS era (pre~1900: ~0 arabic CHAPTER headers): recover via ROMAN headers DIRECTLY
+    # (numeral read off the page -- safe). The prior clause-sequence-from-present-pages backbone was
+    # UNSOUND (Hans: ~25-45% misnumbered duplicates because the fill grabbed the anchor's own clause).
+    # MODERN (arabic header backbone present): the checkpoint-validated clause-sequence gap-fill.
     if len(anchor) < 0.2 * N:
-        bp = sorted(set(lines[b][0] for b in bnds))
-        def _near_bnd(pg):
-            i = bisect.bisect_left(bp, pg)
-            return any(0 <= j < len(bp) and abs(bp[j] - pg) <= 2 for j in (i - 1, i))
-        grid = dict(anchor)
-        for c in present:
-            if c not in grid and c in present_page and _near_bnd(present_page[c]):
-                grid[c] = present_page[c]
-        anchors = lis_anchors(theil_sen_filter(sorted(grid.items())))
-        backbone = "clause-corroborated-present (early/headerless)"
+        early_recovered = roman_recover(lines, N, present)
+        anchors = []  # no modern gap-fill in the early era
+        backbone = "roman-header-direct (early)"
     else:
+        early_recovered = []
         anchors = lis_anchors(theil_sen_filter(sorted(anchor.items())))
         backbone = "header-confirmed (modern)"
 
@@ -206,10 +248,16 @@ def recover_volume(D, N):
                 return re.sub(r"\s+", " ", lines[j][1]).strip()[:300]
         return ""
 
+    def _act_tok(a, b):  # word tokens in lines[a:b] -- the act body for distinctness checks
+        return set(re.findall(r"[a-z]{4,}", " ".join(lines[j][1] for j in range(a, min(b, len(lines)))).lower()))
+
     def try_fill(c_lo, l_lo, c_hi, l_hi, bnd_list, status):
         """If exactly one boundary per chapter in [c_lo,c_hi) AND every present chapter aligns to its
-        positional boundary (within 2pp), return the recovered records for the missing slots; else
-        None. The checkpoint test is what makes a relaxed boundary set safe to use."""
+        positional boundary (within 2pp) AND no two ADJACENT acts in the gap are body-duplicates,
+        return the recovered records for the missing slots; else None. The body-duplicate guard is
+        the Hans fix: if act i's body ~= act i-1's body, a boundary was missed (the two 'acts' are one
+        act detected twice), the sequence is shifted, and a slot would inherit its neighbor's body
+        under a WRONG number -- reject the whole gap."""
         span = c_hi - c_lo
         rng = bnd_list[bisect.bisect_right(bnd_list, l_lo):bisect.bisect_left(bnd_list, l_hi)]
         if len(rng) != span:
@@ -217,11 +265,28 @@ def recover_volume(D, N):
         for c in range(c_lo + 1, c_hi):
             if c in present and c in present_page and abs(lines[rng[c - c_lo]][0] - present_page[c]) > 2:
                 return None
+        # body-duplicate guard (the Hans fix). Each act spans its boundary to the next. The dominant
+        # failure: the gap's first boundary(s) are the LOWER ANCHOR's own approval+clause, so a slot
+        # inherits the anchor's body under the wrong number. Reject the gap if (a) any two ADJACENT
+        # in-gap acts are body-duplicates, or (b) a recovered slot's body duplicates the bracketing
+        # ANCHOR's body. Jaccard on >=8-token act bodies; >0.7 = same text.
+        ends = rng[1:] + [l_hi]
+        act_tok = [_act_tok(rng[k], ends[k]) for k in range(len(rng))]
+        lo_tok = _act_tok(l_lo, rng[0] if rng else l_hi) or _act_tok(l_lo, min(l_lo + BODY_LINES, l_hi))
+        hi_tok = _act_tok(l_hi, min(l_hi + BODY_LINES, len(lines)))
+        def dup(a, b):
+            return len(a) >= 8 and len(b) >= 8 and len(a & b) / len(a | b) > 0.7
+        for k in range(1, len(act_tok)):
+            if dup(act_tok[k], act_tok[k - 1]):
+                return None
         recs = []
         for slot in range(c_lo + 1, c_hi):
             if slot in present:
                 continue
             bi = rng[slot - c_lo]
+            stok = act_tok[slot - c_lo]
+            if dup(stok, lo_tok) or dup(stok, hi_tok):  # slot duplicates a bracketing anchor's act
+                return None
             body = " ".join(lines[j][1] for j in range(bi, min(len(lines), bi + BODY_LINES)))
             recs.append({
                 "chapter": str(slot), "chapter_int": slot, "chapter_int_final": slot,
@@ -231,7 +296,7 @@ def recover_volume(D, N):
             })
         return recs
 
-    recovered, fillable, ambiguous, loose_fills = [], 0, 0, 0
+    recovered, fillable, ambiguous, loose_fills = list(early_recovered), 0, 0, 0
     for (c_lo, _, l_lo), (c_hi, _, l_hi) in zip(aline, aline[1:]):
         if not [s for s in range(c_lo + 1, c_hi) if s not in present]:
             continue
