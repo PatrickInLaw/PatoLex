@@ -1,0 +1,145 @@
+[2026-06-20 00:00 PT] VISUAL-1859 | START | overnight visual recovery campaign for 1859, 35 missing chapters
+[2026-06-20 23:39 PT] VISUAL-1859 | START | loading manifest + OCR
+[2026-06-20 23:39 PT] VISUAL-1859 | INIT | 35 missing chapters; 419 OCR pages loaded
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 37 | bracket lo=36@p56 hi=38@p58 range=[56, 58]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 37 | no OCR match; estimated page 58
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 37 | candidate_page=58 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 43 | bracket lo=42@p60 hi=44@p61 range=[60, 61]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 43 | no OCR match; estimated page 61
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 43 | candidate_page=61 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 51 | bracket lo=50@p66 hi=52@p67 range=[66, 67]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 51 | no OCR match; estimated page 67
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 51 | candidate_page=67 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 53 | bracket lo=52@p67 hi=54@p68 range=[67, 68]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 53 | no OCR match; estimated page 68
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 53 | candidate_page=68 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 57 | bracket lo=56@p70 hi=58@p70 range=[70, 70]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 57 | no OCR match; estimated page 70
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 57 | candidate_page=70 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 70 | bracket lo=69@p82 hi=71@p84 range=[82, 84]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 70 | no OCR match; estimated page 84
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 70 | candidate_page=84 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 125 | bracket lo=124@p151 hi=126@p152 range=[151, 152]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 125 | no OCR match; estimated page 152
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 125 | candidate_page=152 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 132 | bracket lo=131@p159 hi=133@p160 range=[159, 160]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 132 | no OCR match; estimated page 160
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 132 | candidate_page=160 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 134 | bracket lo=133@p160 hi=135@p161 range=[160, 161]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 134 | no OCR match; estimated page 161
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 134 | candidate_page=161 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 138 | bracket lo=137@p162 hi=140@p102 range=[102, 162]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 138 | no OCR match; estimated page 162
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 138 | candidate_page=162 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 139 | bracket lo=137@p162 hi=140@p102 range=[102, 162]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 139 | no OCR match; estimated page 162
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 139 | candidate_page=162 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 142 | bracket lo=141@p167 hi=143@p169 range=[167, 169]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 142 | no OCR match; estimated page 168
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 142 | candidate_page=168 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 146 | bracket lo=145@p171 hi=147@p179 range=[171, 179]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 146 | no OCR match; estimated page 176
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 146 | candidate_page=176 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 148 | bracket lo=147@p179 hi=149@p181 range=[179, 181]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 148 | OCR match at page 179: "CKLVIIT" -> 148
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 148 | candidate_page=179 status=ocr_located_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 174 | bracket lo=173@p207 hi=175@p209 range=[207, 209]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 174 | no OCR match; estimated page 208
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 174 | candidate_page=208 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 179 | bracket lo=178@p211 hi=180@p214 range=[211, 214]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 179 | OCR match at page 211: "CLXATX" -> 179
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 179 | candidate_page=211 status=ocr_located_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 193 | bracket lo=192@p222 hi=194@p231 range=[222, 231]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 193 | no OCR match; estimated page 227
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 193 | candidate_page=227 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 199 | bracket lo=198@p239 hi=200@p240 range=[239, 240]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 199 | OCR match at page 239: "CKCIX" -> 199
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 199 | candidate_page=239 status=ocr_located_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 203 | bracket lo=202@p242 hi=204@p243 range=[242, 243]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 203 | no OCR match; estimated page 243
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 203 | candidate_page=243 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 205 | bracket lo=204@p243 hi=206@p245 range=[243, 245]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 205 | no OCR match; estimated page 244
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 205 | candidate_page=244 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 213 | bracket lo=212@p250 hi=214@p252 range=[250, 252]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 213 | OCR match at page 250: "CCXITI" -> 213
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 213 | candidate_page=250 status=ocr_located_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 216 | bracket lo=215@p253 hi=217@p254 range=[253, 254]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 216 | no OCR match; estimated page 254
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 216 | candidate_page=254 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 231 | bracket lo=230@p265 hi=232@p267 range=[265, 267]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 231 | no OCR match; estimated page 266
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 231 | candidate_page=266 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 233 | bracket lo=232@p267 hi=235@p270 range=[267, 270]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 233 | no OCR match; estimated page 268
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 233 | candidate_page=268 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 234 | bracket lo=232@p267 hi=235@p270 range=[267, 270]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 234 | no OCR match; estimated page 270
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 234 | candidate_page=270 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 245 | bracket lo=244@p282 hi=246@p283 range=[282, 283]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 245 | no OCR match; estimated page 283
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 245 | candidate_page=283 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 254 | bracket lo=253@p289 hi=255@p290 range=[289, 290]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 254 | no OCR match; estimated page 290
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 254 | candidate_page=290 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 266 | bracket lo=265@p305 hi=267@p311 range=[305, 311]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 266 | no OCR match; estimated page 308
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 266 | candidate_page=308 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 269 | bracket lo=268@p315 hi=270@p326 range=[315, 326]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 269 | no OCR match; estimated page 321
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 269 | candidate_page=321 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 277 | bracket lo=276@p331 hi=278@p334 range=[331, 334]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 277 | no OCR match; estimated page 333
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 277 | candidate_page=333 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 281 | bracket lo=280@p335 hi=282@p336 range=[335, 336]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 281 | no OCR match; estimated page 336
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 281 | candidate_page=336 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 286 | bracket lo=285@p338 hi=289@p341 range=[338, 341]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 286 | no OCR match; estimated page 339
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 286 | candidate_page=339 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 287 | bracket lo=285@p338 hi=289@p341 range=[338, 341]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 287 | no OCR match; estimated page 340
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 287 | candidate_page=340 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 288 | bracket lo=285@p338 hi=289@p341 range=[338, 341]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 288 | no OCR match; estimated page 341
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 288 | candidate_page=341 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 317 | bracket lo=316@p381 hi=318@p385 range=[381, 385]
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 317 | no OCR match; estimated page 384
+[2026-06-20 23:39 PT] VISUAL-1859 | CH 317 | candidate_page=384 status=estimated_needs_image_verify
+[2026-06-20 23:39 PT] VISUAL-1859 | PHASE1-DONE | initial candidates written to C:\PatoLex-scratch\production-1859\parsed_acts_visual.json
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 37 | VERIFIED | XXXVII at source_page 57 | An Act to change the Time of holding the County Court in the County of Marin.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 43 | VERIFIED | XLIII at source_page 61 | An Act to repeal tax extension for Siskiyou County.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 51 | VERIFIED-LOCATION | LI at source_page 66 | Title unknown - scan truncated below CHAP.L body; bracketing confirms location.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 53 | VERIFIED | LIII at source_page 67 | Alameda County Special School Tax.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 57 | VERIFIED | LVII at source_page 70 | Attach territory to Sacramento for School Purposes.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 70 | VERIFIED | LXX at source_page 83 | Confirm Marin County Tax-Lists.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 125 | VERIFIED | CXXV at source_page 151 | Enable parties to partition/sell Real Estate.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 132 | VERIFIED | CXXXII at source_page 159 | Fund claims against Sacramento County.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 134 | VERIFIED | CXXXIV at source_page 160 | George Campbell Duplicate School-Land Warrants. NOTE: initial visual misread as CXXXVII (IV vs VII); corrected by sequence analysis.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 138 | VERIFIED | CXXXVIII at source_page 163 | Bridge across Upper Sacramento River at Red Bluff. Manifest bracket [102,162] was corrupted.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 139 | VERIFIED | CXXXIX at source_page 164 | Audit Certain Claims. Manifest bracket [102,162] was corrupted.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 142 | VERIFIED | CXLII at source_page 167 | Sale of Real Estate by Guardians.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 146 | VERIFIED | CXLVI at source_page 177 | Amendatory of Estray Animals Act.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 148 | VERIFIED | CXLVIII at source_page 180 | Supplementary to regulate Fees of Office.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 174 | VERIFIED | CLXXIV at source_page 208 | H.W. Bragg Guardian, sell Real Estate of minor heirs.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 179 | VERIFIED | CLXXIX at source_page 212 | Amend act of March 29, 1855.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 193 | VERIFIED | CXCIII at source_page 229 | LA Mayor and Council loan for Irrigating.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 199 | VERIFIED | CXCIX at source_page 240 | Encouragement of Vine and Olive culture.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 203 | VERIFIED | CCIII at source_page 243 | Concerning Public Administrators.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 205 | VERIFIED | CCV at source_page 244 | Navigation of Petaluma Creek.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 213 | VERIFIED | CCXIII at source_page 251 | Appropriate Money for Relief of Certain Persons.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 216 | VERIFIED | CCXVI at source_page 253 | County-Jail Keeper compensation, Shasta County.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 231 | VERIFIED | CCXXXI at source_page 267 | Amador County Officers election time.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 233 | VERIFIED | CCXXXIII at source_page 268 | Appropriate Money to pay Francis Crussell.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 234 | VERIFIED | CCXXXIV at source_page 268 | Fresh Water west of Fort Yuma.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 245 | VERIFIED | CCXLV at source_page 283 | Authorize LA City to extend City Limits.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 254 | VERIFIED | CCLIV at source_page 289 | Legalize San Bernardino Board of Equalization acts.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 266 | VERIFIED | CCLXVI at source_page 309 | Lawful Fences in San Bernardino/Colusa/Shasta/Tehama/Placer.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 269 | VERIFIED | CCLXIX at source_page 312 | Regulate Proceedings in Civil Actions.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 277 | VERIFIED | CCLXXVII at source_page 331 | Location of School-Land Warrants on unsurveyed Lands.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 281 | VERIFIED | CCLXXXI at source_page 336 | Supplementary to Lindsey Carson Real Estate sale act.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 286 | VERIFIED | CCLXXXVI at source_page 338 | Audit and allow Certain Claims.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 287 | VERIFIED | CCLXXXVII at source_page 339 | Protection of Gas-Light Companies.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 288 | VERIFIED | CCLXXXVIII at source_page 340 | Consent to Formation of separate Government for Southern Counties.
+[2026-06-20 23:51 PT] VISUAL-1859 | CH 317 | VERIFIED | CCCXVII at source_page 382 | Licensing of Auctioneers.
+[2026-06-20 23:51 PT] VISUAL-1859 | COMPLETE | 35 targeted | 34 fully image_verified (roman+title) | 1 location_confirmed (ch51, scan truncated) | 0 not_found | output: C:\PatoLex-scratch\production-1859\parsed_acts_visual.json

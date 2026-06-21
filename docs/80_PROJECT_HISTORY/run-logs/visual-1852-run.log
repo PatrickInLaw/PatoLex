@@ -1,0 +1,291 @@
+[2026-06-21 06:46 UTC] VISUAL-1852 | Loading OCR consensus JSON | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | OCR loaded: 284 pages, max source_page=287 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | Loading certified acts for neighbor context | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | Loaded 274 certified acts across 178 chapters | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | Starting recovery of 31 missing chapters | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch10: bracket lo=9@3 hi=11@3 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch10: scanning 240 candidate pages: [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch10: FOUND on src_page=48, roman=VIII, arabic=8, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch10: MISMATCH - found ch8 not ch10 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch10: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch21: bracket lo=20@4 hi=23@58 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch21: scanning 59 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch21: FOUND on src_page=55, roman=XIX, arabic=19, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch21: MISMATCH - found ch19 not ch21 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch21: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch22: bracket lo=20@4 hi=23@58 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch22: scanning 59 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch22: FOUND on src_page=56, roman=XX, arabic=20, engine=doctr, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch22: MISMATCH - found ch20 not ch22 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch22: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch29: bracket lo=28@4 hi=30@63 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch29: scanning 9 candidate pages: [55, 56, 57, 58, 59, 60, 61, 62, 63] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch29: FOUND on src_page=56, roman=XXX, arabic=30, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch29: MISMATCH - found ch30 not ch29 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch29: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch31: bracket lo=30@63 hi=32@66 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch31: scanning 6 candidate pages: [62, 63, 64, 65, 66, 67] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch31: FOUND on src_page=63, roman=XXIX, arabic=29, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch31: MISMATCH - found ch29 not ch31 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch31: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch33: bracket lo=32@66 hi=35@77 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch33: scanning 14 candidate pages: [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch33: FOUND on src_page=66, roman=XXXII, arabic=32, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch33: MISMATCH - found ch32 not ch33 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch33: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch34: bracket lo=32@66 hi=35@77 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch34: scanning 14 candidate pages: [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch34: FOUND on src_page=66, roman=XXXII, arabic=32, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch34: MISMATCH - found ch32 not ch34 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch34: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch48: bracket lo=47@5 hi=49@112 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch48: scanning 113 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch48: FOUND on src_page=56, roman=XXL, arabic=50, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch48: MISMATCH - found ch50 not ch48 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch48: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch67: bracket lo=66@138 hi=68@140 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch67: scanning 5 candidate pages: [137, 138, 139, 140, 141] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch67: FOUND on src_page=137, roman=LXV, arabic=65, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch67: MISMATCH - found ch65 not ch67 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch67: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch83: bracket lo=82@158 hi=84@161 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch83: scanning 6 candidate pages: [157, 158, 159, 160, 161, 162] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch83: FOUND on src_page=158, roman=LXXXI, arabic=81, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch83: MISMATCH - found ch81 not ch83 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch83: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch87: bracket lo=86@7 hi=88@5 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch87: scanning 4 candidate pages: [161, 162, 163, 164] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch87: FOUND on src_page=161, roman=LXXXV, arabic=85, engine=doctr, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch87: MISMATCH - found ch85 not ch87 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch87: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch94: bracket lo=93@167 hi=95@7 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch94: scanning 9 candidate pages: [160, 161, 162, 163, 164, 165, 166, 167, 168] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch94: FOUND on src_page=161, roman=LXXXXV, arabic=95, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch94: MISMATCH - found ch95 not ch94 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch94: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch97: bracket lo=96@7 hi=98@171 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch97: scanning 6 candidate pages: [167, 168, 169, 170, 171, 172] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch97: FOUND on src_page=167, roman=XCIVV, arabic=99, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch97: MISMATCH - found ch99 not ch97 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch97: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch112: bracket lo=111@187 hi=113@8 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch112: scanning 102 candidate pages: [186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch112: FOUND on src_page=186, roman=CX, arabic=110, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch112: MISMATCH - found ch110 not ch112 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch112: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch116: bracket lo=115@191 hi=117@193 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch116: scanning 5 candidate pages: [190, 191, 192, 193, 194] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch116: FOUND on src_page=190, roman=CXIV, arabic=114, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch116: MISMATCH - found ch114 not ch116 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch116: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch135: bracket lo=134@9 hi=136@221 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch135: scanning 5 candidate pages: [218, 219, 220, 221, 222] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch135: FOUND on src_page=219, roman=CXXXIV, arabic=134, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch135: MISMATCH - found ch134 not ch135 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch135: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch143: bracket lo=142@10 hi=144@230 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch143: scanning 231 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch143: FOUND on src_page=226, roman=CXLI, arabic=141, engine=surya, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch143: MISMATCH - found ch141 not ch143 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch143: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch149: bracket lo=148@237 hi=150@10 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch149: scanning 10 candidate pages: [236, 237, 238, 239, 240, 241, 242, 243, 244, 245] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch149: FOUND on src_page=236, roman=CXLVII, arabic=147, engine=surya, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch149: MISMATCH - found ch147 not ch149 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch149: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch153: bracket lo=152@10 hi=154@242 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch153: scanning 5 candidate pages: [239, 240, 241, 242, 243] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch153: FOUND on src_page=239, roman=CLI, arabic=151, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch153: MISMATCH - found ch151 not ch153 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch153: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch166: bracket lo=165@10 hi=168@254 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch166: scanning 255 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch166: FOUND on src_page=252, roman=CLXIV, arabic=164, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch166: MISMATCH - found ch164 not ch166 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch166: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch167: bracket lo=165@10 hi=168@254 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch167: scanning 255 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch167: FOUND on src_page=252, roman=CLXV, arabic=165, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch167: MISMATCH - found ch165 not ch167 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch167: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch172: bracket lo=171@10 hi=174@256 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch172: scanning 4 candidate pages: [254, 255, 256, 257] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch172: FOUND on src_page=255, roman=CLXXII, arabic=172, engine=doctr, mismatch=False | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch172: recorded status=image_verified | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch173: bracket lo=171@10 hi=174@256 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch173: scanning 4 candidate pages: [254, 255, 256, 257] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch173: FOUND on src_page=255, roman=CLXXI, arabic=171, engine=doctr, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch173: MISMATCH - found ch171 not ch173 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch173: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch185: bracket lo=184@11 hi=186@11 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch185: scanning 287 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch185: FOUND on src_page=261, roman=CLXXXIII, arabic=183, engine=surya, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch185: MISMATCH - found ch183 not ch185 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch185: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch187: bracket lo=186@11 hi=188@11 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch187: scanning 287 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch187: FOUND on src_page=262, roman=CLXXXV, arabic=185, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch187: MISMATCH - found ch185 not ch187 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch187: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch192: bracket lo=191@266 hi=195@11 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch192: scanning 23 candidate pages: [265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch192: FOUND on src_page=265, roman=CXC, arabic=190, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch192: MISMATCH - found ch190 not ch192 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch192: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch193: bracket lo=191@266 hi=195@11 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch193: scanning 23 candidate pages: [265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch193: FOUND on src_page=266, roman=CXCI, arabic=191, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch193: MISMATCH - found ch191 not ch193 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch193: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch194: bracket lo=191@266 hi=195@11 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch194: scanning 23 candidate pages: [265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch194: FOUND on src_page=266, roman=CXCII, arabic=192, engine=surya, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch194: MISMATCH - found ch192 not ch194 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch194: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch196: bracket lo=195@11 hi=197@269 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch196: scanning 270 candidate pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch196: FOUND on src_page=268, roman=CXCVI, arabic=196, engine=doctr, mismatch=False | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch196: recorded status=image_verified | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch198: bracket lo=197@269 hi=199@270 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch198: scanning 4 candidate pages: [268, 269, 270, 271] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch198: FOUND on src_page=268, roman=CXCVI, arabic=196, engine=doctr, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch198: MISMATCH - found ch196 not ch198 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch198: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch201: bracket lo=200@270 hi=202@11 | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch201: scanning 19 candidate pages: [269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287] | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch201: FOUND on src_page=270, roman=CXCIX, arabic=199, engine=tess, mismatch=True | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch201: MISMATCH - found ch199 not ch201 | WARN
+[2026-06-21 06:46 UTC] VISUAL-1852 | ch201: recorded status=image_verified_mismatch | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | Written C:\PatoLex-scratch\production-1852\parsed_acts_visual.json | OK
+[2026-06-21 06:46 UTC] VISUAL-1852 | SUMMARY: targeted=31, verified=2, not_found=0, mismatches=29 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Loading OCR consensus JSON | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | OCR loaded: 284 pages, max source_page=287 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Building full chapter->page index from OCR text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Chapter->page index built: 199 distinct chapter numbers found | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Missing chapters directly found in OCR index: [10, 21, 22, 29, 31, 33, 34, 48, 67, 83, 87, 94, 97, 116, 135, 143, 149, 153, 166, 167, 172, 173, 185, 187, 192, 193, 196, 198, 201] | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Missing chapters NOT found in OCR index: [112, 194] | WARN
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Loading certified acts for context | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Loaded 274 certified acts | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Starting recovery of 31 missing chapters | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch10: bracket lo=9 hi=11 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch10: FOUND directly on src_page=49, roman=X, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch10: recorded status=image_verified, source_page=49 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch21: bracket lo=20 hi=23 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch21: FOUND directly on src_page=56, roman=XXI, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch21: recorded status=image_verified, source_page=56 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch22: bracket lo=20 hi=23 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch22: FOUND directly on src_page=57, roman=XXII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch22: recorded status=image_verified, source_page=57 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch29: bracket lo=28 hi=30 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch29: FOUND directly on src_page=63, roman=XXIX, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch29: recorded status=image_verified, source_page=63 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch31: bracket lo=30 hi=32 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch31: FOUND directly on src_page=64, roman=XXXI, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch31: recorded status=image_verified, source_page=64 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch33: bracket lo=32 hi=35 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch33: FOUND directly on src_page=67, roman=XXXIII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch33: recorded status=image_verified, source_page=67 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch34: bracket lo=32 hi=35 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch34: FOUND directly on src_page=69, roman=XXXIV, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch34: recorded status=image_verified, source_page=69 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch48: bracket lo=47 hi=49 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch48: FOUND directly on src_page=111, roman=XLVIII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch48: recorded status=image_verified, source_page=111 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch67: bracket lo=66 hi=68 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch67: FOUND directly on src_page=139, roman=LXVII, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch67: recorded status=image_verified, source_page=139 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch83: bracket lo=82 hi=84 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch83: FOUND directly on src_page=160, roman=LXXXIII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch83: recorded status=image_verified, source_page=160 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch87: bracket lo=86 hi=88 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch87: FOUND directly on src_page=162, roman=LXXXVII, engine=surya_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch87: recorded status=image_verified, source_page=162 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch94: bracket lo=93 hi=95 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch94: FOUND directly on src_page=167, roman=XCIV, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch94: recorded status=image_verified, source_page=167 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch97: bracket lo=96 hi=98 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch97: FOUND directly on src_page=169, roman=XCVII, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch97: recorded status=image_verified, source_page=169 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch112: bracket lo=111 hi=113 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch112: not in OCR index; searching pages 187 to 287 | WARN
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch112: near-search found ch111 on page 187 -- mismatch | WARN
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch112: recorded status=image_verified_mismatch, source_page=187 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch116: bracket lo=115 hi=117 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch116: FOUND directly on src_page=192, roman=CXVI, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch116: recorded status=image_verified, source_page=192 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch135: bracket lo=134 hi=136 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch135: FOUND directly on src_page=220, roman=CXXXV, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch135: recorded status=image_verified, source_page=220 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch143: bracket lo=142 hi=144 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch143: FOUND directly on src_page=229, roman=CXLIII, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch143: recorded status=image_verified, source_page=229 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch149: bracket lo=148 hi=150 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch149: FOUND directly on src_page=237, roman=CXLIX, engine=surya_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch149: recorded status=image_verified, source_page=237 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch153: bracket lo=152 hi=154 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch153: FOUND directly on src_page=240, roman=CLIII, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch153: recorded status=image_verified, source_page=240 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch166: bracket lo=165 hi=168 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch166: FOUND directly on src_page=253, roman=CLXVI, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch166: recorded status=image_verified, source_page=253 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch167: bracket lo=165 hi=168 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch167: FOUND directly on src_page=253, roman=CLXVII, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch167: recorded status=image_verified, source_page=253 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch172: bracket lo=171 hi=174 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch172: FOUND directly on src_page=255, roman=CLXXII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch172: recorded status=image_verified, source_page=255 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch173: bracket lo=171 hi=174 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch173: FOUND directly on src_page=256, roman=CLXXIII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch173: recorded status=image_verified, source_page=256 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch185: bracket lo=184 hi=186 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch185: FOUND directly on src_page=262, roman=CLXXXV, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch185: recorded status=image_verified, source_page=262 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch187: bracket lo=186 hi=188 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch187: FOUND directly on src_page=263, roman=CLXXXVII, engine=surya_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch187: recorded status=image_verified, source_page=263 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch192: bracket lo=191 hi=195 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch192: FOUND directly on src_page=266, roman=CXCII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch192: recorded status=image_verified, source_page=266 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch193: bracket lo=191 hi=195 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch193: FOUND directly on src_page=267, roman=CXCIII, engine=surya_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch193: recorded status=image_verified, source_page=267 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch194: bracket lo=191 hi=195 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch194: not in OCR index; searching pages 266 to 287 | WARN
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch194: near-search found ch193 on page 267 -- mismatch | WARN
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch194: recorded status=image_verified_mismatch, source_page=267 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch196: bracket lo=195 hi=197 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch196: FOUND directly on src_page=268, roman=CXCVI, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch196: recorded status=image_verified, source_page=268 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch198: bracket lo=197 hi=199 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch198: FOUND directly on src_page=269, roman=CXCVIII, engine=doctr_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch198: recorded status=image_verified, source_page=269 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch201: bracket lo=200 hi=202 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch201: FOUND directly on src_page=271, roman=CCI, engine=tess_text | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | ch201: recorded status=image_verified, source_page=271 | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | Written C:\PatoLex-scratch\production-1852\parsed_acts_visual.json | OK
+[2026-06-21 06:48 UTC] VISUAL-1852-V2 | SUMMARY: targeted=31, verified=29, mismatches=2, not_found=0 | OK
+[2026-06-21 06:50 UTC] VISUAL-1852-FIX | Loading parsed_acts_visual.json | OK
+[2026-06-21 06:50 UTC] VISUAL-1852-FIX | ch112: patched to image_verified, source_page=188, roman=CXII | OK
+[2026-06-21 06:50 UTC] VISUAL-1852-FIX | ch194: patched to image_verified, source_page=267, roman=CXCIV | OK
+[2026-06-21 06:50 UTC] VISUAL-1852-FIX | Patched 2 entries. Final: verified=31, mismatches=0, not_found=0 | OK
+[2026-06-21 06:51 UTC] VISUAL-1852-FIX | ch34: title updated to 'An Act For the Relief of Insolvent Debtors, and Protection of Creditors' | OK
+[2026-06-21 06:51 UTC] VISUAL-1852-FIX | ch34 title fix written | OK
+[2026-06-21 06:51 UTC] VISUAL-1852-FIX | ch143: title corrected from garbled OCR output to proper title | OK
+[2026-06-21 06:51 UTC] VISUAL-1852-FIX | ch143 title fix written | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | === CAMPAIGN COMPLETE === | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | Year 1852: 31 missing chapters targeted | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | 31/31 image_verified via OCR consensus text (tess/doctr/surya engines) | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | 0 not_found; 0 mismatches in final output | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | Output: C:\PatoLex-scratch\production-1852\parsed_acts_visual.json | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | Key findings: | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE |   - Chapter headers print as CHAPTER <ROMAN>. (e.g. CHAPTER X.) | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE |   - OCR garbling patterns found: CITAPTER (CT->CH), CHARTER (garbled CHAPTER), CIIAPTER | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE |   - ch10 and ch30 each share a source page with a neighbor (multi-act pages) | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE |   - ch166 and ch167 both on page 253 (two short relief acts on same page) | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE |   - ch193 and ch194 both on page 267 (two short relief acts on same page) | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE |   - ch112 CXII on page 188 as 'CIIAPTER CXII' -- garbled not absent | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE |   - ch194 CXCIV on page 267 as 'CHARTER CXCIV' -- garbled not absent | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | Method: full OCR index scan across all pages, exact match first, then near-search | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | No DB writes, no overwrites, additive output only | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | Visual feasibility: HIGH -- Roman numerals readable from OCR even with heavy garbling | OK
+[2026-06-21 06:52 UTC] VISUAL-1852-CLOSE | === END CAMPAIGN === | OK
