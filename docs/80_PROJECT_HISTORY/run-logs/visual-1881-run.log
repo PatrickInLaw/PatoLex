@@ -1,0 +1,11 @@
+[2026-06-21 14:56 PT] INIT | Visual recovery campaign for 1881 -- 2 missing chapters: 33, 73 | OK
+[2026-06-21 14:56 PT] MANIFEST | _residual_manifest.py 1881 -> N=77 present=75 missing=2 (ch 33, 73) | OK
+[2026-06-21 14:56 PT] VOLUME | vol=production-1881, no pages_raw dir found; extracting from 1881_Statutes.pdf (151 pages) | OK
+[2026-06-21 14:57 PT] EXTRACT | PyMuPDF extracted 6 pages (idx 70,71,72,127,128,129) at 2x to C:\PatoLex-scratch\_visual_tmp_1881\ | OK
+[2026-06-21 14:57 PT] VERIFY-MAPPING | Key "71" -> page_1indexed=72, img_path shows page_0071.png; confirmed PDF index = OCR key value (0-indexed) | OK
+[2026-06-21 14:58 PT] CH33-LOCATE | page_0070 (key=70, p1indexed=71) shows CHAPTER XXXII then CHAPTER XXXIII; OCR garbled second header as second XXXII; image clearly shows XXXIII | OK
+[2026-06-21 14:58 PT] CH33-TITLE | "An Act concerning the Medical Department of the University of California." [Approved March 3d, 1881] -- EARLY-ERA roman numeral confirmed XXXIII=33 | OK
+[2026-06-21 14:59 PT] CH73-LOCATE | page_0128 (key=128, p1indexed=129) shows CHAPTER LXXIII in image; OCR consensus garbled as "LXXIITI." -- classic page-top running-head miss | OK
+[2026-06-21 14:59 PT] CH73-TITLE | "An Act to amend an Act entitled An Act to establish a Political Code, approved March 12, 1872, by adding thereto two new sections, to be known as Sections 3664 and 3665, relating to assessments of railroads and other property by the State Board of Equalization and County Assessors, for the purpose of taxation." [Approved March 14th, 1881] | OK
+[2026-06-21 15:00 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1881\parsed_acts_visual.json (2 recovered, 0 gap, 0 not_found) | OK
+[2026-06-21 15:00 PT] COMPLETE | 1881 visual recovery DONE: targeted=2, verified=2, legislative_gap=0, not_found=0 | OK
