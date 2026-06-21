@@ -24,6 +24,19 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
 - (Session-only crons: they fire while this Claude process is alive — covers token-window
   exhaustion. If the process fully crashes, Patrick restarts and this doc is the resume point.)
 
+### ☀️ HANDOFF v2 (2026-06-21 ~09:10 PT, 3rd session-limit hit, budget resets 1:10pm PT)
+**Corpus 94.3% → 99.5% (residual 426). ~40 years fully image-verified.** All the BIG years now
+processed: 1860(106) 1861(~partial, 209 tool-uses before kill — verify/finish) 1862(128) 1987(50
+img+105 seq-located) 1988(100, mostly seq-located). RESUME at 1:10pm: re-run `_recall_allyears.py`
+years-short; agents are APPEND-SAFE now (won't overwrite). Remaining 426 = (a) the tail of small
+years not yet run; (b) ~200 SEQUENCE-LOCATED chapters in late-80s vol3s (1987/1988/1989/1982 — vol3
+has NO page images, need image re-extraction from source PDFs to truly image-verify); (c) SCAN/IMAGE
+PREP gaps (1989 vol3 ch1440-1467 truncated; 1951-vol1/1982-vol3/1986-vol3 images not migrated; 1985
+ch505-6, 1905, 1929, 1859); (d) 1854 dual-series (use its existing parsed_acts_dualseries_v2.json,
+174/174). QUALITY CAVEATS for a normalization pass: some agents mislabeled sequence-located as
+"legislative_gap" (1986 ch1301/1303/1304) — only ~a few are TRUE legislative gaps; and the merge has
+latent misnumbered-duplicate errors (1919 ch432=ch482) needing an audit. Heartbeats LEFT ACTIVE.
+
 ### ☀️ MORNING HANDOFF (2026-06-21 ~05:30 PT, 2nd session-limit hit, budget resets 8:10 PT)
 **Result this overnight run: OCR corpus 94.3% → 99.0% (residual 929, down from ~5,150 missing). 33
 years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened. Visual (Goal B)

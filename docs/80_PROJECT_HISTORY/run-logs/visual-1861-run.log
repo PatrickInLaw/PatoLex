@@ -1,0 +1,22 @@
+[2026-06-21 00:00 PT] VISUAL-1861 | Campaign started: 155 missing chapters, production-1861 | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Starting 1861 visual recovery campaign | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Loaded manifest: 155 missing chapters | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Loaded OCR data: 723 pages | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 10/155 processed (verified=0, gap=0, nf=10) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 20/155 processed (verified=2, gap=0, nf=18) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 30/155 processed (verified=3, gap=0, nf=27) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 40/155 processed (verified=5, gap=0, nf=35) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 50/155 processed (verified=6, gap=0, nf=44) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 60/155 processed (verified=9, gap=0, nf=51) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 70/155 processed (verified=11, gap=0, nf=59) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 80/155 processed (verified=12, gap=0, nf=68) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 90/155 processed (verified=13, gap=0, nf=77) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 100/155 processed (verified=19, gap=0, nf=81) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 110/155 processed (verified=21, gap=0, nf=89) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 120/155 processed (verified=26, gap=0, nf=94) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 130/155 processed (verified=30, gap=0, nf=100) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 140/155 processed (verified=35, gap=0, nf=105) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 150/155 processed (verified=40, gap=0, nf=110) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Pass 1 complete: targeted=155, verified=40, gap=0, not_found=115 | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Output written to C:\PatoLex-scratch\production-1861\parsed_acts_visual.json | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Not found chapters needing image review: [4, 6, 9, 17, 19, 20, 23, 43, 44, 47, 51, 53, 56, 71, 75, 77, 84, 86, 87, 88, 95, 113, 116, 128, 129, 136, 140, 147, 150, 158, 161, 165, 166, 170, 177, 180, 185, 201, 208, 221, 224, 226, 227, 228, 239, 241, 248, 251, 255, 256, 261, 264, 267, 269, 273, 282, 288, 291, 292, 293, 295, 296, 297, 299, 300, 302, 306, 307, 312, 321, 334, 337, 347, 351, 356, 358, 362, 369, 382, 390, 397, 404, 407, 411, 412, 417, 421, 425, 429, 431, 436, 437, 438, 442, 451, 456, 461, 465, 468, 470, 474, 481, 483, 485, 486, 493, 512, 516, 518, 522, 523, 527, 533, 536, 537] | WARN
