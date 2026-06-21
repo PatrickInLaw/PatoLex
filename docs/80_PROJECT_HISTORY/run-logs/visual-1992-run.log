@@ -1,0 +1,9 @@
+[2026-06-21 00:00 PT] START | Visual recovery campaign for 1992 | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1992 -> 1 missing chapter: [55] in production-1992-vol1-statutes pages 191-199 | OK
+[2026-06-21 00:02 PT] OCR-READ | Loaded page_ocr_results.json for production-1992-vol1-statutes; keys 188-201 scanned | OK
+[2026-06-21 00:03 PT] OCR-FINDING | Page 191 (key 190): "An act relating to emergencies" = Ch.53 start; "CHAPTER 54" also starts pg 191. OCR running heads absent/corrupted -- no chapter numbers in consensus text | WARN
+[2026-06-21 00:04 PT] IMAGE-READ | page_0190.png (source_page=191): running head "Ch. 54 ]", body shows CHAPTER 53 (LA emergency act) then CHAPTER 54 (medical waste) starting on same page | OK
+[2026-06-21 00:05 PT] IMAGE-READ | page_0198.png (source_page=199): running head "Ch. 56 ]", body shows CHAPTER 55 (Govt Code 76230, Orange County jail) then CHAPTER 56 (Water Code) on same page | OK
+[2026-06-21 00:06 PT] CONFIRMED | Ch.55 = "An act to amend Section 76230 of the Government Code, relating to criminal justice facilities, and declaring the urgency thereof, to take effect immediately." Approved May 13, 1992. source_page=199. image_verified=true | OK
+[2026-06-21 00:07 PT] OUTPUT | Writing production-1992-vol1-statutes/parsed_acts_visual.json (1 recovered act) | OK
+[2026-06-21 00:08 PT] COMPLETE | 1992 visual recovery: targeted=1 verified=1 legislative_gap=0 not_found=0 | OK
