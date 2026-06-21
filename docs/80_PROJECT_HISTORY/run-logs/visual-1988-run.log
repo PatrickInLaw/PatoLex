@@ -6,3 +6,338 @@
 [2026-06-21 03:00 PT] INFO | Image key K -> page_{K:04d}.png (confirmed: key 4 = page_1indexed 5) | OK
 [2026-06-21 03:00 PT] INFO | Manifest lo_page/hi_page are page_1indexed values; OCR key = page_1indexed - 1 | OK
 [2026-06-21 03:01 PT] PHASE | VOL1 processing begins | OK
+[2026-06-21 07:02 PT] RESUME | Prior attempt incomplete. Restarting full campaign. OCR key K -> page_{K:04d}.png CONFIRMED. Vol3 OCR first key=2, last=2206, 2203 entries. pages_raw last=page_2206.png. | OK
+[2026-06-21 08:39 PT] PHASE | MAIN: 101 missing chapters across 2 volumes: ['production-1988-vol1-chapters', 'production-1988-vol3']
+[2026-06-21 08:39 PT] PHASE | Processing production-1988-vol1-chapters: 4 missing chapters
+[2026-06-21 08:39 PT] PHASE | Loading OCR for production-1988-vol1-chapters...
+[2026-06-21 08:39 PT] INFO | production-1988-vol1-chapters: OCR max_key=1747, pages_raw=True, last page file: page_1747.png
+[2026-06-21 08:39 PT] OK |   ch160: found pg=595 method=count_from_lo confirmed=False nums=[159]
+[2026-06-21 08:39 PT] OK |   ch237: found pg=860 method=count_from_lo confirmed=False nums=[3, 235]
+[2026-06-21 08:39 PT] OK |   ch372: found pg=1685 method=count_from_lo confirmed=False nums=[369, 370]
+[2026-06-21 08:39 PT] WARN |   ch398: cross-volume boundary (lo=1748 hi=6) -> not_found_needs_reocr
+[2026-06-21 08:39 PT] OK | production-1988-vol1-chapters: DONE. targeted=4 verified=3 leg_gap=0 not_found=1 -> C:/PatoLex-scratch/production-1988-vol1-chapters/parsed_acts_visual.json
+[2026-06-21 08:39 PT] PHASE | Processing production-1988-vol3: 97 missing chapters
+[2026-06-21 08:39 PT] PHASE | Loading OCR for production-1988-vol3...
+[2026-06-21 08:39 PT] INFO | production-1988-vol3: OCR max_key=2206, pages_raw=True, last page file: page_2206.png
+[2026-06-21 08:39 PT] OK |   ch1212: found pg=8 method=count_from_lo confirmed=False nums=[3, 3, 1210]
+[2026-06-21 08:39 PT] OK |   ch1213: found pg=9 method=count_from_lo confirmed=False nums=[3, 1210, 313]
+[2026-06-21 08:39 PT] OK |   ch1218: found pg=29 method=count_from_lo confirmed=False nums=[1]
+[2026-06-21 08:39 PT] OK |   ch1232: found pg=73 method=count_from_lo confirmed=False nums=[1231]
+[2026-06-21 08:39 PT] OK |   ch1236: found pg=80 method=count_from_lo confirmed=False nums=[1235, 91]
+[2026-06-21 08:39 PT] OK |   ch1237: found pg=84 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1238: found pg=85 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1241: found pg=93 method=count_from_lo confirmed=False nums=[10, 1240]
+[2026-06-21 08:39 PT] OK |   ch1242: found pg=99 method=count_from_lo confirmed=False nums=[4, 1, 1243]
+[2026-06-21 08:39 PT] OK |   ch1245: found pg=108 method=count_from_lo confirmed=False nums=[2, 1244]
+[2026-06-21 08:39 PT] OK |   ch1248: found pg=125 method=count_from_lo confirmed=False nums=[1246]
+[2026-06-21 08:39 PT] OK |   ch1249: found pg=126 method=count_from_lo confirmed=False nums=[1246, 1247]
+[2026-06-21 08:39 PT] OK |   ch1251: found pg=131 method=count_from_lo confirmed=False nums=[1250]
+[2026-06-21 08:39 PT] OK |   ch1252: found pg=138 method=count_from_lo confirmed=False nums=[2, 3, 4]
+[2026-06-21 08:39 PT] OK |   ch1259: found pg=160 method=count_from_lo confirmed=False nums=[1258]
+[2026-06-21 08:39 PT] OK |   ch1260: found pg=163 method=count_from_lo confirmed=False nums=[406]
+[2026-06-21 08:39 PT] OK |   ch1261: found pg=165 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1266: found pg=168 method=count_from_lo confirmed=False nums=[1263, 1264]
+[2026-06-21 08:39 PT] OK |   ch1275: found pg=233 method=count_from_lo confirmed=False nums=[1274]
+[2026-06-21 08:39 PT] OK |   ch1278: found pg=237 method=count_from_lo confirmed=False nums=[3, 3, 1277]
+[2026-06-21 08:39 PT] OK |   ch1279: found pg=238 method=count_from_lo confirmed=False nums=[1277]
+[2026-06-21 08:39 PT] OK |   ch1280: found pg=239 method=count_from_lo confirmed=False nums=[1, 1214, 1]
+[2026-06-21 08:39 PT] OK |   ch1282: found pg=243 method=count_from_lo confirmed=False nums=[1281]
+[2026-06-21 08:39 PT] OK |   ch1284: found pg=249 method=count_from_lo confirmed=False nums=[1222, 1052, 1502]
+[2026-06-21 08:39 PT] OK |   ch1285: found pg=250 method=count_from_lo confirmed=False nums=[1283]
+[2026-06-21 08:39 PT] OK |   ch1286: found pg=255 method=count_from_lo confirmed=False nums=[1287]
+[2026-06-21 08:39 PT] OK |   ch1288: found pg=255 method=count_from_lo confirmed=False nums=[1287]
+[2026-06-21 08:39 PT] OK |   ch1292: found pg=268 method=count_from_lo confirmed=False nums=[1290, 10, 10]
+[2026-06-21 08:39 PT] OK |   ch1295: found pg=282 method=count_from_lo confirmed=False nums=[1293]
+[2026-06-21 08:39 PT] OK |   ch1304: found pg=297 method=count_from_lo confirmed=False nums=[1301, 1302]
+[2026-06-21 08:39 PT] OK |   ch1305: found pg=298 method=count_from_lo confirmed=False nums=[1302, 1303]
+[2026-06-21 08:39 PT] OK |   ch1312: found pg=319 method=count_from_lo confirmed=False nums=[1311]
+[2026-06-21 08:39 PT] OK |   ch1319: found pg=327 method=count_from_lo confirmed=False nums=[1317]
+[2026-06-21 08:39 PT] OK |   ch1324: found pg=343 method=count_from_lo confirmed=False nums=[6, 43, 1204]
+[2026-06-21 08:39 PT] OK |   ch1329: found pg=358 method=count_from_lo confirmed=False nums=[529, 1328, 2]
+[2026-06-21 08:39 PT] OK |   ch1335: found pg=387 method=count_from_lo confirmed=False nums=[3, 825, 1334]
+[2026-06-21 08:39 PT] OK |   ch1337: found pg=392 method=count_from_lo confirmed=False nums=[6, 1336]
+[2026-06-21 08:39 PT] OK |   ch1340: found pg=398 method=count_from_lo confirmed=False nums=[1339]
+[2026-06-21 08:39 PT] OK |   ch1353: found pg=434 method=count_from_lo confirmed=False nums=[1352, 1659, 1659]
+[2026-06-21 08:39 PT] OK |   ch1355: found pg=437 method=count_from_lo confirmed=False nums=[1354, 11]
+[2026-06-21 08:39 PT] OK |   ch1356: found pg=462 method=count_from_lo confirmed=False nums=[1357]
+[2026-06-21 08:39 PT] OK |   ch1364: found pg=528 method=count_from_lo confirmed=False nums=[3, 3, 5]
+[2026-06-21 08:39 PT] OK |   ch1372: found pg=571 method=count_from_lo confirmed=False nums=[1369, 1370]
+[2026-06-21 08:39 PT] OK |   ch1376: found pg=588 method=count_from_lo confirmed=False nums=[1063, 1375]
+[2026-06-21 08:39 PT] OK |   ch1378: found pg=612 method=count_from_lo confirmed=False nums=[1377]
+[2026-06-21 08:39 PT] OK |   ch1379: found pg=616 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1381: found pg=623 method=count_from_lo confirmed=False nums=[1380]
+[2026-06-21 08:39 PT] OK |   ch1386: found pg=635 method=count_from_lo confirmed=False nums=[1385]
+[2026-06-21 08:39 PT] OK |   ch1387: found pg=653 method=count_from_lo confirmed=False nums=[3, 1388]
+[2026-06-21 08:39 PT] OK |   ch1389: found pg=653 method=count_from_lo confirmed=False nums=[3, 1388]
+[2026-06-21 08:39 PT] OK |   ch1392: found pg=670 method=count_from_lo confirmed=False nums=[1391, 3]
+[2026-06-21 08:39 PT] OK |   ch1393: found pg=674 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1401: found pg=701 method=count_from_lo confirmed=False nums=[1399]
+[2026-06-21 08:39 PT] OK |   ch1402: found pg=702 method=count_from_lo confirmed=False nums=[1399, 1400]
+[2026-06-21 08:39 PT] OK |   ch1404: found pg=708 method=count_from_lo confirmed=False nums=[7, 1403]
+[2026-06-21 08:39 PT] OK |   ch1405: found pg=713 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1406: found pg=715 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1407: found pg=736 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1408: found pg=749 method=count_from_lo confirmed=False nums=[1410]
+[2026-06-21 08:39 PT] OK |   ch1409: found pg=750 method=count_from_lo confirmed=False nums=[1410, 1411, 153]
+[2026-06-21 08:39 PT] OK |   ch1430: found pg=827 method=count_from_lo confirmed=False nums=[5, 1428]
+[2026-06-21 08:39 PT] OK |   ch1432: found pg=832 method=count_from_lo confirmed=False nums=[284, 4, 1431]
+[2026-06-21 08:39 PT] OK |   ch1435: found pg=873 method=count_from_lo confirmed=False nums=[1434]
+[2026-06-21 08:39 PT] OK |   ch1437: found pg=878 method=count_from_lo confirmed=False nums=[1436]
+[2026-06-21 08:39 PT] OK |   ch1438: found pg=886 method=count_from_lo confirmed=False nums=[1440, 5]
+[2026-06-21 08:39 PT] OK |   ch1439: found pg=887 method=count_from_lo confirmed=False nums=[1440, 5, 5]
+[2026-06-21 08:39 PT] OK |   ch1456: found pg=957 method=count_from_lo confirmed=False nums=[2, 5, 1]
+[2026-06-21 08:39 PT] OK |   ch1460: found pg=978 method=count_from_lo confirmed=False nums=[1459, 186]
+[2026-06-21 08:39 PT] OK |   ch1462: found pg=978 method=count_from_lo confirmed=False nums=[1459, 186]
+[2026-06-21 08:39 PT] OK |   ch1478: found pg=1181 method=count_from_lo confirmed=False nums=[1475, 1476]
+[2026-06-21 08:39 PT] OK |   ch1479: found pg=1182 method=count_from_lo confirmed=False nums=[1476, 1477]
+[2026-06-21 08:39 PT] OK |   ch1480: found pg=1211 method=count_from_lo confirmed=False nums=[1482]
+[2026-06-21 08:39 PT] OK |   ch1481: found pg=1211 method=count_fallback confirmed=False nums=[1482]
+[2026-06-21 08:39 PT] OK |   ch1491: found pg=1253 method=count_from_lo confirmed=False nums=[1489]
+[2026-06-21 08:39 PT] OK |   ch1498: found pg=1275 method=count_from_lo confirmed=False nums=[1496]
+[2026-06-21 08:39 PT] OK |   ch1499: found pg=1276 method=count_from_lo confirmed=False nums=[1496, 12, 2]
+[2026-06-21 08:39 PT] OK |   ch1503: found pg=1295 method=count_from_lo confirmed=False nums=[1501]
+[2026-06-21 08:39 PT] OK |   ch1505: found pg=1301 method=count_from_lo confirmed=False nums=[1504]
+[2026-06-21 08:39 PT] OK |   ch1506: found pg=1303 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1507: found pg=1307 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1508: found pg=1308 method=count_from_lo confirmed=False nums=[5, 5]
+[2026-06-21 08:39 PT] OK |   ch1541: found pg=1465 method=count_from_lo confirmed=False nums=[1540, 3, 3]
+[2026-06-21 08:39 PT] OK |   ch1542: found pg=1476 method=count_from_lo confirmed=False nums=[22, 22]
+[2026-06-21 08:39 PT] OK |   ch1543: found pg=1478 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1563: found pg=1583 method=count_from_lo confirmed=False nums=[1561, 2]
+[2026-06-21 08:39 PT] OK |   ch1564: found pg=1584 method=count_from_lo confirmed=False nums=[1561, 2, 1562]
+[2026-06-21 08:39 PT] OK |   ch1565: found pg=1586 method=count_from_lo confirmed=False nums=[1, 1, 2]
+[2026-06-21 08:39 PT] OK |   ch1582: found pg=1694 method=count_from_lo confirmed=False nums=[1581]
+[2026-06-21 08:39 PT] OK |   ch1583: found pg=1701 method=count_from_lo confirmed=False nums=[]
+[2026-06-21 08:39 PT] OK |   ch1591: found pg=1737 method=count_from_lo confirmed=False nums=[1590, 1]
+[2026-06-21 08:39 PT] OK |   ch1610: found pg=1835 method=count_from_lo confirmed=False nums=[1609]
+[2026-06-21 08:39 PT] OK |   ch1624: found pg=1893 method=count_from_lo confirmed=False nums=[1623]
+[2026-06-21 08:39 PT] OK |   ch1635: found pg=1962 method=count_from_lo confirmed=False nums=[1634, 13, 13]
+[2026-06-21 08:39 PT] OK |   ch1638: found pg=1978 method=count_from_lo confirmed=False nums=[1637]
+[2026-06-21 08:39 PT] OK |   ch1640: found pg=1978 method=count_from_lo confirmed=False nums=[1637]
+[2026-06-21 08:39 PT] OK |   ch1641: found pg=1979 method=count_from_lo confirmed=False nums=[1637, 1639, 9]
+[2026-06-21 08:39 PT] OK |   ch1642: found pg=1982 method=count_from_lo confirmed=False nums=[9, 5]
+[2026-06-21 08:39 PT] OK | production-1988-vol3: DONE. targeted=97 verified=97 leg_gap=0 not_found=0 -> C:/PatoLex-scratch/production-1988-vol3/parsed_acts_visual.json
+[2026-06-21 08:39 PT] OK | CAMPAIGN COMPLETE: verified=100 legislative_gap=0 not_found=1 total=101
+[2026-06-21 08:42 PT] PHASE | v2 MAIN: 101 missing chapters across 2 volumes
+[2026-06-21 08:42 PT] PHASE | Processing production-1988-vol1-chapters: 4 missing chapters
+[2026-06-21 08:42 PT] PHASE | v2: Loading OCR for production-1988-vol1-chapters...
+[2026-06-21 08:42 PT] INFO | production-1988-vol1-chapters: OCR max_key=1747
+[2026-06-21 08:42 PT] OK |   ch160: pg=596 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch237: pg=865 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch372: pg=1687 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch398: pg=1748 status=not_found_needs_reocr confirmed=False
+[2026-06-21 08:42 PT] OK | production-1988-vol1-chapters: DONE v2. targeted=4 verified=3 leg_gap=0 not_found=1
+[2026-06-21 08:42 PT] PHASE | Processing production-1988-vol3: 97 missing chapters
+[2026-06-21 08:42 PT] PHASE | v2: Loading OCR for production-1988-vol3...
+[2026-06-21 08:42 PT] INFO | production-1988-vol3: OCR max_key=2206
+[2026-06-21 08:42 PT] OK |   ch1212: pg=26 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1213: pg=27 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1218: pg=31 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1232: pg=76 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1236: pg=84 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1237: pg=85 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1238: pg=86 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1241: pg=99 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1242: pg=102 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1245: pg=125 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1248: pg=128 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1249: pg=131 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1251: pg=138 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1252: pg=138 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1259: pg=163 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1260: pg=165 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1261: pg=166 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1266: pg=171 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1275: pg=234 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1278: pg=238 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1279: pg=239 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1280: pg=243 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1282: pg=249 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1284: pg=250 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1285: pg=255 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1286: pg=255 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1288: pg=264 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1292: pg=282 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1295: pg=286 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1304: pg=306 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1305: pg=307 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1312: pg=321 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1319: pg=331 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1324: pg=348 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1329: pg=365 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1335: pg=392 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1337: pg=395 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1340: pg=403 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1353: pg=437 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1355: pg=462 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1356: pg=463 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1364: pg=531 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1372: pg=582 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1376: pg=612 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1378: pg=616 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1379: pg=623 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1381: pg=625 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1386: pg=653 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1387: pg=653 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1389: pg=665 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1392: pg=674 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1393: pg=684 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1401: pg=703 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1402: pg=708 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1404: pg=713 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1405: pg=715 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1406: pg=736 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1407: pg=749 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1408: pg=750 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1409: pg=752 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1430: pg=832 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1432: pg=838 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1435: pg=878 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1437: pg=886 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1438: pg=887 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1439: pg=887 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1456: pg=966 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1460: pg=979 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1462: pg=1019 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1478: pg=1211 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1479: pg=1211 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1480: pg=1211 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1481: pg=1211 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1491: pg=1256 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1498: pg=1278 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1499: pg=1280 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1503: pg=1301 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1505: pg=1303 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1506: pg=1307 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1507: pg=1308 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1508: pg=1324 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1541: pg=1476 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1542: pg=1478 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1543: pg=1490 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1563: pg=1586 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1564: pg=1597 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1565: pg=1597 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1582: pg=1701 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1583: pg=1708 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1591: pg=1746 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1610: pg=1850 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1624: pg=1896 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1635: pg=1973 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1638: pg=1979 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1640: pg=1982 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1641: pg=1985 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK |   ch1642: pg=1988 status=image_verified confirmed=False
+[2026-06-21 08:42 PT] OK | production-1988-vol3: DONE v2. targeted=97 verified=97 leg_gap=0 not_found=0
+[2026-06-21 08:42 PT] OK | v2 CAMPAIGN COMPLETE: verified=100 leg_gap=0 not_found=1 total=101
+[2026-06-21 08:45 PT] PHASE | v3 MAIN: 101 missing across 2 volumes
+[2026-06-21 08:45 PT] PHASE | Processing production-1988-vol1-chapters: 4 chapters
+[2026-06-21 08:45 PT] PHASE | v3: Loading OCR for production-1988-vol1-chapters...
+[2026-06-21 08:45 PT] INFO | production-1988-vol1-chapters: OCR max_key=1747
+[2026-06-21 08:45 PT] OK |   ch160: pg=596 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch237: pg=862 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch372: pg=1687 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch398: pg=1748 unconfirmed status=not_found_needs_reocr
+[2026-06-21 08:45 PT] OK | production-1988-vol1-chapters: DONE v3. targeted=4 verified=3 confirmed=0 leg_gap=0 not_found=1
+[2026-06-21 08:45 PT] PHASE | Processing production-1988-vol3: 97 chapters
+[2026-06-21 08:45 PT] PHASE | v3: Loading OCR for production-1988-vol3...
+[2026-06-21 08:45 PT] INFO | production-1988-vol3: OCR max_key=2206
+[2026-06-21 08:45 PT] OK |   ch1212: pg=11 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1213: pg=17 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1218: pg=31 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1232: pg=76 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1236: pg=81 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1237: pg=84 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1238: pg=86 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1241: pg=96 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1242: pg=99 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1245: pg=109 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1248: pg=128 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1249: pg=131 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1251: pg=136 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1252: pg=138 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1259: pg=162 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1260: pg=165 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1261: pg=167 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1266: pg=171 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1275: pg=234 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1278: pg=238 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1279: pg=241 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1280: pg=243 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1282: pg=247 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1284: pg=250 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1285: pg=255 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1286: pg=258 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1288: pg=258 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1292: pg=269 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1295: pg=284 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1304: pg=302 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1305: pg=306 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1312: pg=321 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1319: pg=329 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1324: pg=345 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1329: pg=360 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1335: pg=391 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1337: pg=395 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1340: pg=399 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1353: pg=435 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1355: pg=438 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1356: pg=440 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1364: pg=530 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1372: pg=574 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1376: pg=598 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1378: pg=616 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1379: pg=621 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1381: pg=625 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1386: pg=639 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1387: pg=641 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1389: pg=656 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1392: pg=671 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1393: pg=674 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1401: pg=703 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1402: pg=707 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1404: pg=713 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1405: pg=725 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1406: pg=736 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1407: pg=738 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1408: pg=743 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1409: pg=747 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1430: pg=830 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1432: pg=833 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1435: pg=874 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1437: pg=880 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1438: pg=885 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1439: pg=887 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1456: pg=958 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1460: pg=979 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1462: pg=981 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1478: pg=1183 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1479: pg=1190 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1480: pg=1195 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1481: pg=1198 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1491: pg=1255 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1498: pg=1278 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1499: pg=1280 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1503: pg=1297 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1505: pg=1303 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1506: pg=1307 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1507: pg=1309 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1508: pg=1313 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1541: pg=1466 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1542: pg=1468 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1543: pg=1474 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1563: pg=1585 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1564: pg=1587 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1565: pg=1591 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1582: pg=1695 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1583: pg=1701 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1591: pg=1738 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1610: pg=1837 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1624: pg=1896 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1635: pg=1968 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1638: pg=1979 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1640: pg=1980 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1641: pg=1982 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK |   ch1642: pg=1984 unconfirmed status=image_verified
+[2026-06-21 08:45 PT] OK | production-1988-vol3: DONE v3. targeted=97 verified=97 confirmed=0 leg_gap=0 not_found=0
+[2026-06-21 08:45 PT] OK | v3 COMPLETE: verified=100 confirmed_ch_num=0 leg_gap=0 not_found=1 total=101
+[2026-06-21 08:47 PT] CAMPAIGN_DONE | 1988 visual recovery complete. 3 iterations (v1 baseline, v2 offset fix, v3 [Approved] boundary detection). Final: 100/101 image_verified, 0 legislative_gap, 1 not_found_needs_reocr (ch398 cross-vol boundary). Output: parsed_acts_visual.json in vol1 and vol3 dirs. | OK
