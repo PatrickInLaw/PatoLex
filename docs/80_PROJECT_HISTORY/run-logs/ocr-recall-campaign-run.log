@@ -16,3 +16,5 @@ Control doc: docs/30_SYSTEM_DESIGN/OCR_RECALL_RECOVERY.md
 [2026-06-20 22:36 PT] PHASE-A-EARLY | Recovery re-run: 1800s done (e.g. 1860 254->298, 1861 377->450, 1862 322->360, 1863 359->412, 1899 172->214, 1905 530->576). 1900s recovery running (bg b42ym85kf). | OK
 [2026-06-20 22:34 PT] PHASE-A-EARLY | 1900s recovery done (b42ym85kf exit0). FULL RE-MEASURE: corpus 94.3%->98.5%, residual 1372 (was 1873). Early-era mode added ~500. | OK
 [2026-06-20 22:35 PT] NEXT | (1) Hans-audit early-era recovery correctness. (2) Phase B visual: start 1915, work forward, close per-year residuals via page images. Residual leaders: 1862(95) 1861(88) 1854(76) 1860(73) + modern tail 15-51. | OK
+[2026-06-20 22:40 PT] HANS | Launched Hans early-era correctness audit (Opus, id aeb08bae): verify early recoveries on actual page images (1861/1905/1860). Run log hans-early-era-audit.log. | OK
+[2026-06-20 22:41 PT] PHASE-B | Launched VISUAL-1915 worker (Sonnet, id ad6919d7): recover 31 missing 1915 chapters via page images, manifest _manifest_1915.json. Output parsed_acts_visual.json + visual-1915-run.log. Built _residual_manifest.py. | OK
