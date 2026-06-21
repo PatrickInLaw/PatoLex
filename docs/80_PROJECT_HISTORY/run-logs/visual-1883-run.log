@@ -1,0 +1,13 @@
+[2026-06-21 00:00 PT] START | Visual recovery campaign for year 1883 | OK
+[2026-06-21 00:00 PT] MANIFEST | _residual_manifest.py 1883: N=96 present=91 missing=5 chapters=[3,9,14,27,71] | OK
+[2026-06-21 00:01 PT] VOLUMES | production-1883-84 (ch 9,14), production-1883-84-regular (ch 3,27,71) | OK
+[2026-06-21 00:01 PT] IMAGES | No pages_raw/ directory in either volume -- OCR text fallback mode | WARN
+[2026-06-21 00:02 PT] OCR-STRUCT | page_ocr_results.json: dict keyed by page# (1-indexed str), engines: tess/doctr/surya/consensus | OK
+[2026-06-21 00:03 PT] CH-3 | production-1883-84-regular page 49 | CHAPTER III confirmed all 4 engines | "Amendment to the Constitution." | Approved Feb 14 1883 | OK
+[2026-06-21 00:03 PT] CH-27 | production-1883-84-regular page 95 | CHAPTER XXVII confirmed doctr+surya | "An Act to authorize and empower the State Board of Harbor Commissioners to adjust and pay the claim of Daniel McNeil." | Approved Mar 7 1883 | OK
+[2026-06-21 00:03 PT] CH-71 | production-1883-84-regular page 342 (range said 343; off-by-one normal) | CHAPTER LXXI confirmed doctr+surya | "An Act to provide for the erection of a wall at the State Prison at Folsom." | Approved Mar 13 1883 | OK
+[2026-06-21 00:04 PT] CH-9 | production-1883-84 page 9 | CHAPTER IX confirmed all 4 engines | "Assembly Concurrent Resolution No. 9, relative to the location of the eastern boundary line of the State of California." | Adopted May 5 1884 | OK
+[2026-06-21 00:04 PT] CH-14 | production-1883-84 page 12 | CHAPTER XIV confirmed all 4 engines | "Assembly Concurrent Resolution No. 18, relative to declaring the twenty-ninth day of August...a public holiday...memory of Junipero Serra." | OK
+[2026-06-21 00:05 PT] OUTPUT | C:\PatoLex-scratch\production-1883-84-regular\parsed_acts_visual.json (3 records) | OK
+[2026-06-21 00:05 PT] OUTPUT | C:\PatoLex-scratch\production-1883-84\parsed_acts_visual.json (2 records) | OK
+[2026-06-21 00:05 PT] SUMMARY | targeted=5 verified=5 legislative_gap=0 not_found=0 | ALL RESOLVED | OK
