@@ -1,0 +1,116 @@
+[2026-06-20 23:55 PT] ch000 | START | visual-1863 recovery: 63 missing chapters across ['production-1863', 'production-1863-64']
+[2026-06-20 23:55 PT] ch000 | INFO | Grouped into 47 scan groups
+[2026-06-20 23:55 PT] ch005 | SCAN | vol=production-1863 pages=71-74 chapters=[5]
+[2026-06-20 23:55 PT] ch005 | FOUND | page=73 roman=V engine=doctr_text title='An Act to amend. an Act approred February ninelcenth, ciyhte'
+[2026-06-20 23:55 PT] ch023 | SCAN | vol=production-1863 pages=87-89 chapters=[23]
+[2026-06-20 23:55 PT] ch023 | FOUND | page=87 roman=XXIII engine=surya_text title='An Act concerning the office of County Assessor for Butte Co'
+[2026-06-20 23:55 PT] ch062 | SCAN | vol=production-1863 pages=120-121 chapters=[62]
+[2026-06-20 23:55 PT] ch062 | GAP | LEGISLATIVE_GAP: ch61 -> ch63 with no ch62 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch079 | SCAN | vol=production-1863 pages=150-155 chapters=[79]
+[2026-06-20 23:55 PT] ch079 | FOUND | page=154 roman=LXXIX engine=doctr_text title='CHAP. LXXIX. An Act to repeal an Act entitled an Act to atta'
+[2026-06-20 23:55 PT] ch081 | SCAN | vol=production-1863 pages=155-156 chapters=[81]
+[2026-06-20 23:55 PT] ch081 | GAP | LEGISLATIVE_GAP: ch80 -> ch82 with no ch81 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch086 | SCAN | vol=production-1863 pages=159-160 chapters=[86]
+[2026-06-20 23:55 PT] ch086 | GAP | LEGISLATIVE_GAP: ch85 -> ch87 with no ch86 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch098 | SCAN | vol=production-1863 pages=166-179 chapters=[98]
+[2026-06-20 23:55 PT] ch098 | GAP | LEGISLATIVE_GAP: ch97 -> ch99 with no ch98 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch123 | SCAN | vol=production-1863 pages=208-209 chapters=[123]
+[2026-06-20 23:55 PT] ch123 | FOUND | page=207 roman=CXXIII engine=surya_text title='An Act to amend an Act entitled un Act in rela- tion to Publ'
+[2026-06-20 23:55 PT] ch136 | SCAN | vol=production-1863 pages=231-232 chapters=[136]
+[2026-06-20 23:55 PT] ch136 | FOUND | page=230 roman=CXXXVI engine=surya_text title='An Act, in relation to the collection of Poll Taxes in the C'
+[2026-06-20 23:55 PT] ch147 | SCAN | vol=production-1863 pages=242-222 chapters=[147, 148]
+[2026-06-20 23:55 PT] ch147 | MISS | Not found in OCR pages 242-222 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch148 | MISS | Not found in OCR pages 242-222 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch177 | SCAN | vol=production-1863 pages=299-257 chapters=[177]
+[2026-06-20 23:55 PT] ch177 | GAP | LEGISLATIVE_GAP: ch176 -> ch178 with no ch177 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch285 | SCAN | vol=production-1863 pages=374-380 chapters=[285]
+[2026-06-20 23:55 PT] ch285 | GAP | LEGISLATIVE_GAP: ch284 -> ch286 with no ch285 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch268 | SCAN | vol=production-1863 pages=416-418 chapters=[268]
+[2026-06-20 23:55 PT] ch268 | GAP | LEGISLATIVE_GAP: ch267 -> ch269 with no ch268 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch282 | SCAN | vol=production-1863 pages=425-426 chapters=[282]
+[2026-06-20 23:55 PT] ch282 | GAP | LEGISLATIVE_GAP: ch281 -> ch283 with no ch282 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch291 | SCAN | vol=production-1863 pages=440-456 chapters=[291, 292]
+[2026-06-20 23:55 PT] ch291 | MISS | Not found in OCR pages 440-456 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch292 | MISS | Not found in OCR pages 440-456 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch331 | SCAN | vol=production-1863 pages=557-558 chapters=[331]
+[2026-06-20 23:55 PT] ch331 | GAP | LEGISLATIVE_GAP: ch330 -> ch332 with no ch331 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch337 | SCAN | vol=production-1863 pages=560-450 chapters=[337]
+[2026-06-20 23:55 PT] ch337 | GAP | LEGISLATIVE_GAP: ch336 -> ch338 with no ch337 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch357 | SCAN | vol=production-1863 pages=617-482 chapters=[357]
+[2026-06-20 23:55 PT] ch357 | GAP | LEGISLATIVE_GAP: ch356 -> ch358 with no ch357 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch378 | SCAN | vol=production-1863 pages=638-638 chapters=[378]
+[2026-06-20 23:55 PT] ch378 | FOUND | page=637 roman=CCCLXXVIII engine=doctr_text title='An Act appropriating moncy to pay the claim of Auyustus D. S'
+[2026-06-20 23:55 PT] ch399 | SCAN | vol=production-1863 pages=665-635 chapters=[399]
+[2026-06-20 23:55 PT] ch399 | GAP | LEGISLATIVE_GAP: ch398 -> ch400 with no ch399 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch403 | SCAN | vol=production-1863 pages=681-688 chapters=[403]
+[2026-06-20 23:55 PT] ch403 | FOUND | page=682 roman=CDIII engine=doctr_text title='CHAP. CCCCIII. in ict concerning Roads and liighways in the '
+[2026-06-20 23:55 PT] ch503 | SCAN | vol=production-1863 pages=681-822 chapters=[503, 504]
+[2026-06-20 23:55 PT] ch503 | FOUND | page=820 roman=DIII engine=doctr_text title='An Act appropriuling moncy to pay the Cluin of thc Sun Frunc'
+[2026-06-20 23:55 PT] ch504 | FOUND | page=821 roman=DIV engine=doctr_text title='An Act to amend (LIL Act concerning Public Ferries und Tull '
+[2026-06-20 23:55 PT] ch416 | SCAN | vol=production-1863 pages=730-555 chapters=[416]
+[2026-06-20 23:55 PT] ch416 | GAP | LEGISLATIVE_GAP: ch415 -> ch417 with no ch416 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch425 | SCAN | vol=production-1863 pages=760-762 chapters=[425]
+[2026-06-20 23:55 PT] ch425 | GAP | LEGISLATIVE_GAP: ch424 -> ch426 with no ch425 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch428 | SCAN | vol=production-1863 pages=763-561 chapters=[428]
+[2026-06-20 23:55 PT] ch428 | GAP | LEGISLATIVE_GAP: ch427 -> ch429 with no ch428 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch433 | SCAN | vol=production-1863 pages=769-773 chapters=[433, 434]
+[2026-06-20 23:55 PT] ch433 | FOUND | page=769 roman=CDXXXIII engine=surya_text title='An Act granting the Right of Way and to encourage the Constr'
+[2026-06-20 23:55 PT] ch434 | MISS | Not found in OCR pages 769-773 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch437 | SCAN | vol=production-1863 pages=774-778 chapters=[437, 438, 439]
+[2026-06-20 23:55 PT] ch437 | MISS | Not found in OCR pages 774-778 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch438 | MISS | Not found in OCR pages 774-778 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch439 | MISS | Not found in OCR pages 774-778 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch448 | SCAN | vol=production-1863 pages=788-581 chapters=[448]
+[2026-06-20 23:55 PT] ch448 | GAP | LEGISLATIVE_GAP: ch447 -> ch449 with no ch448 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch477 | SCAN | vol=production-1863 pages=807-810 chapters=[477, 478, 479, 480]
+[2026-06-20 23:55 PT] ch477 | FOUND | page=807 roman=CDLXXVII engine=doctr_text title='An Act to appropriate moncy to pay Con- tingent Erpenscs of '
+[2026-06-20 23:55 PT] ch478 | MISS | Not found in OCR pages 807-810 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch479 | MISS | Not found in OCR pages 807-810 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch480 | MISS | Not found in OCR pages 807-810 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch482 | SCAN | vol=production-1863 pages=810-812 chapters=[482, 483, 484]
+[2026-06-20 23:55 PT] ch482 | MISS | Not found in OCR pages 810-812 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch483 | MISS | Not found in OCR pages 810-812 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch484 | MISS | Not found in OCR pages 810-812 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch486 | SCAN | vol=production-1863 pages=812-815 chapters=[486, 487, 488, 489]
+[2026-06-20 23:55 PT] ch486 | MISS | Not found in OCR pages 812-815 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch487 | MISS | Not found in OCR pages 812-815 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch488 | FOUND | page=813 roman=CDLXXXVIII engine=surya_text title='An Act to amend an Act entitled an Act for the Relief of Ins'
+[2026-06-20 23:55 PT] ch489 | FOUND | page=813 roman=CDLXXXIX engine=doctr_text title='dn Act to prerent the Fraudulent Convcy- unce or Encumbrance'
+[2026-06-20 23:55 PT] ch492 | SCAN | vol=production-1863 pages=815-816 chapters=[492]
+[2026-06-20 23:55 PT] ch492 | GAP | LEGISLATIVE_GAP: ch491 -> ch493 with no ch492 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch494 | SCAN | vol=production-1863 pages=816-817 chapters=[494]
+[2026-06-20 23:55 PT] ch494 | GAP | LEGISLATIVE_GAP: ch493 -> ch495 with no ch494 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch496 | SCAN | vol=production-1863 pages=817-818 chapters=[496]
+[2026-06-20 23:55 PT] ch496 | GAP | LEGISLATIVE_GAP: ch495 -> ch497 with no ch496 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch498 | SCAN | vol=production-1863 pages=818-819 chapters=[498]
+[2026-06-20 23:55 PT] ch498 | FOUND | page=818 roman=CDXCVIII engine=doctr_text title='An Art to punish Ofrnces ugainst the Peuce of thc State. [Ap'
+[2026-06-20 23:55 PT] ch515 | SCAN | vol=production-1863 pages=827-829 chapters=[515, 516]
+[2026-06-20 23:55 PT] ch515 | FOUND | page=827 roman=DXV engine=doctr_text title='li Aet to appropriate money to pay a Claim, arising under a '
+[2026-06-20 23:55 PT] ch516 | MISS | Not found in OCR pages 827-829 — marking not_found_needs_reocr
+[2026-06-20 23:55 PT] ch519 | SCAN | vol=production-1863 pages=830-831 chapters=[519]
+[2026-06-20 23:55 PT] ch519 | FOUND | page=829 roman=DXIX engine=doctr_text title='An Act to unthorize thc Board of Superrisors of thc County o'
+[2026-06-20 23:55 PT] ch521 | SCAN | vol=production-1863 pages=831-832 chapters=[521]
+[2026-06-20 23:55 PT] ch521 | GAP | LEGISLATIVE_GAP: ch520 -> ch522 with no ch521 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch533 | SCAN | vol=production-1863 pages=837-838 chapters=[533]
+[2026-06-20 23:55 PT] ch533 | GAP | LEGISLATIVE_GAP: ch532 -> ch534 with no ch533 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch300 | SCAN | vol=production-1863-64 pages=391-393 chapters=[300]
+[2026-06-20 23:55 PT] ch300 | GAP | LEGISLATIVE_GAP: ch299 -> ch301 with no ch300 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch341 | SCAN | vol=production-1863-64 pages=459-563 chapters=[341]
+[2026-06-20 23:55 PT] ch341 | FOUND | page=461 roman=CCCXLI engine=doctr_text title='CHAP. CCCXLI. An Act to authorize the Board of Supervisors o'
+[2026-06-20 23:55 PT] ch383 | SCAN | vol=production-1863-64 pages=515-641 chapters=[383]
+[2026-06-20 23:55 PT] ch383 | FOUND | page=514 roman=CCCLXXXIII engine=doctr_text title='An Act amendatory of and supplemental to an Act in addition '
+[2026-06-20 23:55 PT] ch388 | SCAN | vol=production-1863-64 pages=522-527 chapters=[388]
+[2026-06-20 23:55 PT] ch388 | FOUND | page=524 roman=CCCLXXXVIII engine=doctr_text title='An Act to incorporate the Town of Mark- leeville. [Approved '
+[2026-06-20 23:55 PT] ch410 | SCAN | vol=production-1863-64 pages=548-716 chapters=[410]
+[2026-06-20 23:55 PT] ch410 | FOUND | page=548 roman=CDX engine=doctr_text title='An Act to amend an Act entitled an Act concerning Lawful Fen'
+[2026-06-20 23:55 PT] ch443 | SCAN | vol=production-1863-64 pages=570-576 chapters=[443]
+[2026-06-20 23:55 PT] ch443 | GAP | LEGISLATIVE_GAP: ch442 -> ch444 with no ch443 anywhere in range, gap=2
+[2026-06-20 23:55 PT] ch468 | SCAN | vol=production-1863-64 pages=606-612 chapters=[468, 469]
+[2026-06-20 23:55 PT] ch468 | FOUND | page=606 roman=CDLXVIII engine=doctr_text title='CHAP. CCCCLXVIII. An Act to amend an Act entitled an Act to '
+[2026-06-20 23:55 PT] ch469 | FOUND | page=607 roman=CDLXIX engine=doctr_text title='An Act concerning Jurors in certain Counties. [Approved Apri'
+[2026-06-20 23:55 PT] ch473 | SCAN | vol=production-1863-64 pages=616-811 chapters=[473]
+[2026-06-20 23:55 PT] ch473 | FOUND | page=615 roman=CDLXXIII engine=doctr_text title='An Act supplemental to an Act entitled an Act to create the '
+[2026-06-20 23:55 PT] ch000 | SUMMARY | total=63 verified=23 gap=23 not_found=17
+[2026-06-20 23:55 PT] ch000 | WRITE | Wrote 54 records to C:/PatoLex-scratch/production-1863/parsed_acts_visual.json
+[2026-06-20 23:55 PT] ch000 | WRITE | Wrote 9 records to C:/PatoLex-scratch/production-1863-64/parsed_acts_visual.json
+[2026-06-20 23:55 PT] ch000 | DONE | Campaign complete: verified=23 gap=23 not_found=17
