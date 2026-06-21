@@ -24,6 +24,25 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
 - (Session-only crons: they fire while this Claude process is alive — covers token-window
   exhaustion. If the process fully crashes, Patrick restarts and this doc is the resume point.)
 
+### ☀️ MORNING HANDOFF (2026-06-21 ~05:30 PT, 2nd session-limit hit, budget resets 8:10 PT)
+**Result this overnight run: OCR corpus 94.3% → 99.0% (residual 929, down from ~5,150 missing). 33
+years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened. Visual (Goal B)
+~33/91 years done; the rest is mostly the BIG years.
+- **DONE 100% (visual, image-verified):** 1850 1851 1852 1855 1856 1857 1858 1859 1860 1863 1885 1887
+  1889 1891 1893 1899 1903 1905 1907 1915 1929 1933 1937 1939 1941 1943 1955 1971 1979 1982 1983 1990
+  + algorithmic-complete modern years. (Some have a few documented gaps — see below.)
+- **REMAINING (resume here — pick from `python pipeline/analysis/_recall_allyears.py` years-short):**
+  big years 1862(128) 1988(101) 1861(155) 1987(155,4vol) 1854(78 DUAL-SERIES) + a thin tail. Launch
+  one big-year visual agent at a time (template = the 1860 agent prompt: early=roman/multi-engine,
+  modern=arabic/image; UPDATE run log AS YOU GO; image map: OCR dict key K -> page_{K:04d}.png).
+- **SOURCE-ACQUISITION GAPS (cannot fix from existing scans — need re-acquire/re-scan, defer):**
+  1989 vol3 ch1440-1467 (28, scan ends p2173), 1982 vol3 ch793+ch1088 (no page images), 1905
+  ch389-397 (pp497-519 absent), 1929 ch881, 1859 ch51. ~7 confirmed LEGISLATIVE GAPS (never enacted).
+- **Heartbeats LEFT ACTIVE** (campaign not complete) — they will keep nudging/resuming post-8:10 reset.
+  NOTHING is wired into the merge/DB — all visual output is additive `parsed_acts_visual.json` (draft).
+- **Cleanup deferred to end:** agent junk scripts in pipeline/analysis/ (untracked `_*`, `visual_*`)
+  + temp images/page-renders in C:\PatoLex-scratch.
+
 ### CURRENT STATE  ← keep this line block updated every checkpoint
 - **Phase A (algorithmic clause_seq, all OCR years): DONE** (subagent a6df9a2f, ~22:23 PT). Corpus
   **94.3% → 97.9%**, residual **1,873** chapters (mapped years). Scoreboard: `python

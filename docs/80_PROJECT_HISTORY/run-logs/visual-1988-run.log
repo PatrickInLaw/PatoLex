@@ -1,0 +1,8 @@
+[2026-06-21 03:00 PT] INIT | Visual recovery campaign 1988 started | OK
+[2026-06-21 03:00 PT] INFO | 101 missing chapters: 4 in vol1, 97 in vol3 | OK
+[2026-06-21 03:00 PT] INFO | Vol1 images: 0-1747, OCR keys: 2-1747 | OK
+[2026-06-21 03:00 PT] INFO | Vol3 images: 0-2206, OCR keys: 2-2206 | OK
+[2026-06-21 03:00 PT] INFO | Vol4: OCR exists (keys 10-710) but no pages_raw images | WARN
+[2026-06-21 03:00 PT] INFO | Image key K -> page_{K:04d}.png (confirmed: key 4 = page_1indexed 5) | OK
+[2026-06-21 03:00 PT] INFO | Manifest lo_page/hi_page are page_1indexed values; OCR key = page_1indexed - 1 | OK
+[2026-06-21 03:01 PT] PHASE | VOL1 processing begins | OK
