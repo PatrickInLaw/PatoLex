@@ -114,14 +114,28 @@ _RVAL = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 _ROMAN_HDR = re.compile(r"^[^A-Za-z0-9]{0,4}([A-Za-z]{3,8})\.?\s+([IVXLCDMivxlcdm]{1,15})[\.\s,]")
 _CLAUSE_VAL = re.compile(r"en[ae]ct\w{0,2}\s+as\s+follow|p[eco]ople\s+of\s+the\s+stat", re.I)
 
+_R2I = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (90, 'XC'), (50, 'L'),
+        (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
+
+def int_to_roman(n):
+    out = ''
+    for v, s in _R2I:
+        while n >= v:
+            out += s; n -= v
+    return out
+
 def roman_int(s):
+    """Parse a roman numeral, but ONLY if it is CANONICAL (round-trips). OCR garbles a roman header
+    by inserting/swapping a letter (e.g. CLII->'CLIL', CCXXXVI->'CCCLXXXVI') which would otherwise
+    parse to a plausible-but-WRONG number (Hans: ch152 misread as 199). Requiring canonical form
+    rejects those garbles -- precision over recall; garbled-header chapters fall to the visual pass."""
     s = s.upper()
     if not s or any(c not in _RVAL for c in s):
         return None
     tot = prev = 0
     for ch in reversed(s):
         v = _RVAL[ch]; tot += -v if v < prev else v; prev = max(prev, v)
-    return tot
+    return tot if int_to_roman(tot) == s else None
 
 def roman_recover(lines, N, present):
     """Recover each chapter whose printed ROMAN act-header ('CHAP. <roman>') survived OCR and is NOT
