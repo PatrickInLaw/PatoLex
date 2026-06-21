@@ -160,7 +160,28 @@ def recover_volume(D, N):
     bnds = detect(False)
     bnds_loose = detect(True)
 
-    anchors = lis_anchors(theil_sen_filter(sorted(anchor.items())))
+    # Anchor backbone. MODERN (per-act CHAPTER headers present): header-confirmed chapters.
+    # EARLY/HEADERLESS era (pre~1900: ~0 headers but enactment clauses are clean and ~= N): there is
+    # no header backbone, so build it from PRESENT chapters whose merged page is corroborated by a
+    # clause boundary within 2pp (a real act head there + a reliable position). Only used when header
+    # anchors are too sparse to bracket the volume -- modern years keep their clean header backbone
+    # unchanged (adding present-chapter anchors there was tested and REGRESSED 1915 96->94.7%). The
+    # downstream checkpoint validation still guards every fill, so a year with garbage present-pages
+    # (e.g. 1860, 5% clause-alignment) simply recovers little -- never wrongly.
+    if len(anchor) < 0.2 * N:
+        bp = sorted(set(lines[b][0] for b in bnds))
+        def _near_bnd(pg):
+            i = bisect.bisect_left(bp, pg)
+            return any(0 <= j < len(bp) and abs(bp[j] - pg) <= 2 for j in (i - 1, i))
+        grid = dict(anchor)
+        for c in present:
+            if c not in grid and c in present_page and _near_bnd(present_page[c]):
+                grid[c] = present_page[c]
+        anchors = lis_anchors(theil_sen_filter(sorted(grid.items())))
+        backbone = "clause-corroborated-present (early/headerless)"
+    else:
+        anchors = lis_anchors(theil_sen_filter(sorted(anchor.items())))
+        backbone = "header-confirmed (modern)"
 
     # anchor header line index (first line on its page matching a fuzzy 'CHAPTER <c>')
     def anchor_line(c, p):
@@ -225,13 +246,17 @@ def recover_volume(D, N):
             fillable += 1
             recovered.extend(recs)
 
+    for r in recovered:
+        r["backbone"] = backbone  # provenance: header-confirmed (modern) vs clause-present (early)
     out = {"recovered_acts": recovered,
            "_clauserec_meta": {"N": N, "present_before": len(present), "anchors_lis": len(aline),
+                               "backbone": backbone, "header_anchors": len(anchor),
                                "boundaries": len(bnds), "gaps_fillable": fillable,
                                "gaps_loose_filled": loose_fills,
                                "gaps_ambiguous": ambiguous, "recovered": len(recovered),
                                "after": len(present) + len(recovered),
                                "pct_after": round(100 * (len(present) + len(recovered)) / N, 1),
+                               "lower_confidence_early": backbone.startswith("clause"),
                                "draft": True, "hans_gated": False, "wired_into_merge": False}}
     json.dump(out, open(os.path.join(D, "parsed_acts_clauserec.json"), "w", encoding="utf-8"),
               indent=1, ensure_ascii=False)
