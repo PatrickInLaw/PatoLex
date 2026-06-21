@@ -56,3 +56,32 @@
 [2026-06-20 23:13 PT] VISUAL-1858 | Ch.347 (CCCXLVII) pages=[349, 350]: NOT FOUND by any method | WARN
 [2026-06-20 23:13 PT] VISUAL-1858 | Output written: C:\PatoLex-scratch\production-1858\parsed_acts_visual.json | OK
 [2026-06-20 23:13 PT] VISUAL-1858 | DONE: targeted=26 verified=10 mismatches=10 not_found=6 | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | START 1858 visual recovery v3 -- 26 chapters -- hand-resolved | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch. 53 (LIII) VERIFIED: sp=58 raw='Cuar. LITI' title=An Act to extend the time of collecting Taxes in the | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch. 55 (LV) VERIFIED: sp=59 raw='Cuap. 1V' title=An Act to amend an Act entitled an Act to regulate Fees | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch. 67 (LXVII) VERIFIED: sp=77 raw='Cuar. LX VII' title=An Act to extend the time for assessing the Taxes | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch. 68 (LXVIII) VERIFIED: sp=77 raw='Cuap. LX VITI' title=An Act to further extend the Act concerning Cor- | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch. 78 (LXXVIII) NOT FOUND: NOT FOUND in OCR. LXXVII (ch77) on page 82, LXXIX (ch79) on page 84. Page 83 is  | WARN
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch. 83 (LXXXIII) VERIFIED: sp=86 raw='Cuapv. LX XXIII' title=An Act legalizing the Assessment Roll of Tehama | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.117 (CXVII) VERIFIED: sp=114 raw='Cuav. CX VII' title=An Act to change the manner of paying Officers of | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.132 (CXXXII) VERIFIED: sp=122 raw='CXXXII' title=An Act authorizing the Treasurer of State to | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.139 (CXXXIX) NOT FOUND: NOT FOUND in OCR. CXXXVIII (ch138) on page 125, continuation pages 126-127 body- | WARN
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.141 (CXLI) VERIFIED: sp=127 raw='CXLI' title=An Act relating to the Thirteenth Judicial District, | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.163 (CLXIII) VERIFIED: sp=142 raw='Cuapr. CLXTI' title=An Act appropriating Money for transporting to | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.168 (CLXVIII) VERIFIED: sp=143 raw='Cuap. CLXVITI' title=An Act granting to Franklin A. Rogers leave of | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.173 (CLXXIII) NOT FOUND: NOT FOUND in OCR. CLXXI (ch171) on page 144, continuation pages 145-146 body-tex | WARN
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.181 (CLXXXI) VERIFIED: sp=153 raw='Cnar. CLAXXI' title=An Act amendatory of and supplementary to an | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.187 (CLXXXVII) VERIFIED: sp=165 raw='CLXXXVII' title=An Act concerning the collection of Poll- | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.196 (CXCVI) VERIFIED: sp=176 raw='CXCVI' title=An Act amendatory of and supplementary to an Act enti- | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.247 (CCXLVII) VERIFIED: sp=227 raw='CCXLVII' title=An Act to incorporate the Town of Coloma. | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.277 (CCLXXVII) VERIFIED: sp=255 raw='CCLXXVIL' title=An Act to confer further powers upon the | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.282 (CCLXXXII) VERIFIED: sp=271 raw='CCLXXXII' title=An Act amendatory of an Act entitled “An | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.287 (CCLXXXVII) VERIFIED: sp=274 raw='CCLXXXVII' title=An Act to authorize the Judges of the | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.301 (CCCI) VERIFIED: sp=310 raw='Cuap. CCCIL' title=An Act for the relief of D. L. Mulford. | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.330 (CCCXXX) NOT FOUND: NOT FOUND in OCR. CCCXXIX (ch329) on page 335, CCCXXXI (ch331) on page 336. Chap | WARN
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.333 (CCCXXXIII) NOT FOUND: NOT FOUND in OCR. CCCXXXI (ch331) on page 336, CCCXXXIV (ch334) on page 337 (sta | WARN
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.336 (CCCXXXVI) VERIFIED: sp=345 raw='CCCXXXVI' title=An Act to audit and allow the Claim of | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.338 (CCCXXXVIII) VERIFIED: sp=345 raw='CCCXXXVIII' title=An Act to audit and allow the Claim of | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Ch.347 (CCCXLVII) VERIFIED: sp=350 raw='Cuap. COCXLVII' title=An Act to pay the Treasurer of State, for extra | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | Output written: C:\PatoLex-scratch\production-1858\parsed_acts_visual.json | OK
+[2026-06-20 23:20 PT] VISUAL-1858 | FINAL: targeted=26 verified=21 not_found=5 mismatches=0 | OK
