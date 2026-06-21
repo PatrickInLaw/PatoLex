@@ -57,52 +57,40 @@ years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened
   + temp images/page-renders in C:\PatoLex-scratch.
 
 ### CURRENT STATE  ← keep this line block updated every checkpoint
-- **Phase A (algorithmic clause_seq, all OCR years): DONE** (subagent a6df9a2f, ~22:23 PT). Corpus
-  **94.3% → 97.9%**, residual **1,873** chapters (mapped years). Scoreboard: `python
-  pipeline/analysis/_recall_allyears.py` → `C:\PatoLex-scratch\_recall_allyears.json`. Run log:
-  `run-logs/phase-a-algorithmic-run.log`.
-- **KEY SPLIT:** modern 1900–1999 recovered well (per-year residual mostly 14–51; total ~470) → Phase
-  B visual. **Early era 1850–1899 = ZERO recovery** (~1,400 residual): no per-act `CHAPTER` headers
-  pre-1900 → no anchor backbone for clause_seq. Needs a DIFFERENT anchor source = the printed Table of
-  Acts / Contents (chapter→title→page; we have these PDFs locally). Also 1903 (33) & 1905 (83) are
-  1900s years with zero recovery → investigate (likely missing/odd structure).
-- **17 unmapped biennium-named years** (1866…1964; oracle weight 6,211) not measured — real scope gap.
-- **Phase A-early: roman-header-direct (FIXED, commit 2736cdd).** The first early-era mode
-  (clause-from-present-pages) was Hans-UNSOUND (~25-45% misnumbered dups) → REPLACED with
-  roman-header-direct: recover each pre-1900 chapter whose printed ROMAN header "CHAP. <roman>"
-  survived OCR (validated by a nearby clause/An-act), number read off the numeral. Safe by
-  construction, lower recall. **HONEST corpus = 98.3%, residual 1,546.** Re-Hans RUNNING (a2b2af51).
-- **Algorithmic HARDENED via 3 Hans rounds** (early-era was the trouble): roman-direct now requires
-  CANONICAL roman + SEQUENCE-POSITION sanity (rejects insert-L misparses + body-citation ghosts);
-  modern body-dup guard REMOVED (over-rejected code-amendment gaps; checkpoint validation is the
-  sound guard). Honest corpus ~97.9%, residual ~1844. 1915 control steady at 96% algorithmic.
-- **Phase B (visual) — WORKING WELL. ~30 YEARS DONE 100%** (image+multi-engine verified): modern
-  1907/1929/1933/1937/1939/1941/1943/1955/1971/1979/1983/1990 + 1915 + early 1850/1851/1852/1855/1856/
-  1857/1858/1859/1863/1885/1887/1889/1891/1893/1899/1903/1905. Corpus **98.7%, residual ~1145**.
-  RUNNING: big years 1982 (58, 5vol) + 1989 (73, 3vol). Scoreboard counts ONLY image_verified;
-  legislative_gap (~12 confirmed) reduces effN. Documented SCAN-GAPS (physical pages absent, re-OCR
-  later): 1905 ch389-397, 1929 ch881, 1859 ch51.
-- **REMAINING RESIDUAL = the BIG years** (after 1982/1989): 1987(155,4vol) 1862(128) 1860(106)
-  1988(101,4vol) 1854(78,dual-series) 1861(155) — these are the bulk (~720). Launch one big-year
-  agent at a time (or split per-volume), tell it to UPDATE its run log AS IT GOES and group by vol.
-  Pick targets from `python pipeline/analysis/_recall_allyears.py`. Image off-by-one: OCR dict key K
-  -> page_{K:04d}.png (NOT K-1); confirm mapping per volume before a batch (lesson note).
-- **DURABLE FINDINGS:** (a) root cause = OCR skips page-top CHAPTER headers (running-header zone) →
-  image/multi-engine verify is essential. (b) **LEGISLATIVE GAPS**: some oracle chapters were NEVER
-  ENACTED (printed volume skips the number, e.g. 1857 ch54/ch232) → oracle N OVER-counts; visual
-  marks status="legislative_gap" — these are NOT recoverable and REDUCE the true denominator.
-  (c) early-era agents should MINE all 4 OCR engines (doctr/surya read roman best). not_found/
-  scan-truncated → status="not_found_needs_reocr" (re-OCR candidate, defer).
-- **NEXT targets (confirmed residual>0 only — don't waste agents on 0-residual years like 1947):**
-  early 1899/1850/1903/1905/1863/1889 then SPLIT the big ones one-agent-per-volume/range: early
-  1861(155)/1862(128)/1860(106)/1854(78,dual-series); modern 1987(155,4vol)/1988(101,4vol)/1989(73,
-  3vol)/1982(58,5vol). Pick targets from `python pipeline/analysis/_recall_allyears.py` years-short
-  table. Agent junk scripts accumulate in pipeline/analysis/ (untracked `_*1850*` etc.) — clean at end.
-- **Background:** final modern recover re-run (bkhwloi1a) for consistency (guard removed).
-- **NEXT loop:** as each visual agent finishes → bank its run log + re-measure + launch next residual
-  year (≤3-4 in flight). Targets: modern 1987(big,4vol)/1989/1982/1929 + the 15-35 tail, then early
-  years (1850-1862 via roman-aware visual). not_found chapters = re-OCR candidates (defer).
-- Recovery tool: `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`).
+**UPDATED 2026-06-21 (cc015/cc016, deep into autonomous visual run).**
+- **Phase A (algorithmic clause_seq): DONE & Hans-hardened (3 rounds).** Corpus 94.3% → ~97.9%
+  algorithmic. Tool `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`,
+  never wired to DB). Early-era = roman-header-direct (canonical roman + sequence-position sanity);
+  modern = checkpoint-validated gap-fill.
+- **Phase B (visual): NEARLY EXHAUSTED. Scoreboard now 99.6%** (`python
+  pipeline/analysis/_recall_allyears.py` → `_recall_allyears.json`), residual ~349 by scoreboard but
+  TRUE coverage is HIGHER — scoreboard counts only `image_verified`, so the many `ocr_text_verified`
+  recoveries (image-less volumes) don't register until the normalization recount.
+- **Years CLOSED this session (banked run logs):** 1913, 1917, 1897, 1931, 1967, 1975, 1994, 1959,
+  1925, 1881, 1935, 1993, 1976, 1921, 1972, 1978, 1982, 1895, 1986, 1951, 1963, 1965, 1992, 1988,
+  1883 — most to FULL coverage. RUNNING NOW: 1861 (big, ~115, early roman), 1880, 1981.
+- **Missing-image years ARE autonomously recoverable** — the agent re-extracts page images from the
+  source PDF in `chief-clerk-archive` via PyMuPDF (proved on 1982-vol3, 1895, 1986-vol3, 1951-vol1).
+  VERIFY the PDF-index→source_page offset on a KNOWN chapter first (early vols have front-matter shift).
+- **Key new finding — OCR CORRUPTS the chapter number, not just drops it:** e.g. 1935 ch329→"328",
+  1978 ch1432→"1482", 1963 ch1174→"J174", 1921 ch796 (OCR "757"→"797"), 1986 ch1301 carried ch1300's
+  title. The image running head is GROUND TRUTH. This is also why a MERGE DUP-AUDIT is needed (present
+  but misnumbered/mistitled chapters the gap-fill can't catch — e.g. 1919 ch432/482).
+- **NOT OCR-recoverable (need physical re-scan, status=not_found_needs_reocr):** 1989 vol3
+  ch1440-1467, 1905 ch389-397, 1929 ch881, 1970 ch906-907, 1985 ch505-506, 1959 ch1001 (inter-vol
+  leaf), 1927 ch816/817 (pp1626-27), 1986 ch1357/1358 (pp4812-15), 1972 ch517 (pp896-97).
+- **Confirmed LEGISLATIVE GAPS (never enacted, reduce effN):** 1857 ch54/232, 1853 ch123, 1919
+  ch476, 1951 ch654, + ~12 others. status="legislative_gap".
+- **SCOPE QUESTION now concrete in data:** several recovered "chapters" are concurrent/joint
+  resolutions or constitutional amendments, NOT statutes — 1883 ch3/9/14 flagged in their note fields
+  (also 1887 ch79/83). Patrick must decide if these belong in the statute corpus.
+- **PREP-BLOCKED remainder (needs Patrick / not more OCR):** (A) status-normalization recount
+  (lifts true % above scoreboard); (B) physical re-scan of the scan-gap pages above; (C) wire in 1854
+  `parsed_acts_dualseries_v2.json` (174/174 already built — accounts for 1854's residual 78); (D)
+  merge misnumbered-dup audit. Final report: `docs/80_PROJECT_HISTORY/OCR_RECALL_CAMPAIGN_FINAL_REPORT_2026-06-21.md`.
+- **NEXT loop:** as each visual agent finishes → bank its run log (commit+push) + launch next residual
+  year (≤4 in flight). Recoverable tail left after current batch: 1858, 1863, 1968, 1991 (append-safe
+  re-run). Then the tail is DRY → remaining work is the PREP-BLOCKED items above (pause for Patrick).
 
 ### RESUME PROTOCOL (if you wake up unsure where you are)
 1. Read CURRENT STATE above + the master run log (tail it) + any per-agent run logs in run-logs/.
