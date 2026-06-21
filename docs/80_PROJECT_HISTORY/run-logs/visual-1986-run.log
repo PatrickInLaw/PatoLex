@@ -43,3 +43,16 @@
 [2026-06-21 09:12 PT] NOT_FOUND | Ch.1359 in vol3 -- title page in scan gap; body at p1076 recovered (printed page 4816) | WARN
 [2026-06-21 09:12 PT] MANIFEST_VERIFY | Re-ran _residual_manifest.py: 1986 N=1521 present=1519 missing=2 (only 1357,1358 remain) | OK
 [2026-06-21 09:12 PT] OUTPUT | parsed_acts_visual.json written to all 3 volumes | OK
+[2026-06-21 14:00 PT] CORRECTION-PASS | Re-run with prior-error fix: ch1301/1303/1304 mislabeled as legislative_gap; correction worker started | OK
+[2026-06-21 14:00 PT] PDF-EXTRACT | Extracted PDF pages 872-892 from 1986_Vol3.pdf to temp_1986_vol3_ch1301 for ch1301/1303/1304 image verification | OK
+[2026-06-21 14:01 PT] IMAGE-READ | PDF p877 (0-idx): CHAPTER 1301 confirmed, printed page 4614; title: 'An act to add and repeal Section 14027 of the Welfare and Institutions Code...' -- NOTE: prior visual.json had WRONG title (ch1300 subject) | OK
+[2026-06-21 14:01 PT] IMAGE-READ | PDF p881 (0-idx): CHAPTER 1303 confirmed, printed page 4618; title matches prior entry | OK
+[2026-06-21 14:01 PT] IMAGE-READ | PDF p882 (0-idx): CHAPTER 1304 confirmed, printed page 4619; title matches prior entry | OK
+[2026-06-21 14:01 PT] CORRECTION | ch1301: status legislative_gap -> image_verified; title CORRECTED (was ch1300 subject); source_page corrected to 878 | OK
+[2026-06-21 14:01 PT] CORRECTION | ch1303: status legislative_gap -> image_verified; title confirmed; source_page confirmed 882 | OK
+[2026-06-21 14:01 PT] CORRECTION | ch1304: status legislative_gap -> image_verified; title confirmed; source_page confirmed 883 | OK
+[2026-06-21 14:02 PT] PDF-EXTRACT | Extracted PDF pages 1070-1079 from 1986_Vol3.pdf to temp_1986_vol3_scan_gap for ch1357/1358 scan gap re-verification | OK
+[2026-06-21 14:02 PT] SCAN-GAP | PDF p1073 (0-idx) = printed 4810 (Ch.1356 start); PDF p1074 = printed 4811 (Ch.1356 body); PDF p1075 = printed 4816 (Ch.1359 body) | WARN
+[2026-06-21 14:02 PT] SCAN-GAP | CONFIRMED: printed pages 4812-4815 (4 pages) absent from source PDF -- ch1357+ch1358 title pages unrecoverable without physical rescan | WARN
+[2026-06-21 14:02 PT] WRITE | Merged+corrected parsed_acts_visual.json written to C:\PatoLex-scratch\production-1986-vol3\ | OK
+[2026-06-21 14:02 PT] SUMMARY | vol3 correction complete: 3 image_verified (was 0), 0 legislative_gap (was 3), 2 not_found_needs_reocr (unchanged) | OK
