@@ -148,8 +148,6 @@ def recover_volume(D, N):
                 present_page[c] = p
                 if c in ph.get(p, (set(), []))[0]:
                     anchor[c] = p
-    anchors = lis_anchors(theil_sen_filter(sorted(anchor.items())))
-
     # boundaries (global line index), deduped to one per act head. STRICT (clause/approval) for the
     # main pass; LOOSE (also a garbled 'An act <verb>' title) reserved for under-filled gaps only.
     def detect(loose):
@@ -161,6 +159,8 @@ def recover_volume(D, N):
         return out
     bnds = detect(False)
     bnds_loose = detect(True)
+
+    anchors = lis_anchors(theil_sen_filter(sorted(anchor.items())))
 
     # anchor header line index (first line on its page matching a fuzzy 'CHAPTER <c>')
     def anchor_line(c, p):

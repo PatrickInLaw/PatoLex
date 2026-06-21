@@ -49,14 +49,32 @@ Then Hans-SOUND → wire into the merge/ingest → generalize to every OCR year.
   chapters are checkpoints; assign each missing slot its positional boundary; REJECT the gap if any
   checkpoint mis-aligns. This is the big lever (87%→94%).
 
-## Remaining work to 100% on 1915 (Stage 2 / 3 — next)
-- [ ] **Stage 2 — targeted gap completion (44 slots, 26 gaps): 17 under-detect** (clause+approval
-  both garbled → missing boundary) — search ONLY that gap's page range with a relaxed signal (knowing
-  the exact count needed + checkpoints constrain it); **6 over-detect** (residual body citations);
-  **3 CKFAIL** (alignment broken). Global signal-adding fails — must be per-gap/surgical.
-- [ ] **source_page = act START** (currently clause page) — walk back to the "An act" title line.
-- [ ] **Stage 3** residual + heavy per-act verify (on-page render for anything not text-anchored).
-- [ ] **Hans-gate** (twice; pipeline) → wire into merge → generalize to all OCR years.
+## Remaining work to 100% on 1915 — the precise residual (17 gaps, ~31 slots) for STAGE 3
+Enumerated (c_lo..c_hi, pages, missing chapters, type) — target these surgically with on-page reads:
+- **over-detect (10)** — residual body-citation false boundaries inside the gap (and 1-2 wrong-slope
+  anchors): `93..95`(94), `149..153`(150,151,152), `153..155`(154), `249..252`(250),
+  `254..259`(255,257,258), `484..489`(485,486,487), `497..500`(498,499), `526..529`(527),
+  `568..573`(569-572; p949-988 = 39pp → 573 likely mis-anchored), `654..657`(655,656), `692..695`(693).
+  Fix: per-SLOT localization (find each missing slot's boundary between its nearest *present*
+  checkpoints, ignoring false boundaries elsewhere in the gap) — i.e. promote slope-consistent present
+  chapters with an aligned boundary to sub-anchors, subdividing the gap.
+- **under-detect (6)** — act markers ALL garbled, even the loose "An act" signal finds nothing:
+  `380..382`(381, 2pp), `401..405`(402), `426..428`(427), `481..484`(482,483), `563..568`(566,567).
+  Most are TIGHTLY bracketed (≤3pp) between two header-confirmed anchors → the act is provably there;
+  position-fill + **render the page image** (PyMuPDF) to read/verify the chapter and capture text.
+- **ckfail (1)** — `615..620`(616,617): count matches but a checkpoint mis-aligns → on-page resolve.
+
+### Stage-3 method (do next)
+1. Per-slot localization / sub-anchor subdivision to clear most over-detect gaps (text-verified, safe).
+2. For the markerless under/ckfail residual: render the bracketed pages (PyMuPDF → PNG, read the
+   IMAGE, not the OCR) to confirm the act + its true chapter number, then fill with that evidence.
+3. **source_page = act START** (walk back to the "An act" title line).
+4. **Hans-gate** (twice; pipeline) → wire into merge → generalize to all OCR years.
+
+## STATUS CHECKPOINT (worst year)
+1915: **62% → 96.0%, every fill alignment-validated (zero wrong fills proven).** The last ~4% (17
+enumerated gaps above) is the hard residual requiring Stage-3 per-gap + on-page verification. Still
+DRAFT/additive (`parsed_acts_clauserec.json`), NOT Hans-gated, NOT wired into the merge.
 
 ## Artifacts
 - `pipeline/ingest/recover_clause_seq.py` — Stage-1 recovery (additive `parsed_acts_clauserec.json`;
