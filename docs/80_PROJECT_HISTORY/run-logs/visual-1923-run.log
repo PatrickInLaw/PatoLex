@@ -1,0 +1,16 @@
+[2026-06-21 00:00 PT] START | Visual recovery campaign -- 1923, 3 missing chapters [21, 411, 417] | OK
+[2026-06-21 00:01 PT] MANIFEST | _manifest_1923.json: N=479 present=476 missing=3 [21, 411, 417] vol=production-1923-vol1-chapters | OK
+[2026-06-21 00:02 PT] IMAGE-CHECK | pages_raw confirmed present (page_0035.png, page_0929.png, page_0939.png verified) | OK
+[2026-06-21 00:03 PT] IMAGE-MAPPING | Confirmed: source_page K -> page_{K-1:04d}.png (0-indexed, matches manifest pattern) | OK
+[2026-06-21 00:04 PT] OCR-EXTRACT | Extracted all 4-engine texts for pages around missing chapters from ocr_consensus/page_ocr_results.json | OK
+[2026-06-21 00:05 PT] CH21-LOCATE | Chapter 21 heading found on source_page=36 (0idx=35, image=page_0035.png) -- starts mid-page after Ch20 which ends on same page | OK
+[2026-06-21 00:06 PT] CH21-IMAGE | page_0035.png read; running head [Ch. 21] and CHAPTER 21 bold heading clearly visible; printed page 36 | OK
+[2026-06-21 00:07 PT] CH21-TITLE | "An act to approve, confirm, ratify and validate sales and conveyance of real property made by school districts or high school districts..." [Approved April 19, 1923.] | OK
+[2026-06-21 00:08 PT] CH411-LOCATE | Chapter 411 heading found on source_page=930 (0idx=929, image=page_0929.png) -- starts after Ch410 on same page | OK
+[2026-06-21 00:09 PT] CH411-IMAGE | page_0929.png read; CHAPTER 411 bold heading clearly visible; printed page 930; running head confusingly shows [Ch. 409] for top portion but Ch411 heading is unambiguous | OK
+[2026-06-21 00:10 PT] CH411-TITLE | "An act to amend an act entitled 'An act creating a state land settlement board and defining its powers and duties and making an appropriation in aid of its operations,' approved June 1, 1917, as amended, by amending sections two, four, eleven, twenty-two and twenty-six thereof." [Approved June 18, 1923.] | OK
+[2026-06-21 00:11 PT] CH417-LOCATE | Chapter 417 heading found on source_page=940 (0idx=939, image=page_0939.png) | OK
+[2026-06-21 00:12 PT] CH417-IMAGE | page_0939.png read; running head [Ch. 417] clearly visible; body prints "CHAPTER 117" (printing error in original volume -- 117 vs 417; running head is authoritative); printed page 940 | OK
+[2026-06-21 00:13 PT] CH417-TITLE | "An act making appropriation to pay the claim of E. R. Simon against the State of California." [Approved June 18, 1923.] | OK
+[2026-06-21 00:14 PT] OUTPUT | Writing parsed_acts_visual.json: 3 verified, 0 legislative_gap, 0 not_found | OK
+[2026-06-21 00:15 PT] DONE | All 3 missing chapters image-verified and recorded | OK
