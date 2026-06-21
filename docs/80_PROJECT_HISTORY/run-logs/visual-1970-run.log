@@ -1,0 +1,14 @@
+[2026-06-21 00:00 PT] START | Visual recovery campaign for year 1970 | OK
+[2026-06-21 00:01 PT] MANIFEST | 6 missing chapters: 707, 733, 906, 907, 1013 (vol1) + 1139 (vol2) | OK
+[2026-06-21 00:02 PT] IMAGE-CHECK | pages_raw present in both vol1 and vol2, naming: page_{K:04d}.png (0-indexed) | OK
+[2026-06-21 00:03 PT] NO-EXISTING-VISUAL | No parsed_acts_visual.json found in either volume - clean slate | OK
+[2026-06-21 00:04 PT] AGENTS-LAUNCHED | 5 parallel image-reading agents dispatched for all page ranges | OK
+[2026-06-21 00:10 PT] CH707 | IMAGE-VERIFIED page_1334.png (printed 1335): "CHAPTER 707 - An act to amend Section 7117 of the Health and Safety Code, relating to burials." Single-page act, running head Ch.708 | OK
+[2026-06-21 00:10 PT] CH733 | IMAGE-VERIFIED page_1358.png (printed 1359): "CHAPTER 733 - An act to amend Section 13353 of the Vehicle Code, relating to chemical tests." Spans printed 1359-1362 | OK
+[2026-06-21 00:11 PT] CH906/907 | OFFSET ANOMALY - printed page 1648 (where 906/907 live) appears between page_1646.png(printed 1647) and page_1647.png(printed 1649). Investigating offset/scan gap | WARN
+[2026-06-21 00:11 PT] IMAGE-MAPPING | CLARIFIED: file = page_{source_page-1:04d}.png (by SOURCE/PDF page, NOT printed page). printed-vs-source drift grows through volume -- expected | OK
+[2026-06-21 00:18 PT] CH1013 | IMAGE-VERIFIED page_1818.png (source_page 1819, printed 1820): "CHAPTER 1013 - An act to amend Section 14101 of the Education Code, relating to the State Teachers' Retirement System... urgency." Cause of miss: OCR consensus error -- doctr+surya read 1013, tesseract misread 1015, consensus chose tess. Mining all 4 engines + image confirms 1013 | OK
+[2026-06-21 00:19 PT] CH1139 | IMAGE-VERIFIED vol2 page_0009.png (source_page 10, printed 2022): "CHAPTER 1139 - An act to add Section 69893.5 to the Government Code, relating to superior courts." Was garbled 'filled' record chapter_raw='1J39' that never reached DB | OK
+[2026-06-21 00:25 PT] CH906/907 | NOT_FOUND (scan gap). VERIFIED by my direct image reads (page_1645/1646/1647.png) + independent agent: pages_raw filenames contiguous (1640..1659) but page_1646.png=printed1647 jumps to page_1647.png=printed1649. Printed leaf 1648 (holds 906, 907, start of Ch.908 Sec.6103 act) physically skipped at scan. NOT a legislative gap. Needs re-scan of leaf 1648. (OCR-text agent's 'lostheader' guess was wrong -- it missed the printed-page-number jump) | WARN
+[2026-06-21 00:28 PT] OUTPUT | Wrote vol1 parsed_acts_visual.json (5 targeted: 3 image_verified [707,733,1013], 2 not_found_needs_reocr [906,907]) + vol2 parsed_acts_visual.json (1 targeted: 1 image_verified [1139]) | OK
+[2026-06-21 00:29 PT] DONE | 1970 visual: 6 missing -> 4 image_verified (707,733,1013,1139), 0 legislative_gap, 2 not_found scan-gap (906,907 on unscanned printed leaf 1648) | OK
