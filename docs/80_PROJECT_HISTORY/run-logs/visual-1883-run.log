@@ -11,3 +11,6 @@
 [2026-06-21 00:05 PT] OUTPUT | C:\PatoLex-scratch\production-1883-84-regular\parsed_acts_visual.json (3 records) | OK
 [2026-06-21 00:05 PT] OUTPUT | C:\PatoLex-scratch\production-1883-84\parsed_acts_visual.json (2 records) | OK
 [2026-06-21 00:05 PT] SUMMARY | targeted=5 verified=5 legislative_gap=0 not_found=0 | ALL RESOLVED | OK
+[2026-06-21 00:10 PT] RECHECK | New visual worker pass: _residual_manifest.py 1883 -> N=96 present=96 missing=0 (confirmed complete from prior session) | OK
+[2026-06-21 00:11 PT] FLAG-UPDATE | Added required 'possible resolution/amendment, not statute' note flag to ch9, ch14 (concurrent resolutions) and ch3 (constitutional amendment) in both parsed_acts_visual.json files | OK
+[2026-06-21 00:12 PT] COMPLETE | 1883 campaign fully verified. 5 visual recoveries (2 in production-1883-84 extra session, 3 in production-1883-84-regular). 3 chapters flagged as possible resolution/amendment. 0 gaps. | OK
