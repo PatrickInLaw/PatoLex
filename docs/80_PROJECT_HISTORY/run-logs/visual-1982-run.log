@@ -64,3 +64,8 @@
 [2026-06-21 00:55 PT] NOTE | Vol3 pages_raw/pages_prep_gray directories do NOT exist -- image files were never extracted or were deleted. Ch793 and ch1088 cannot be image-verified until vol3 images are re-extracted. | WARN
 [2026-06-21 00:55 PT] NOTE | Multiple OCR misread patterns found: (1) page 945 vol1 OCR read 'CHAPTER 306' when image shows 'CHAPTER 300' -- misread last digit; (2) multiple chapter headers missed entirely (all 3 engines); (3) vol boundary crossings where chapter starts in different vol than lo_ch (ch327: vol1->vol2, ch746: vol2->vol3, ch1229: vol3->vol4). | WARN
 [2026-06-21 00:55 PT] COMPLETE | 1982 visual recovery campaign done | OK
+[2026-06-21 PT] REOPEN | vol3 ch793 and ch1088 still marked not_found_needs_reocr; re-extracting pages from 1982_Vol3.pdf via PyMuPDF | OK
+[2026-06-21 PT] EXTRACT | PyMuPDF extracted source_pages 110-115 + 999-1006 from 1982_Vol3.pdf to C:\PatoLex-scratch\_vol3_extracted\ | OK
+[2026-06-21 PT] VOL3/CH793 | page_0113.png (source_page=114) confirms 'Ch. 793' running head (top-right) and 'CHAPTER 793' in body; prior source_page=113 was the last page of ch792; corrected to 114 | image_verified | OK
+[2026-06-21 PT] VOL3/CH1088 | page_1002.png (source_page=1003) confirms 'Ch. 1088' running head (top-right) and 'CHAPTER 1088' in body; prior source_page=1002 (ch1087 running head page); corrected to 1003 | image_verified | OK
+[2026-06-21 PT] FINAL | vol3 parsed_acts_visual.json updated: 3/3 image_verified, 0 not_found, draft=false | 1982 full coverage: 1644/1644 chapters, all image_verified | OK
