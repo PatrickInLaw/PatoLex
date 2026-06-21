@@ -10,8 +10,11 @@ year first (1915), polish the approach to completion, then generalize to all OCR
 **Authorized 2026-06-20 ~22:12 PT by Patrick to run AUTONOMOUSLY overnight while he sleeps (back
 before 8am PT). Directive: drive to (A) full ALGORITHMIC run across all OCR years, then (B) full
 VISUAL run. Do NOT ask for authorization — figure it out. NO irreversible changes (additive files
-only; NO DB writes, NO overwrites of existing parse files, NO deletes). Communicate milestones via
-Telegram: `powershell C:/GitHub/PatoLex/.claude/scripts/telegram.ps1 send "..."`.**
+only; NO DB writes, NO overwrites of existing parse files, NO deletes).**
+
+**⚠️ COMMS ROUTE (the PowerShell *tool* is BROKEN in this environment — returns exit 1 on everything;
+use the Bash tool to call powershell.exe instead):** send Telegram with the Bash tool:
+`powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:/GitHub/PatoLex/.claude/scripts/telegram.ps1" send "MESSAGE"` (chat 8525048490 = Patrick). Verified working 22:17 PT.
 
 ### Heartbeats (set this session)
 - **One-shot ~03:13 PT (June 21)** — safety wakeup: if stalled/out of tokens, resume per CURRENT

@@ -5,3 +5,6 @@ Control doc: docs/30_SYSTEM_DESIGN/OCR_RECALL_RECOVERY.md
 [2026-06-20 22:14 PT] SETUP | Autonomous campaign authorized by Patrick (overnight, back before 8am). Goal: A) full algorithmic run all OCR years, B) full visual run. Worst year 1915 already 62%->96.0% (committed 5f3c3ac). | OK
 [2026-06-20 22:14 PT] SETUP | Heartbeats set: one-shot 03:13 PT (safety wakeup) + recurring ~20min (ucp nudge). Telegram via .claude/scripts/telegram.ps1. | OK
 [2026-06-20 22:15 PT] SETUP | Wrote control doc autonomous section + this run log + pipeline/analysis/_recall_allyears.py (per-year before/after scoreboard). | OK
+[2026-06-20 22:16 PT] PHASE-A | Launched Phase-A subagent (Sonnet, id a6df9a2f): merge + recover_clause_seq across all OCR years + scoreboard + run log phase-a-algorithmic-run.log. | OK
+[2026-06-20 22:17 PT] SETUP | Telegram comms: PowerShell TOOL is broken here (exit 1 on all cmds). WORKING route = Bash -> powershell.exe -File telegram.ps1. Verified (msg 1189). Campaign-start msg sent. | OK
+[2026-06-20 22:17 PT] SETUP | Infra committed f7c0988 + pushed. Awaiting Phase-A completion. | OK
