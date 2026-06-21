@@ -1,0 +1,21 @@
+[2026-06-21 00:00 PT] INIT | Visual recovery campaign started for 1919 | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1919 -> N=669 present=655 missing=14 | OK
+[2026-06-21 00:02 PT] VOLUME | Found production-1919-vol1-chapters; images at C:\PatoLex-scratch\page-renders\1919_Vol1_Chapters\{key:04d}.png (1557 images, 0-indexed) | OK
+[2026-06-21 00:03 PT] IMAGE-MAP | Confirmed: source_page P (1-indexed) -> key P-1 -> image {P-1:04d}.png | OK
+[2026-06-21 00:05 PT] CH74 | image 0117: CHAPTER 74 confirmed; OCR missed header; title: An act to validate, confirm and cure the incorporation of municipal corporations | OK
+[2026-06-21 00:05 PT] CH75 | image 0118: CHAPTER 75 confirmed; tess reads 'CITAPTER 75' (CH->CI); title: amend sec3 re hunting wild birds | OK
+[2026-06-21 00:06 PT] CH99 | image 0140: CHAPTER 99 confirmed; OCR missed header; title: add new sec to Pol Code re grand jurors 58th class | OK
+[2026-06-21 00:07 PT] CH178 | image 0264: CHAPTER 178 confirmed; tess 'CITAPTER 178'; title: proceedings against delinquent insurance corps | OK
+[2026-06-21 00:08 PT] CH218 | image 0319: CHAPTER 218 confirmed; OCR missed header; title: amend sec 206 Pol Code re elections | OK
+[2026-06-21 00:09 PT] CH402 | image 0814: CHAPTER 402 confirmed (page has 401+402+403); OCR only read ch403 content; title: appropriating money for reconstruction of road, Mendocino State Hospital | OK
+[2026-06-21 00:10 PT] CH405 | image 0815: CHAPTER 405 confirmed; title: appropriating money for maintenance of Los Angeles exposition | OK
+[2026-06-21 00:11 PT] CH476 | LEGISLATIVE GAP: searched all 1557 pages across all 4 OCR engines; no CHAPTER 476 body found; volume sequence 475->477; running head 'Ch.476' on img 0927 is carry-over artifact | OK
+[2026-06-21 00:12 PT] CH481 | image 0961: CHAPTER 481 confirmed at source_page 962; OCR missed header; ALSO: ch480 at pg942 (not pg980 as merged recorded); ch482 at pg964; merged pipeline ch482@pg831 is data error (page 831 has chs 432-433, digit misread) | OK
+[2026-06-21 00:14 PT] CH559 | image 1211: CHAPTER 559 confirmed; tess garbled as 'CHAPTER 999' (5->9 misread); title: appropriating money for trade school unit, Chico State Normal School | OK
+[2026-06-21 00:15 PT] CH590 | image 1236: CHAPTER 590 confirmed; all engines missed header; title: appropriating money for repairs/improvements, Whittier State School | OK
+[2026-06-21 00:16 PT] CH615 | image 1283: CHAPTER 615 confirmed at source_page 1284; OCR missed header; title: add secs 172b/c/d Civil Code re community property | OK
+[2026-06-21 00:17 PT] CH635 | image 1300: CHAPTER 635 confirmed at source_page 1301; OCR missed 634+635 (caught 633, 636, 637); title: add sec 737e Pol Code re superior judge salaries | OK
+[2026-06-21 00:18 PT] CH646 | image 1310: CHAPTER 646 header at bottom of page; general appropriations act spanning ~22 pages (pgs 1311-1332); running head 'Ch.646' confirmed across multiple images | OK
+[2026-06-21 00:19 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1919-vol1-chapters\parsed_acts_visual.json | OK
+[2026-06-21 00:19 PT] SUMMARY | targeted=14 verified=13 legislative_gap=1 not_found=0 | OK
+[2026-06-21 00:20 PT] INTEGRITY-NOTE | WARN: merged pipeline ch482@source_page831 is a data error—that page has chs 432-433 (digit misread). True ch480 at pg942, ch481 at pg962, ch482 at pg964. This is outside scope of additive visual output but warrants follow-up repair. | WARN
