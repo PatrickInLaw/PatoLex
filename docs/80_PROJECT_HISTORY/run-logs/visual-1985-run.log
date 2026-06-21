@@ -1,0 +1,51 @@
+[2026-06-21 08:40 PT] INIT | Starting visual recovery for 1985 | OK
+[2026-06-21 08:40 PT] MANIFEST | Loaded manifest: 14 missing chapters | OK
+[2026-06-21 08:40 PT] LOAD_OCR | Loading OCR for production-1985-vol1-chapters | OK
+[2026-06-21 08:40 PT] LOAD_OCR | Loaded 1886 pages for production-1985-vol1-chapters | OK
+[2026-06-21 08:40 PT] LOAD_OCR | Loading OCR for production-1985-vol2 | OK
+[2026-06-21 08:40 PT] LOAD_OCR | Loaded 2190 pages for production-1985-vol2 | OK
+[2026-06-21 08:40 PT] LOAD_OCR | Loading OCR for production-1985-vol3 | OK
+[2026-06-21 08:40 PT] LOAD_OCR | Loaded 2137 pages for production-1985-vol3 | OK
+[2026-06-21 08:40 PT] SEARCH | Chapter 26 in production-1985-vol1-chapters, pages [93, 102] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 26: not found in OCR text range [93, 102] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 67 in production-1985-vol1-chapters, pages [182, 184] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 67: not found in OCR text range [182, 184] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 69 in production-1985-vol1-chapters, pages [184, 186] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 69: not found in OCR text range [184, 186] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 82 in production-1985-vol1-chapters, pages [195, 199] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 82: not found in OCR text range [195, 199] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 84 in production-1985-vol1-chapters, pages [199, 218] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 84: not found in OCR text range [199, 218] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 92 in production-1985-vol1-chapters, pages [228, 230] | OK
+[2026-06-21 08:40 PT] FOUND | Chapter 92: page 227 via tess | img=NO | OK
+[2026-06-21 08:40 PT] SEARCH | Chapter 93 in production-1985-vol1-chapters, pages [228, 230] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 93: not found in OCR text range [228, 230] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 505 in production-1985-vol1-chapters, pages [1856, 1857] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 505: not found in OCR text range [1856, 1857] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 506 in production-1985-vol1-chapters, pages [1856, 1857] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 506: not found in OCR text range [1856, 1857] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 722 in production-1985-vol2, pages [470, 474] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 722: not found in OCR text range [470, 474] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 905 in production-1985-vol2, pages [990, 1002] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 905: not found in OCR text range [990, 1002] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 906 in production-1985-vol2, pages [990, 1002] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 906: not found in OCR text range [990, 1002] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 1406 in production-1985-vol3, pages [887, 895] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 1406: not found in OCR text range [887, 895] | WARN
+[2026-06-21 08:40 PT] SEARCH | Chapter 1407 in production-1985-vol3, pages [887, 895] | OK
+[2026-06-21 08:40 PT] MISSING | Chapter 1407: not found in OCR text range [887, 895] | WARN
+[2026-06-21 08:40 PT] WRITE | Wrote C:\PatoLex-scratch\production-1985-vol1-chapters\parsed_acts_visual.json: 9 acts (9 new) | OK
+[2026-06-21 08:40 PT] WRITE | Wrote C:\PatoLex-scratch\production-1985-vol2\parsed_acts_visual.json: 3 acts (3 new) | OK
+[2026-06-21 08:40 PT] WRITE | Wrote C:\PatoLex-scratch\production-1985-vol3\parsed_acts_visual.json: 2 acts (2 new) | OK
+[2026-06-21 08:40 PT] SUMMARY | targeted=14 verified=1 gap=0 not_found=13 | OK
+[2026-06-21 08:50 PT] FINAL | Writing image-verified results for 1985 visual recovery | OK
+[2026-06-21 08:50 PT] WRITE | production-1985-vol1-chapters: 9 total acts (0 new) verified=7 not_found=2 | OK
+[2026-06-21 08:50 PT] WRITE | production-1985-vol2: 3 total acts (0 new) verified=3 not_found=0 | OK
+[2026-06-21 08:50 PT] WRITE | production-1985-vol3: 2 total acts (0 new) verified=2 not_found=0 | OK
+[2026-06-21 08:50 PT] SUMMARY | FINAL: targeted=14 verified=12 gap=0 not_found=2 | OK
+[2026-06-21 08:51 PT] FINAL | Writing image-verified results for 1985 visual recovery | OK
+[2026-06-21 08:51 PT] WRITE | production-1985-vol1-chapters: 9 total acts (0 new) verified=7 not_found=2 | OK
+[2026-06-21 08:51 PT] WRITE | production-1985-vol2: 3 total acts (0 new) verified=3 not_found=0 | OK
+[2026-06-21 08:51 PT] WRITE | production-1985-vol3: 2 total acts (0 new) verified=2 not_found=0 | OK
+[2026-06-21 08:51 PT] SUMMARY | FINAL: targeted=14 verified=12 gap=0 not_found=2 | OK
+[2026-06-21 08:52 PT] COMPLETE | 1985 visual recovery: 14 targeted, 12 image_verified, 0 legislative_gap, 2 not_found (scan gap ch505/506). Output: production-1985-vol1-chapters/parsed_acts_visual.json, production-1985-vol2/parsed_acts_visual.json, production-1985-vol3/parsed_acts_visual.json | OK
