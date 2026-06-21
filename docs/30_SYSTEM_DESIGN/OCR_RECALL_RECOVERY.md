@@ -44,14 +44,17 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
   CANONICAL roman + SEQUENCE-POSITION sanity (rejects insert-L misparses + body-citation ghosts);
   modern body-dup guard REMOVED (over-rejected code-amendment gaps; checkpoint validation is the
   sound guard). Honest corpus ~97.9%, residual ~1844. 1915 control steady at 96% algorithmic.
-- **Phase B (visual) — WORKING WELL. ~20 YEARS DONE 100%** (image+multi-engine verified): modern
-  1915/1929/1933/1937/1939/1941/1943/1971 + early 1850/1852/1855/1857/1858/1859/1863/1889/1891/1899/
-  1903/1905. Corpus **98.6%, residual 1294**. A few documented re-OCR/SCAN-GAP chapters (physical
-  pages absent, defer): 1905 ch389-397 (pp497-519), 1929 ch881, 1859 ch51. Confirmed LEGISLATIVE GAPS
-  (never enacted, reduce effN): only ~4 left after the 1863 retry corrected its false ones. RUNNING:
-  1885, 1887. **Session-limit hit ~3am killed 3 agents -> relaunched clean post-3:10 reset; the killed
-  1863 run's 21 'legislative_gap' were FALSE (cause: roman 400 printed CCCC-additive, not CD — new
-  lesson).** Scoreboard counts ONLY image_verified; legislative_gap reduces effN.
+- **Phase B (visual) — WORKING WELL. ~30 YEARS DONE 100%** (image+multi-engine verified): modern
+  1907/1929/1933/1937/1939/1941/1943/1955/1971/1979/1983/1990 + 1915 + early 1850/1851/1852/1855/1856/
+  1857/1858/1859/1863/1885/1887/1889/1891/1893/1899/1903/1905. Corpus **98.7%, residual ~1145**.
+  RUNNING: big years 1982 (58, 5vol) + 1989 (73, 3vol). Scoreboard counts ONLY image_verified;
+  legislative_gap (~12 confirmed) reduces effN. Documented SCAN-GAPS (physical pages absent, re-OCR
+  later): 1905 ch389-397, 1929 ch881, 1859 ch51.
+- **REMAINING RESIDUAL = the BIG years** (after 1982/1989): 1987(155,4vol) 1862(128) 1860(106)
+  1988(101,4vol) 1854(78,dual-series) 1861(155) — these are the bulk (~720). Launch one big-year
+  agent at a time (or split per-volume), tell it to UPDATE its run log AS IT GOES and group by vol.
+  Pick targets from `python pipeline/analysis/_recall_allyears.py`. Image off-by-one: OCR dict key K
+  -> page_{K:04d}.png (NOT K-1); confirm mapping per volume before a batch (lesson note).
 - **DURABLE FINDINGS:** (a) root cause = OCR skips page-top CHAPTER headers (running-header zone) →
   image/multi-engine verify is essential. (b) **LEGISLATIVE GAPS**: some oracle chapters were NEVER
   ENACTED (printed volume skips the number, e.g. 1857 ch54/ch232) → oracle N OVER-counts; visual
