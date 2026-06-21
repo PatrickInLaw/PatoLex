@@ -35,17 +35,19 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
   Acts / Contents (chapter→title→page; we have these PDFs locally). Also 1903 (33) & 1905 (83) are
   1900s years with zero recovery → investigate (likely missing/odd structure).
 - **17 unmapped biennium-named years** (1866…1964; oracle weight 6,211) not measured — real scope gap.
-- **Phase A-early (clause-corroborated-present backbone for 1850–1899): DONE** (commit 0a9d154). Corpus
-  now **98.5%**, residual **1,372** (was 1,873). recover_clause_seq early-era mode runs when header
-  anchors < 0.2*N. Early recoveries tagged `lower_confidence_early` → must be Hans+visual verified.
-  Residual leaders now: 1862(95) 1861(88) 1854(76 dual-series) 1860(73) 1987(51) 1971(45) 1889(42)
-  1899(39) 1905(37) 1941(37) 1989(37) … then a long tail of modern years 15-35 each.
-- **Phase A-early HANS audit: PENDING** — confirm the ~500 early-era recoveries are correct (early
-  present-pages can be unreliable; the checkpoint gate should prevent wrong fills, but verify).
-- **Phase B (visual residual): NOT STARTED** — start 1915 (template), then work forward as tokens allow.
-  Goal: drive per-year residuals to 0 by reading the actual page IMAGES (pages_raw PNGs) for each
-  bracketed missing chapter. Prioritize years with small residual (completable) + the early-era
-  lower-confidence recoveries (verify + close).
+- **Phase A-early: roman-header-direct (FIXED, commit 2736cdd).** The first early-era mode
+  (clause-from-present-pages) was Hans-UNSOUND (~25-45% misnumbered dups) → REPLACED with
+  roman-header-direct: recover each pre-1900 chapter whose printed ROMAN header "CHAP. <roman>"
+  survived OCR (validated by a nearby clause/An-act), number read off the numeral. Safe by
+  construction, lower recall. **HONEST corpus = 98.3%, residual 1,546.** Re-Hans RUNNING (a2b2af51).
+- **Phase B (visual) — RUNNING & WORKING.** Method proven: read pages_raw PNGs, confirm printed
+  chapter#. DONE: **1915 = 100%** (31/31 verified), **1937 = 100%** (19/19). RUNNING: 1941 (af2255a3),
+  1939 (a8cc3da7). Each visual agent: `python pipeline/analysis/_residual_manifest.py <year>` then
+  image-verify each missing chapter → additive `<vol>/parsed_acts_visual.json` + `visual-<year>-run.log`.
+- **Background:** 1910-1999 recover re-run (b7inme498) to apply the body-dup guard consistently.
+- **NEXT loop:** as each visual agent finishes → bank (commit run log) + re-measure + launch next
+  residual year. Residual leaders to target: early 1862/1861/1860/1854(dual-series)/1850 + modern
+  1987/1971/1989/1933/1943/1929 + the long 15-35 tail. ~3-4 visual agents in flight max (be reasonable).
 - Recovery tool: `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`).
 
 ### RESUME PROTOCOL (if you wake up unsure where you are)
