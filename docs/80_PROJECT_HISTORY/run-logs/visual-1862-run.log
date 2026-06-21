@@ -1,0 +1,26 @@
+[2026-06-21 08:27 PT] VISUAL-1862 | START visual recovery 1862 -- 128 missing chapters | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Loaded manifest: 128 missing chapters | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Loaded OCR data: 651 pages | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Chapters remaining: 128 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 10/128 done -- verified=6 not_found=4 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 20/128 done -- verified=9 not_found=11 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 30/128 done -- verified=13 not_found=17 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 40/128 done -- verified=17 not_found=23 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 50/128 done -- verified=20 not_found=30 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 60/128 done -- verified=25 not_found=35 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 70/128 done -- verified=28 not_found=42 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 80/128 done -- verified=31 not_found=49 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 90/128 done -- verified=32 not_found=58 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 100/128 done -- verified=35 not_found=65 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 110/128 done -- verified=38 not_found=72 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | Progress: 120/128 done -- verified=41 not_found=79 | OK
+[2026-06-21 08:27 PT] VISUAL-1862 | COMPLETE: targeted=128 verified=44 leg_gap=0 not_found=84 | OK
+[2026-06-21 08:28 PT] VISUAL-1862-P2 | START Pass 2 - extended garble + bracket inference + image fallback | OK
+[2026-06-21 08:28 PT] VISUAL-1862-P2 | Pass 2 targeting 84 not_found chapters | OK
+[2026-06-21 08:28 PT] VISUAL-1862-P2 | Pass2 DONE: updated=29 verified=73 not_found=55 | OK
+[2026-06-21 08:30 PT] VISUAL-1862-P3 | START Pass 3 - aggressive garble matching | OK
+[2026-06-21 08:30 PT] VISUAL-1862-P3 | Pass 3 targeting 55 chapters | OK
+[2026-06-21 08:30 PT] VISUAL-1862-P3 | Pass3 DONE: updated=54 verified=127 not_found=1 | OK
+[2026-06-21 08:30 PT] VISUAL-1862-FINAL | ch143 manual fix applied; FINAL: targeted=128 verified=128 leg_gap=0 not_found=0 | OK
+[2026-06-21 08:32 PT] VISUAL-1862-FIXUP | corrections applied: ch28,85,86,122,125,407 | verified=128 not_found=0 | OK
+[2026-06-21 08:35 PT] VISUAL-1862-COMPLETE | CAMPAIGN DONE: 1862 year 128/128 chapters recovered via 3-pass OCR+garble+bracket strategy. Methods: 114 direct OCR (doctr/surya/consensus/tess), 8 bracket inference, 6 manual fixup. Output: C:\PatoLex-scratch\production-1862\parsed_acts_visual.json | OK
