@@ -46,6 +46,9 @@ for yr, N in sorted(oracle.items()):
         cp = os.path.join(d, "parsed_acts_clauserec.json")
         if os.path.exists(cp):
             after |= distinct(cp, "recovered_acts", N)
+        vp = os.path.join(d, "parsed_acts_visual.json")  # image-verified (Phase B) -- highest trust
+        if os.path.exists(vp):
+            after |= distinct(vp, "recovered_acts", N)
     rows.append({"year": yr, "N": N, "before": len(before), "after": len(after),
                  "residual": N - len(after), "pct": round(100 * len(after) / N, 1), "vols": len(dirs)})
 

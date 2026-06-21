@@ -1,0 +1,15 @@
+[2026-06-20 22:37 PT] START | Hans early-era audit of recover_clause_seq.py early/headerless mode | OK
+[2026-06-20 22:55 PT] MAP | source_page S maps to image page_(S-1).png and OCR page_1indexed equals source_page | OK
+[2026-06-20 22:56 PT] STRUCT | No chapter_int collisions w/ present, no dup chapter_int, page-monotonic all 3 vols | OK
+[2026-06-20 22:57 PT] POS | Recovered source_pages within ~1-5pp of interpolated expected (present pages NOT garbage in these vols) | OK
+[2026-06-20 23:05 PT] IMG-FAIL | 1905 ch241 p268 image=CHAPTER CCXL Preston bedding=present240, real241 Weaver on p269 not recovered | FAIL
+[2026-06-20 23:10 PT] IMG-FAIL | 1905 ch359 p479 loose image=only CHAPTER CCCLVIII, 359 dup of 358, real359 dental on p480 | FAIL
+[2026-06-20 23:15 PT] IMG-FAIL | 1861 ch286 p323 STRICT clause text=CCLXXXV(285) State Printer already present, mislabel dup | FAIL
+[2026-06-20 23:18 PT] IMG-FAIL | 1861 ch306 p342 STRICT clause text=CCCV(305) War Debt already present, mislabel dup | FAIL
+[2026-06-20 23:20 PT] IMG-OK | 1860 ch182 p178=CHAP CLXXXII Charles White and 1905 ch53 p97=CHAPTER LIII both STRICT correct | OK
+[2026-06-20 23:35 PT] IMG-OK | 1860 ch312 p325=CHAP CCCXII City of Nevada streets CORRECT (2nd act on page) | OK
+[2026-06-20 23:40 PT] IMG-FAIL | 1860 ch76 p78 STRICT=CHAP LXXV(75) Siskiyou transfer already present ch75 mislabel dup, real76 Crippen on p79 | FAIL
+[2026-06-20 23:45 PT] IMG-FAIL | 1861 ch512 p623 STRICT=CHAP DXI(511) Calaveras fees already present ch511 mislabel dup, real512 on p624 | FAIL
+[2026-06-20 23:50 PT] SYS | clause-anchored body-dup vs adjacent present 1860 17/44 1861 34/73 1905 13/46 many body-cont 1.00 some buffer-bleed FP but core failure pervasive | FAIL
+[2026-06-20 23:55 PT] TALLY | Image-verified 6 WRONG (241 359 286 306 76 512) incl 4 STRICT (286 306 76 512), 3 CORRECT (182 53 312). Failure recovered chC equals present ch(C-1) body relabeled +1 real chC unrecovered | FAIL
+[2026-06-20 23:58 PT] VERDICT | UNSOUND across all 3 years. Misnumbered duplicate chapters pervasive. Checkpoint (2pp) passes spuriously when consecutive acts share a page. GATE OFF early/headerless mode both strict and loose before any merge or ingest | FAIL

@@ -23,7 +23,8 @@ def chap_pages(D, N):
     """chapter -> source_page from merge (present) and clauserec (recovered). Returns (present_set,
     page_map, vol_of_page)."""
     pages, vol = {}, {}
-    for fn, key in (("parsed_acts_merged.json", "merged_acts"), ("parsed_acts_clauserec.json", "recovered_acts")):
+    for fn, key in (("parsed_acts_merged.json", "merged_acts"), ("parsed_acts_clauserec.json", "recovered_acts"),
+                    ("parsed_acts_visual.json", "recovered_acts")):
         p = os.path.join(D, fn)
         if not os.path.exists(p):
             continue
