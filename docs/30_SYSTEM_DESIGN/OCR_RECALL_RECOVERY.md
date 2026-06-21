@@ -35,8 +35,17 @@ use the Bash tool to call powershell.exe instead):** send Telegram with the Bash
   Acts / Contents (chapter→title→page; we have these PDFs locally). Also 1903 (33) & 1905 (83) are
   1900s years with zero recovery → investigate (likely missing/odd structure).
 - **17 unmapped biennium-named years** (1866…1964; oracle weight 6,211) not measured — real scope gap.
-- **Phase A-early (Contents-anchored recovery for 1850–1899): NEXT / IN PROGRESS.**
-- **Phase B (visual residual, modern tail 1900–1999): NOT STARTED.**
+- **Phase A-early (clause-corroborated-present backbone for 1850–1899): DONE** (commit 0a9d154). Corpus
+  now **98.5%**, residual **1,372** (was 1,873). recover_clause_seq early-era mode runs when header
+  anchors < 0.2*N. Early recoveries tagged `lower_confidence_early` → must be Hans+visual verified.
+  Residual leaders now: 1862(95) 1861(88) 1854(76 dual-series) 1860(73) 1987(51) 1971(45) 1889(42)
+  1899(39) 1905(37) 1941(37) 1989(37) … then a long tail of modern years 15-35 each.
+- **Phase A-early HANS audit: PENDING** — confirm the ~500 early-era recoveries are correct (early
+  present-pages can be unreliable; the checkpoint gate should prevent wrong fills, but verify).
+- **Phase B (visual residual): NOT STARTED** — start 1915 (template), then work forward as tokens allow.
+  Goal: drive per-year residuals to 0 by reading the actual page IMAGES (pages_raw PNGs) for each
+  bracketed missing chapter. Prioritize years with small residual (completable) + the early-era
+  lower-confidence recoveries (verify + close).
 - Recovery tool: `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`).
 
 ### RESUME PROTOCOL (if you wake up unsure where you are)
