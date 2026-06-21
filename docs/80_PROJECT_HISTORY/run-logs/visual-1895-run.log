@@ -12,3 +12,17 @@
 [2026-06-21 00:22 PT] CH222 | CCXXII page 399 doctr+surya -- Law Revision Commission | OK
 [2026-06-21 00:25 PT] WRITE | parsed_acts_visual.json written (no prior file -> fresh, not merge). 8 recovered_acts, all ocr_text_verified, printed_number_confirmed=false | OK
 [2026-06-21 00:25 PT] DONE | targeted=8 verified=8 legislative_gap=0 not_found=0. draft=true | OK
+[2026-06-21 PT] PHASE2-START | Image-verification pass: re-extract pages from 1895_Statutes.pdf via PyMuPDF (pages_raw/ was absent at prior session). | OK
+[2026-06-21 PT] PDF-VERIFY | 1895_Statutes.pdf = 508 pages. Offset empirically confirmed: ch1 known at sp55, image at PDF idx 54 shows CHAPTER I. Offset = source_page - 1. | OK
+[2026-06-21 PT] IMG-CONFIRM ch58 | sp110 PDF-idx=109 -> CHAPTER LVIII visible in image. Page header 56. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch131 | sp176 PDF-idx=175 -> CHAPTER CXXXI visible in image (CXXX also on same page). Page header 132. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch152 | sp213 PDF-idx=212 -> CHAPTER CLII visible. Page header 159. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch153 | sp213 PDF-idx=212 -> CHAPTER CLIII visible (same page as ch152). Page header 159. prior source_page=213 correct. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch162 | sp220 PDF-idx=219 -> CHAPTER CLXII visible. Page header 166. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch178 | sp259 PDF-idx=258 -> CHAPTER CLXXVIII visible. Page header 205. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch179 | sp260 PDF-idx=259 -> CHAPTER CLXXIX visible. Page header 206. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch222 | sp399 PDF-idx=398 -> CHAPTER CCXXII visible. printed_number_confirmed=true. | OK
+[2026-06-21 PT] NOTE | 1895 confirmed ROMAN numeral chapter headers throughout (EARLY-ERA). No Arabic chapter numbering. | OK
+[2026-06-21 PT] WRITE | parsed_acts_visual.json updated: all 8 acts status=image_verified, printed_number_confirmed=true (upgraded from ocr_text_verified/false). ADDITIVE MERGE: all 8 prior entries preserved and upgraded. | OK
+[2026-06-21 PT] COVERAGE | 223/223 chapters: 213 certified + 2 clauserec (ch150,ch197) + 8 visual (ch58,131,152,153,162,178,179,222). | OK
+[2026-06-21 PT] DONE-PHASE2 | targeted=8 image_verified=8 legislative_gap=0 not_found=0. Temp images in C:\PatoLex-scratch\visual-1895-tmp\ | OK
