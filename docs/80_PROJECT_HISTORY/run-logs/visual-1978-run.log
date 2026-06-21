@@ -1,0 +1,9 @@
+[2026-06-21 00:00 PT] START | VISUAL-RECOVERY 1978 | targeted=1 missing=[ch.1432] vol=production-1978-vol3 | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1978 -> N=1432 present=1431 missing=1 ch.1432 pages=1277-1281 | OK
+[2026-06-21 00:02 PT] OCR-SCAN | key=1276 (source_page=1277) tess_text shows 'CHAPTER 1431' + 'CHAPTER 1482' (corruption of 1432) | WARN
+[2026-06-21 00:03 PT] OCR-SCAN | key=1279 absent from page_ocr_results.json; image page_1279.png present (no scan gap) | WARN
+[2026-06-21 00:04 PT] IMAGE-READ | page_1276.png: running head 'Ch. 1432]' top-left; body heading 'CHAPTER 1432' confirmed; title: Health and Safety Code skateboard parks | OK
+[2026-06-21 00:05 PT] IMAGE-READ | page_1277.png: running head '[Ch. 1432' top-right; continuation confirms ch.1432 = Health & Safety Code s.25906 | OK
+[2026-06-21 00:06 PT] FINDING | OCR digit corruption: '1432' -> '1482' (3->8 swap); chapter was present in OCR text but under wrong number, causing DB miss | WARN
+[2026-06-21 00:07 PT] WRITE | C:\PatoLex-scratch\production-1978-vol3\parsed_acts_visual.json -- 1 act, status=image_verified | OK
+[2026-06-21 00:08 PT] COMPLETE | 1978 visual recovery: targeted=1 verified=1 legislative_gap=0 not_found=0 | OK
