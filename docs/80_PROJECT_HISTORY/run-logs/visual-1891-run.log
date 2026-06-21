@@ -1,0 +1,39 @@
+[2026-06-21 03:37 PT] VISUAL-1891 | START | Processing 18 missing chapters
+[2026-06-21 03:37 PT] CH-14 | Searching pages 50-81 (base 65-66)
+[2026-06-21 03:37 PT] CH-14 | VERIFIED | pg 65 via doctr | "CHAPTER XIV." | title: An Act to repeal an Act entitled “An Act to declare the Klam
+[2026-06-21 03:37 PT] CH-43 | Searching pages 69-99 (base 84-84)
+[2026-06-21 03:37 PT] CH-43 | VERIFIED | pg 83 via doctr | "CHAPTER XLIII." | title: an Act
+entitled “An Act to provide for the organization, inc
+[2026-06-21 03:37 PT] CH-60 | Searching pages 96-127 (base 111-112)
+[2026-06-21 03:37 PT] CH-60 | VERIFIED | pg 111 via doctr | "CHAPTER LX." | title: An Act concerning the costs in civil actions for serving sum
+[2026-06-21 03:37 PT] CH-63 | Searching pages 98-128 (base 113-113)
+[2026-06-21 03:37 PT] CH-63 | VERIFIED | pg 112 via doctr | "CHAPTER LXIII." | title: An Act to amend section three hundred and thirty of an Act e
+[2026-06-21 03:37 PT] CH-119 | Searching pages 172-204 (base 187-189)
+[2026-06-21 03:37 PT] CH-119 | VERIFIED | pg 187 via doctr | "CHAPTER CXIX." | title: An Act to amend sections nine and ten of an Act entitled “An
+[2026-06-21 03:37 PT] CH-142 | Searching pages 233-264 (base 248-249)
+[2026-06-21 03:37 PT] CH-142 | VERIFIED | pg 248 via tess | "CHAPTER CXLII" | title: An Act making an appropriation to pay the deficiency in the 
+[2026-06-21 03:37 PT] CH-143 | Searching pages 233-264 (base 248-249)
+[2026-06-21 03:37 PT] CH-143 | VERIFIED | pg 248 via doctr | "CHAPTER CXLIII." | title: An Act making an appropriation to pay the deficiency in the 
+[2026-06-21 03:37 PT] CH-155 | Searching pages 258-292 (base 273-277)
+[2026-06-21 03:37 PT] CH-155 | VERIFIED | pg 274 via doctr | "CHAPTER CLV." | title: An Act entitled an Act relating to the working, rights of wa
+[2026-06-21 03:37 PT] CH-162 | Searching pages 264-304 (base 279-289)
+[2026-06-21 03:37 PT] CH-162 | VERIFIED | pg 288 via doctr | "CHAPTER CLXII." | title: An Act to amend an Act entitled “An Act to amend section six
+[2026-06-21 03:37 PT] CH-174 | Searching pages 292-329 (base 307-314)
+[2026-06-21 03:37 PT] CH-174 | VERIFIED | pg 307 via doctr | "CHAPTER CLXXIV." | title: An Act to repeal sections six hundred and thirty-nine, siz h
+[2026-06-21 03:37 PT] CH-177 | Searching pages 299-331 (base 314-316)
+[2026-06-21 03:37 PT] CH-177 | VERIFIED | pg 315 via doctr | "CHAPTER CLXXVII." | title: An Act to amend an Act entitled “An Act to amend an Act enti
+[2026-06-21 03:37 PT] CH-198 | Searching pages 320-351 (base 335-336)
+[2026-06-21 03:37 PT] CH-198 | VERIFIED | pg 335 via doctr | "CHAPTER CXCVIII." | title: An Act fixing a bounty on coyote scalps.
+[2026-06-21 03:37 PT] CH-202 | Searching pages 322-353 (base 337-338)
+[2026-06-21 03:37 PT] CH-202 | VERIFIED | pg 337 via doctr | "CHAPTER CCII." | title: An Act making an appropriation to pay the Journal Clerk of t
+[2026-06-21 03:37 PT] CH-203 | Searching pages 322-353 (base 337-338)
+[2026-06-21 03:37 PT] CH-203 | VERIFIED | pg 337 via doctr | "CHAPTER CCIII." | title: An Act making an appropriation to pay the Journal Clerk of t
+[2026-06-21 03:37 PT] CH-220 | Searching pages 465-496 (base 480-481)
+[2026-06-21 03:37 PT] CH-220 | VERIFIED | pg 480 via doctr | "CHAPTER CCXX." | title: An Act to amend section one hundred and seventy-two of an Ac
+[2026-06-21 03:37 PT] CH-237 | Searching pages 493-525 (base 508-510)
+[2026-06-21 03:37 PT] CH-237 | VERIFIED | pg 508 via doctr | "CHAPTER CCXXXVII." | title: An Act to amend section five of an Act entitled “An Act to p
+[2026-06-21 03:37 PT] CH-238 | Searching pages 493-525 (base 508-510)
+[2026-06-21 03:37 PT] CH-238 | VERIFIED | pg 509 via doctr | "CHAPTER CCXXXVIII" | title: An Act to provide for the publication and distribution of a 
+[2026-06-21 03:37 PT] CH-260 | Searching pages 526-557 (base 541-542)
+[2026-06-21 03:37 PT] CH-260 | VERIFIED | pg 541 via tess | "CHAPTER CCLX." | title: An Act to appropriate money for the completion of the buildi
+[2026-06-21 03:37 PT] VISUAL-1891 | COMPLETE | verified=18 gap=0 not_found=0 | output=C:\PatoLex-scratch\production-1891\parsed_acts_visual.json
