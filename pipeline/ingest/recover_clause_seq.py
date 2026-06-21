@@ -137,12 +137,25 @@ def roman_int(s):
         v = _RVAL[ch]; tot += -v if v < prev else v; prev = max(prev, v)
     return tot if int_to_roman(tot) == s else None
 
-def roman_recover(lines, N, present):
+def roman_recover(lines, N, present, present_page):
     """Recover each chapter whose printed ROMAN act-header ('CHAP. <roman>') survived OCR and is NOT
-    already present, validated by an enactment clause / 'An act' within 25 lines. The chapter number
-    is read DIRECTLY off the roman header (numeral-verified -- no sequence inference, no body-dup
-    risk). Returns recovered records. Lower recall than sequence-fill but SAFE by construction; the
-    chapters whose roman header is too garbled fall to the visual pass."""
+    already present, validated by (1) a CANONICAL roman numeral, (2) an enactment clause / 'An act'
+    within 25 lines, and (3) a SEQUENCE-POSITION sanity check -- the chapter number must be near the
+    page-interpolated expected chapter (Hans: rejects insert-L misparses like CLII->CLIL->199, and
+    body-citation false positives like a mid-body 'Cnar. CLV.' ghost on a page that really holds
+    ch104-105). Numeral read off the page, no sequence inference for the number itself. Lower recall
+    but SAFE; garbled/ambiguous-header chapters fall to the visual pass."""
+    pts = sorted((p, c) for c, p in present_page.items())  # (page, chapter) for interpolation
+    pgs = [p for p, _ in pts]
+    tol = max(12, 0.03 * N)
+    def expected_ch(p):
+        i = bisect.bisect_left(pgs, p)
+        if 0 < i < len(pts):
+            (pa, ca), (pb, cb) = pts[i - 1], pts[i]
+            return ca + (cb - ca) * (p - pa) / (pb - pa) if pb > pa else (ca + cb) / 2
+        if not pts:
+            return None
+        return pts[0][1] if i == 0 else pts[-1][1]
     recs, seen = [], set()
     for i, (pg, ln) in enumerate(lines):
         m = _ROMAN_HDR.match(ln)
@@ -153,6 +166,9 @@ def roman_recover(lines, N, present):
             continue
         c = roman_int(m.group(2))
         if not c or not (1 <= c <= N) or c in present or c in seen:
+            continue
+        e = expected_ch(pg)
+        if e is not None and abs(c - e) > tol:  # positionally implausible -> garble/citation, reject
             continue
         window = " ".join(lines[j][1] for j in range(i, min(len(lines), i + 25)))
         if not (_CLAUSE_VAL.search(window) or ANACT.search(window)):
@@ -231,7 +247,7 @@ def recover_volume(D, N):
     # UNSOUND (Hans: ~25-45% misnumbered duplicates because the fill grabbed the anchor's own clause).
     # MODERN (arabic header backbone present): the checkpoint-validated clause-sequence gap-fill.
     if len(anchor) < 0.2 * N:
-        early_recovered = roman_recover(lines, N, present)
+        early_recovered = roman_recover(lines, N, present, present_page)
         anchors = []  # no modern gap-fill in the early era
         backbone = "roman-header-direct (early)"
     else:
