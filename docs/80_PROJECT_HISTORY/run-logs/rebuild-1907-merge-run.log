@@ -1,0 +1,67 @@
+PatoLex -- rebuild-1907-merge run log
+Task: SAME family as the 1901/09/11 merge re-run. Regenerate production-1906-07\parsed_acts_merged.json
+from existing certified/pass data with the CORRECT N=539 (the 1907 REGULAR session), then alias
+oracle 1907->production-1906-07 and 1909->production-1907-09 in _recall_allyears.py.
+REVERSIBLE + VERIFIED. NO DB writes. Back up before overwriting.
+================================================================================
+
+[2026-06-22 PT] PHASE: ROOT CAUSE | confirmed identical to 1901/09/11 | OK
+--------------------------------------------------------------------------------
+merge_passes.n_for("production-1906-07") regex-grabs leading year 1906. ORACLE[1906] is built
+only from the 1906 EXTRA session row (N=64) -- the 1907 Regular row keys to session_year 1907.
+So the merge capped at N=64, clipping the certified 1907-regular data (ch 3..539) down to ch<=64.
+Result: current merged.json = distinct 60, cap_N 64, max_ch 64 = the 1906 extra session (WRONG).
+The real 1907 regular data IS present in this dir:
+  certified : 489 distinct, min 3 max 539 (438 chapters > 64 -- the data the N=64 cap discarded)
+  +repaired/recovered/fixed/multiengine/lostheader passes present (merge_dir reads these)
+Oracle (regular): 1907=539, 1909=729. Fix = regenerate merged with correct N=539 (the only change),
+exactly as 1901/09/11 did (merge-rerun-1901-1909-1911-run.log).
+
+[2026-06-22 PT] PHASE: BACKUP | reversible | OK
+--------------------------------------------------------------------------------
+cp parsed_acts_merged.json -> parsed_acts_merged.BAK.json (holds the 1906 extra session; preserve).
+Verified BAK: distinct 60, cap_N 64, max_ch 64.
+
+[2026-06-22 PT] PHASE: REGENERATE | existing merge_passes.merge_dir(D, N=539) | OK
+--------------------------------------------------------------------------------
+Temp driver under C:\PatoLex-scratch (_rerun_1907_merge.py, removed after use) called the EXISTING
+mp.merge_dir(r"...\production-1906-07", N=539) -- no reinvented merge, no hand-fabrication. The
+ONLY change vs the CLI is supplying the correct oracle N=539 (n_for would wrongly return 64).
+  production-1906-07 merged  OLD distinct=60  cap_N=64  max_ch=64   (the 1906 extra session)
+                          ->  NEW distinct=529 cap_N=539 max_ch=539 (the 1907 REGULAR session)
+  raw_before_dedup=530  low_pass_dropped=4  same_act_collapsed=1  ocr_headers_available=True
+  by_source: certified 489 + multiengine 40
+VERIFY GATE: NEW merged 529 distinct, min 2 max 539, 469 ch > 64. All 489 certified chapters
+present (certified minus merged = {}); merged adds 40 more from multiengine. This is unmistakably
+the 1907 regular session, NOT the 64-ch extra. Gate PASSED -- no restore. (.BAK retained.)
+
+[2026-06-22 PT] PHASE: ALIAS EDIT | _recall_allyears.py | OK
+--------------------------------------------------------------------------------
+1) BUDGET_OWNED_DIRS += "production-1907-09" -- excludes it from the greedy `production-1907*`
+   glob so it is NOT swept into oracle 1907 (the historic bug); handed solely to 1909's alias.
+2) YEAR_DIR_ALIAS: 1907 -> ["production-1906-07"], 1909 -> ["production-1907-09"];
+   replaced the obsolete "1909 deliberately NOT aliased" NOTE block.
+No double-count: production-1906-07 -> 1907 only; production-1907-09 -> 1909 only. (1906 has no
+regular oracle row -> production-1906-07 is reachable ONLY via the 1907 alias.)
+
+[2026-06-22 PT] PHASE: VERIFY | _recall_allyears.py re-run | OK
+--------------------------------------------------------------------------------
+Anti-double-count assert: PASS (215 distinct dirs, was 214 -- production-1906-07 newly counted).
+  1907 -> production-1906-07 : before=529 after=532 residual=7  pct=98.7  (was scoring wrong volume)
+  1909 -> production-1907-09 : before=670 after=724 residual=5  pct=99.3  (was UNMAPPED, weight 729)
+  unmapped years: []  (was [1909] weight 729) -- no holes remain.
+Corpus scoreboard BEFORE (documented pre-fix baseline, fix-1907-1909-remap-run.log) -> AFTER:
+  mapped years        107            -> 108
+  oracleN / effN      95285 / 95273  -> 96014 / 96002   (+729: 1909 folded in)
+  BEFORE (merge)      89057 (93.5%)  -> 89771 (93.5%)
+  AFTER (full)        94738 (99.4%)  -> 95455 (99.4%)   RESIDUAL 535 -> 547
+  corpus incl unmapped  98.7%        -> 99.4%   (1909's 729 no longer a 0%-counted hole)
+The +12 residual is expected: 1907 now measured against its REAL 539-ch volume (resid 7) instead
+of the first 539 ch of the 1909 volume (coincidental resid 0), and 1909's real resid 5 is now
+counted -- both are TRUE residuals, not a regression. Corpus-wide coverage improved (no hole).
+
+SUMMARY:
+  Regenerated production-1906-07\merged.json: 60 ch (extra session, N=64) -> 529 ch (1907 regular, N=539).
+  Alias: 1907->production-1906-07, 1909->production-1907-09; production-1907-09 added to glob-exclusion.
+  1907 residual 7 (532/539); 1909 residual 5 (724/729); unmapped now []; assert PASS (215 dirs).
+  Corpus incl-unmapped 98.7% -> 99.4%. Nothing restored, nothing blocked. .BAK retained for reversal.

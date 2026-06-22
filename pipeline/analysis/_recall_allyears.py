@@ -70,6 +70,14 @@ BUDGET_OWNED_DIRS = {
     "production-1957-vol1-56chapters", "production-1959-vol1-58chapters",
     "production-1961-vol1-60chapters", "production-1963-vol1-62chapters",
     "production-1965-vol1-64chapters",
+    # TRANSITION collision (added 2026-06-22, rebuild-1907-merge): production-1907-09 holds the
+    # 1909 REGULAR session (certified/merged max=729==oracle 1909), but the greedy `production-1907*`
+    # glob for oracle 1907 would ALSO sweep it -- scoring 1907 against the FIRST 539 ch of the 1909
+    # volume (the historic bug). We EXCLUDE it from every glob match and hand it solely to 1909's
+    # alias. Oracle 1907 (N=539) is now served by production-1906-07, whose merged.json was rebuilt
+    # this session from its certified 1907-regular data with the correct N=539 (was N=64 = the 1906
+    # extra session). Verified harmless to 1907: 1907's true data lives in production-1906-07.
+    "production-1907-09",
 }
 YEAR_DIR_ALIAS = {
     # biennial (even-year oracle row -> biennium-span dir [+ code-volume sibling])
@@ -83,13 +91,17 @@ YEAR_DIR_ALIAS = {
     # transition (odd-year regular session bound in the biennium volume)
     1901: ["production-1900-01"],
     1911: ["production-1910-11"],
-    # NOTE: 1909 (regular, oracle 729) is deliberately NOT aliased. Its data physically lives in
-    # production-1907-09 (certified max=729 == oracle 1909) -- but that dir is ALREADY consumed by
-    # the existing `production-1907*` glob for oracle 1907 (which it caps at 539). Aliasing 1909 to
-    # it would double-count the dir (the anti-double-count assert catches this). The 1907 mapping is
-    # itself suspect (production-1906-07, certified max=539, is the truer 1907 volume), but fixing
-    # that is a remap of an already-"green" year and out of scope for this measurement task. 1909 is
-    # therefore reported as UNLOCATED-under-no-double-count: data present, dir collision unresolved.
+    # 1907/1909 RESOLVED (2026-06-22, rebuild-1907-merge): the biennial volumes are offset by one.
+    #   production-1906-07 holds the 1907 REGULAR session (oracle 539). Its merged.json was rebuilt
+    #     this session from its own certified 1907-regular data (ch 3..539) with the correct N=539
+    #     (it had been mis-capped at N=64 = the 1906 EXTRA session by merge_passes.n_for's leading-
+    #     year regex). -> alias 1907 here. The greedy `production-1907*` glob no longer applies to
+    #     1907 because the only dir it would match (production-1907-09) is now in BUDGET_OWNED_DIRS.
+    #   production-1907-09 holds the 1909 REGULAR session (certified/merged max=729 == oracle 1909).
+    #     Excluded from the glob (BUDGET_OWNED_DIRS) and handed solely to 1909's alias below.
+    # No double-count: production-1906-07 -> 1907 ONLY; production-1907-09 -> 1909 ONLY.
+    1907: ["production-1906-07"],
+    1909: ["production-1907-09"],
     # mid-century budget sessions (-NNchapters sub-volume = even-year budget chapters)
     1952: ["production-1953-vol1-52chapters"],
     1954: ["production-1955-vol1-54chapters"],
