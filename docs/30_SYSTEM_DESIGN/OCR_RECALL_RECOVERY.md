@@ -58,6 +58,32 @@ years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened
 
 ### CURRENT STATE  ← keep this line block updated every checkpoint
 
+**>>> SESSION-END WAKE-UP HANDOFF (2026-06-22, cc015, autonomous overnight COMPLETE) <<<**
+**Corpus = 99.5% (95,491 / 96,002), residual 511, ALL 108 OCR-era session-years mapped (0 unmapped
+holes).** Up from 94.3%-of-91-mapped-years at session start. Everything autonomously recoverable WITHOUT
+Patrick and WITHOUT burning vision tokens is DONE. What the night did:
+- LOCAL header-OCR tool built (crop running-head + Tesseract, zero vision tokens) -> recovered ~620
+  biennial chapters: ~527 single-act (1866-1878) + 93 multi-act-page (full-page psm-11 + >=2-DPI vote).
+- MERGE FIXES (n_for biennium-offset bug): 1901/1909/1911/1907 regenerated from certified (+~2270 ch),
+  PLUS a durable code fix (`pipeline/year_dir_alias.py` shared module so merge + scoreboard can't drift).
+- 1854 dual-series WIRED + content-corrected (61/96 merged chapters were the wrong act -> rebuilt 174).
+- NORMALIZATION (Hans-SOUND) + biennial/budget REMAP -> all 108 years measured (was 91).
+- 1913/1917 "misnumber cohort" = FALSE ALARM (dup-audit H5 over-flags single-digit OCR noise; corpus
+  data is correct). 679 dup-audit "high-conf" are mostly this false-positive class.
+**RESIDUAL 511 BREAKDOWN — ALL of it needs PATRICK or vision-tokens (nothing else local-recoverable):**
+- ~292 biennial hard-core (1866=61,1868=14,1870=55,1872=28,1874=38,1876=50,1878=46) -> need VISUAL-AGENT
+  fallback (vision tokens). Local OCR exhausted on these (single-DPI-fragile / wide garbled clusters).
+  HELD per Patrick's "don't burn all our tokens on 600+ pages" steer — his call whether to spend them.
+- 53 modern PHYSICAL scan gaps -> re-scan the bound volumes (external).
+- ~166 small per-year tails + 1907(7)/1909(5) -> mostly the same visual-fallback class.
+**NEEDS PATRICK (decisions, not work):** (1) spend vision tokens on the ~292+ visual-fallback set? (2)
+fund the 53 scan re-scans, (3) resolution/amendment corpus scope. **LOOSE END (small, mine):** F1 —
+`_residual_manifest.py` still has its own divergent partial alias (1864->production-1863-64) that should
+also source `pipeline/year_dir_alias.py`; diagnostic-only, low risk. All work pushed + merged backups
+kept (`*.BAK.json`). A formal clean-slate Hans on the merge_passes/year_dir_alias change is advisable
+when Patrick reviews (self-Hans was clean, scoreboard byte-identical).
+
+
 **>>> LATEST (2026-06-21 evening, cc015 — Patrick AWAKE, holding for his direction):**
 - **Corpus-wide = 97.2%** (107 of 108 session-years mapped; was mis-quoted as "99.9%" when only 91
   years were mapped). Scoreboard residual **1,979**, fully decomposed:
