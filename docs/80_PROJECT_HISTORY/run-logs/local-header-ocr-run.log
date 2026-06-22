@@ -258,3 +258,27 @@ VERDICT / VIABILITY FOR BIENNIALS 1868-1878
     present 616->641, missing 63->38. attempted=55 confirmed=25.
   Audit (multi-DPI): 25/25 STRONG, 0 FAIL -- every printed token == oracle (XLIII=43, LXV=65,
     LXXXIV=84, ..., DXXVI=526, DXXVII=527, DCLXVIII=668, DCLXXIII=673). Method is rock-solid.
+
+[2026-06-22] 1876 multiact: residual 59->50 (+9)  [DUAL-SERIES, main-volume anchored]
+  Lower yield (like 1870) -- 1876's residual is heavy on single-DPI-fragile reads and wide-window
+    garbled clusters (the dual-series cross-volume page collapse inflates many spans, e.g. avg
+    page-span 124pp, max 820 -- correctly skipped). Recovered (all roman, >=2-DPI vote-confirmed):
+    9,24,104,223,483,488,489,490,544. Multi-act shared-page clusters landed together (488/489 pg795,
+    489/490). Manifest regenerated (reads MAIN-volume parsed_acts_visual.json): present 554->563,
+    missing 59->50. attempted=42 confirmed=9.
+  OPS NOTE: a stray duplicate `_apply_multiact.py 1876 --dry-run` process ran concurrently and
+    interleaved its WOULD-CONFIRM lines into the same progress log. HARMLESS to data -- dry-run is
+    CONFIRM-ONLY + writes NOTHING; its WOULD-CONFIRM set matched the real run's CONFIRMED set
+    exactly (consistency check passed). Final state verified via the regenerated manifest (reads
+    the actual visual.json), not the polluted log. Real run = task bpv6xz5pb, confirmed=9.
+  Audit (multi-DPI): 9/9 STRONG, 0 FAIL -- tokens correct (IX=9, XXIV=24, CIV=104, CCXXIII=223,
+    CCCCLXXXIII=483, CCCCLXXXVIII=488, CCCCLXXXIX=489, CCCCXC=490, DXLIV=544). Dual-series sound.
+
+[2026-06-22] 1876 multiact: residual 50->50 (+0) -- RE-VERIFY (synchronous foreground)
+  Re-ran _apply_multiact.py 1876 to confirm the prior pass landed and is append-safe. Idempotent:
+    attempted=33 confirmed=0 (the 9 multiact chapters already present, skipped). visual.json integrity
+    checked: 88 acts / 88 distinct chapters / 0 duplicates; all 9 local_header_ocr_multiact entries
+    well-formed (status=image_verified, printed_number_confirmed=true, dpi_votes>=2): 9,24,104,223,
+    483,488,489,490,544. Manifest re-derived: present 563, missing 50. 1876 multiact COMPLETE -- no
+    new residual recoverable by the band scanner (remaining 50 are single-DPI-fragile / wide-window
+    garbled clusters correctly left for visual fallback).
