@@ -149,3 +149,23 @@ VERDICT / VIABILITY FOR BIENNIALS 1868-1878
     page range x3 psm). The apply is resumable (skips confirmed; persists a
     page->chapters scan cache) so each biennial can be chunked. Reuse _apply_1866.py
     as a template (swap VOL/PDF/MANIFEST and the manifest year alias).
+
+[2026-06-22] 1874 (production-1873-74, 1873-74_Statutes.pdf, N=679, early-era ROMAN, additive CCCC=400):
+  before/after/residual = 506 / 616 / 63   (recovered 110 of 173 missing, CONFIRM-ONLY).
+  Tool: _apply_1874.py (modeled on _apply_1872.py; kept MAX_SPAN=60 mis-anchor guard,
+  but on a mis-anchor it now scans a BOUNDED dual window around BOTH the lo and hi
+  anchor page -- never the full span -- because the template's "trust HIGH anchor" rule
+  is wrong when the HIGH anchor is the mis-paged one). 2 mis-anchored items in 1874:
+    ch 533 (range [180,858]): true header is pg860 (sequential 531=856,532=858,533=860).
+      The dual-window scan first emitted a SPURIOUS 533 on noisy pg179 (mis-paged-neighbor
+      region read [27,77,131,533]); caught in post-run verification and CORRECTED to the
+      verified pg860 via _fix533_1874.py. Number+page both now verified.
+    ch 587 (range [183,915]): correctly left RESIDUAL -- its header is genuinely
+      OCR-garbled in the dense pg913-915 region (pg915 read [586,532,588,570,636,585],
+      no clean 587), so CONFIRM-ONLY did not write it. No wrong number emitted.
+  Verification: all 110 confirmed chapters' cited page matches the cached header read
+  (0 mismatches); ch 533's pg860 independently re-scanned -> reads [533].
+  Remaining 63 residual: dominated by multi-act-page header loss (a page's 2nd/3rd act
+  header eludes OCR, e.g. clusters 462-468, 423-428) plus genuinely garbled/edge headers
+  (41,43,53,55,...). These need the page-image visual fallback. No DB/merged/certified
+  writes; additive superset to production-1873-74/parsed_acts_visual.json.
