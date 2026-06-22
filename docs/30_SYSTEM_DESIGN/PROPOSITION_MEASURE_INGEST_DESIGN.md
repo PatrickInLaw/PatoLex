@@ -319,24 +319,40 @@ the oracle, and human-verifying the (small) adopted tail.
 
 ---
 
-## 9. Open decisions for Patrick
+## 9. Decisions — RESOLVED (Patrick, 2026-06-22)
 
-1. **§9605 precedence for initiatives** — overload `chapter_number` via
-   `COALESCE(..., high-sentinel)`, or add an explicit `precedence` column to
-   `enactment`? (Affects the fold and conflict resolution.) [§4(b), §5(4)]
-2. **Completeness oracle source** — canonical denominator = SoS "Summary of Data"
-   (initiatives only) vs the full SoS/Hastings ballot-measure list (all measure
-   types)? And: scrape vs hand-seed `measure_oracle.tsv`? [§6]
-3. **Scope of `result=defeated`** — ingest defeated measures (kept for denominator +
-   audit, flagged non-operative) or store only adopted? [§3, §4(2)]
-4. **Constitution track** — bring the 58 `*_Constitution.pdf` files in via the same
-   `const_article` provision modeling (a separate, larger workstream), or defer? [§5(3)]
-5. **Bond acts / legislature-referred measures** — these usually ALSO have a
-   resolution-chapter cite and may be partially captured via the chapter pipeline.
-   Dedupe against existing chapter enactments, or treat the measures-volume copy as
-   authoritative for the voter-approval event? [§4]
-6. **Born-digital probe** — confirm whether any post-1992 measures volumes have a real
-   text layer (the 1990 one did not) before committing OCR budget. [§7]
+1. **Precedence/ordering → ADD an explicit `precedence` column to `enactment`** (NOT a
+   COALESCE sentinel on `chapter_number`). Every enactment fills it: chapter number for
+   chapters; election-date-derived value for initiatives (initiatives sort by their
+   post-election effective date, which correctly supersedes earlier same-year chapters on
+   the same provision per the §9605 spirit). Small one-time migration; keeps
+   `chapter_number` semantically honest. [§4(b), §5(4)]
+2. **Completeness oracle → the FULL Hastings/SoS ballot-measure list, ALL adopted measure
+   types** (initiatives + referenda + legislature-referred + constitutional), filtered to
+   ADOPTED. SCRAPE it into `measure_oracle.tsv` (few hundred rows, re-runnable), not
+   hand-seed. (Rationale: we ingest all adopted measures incl. constitution, so the
+   denominator must span all adopted types.) [§6]
+3. **Defeated measures → DO NOT INGEST. Adopted-only.** (Same as we don't ingest defeated
+   bills.) A future "GitHub-model" process that treats propositions/bills as BRANCHES
+   (incl. defeated/proposed) is an entire separate project, far down the line — explicitly
+   out of scope here. [§3, §4(2)]
+4. **Constitution track → YES, build it in parallel** (like the legislative changes), via
+   the `const_article` provision modeling. The 58 `*_Constitution.pdf` are in scope for the
+   proposition gate. [§5(3)]
+5. **Bond / legislature-referred measures → LINK, don't double-count.** These are TWO
+   events: the legislative referral (already a chapter) and the voter approval. The measure
+   record LINKS to the referral chapter, but the **measure copy is AUTHORITATIVE for the
+   operative voter-approval event** (carries the real post-election effective date that
+   drives the fold). Ingest-time reconciliation rule, not a blocker. [§4]
+6. **Born-digital → PROBE post-1992 volumes for a text layer, but OCR REGARDLESS**
+   (two-track, exactly as the statutes pipeline). The 1990 vol had no text layer; do not
+   assume any later one does. [§7]
+
+### Sequencing decision (Patrick, 2026-06-22) — REVERSES the earlier "do A now"
+Propositions become an **EXPLICIT ROADMAP GATE**: **finish legislative work FIRST → then the
+proposition+constitution gate → THEN ingestion.** The proposition track is well-designed and
+pilot-tested but deliberately NOT started yet; we pivot back to closing out legislative work
+now. This gate is recorded in `docs/20_ROADMAP/ROADMAP.md`.
 
 ---
 
