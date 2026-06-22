@@ -81,6 +81,17 @@ years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened
 - **GUARDRAIL reminder:** merge re-run + any dup-audit fix are NOT additive (they overwrite) — do them
   only with Patrick's go. Biennial OCR recovery IS additive/safe (visual.json) and within the campaign.
 
+**>>> PROGRESS (2026-06-22 ~03:40):** BIENNIAL LOCAL-OCR SWEEP COMPLETE (1866-1878, all 7 years, ONE
+year per synchronous agent, ZERO vision tokens). Per-year residual after local OCR: 1866=79, 1868=19,
+1870=65, 1872=45, 1874=63, 1876=59, 1878=55 (~527 ch recovered locally). **Corpus now 99.4% mapped /
+98.6% corpus-wide, residual 592** (was 1094). Remaining 592 ≈ ~365 biennial multi-act-page misses
+(2nd/3rd act header on a shared page — VISUAL-AGENT FALLBACK set) + 53 modern scan gaps (re-scan) +
+1909 (unmapped, merge done, needs 1907 remap). NOTE: the per-year agents tend to finish the apply then
+STALL on a self-made monitor wait without appending the run-log line — verify completion via
+`_residual_manifest.py <year>` + the visual.json mtime going static, then bank from there (1878's line
+was not self-appended; its recovery IS in production-1877-78/parsed_acts_visual.json). NEXT: visual-agent
+fallback for the ~365 multi-act-page misses; content-correctness 1913/1917 cohorts; merge_passes.py n_for fix.
+
 **>>> PROGRESS (2026-06-22 early AM):** MERGE RE-RUN DONE (1901/09/11, residual 1954->1094, **98.1%
 corpus-wide**, backups kept). LOCAL header-OCR tool BUILT+VALIDATED (90-93% arabic, GO) and applied to
 **1866: residual 182->79, 103 ch recovered at ZERO vision-token cost**. BIENNIALS 1868-1878 STILL
