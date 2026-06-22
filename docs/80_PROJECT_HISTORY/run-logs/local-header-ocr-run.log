@@ -293,3 +293,32 @@ VERDICT / VIABILITY FOR BIENNIALS 1868-1878
     Manifest re-derived: present 571 -> 589, missing 79 -> 61. Remaining 61 are single-DPI-fragile reads
     (e.g. ch38,52,114,143,187,282,433,482,518,638) or wide-window (>12pp) garbled clusters correctly
     left for the visual fallback. No DB/merged/certified writes; additive only.
+
+[2026-06-22] 1878 multiact: residual 55->46 (+9). Dual-series (production-1877-78 +
+    -code sibling), main-volume-anchor windows. Band-scan (psm6 block + psm11 sparse
+    union @ 200/240/300dpi, >=2 distinct-DPI votes) recovered 9 mid-page secondary-act
+    headers: ch13@pg87, ch93@pg176, ch224@pg340, ch229@pg346, ch237@pg355, ch367@pg619,
+    ch427@pg699, ch437@pg708, ch660@pg1088 (early-era roman, additive CCCC=400). All
+    CONFIRM-ONLY exact-oracle, status=image_verified, printed_number_confirmed=true,
+    origin=local_header_ocr_multiact, post-checked. Appended to existing 92-act visual.json
+    (now 101). Remaining 46 are single-DPI-fragile (ch268/387/428...) or wide-window
+    (>12pp) garbled clusters left for the visual fallback. Completes the biennial
+    multi-act sweep (1878 = last biennial). No DB/merged/certified writes; additive only.
+    AUDIT (_mq_audit.py 1878, multi-DPI 150/200/240/300): 9/9 STRONG, 0 WEAK, 0 FAIL --
+    every printed roman token == oracle (XIII=13, COCCXXVII=427 additive, DCLX=660).
+
+[2026-06-22] BIENNIAL MULTI-ACT SWEEP COMPLETE -- all 7 biennials (1866-1878):
+    Per-year residual before->after (recovered):
+      1868  19->14 (+5)   | audit 5/5 STRONG
+      1872  45->28 (+17)  | audit 16 STRONG + 1 WEAK
+      1870  65->55 (+10)  | audit 10/10 STRONG
+      1874  63->38 (+25)  | audit 25/25 STRONG
+      1876  59->50 (+9)   | audit 9/9 STRONG
+      1866  79->61 (+18)  | audit 18/18 STRONG
+      1878  55->46 (+9)   | audit 9/9 STRONG
+    TOTAL: 385 residual -> 292 residual, +93 chapters recovered locally (0 agent vision tokens).
+    Audit aggregate: 92 STRONG + 1 WEAK + 0 FAIL of 93 confirmations -- every printed roman
+    token matched oracle exactly (multi-DPI 150/200/240/300 re-read). Method: full-page band-FREE
+    scan, psm6 block + psm11 sparse union @ multiple DPIs, CONFIRM-ONLY with >=2 distinct-DPI vote
+    guard. Remaining 292 are single-DPI-fragile reads or wide-window (>12pp) garbled clusters,
+    correctly deferred to the visual fallback. Additive only; no DB/merged/certified writes.
