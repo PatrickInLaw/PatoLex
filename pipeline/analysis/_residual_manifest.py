@@ -40,18 +40,17 @@ def chap_pages(D, N):
                     pages[c] = pg; vol[c] = os.path.basename(D)
     return pages, vol
 
-# biennial / session-year -> production-dir aliases (the dir name does not start
-# with the second session year, so a bare glob misses it).
-YEAR_DIR_ALIAS = {
-    1866: ["production-1865-66"],
-    1864: ["production-1863-64"],
-    1868: ["production-1867-68"],
-    1870: ["production-1869-70"],
-    1872: ["production-1871-72"],
-    1874: ["production-1873-74", "production-1873-74-code"],
-    1876: ["production-1875-76", "production-1875-76-code"],
-    1878: ["production-1877-78", "production-1877-78-code"],
-}
+# biennial / session-year -> production-dir aliases: SOURCED from the shared single-source-of-truth
+# `pipeline/year_dir_alias.py` so this manifest can't drift from the scoreboard + merge (F1 fix,
+# 2026-06-22; previously this file carried a divergent partial copy -- a stray 1864 entry, and it
+# MISSED the transition 1901/1907/1909/1911 + the budget 1952-1964 aliases). These files run as
+# standalone scripts, so load the module by absolute path via importlib (a package import is fragile).
+import importlib.util as _ilu
+_yda_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "year_dir_alias.py")
+_yda_spec = _ilu.spec_from_file_location("year_dir_alias", _yda_path)
+_yda = _ilu.module_from_spec(_yda_spec)
+_yda_spec.loader.exec_module(_yda)
+YEAR_DIR_ALIAS = _yda.YEAR_DIR_ALIAS
 
 def main(yr):
     N = oracle_N(yr)
