@@ -238,3 +238,23 @@ VERDICT / VIABILITY FOR BIENNIALS 1868-1878
     missing 19->14. Remaining 14 = single-DPI-fragile + wide-window garbled (visual fallback).
   Audit (multi-DPI, _mq_audit.py): 5/5 STRONG, 0 WEAK, 0 FAIL -- every token correct
     (CCCLXXXVIII=388, CCCCLXIII=463, CCCCLXVIII=468, CCCCLXXVIII=478, CCCCLXXXVIII=488).
+
+[2026-06-22] 1870 multiact: residual 65->55 (+10)
+  Recovered (all roman, >=2-DPI vote-confirmed): 128,221,347,367,383,468,475,478,488,576.
+    Lower yield than 1872 -- 1870's residual is heavier on wide-window (skipped, e.g.
+    361/378/482-484 spans 27-58pp) and single-DPI-fragile reads (44,173,205,253,275,295,447,
+    558 -- all correctly LEFT residual by the vote guard, never a wrong number). Manifest
+    regenerated: present 518->528, missing 65->55. attempted=46 confirmed=10.
+  Audit (multi-DPI): 10/10 STRONG, 0 FAIL -- tokens correct (CXXVIII=128, CCXXI=221,
+    CCCXLVII=347, CCCLXVII=367, CCCLXXXIII=383, CCCCLXVIII=468, CCCCLXXV=475, CCCCLXXVIII=478,
+    CCCCLXXXVIII=488, DLXXVI=576).
+
+[2026-06-22] 1874 multiact: residual 63->38 (+25)
+  Best biennial yield. Recovered (all roman, >=2-DPI vote-confirmed): 43,65,84,86,123,224,304,
+    317,318,337,338,364,392,418,423,425,428,468,473,498,515,526,527,668,673. Several multi-act
+    shared-page pairs landed together (317/318 pg543; 526/527 pg852). The vote guard left the
+    usual single-DPI-fragile reads residual (41,55,83,385,426,458,472,478,634,658,672,675) and
+    skipped wide-window garbled clusters (462-466, 587 span 74pp, 665). Manifest regenerated:
+    present 616->641, missing 63->38. attempted=55 confirmed=25.
+  Audit (multi-DPI): 25/25 STRONG, 0 FAIL -- every printed token == oracle (XLIII=43, LXV=65,
+    LXXXIV=84, ..., DXXVI=526, DXXVII=527, DCLXVIII=668, DCLXXIII=673). Method is rock-solid.
