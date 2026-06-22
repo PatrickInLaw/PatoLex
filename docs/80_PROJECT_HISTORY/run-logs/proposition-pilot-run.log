@@ -1,0 +1,21 @@
+[2026-06-22 PT] INIT | Proposition/Initiative-measure parser PILOT + DESIGN started (Patrick-approved workstream) | OK
+[2026-06-22 PT] INVESTIGATE | Read PROPOSITION_CAPTURE_INVESTIGATION_2026-06-22.md; confirmed gap (measures never ingested, no oracle dimension) | OK
+[2026-06-22 PT] ENV | surya-venv python 3.12.10; pytesseract + PyMuPDF 1.27.2 OK; tesseract.exe at C:\Program Files\Tesseract-OCR\ | OK
+[2026-06-22 PT] PILOT-SELECT | EARLY=1915_Vol1_Initiative.pdf(30p), MID=1935_Vol1_Measures.pdf(26p), MODERN=1990_Vol1_Measures.pdf(544p) | OK
+[2026-06-22 PT] TEXTLAYER | All 3 volumes SCANNED (avg 0 chars/page via PyMuPDF get_text) -> OCR required for all, incl. 1990 | OK
+[2026-06-22 PT] STRUCT | 1990: TOC by category heading, MEASURES ADOPTED/DEFEATED, body "NNN. Title. (cite)" + "[Approved by electors DATE]" | OK
+[2026-06-22 PT] STRUCT | 1935: interleaved TOC+body under category headings; explicit "In effect DATE" brackets | OK
+[2026-06-22 PT] STRUCT | 1915: TOC list "NN Title (Constitutional Amendment)" under "Approved by Electors / In effect DATE" header; noisier OCR | OK
+[2026-06-22 PT] OCR | 1915 (30p) + 1935 (26p) OCR'd single-engine Tesseract @300dpi -> _prop_ocr_{1915,1935}.json | OK
+[2026-06-22 PT] OCR | 1990 (544p) OCR launched in background (bm0zenv95) | OK
+[2026-06-22 PT] PARSE | Built _prop_parse.py era-aware segmenter (TOC-page gate, roster-reject, title-header body fallback, In-effect date) | OK
+[2026-06-22 PT] PARSE-1915 | 5 measures ALL adopted (4 init_statute, 1 init_const_amend); 2 lost to single-engine OCR (garbled ballot #s) -> consensus will recover | WARN
+[2026-06-22 PT] PARSE-1935 | 22 ADOPTED measures (1 referendum, 4 ICA, 17 leg-referred); roster-reject suppressed ~34 back-matter false positives | OK
+[2026-06-22 PT] VERIFY | affected-codes extraction works (Prize Fights->Penal Code 412/413); In-effect dates parsed (1914-12-19) | OK
+[2026-06-22 PT] SCHEMA | Reviewed enactment/change-event/enums + SCHEMA_DESIGN; recommend reuse enactment spine + enum ADD + nullable cols (NOT parallel table) | OK
+[2026-06-22 PT] DESIGN | Wrote docs/30_SYSTEM_DESIGN/PROPOSITION_MEASURE_INGEST_DESIGN.md (schema, fold, oracle, era split, scale-up, 6 open decisions) | OK
+[2026-06-22 PT] OCR-1990 | 1990 (544p) OCR complete (bm0zenv95, exit 0) -> _prop_ocr_1990.json | OK
+[2026-06-22 PT] PARSE-1990 | 39 measures (25 adopted, 14 defeated), ballot #107-151; 11 prose-findings false-positives removed via prose-reject; 0 loss to real set | OK
+[2026-06-22 PT] REGRESS | 1915 (5) + 1935 (22) unchanged after prose-reject add; all 3 pilot volumes clean | OK
+[2026-06-22 PT] DESIGN | Filled 1990 counts + segmentation-hazard notes into design doc | OK
+[2026-06-22 PT] DONE | Pilot complete: 3 volumes, 66 measures total; design doc + run log written; NO DB writes; scratch only | OK
