@@ -5,9 +5,17 @@ Reports residual (oracle N - after) per year and the corpus total -- the campaig
 Mapping: exact leading year `production-<year>*` (biennium-named dirs are reported as UNMAPPED with
 their oracle weight, never silently dropped). Writes a machine-readable table to
 C:\\PatoLex-scratch\\_recall_allyears.json and prints a human table sorted by residual."""
-import os, json, glob, csv, re
+import os, json, glob, csv, re, importlib.util
 SCRATCH = r"C:\PatoLex-scratch"
 ORACLE = r"C:\GitHub\PatoLex\docs\30_SYSTEM_DESIGN\sources\ca_chapter_counts.tsv"
+
+# --- shared production-dir <-> oracle-year alias (single source of truth; loaded by abs path) -----
+# Run as a standalone script, so load the shared module by path (sibling of pipeline/config.py) to
+# avoid sys.path/package fragility. merge_passes.py loads the SAME module -> the alias cannot drift.
+_ALIAS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "year_dir_alias.py")
+_spec = importlib.util.spec_from_file_location("patolex_year_dir_alias", _ALIAS_PATH)
+_alias = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_alias)
 
 oracle = {}
 with open(ORACLE, encoding="utf-8") as f:
@@ -65,52 +73,11 @@ def distinct(path, key, N, only_status=None):
 #     We therefore EXCLUDE the budget sub-volume basenames (BUDGET_OWNED_DIRS) from every glob match,
 #     handing them solely to the budget year's alias. Verified harmless: removing them costs the odd
 #     years <=1 chapter total (the budget chapters 1..N are already covered by the odd year's vol1).
-BUDGET_OWNED_DIRS = {
-    "production-1953-vol1-52chapters", "production-1955-vol1-54chapters",
-    "production-1957-vol1-56chapters", "production-1959-vol1-58chapters",
-    "production-1961-vol1-60chapters", "production-1963-vol1-62chapters",
-    "production-1965-vol1-64chapters",
-    # TRANSITION collision (added 2026-06-22, rebuild-1907-merge): production-1907-09 holds the
-    # 1909 REGULAR session (certified/merged max=729==oracle 1909), but the greedy `production-1907*`
-    # glob for oracle 1907 would ALSO sweep it -- scoring 1907 against the FIRST 539 ch of the 1909
-    # volume (the historic bug). We EXCLUDE it from every glob match and hand it solely to 1909's
-    # alias. Oracle 1907 (N=539) is now served by production-1906-07, whose merged.json was rebuilt
-    # this session from its certified 1907-regular data with the correct N=539 (was N=64 = the 1906
-    # extra session). Verified harmless to 1907: 1907's true data lives in production-1906-07.
-    "production-1907-09",
-}
-YEAR_DIR_ALIAS = {
-    # biennial (even-year oracle row -> biennium-span dir [+ code-volume sibling])
-    1866: ["production-1865-66"],
-    1868: ["production-1867-68"],
-    1870: ["production-1869-70"],
-    1872: ["production-1871-72"],
-    1874: ["production-1873-74", "production-1873-74-code"],
-    1876: ["production-1875-76", "production-1875-76-code"],
-    1878: ["production-1877-78", "production-1877-78-code"],
-    # transition (odd-year regular session bound in the biennium volume)
-    1901: ["production-1900-01"],
-    1911: ["production-1910-11"],
-    # 1907/1909 RESOLVED (2026-06-22, rebuild-1907-merge): the biennial volumes are offset by one.
-    #   production-1906-07 holds the 1907 REGULAR session (oracle 539). Its merged.json was rebuilt
-    #     this session from its own certified 1907-regular data (ch 3..539) with the correct N=539
-    #     (it had been mis-capped at N=64 = the 1906 EXTRA session by merge_passes.n_for's leading-
-    #     year regex). -> alias 1907 here. The greedy `production-1907*` glob no longer applies to
-    #     1907 because the only dir it would match (production-1907-09) is now in BUDGET_OWNED_DIRS.
-    #   production-1907-09 holds the 1909 REGULAR session (certified/merged max=729 == oracle 1909).
-    #     Excluded from the glob (BUDGET_OWNED_DIRS) and handed solely to 1909's alias below.
-    # No double-count: production-1906-07 -> 1907 ONLY; production-1907-09 -> 1909 ONLY.
-    1907: ["production-1906-07"],
-    1909: ["production-1907-09"],
-    # mid-century budget sessions (-NNchapters sub-volume = even-year budget chapters)
-    1952: ["production-1953-vol1-52chapters"],
-    1954: ["production-1955-vol1-54chapters"],
-    1956: ["production-1957-vol1-56chapters"],
-    1958: ["production-1959-vol1-58chapters"],
-    1960: ["production-1961-vol1-60chapters"],
-    1962: ["production-1963-vol1-62chapters"],
-    1964: ["production-1965-vol1-64chapters"],
-}
+# The alias dicts themselves now live in pipeline/year_dir_alias.py (shared with merge_passes.py and
+# _residual_manifest.py) so the merge cap and this scoreboard CANNOT drift. Re-bound here under their
+# original names so the rest of this script is unchanged.
+BUDGET_OWNED_DIRS = _alias.BUDGET_OWNED_DIRS
+YEAR_DIR_ALIAS = _alias.YEAR_DIR_ALIAS
 
 rows, unmapped, counted_basenames = [], [], {}
 for yr, N in sorted(oracle.items()):

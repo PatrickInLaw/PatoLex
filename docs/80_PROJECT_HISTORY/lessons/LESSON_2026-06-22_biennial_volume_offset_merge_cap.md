@@ -42,3 +42,22 @@ session → its biennial dir at the odd-year oracle N). Until then, ALWAYS pass 
 correct N when re-merging a biennial dir, and verify `cap_N`/`max_chapter` in `_merge_meta`
 match the oracle regular N — a `cap_N` of 1, 15, or 64 on a biennial dir is the tell-tale sign
 of this bug.
+
+## RESOLVED 2026-06-22 (n_for-biennium-fix) — durable fix LANDED
+The "lasting fix" above is now implemented (run log `n_for-biennium-fix-run.log`).
+- NEW `pipeline/year_dir_alias.py` is the SINGLE source of truth for the production-dir ↔
+  oracle-session-year alias: `YEAR_DIR_ALIAS` (oracle-year → dir basenames), `BUDGET_OWNED_DIRS`,
+  the 1:1 inverse `DIR_TO_YEAR` (basename → year), `regular_oracle()` (regular-only N from the
+  oracle TSV), and `n_for_dir()`. It imports nothing from `ingest/`/`analysis/` → no import cycle.
+- `merge_passes.n_for()` now resolves biennium/budget/transition dirs THROUGH that alias to their
+  TRUE regular-session N (1865-66→1866→650, 1906-07→1907→539, 1907-09→1909→729,
+  1953-vol1-52chapters→1952→14, …). Normal `production-<year>*` dirs keep the original
+  leading-year-regex behavior. Re-running the merge CLI on a biennial dir no longer mis-caps.
+- `_recall_allyears.py` re-binds its `YEAR_DIR_ALIAS`/`BUDGET_OWNED_DIRS` to the shared module, so
+  merge and scoreboard can no longer drift. Scoreboard output is byte-identical (merge-side-only fix);
+  anti-double-count assert still PASSES (215 dirs).
+- Budget N must come from the **regular** session row, not max-across-session-types (1952 regular=14
+  vs extras 33/34) — the shared `regular_oracle()` enforces that.
+- KNOWN follow-up: `pipeline/analysis/_residual_manifest.py` still carries its OWN divergent partial
+  alias copy (maps 1864→production-1863-64) — a diagnostic script, left for a later pass to also
+  source the shared module.

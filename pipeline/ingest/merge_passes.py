@@ -9,8 +9,18 @@ parsed_acts_merged.json; never touches inputs.
 
 Usage: python merge_passes.py <glob>   e.g. "production-1915*"  or  "production-19*"
 """
-import os, json, glob, sys, re, csv, bisect
+import os, json, glob, sys, re, csv, bisect, importlib.util
 from collections import defaultdict
+
+# --- shared production-dir <-> oracle-year alias (single source of truth; no import cycle) --------
+# merge_passes.py is run as a standalone script (`python merge_passes.py <glob>`), so `pipeline` is
+# not necessarily on sys.path and a package import would be fragile. Load the shared module by its
+# absolute path (sibling of pipeline/config.py, two dirs up from this file). _recall_allyears.py and
+# _residual_manifest.py share the SAME module so the alias cannot drift between merge and scoreboard.
+_ALIAS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "year_dir_alias.py")
+_spec = importlib.util.spec_from_file_location("patolex_year_dir_alias", _ALIAS_PATH)
+year_dir_alias = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(year_dir_alias)
 
 SCRATCH = r"C:\PatoLex-scratch"
 ORACLE_TSV = r"C:\GitHub\PatoLex\docs\30_SYSTEM_DESIGN\sources\ca_chapter_counts.tsv"
@@ -27,7 +37,17 @@ with open(ORACLE_TSV, encoding="utf-8") as f:
         except Exception:
             pass
 
+_ORACLE_REGULAR = year_dir_alias.regular_oracle()
+
 def n_for(name):
+    """(N, resolved_year) for a production-dir basename. BIENNIUM/BUDGET/TRANSITION dirs (named for a
+    span or a -NNchapters sub-volume) are resolved THROUGH the shared alias to their TRUE oracle
+    REGULAR-session year and that year's regular N -- NOT the leading-year regex, which would grab the
+    wrong (tiny extra/budget-session) year and mis-cap the merge (the 1901/1907/1909/1911 bug). Normal
+    `production-<year>*` dirs keep the original leading-year-regex behavior unchanged."""
+    n, yr = year_dir_alias.n_for_dir(os.path.basename(name), _ORACLE_REGULAR)
+    if yr is not None:
+        return (n, yr)
     m = re.search(r"production-(\d{4})", name)
     return (ORACLE[int(m.group(1))], int(m.group(1))) if m and int(m.group(1)) in ORACLE else (FALLBACK_CAP, None)
 
