@@ -57,6 +57,50 @@ years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened
   + temp images/page-renders in C:\PatoLex-scratch.
 
 ### CURRENT STATE  ← keep this line block updated every checkpoint
+
+**>>> LATEST (2026-06-21 evening, cc015 — Patrick AWAKE, holding for his direction):**
+- **Corpus-wide = 97.2%** (107 of 108 session-years mapped; was mis-quoted as "99.9%" when only 91
+  years were mapped). Scoreboard residual **1,979**, fully decomposed:
+  - **~1,012 = BROKEN-MERGE (1901, 1911, +1909 unmapped):** full session text already exists in
+    `parsed_acts_certified.json`; the `parsed_acts_merged.json` is stale/under-built -> **RE-RUN THE
+    MERGE STEP** (pipeline, not OCR — cheapest win ~1,740 ch). NOTE: re-running merge OVERWRITES those
+    merged files -> needs Patrick's explicit OK (not additive) before doing it.
+  - **912 = 19th-c BIENNIAL 1866-1878 (7 yrs):** genuine OCR under-recovery -> same visual-recovery
+    method as the tail years, ONE AGENT AT A TIME (early-era roman, multi-vol, big like 1861).
+  - **53 = modern physical SCAN GAPS:** need the bound volumes re-scanned (external — Patrick).
+- **3 user-picked tasks DONE:** (1) normalization recount (Hans-SOUND), (2) 1854 wired AND
+  content-corrected — all 174 chapters now carry the correct dualseries_v2 act (merged was 61/96 WRONG;
+  see `lessons/LESSON_2026-06-21_1854_dualseries_merge_corruption.md`; ingest must SUPERSEDE 1854 merged
+  with dualseries), (3) dup-audit (detection only).
+- **NEW workstream — CONTENT-CORRECTNESS ≠ coverage:** dup-audit found **679 high-conf** present-but-
+  misnumbered chapters (`run-logs/dup-audit-run.log`, full list `C:\PatoLex-scratch\_dup_audit_candidates.json`).
+  **1913 & 1917 are standout cohort volumes** (systematic ±5/±50 offset cascades — likely ONE per-volume
+  merge bug each, cheap to fix vs 679 individual verifies). Each fix needs image verification.
+- **DECISIONS PENDING (Patrick):** approve merge re-run (1901/09/11); 1909<->1907 dir-ownership remap;
+  fund the 53 scan-gap re-scans; resolution/amendment corpus scope; content-correctness priority.
+- **GUARDRAIL reminder:** merge re-run + any dup-audit fix are NOT additive (they overwrite) — do them
+  only with Patrick's go. Biennial OCR recovery IS additive/safe (visual.json) and within the campaign.
+
+**>>> AUTONOMOUS PLAN (2026-06-21 ~late, Patrick ASLEEP again, BROAD mandate "everything you can do
+without me"):** Work order, all via SUBAGENTS to preserve main-loop context, /ucp regularly, Telegram
+milestones (chat 8525048490 via `.claude/scripts/telegram.ps1`). RESUME CORRECTLY after a reset: a
+subagent returning ONLY "You've hit your session limit" / "529 Overloaded" = it DIED, relaunch it; do
+NOT treat a stale limit message as a fresh block — check git log / scoreboard for actual state first.
+1. **LOCAL-OCR efficiency FIRST (Patrick's ask — don't burn tokens on 600+ visual pages):** build a
+   local script that crops the page-top running-head strip and runs the already-installed Tesseract/
+   Surya on JUST that crop to read "CHAPTER N" — header-zone crop may be legible even though full-page
+   OCR skipped it. If it works, biennial recovery becomes a cheap LOCAL batch (no agent vision tokens).
+   Prototype on a known year, measure accuracy vs known chapters, THEN apply.
+2. **Biennial OCR recovery (912 ch, 1866-1878)** — ONE year-agent at a time, append-safe, crash-safe
+   periodic writes (never all-not_found init — see clobber lesson). Prefer the local-OCR batch from (1).
+3. **Merge re-run 1901/1909/1911** — broad mandate now covers it; it's reproducible from certified (not
+   truly irreversible). Do it CAREFULLY via a subagent that backs up the old merged.json to scratch
+   first, re-runs merge, verifies against certified, reports. ~1,740 ch.
+4. **Content-correctness:** start with 1913 & 1917 cohort volumes — find the systematic per-volume
+   offset bug (one fix corrects the cohort) before touching the 679 one-offs.
+5. Leave for Patrick only: physical re-scans (53 modern scan gaps), resolution/amendment scope, the
+   1909<->1907 dir remap. Everything else: proceed.
+
 **UPDATED 2026-06-21 (cc015/cc016, deep into autonomous visual run).**
 - **Phase A (algorithmic clause_seq): DONE & Hans-hardened (3 rounds).** Corpus 94.3% → ~97.9%
   algorithmic. Tool `pipeline/ingest/recover_clause_seq.py` (additive `parsed_acts_clauserec.json`,
