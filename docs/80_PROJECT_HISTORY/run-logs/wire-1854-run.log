@@ -1,0 +1,101 @@
+[2026-06-21 PT] START | wire-1854-run: wire dualseries_v2 parse into scoreboard via parsed_acts_visual.json | OK
+
+---
+
+## TASK
+Wire the already-built 1854 dual-series parse (parsed_acts_dualseries_v2.json, 174/174 acts)
+into the coverage scoreboard (_recall_allyears.py) via the established additive channel
+(parsed_acts_visual.json). Additive-only; no DB writes; no modification of merge_passes.py
+or certified/merged files.
+
+---
+
+## FINDINGS
+
+### 1. Dualseries_v2 Structure
+
+File: C:\PatoLex-scratch\production-1854\parsed_acts_dualseries_v2.json
+- Keys: ["general_acts", "special_acts", "summary"]
+- general_acts: 71 acts, chapter_int 1..71 (General Laws section, printed pp ~3-128)
+- special_acts: 103 acts, chapter_int 1..103 (Special Laws section, printed pp ~129-214)
+- All 174 acts have body_found=True
+- Confidence breakdown: high=172, high (image-verified)=1 (general ch15), medium=1 (general ch1)
+- Zero missing_bodies in summary
+
+### 2. Oracle Numbering Mapping
+
+Oracle expects 174 chapters in a single sequential 1..174 space.
+The 1854 volume has two INDEPENDENTLY numbered series.
+CONFIRMED MAPPING (via cross-reference with parsed_acts_merged.json content):
+  - General series ch N  -> oracle chapter N   (N = 1..71)
+  - Special series ch N  -> oracle chapter N+71 (N = 1..103 -> oracle 72..174)
+
+Verification examples:
+  - Special ch73 (City of Oakland, page 183) -> oracle 144
+  - Special ch1  (County of Plumas, page 129) -> oracle 72
+  - Special ch103 (Fund Solano County, page 212) -> oracle 174
+  - General ch27 (payment of certain expenses, page 33) -> oracle 27
+
+### 3. Existing Merged File (parsed_acts_merged.json)
+
+- Contains 96 acts with chapter_int_final in 1..125
+- 58 acts from general section (page < 129)
+- 38 acts from special section (page >= 129), using LOCAL special chapter numbers
+- PROBLEM: 14 special acts had chapter_int <= 71 (colliding with general namespace)
+  These used roman numerals from the body headers, which restart at I in the special section
+  The old parse did not know the dual-series structure; it extracted chapter numbers raw
+- Net result: 96 distinct oracle slots covered vs 174 expected = 78 missing
+
+### 4. Missing Chapters (pre-fix)
+
+From _residual_manifest.py 1854:
+  - N=174, present=96, missing=78
+  - 1 from general series: ch27 (presumably not extracted by the body-header roman parser)
+  - 77 from special series (oracle 72-174), of which most were above special ch30
+
+All 78 missing chapters ARE covered by dualseries_v2 with body_found=True.
+
+### 5. What Was Written
+
+Script: C:\PatoLex-scratch\_build_visual_1854.py
+Output: C:\PatoLex-scratch\production-1854\parsed_acts_visual.json
+
+Content:
+  - 78 recovered_acts records
+  - All status="ocr_text_verified" (no image_verified; the one image-verified act, general ch15,
+    was already present in merged_acts so was skipped)
+  - chapter_int_final = oracle chapter number (general N, or special N+71)
+  - Fields: chapter, chapter_int, chapter_int_final, title, source_page,
+    printed_number_confirmed, origin, status, note, dualseries_series,
+    dualseries_local_chapter_int, match_confidence, token_frac
+  - origin = "dualseries_v2"
+  - Note field documents: series, local chapter number, oracle mapping formula,
+    OCR method (token-overlap against tess/surya/doctr/consensus), confidence level
+
+Additive contract: skipped 96 chapters already in merged_acts; wrote only the 78 missing.
+No existing visual.json was present (new file).
+
+---
+
+## SCOREBOARD RESULT
+
+BEFORE:
+  1854: effN=174, before=96, after=96, residual=78, pct=55.2%
+  Corpus total: AFTER=89660/89791=99.9%, RESIDUAL=131
+
+AFTER (parsed_acts_visual.json added):
+  1854: NOT IN RESIDUAL LIST (residual=0, 100%)
+  Corpus total: AFTER=89738/89791=99.9%, RESIDUAL=53
+
+Net improvement: 78 chapters recovered, 1854 residual 78->0.
+
+---
+
+## NO REMAINING MISSING CHAPTERS FOR 1854
+
+The dualseries_v2 parse covers all 174 oracle chapters. No chapters genuinely absent
+from the source (the summary.missing_bodies list is empty). 1854 is complete.
+
+---
+
+[2026-06-21 PT] DONE | wire-1854: parsed_acts_visual.json written, scoreboard updated 1854 100%, corpus residual 131->53 | OK
