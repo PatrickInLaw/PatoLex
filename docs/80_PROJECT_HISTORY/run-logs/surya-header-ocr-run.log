@@ -1,0 +1,9 @@
+[2026-06-22 13:10 PT] START | Surya GPU header-OCR recall for biennial residuals 1866/68/70/72/74/76/78 (~292) plus 1911 (5). Reuses _header_ocr parser and render logic, swaps Tesseract for Surya on RTX 5090. CONFIRM-ONLY, append-safe, >=2 DPI cross-agreement. Manifests written; CUDA confirmed. | OK
+[2026-06-22 13:18 PT] LIFT | FIRST MEASURED BATCH (1868, sample=14, no writes, dpis 400/500, >=2-DPI agreement): Surya newly read 11/14 (79%) chapters that Tesseract could NOT read -- ch 44,184,189,368,383,425,428,458,465,477,495. 3 still missed (483,485,508). ~12.8s/ch on RTX 5090. Lever CONFIRMED; switching to production writes, smallest-residual-first. | OK
+[2026-06-22 13:25 PT] 1911 | attempted=5 confirmed=2 (ch110,387) residual 5->3 (90,252,356 remain) | OK
+[2026-06-22 13:30 PT] 1868 | attempted=14 confirmed=11 residual 14->3 (483,485,508 remain) | OK
+[2026-06-22 13:36 PT] 1872 | attempted=28 confirmed=7 (262,264,285,335,458,473,584) residual 28->21; multi-act clusters 125-128/433-439 still missed | OK
+[2026-06-22 13:43 PT] 1874 | attempted=38 confirmed=24 residual 38->14; strongest year, partial-save@15 worked | OK
+[2026-06-22 13:48 PT] CHECKPOINT | Durably written so far (CONFIRM-ONLY, status=image_verified, origin=surya_header_ocr, >=2-DPI): 1911=2, 1868=11, 1872=7, 1874=24 = 44 chapters across 4 years. parsed_acts_visual.json append-safe writes verified by grep count. | OK
+[2026-06-22 13:48 PT] INFLIGHT | 1876 (largest page-spans, 50 missing) running in background (job b7sw4y4xv); writes flush every 15 confirms so a 13:50 stop preserves everything. 1878/1870/1866 NOT YET RUN (deferred past window). | WARN
+[2026-06-22 13:48 PT] LEVER | Surya alone closes the easy/clean Roman residuals (1868 79%, 1874 63%). Remaining residuals are tight multi-act clusters + illegible short-span headers (1872 25%); these need a stronger local VLM (Qwen2.5-VL / GOT-OCR2) or clerk-index cross-check, NOT another OCR-engine swap. | OK
