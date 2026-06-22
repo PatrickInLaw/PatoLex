@@ -97,6 +97,21 @@ APPLICATION -- 1866 (production-1865-66)
   477/478/483/485/488 in 700-739); a few short ranges (44, 184, 189, 495, 508) are
   garbled single headers. No scan gaps -- all ranges rendered cleanly.
 
+[2026-06-22] APPLY | _apply_1870.py (production-1869-70, 1869-70_Statutes.pdf, ROMAN) | OK
+  1870: before/after/residual = present 451 -> 518, residual 132 -> 65 (67 recovered).
+  Confirm-only, additive CCCC=400 (ch 400 confirmed); surya-venv python; foreground/
+  synchronous, progressive save every 15; scan cache _hdrscan_cache_1870.json. No DB/
+  merged/certified writes. 67 acts, 0 dupes, all image_verified/printed_number_confirmed/
+  origin=local_header_ocr, chapter_int_final==chapter_int.
+  Recovered (67): 11,63,103,185,196,202,226,246,279,283,284,288,332,338,339,349,376,
+  387,392,400,402,410,413,416,418,419,421,423,427,428,429,430,432,433,434,435,436,437,
+  438,439,441,446,448,449,451,454,456,460,466,467,470,471,474,476,481,486,489,492,493,
+  494,495,497,507,524,531,549,552.
+  Residual 65 [3,27,29,35,37,43,45,70,102,120,121,128,142,143,161,173,175,181,187,198,
+  205,221,223,224,253,275,295,347,361,367,368,374,378,383,384,386,388,401,405,431,...]
+  -- dominated by multi-act-page header misses (2nd/3rd short act on a shared page) and
+  garbled single headers; avg residual page-span now 6.2 (was 14.0). No scan gaps.
+
 ================================================================================
 VERDICT / VIABILITY FOR BIENNIALS 1868-1878
 ================================================================================
