@@ -91,6 +91,14 @@ years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened
 - **NEXT loop:** as each visual agent finishes → bank its run log (commit+push) + launch next residual
   year (≤4 in flight). Recoverable tail left after current batch: 1858, 1863, 1968, 1991 (append-safe
   re-run). Then the tail is DRY → remaining work is the PREP-BLOCKED items above (pause for Patrick).
+- **CRASH-SAFETY HAZARD (observed 2026-06-21 on 1861):** a visual agent that writes an INITIAL
+  all-`not_found` visual.json (the full target list seeded as not_found) and then dies mid-run before
+  verifying CLOBBERS any prior session's good `image_verified` entries — 1861 regressed 423→383
+  counted. FIX in agent prompts: never write an all-not_found initialization; only write a MERGED
+  SUPERSET of prior-good + newly-verified; and for big years re-write the full file every ~25 chapters
+  so an interruption preserves progress. Recovery is a full re-run (source images are intact).
+- **SESSION-LIMIT deaths:** when the 5-hour limit hits, in-flight agents die returning only the limit
+  message; relaunch them after reset (append-safe handles partial state, except the clobber case above).
 
 ### RESUME PROTOCOL (if you wake up unsure where you are)
 1. Read CURRENT STATE above + the master run log (tail it) + any per-agent run logs in run-logs/.
