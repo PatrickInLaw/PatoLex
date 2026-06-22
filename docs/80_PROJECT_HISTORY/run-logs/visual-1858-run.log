@@ -88,3 +88,9 @@
 [2026-06-20 23:25 PT] VISUAL-1858 | FINAL OUTPUT WRITTEN -- all 26 chapters resolved | OK
 [2026-06-20 23:25 PT] VISUAL-1858 | image_verified=17 ocr_verified=9 not_found=0 mismatches=0 | OK
 [2026-06-20 23:25 PT] VISUAL-1858 | Roman numeral reading FEASIBILITY: FULLY CONFIRMED for early-era 1858 volume | OK
+[2026-06-21 00:00 PT] VISUAL-1858 | RESUME -- manifest re-run: N=358 present=357 missing=1 (ch278 only) | OK
+[2026-06-21 00:00 PT] VISUAL-1858 | OCR: ch278 heading on OCR-key 258 (img page_0258.png) all 3 engines -- tess Cuar.CCLXXVIII doctr CHAP.CCLXXVIIL surya CHAP.CCLIXXVIII | OK
+[2026-06-21 00:00 PT] VISUAL-1858 | CALIBRATE: offset re-verified on ch277 -- read page_0254.png (folio 235), CHAP.CCLXXVI/CCLXXVII confirmed; source_page = image_NNNN+1 | OK
+[2026-06-21 00:00 PT] VISUAL-1858 | Ch.278 (CCLXXVIII) IMAGE_VERIFIED: read page_0258.png (folio 239), printed CHAP.CCLXXVIII confirmed, sp=259, Approved Apr 23 1858, title=An Act concerning the offices of County Clerk, Sheriff, and County Recorder, of the City and County of San Francisco | OK
+[2026-06-21 00:00 PT] VISUAL-1858 | MERGE: append+sort, all 26 prior entries preserved; total=27 (image_verified=18 ocr_verified=9 gap=0 not_found=0) | OK
+[2026-06-21 00:00 PT] VISUAL-1858 | Output written: C:\PatoLex-scratch\production-1858\parsed_acts_visual.json | OK
