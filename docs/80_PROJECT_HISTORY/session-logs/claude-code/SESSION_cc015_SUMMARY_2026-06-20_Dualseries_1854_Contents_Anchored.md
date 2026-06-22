@@ -3,6 +3,46 @@
 **Date:** 2026-06-20
 **Focus:** Resolve OCR-era residual rows; fix the 1854 parse; bank the corpus relocation.
 
+---
+
+## OVERNIGHT AUTONOMOUS CAMPAIGN ADDENDUM (2026-06-21 → 06-22)
+
+Patrick-directed autonomous run (asleep, broad mandate "everything you can do without me", conserve vision tokens, /ucp regularly, Telegram milestones). **Definitive state lives at the top of `docs/30_SYSTEM_DESIGN/OCR_RECALL_RECOVERY.md` CURRENT STATE (SESSION-END WAKE-UP HANDOFF).**
+
+**Headline: corpus 94.3%(of 91 mapped yrs) → 99.5% (95,491/96,002), ALL 108 OCR-era session-years mapped (0 unmapped holes), residual 511.**
+
+### What Was Done (overnight)
+- **~30 small years closed to full coverage** (visual tail), then:
+- **NORMALIZATION recount (Hans-SOUND)** — canonicalized visual `status` strings (`pipeline/analysis/normalize_visual_status.py`), scoreboard counts image+ocr_text_verified.
+- **BIENNIAL/BUDGET REMAP** — 16-17 "unmapped" oracle years were a naming/glob ARTIFACT (data under biennium dir names); aliased them → all 108 years measured. Corpus-wide honesty restored (was quoting "99.9% of 91 yrs").
+- **MERGE RE-RUNS 1901/1909/1911/1907** — root cause `merge_passes.n_for()` regex capped N at the wrong biennium year; regenerated from existing certified (+~2,270 ch); backups kept (`*.BAK.json`). **Durable code fix:** new shared `pipeline/year_dir_alias.py` (merge + scoreboard can't drift).
+- **1854 WIRED + CONTENT-CORRECTED** — Hans caught 61/96 merged chapters held the WRONG act (special-series roman read as oracle numbers); rebuilt all 174 correct from dualseries_v2.
+- **LOCAL header-OCR tool built** (crop running-head + Tesseract, ZERO vision tokens) → recovered ~620 biennial chapters (527 single-act 1866-1878 + 93 multi-act-page via full-page psm-11 + ≥2-DPI vote).
+- **1913/1917 "misnumber cohort" = FALSE ALARM** — filed numbers correct; dup-audit H5 over-flags single-digit OCR noise. Corpus data healthy.
+- **Resolved Patrick's "needs you" #2 challenge:** launched ADVERSARIAL scan-gap verification (the 53 "physical gaps" were relayed agent claims, never independently checked → verifying with page-level citations).
+- **Scope decisions (Patrick, 06-22):** resolutions EXCLUDED; constitutional amendments = future parallel archive (harvest-now/build-later); **PROPOSITION/INITIATIVE capture = open completeness question** (pipeline keys on Chapter N; initiative measures aren't chaptered → may be MISSED 1911+) — investigation launched. Recorded in memory + `PROPOSITION_CAPTURE_INVESTIGATION_2026-06-22.md`.
+
+### Decisions Made (overnight)
+- Local-OCR before vision tokens (Patrick's conservation steer); confirm-only (never guess a number).
+- Per-year-per-agent synchronous runs (multi-year background batches STALL).
+- Crash-safety: never write an all-not_found init (clobbers prior good — cost 1861 a regression).
+- Merge re-runs ARE acceptable under broad mandate (reversible from certified, backed up) — NOT additive but OK'd.
+
+### Files Changed (overnight, durable/repo)
+- **NEW** `pipeline/year_dir_alias.py`; **NEW** `pipeline/analysis/normalize_visual_status.py`
+- **EDIT** `pipeline/ingest/merge_passes.py` (n_for), `pipeline/analysis/_recall_allyears.py` (alias/normalization/corpus-wide line), `pipeline/analysis/_residual_manifest.py` (biennial aliases)
+- **NEW** many run-logs + lessons under `docs/80_PROJECT_HISTORY/` (local-header-ocr, merge-rerun, rebuild-1907, 1854 corruption, multiact band-scan, H5-false-positive, biennial-offset, scan-gap-verification, proposition-capture)
+- **EDIT** `docs/30_SYSTEM_DESIGN/OCR_RECALL_RECOVERY.md` (CURRENT STATE handoff)
+- **MEMORY** `corpus-scope-resolutions-amendments-propositions` (+ MEMORY.md index)
+
+### Open Items at Close
+- **IN FLIGHT:** scan-gap verification + proposition-capture investigation (durable docs pending).
+- **NEEDS PATRICK:** (1) spend vision tokens on ~292+ visual-fallback chapters? (2) fund the (pending-verification) scan-gap re-scans, (3) resolution scope = DECIDED (out) / constitution timing.
+- **SMALL/MINE (F1):** point `_residual_manifest.py` at shared `year_dir_alias.py` (divergent partial alias). Formal clean-slate Hans on merge_passes/year_dir_alias advisable.
+- Residual 511 = ~292 biennial visual-fallback + 53 (claimed) scan gaps + ~166 small tails. NO further local-OCR recovery available.
+
+---
+
 ## What Was Done
 
 - **Residual-row investigation (opened SOURCES, not derived OCR).** Installed PyMuPDF and opened actual source PDFs / page images instead of trusting garbled derived OCR.

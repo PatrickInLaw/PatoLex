@@ -47,6 +47,10 @@ YEAR_DIR_ALIAS = {
     1864: ["production-1863-64"],
     1868: ["production-1867-68"],
     1870: ["production-1869-70"],
+    1872: ["production-1871-72"],
+    1874: ["production-1873-74", "production-1873-74-code"],
+    1876: ["production-1875-76", "production-1875-76-code"],
+    1878: ["production-1877-78", "production-1877-78-code"],
 }
 
 def main(yr):
