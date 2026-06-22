@@ -69,3 +69,36 @@ APPLICATION -- 1866 (production-1865-66)
   Added YEAR_DIR_ALIAS {1866:[production-1865-66], 1864/1868/1870 too} to
   pipeline/analysis/_residual_manifest.py so the biennial dir is found.
   BEFORE: present=468  missing=182  (N oracle=650).
+
+[2026-06-21] APPLY | _apply_1866.py (CONFIRM-ONLY, append-safe) | OK
+  For each of the 182 missing chapters, scanned its manifest page_range (+-2 pad)
+  with the full-page multi-psm header scanner; CONFIRMED a chapter only when its
+  exact oracle number appeared as a clean printed header in-range.
+  Wrote production-1865-66/parsed_acts_visual.json (recovered_acts): 103 acts,
+  all status=image_verified, origin=local_header_ocr, printed_number_confirmed=true,
+  chapter_int_final=oracle, source_page=PDF page where header was read.
+  Integrity: 103 acts, 0 malformed, 0 duplicates (chapters 2..644). merged.json
+  (Jun20) and certified.json (Jun16) UNTOUCHED. No DB writes.
+  RESULT: attempted=182  confirmed=103  (56.6% recall, zero agent vision tokens).
+
+[2026-06-21] RESIDUAL | _residual_manifest.py 1866 (re-run) | OK
+  AFTER: present=571  missing=79  (was present=468 missing=182).
+  1866 residual reduced 182 -> 79 by local header-OCR alone.
+
+================================================================================
+VERDICT / VIABILITY FOR BIENNIALS 1868-1878
+================================================================================
+[2026-06-21] VERDICT | OK
+  * Go/no-go: GO (1935 arabic gate = 93.3% exact; roman engine proven on real
+    1865-66 images).
+  * 1866: 103/182 missing recovered locally, residual 182 -> 79, no vision tokens,
+    no DB writes, merged/certified untouched, append-safe superset.
+  * Viability 1868-1878: VIABLE as a token-free FIRST pass. It recovers ~half-plus
+    of each biennial's residual at zero agent-vision cost, leaving a much smaller
+    set for the visual-agent fallback. NOT a full substitute: the ~79 still-missing
+    are dominated by multi-act-page header loss (a page's 2nd/3rd act header eludes
+    OCR) and a few genuinely garbled/edge headers -- read those on the page image.
+  * Cost note: dominant runtime is the "not found" chapters (each scans its whole
+    page range x3 psm). The apply is resumable (skips confirmed; persists a
+    page->chapters scan cache) so each biennial can be chunked. Reuse _apply_1866.py
+    as a template (swap VOL/PDF/MANIFEST and the manifest year alias).
