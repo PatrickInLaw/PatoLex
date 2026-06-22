@@ -1,0 +1,18 @@
+[2026-06-21 00:00 PT] START | VISUAL recovery campaign YEAR 1991 (MODERN arabic, 3 volumes) | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1991 -> N=1231 present=1221 missing=10 | OK
+[2026-06-21 00:02 PT] PREFLIGHT | All 3 vols have pages_raw/ images; OCR page_ocr_results.json present; no prior parsed_acts_visual.json (net-new, additive) | OK
+[2026-06-21 00:03 PT] TARGETS | vol1: ch 88,89,90,91 (wide span 256-492 = large omnibus acts, NOT gap). vol3: ch 997,1038,1039,1054,1055,1148 | OK
+[2026-06-21 00:10 PT] RECOVER | vol1 ch88 -> page_0260.png src_page 261 CHAPTER 88 confirmed (taxation, R&T Code) | OK
+[2026-06-21 00:11 PT] RECOVER | vol1 ch89 -> page_0270.png src_page 271 CHAPTER 89 confirmed (~135pg omnibus health/W&I act 271-405) | OK
+[2026-06-21 00:12 PT] RECOVER | vol1 ch90 -> page_0405.png src_page 406 CHAPTER 90 confirmed (trial court funding, Gov Code 406-467) | OK
+[2026-06-21 00:13 PT] RECOVER | vol1 ch91 -> page_0467.png src_page 468 CHAPTER 91 confirmed (public social services, H&S/W&I 468-491) | OK
+[2026-06-21 00:14 PT] RECOVER | vol3 ch997 -> page_0562.png src_page 563 CHAPTER 997 confirmed (special education, 2pg) | OK
+[2026-06-21 00:15 PT] RECOVER | vol3 ch1038 -> page_0697.png src_page 698 CHAPTER 1038 confirmed (community colleges, Ed Code) | OK
+[2026-06-21 00:16 PT] RECOVER | vol3 ch1039 -> page_0708.png src_page 709 CHAPTER 1039 confirmed (taxation, R&T Code) | OK
+[2026-06-21 00:17 PT] RECOVER | vol3 ch1054 -> page_0771.png src_page 772 CHAPTER 1054 confirmed (vehicles, multi-code 772-788) | OK
+[2026-06-21 00:18 PT] RECOVER | vol3 ch1055 -> page_0788.png src_page 789 CHAPTER 1055 confirmed (disposition of property, 789-834) | OK
+[2026-06-21 00:19 PT] RECOVER | vol3 ch1148 -> page_1451.png src_page 1452 CHAPTER 1148 confirmed (taxation urgency, R&T Code) | OK
+[2026-06-21 00:25 PT] WRITE | production-1991-vol1/parsed_acts_visual.json (4 verified) | OK
+[2026-06-21 00:25 PT] WRITE | production-1991-vol3/parsed_acts_visual.json (6 verified) | OK
+[2026-06-21 00:27 PT] RECHECK | _residual_manifest.py 1991 -> N=1231 present=1231 missing=0 | OK
+[2026-06-21 00:28 PT] DONE | 10 targeted, 10 verified, 0 legislative_gap, 0 not_found. FINAL residual=0. Full 1991 coverage. | OK
