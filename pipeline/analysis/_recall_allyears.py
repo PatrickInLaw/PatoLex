@@ -82,7 +82,8 @@ json.dump({"summary": summary, "rows": rows}, open(os.path.join(SCRATCH, "_recal
 
 print(f"OCR era 1850-1999 mapped years: {len(rows)}  oracleN={tot_oracleN} effN(minus {tot_leg} leg-gaps)={tot_N}")
 print(f"  BEFORE (merge only):  {tot_before}/{tot_N} = {summary['pct_before']}%")
-print(f"  AFTER (clause+VISUAL image-verified): {tot_after}/{tot_N} = {summary['pct_after']}%   RESIDUAL={tot_resid}")
+print(f"  AFTER (clause+VISUAL image+ocr_text-verified): {tot_after}/{tot_N} = {summary['pct_after']}%   RESIDUAL={tot_resid}")
+print(f"  NOTE: pct is over the {len(rows)} MAPPED years only; {len(unmapped)} biennium/budget session-years (oracle weight {unmap_wt}) are UNMEASURED -> corpus-wide incl. those at 0% = {round(100*tot_after/(tot_N+unmap_wt),1)}%")
 print(f"  unmapped (biennium-named, not measured): {summary['unmapped_years']} (weight {unmap_wt})")
 print(f"\nYears still short (residual desc):")
 print(f"  {'year':>5} {'effN':>5} {'before':>6} {'after':>6} {'resid':>5} {'leg':>4} {'pct':>5} vols")

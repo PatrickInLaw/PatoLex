@@ -65,6 +65,10 @@ for d in sorted(glob.glob(os.path.join(SCRATCH, "production-*"))):
                 new = tgt
         if new == old and old in STATUS_MAP:
             new = STATUS_MAP[old]
+            # guard (Hans MINOR-3): only promote to image_verified when the printed number
+            # was actually confirmed; otherwise keep it in the tier-2 ocr_text bucket.
+            if new == "image_verified" and not a.get("printed_number_confirmed"):
+                new = "ocr_text_verified"
         if new != old:
             file_changes.append((ci, old, new))
             if APPLY:
