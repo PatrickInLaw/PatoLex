@@ -85,6 +85,18 @@ APPLICATION -- 1866 (production-1865-66)
   AFTER: present=571  missing=79  (was present=468 missing=182).
   1866 residual reduced 182 -> 79 by local header-OCR alone.
 
+[2026-06-22] APPLY | _apply_1868.py (production-1867-68, 1867-68_Statutes.pdf, ROMAN) | OK
+  1868: before/after/residual = present 502 -> 526, residual 43 -> 19 (24 recovered).
+  Confirm-only, additive CCCC=400; surya-venv python; foreground/synchronous,
+  progressive save every 15; scan cache _hdrscan_cache_1868.json. No DB/merged/
+  certified writes. Recovered chapters: 145,338,387,393,411,426,427,457,464,467,
+  472,473,474,475,476,479,481,482,484,486,487,489,503,517.
+  Residual 19 [44,184,189,368,383,388,425,428,458,463,465,468,477,478,483,485,
+  488,495,508] -- dominated by multi-act-page header misses (2nd/3rd act header on
+  a shared page eludes OCR: e.g. 425/428 in 609-627, 463/465/468 in 686-702,
+  477/478/483/485/488 in 700-739); a few short ranges (44, 184, 189, 495, 508) are
+  garbled single headers. No scan gaps -- all ranges rendered cleanly.
+
 ================================================================================
 VERDICT / VIABILITY FOR BIENNIALS 1868-1878
 ================================================================================
