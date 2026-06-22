@@ -1,0 +1,14 @@
+[2026-06-21 PT] START | Visual recovery campaign for year 1968 (MODERN arabic, 2 volumes) | OK
+[2026-06-21 PT] MANIFEST | N=1474 present=1463 missing=11: [502,845,918,919,920,1457,1460,1461,1468,1469,1474] | OK
+[2026-06-21 PT] VOLUMES | vol1-chapters (1648 imgs) + vol2-chapters (1682 imgs): pages_raw + ocr_consensus confirmed | OK
+[2026-06-21 PT] IMAGES | Mapping confirmed: source_page P -> page_{P-1:04d}.png (0-based file); OCR page_1indexed = true source_page | OK
+[2026-06-21 PT] NOPRIOR | No pre-existing parsed_acts_visual.json in either volume — fresh write (additive-safe) | OK
+[2026-06-21 PT] AGENT1 | Visual-recovery agent: all 11 chapters image_verified, 0 legislative_gap, 0 not_found | OK
+[2026-06-21 PT] CLEANUP | Removed leftover temp scripts tmp_cmd1.py / tmp_cmd2.py from scratch root | OK
+[2026-06-21 PT] AGENT2 | Consolidation agent: exact per-chapter source_page + titles re-derived, all 11 image_verified, printed_number_confirmed=true | OK
+[2026-06-21 PT] BOUNDARY | Ch 918/919/920 land at START OF VOL2 (source_pages 3/7/10), not vol1; 920 shares a page with 921 | OK
+[2026-06-21 PT] VOL1 | Wrote parsed_acts_visual.json: ch 502 (sp1065), 845 (sp1546) | targeted=2 verified=2 | OK
+[2026-06-21 PT] VOL2 | Wrote parsed_acts_visual.json: ch 918,919,920,1457,1460,1461,1468,1469,1474 | targeted=9 verified=9 | OK
+[2026-06-21 PT] NOTE | Long spans (ch 1460 Human Resources Development Act; ch 1473 Public Records Act omnibus) are ACT LENGTH, not legislative gaps | OK
+[2026-06-21 PT] RERUN | Manifest re-run: N=1474 present=1474 missing=0 — RESIDUAL=0 | OK
+[2026-06-21 PT] FINAL | targeted=11 | verified=11 (all image_verified) | legislative_gap=0 | not_found=0 | residual=0 | OK
