@@ -40,9 +40,22 @@ def chap_pages(D, N):
                     pages[c] = pg; vol[c] = os.path.basename(D)
     return pages, vol
 
+# biennial / session-year -> production-dir aliases (the dir name does not start
+# with the second session year, so a bare glob misses it).
+YEAR_DIR_ALIAS = {
+    1866: ["production-1865-66"],
+    1864: ["production-1863-64"],
+    1868: ["production-1867-68"],
+    1870: ["production-1869-70"],
+}
+
 def main(yr):
     N = oracle_N(yr)
     dirs = [d for d in glob.glob(os.path.join(SCR, f"production-{yr}*")) if os.path.isdir(d)]
+    for alias in YEAR_DIR_ALIAS.get(yr, []):
+        ad = os.path.join(SCR, alias)
+        if os.path.isdir(ad) and ad not in dirs:
+            dirs.append(ad)
     pages, vol = {}, {}
     for D in dirs:
         pg, v = chap_pages(D, N)

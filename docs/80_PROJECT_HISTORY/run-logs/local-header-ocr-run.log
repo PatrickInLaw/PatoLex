@@ -1,0 +1,71 @@
+LOCAL HEADER-OCR RECOVERY -- run log
+Tool: C:\PatoLex-scratch\_header_ocr.py  (+ _scan_headers.py, _validate_*.py, _apply_1866.py)
+Goal: token-efficient LOCAL recovery of "missing" chapters whose page-TOP running-head
+("CHAPTER N" / "Chap. N" / roman) was skipped/garbled by full-page OCR. No agent vision
+tokens; no DB writes; additive only; merged/certified files untouched.
+
+Engine: Tesseract 5.4.0 (C:\Users\patolex\AppData\Local\Tesseract-OCR\tesseract.exe)
+Python: C:\PatoLex-scratch\ocr-engines\surya-venv\Scripts\python.exe (has pytesseract, PIL, PyMuPDF, surya)
+
+================================================================================
+TOOL DESIGN
+================================================================================
+[2026-06-21] DESIGN | _header_ocr.py | OK
+  * header_ocr_page(img): crops top strips (fracs 0.10/0.14/0.18/0.22) of the page
+    image, upscales 2x, runs Tesseract --oem 1 at psm 6/7/11, parses the first
+    legible chapter number. Optional Surya fallback (lazy-loaded).
+  * parse_chapter_from_text(): arabic ("CHAPTER 482","CHAP. 482","[Ch. 482]") and
+    roman ("CHAP. XXVI","CHAPTER CCCCLXXXII"). roman_to_int handles archaic ADDITIVE
+    forms (CCCC=400, XXXX=40, VIIII=9) AND standard subtractive (XL, CD, CM).
+  * OCR-tolerance (critical for early-era): the chapter word "CHAP."/"Chap." is
+    routinely corrupted by Tesseract to "Cuap."/"CHap."/"Cnap."/"Cuar." -- lead-in
+    regex accepts C/O + 2-3 letters + (p|r). Roman tokens normalize O->C, U->V
+    (the 'CCC' triple often OCRs as 'CCO'). A leading word-boundary + required
+    separator suppress false hits from prose/dates ("March 12" no longer matches).
+  * Parser self-test: 12/12 cases pass (incl. all additive-roman forms).
+
+================================================================================
+VALIDATION (go/no-go)  -- threshold: >=85% exact match
+================================================================================
+[2026-06-21] VALIDATE-ARABIC | year 1935 (production-1935-vol1-chapters, image_verified) | OK
+  Ground truth: parsed_acts_merged.json (791 chapters, chapter_int -> source_page).
+  Sampled 30 known chapters; ran header-OCR on each chapter's source-page image.
+  RESULT: EXACT match 28/30 = 93.3%.  Off-by-1 = 2/30 (explained: chapter starts
+  mid-page, so the very-top running head shows the PREVIOUS chapter). NOFIND 0,
+  WRONG 0.
+  VERDICT: GO (93.3% >= 85%).
+
+[2026-06-21] VALIDATE-ROMAN | year 1865-66 (early-era roman) from PDF | OK (engine), WARN (source_page)
+  Rendered known-chapter pages on demand from 1865-66_Statutes.pdf (PyMuPDF).
+  FINDING 1 (engine works): the roman header path reads real printed headers
+  correctly -- e.g. PDF pg101 "CHap. XXIV"=24, pg102 "Cuap. XXVI"=26, pg316
+  "Cuar. CCOXXIX"=329 (after O->C normalization). The OCR-tolerant lead-in + roman
+  normalization were REQUIRED; the first-cut regex (literal "CH") missed ~all of
+  these and produced date/page-number false positives.
+  FINDING 2 (data caveat -- DURABLE): for the early-era 1865-66 volume the merged
+  parsed_acts_merged.json `source_page` is in the right coordinate system for
+  PRESENT chapters (pg101->ch25, pg106->ch33/34 confirmed) BUT some recorded
+  source_pages point at mid-act CONTINUATION pages with no header at all (e.g.
+  ch13 "source_page 113" is continuation text, no "Chap." header). So a naive
+  point-lookup on source_page is unreliable for the missing-chapter set; the
+  manifest's page_RANGES (bracketed by reliable PRESENT neighbors) are the sound
+  driver.
+  FINDING 3 (limiting factor): pages hold 2-3 short acts; a single psm-6 pass
+  reliably reads the FIRST header and drops lower ones. Mitigation: union psm
+  6/4/11 in _scan_headers.headers_on_page(). Helps but does not fully close the
+  gap -- some genuine headers still missed at 230 dpi.
+
+  GO/NO-GO: GO overall (1935 arabic validation = 93.3% exact, the formal gate).
+  The roman ENGINE is sound; the residual risk for biennials is page-LOCATION
+  (multi-act pages + imperfect source_page), not number-READING. Application is
+  run in CONFIRM-ONLY mode: a missing chapter is written ONLY when its exact
+  oracle number is read as a clean header in its candidate page range -- so a
+  miss costs coverage, never a wrong claim.
+
+================================================================================
+APPLICATION -- 1866 (production-1865-66)
+================================================================================
+[2026-06-21] MANIFEST | _residual_manifest.py 1866 | OK
+  Added YEAR_DIR_ALIAS {1866:[production-1865-66], 1864/1868/1870 too} to
+  pipeline/analysis/_residual_manifest.py so the biennial dir is found.
+  BEFORE: present=468  missing=182  (N oracle=650).
