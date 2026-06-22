@@ -81,6 +81,17 @@ years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened
 - **GUARDRAIL reminder:** merge re-run + any dup-audit fix are NOT additive (they overwrite) — do them
   only with Patrick's go. Biennial OCR recovery IS additive/safe (visual.json) and within the campaign.
 
+**>>> PROGRESS (2026-06-22 early AM):** MERGE RE-RUN DONE (1901/09/11, residual 1954->1094, **98.1%
+corpus-wide**, backups kept). LOCAL header-OCR tool BUILT+VALIDATED (90-93% arabic, GO) and applied to
+**1866: residual 182->79, 103 ch recovered at ZERO vision-token cost**. BIENNIALS 1868-1878 STILL
+PENDING: local-OCR worked for 1866 but every AGENT that backgrounds the multi-year batch STALLS (output
+buffered to end, agent waits, silently dies — afff9534, a2aadf50/bxz37uk46 both produced NO 1868+ output
+over 40+ min). RESUME FIX: run the local OCR for 1868-1878 ONE YEAR PER AGENT, synchronous, writing that
+year's visual.json before exiting (NOT a 6-year background batch). Template: `C:\PatoLex-scratch\_apply_1866.py`
+(resumable, page->chapter scan cache). Each biennial year ~40-60% recoverable locally; the rest
+(multi-act-page 2nd/3rd headers) needs a visual-agent fallback. CONTENT-CORRECTNESS (1913/1917 cohorts)
+and the `merge_passes.py` n_for() durable fix still pending.
+
 **>>> AUTONOMOUS PLAN (2026-06-21 ~late, Patrick ASLEEP again, BROAD mandate "everything you can do
 without me"):** Work order, all via SUBAGENTS to preserve main-loop context, /ucp regularly, Telegram
 milestones (chat 8525048490 via `.claude/scripts/telegram.ps1`). RESUME CORRECTLY after a reset: a
