@@ -198,3 +198,43 @@ VERDICT / VIABILITY FOR BIENNIALS 1868-1878
     417-418, 427-428, 442-443, 458-459, 476-477) plus genuinely garbled/edge headers
     (3,9,24,47,63,91,104,117,...). These need the page-image visual fallback. No DB/merged/
     certified writes; additive superset to production-1875-76/parsed_acts_visual.json.
+
+[2026-06-22] MULTIACT-METHOD | NEW band-free mid-page header recovery (_scan_headers_multiact.py + _apply_multiact.py) | OK
+  Goal: recover the residual chapters where 2-3 short acts share one printed page and the
+    page's 2nd/3rd "CHAPTER N" header sits MID-PAGE, eluding the top-favoring scanners
+    (_header_ocr top-strip crop; _scan_headers full-page psm 6/4/11 block union).
+  Technique: run Tesseract psm 11 (SPARSE) + psm 6 (block) over the FULL page at multiple
+    render DPIs (200/240/300). Sparse mode segments isolated text regions, so a mid-page
+    header set off by whitespace reads as its own line instead of dissolving into the body
+    block. (An earlier 8-band slicing design worked but cost ~10s/page and MANUFACTURED
+    roman misreads; the sparse full-page pass is ~3s/page, equal recall, no sibling noise.)
+  PRECISION GUARD (critical, roman volumes): roman headers are DPI-FRAGILE -- the glyph count
+    of a CCCC.../DCXVIII... token shifts with resolution. A confirm therefore requires the
+    EXACT oracle number to read at >=2 distinct render DPIs (vote>=2); a single-DPI read is
+    left residual. Verified on 1872: a multi-DPI re-audit of all 17 confirmations showed the
+    printed roman token matches the oracle EXACTLY in every case (CCCCXCIII=493, DCXVIII=618,
+    CCLXXXVIII=288, ...); a naive single-different-DPI (240) re-read had falsely "mismatched"
+    11/17 purely from DPI fragility -- multi-DPI agreement is the correct test, vote count
+    alone (within one DPI) is NOT (a real mid-page win and a sibling misread both poll once).
+  Also: only TIGHT windows scanned (multi-act pages share a page with a present neighbor);
+    windows wider than 12 pp are garbled/edge cases, skipped for the visual fallback.
+  CONFIRM-ONLY, additive: origin=local_header_ocr_multiact, status=image_verified,
+    printed_number_confirmed=true, chapter_int_final==oracle, dpi_votes recorded. No DB/
+    merged/certified writes. Durable lesson: LESSON_2026-06-22_multiact_band_scan_header_ocr.md
+
+[2026-06-22] 1872 multiact: residual 45->28 (+17)
+  Recovered (all roman, multi-DPI-verified printed token == oracle): 43,62,288,383,426,443,
+    448,463,464,468,480,481,483,486,487,493,618. Confirmations audited at 150/200/240/300 dpi:
+    16 STRONG (>=2 DPIs) + 1 WEAK (481, single-DPI but token CCCCLXXXI unambiguous) + 0 FAIL.
+    (481 predates the >=2-vote guard now enforced for the remaining years.) Manifest
+    regenerated: present 592->609, missing 45->28. Remaining 28 = genuinely garbled/edge
+    headers + wide-window non-multi-act cases (the true hard core for visual fallback).
+
+[2026-06-22] 1868 multiact: residual 19->14 (+5)
+  (First year run under the now-enforced >=2-DPI vote guard.) Recovered (all roman,
+    multi-DPI-confirmed): 388,463,468,478,488. The guard correctly LEFT residual several
+    single-DPI-only reads (44,189,383,428,508 -- DPI-fragile, not trusted) and wide-window
+    non-multi-act cases (184,368,458,465,483,495). Manifest regenerated: present 526->531,
+    missing 19->14. Remaining 14 = single-DPI-fragile + wide-window garbled (visual fallback).
+  Audit (multi-DPI, _mq_audit.py): 5/5 STRONG, 0 WEAK, 0 FAIL -- every token correct
+    (CCCLXXXVIII=388, CCCCLXIII=463, CCCCLXVIII=468, CCCCLXXVIII=478, CCCCLXXXVIII=488).
