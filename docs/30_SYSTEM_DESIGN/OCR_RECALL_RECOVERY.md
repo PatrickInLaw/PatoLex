@@ -74,7 +74,13 @@ Patrick and WITHOUT burning vision tokens is DONE. What the night did:
 - ~292 biennial hard-core (1866=61,1868=14,1870=55,1872=28,1874=38,1876=50,1878=46) -> need VISUAL-AGENT
   fallback (vision tokens). Local OCR exhausted on these (single-DPI-fragile / wide garbled clusters).
   HELD per Patrick's "don't burn all our tokens on 600+ pages" steer — his call whether to spend them.
-- 53 modern PHYSICAL scan gaps -> re-scan the bound volumes (external).
+- the "53 modern PHYSICAL scan gaps" claim was ADVERSARIALLY VERIFIED 2026-06-22 (Patrick's
+  skepticism) -> **MOSTLY ARTIFACTS.** 57 claims: 35 PRESENT-AFTER-ALL (re-OCR/re-extract, MINE),
+  19 real gaps (need a better digital copy via HathiTrust/IA, NOT physical re-scan), 3 title-leaf-only
+  (recoverable). Biggest: **1989 ch1440-67 (28 ch) = full text in mis-named `1989_Vol4_DigestChapters.pdf`,
+  just never OCR'd -> RE-OCR.** 1959 ch1001 / 1955 ch1139 / 1988 ch398 = first chapter of NEXT volume's
+  PDF (the lesson calling 1959 ch1001 a real gap is WRONG -> fix). Table+page citations:
+  `docs/80_PROJECT_HISTORY/SCAN_GAP_VERIFICATION_2026-06-22.md`. Almost nothing needs Patrick here.
 - ~166 small per-year tails + 1907(7)/1909(5) -> mostly the same visual-fallback class.
 **NEEDS PATRICK (decisions, not work):** (1) spend vision tokens on the ~292+ visual-fallback set? (2)
 fund the 53 scan re-scans, (3) resolution/amendment corpus scope. **LOOSE END (small, mine):** F1 —
