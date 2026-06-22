@@ -282,3 +282,14 @@ VERDICT / VIABILITY FOR BIENNIALS 1868-1878
     483,488,489,490,544. Manifest re-derived: present 563, missing 50. 1876 multiact COMPLETE -- no
     new residual recoverable by the band scanner (remaining 50 are single-DPI-fragile / wide-window
     garbled clusters correctly left for visual fallback).
+
+[2026-06-22] 1866 multiact: residual 79->61 (+18)
+  Ran _apply_multiact.py 1866 (synchronous foreground). Multi-act band scan (psm6 block + psm11 sparse
+    union @ 200/240/300 dpi, confirm requires >=2 distinct-DPI votes) recovered 18 mid-page secondary-act
+    headers: ch 24,28,32,72,74,176,193,194,216,226,262,270,281,296,428,439,442,576. All append-safe
+    additions to parsed_acts_visual.json (103 -> 121 acts); every new entry well-formed
+    (status=image_verified, printed_number_confirmed=true, origin=local_header_ocr_multiact,
+    chapter_int==chapter_int_final, dpi_votes>=2); 0 bad metadata. attempted=55 confirmed=18.
+    Manifest re-derived: present 571 -> 589, missing 79 -> 61. Remaining 61 are single-DPI-fragile reads
+    (e.g. ch38,52,114,143,187,282,433,482,518,638) or wide-window (>12pp) garbled clusters correctly
+    left for the visual fallback. No DB/merged/certified writes; additive only.
