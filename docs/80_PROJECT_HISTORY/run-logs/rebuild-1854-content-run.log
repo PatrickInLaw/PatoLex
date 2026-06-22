@@ -1,0 +1,10 @@
+[2026-06-21 00:00 PT] START | 1854 CONTENT-CORRECTNESS fix: rebuild parsed_acts_visual.json to carry all 174 oracle chapters from dualseries_v2 | OK
+[2026-06-21 00:00 PT] INSPECT | dualseries_v2: general_acts=71, special_acts=103, oracle_total=174; visual.json had 78 recs (already_in_merged skip in old _build_visual_1854.py) | OK
+[2026-06-21 00:00 PT] VERIFY-TITLES | Confirmed dualseries general local ch12/35/71 = Fire-Arms / Stanislaus county / Public Ferries (the previously-corrupt general slots) | OK
+[2026-06-21 00:00 PT] REBUILD | _rebuild_visual_1854_all174.py (scratch): removed already_in_merged skip; general N->oracle N (1..71), special N->oracle N+71 (72..174); status ocr_text_verified, printed_number_confirmed=false, origin dualseries_v2 | OK
+[2026-06-21 00:00 PT] WRITE | parsed_acts_visual.json rebuilt: 174 recovered_acts, oracle range 1-174, unique=174 (asserts passed) | OK
+[2026-06-21 00:00 PT] SPOTCHECK | oracle ch12=Fire-Arms (gen 12), ch35=Stanislaus county (gen 35), ch71=Public Ferries (gen 71) -- all CORRECT in rebuilt visual.json | OK
+[2026-06-21 00:00 PT] MANIFEST | python pipeline/analysis/_residual_manifest.py 1854 -> N=174 present=174 missing=0 | OK
+[2026-06-21 00:00 PT] DOCS | Wrote durable lesson LESSON_2026-06-21_1854_dualseries_merge_corruption.md (corruption mechanism, +71 mapping, merged SUPERSEDED-for-ingest directive) | OK
+[2026-06-21 00:00 PT] SCOPE | parsed_acts_merged.json and DB NOT modified; additive file-corpus correction only; temp scripts under C:\PatoLex-scratch only | OK
+[2026-06-21 00:00 PT] DONE | 174 records written; manifest present=174 missing=0; lesson + run log written | OK
