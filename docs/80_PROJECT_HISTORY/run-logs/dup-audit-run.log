@@ -1,0 +1,275 @@
+==============================================================================
+MERGE MISNUMBERED-DUPLICATE AUDIT (detection-only triage) -- 2026-06-21
+==============================================================================
+Scope: 216 production-* merged files (per-volume).
+Total candidates: 2334
+
+BY HEURISTIC + CONFIDENCE:
+  H5_heading_mismatch        total=1127  high=621  med=25   low=481 
+  H1_dup_body                total=25    high=7    med=18   low=0   
+  H1_near_dup_body           total=57    high=0    med=2    low=55  
+  H2_page_out_of_seq         total=224   high=51   med=84   low=89  
+  H3_text_cites_other_ch     total=900   high=0    med=2    low=898 
+  H4_present_and_recovered   total=1     high=0    med=0    low=1   
+
+CONFIDENCE TOTALS: high=679  med=131  low=1524
+
+------------------------------------------------------------------------------
+TOP MISNUMBER SUSPECTS (digit-misread heading/body, highest confidence first)
+------------------------------------------------------------------------------
+[HIGH] 1869 H1_dup_body  pg=[607]
+      identical normalized body[:400] across chapters [379, 389]; title="An Act for the relief and support of the California Labor and"
+[HIGH] 1907 H5_heading_mismatch  pg=[178]
+      filed as ch79 but printed heading reads "CHAPTER 19" (diff 60, single-digit misread); title="An act ta amend section 1876 of the Political Code of the State"
+[HIGH] 1907 H5_heading_mismatch  pg=[807]
+      filed as ch432 but printed heading reads "CHAPTER 482" (diff 50, single-digit misread); title="ain act to repeal an act entitled ‘‘An act to provide for the"
+[HIGH] 1913 H5_heading_mismatch  pg=[95]
+      filed as ch35 but printed heading reads "CHAPTER 30" (diff 5, single-digit misread); title="An act appropriating money to pay the ccpense of maintain-"
+[HIGH] 1913 H5_heading_mismatch  pg=[102]
+      filed as ch43 but printed heading reads "CHAPTER 48" (diff 5, single-digit misread); title="An act to require county recorders to furnish the surveyor"
+[HIGH] 1913 H5_heading_mismatch  pg=[115]
+      filed as ch56 but printed heading reads "CHAPTER 36" (diff 20, single-digit misread); title="An act to repcal section 398 of ihe Penal Code of California"
+[HIGH] 1913 H5_heading_mismatch  pg=[128]
+      filed as ch65 but printed heading reads "CHAPTER 60" (diff 5, single-digit misread); title="An act to authorize the exchange of certain real estale belong-"
+[HIGH] 1913 H5_heading_mismatch  pg=[275]
+      filed as ch130 but printed heading reads "CHAPTER 180" (diff 50, single-digit misread); title="An act to amend section 370 of the Code of Civil Procedure,"
+[HIGH] 1913 H5_heading_mismatch  pg=[275]
+      filed as ch131 but printed heading reads "CHAPTER 181" (diff 50, single-digit misread); title="An act to amend the Civil Code of the State of California, by"
+[HIGH] 1913 H5_heading_mismatch  pg=[276]
+      filed as ch133 but printed heading reads "CHAPTER 183" (diff 50, single-digit misread); title="An act to amend section 367c of the Penal Code of the State"
+[HIGH] 1913 H5_heading_mismatch  pg=[286]
+      filed as ch144 but printed heading reads "CHAPTER 134" (diff 10, single-digit misread); title="An act to amend section four hundred and fifty-nine of the"
+[HIGH] 1913 H5_heading_mismatch  pg=[307]
+      filed as ch168 but printed heading reads "CHAPTER 163" (diff 5, single-digit misread); title="An acl to amend an act entithd, *‘ An act to promote the safety"
+[HIGH] 1913 H5_heading_mismatch  pg=[505]
+      filed as ch259 but printed heading reads "CHAPTER 209" (diff 50, single-digit misread); title="An act to amend seclions eleven and eighteen of an act entitled"
+[HIGH] 1913 H5_heading_mismatch  pg=[666]
+      filed as ch318 but printed heading reads "CHAPTER 313" (diff 5, single-digit misread); title="An act relating lo immiyrants and immigration, creating a"
+[HIGH] 1913 H5_heading_mismatch  pg=[771]
+      filed as ch351 but printed heading reads "CHAPTER 301" (diff 50, single-digit misread); title="An act to provide for the supplying the cownty auditor with a"
+[HIGH] 1913 H5_heading_mismatch  pg=[942]
+      filed as ch455 but printed heading reads "CHAPTER 405" (diff 50, single-digit misread); title="An act to provide for the establishment of a state hospilal for"
+[HIGH] 1913 H5_heading_mismatch  pg=[1012]
+      filed as ch566 but printed heading reads "CHAPTER 966" (diff 400, single-digit misread); title="An act to provide for the cstablishment and change of grade"
+[HIGH] 1917 H5_heading_mismatch  pg=[39]
+      filed as ch43 but printed heading reads "CHAPTER 48" (diff 5, single-digit misread); title="An act tu amend section sic hundred twenty-sic p of the Penal"
+[HIGH] 1917 H5_heading_mismatch  pg=[240]
+      filed as ch155 but printed heading reads "CHAPTER 150" (diff 5, single-digit misread); title="An act lo amend section one thousand six hundred sixteen of"
+[HIGH] 1917 H5_heading_mismatch  pg=[248]
+      filed as ch163 but printed heading reads "CHAPTER 168" (diff 5, single-digit misread); title="An act permilting daily payment into lhe county treasury of"
+[HIGH] 1917 H5_heading_mismatch  pg=[448]
+      filed as ch259 but printed heading reads "CHAPTER 299" (diff 40, single-digit misread); title="An act appropriating money for sewerage and water systems"
+[HIGH] 1917 H5_heading_mismatch  pg=[479]
+      filed as ch332 but printed heading reads "CHAPTER 322" (diff 10, single-digit misread); title="An act appropriating money for the construction of workers’"
+[HIGH] 1917 H5_heading_mismatch  pg=[487]
+      filed as ch354 but printed heading reads "CHAPTER 304" (diff 50, single-digit misread); title="An act appropriating money for the maintenance and support"
+[HIGH] 1917 H5_heading_mismatch  pg=[933]
+      filed as ch605 but printed heading reads "CHAPTER 600" (diff 5, single-digit misread); title="An act authorizing any county now or hereafler organized to"
+[HIGH] 1917 H5_heading_mismatch  pg=[1619]
+      filed as ch773 but printed heading reads "CHAPTER 173" (diff 600, single-digit misread); title="An act to appropriate moncy to be used as a revolving fund by"
+[HIGH] 1919 H5_heading_mismatch  pg=[831]
+      filed as ch432 but printed heading reads "CHAPTER 482" (diff 50, single-digit misread); title="An act approprialing money to provide for a permancnt water"
+[HIGH] 1921 H5_heading_mismatch  pg=[149]
+      filed as ch150 but printed heading reads "CHAPTER 100" (diff 50, single-digit misread); title="An act to amend scction one thousand cight hundred sixty of"
+[HIGH] 1921 H5_heading_mismatch  pg=[164]
+      filed as ch165 but printed heading reads "CHAPTER 168" (diff 3, single-digit misread); title="An act to amend scction four thousand forty-one of the Polit-"
+[HIGH] 1921 H5_heading_mismatch  pg=[403]
+      filed as ch302 but printed heading reads "CHAPTER 802" (diff 500, single-digit misread); title="An act reapproprialing money for the purpose of refunding. to"
+[HIGH] 1921 H5_heading_mismatch  pg=[894]
+      filed as ch559 but printed heading reads "CHAPTER 539" (diff 20, single-digit misread); title="An act to amend sections one, sic. twelve, sixteen and"
+[HIGH] 1921 H5_heading_mismatch  pg=[1098]
+      filed as ch651 but printed heading reads "CHAPTER 601" (diff 50, single-digit misread); title="An act to add a new section lo the Political Code to be"
+[HIGH] 1921 H5_heading_mismatch  pg=[1306]
+      filed as ch757 but printed heading reads "CHAPTER 797" (diff 40, single-digit misread); title="An act to restrict the running of dogs at large; to protect live"
+[HIGH] 1923 H5_heading_mismatch  pg=[79]
+      filed as ch43 but printed heading reads "CHAPTER 48" (diff 5, single-digit misread); title="An act to amend section four thousand lwo hundred eighteen of"
+[HIGH] 1923 H5_heading_mismatch  pg=[87]
+      filed as ch50 but printed heading reads "CHAPTER 90" (diff 40, single-digit misread); title="An act lo amend sections two, five, siztecn and sevenlecn, of"
+[HIGH] 1923 H5_heading_mismatch  pg=[515]
+      filed as ch263 but printed heading reads "CHAPTER 268" (diff 5, single-digit misread); title="An act authorizing incorporated cities and towns to acquire"
+[HIGH] 1923 H5_heading_mismatch  pg=[716]
+      filed as ch345 but printed heading reads "CHAPTER 315" (diff 30, single-digit misread); title="An act to amend scction fifty-seven of an act entilled An act"
+[HIGH] 1923 H5_heading_mismatch  pg=[727]
+      filed as ch353 but printed heading reads "CHAPTER 358" (diff 5, single-digit misread); title="An act to amend the title of chapter eleven of title thirteen"
+[HIGH] 1923 H5_heading_mismatch  pg=[728]
+      filed as ch354 but printed heading reads "CHAPTER 854" (diff 500, single-digit misread); title="An act to add a new section to the Political Code to be num-"
+[HIGH] 1923 H5_heading_mismatch  pg=[755]
+      filed as ch374 but printed heading reads "CHAPTER 874" (diff 500, single-digit misread); title="An act to amend section two thousand nine hundred twenly-"
+[HIGH] 1923 H5_heading_mismatch  pg=[1002]
+      filed as ch428 but printed heading reads "CHAPTER 423" (diff 5, single-digit misread); title="An act to amend section one thousaud five hundred eighty-"
+
+------------------------------------------------------------------------------
+H5 HEADING MISMATCH -- top 15 of 1127
+------------------------------------------------------------------------------
+[HIGH] 1907 ch=[19, 79] pg=[178] | filed as ch79 but printed heading reads "CHAPTER 19" (diff 60, single-digit misread); title="An act ta amend section 1876 of the P
+[HIGH] 1907 ch=[432, 482] pg=[807] | filed as ch432 but printed heading reads "CHAPTER 482" (diff 50, single-digit misread); title="ain act to repeal an act entitled ‘
+[HIGH] 1913 ch=[30, 35] pg=[95] | filed as ch35 but printed heading reads "CHAPTER 30" (diff 5, single-digit misread); title="An act appropriating money to pay the 
+[HIGH] 1913 ch=[43, 48] pg=[102] | filed as ch43 but printed heading reads "CHAPTER 48" (diff 5, single-digit misread); title="An act to require county recorders to 
+[HIGH] 1913 ch=[36, 56] pg=[115] | filed as ch56 but printed heading reads "CHAPTER 36" (diff 20, single-digit misread); title="An act to repcal section 398 of ihe P
+[HIGH] 1913 ch=[60, 65] pg=[128] | filed as ch65 but printed heading reads "CHAPTER 60" (diff 5, single-digit misread); title="An act to authorize the exchange of ce
+[HIGH] 1913 ch=[130, 180] pg=[275] | filed as ch130 but printed heading reads "CHAPTER 180" (diff 50, single-digit misread); title="An act to amend section 370 of the 
+[HIGH] 1913 ch=[131, 181] pg=[275] | filed as ch131 but printed heading reads "CHAPTER 181" (diff 50, single-digit misread); title="An act to amend the Civil Code of t
+[HIGH] 1913 ch=[133, 183] pg=[276] | filed as ch133 but printed heading reads "CHAPTER 183" (diff 50, single-digit misread); title="An act to amend section 367c of the
+[HIGH] 1913 ch=[134, 144] pg=[286] | filed as ch144 but printed heading reads "CHAPTER 134" (diff 10, single-digit misread); title="An act to amend section four hundre
+[HIGH] 1913 ch=[163, 168] pg=[307] | filed as ch168 but printed heading reads "CHAPTER 163" (diff 5, single-digit misread); title="An acl to amend an act entithd, *‘ A
+[HIGH] 1913 ch=[209, 259] pg=[505] | filed as ch259 but printed heading reads "CHAPTER 209" (diff 50, single-digit misread); title="An act to amend seclions eleven and
+[HIGH] 1913 ch=[313, 318] pg=[666] | filed as ch318 but printed heading reads "CHAPTER 313" (diff 5, single-digit misread); title="An act relating lo immiyrants and im
+[HIGH] 1913 ch=[301, 351] pg=[771] | filed as ch351 but printed heading reads "CHAPTER 301" (diff 50, single-digit misread); title="An act to provide for the supplying
+[HIGH] 1913 ch=[405, 455] pg=[942] | filed as ch455 but printed heading reads "CHAPTER 405" (diff 50, single-digit misread); title="An act to provide for the establish
+
+------------------------------------------------------------------------------
+H1 DUPLICATE BODY -- top 15 of 25
+------------------------------------------------------------------------------
+[HIGH] 1869 ch=[379, 389] pg=[607] | identical normalized body[:400] across chapters [379, 389]; title="An Act for the relief and support of the California Labor and"
+[HIGH] 1943 ch=[375, 376] pg=[1791] | identical normalized body[:400] across chapters [375, 376] (consecutive - possible boilerplate); title="Stats 1943, An act to amen
+[HIGH] 1861 ch=[137, 184] pg=[169] | identical normalized body[:400] across chapters [137, 184]; title="Cuap. CXXXVIL—An Act for the Relief of William Greenhood."
+[HIGH] 1861 ch=[153, 200] pg=[196] | identical normalized body[:400] across chapters [153, 200]; title="Crap. CLIIL—An Act to amend an Act entitled An Act to author-"
+[HIGH] 1862 ch=[308, 355] pg=[471] | identical normalized body[:400] across chapters [308, 355]; title="ded an Act amendutory of and supplementary to an Act entitled a
+[HIGH] 1863 ch=[37, 84] pg=[119] | identical normalized body[:400] across chapters [37, 84]; title="Cuap. XXXVIl.—An Act to amend an Act entitled an Act to"
+[HIGH] 1873 ch=[269, 519] pg=[455] | identical normalized body[:400] across chapters [269, 519]; title="An Act to amend an Act entitled “An Act to create the County ,"
+[MED] 1907 ch=[10, 18] pg=[57, 61] | identical normalized body[:400] across chapters [10, 18]; title="An act making an appropriation to pay the deficiency in the"
+[MED] 1907 ch=[348, 368] pg=[630, 657] | identical normalized body[:400] across chapters [348, 368]; title="An act to add a new section to the Code of Civil Procedure of"
+[MED] 1923 ch=[432, 437] pg=[1005, 1013] | identical normalized body[:400] across chapters [432, 437]; title="An act to provide for the accomplishment of the work of the"
+[MED] 1990 ch=[1566, 1567] pg=[1676, 1681] | identical normalized body[:400] across chapters [1566, 1567] (consecutive - possible boilerplate); title="An act to amend Section 
+[MED] 1869 ch=[192, 277, 372] pg=[359, 448, 575] | identical normalized body[:400] across chapters [192, 277, 372]; title="An Act to amend an Act entitled an Act to regulate proceed
+[MED] 1871 ch=[170, 371] pg=[279, 616] | identical normalized body[:400] across chapters [170, 371]; title="An Act to amend an Act entitled an Act to requlate proceedings 
+[MED] 1871 ch=[365, 519] pg=[605, 846] | identical normalized body[:400] across chapters [365, 519]; title="An Act to amend an Act entitled an Act concerning roads and hig
+[MED] 1873 ch=[139, 259] pg=[269, 447] | identical normalized body[:400] across chapters [139, 259]; title="An Act supplemental to and amendatory of an Act entitled an Act
+
+------------------------------------------------------------------------------
+H1 NEAR-DUP BODY -- top 15 of 57
+------------------------------------------------------------------------------
+[MED] 1927 ch=[294, 295] pg=[512] | token-jaccard 0.89, same page 512; title="An act appropriating money to pay the claim of H. Moffatt"
+[MED] 1973 ch=[409, 410] pg=[875] | token-jaccard 0.93, same page 875; title="An act to amend Section 23604.5 of the Education Code, relating"
+[LOW] 1854 ch=[57, 58] pg=[78] | token-jaccard 0.83, same page 78; title="AN ACT defining the Legal Distances from each County Seat in"
+[LOW] 1858 ch=[268, 269] pg=[243] | token-jaccard 0.82, same page 243; title="CHAP. CCLIXIX .- An Act to audit Certain Claims."
+[LOW] 1863 ch=[406, 407] pg=[546] | token-jaccard 0.83, same page 546; title="CHAP. CCCCVI .- An Act to amend an Act entitled an Act concern-"
+[LOW] 1865 ch=[336, 346] pg=[468] | token-jaccard 0.83, same page 468; title="Cuap. CCCXXXVI.—An Act supplementary to the various Acts now"
+[LOW] 1875 ch=[290, 291] pg=[452] | token-jaccard 0.83, same page 452; title="CHAP. UCXCL .- An Act to extend the franchise granted to J. E."
+[LOW] 1887 ch=[158, 159] pg=[225] | token-jaccard 0.88, same page 225; title="An Act to provide for the deficiency in the appropriation for the"
+[LOW] 1889 ch=[68, 69] pg=[121] | token-jaccard 0.81, same page 121; title="An Act making an appropriation to pay the claim of A. A. Ben-"
+[LOW] 1913 ch=[126, 127] pg=[273] | token-jaccard 0.81, same page 273; title="An act to amend section seventeen hundred and seventy-four"
+[LOW] 1917 ch=[265, 266] pg=[450] | token-jaccard 0.83, same page 450; title="An act appropriating money for the construction and equipment"
+[LOW] 1917 ch=[293, 294] pg=[459] | token-jaccard 0.86, same page 459; title="An act appropriating money to complete the heating plant of"
+[LOW] 1917 ch=[382, 383] pg=[519] | token-jaccard 0.84, same page 519; title="An act appropriating money to pay the claim of C. 8S. Baldwin."
+[LOW] 1921 ch=[50, 52] pg=[59] | token-jaccard 0.84, same page 59; title="An act to recognize and declare valid all proceedings in Butte"
+[LOW] 1925 ch=[200, 201] pg=[355] | token-jaccard 0.85, same page 355; title="An act appropriating money to pay the claim of H. C. Harter"
+
+------------------------------------------------------------------------------
+H2 PAGE OUT OF SEQUENCE -- top 15 of 224
+------------------------------------------------------------------------------
+[HIGH] 1937 ch=[134] pg=[3049] | ch134 on page 3049 is isolated: neighbor ch133->p376 and ch135->p378 (tight band, this off by 2671)
+[HIGH] 1945 ch=[139] pg=[2839] | ch139 on page 2839 is isolated: neighbor ch138->p316 and ch141->p319 (tight band, this off by 2520)
+[HIGH] 1933 ch=[92] pg=[2447] | ch92 on page 2447 is isolated: neighbor ch91->p536 and ch93->p537 (tight band, this off by 1910)
+[HIGH] 1933 ch=[89] pg=[2308] | ch89 on page 2308 is isolated: neighbor ch88->p535 and ch90->p535 (tight band, this off by 1773)
+[HIGH] 1931 ch=[172] pg=[1612] | ch172 on page 1612 is isolated: neighbor ch171->p247 and ch174->p249 (tight band, this off by 1363)
+[HIGH] 1971 ch=[311] pg=[1784] | ch311 on page 1784 is isolated: neighbor ch309->p636 and ch312->p648 (tight band, this off by 1136)
+[HIGH] 1961 ch=[1885] pg=[153] | ch1885 on page 153 is isolated: neighbor ch1884->p980 and ch1886->p983 (tight band, this off by 827)
+[HIGH] 1961 ch=[1866] pg=[137] | ch1866 on page 137 is isolated: neighbor ch1865->p962 and ch1868->p964 (tight band, this off by 825)
+[HIGH] 1951 ch=[1054] pg=[862] | ch1054 on page 862 is isolated: neighbor ch1053->p70 and ch1055->p71 (tight band, this off by 791)
+[HIGH] 1961 ch=[1040] pg=[368] | ch1040 on page 368 is isolated: neighbor ch180->p1171 and ch1071->p1155 (tight band, this off by 787)
+[HIGH] 1907 ch=[47] pg=[833] | ch47 on page 833 is isolated: neighbor ch46->p91 and ch48->p91 (tight band, this off by 742)
+[HIGH] 1873 ch=[586] pg=[183] | ch586 on page 183 is isolated: neighbor ch585->p915 and ch588->p915 (tight band, this off by 732)
+[HIGH] 1907 ch=[42] pg=[821] | ch42 on page 821 is isolated: neighbor ch41->p87 and ch43->p89 (tight band, this off by 732)
+[HIGH] 1969 ch=[902] pg=[1059] | ch902 on page 1059 is isolated: neighbor ch901->p1755 and ch903->p1757 (tight band, this off by 696)
+[HIGH] 1871 ch=[537] pg=[179] | ch537 on page 179 is isolated: neighbor ch536->p859 and ch540->p863 (tight band, this off by 680)
+
+------------------------------------------------------------------------------
+H3 TEXT CITES OTHER CHAPTER -- top 15 of 900
+------------------------------------------------------------------------------
+[MED] 1957 ch=[2394] pg=[1402] | recorded ch2394; body self-references chapter(s) [456] heading="CHAPTER 2894"
+[MED] 1963 ch=[1892] pg=[1381] | recorded ch1892; body self-references chapter(s) [156] heading="CHAPTER 1592"
+[LOW] 1907 ch=[1] pg=[53] | recorded ch1; body self-references chapter(s) [2]
+[LOW] 1915 ch=[271] pg=[478] | recorded ch271; body self-references chapter(s) [272]
+[LOW] 1917 ch=[164] pg=[249] | recorded ch164; body self-references chapter(s) [160]
+[LOW] 1931 ch=[585] pg=[1268] | recorded ch585; body self-references chapter(s) [718]
+[LOW] 1933 ch=[182] pg=[585] | recorded ch182; body self-references chapter(s) [42]
+[LOW] 1933 ch=[407] pg=[1035] | recorded ch407; body self-references chapter(s) [28]
+[LOW] 1933 ch=[549] pg=[1447] | recorded ch549; body self-references chapter(s) [25]
+[LOW] 1933 ch=[1026] pg=[2619] | recorded ch1026; body self-references chapter(s) [278]
+[LOW] 1933 ch=[1035] pg=[2632] | recorded ch1035; body self-references chapter(s) [278]
+[LOW] 1933 ch=[1047] pg=[2693] | recorded ch1047; body self-references chapter(s) [490]
+[LOW] 1933 ch=[1052] pg=[2708] | recorded ch1052; body self-references chapter(s) [278]
+[LOW] 1933 ch=[1053] pg=[2708] | recorded ch1053; body self-references chapter(s) [248]
+[LOW] 1935 ch=[358] pg=[1221] | recorded ch358; body self-references chapter(s) [821]
+
+------------------------------------------------------------------------------
+H4 PRESENT + RECOVERED -- top 1 of 1
+------------------------------------------------------------------------------
+[LOW] 1921 ch=[682] pg=[1154, 1154] | ch682 present in merged (p1154) but also independently recovered by visual (p1154, status=image_verified)
+
+------------------------------------------------------------------------------
+CANDIDATES BY YEAR (high/med only)
+------------------------------------------------------------------------------
+  1851 : 2
+  1852 : 25
+  1853 : 32
+  1854 : 7
+  1855 : 6
+  1857 : 4
+  1858 : 1
+  1859 : 2
+  1861 : 5
+  1862 : 5
+  1863 : 8
+  1865 : 2
+  1869 : 2
+  1871 : 3
+  1873 : 7
+  1880 : 9
+  1893 : 1
+  1907 : 7
+  1913 : 18
+  1917 : 8
+  1919 : 3
+  1921 : 8
+  1923 : 12
+  1925 : 5
+  1927 : 24
+  1929 : 7
+  1931 : 12
+  1933 : 19
+  1935 : 13
+  1937 : 14
+  1939 : 14
+  1941 : 6
+  1943 : 4
+  1945 : 41
+  1947 : 33
+  1949 : 6
+  1951 : 24
+  1953 : 23
+  1955 : 19
+  1957 : 41
+  1959 : 30
+  1961 : 27
+  1963 : 45
+  1965 : 34
+  1967 : 29
+  1968 : 24
+  1969 : 21
+  1970 : 14
+  1971 : 14
+  1972 : 6
+  1973 : 2
+  1974 : 4
+  1975 : 6
+  1976 : 8
+  1977 : 2
+  1978 : 8
+  1979 : 13
+  1980 : 1
+  1981 : 8
+  1982 : 9
+  1983 : 1
+  1984 : 3
+  1986 : 1
+  1987 : 5
+  1988 : 5
+  1989 : 1
+  1990 : 4
+  1991 : 1
+  1993 : 1
+  1994 : 1
+
+Full machine-readable list: C:\PatoLex-scratch\_dup_audit_candidates.json
