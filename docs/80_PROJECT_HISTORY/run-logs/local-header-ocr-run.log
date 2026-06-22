@@ -169,3 +169,32 @@ VERDICT / VIABILITY FOR BIENNIALS 1868-1878
   header eludes OCR, e.g. clusters 462-468, 423-428) plus genuinely garbled/edge headers
   (41,43,53,55,...). These need the page-image visual fallback. No DB/merged/certified
   writes; additive superset to production-1873-74/parsed_acts_visual.json.
+
+[2026-06-22] APPLY-1876 | year 1876 (production-1875-76, early-era ROMAN, additive CCCC=400) | OK
+  1876: before/after/residual = 138/79/59   (recovered 79 of 138; residual 138 -> 59)
+  Tool: _apply_1876.py (modeled on _apply_1874.py dual-window guard) + _scan_headers.py +
+    _header_ocr.py + _render_page.py/PyMuPDF. INTERPRETER surya-venv python. CONFIRM-ONLY:
+    a chapter written ONLY when its EXACT oracle number reads as a clean in-range printed
+    header (status=image_verified, printed_number_confirmed=true, origin=local_header_ocr,
+    chapter_int_final==oracle). In-script POST-CHECK re-read every found page (0 rejected
+    this run -- no spurious mis-paged entries, unlike 1874's ch587 case). Independent
+    re-scan spot-check: pg994 -> [613], pg824 -> [496]. attempted=138 confirmed=79.
+  DUAL-SERIES CORRECTION (durable finding -> SEE lessons): 1875-76 has TWO physical volumes
+    sharing the SAME chapter-number range 1..613 -- production-1875-76 (main Statutes vol,
+    maps into 1875-76_Statutes.pdf, source_page == PDF page, offset 0) and
+    production-1875-76-code (Code-Amendments vol, a SEPARATE smaller PDF, own page numbering
+    13..129, NOT in 1875-76_Statutes.pdf; 69 acts, 15 chapter numbers overlap the main vol).
+    _residual_manifest.py collapses both volumes into one chapter->page map, so any missing
+    chapter whose nearest present neighbors come one-from-each-volume gets a GARBAGE
+    page_range (17 such, max span 820, e.g. ch467: lo_pg751 main / hi_pg39 code). The 1874
+    dual-WINDOW guard alone does NOT fix this (it would scan the code vol's page 39 region
+    of the WRONG PDF). FIX: re-derive anchors from the MAIN volume's present chapters ONLY
+    (dropping the 15 overlap chapters) and scan the bounded sequential window (cap 40 pp)
+    between the nearest present main-vol neighbors. This converted the 820-pp bogus spans
+    into tight 8-15 pp windows and correctly recovered the formerly-mis-anchored cluster
+    members (419@646, 468/469@752, 496@824, 512@848, 519@859) while leaving their true
+    misses (417,418,452,467,497,498,518,522) residual. NO wrong number emitted.
+  Remaining 59 residual: dominated by multi-act-page 2nd/3rd-header OCR loss (clusters
+    417-418, 427-428, 442-443, 458-459, 476-477) plus genuinely garbled/edge headers
+    (3,9,24,47,63,91,104,117,...). These need the page-image visual fallback. No DB/merged/
+    certified writes; additive superset to production-1875-76/parsed_acts_visual.json.
