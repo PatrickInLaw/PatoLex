@@ -7,3 +7,8 @@
 [2026-06-22 13:48 PT] CHECKPOINT | Durably written so far (CONFIRM-ONLY, status=image_verified, origin=surya_header_ocr, >=2-DPI): 1911=2, 1868=11, 1872=7, 1874=24 = 44 chapters across 4 years. parsed_acts_visual.json append-safe writes verified by grep count. | OK
 [2026-06-22 13:48 PT] INFLIGHT | 1876 (largest page-spans, 50 missing) running in background (job b7sw4y4xv); writes flush every 15 confirms so a 13:50 stop preserves everything. 1878/1870/1866 NOT YET RUN (deferred past window). | WARN
 [2026-06-22 13:48 PT] LEVER | Surya alone closes the easy/clean Roman residuals (1868 79%, 1874 63%). Remaining residuals are tight multi-act clusters + illegible short-span headers (1872 25%); these need a stronger local VLM (Qwen2.5-VL / GOT-OCR2) or clerk-index cross-check, NOT another OCR-engine swap. | OK
+[surya-tool] 1878: attempted=46 confirmed=11 in 751s (direct bg run, backfilled) -> [77,87,101,185,221,443,563,568,608,633,668]
+[surya-tool] 1876: attempted=50 confirmed=11 in 1185s (direct bg run, backfilled) -> [47,207,313,427,433,449,467,472,487,527,548]
+[surya-tool] 1870: attempted=55 confirmed=22 in 778s (direct bg run, backfilled) -> [3,27,35,120,175,187,198,205,224,253,275,295,368,374,378,388,447,463,464,477,479,498]
+[surya-tool] 1866: attempted=61 confirmed=19 in 1111s (direct bg run, backfilled) -> [38,52,86,113,114,183,187,227,243,368,397,443,482,503,507,518,533,543,592]
+SUMMARY 2026-06-22 window-2: biennial Surya pass 1878/1876/1870/1866 = 63 chapters confirmed (zero Claude tokens). Corpus OCR-era residual 270->207 = 99.8%. Hard remainder (multi-act clusters) -> next-stage local VLM.
