@@ -1,0 +1,95 @@
+[2026-06-22 PT] SCAN-GAP-VERIFICATION | Adversarial page-level verification of every claimed OCR "physical scan gap". Method: render source PDF in chief-clerk-archive, OCR consecutive running-head printed page numbers across each claimed gap. Continuous => DEBUNKED; printed-page jump => REAL GAP. Read-only.
+
+[STEP 1] INVENTORY | OK
+  Source: every production-*/parsed_acts_visual.json (status=not_found_needs_reocr) + final report + lessons.
+  71 inventory rows; after de-dup of note-keyword false hits (image_verified / legislative_gap), the DISTINCT scan-gap claims are:
+    1989 ch1440-1467 (28)  | 1986 ch1357/1358/1359 | 1988 ch398 | 1985 ch505/506 | 1981 ch378
+    1972 ch517             | 1970 ch906/907        | 1959 ch1001 | 1955 ch1139   | 1929 ch881
+    1927 ch816/817         | 1905 ch389-397        | 1951 ch435/756/829/831
+
+[STEP 2] PER-CLAIM PDF VERIFICATION
+
+  1989 ch1440-1467 | 1989_Vol4_DigestChapters.pdf | DEBUNKED (PRESENT-AFTER-ALL) | OK
+    Vol3 PDF (2174 pp) tail idx2173 = printed 6406 = START of CHAPTER 1439 -> PDF truncates there.
+    1989_Vol4_DigestChapters.pdf idx2 = "Ch.1440 ] STATUTES OF 1989 6407 CHAPTER 1440" (full body).
+    Chapters run contiguously 1440,1441,1442... idx195-230 = ch1467 (printed 6600-6635). Printed pages
+    6407->6635 continuous, directly continuing Vol3's 6406. ALL 28 chapters present in Vol4 PDF
+    (mis-named "DigestChapters" = actually the full-text Vol4 continuation). Never OCR'd. ACTION: re-OCR Vol4.
+
+  1959 ch1001 | 1959_Vol2_Chapters.pdf | DEBUNKED (PRESENT-AFTER-ALL) | OK
+    Vol1 tail idx2430 = printed 3022 (ch1000). Vol2 idx1 (1-based pg2) = "Ch.1001] 1959 REGULAR SESSION
+    3023 CHAPTER 1001". Printed 3022->3023 continuous. Recovery note + lesson claimed Vol2 starts at
+    ch1002 and ch1001 was a between-volume scan gap -- FALSE. ch1001 is Vol2's first chapter.
+
+  1955 ch1139 | 1955_Vol2_Chapters.pdf | DEBUNKED (PRESENT-AFTER-ALL) | OK
+    Vol2 idx1 = "Ch.1139] 1955 REGULAR SESSION 2133 CHAPTER 1139". First chapter of Vol2. Cross-volume
+    manifest mis-assignment only.
+
+  1988 ch398 | 1988_Vol2.pdf | DEBUNKED (PRESENT-AFTER-ALL) | OK
+    Vol2 idx2 = "Ch.398] STATUTES OF 1988 1749 CHAPTER 398" (full body). First chapter of Vol2. Vol1
+    ended printed 1748. Note already self-resolved; confirmed.
+
+  1986 ch1357/1358 | 1986_Vol3.pdf | REAL GAP | OK
+    idx1074(pg1075)=printed 4811 (ch1356 body) -> idx1075(pg1076)=printed 4816 (ch1359). Printed
+    4812-4815 absent (tail ch1356 + title pages ch1357 & ch1358 + title ch1359). No local PDF covers.
+  1986 ch1359 | 1986_Vol3.pdf | REAL GAP (TITLE LEAF ONLY) | OK
+    Body present idx1076(pg1077)=printed 4817 "Ch.1359". Only its title page (in the 4812-4815 gap) absent.
+
+  1985 ch505/506(+507) | 1985_Vol1_Chapters.pdf | REAL GAP | OK
+    idx1855(pg1856)=printed 1858 (ch504) -> idx1856(pg1857)=printed 1861 (ch508). Printed 1859-1860
+    absent => ch505, ch506 AND ch507 all missing. CLAIM UNDER-COUNTED (listed only 505/506). Needs external scan.
+
+  1981 ch378 | 1981_Vol2.pdf | REAL GAP | OK
+    idx62(pg63)=printed 1561 (ch377) -> idx63(pg64)=printed 1564 (ch379). Printed 1562-1563 (entire
+    ch378, urgency statute) absent. Urgency-clause tail atop idx63 confirms ch378 enacted. Needs external scan.
+
+  1972 ch517 | 1972_Vol1_Chapters.pdf | REAL GAP (TITLE LEAF ONLY) | OK
+    idx894(pg895)=printed 895 (ch516) -> idx895(pg896)=printed 898 (ch517 body, running head "Ch.517").
+    Printed 896-897 (ch517 title/enacting page) absent, but ch517 BODY present and OCR-recoverable.
+
+  1970 ch906/907 | 1970_Vol1_Chapters.pdf | REAL GAP | OK
+    idx1646(pg1647)=printed 1647 (ch905) -> idx1647(pg1648)=printed 1649 (ch908). Printed leaf 1648
+    physically skipped (held ch906, ch907 headings + start of ch908). Confirms the lesson. Needs external scan.
+
+  1929 ch881 | 1929_Vol1_29Chapters.pdf | REAL GAP | OK
+    idx1962(pg1963)=printed 1961 (ch880) -> idx1963(pg1964)=printed 1964 ("[Ch.882 CHAPTER 882"). Two
+    consecutive PDF pages span printed 1961->1964 => printed 1962-1963 (ch881) absent. Needs external scan.
+
+  1927 ch816 | 1927_Vol1_Chapters.pdf | REAL GAP | OK
+    idx1624(pg1625)=printed 1625 (ch815) -> idx1625(pg1626)=printed 1628 ("[Ch.817"). Printed 1626-1627
+    absent (end ch815 + all ch816 + title ch817). ch816 fully absent. Needs external scan.
+  1927 ch817 | 1927_Vol1_Chapters.pdf | REAL GAP (TITLE LEAF ONLY) | OK
+    ch817 BODY (dairy-products act) present from printed 1628 idx1625 onward; only title page absent.
+
+  1905 ch389-397 | 1905_Statutes.pdf | REAL GAP | OK
+    Last chapter before gap = ch388 (CCCLXXXVIII) at printed 496 (idx561). idx561 printed 496 ->
+    idx562 printed 513. Resume = ch398 (CCCXCVIII) at printed 519/520 (idx569). Printed 497-512
+    physically absent. idx540-561 is a LITERAL DUPLICATE of printed 481-496 (chapters 379-388 printed
+    twice), masking the gap. ch389-397 appear NOWHERE in the PDF (roman-heading search idx500-640).
+    1905_BR.pdf (budget report) and 1905_Index.pdf hold no statute chapters. Duplicated-leaf +
+    dropped-leaf scan defect. Needs external scan. Patrick: open pg562 (printed 496, ch388) then pg563
+    (printed 513) to see the jump; ch398 resumes pg570.
+
+  1951 ch435/756/829/831 | 1951_Vol1_Chapters.pdf | ALL PRESENT-AFTER-ALL (header-loss) | OK
+    ch435 idx1298 "[Ch 435] 1418" body "amend Sec 1081 Insurance Code"; heads 1415->1418->1419.
+    ch756 idx1899 "[Ch 756] 2020" body "amend Sec 32002.2 Health & Safety Code"; heads 2018->2019->2020.
+    ch829 idx2196 "CHAPTER 829 / [Ch.829]" body "amend Sec 320 Vehicle Code".
+    ch831 idx2197 "CHAPTER 831 / [Ch.831]" body "San Lucas Dam construction plan".
+    All four are classic header-loss; bodies present, running heads continuous. NOT scan gaps.
+    Bonus: resolves the original agent's "829-or-831 = San Lucas Dam" ambiguity -> ch831 = San Lucas
+    Dam, ch829 = Vehicle Code. Reclassify all four from not_found_needs_reocr to recoverable.
+
+[STEP 3] FINAL TALLY | 57 chapter-claims verified at page level | OK
+  PRESENT-AFTER-ALL (debunked artifacts): 35 chapters
+    = 1989 ch1440-1467 (28, present in 1989_Vol4_DigestChapters.pdf) + 1959 ch1001 + 1955 ch1139 +
+      1988 ch398 (each first chapter of next vol's PDF) + 1951 ch435/756/829/831 (header-loss).
+  REAL GAP (fully absent printed leaf, need external source): 19 chapters
+    = 1905 ch389-397 (9) + 1986 ch1357/1358 (2) + 1985 ch505/506/507 (3) + 1970 ch906/907 (2) +
+      1981 ch378 + 1929 ch881 + 1927 ch816.
+  REAL GAP -- title leaf only (body present, OCR-recoverable): 3 chapters
+    = 1972 ch517 + 1927 ch817 + 1986 ch1359.
+  ~36/57 (63%) of claims were artifacts -- consistent with the project-wide pattern. Corrections to
+  prior records: (a) 1985 gap also drops ch507 (claim listed only 505/506); (b) the lesson file +
+  1959 note recorded ch1001 as "the only real 1959 scan gap" -- FALSE, ch1001 is in Vol2;
+  (c) 1955 ch1139, 1988 ch398, 1959 ch1001 are cross-volume artifacts, not gaps.
+  Durable markdown: docs/80_PROJECT_HISTORY/SCAN_GAP_VERIFICATION_2026-06-22.md
