@@ -1,0 +1,16 @@
+[2026-06-22 15:43 PT] VLM | 1870 DRY: targets=10 chapters, would render 32 unique pages @ 350dpi from 1869-70_Statutes.pdf | OK
+[2026-06-22 15:43 PT] VLM | 1870 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 15:46 PT] VLM | 1870 model loaded in 203s; vram_alloc=16.6GB | OK
+[2026-06-22 15:49 PT] VLM | 1870 LIFT: recovered 7/10 missing chapters (5.1s/page, 32 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1870.json | OK
+[2026-06-22 15:51 PT] VLM | 1870 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 15:51 PT] VLM | 1870 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-22 15:54 PT] VLM | 1870 LIFT: recovered 7/10 missing chapters (4.0s/page, 32 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1870.json | OK
+[2026-06-22 15:55 PT] VLM | 1870 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 15:55 PT] VLM | 1870 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-22 15:58 PT] VLM | 1870 LIFT: recovered 9/10 missing chapters (3.9s/page, 32 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1870.json | OK
+[2026-06-22 16:00 PT] VLM | PILOT SUMMARY -- VLM=Qwen2.5-VL-7B-Instruct (transformers 5.12.1, torch 2.7.0+cu128, RTX 5090) | OK
+[2026-06-22 16:00 PT] VLM | LIFT 9/10 on 1870 hard multi-act-cluster residual (the 1 non-hit, ch143/CXLIII, is genuinely NOT printed in range -- manifest page-anchor artifact, not a VLM miss; effective read-lift 9/9 of present chapters) | OK
+[2026-06-22 16:00 PT] VLM | KEY FIX: VLM transcribes scan FAITHFULLY incl. broken ligatures (CHIAPTER/CITAPTER/CHAPTEER) -- parse_chapters() must fuzzy-match the heading token (CHAP_TOK regex), strict on the number. Without this, lift was 7/10. | OK
+[2026-06-22 16:00 PT] VLM | PERF: model load ~12s warm (~200s cold dl), 16.6GB VRAM (of 32GB), ~4.0s/page @ 350dpi. Full ~187 residual ~ 30-45 min GPU wall. | OK
+[2026-06-22 16:00 PT] VLM | GO/NO-GO = GO. Tool: C:\PatoLex-scratch\_vlm_header_recover.py (year-driven, --confirm gated, append-safe, NO DB writes, self-logs). Venv: C:\PatoLex-scratch\ocr-engines\qwenvl-venv | OK
+[2026-06-22 16:00 PT] VLM | FULL-RUN INVOCATION (background, per year): C:/PatoLex-scratch/ocr-engines/qwenvl-venv/Scripts/python.exe C:/PatoLex-scratch/_vlm_header_recover.py <year> --confirm   (years: 1866 1868 1870 1872 1874 1876 1878; run _residual_manifest.py <year> first) | OK
