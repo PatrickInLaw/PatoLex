@@ -123,3 +123,37 @@ under `C:\PatoLex-scratch`.
 and vol2's first chapter ch1002 — no available PDF covers it). Outputs:
 `C:\PatoLex-scratch\production-1959-vol1-59chapters\parsed_acts_visual.json` (857, 1000, 1001)
 and `...\production-1959-vol2-chapters\parsed_acts_visual.json` (1332, 2123, 2128, 2159).
+
+## Reinforcement from 1861 + 1968 (2026-06-21) — a LONG ACT looks like a gap; OCR CORRUPTS the number
+
+Two more sub-patterns hardened across the early-roman (1861) and modern (1968) rebuilds:
+
+- **Wide page-span = a long act, NOT a gap.** When the bracket between two recovered chapters
+  spans 8–10+ pages, the natural (wrong) inference is "the chapters in between were never
+  enacted." In every observed case it was a single long multi-code/omnibus act: 1861 ch493
+  (CCCCXCIII, the SF Consolidation Act amendments, printed pp544–553), 1968 ch1460 (Human
+  Resources Development Act) and ch1473 (Public Records Act, pp1219–1226). The wide span is the
+  act's LENGTH; the next chapter number appears correctly right after it. **Never call a
+  legislative_gap from a wide span — render the page at the expected position and read.** A
+  worker agent made exactly this false-gap call twice on 1861 (ch140, ch493) and it was caught
+  only by re-reading the images.
+- **OCR corrupts the chapter NUMBER, not just drops the header.** Beyond header-loss, the
+  running head's digits get mangled so the act is indexed under the WRONG number and looks
+  missing: 1968 ch502→"902", 1963 ch1174→"J174", 1978 ch1432→"1482", 1935 ch329→"328", 1921
+  ch796 (OCR "757"→"797"). Corollary for the MERGE: the corrupted number can land as a phantom
+  PRESENT chapter (e.g. 1919 ch432 is really ch482; 1986 ch1301 carried ch1300's title) — these
+  are invisible to gap-fill (which only fills *missing* slots) and require a separate
+  misnumbered-duplicate audit of the merged output.
+- **Volume-boundary placement:** chapters can sit at the START of the next volume, not the end
+  of the current one (1968 ch918/919/920 are at vol2 source_pages 3/7/10; the manifest's
+  volume-spanning page_range [10,1636] is an artifact, not a gap).
+
+## CRASH-SAFETY (orchestration, 2026-06-21, observed on 1861)
+
+A visual agent that writes an INITIAL all-`not_found` visual.json (the full target list seeded
+as not_found) and then dies mid-run **clobbers** any prior session's good `image_verified`
+entries (1861 regressed 423→383 counted chapters). Rule for agent prompts: **never write an
+all-not_found initialization**; only ever write a MERGED SUPERSET of prior-good + newly-verified,
+and for large years re-write the full file every ~25 chapters so an interruption preserves
+progress. Recovery from a clobber is a full re-run (source images are intact, so no permanent
+loss — but the measured count regresses until rebuilt).
