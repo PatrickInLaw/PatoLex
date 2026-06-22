@@ -124,6 +124,28 @@ and vol2's first chapter ch1002 — no available PDF covers it). Outputs:
 `C:\PatoLex-scratch\production-1959-vol1-59chapters\parsed_acts_visual.json` (857, 1000, 1001)
 and `...\production-1959-vol2-chapters\parsed_acts_visual.json` (1332, 2123, 2128, 2159).
 
+> ### CORRECTION 2026-06-22 — 1959 ch1001 was NOT a scan gap (it is the FIRST chapter of Vol2)
+>
+> The line above (and the 1959 visual note) calling **ch1001 "the only real 1959 scan gap"**
+> and claiming **"vol2-chapters starts at ch1002"** is **FALSE**. Independent page-level
+> verification (`docs/80_PROJECT_HISTORY/SCAN_GAP_VERIFICATION_2026-06-22.md`) plus local
+> header-OCR of `1959_Vol2_Chapters.pdf` **PDF idx 1 / page_1indexed 2 / printed page 3023**
+> read the running head **`Ch. 1001]`**, heading **`CHAPTER 1001`**, and act *"An act to amend
+> Section 11380.1 of the Government Code, relating to the designation by the Secretary of State
+> of style and form to be used in filing regulations"* (Approved June 16, 1959). **ch1001 is the
+> FIRST chapter of Vol2** — ch1002 follows it on the *same* printed page. The earlier session
+> misread Vol2's opening as starting at ch1002.
+>
+> Resolution (2026-06-22): ch1001 written `status="image_verified"`,
+> `origin="local_header_ocr_scangapfix"`, `source_page=2` into
+> `production-1959-vol2-chapters\parsed_acts_visual.json`; the stale vol1-59chapters ch1001
+> record was corrected to `status="superseded_present_in_vol2"` (original incorrect note
+> preserved inline). **1959 residual: 1 → 0.** This is a *cross-volume re-point*, the SAME class
+> as 1955 ch1139 and 1988 ch398 (each the first chapter of its next volume's PDF) — NOT a scan
+> gap. The durable rule in Lesson §1 ("Always check the next volume's first page before
+> declaring a cross-volume gap") stands; this 1959 conclusion violated it and is hereby
+> corrected.
+
 ## Reinforcement from 1861 + 1968 (2026-06-21) — a LONG ACT looks like a gap; OCR CORRUPTS the number
 
 Two more sub-patterns hardened across the early-roman (1861) and modern (1968) rebuilds:
