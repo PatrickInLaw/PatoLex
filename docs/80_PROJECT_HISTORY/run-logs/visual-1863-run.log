@@ -49,3 +49,16 @@
 [2026-06-21 06:15 PT] SUMMARY | 40/40 chapters image_verified; 0 legislative_gap; 0 not_found. Prior vol2 ch300 & ch443 (marked legislative_gap) CORRECTED to image_verified -- both exist with printed Roman confirmed | OK
 [2026-06-21 06:16 PT] KEY FINDING | OCR header truncation at page tops is the dominant failure mode (matches known ch62 case); CCCC-additive Roman form for 4xx + surya engine's extra-C garbling caused most missed OCR hits. NONE of the 40 was a true legislative gap. | OK
 [2026-06-21 06:18 PT] WRITE | parsed_acts_visual.json written for both volumes | OK
+
+=== APPEND-SAFE RE-RUN (later 2026-06-21 session) ===
+[2026-06-21 PT] RERUN-START | _residual_manifest.py 1863 -> N=536 present=520 missing=16 [5,23,79,123,136,378,403,433,477,488,489,498,503,504,515,519] (ALL vol1) | OK
+[2026-06-21 PT] PRIOR | read production-1863/parsed_acts_visual.json: 38 prior image_verified acts; NONE of the 38 overlap the 16 current-missing -> MERGE (keep 38, add 16). vol2 visual file left UNTOUCHED (manifest shows vol2 complete). | OK
+[2026-06-21 PT] IMAGES | no pages_raw/pages_prep_gray dirs (stale C:\Users\patolex img_paths in OCR json); extracted pages from 1863_Statutes.pdf via PyMuPDF @200dpi to C:\PatoLex-scratch\_tmp_1863_imgs | OK
+[2026-06-21 PT] CALIB | source_page = OCR_key+1 = PDF_idx0+1 (PDF text layer empty/scan-only); verified on ch62 body (Hogs/Marin appr Apr-21-1856) @ OCR key120 = PDF idx120 = sp121 | OK
+[2026-06-21 PT] IMG-VERIFY | all 16 confirmed by reading printed Roman header on page image; additive CCCC=400 confirmed on 403/433/477/488/489/498: | OK
+[2026-06-21 PT]   ch5 V sp74; ch23 XXIII sp88; ch79 LXXIX sp155; ch123 CXXIII sp208; ch136 CXXXVI sp231; ch378 CCCLXXVIII sp638 | OK
+[2026-06-21 PT]   ch403 CCCCIII sp683; ch433 CCCCXXXIII sp770; ch477 CCCCLXXVII sp808; ch488 CCCCLXXXVIII sp814; ch489 CCCCLXXXIX sp814 | OK
+[2026-06-21 PT]   ch498 CCCCXCVIII sp819; ch503 DIII sp821; ch504 DIV sp822; ch515 DXV sp828; ch519 DXIX sp830 | OK
+[2026-06-21 PT] OCR-MISSED | running head OCR-MISSED (NOT a gap) on 8: 123,136,378,433,489,498,515,519 -- recovered via image read | OK
+[2026-06-21 PT] WRITE | merged superset production-1863/parsed_acts_visual.json = 54 acts (38 prior + 16 new), all image_verified; meta targeted=54 verified=54 gap=0 not_found=0 draft=true | OK
+[2026-06-21 PT] RERUN-END | _residual_manifest.py 1863 -> N=536 present=536 missing=0. FULL COVERAGE. 0 legislative_gap, 0 not_found. Additive only, no DB writes. | OK
