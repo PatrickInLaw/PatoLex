@@ -55,9 +55,9 @@ for yr, N in sorted(oracle.items()):
         cp = os.path.join(d, "parsed_acts_clauserec.json")
         if os.path.exists(cp):
             c, _ = distinct(cp, "recovered_acts", N); after |= c
-        vp = os.path.join(d, "parsed_acts_visual.json")  # ONLY image_verified counts; gaps tracked
+        vp = os.path.join(d, "parsed_acts_visual.json")  # image_verified + ocr_text_verified count; gaps tracked
         if os.path.exists(vp):
-            v, g = distinct(vp, "recovered_acts", N, only_status="image_verified"); after |= v; leg |= g
+            v, g = distinct(vp, "recovered_acts", N, only_status=("image_verified", "ocr_text_verified")); after |= v; leg |= g
     leg -= after  # a chapter both recovered somewhere AND marked gap elsewhere -> trust the recovery
     eff_N = N - len(leg)  # legislative gaps were never enacted -> reduce the true denominator
     rows.append({"year": yr, "N": N, "eff_N": eff_N, "before": len(before), "after": len(after),
