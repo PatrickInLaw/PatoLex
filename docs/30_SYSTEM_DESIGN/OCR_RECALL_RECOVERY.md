@@ -99,6 +99,21 @@ years driven to 100% image-verified.** Algorithmic (Goal A) DONE + Hans-hardened
   so an interruption preserves progress. Recovery is a full re-run (source images are intact).
 - **SESSION-LIMIT deaths:** when the 5-hour limit hits, in-flight agents die returning only the limit
   message; relaunch them after reset (append-safe handles partial state, except the clobber case above).
+- **NORMALIZATION DONE (2026-06-21, Hans-SOUND):** canonicalized visual status strings
+  (`verified`->`image_verified`, `ocr_verified`->`ocr_text_verified`, 1972 ch517 gap->not_found) via
+  `pipeline/analysis/normalize_visual_status.py`; scoreboard now counts image_verified + ocr_text_verified.
+  **Mapped-years coverage = 99.9% (89,660/89,791), residual 131 = 1854(78, wiring) + ~53 physical scan
+  gaps.** Vocabulary is now exactly 4 statuses across 116 visual files.
+- **MAJOR scope finding (Hans MAJOR-1) — the 99.9% is ONLY the 91 MAPPED years.** 17 session-years
+  (oracle weight 6,211) are UNMEASURED -> corpus-wide incl. them at 0% = **93.4%**. They are NOT a flat
+  hole: (a) **19th-c biennium 1866-1878 (~4,380 ch)** data EXISTS under biennium dirs
+  (`production-1865-66` etc.) but the oracle splits them per-year while volumes are BIENNIAL -> needs a
+  session-year<->biennial-volume reconciliation + numbering check (the harder fix). (b) **1901/1909/1911
+  (~1,757 ch):** partial — `production-1907-09`=485 but `production-1900-01`=14 and `production-1910-11`=1
+  are near-empty (possible real gaps/special-session-only). (c) **1952-1964 even budget years (74 ch):**
+  tiny special sessions folded into adjacent volumes. RESOLUTION needs Patrick's direction — this is a
+  4th workstream beyond the normalization/1854/dup-audit set. Quote coverage as "99.9% of mapped years
+  / 93.4% corpus-wide" until reconciled.
 
 ### RESUME PROTOCOL (if you wake up unsure where you are)
 1. Read CURRENT STATE above + the master run log (tail it) + any per-agent run logs in run-logs/.
