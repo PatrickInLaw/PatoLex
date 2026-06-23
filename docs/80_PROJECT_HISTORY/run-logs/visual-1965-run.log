@@ -1,0 +1,22 @@
+[2026-06-21 09:00 PT] INIT | visual-recovery-1965 campaign started | OK
+[2026-06-21 09:01 PT] MANIFEST | python _residual_manifest.py 1965 -> 7 missing: [689, 696, 697, 710, 870, 871, 1936] in vol2 (6) and vol3-chapters (1) | OK
+[2026-06-21 09:02 PT] PREFLIGHT | Verified page images present: vol2/pages_raw/page_0250.png, vol3-chapters/pages_raw/page_0647.png | OK
+[2026-06-21 09:02 PT] PREFLIGHT | No existing parsed_acts_visual.json in either volume; fresh run | OK
+[2026-06-21 09:03 PT] OCR-AUDIT | Loaded page_ocr_results.json: vol2=2004 pages (keys 2-2005), vol3-chapters=1621 pages (keys 0-1620) | OK
+[2026-06-21 09:04 PT] OCR-AUDIT | Key->image mapping confirmed: OCR key K, page_1indexed=K+1, image=page_{K:04d}.png (0-indexed) | OK
+[2026-06-21 09:05 PT] CH689 | lo_ch=688 (page 251), hi_ch=690 (page 210/key 209). Scanned pages 0249-0253. | OK
+[2026-06-21 09:05 PT] CH689 | page_0253.png: CHAPTER 689 clearly printed. Title: 'An act to amend Section 263 of the Streets and Highways Code, relating to state scenic highways.' source_page=254 | IMAGE_VERIFIED
+[2026-06-21 09:06 PT] CH696 | page_range=[277,279]. Ch695 confirmed page_0276.png; ch697 confirmed page_0278.png. | OK
+[2026-06-21 09:07 PT] CH696 | page_0277.png: BLACK SCAN ARTIFACT at top obscures chapter header. Body text = Education Code act (Section 13253.5, work-study/nonteaching aides). All 4 OCR engines garbled top line. Ch696 occupies this page, printed number NOT readable from image. | OCR_TEXT_VERIFIED
+[2026-06-21 09:08 PT] CH697 | page_0278.png: CHAPTER 697 clearly printed. Title: 'An act to amend Section 273a of the Penal Code, relating to cruelty to children.' source_page=279 | IMAGE_VERIFIED
+[2026-06-21 09:09 PT] CH710 | page_range=[293,297]. Scanned pages_0292-0296. | OK
+[2026-06-21 09:09 PT] CH710 | page_0295.png: CHAPTER 710 clearly printed. Title: 'An act to add Section 172.95 to the Penal Code, relating to alcoholic beverages, and declaring the urgency thereof, to take effect immediately.' source_page=296 | IMAGE_VERIFIED
+[2026-06-21 09:10 PT] CH870 | page_range=[659,662]. Scanned pages_0658-0661. | OK
+[2026-06-21 09:10 PT] CH870 | page_0660.png: CHAPTER 870 clearly printed. Title: 'An act to amend Section 12223 of the Financial Code, relating to check sellers and cashers.' source_page=661 | IMAGE_VERIFIED
+[2026-06-21 09:11 PT] CH871 | page_0661.png: CHAPTER 871 clearly printed (midpage). Title: 'An act to amend Section 952 of the Probate Code, relating to probate vouchers.' source_page=662 | IMAGE_VERIFIED
+[2026-06-21 09:12 PT] CH1936 | vol3-chapters, page_range=[648,649]. Scanned pages_0647-0648. | OK
+[2026-06-21 09:12 PT] CH1936 | page_0648.png: CHAPTER 1936 clearly printed. Title: 'An act to amend Section 850 of the Penal Code, relating to warrants.' source_page=649 | IMAGE_VERIFIED
+[2026-06-21 09:13 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1965-vol2\parsed_acts_visual.json (6 acts: 5 image_verified, 1 ocr_text_verified) | OK
+[2026-06-21 09:13 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1965-vol3-chapters\parsed_acts_visual.json (1 act: 1 image_verified) | OK
+[2026-06-21 09:14 PT] SUMMARY | 1965 visual recovery: 7 targeted, 6 image_verified, 1 ocr_text_verified, 0 legislative_gap, 0 not_found | OK
+[2026-06-21 PT] VERIFY | Re-run of campaign agent: manifest _residual_manifest.py 1965 -> N=2070 present=2070 missing=0. Both visual JSONs verified intact (vol2: 6 acts, vol3-chapters: 1 act). Image mapping confirmed (page_0253.png for ch689, page_0648.png for ch1936). Full coverage achieved. | OK

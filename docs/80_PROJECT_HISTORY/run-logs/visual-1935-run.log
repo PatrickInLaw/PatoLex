@@ -1,0 +1,22 @@
+[2026-06-21 00:00 PT] INIT | VISUAL-recovery worker 1935 started | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1935 -> 7 missing: [27, 329, 395, 547, 640, 656, 808], all in production-1935-vol1-chapters | OK
+[2026-06-21 00:02 PT] VERIFY | Page images confirmed present in production-1935-vol1-chapters/pages_raw/; key->image mapping verified: key N -> page_1indexed=N+1 -> image page_{N:04d}.png | OK
+[2026-06-21 00:03 PT] OCR-MINE | Searched all 4 engines (tess/doctr/surya/consensus) across page ranges (+5 buffer) for all 7 chapters | OK
+[2026-06-21 00:03 PT] OCR-MINE | Ch27: FOUND in tess_text on src_page=48 (img page_0047.png) -- Vehicle Code act | OK
+[2026-06-21 00:03 PT] OCR-MINE | Ch329,395,547,640,656,808: NOT FOUND in any OCR engine -- systematic running-head miss; image read required | WARN
+[2026-06-21 00:04 PT] IMAGE-READ | Ch27 src=48 img=page_0047.png: CHAPTER 27 header + title confirmed. 'An act to establish a Vehicle Code...' | OK
+[2026-06-21 00:05 PT] IMAGE-READ | Ch329 src=1045 img=page_1044.png: Running head '[Ch. 329' confirms ch329. OCR MISREAD chapter number as '328' -- critical OCR error; image is ground truth. Title: Personal Income Tax Act of 1935 | OK
+[2026-06-21 00:06 PT] IMAGE-READ | Ch395 src=1392 img=page_1391.png: CHAPTER 395 header + title confirmed. 'An act confirming the formation, organization and existence of municipal utility districts.' | OK
+[2026-06-21 00:07 PT] IMAGE-READ | Ch547 src=1575 img=page_1574.png: CHAPTER 547 header + title confirmed. Multi-chapter page (ch546 ends, ch547+548 both start). 'An act to amend section 375 of the Fish and Game Code...' | OK
+[2026-06-21 00:08 PT] IMAGE-READ | Ch640 src=1743 img=page_1742.png: CHAPTER 640 header + title confirmed. 'An act to provide for the cooperation of State officers and agencies, and stockmen associations with the Federal Government in relation to grazing lands...' | OK
+[2026-06-21 00:09 PT] IMAGE-READ | Ch656 src=1768 img=page_1767.png: CHAPTER 656 header + title confirmed. 'An act to add a new section to the Streets and Highways Code, to be numbered 283...' | OK
+[2026-06-21 00:10 PT] IMAGE-READ | Ch808 src=2156 img=page_2155.png: CHAPTER 808 header + title confirmed. '[Ch. 808]' running head. 'An act to add section 435.5 to the Vehicle Code, relating to the sale of vehicles by a lienholder.' | OK
+[2026-06-21 00:11 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1935-vol1-chapters\parsed_acts_visual.json -- 7 recovered_acts, all image_verified, 0 legislative_gap, 0 not_found | OK
+[2026-06-21 00:11 PT] DONE | 1935 visual recovery complete: targeted=7 verified=7 gap=0 not_found=0 | OK
+
+NOTES:
+- KEY LESSON: OCR ch329 misread chapter number '329' as '328' -- running-head garble is worse than expected; it can corrupt the chapter NUMBER itself, not just omit it. Always image-verify.
+- Ch27 is a starred (*) act: it contains all amendments made during the 51st session.
+- Ch547 is a multi-chapter page: ch546 ends, ch547 and ch548 both start on source page 1575.
+- Ch808 cross-refs Stats 1935, Ch 27 (Vehicle Code) -- related acts.
+- No scan gaps or missing printed pages detected across any of the 7 chapters.

@@ -1,0 +1,12 @@
+[2026-06-21 10:00 PT] INIT | visual-recovery-1853 worker started; verified OCR key mapping (key K -> source_page K+1; key 29=source_page 30=ch14 boundary confirmed) | OK
+[2026-06-21 10:02 PT] CH15 | Chapter XV found at key 29 (source_page 30); Surya reads CHAPTER XV correctly; Tess/doctr misread as XY/KV; image page_0029.png visually confirmed; ch14+ch15 share same physical page | OK
+[2026-06-21 10:04 PT] CH26 | Chapter XXVI found at key 36 (source_page 37); all 3 engines correct; image page_0036.png visually confirmed; ch25+ch26 share same physical page; DB lo/hi=4 due to ToC anchor | OK
+[2026-06-21 10:06 PT] CH33 | Chapter XXXIII found at key 43 (source_page 44); all 3 engines correct; image page_0043.png visually confirmed; ch32 ends on same page; approved March 19 1853 | OK
+[2026-06-21 10:08 PT] CH123 | Chapter 123 LEGISLATIVE_GAP confirmed; page_0177.png shows ch122 approval then immediate CHAPTER CXXIV; no ch123 anywhere in physical volume; all 3 engines agree; ToC lists ch123 as Major Birney paymaster act at p178 same as ch124 | OK
+[2026-06-21 10:10 PT] CH137 | Chapter CXXXVII found at key 194 (source_page 195); all 3 engines correct; image page_0194.png confirmed; ch137+ch138 share same physical page; DB lo/hi=11 due to ToC anchor | OK
+[2026-06-21 10:12 PT] CH162 | Chapter CLXII found at key 224 (source_page 225); all 3 engines correct; image page_0224.png confirmed; DB lo/hi=13 due to ToC anchor | OK
+[2026-06-21 10:14 PT] CH172 | Chapter CLXXII found at key 269 (source_page 270); all 3 engines correct; image page_0269.png confirmed; ch172+ch173 share same physical page | OK
+[2026-06-21 10:16 PT] CH178 | Chapter CLXXVIII found at key 275 (source_page 276); Surya correct; Tess garbled to CLXXVIULI; doctr misread as CLXXVII; image page_0275.png clearly shows CLXXVIII; DB lo/hi=14 due to ToC anchor | OK
+[2026-06-21 10:18 PT] OUTPUT | parsed_acts_visual.json written with 8 entries (7 image_verified + 1 legislative_gap); all chapters accounted for | OK
+[2026-06-21 10:22 PT] SCHEMA | Reformatted parsed_acts_visual.json to required schema: {recovered_acts:[{chapter,chapter_int,chapter_int_final,title,source_page,printed_number_confirmed,origin,status,note}], _visual_meta:{year,targeted,verified,legislative_gap,not_found,draft}}; meta = targeted=8 verified=7 legislative_gap=1 not_found=0 draft=true | OK
+[2026-06-21 10:23 PT] DONE | 1853 visual recovery COMPLETE; 8/8 missing chapters resolved (7 verified against page image, 1 confirmed legislative gap, 0 not_found) | OK

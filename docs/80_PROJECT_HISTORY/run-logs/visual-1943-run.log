@@ -1,0 +1,86 @@
+[2026-06-20 02:30 PT] INIT | visual-recovery 1943 START | 26 missing chapters across 2 volumes | OK
+[2026-06-20 02:31 PT] LOAD | Manifest read: 26 missing, vol1-42chapters (1 ch), vol1-chapters (25 chs) | OK
+[2026-06-20 02:32 PT] LOAD | OCR consensus loaded: vol1-chapters (3284 keys/3290 pages), vol1-42chapters (98 keys/102 pages) | OK
+[2026-06-20 02:33 PT] LOAD | PDF open: 1943_Vol1_Chapters.pdf (3290 pages), 1943_Vol1_42Chapters.pdf (102 pages) | OK
+[2026-06-20 02:34 PT] PROBE | Page mapping confirmed: source_page P -> PDF 0-idx P-1 (key K -> page_1indexed K+1) | OK
+[2026-06-20 02:35 PT] CH 25 | vol=production-1943-vol1-42chapters | bracket: lo=24@p32, hi=26@p42 | bracket was too narrow -- ch25 at sp=62 | SEARCHING
+[2026-06-20 02:36 PT] CH 25 | Rendered sp=62 (PDF 0-idx=61), 42Chapters.pdf | IMAGE READ | VERIFIED: printed CHAPTER 25 at top | OK
+[2026-06-20 02:37 PT] CH 25 | CONFIRMED | source_page=62 (printed p.64) | Senate Joint Resolution No. 6 -- Relative to flood control on the Sacramento River | OK
+[2026-06-20 02:40 PT] CH 71 | vol=production-1943-vol1-chapters | bracket: lo=70@p202, hi=73@p686 | OCR scan finds no CHAPTER 71 header -- massive Education Code act | SEARCHING
+[2026-06-20 02:41 PT] CH 71 | Rendered sp=203 (PDF 0-idx=202) | IMAGE READ | VERIFIED: printed CHAPTER 71 at top of page | OK
+[2026-06-20 02:42 PT] CH 71 | CONFIRMED | source_page=203 (printed p.310) | An act to establish an Education Code, thereby consolidating and revising the law relating to the establishment, maintenance, government and operation of schools... | OK
+[2026-06-20 02:43 PT] CH 72 | vol=production-1943-vol1-chapters | bracket: lo=70@p202, hi=73@p686 | same huge range as ch71 | SEARCHING
+[2026-06-20 02:44 PT] CH 72 | Rendered sp=686 (PDF 0-idx=685) | IMAGE READ | VERIFIED: printed CHAPTER 72 at top of page | OK
+[2026-06-20 02:44 PT] CH 72 | CONFIRMED | source_page=686 (printed p.793) | An act to add Article 2, comprising Section 5171, to Chapter 2 of Division 3, and to add Section 40006 to Division 20, of the Education Code, relating to payments from State general funds for support of elementary schools | OK
+[2026-06-20 02:45 PT] CH 80 | vol=production-1943-vol1-chapters | bracket: lo=79@p687, hi=81@p688 | OCR page 688 has no header (split across page break) | SEARCHING
+[2026-06-20 02:46 PT] CH 80 | Rendered sp=688 (PDF 0-idx=687) | IMAGE READ | VERIFIED: printed CHAPTER 80 at top of page | OK
+[2026-06-20 02:46 PT] CH 80 | CONFIRMED | source_page=688 (printed p.795) | An act to add Article 4, comprising Sections 6971 to 6979, inclusive, and Article 5, comprising Section 6991, to Chapter 13 of Division 3, and to add Section 40014 to Division 20 of the Education Code, relating to apportionments from the State General Fund to elementary schools | OK
+[2026-06-20 02:47 PT] CH 175 | vol=production-1943-vol1-chapters | bracket: lo=174@p962, hi=176@p963 | OCR page 963 shows ch176, ch175 missed | SEARCHING
+[2026-06-20 02:47 PT] CH 175 | Rendered sp=963 (PDF 0-idx=962) | IMAGE READ | VERIFIED: printed CHAPTER 175 at top of page | OK
+[2026-06-20 02:48 PT] CH 175 | CONFIRMED | source_page=963 (printed p.1070) | An act to amend Section 2102 of the Education Code, relating to city boards of education | OK
+[2026-06-20 02:48 PT] CH 373 | vol=production-1943-vol1-chapters | bracket: lo=372@p1790, hi=374@p1790 | OCR garbled 373 as '3738' | SEARCHING
+[2026-06-20 02:49 PT] CH 373 | Rendered sp=1790 (PDF 0-idx=1789) | IMAGE READ | VERIFIED: printed CHAPTER 373 at middle of page | OK
+[2026-06-20 02:49 PT] CH 373 | CONFIRMED | source_page=1790 (printed p.1897) | An act to add Sections 202, 203, 1050.5 and 1050.6 to, to amend Sections 228 and 275 of and to repeal Article 5, of Chapter 1 of Part 2 of Division 2 of the Water Code, relating to the administration of the provisions of said code | OK
+[2026-06-20 02:50 PT] CH 383 | vol=production-1943-vol1-chapters | bracket: lo=382@p1793, hi=384@p1794 | | SEARCHING
+[2026-06-20 02:50 PT] CH 383 | Rendered sp=1794 (PDF 0-idx=1793) | IMAGE READ | VERIFIED: printed CHAPTER 383 at top of page | OK
+[2026-06-20 02:51 PT] CH 383 | CONFIRMED | source_page=1794 (printed p.1901) | An act to add Section 1.5 to an act entitled 'An act regulating the use of public highways for commercial purposes by certain motor vehicles...' relating to highway carriers | OK
+[2026-06-20 02:51 PT] CH 585 | vol=production-1943-vol1-chapters | bracket: lo=584@p2053, hi=587@p2063 | OCR misses header | SEARCHING
+[2026-06-20 02:52 PT] CH 585 | Rendered sp=2055 (PDF 0-idx=2054) | IMAGE READ | VERIFIED: printed CHAPTER 585 at top of page | OK
+[2026-06-20 02:52 PT] CH 585 | CONFIRMED | source_page=2055 (printed p.2162) | An act to add Article 4, comprising Sections 990 to 991.3 inclusive, to Chapter 6 of Division 4 of the Military and Veterans Code, authorizing the creation of a debt or debts... (Veterans Bond Act of 1943) | OK
+[2026-06-20 02:53 PT] CH 586 | vol=production-1943-vol1-chapters | bracket: lo=584@p2053, hi=587@p2063 | Need to scan within ch585's long range | SEARCHING
+[2026-06-20 02:54 PT] CH 586 | Rendered sp=2062 (PDF 0-idx=2061) | IMAGE READ | VERIFIED: printed CHAPTER 586 at top of page | OK
+[2026-06-20 02:54 PT] CH 586 | CONFIRMED | source_page=2062 (printed p.2169) | An act to amend Section 6902 of the Labor Code, relating to operation personnel of railroads, declaring the urgency thereof, to take effect immediately | OK
+[2026-06-20 02:55 PT] CH 595 | vol=production-1943-vol1-chapters | bracket: lo=594@p2070, hi=598@p2073 | | SEARCHING
+[2026-06-20 02:55 PT] CH 595 | Rendered sp=2071 (PDF 0-idx=2070) | IMAGE READ | VERIFIED: printed CHAPTER 595 at top of page | OK
+[2026-06-20 02:56 PT] CH 595 | CONFIRMED | source_page=2071 (printed p.2178) | An act to add Section 797.1 to the Fish and Game Code, relating to abalones, and declaring the urgency of this act, to take effect immediately | OK
+[2026-06-20 02:56 PT] CH 596 | vol=production-1943-vol1-chapters | bracket: lo=594@p2070, hi=598@p2073 | | SEARCHING
+[2026-06-20 02:57 PT] CH 596 | Rendered sp=2072 (PDF 0-idx=2071) | IMAGE READ | VERIFIED: printed CHAPTER 596 at top of page | OK
+[2026-06-20 02:57 PT] CH 596 | CONFIRMED | source_page=2072 (printed p.2179) | An act to add Section 174 to the State Civil Service Act, relating to reinstatement of persons who leave the civil service to serve as seamen on vessels of the United States in time of war | OK
+[2026-06-20 02:58 PT] CH 597 | vol=production-1943-vol1-chapters | bracket: lo=594@p2070, hi=598@p2073 | | SEARCHING
+[2026-06-20 02:58 PT] CH 597 | Rendered sp=2073 (PDF 0-idx=2072) | IMAGE READ | VERIFIED: printed CHAPTER 597 at top of page | OK
+[2026-06-20 02:58 PT] CH 597 | CONFIRMED | source_page=2073 (printed p.2180) | An act to amend Section 658.1 of the Fish and Game Code, relating to salmon | OK
+[2026-06-20 02:59 PT] CH 663 | vol=production-1943-vol1-chapters | bracket: lo=662@p2307, hi=664@p2314 | OCR garbles -- need wider scan | SEARCHING
+[2026-06-20 03:00 PT] CH 663 | Rendered sp=2310 (PDF 0-idx=2309) | IMAGE READ | VERIFIED: printed CHAPTER 663 at top of page | OK
+[2026-06-20 03:00 PT] CH 663 | CONFIRMED | source_page=2310 (printed p.2417) | An act to amend Sections 802.6, 803, 823, 828.15, 828.25, 828.4 and 829.2 of the Agricultural Code, relating to standard containers for deciduous fruits and grapes, declaring the urgency of this act | OK
+[2026-06-20 03:01 PT] CH 669 | vol=production-1943-vol1-chapters | bracket: lo=668@p2316, hi=671@p2322 | OCR garbles '6693' | SEARCHING
+[2026-06-20 03:01 PT] CH 669 | Rendered sp=2319 (PDF 0-idx=2318) | IMAGE READ | VERIFIED: printed CHAPTER 669 at middle of page | OK
+[2026-06-20 03:02 PT] CH 669 | CONFIRMED | source_page=2319 (printed p.2426) | An act to add Sections 3695.4, 3695.5, 3774, and 3775, and to amend Sections 3705 and 3773 of the Revenue and Taxation Code, relating to taxation | OK
+[2026-06-20 03:02 PT] CH 670 | vol=production-1943-vol1-chapters | bracket: lo=668@p2316, hi=671@p2322 | OCR shows '67' only | SEARCHING
+[2026-06-20 03:03 PT] CH 670 | Rendered sp=2321 (PDF 0-idx=2320) | IMAGE READ | VERIFIED: printed CHAPTER 670 at top of page | OK
+[2026-06-20 03:03 PT] CH 670 | CONFIRMED | source_page=2321 (printed p.2428) | An act to add Section 59.5 to the State Civil Service Act, providing for the creation of a clerical pool to make available clerical services to all State appointing powers | OK
+[2026-06-20 03:04 PT] CH 686 | vol=production-1943-vol1-chapters | bracket: lo=685@p2329, hi=687@p2331 | | SEARCHING
+[2026-06-20 03:04 PT] CH 686 | Rendered sp=2330 (PDF 0-idx=2329) | IMAGE READ | VERIFIED: printed CHAPTER 686 at top of page | OK
+[2026-06-20 03:05 PT] CH 686 | CONFIRMED | source_page=2330 (printed p.2437) | An act to amend the title and Sections 3 and 4 and to repeal Sections 4c and 4d of an act entitled 'An act to provide for the government of irrigation districts...' relating to irrigation districts of an area of over 500,000 acres | OK
+[2026-06-20 03:05 PT] CH 689 | vol=production-1943-vol1-chapters | bracket: lo=688@p2332, hi=691@p2338 | | SEARCHING
+[2026-06-20 03:06 PT] CH 689 | Rendered sp=2333 (PDF 0-idx=2332) | IMAGE READ | VERIFIED: printed CHAPTER 689 at top of page | OK
+[2026-06-20 03:06 PT] CH 689 | CONFIRMED | source_page=2333 (printed p.2440) | An act to add Sections 134, 1651, 2902, 2902.1, and 2219.1 to, and to amend Sections 2901, 2902, 2904, 2905, 2906, 2908 and 2914 of the Revenue and Taxation Code, relating to assessment and collection of taxes which are not a lien on real property | OK
+[2026-06-20 03:07 PT] CH 690 | vol=production-1943-vol1-chapters | bracket: lo=688@p2332, hi=691@p2338 | OCR shows ch689 and ch691 but not ch690 | SEARCHING
+[2026-06-20 03:07 PT] CH 690 | Rendered sp=2335 (PDF 0-idx=2334) | IMAGE READ | VERIFIED: printed CHAPTER 690 at top of page | OK
+[2026-06-20 03:08 PT] CH 690 | CONFIRMED | source_page=2335 (printed p.2442) | An act to amend Sections 1701 and 1710 of, the heading of Chapter 1 of Division 2.5 of, and the headings of Articles 2, 3 and 4 of Chapter 1 of Division 2.5 of, and to repeal Section 1711.5 of, and to add Sections 1725 and 1742 to, the Welfare and Institutions Code, relating to the Youth Authority | OK
+[2026-06-20 03:08 PT] CH 813 | vol=production-1943-vol1-chapters | bracket: lo=812@p2497, hi=814@p2506 | | SEARCHING
+[2026-06-20 03:09 PT] CH 813 | Rendered sp=2498 (PDF 0-idx=2497) | IMAGE READ | VERIFIED: printed CHAPTER 813 at top of page | OK
+[2026-06-20 03:09 PT] CH 813 | CONFIRMED | source_page=2498 (printed p.2605) | An act to amend Sections 5.822, 5.850, 5.851, 5.852 and 5.852-1 of the School Code and to amend Sections 14340, 14432, 14439 and 14450 of, and to add Section 14456.1 to, the Education Code, relating to the State Teachers Retirement System, declaring the urgency thereof | OK
+[2026-06-20 03:10 PT] CH 835 | vol=production-1943-vol1-chapters | bracket: lo=834@p2522, hi=836@p2523 | | SEARCHING
+[2026-06-20 03:10 PT] CH 835 | Rendered sp=2523 (PDF 0-idx=2522) | IMAGE READ | VERIFIED: printed CHAPTER 835 at top of page | OK
+[2026-06-20 03:11 PT] CH 835 | CONFIRMED | source_page=2523 (printed p.2630) | An act to add Section 21a to the Corporate Securities Act, relating to the commissioner or his employees accepting employment by corporations, the organization, reorganization, rehabilitation or merger of which they supervised | OK
+[2026-06-20 03:11 PT] CH 910 | vol=production-1943-vol1-chapters | bracket: lo=909@p2649, hi=911@p2654 | need to scan range | SEARCHING
+[2026-06-20 03:12 PT] CH 910 | Rendered sp=2653 (PDF 0-idx=2652) | IMAGE READ | VERIFIED: printed CHAPTER 910 at bottom of page | OK
+[2026-06-20 03:12 PT] CH 910 | CONFIRMED | source_page=2653 (printed p.2760) | An act to amend Sections 28, 43.5 and 43.6 of the County Employees Retirement Act of 1937, relating to retirement | OK
+[2026-06-20 03:13 PT] CH 916 | vol=production-1943-vol1-chapters | bracket: lo=915@p2667, hi=917@p2668 | | SEARCHING
+[2026-06-20 03:13 PT] CH 916 | Rendered sp=2668 (PDF 0-idx=2667) | IMAGE READ | VERIFIED: printed CHAPTER 916 at top of page | OK
+[2026-06-20 03:13 PT] CH 916 | CONFIRMED | source_page=2668 (printed p.2775) | An act to amend Section 25502 of the Water Code, relating to irrigation district assessments | OK
+[2026-06-20 03:14 PT] CH 945 | vol=production-1943-vol1-chapters | bracket: lo=944@p2708, hi=946@p2709 | OCR exact match at sp=2709 | SEARCHING
+[2026-06-20 03:14 PT] CH 945 | Rendered sp=2709 (PDF 0-idx=2708) | IMAGE READ | VERIFIED: printed CHAPTER 945 at top of page | OK
+[2026-06-20 03:15 PT] CH 945 | CONFIRMED | source_page=2709 (printed p.2816) | An act to amend Sections 21285 and 21336 of the Water Code, relating to the appointment or election of officers of an irrigation district | OK
+[2026-06-20 03:15 PT] CH 1042 | vol=production-1943-vol1-chapters | bracket: lo=1041@p2869, hi=1043@p2872 | OCR misses -- scan needed | SEARCHING
+[2026-06-20 03:16 PT] CH 1042 | Rendered sp=2871 (PDF 0-idx=2870) | IMAGE READ | VERIFIED: printed CHAPTER 1042 at top of page | OK
+[2026-06-20 03:16 PT] CH 1042 | CONFIRMED | source_page=2871 (printed p.2978) | An act concerning the Solano Monument Lands, whose use for a monument has been abandoned, to the contributors of the purchase price | OK
+[2026-06-20 03:17 PT] CH 1136 | vol=production-1943-vol1-chapters | bracket: lo=1135@p2972, hi=null | | SEARCHING
+[2026-06-20 03:17 PT] CH 1136 | Rendered sp=2974 (PDF 0-idx=2973) | IMAGE READ | VERIFIED: printed CHAPTER 1136 at top of page | OK
+[2026-06-20 03:18 PT] CH 1136 | CONFIRMED | source_page=2974 (printed p.3081) | An act to amend Section 101 of the State Employees' Retirement Act, relating to retirement benefits | OK
+[2026-06-20 03:18 PT] CH 1137 | vol=production-1943-vol1-chapters | bracket: lo=1135@p2972, hi=null | | SEARCHING
+[2026-06-20 03:18 PT] CH 1137 | Rendered sp=2975 (PDF 0-idx=2974) | IMAGE READ | VERIFIED: printed CHAPTER 1137 at top of page | OK
+[2026-06-20 03:19 PT] CH 1137 | CONFIRMED | source_page=2975 (printed p.3082) | An act to amend Sections 4803 and 4804 of the Labor Code, relating to disability indemnities for members of the California Highway Patrol | OK
+[2026-06-20 03:20 PT] WRITE | C:\PatoLex-scratch\production-1943-vol1-42chapters\parsed_acts_visual.json | targeted=1 verified=1 not_found=0 | OK
+[2026-06-20 03:20 PT] WRITE | C:\PatoLex-scratch\production-1943-vol1-chapters\parsed_acts_visual.json | targeted=25 verified=25 not_found=0 | OK
+[2026-06-20 03:21 PT] DONE | 1943 visual recovery COMPLETE | total=26 verified=26 mismatches=0 not_found=0 | OK

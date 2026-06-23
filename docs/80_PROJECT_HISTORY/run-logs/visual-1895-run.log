@@ -1,0 +1,28 @@
+[2026-06-21 00:00 PT] START | VISUAL-recovery 1895, single early-era volume production-1895, additive only | OK
+[2026-06-21 00:05 PT] MANIFEST | _residual_manifest.py 1895: N=223 present=215 missing=8 -> [58,131,152,153,162,178,179,222] | OK
+[2026-06-21 00:08 PT] IMAGES | Volume production-1895 has NO pages_raw/ -- no page images. OCR-text fallback engaged (printed_number_confirmed=false) | WARN
+[2026-06-21 00:20 PT] MINE | Mined ocr_consensus/page_ocr_results.json across 4 engines, +/-15 page buffer per missing ch. Numerals ROMAN (LVIII..CCXXII) | OK
+[2026-06-21 00:22 PT] CH58 | LVIII page 110 doctr+surya -- admission to practice law (CCP s.276) | OK
+[2026-06-21 00:22 PT] CH131 | CXXXI page 176 -- Whittier/Preston School commitments; doctr correct, surya/tess garbled numeral, body multi-engine | OK
+[2026-06-21 00:22 PT] CH152 | CLII page 213 doctr+surya -- municipal corporations s.752 amend | OK
+[2026-06-21 00:22 PT] CH153 | CLIII page 213 doctr+surya -- James A. Kearney claim | OK
+[2026-06-21 00:22 PT] CH162 | CLXII page 220 doctr+surya -- unfinished county buildings | OK
+[2026-06-21 00:22 PT] CH178 | CLXXVIII page 259 doctr+surya -- Berkeley town court | OK
+[2026-06-21 00:22 PT] CH179 | CLXXIX page 260 doctr+surya -- Salinas City reincorporation taxes | OK
+[2026-06-21 00:22 PT] CH222 | CCXXII page 399 doctr+surya -- Law Revision Commission | OK
+[2026-06-21 00:25 PT] WRITE | parsed_acts_visual.json written (no prior file -> fresh, not merge). 8 recovered_acts, all ocr_text_verified, printed_number_confirmed=false | OK
+[2026-06-21 00:25 PT] DONE | targeted=8 verified=8 legislative_gap=0 not_found=0. draft=true | OK
+[2026-06-21 PT] PHASE2-START | Image-verification pass: re-extract pages from 1895_Statutes.pdf via PyMuPDF (pages_raw/ was absent at prior session). | OK
+[2026-06-21 PT] PDF-VERIFY | 1895_Statutes.pdf = 508 pages. Offset empirically confirmed: ch1 known at sp55, image at PDF idx 54 shows CHAPTER I. Offset = source_page - 1. | OK
+[2026-06-21 PT] IMG-CONFIRM ch58 | sp110 PDF-idx=109 -> CHAPTER LVIII visible in image. Page header 56. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch131 | sp176 PDF-idx=175 -> CHAPTER CXXXI visible in image (CXXX also on same page). Page header 132. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch152 | sp213 PDF-idx=212 -> CHAPTER CLII visible. Page header 159. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch153 | sp213 PDF-idx=212 -> CHAPTER CLIII visible (same page as ch152). Page header 159. prior source_page=213 correct. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch162 | sp220 PDF-idx=219 -> CHAPTER CLXII visible. Page header 166. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch178 | sp259 PDF-idx=258 -> CHAPTER CLXXVIII visible. Page header 205. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch179 | sp260 PDF-idx=259 -> CHAPTER CLXXIX visible. Page header 206. printed_number_confirmed=true. | OK
+[2026-06-21 PT] IMG-CONFIRM ch222 | sp399 PDF-idx=398 -> CHAPTER CCXXII visible. printed_number_confirmed=true. | OK
+[2026-06-21 PT] NOTE | 1895 confirmed ROMAN numeral chapter headers throughout (EARLY-ERA). No Arabic chapter numbering. | OK
+[2026-06-21 PT] WRITE | parsed_acts_visual.json updated: all 8 acts status=image_verified, printed_number_confirmed=true (upgraded from ocr_text_verified/false). ADDITIVE MERGE: all 8 prior entries preserved and upgraded. | OK
+[2026-06-21 PT] COVERAGE | 223/223 chapters: 213 certified + 2 clauserec (ch150,ch197) + 8 visual (ch58,131,152,153,162,178,179,222). | OK
+[2026-06-21 PT] DONE-PHASE2 | targeted=8 image_verified=8 legislative_gap=0 not_found=0. Temp images in C:\PatoLex-scratch\visual-1895-tmp\ | OK

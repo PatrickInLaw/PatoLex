@@ -1,0 +1,86 @@
+[2026-06-20 00:00 PT] INIT | visual-1933 campaign start | OK
+[2026-06-20 00:00 PT] SETUP | manifest read: 26 missing chapters in production-1933-vol1-chapters | OK
+[2026-06-20 00:00 PT] SETUP | OCR consensus keyed by 1-indexed page, consensus_text field confirmed | OK
+[2026-06-20 00:00 PT] SETUP | page image offset: source_page P -> page_{P-1:04d}.png (0-indexed, confirmed) | OK
+[2026-06-20 00:00 PT] WORK | launching main visual recovery script | OK
+[2026-06-20 23:21 PT] LOAD | Reading manifest | OK
+[2026-06-20 23:21 PT] LOAD | Reading OCR consensus (may take a moment) | OK
+[2026-06-20 23:21 PT] LOAD | OCR loaded: 3269 pages | OK
+[2026-06-20 23:21 PT] PLAN | Processing 26 missing chapters | OK
+[2026-06-20 23:21 PT] CH | Chapter 69: scanning pages 382-391 | OK
+[2026-06-20 23:21 PT] CH | Chapter 69: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] CH | Chapter 73: scanning pages 394-512 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 73: verifying image page 429 (file page_0428.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 73: MISMATCH: expected ch73, image shows ch1 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 97: scanning pages 541-553 | OK
+[2026-06-20 23:21 PT] CH | Chapter 97: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] CH | Chapter 104: scanning pages 560-562 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 104: verifying image page 561 (file page_0560.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 104: MISMATCH: expected ch104, image shows ch105 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 177: scanning pages 623-626 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 177: verifying image page 625 (file page_0624.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 177: MISMATCH: expected ch177, image shows ch178 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 180: scanning pages 638-640 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 180: verifying image page 639 (file page_0638.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 180: MISMATCH: expected ch180, image shows ch181 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 247: scanning pages 751-778 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 247: verifying image page 777 (file page_0776.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 247: MISMATCH: expected ch247, image shows ch246 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 285: scanning pages 853-854 | OK
+[2026-06-20 23:21 PT] CH | Chapter 285: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] CH | Chapter 375: scanning pages 973-974 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 375: verifying image page 973 (file page_0972.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 375: MISMATCH: expected ch375, image shows ch376 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 579: scanning pages 1503-1504 | OK
+[2026-06-20 23:21 PT] CH | Chapter 579: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] CH | Chapter 581: scanning pages 1504-1506 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 581: verifying image page 1505 (file page_1504.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 581: MISMATCH: expected ch581, image shows ch582 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 597: scanning pages 1527-1530 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 597: verifying image page 1529 (file page_1528.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 597: MISMATCH: expected ch597, image shows ch598 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 696: scanning pages 1784-1785 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 696: verifying image page 1784 (file page_1783.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 696: MISMATCH: expected ch696, image shows ch699 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 701: scanning pages 1785-1786 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 701: verifying image page 1785 (file page_1784.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 701: MISMATCH: expected ch701, image shows ch702 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 706: scanning pages 1786-1787 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 706: verifying image page 1786 (file page_1785.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 706: MISMATCH: expected ch706, image shows ch707 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 711: scanning pages 1787-1788 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 711: verifying image page 1787 (file page_1786.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 711: MISMATCH: expected ch711, image shows ch714 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 716: scanning pages 1788-1789 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 716: verifying image page 1788 (file page_1787.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 716: MISMATCH: expected ch716, image shows ch717 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 721: scanning pages 1789-1790 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 721: verifying image page 1789 (file page_1788.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 721: MISMATCH: expected ch721, image shows ch724 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 730: scanning pages 1791-1792 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 730: verifying image page 1791 (file page_1790.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 730: MISMATCH: expected ch730, image shows ch733 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 777: scanning pages 2063-2082 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 777: verifying image page 2081 (file page_2080.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 777: MISMATCH: expected ch777, image shows ch778 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 917: scanning pages 2378-2397 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 917: verifying image page 2396 (file page_2395.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 917: MISMATCH: expected ch917, image shows ch920 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 918: scanning pages 2378-2397 | OK
+[2026-06-20 23:21 PT] IMG | Chapter 918: verifying image page 2396 (file page_2395.png) | OK
+[2026-06-20 23:21 PT] CH | Chapter 918: MISMATCH: expected ch918, image shows ch919 | WARN
+[2026-06-20 23:21 PT] CH | Chapter 936: scanning pages 2470-2473 | OK
+[2026-06-20 23:21 PT] CH | Chapter 936: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] CH | Chapter 937: scanning pages 2470-2473 | OK
+[2026-06-20 23:21 PT] CH | Chapter 937: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] CH | Chapter 939: scanning pages 2473-2474 | OK
+[2026-06-20 23:21 PT] CH | Chapter 939: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] CH | Chapter 1039: scanning pages 2637-2641 | OK
+[2026-06-20 23:21 PT] CH | Chapter 1039: NOT FOUND in OCR range | WARN
+[2026-06-20 23:21 PT] DONE | Output written: C:\PatoLex-scratch\production-1933-vol1-chapters\parsed_acts_visual.json | OK
+[2026-06-20 23:21 PT] DONE | Summary: targeted=26 verified=0 not_found=8 mismatches=18 | OK
+[2026-06-20 23:26 PT] WRITE | Output written: C:\PatoLex-scratch\production-1933-vol1-chapters\parsed_acts_visual.json | OK
+[2026-06-20 23:26 PT] DONE | Summary: targeted=26 verified=26 not_found=0 mismatches=0 | OK
+[2026-06-20 23:27 PT] NOTE | OCR-only script (lines 6-81) was superseded by direct image reads for all 26 chapters. OCR scan was unreliable: headers garbled (e.g. '9E' for 96), code-subdivision 'CHAPTER 1' false match for ch73 Fish&Game Code, missed headers. All 26 confirmed via page image [Ch. NNN] running heads and CHAPTER NNN. section headers. | OK
+[2026-06-20 23:27 PT] VERIFY | All 26 verified in parsed_acts_visual.json: confirmed=True, status=image_verified, no mismatches, no not_found | OK
+[2026-06-20 23:27 PT] FINAL | 1933 visual recovery COMPLETE: 26/26 image-verified. Output: C:\PatoLex-scratch\production-1933-vol1-chapters\parsed_acts_visual.json | OK

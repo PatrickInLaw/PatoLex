@@ -1,0 +1,54 @@
+[2026-06-21 03:36 PT] START | visual-worker-1903 | targeting 23 missing chapters
+[2026-06-21 03:36 PT] OCR | loaded 808 page records
+[2026-06-21 03:36 PT] PDF | opened 1903_Statutes.pdf (812 pages)
+[2026-06-21 03:36 PT] CH   6 | searching source pages 56–92 (bracket 71–77)
+[2026-06-21 03:36 PT] CH   6 | OCR-HIT | page=75 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH  17 | searching source pages 72–104 (bracket 87–89)
+[2026-06-21 03:36 PT] CH  17 | OCR-HIT | page=88 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH  42 | searching source pages 95–127 (bracket 110–112)
+[2026-06-21 03:36 PT] CH  42 | OCR miss, rendering pages for re-read
+[2026-06-21 03:36 PT] CH  42 | LEG-GAP | span=2 lo/hi both found | legislative_gap
+[2026-06-21 03:36 PT] CH  82 | searching source pages 142–175 (bracket 157–160)
+[2026-06-21 03:36 PT] CH  82 | OCR-HIT | page=158 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH  91 | searching source pages 150–184 (bracket 165–169)
+[2026-06-21 03:36 PT] CH  91 | OCR-HIT | page=166 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH  95 | searching source pages 160–191 (bracket 175–176)
+[2026-06-21 03:36 PT] CH  95 | OCR-HIT | page=175 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH  99 | searching source pages 162–194 (bracket 177–179)
+[2026-06-21 03:36 PT] CH  99 | OCR-HIT | page=179 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 129 | searching source pages 191–224 (bracket 206–209)
+[2026-06-21 03:36 PT] CH 129 | OCR-HIT | page=207 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 130 | searching source pages 191–224 (bracket 206–209)
+[2026-06-21 03:36 PT] CH 130 | OCR-HIT | page=208 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 135 | searching source pages 197–235 (bracket 212–220)
+[2026-06-21 03:36 PT] CH 135 | OCR-HIT | page=219 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 136 | searching source pages 197–235 (bracket 212–220)
+[2026-06-21 03:36 PT] CH 136 | OCR-HIT | page=220 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 143 | searching source pages 211–244 (bracket 226–229)
+[2026-06-21 03:36 PT] CH 143 | OCR-HIT | page=227 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 208 | searching source pages 298–329 (bracket 313–314)
+[2026-06-21 03:36 PT] CH 208 | OCR-HIT | page=313 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 231 | searching source pages 324–367 (bracket 339–352)
+[2026-06-21 03:36 PT] CH 231 | OCR-HIT | page=340 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 283 | searching source pages 462–494 (bracket 477–479)
+[2026-06-21 03:36 PT] CH 283 | OCR-HIT | page=478 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 288 | searching source pages 468–499 (bracket 483–484)
+[2026-06-21 03:36 PT] CH 288 | OCR-HIT | page=484 eng=surya_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 326 | searching source pages 496–528 (bracket 511–513)
+[2026-06-21 03:36 PT] CH 326 | OCR-HIT | page=512 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 332 | searching source pages 504–537 (bracket 519–522)
+[2026-06-21 03:36 PT] CH 332 | OCR-HIT | page=519 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 333 | searching source pages 504–537 (bracket 519–522)
+[2026-06-21 03:36 PT] CH 333 | OCR-HIT | page=520 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 334 | searching source pages 504–537 (bracket 519–522)
+[2026-06-21 03:36 PT] CH 334 | OCR-HIT | page=521 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 338 | searching source pages 509–542 (bracket 524–527)
+[2026-06-21 03:36 PT] CH 338 | OCR-HIT | page=525 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 339 | searching source pages 509–542 (bracket 524–527)
+[2026-06-21 03:36 PT] CH 339 | OCR-HIT | page=526 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] CH 346 | searching source pages 517–549 (bracket 532–534)
+[2026-06-21 03:36 PT] CH 346 | OCR-HIT | page=533 eng=doctr_text form=roman | image_verified
+[2026-06-21 03:36 PT] DONE | verified=22 gap=1 not_found=0 | wrote C:\PatoLex-scratch\production-1903\parsed_acts_visual.json
+[2026-06-21 03:40 PT] ENRICH | 22 titles populated from OCR text (doctr primary) | OK
+[2026-06-21 03:40 PT] VERIFY | spot-check 6 chapters vs OCR text: ch6=VI ch17=XVII ch82=LXXXII ch231=CCXXXI ch346=CCCXLVI confirmed; ch42 gap confirmed (XLII absent page 111, ch41@p110 ch43@p112 present all 4 engines) | OK
+[2026-06-21 03:40 PT] CAMPAIGN COMPLETE | 1903: targeted=23 image_verified=22 legislative_gap=1 not_found=0 | output: C:\PatoLex-scratch\production-1903\parsed_acts_visual.json | OK

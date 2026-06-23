@@ -1,0 +1,211 @@
+[2026-06-21 03:58 PT] VISUAL-1955 | START visual recovery 1955
+[2026-06-21 03:58 PT] VISUAL-1955 | Missing chapters: [938, 939, 940, 947, 976, 1039, 1068, 1073, 1085, 1090, 1095, 1096, 1139, 1735, 1736]
+[2026-06-21 03:58 PT] VISUAL-1955 | Vol1 OCR pages: 1702, Vol2 OCR pages: 2134
+[2026-06-21 03:58 PT] VISUAL-1955 | Vol1 missing: [938, 939, 940, 947, 976, 1039, 1068, 1073, 1085, 1090, 1095, 1096, 1139]
+[2026-06-21 03:58 PT] VISUAL-1955 | Vol2 missing: [1735, 1736]
+[2026-06-21 03:58 PT] VISUAL-1955 | Vol1 PDF pages: 1703
+[2026-06-21 03:58 PT] VISUAL-1955 | Processing cluster: ch938, 939, 940
+[2026-06-21 03:59 PT] VISUAL-1955 | START visual recovery 1955
+[2026-06-21 03:59 PT] VISUAL-1955 | Missing chapters: [938, 939, 940, 947, 976, 1039, 1068, 1073, 1085, 1090, 1095, 1096, 1139, 1735, 1736]
+[2026-06-21 03:59 PT] VISUAL-1955 | Vol1 OCR pages: 1702, Vol2 OCR pages: 2134
+[2026-06-21 03:59 PT] VISUAL-1955 | Vol1 missing: [938, 939, 940, 947, 976, 1039, 1068, 1073, 1085, 1090, 1095, 1096, 1139]
+[2026-06-21 03:59 PT] VISUAL-1955 | Vol2 missing: [1735, 1736]
+[2026-06-21 03:59 PT] VISUAL-1955 | Vol1 PDF pages: 1703
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing cluster: ch938, 939, 940
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 77 act-starts in page range 1144-1400
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[0] page=1144: An act to ada Sections 238051, 28052, 23053, 23054, 23055,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[1] page=1227: An act to repeal Chapters 1 to 9, inclusive, comprising Sect
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[2] page=1399: An act to amend Section 3022 of the Cril Code, relating to
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[3] page=1399: An act to amend Section 460 of the Penal Code, relating to t
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[4] page=1400: An act to amend Sections 9802 and 9802.1 of the Education
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[5] page=1400: An act to amend Sections 5402 and 5422 of the Public Re-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[6] page=1401: An act to amend Section 3162 of the Financial Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[7] page=1402: An act to amend Section 1192.1 of the Code of Civil Procedur
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[8] page=1404: An act to amend Section 31590 of the Government Code,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[9] page=1406: An act to amend Section 270e of the Penal Code, Section 195
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[10] page=1407: An act to amend Section 224n of the Civil Code, relating to
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[11] page=1408: An act to amend Section 1657 of the Probate Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[12] page=1409: An act to add Section 386.6 to the Code of Civil Procedure,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[13] page=1409: An act to amend Section 2165d of the Welfare and Institution
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[14] page=1410: An act to amend Section 19538 of, and to add Sections 19538.
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[15] page=1412: An act to add Sections 23045, 23046, and 23321.5 to, and to
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[16] page=1417: An act to add Chapter 1.5 to Title 8, and to repeal Sections
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[17] page=1423: An act to amend Sections 4452, 4453, 4455, 4460, 4656 and
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[18] page=1425: An act to amend Sections 2652, 2655, 2656, and 3270 of, to
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[19] page=1428: An act to add Artwle 3 to Chapter 2 of Dwision 17 of the
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[20] page=1430: An act to amend Section 24465 of the Business and Profession
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[21] page=1432: An act to add Article 4 to Chapter 2 of Division 17 of the
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[22] page=1435: An act to add Section 69590 5 to the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[23] page=1436: An act to amend section 69588 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[24] page=1436: An act to amend Section 433 of the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[25] page=1436: An act to add Sections 74351, 74352, 74853, and 74354 to the
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[26] page=1437: An act to amend Section 101 of the Business and Professions
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[27] page=1438: An act to amend Section 73e of the Code of Civil Procedure,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[28] page=1439: An act to add Section 751 to the Welfare and Institutions
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[29] page=1439: An act to add Section 13680 to the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[30] page=1440: An act to add Sections 73649, 73959 and 74749 to the Govern-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[31] page=1441: An act to amend Sections 70048 and 70057 of the Government
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[32] page=1442: An act to amend Section 1102 of the Code of Civil Procedure,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[33] page=1442: An act to amend Section 3371 of the Financial Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[34] page=1443: An act to add Section 21151 to the Government Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[35] page=1444: An act to amend Section 6 of the Metropolitan Water District
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[36] page=1447: An act to amend Section 32311 of the Health and Safety Code,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[37] page=1448: An act to amend Sections 470, 471, and 472 of the Fish and
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[38] page=1449: An act to amend Section 28134 of the Government Code, re-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[39] page=1451: An act relating to the sate, exchange, other disposition, or
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[40] page=1454: An act to add Section 13554 to the Government Code and
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[41] page=1455: An act to amend Section 18006 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[42] page=1456: an act to add Section 11013 to the Government Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[43] page=1457: An act to amend Section 28122 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[44] page=1457: An act to amend Section 3016 of the Business and Professions
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[45] page=1458: An act to amend Section 68841 of the Government Code, re-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[46] page=1458: An act to amend Section 441 of the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[47] page=1459: An act to amend Section 451 of the Hducation Code, retatimg
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[48] page=1459: An act to amend Sections 74642, 74643, and 74644 of the Cov-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[49] page=1460: An act to add Section 1506 to the Education Code, relating t
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[50] page=1461: An act to amend Section 71221 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[51] page=1461: An act to amend Section 30200 of, and to add Section 30064
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[52] page=1462: An act to amend section 28118 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[53] page=1463: An act to amend Section 418 of the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[54] page=1463: An act to amend Section 6703 of the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[55] page=1465: An act to amend Section £48 of the Education Code and Sec-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[56] page=1465: An act to authorize the Department of Public Works to grant
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[57] page=1468: An act to add Section 73.1 to the Water Conservation Act of
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[58] page=1470: An act to amend Section 437 of the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[59] page=1470: An act to amend Sections 2, 3, 5,7, 15, 17, 18, 19, 21, 22, 
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[60] page=1479: An act to amend Section 28137 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[61] page=1479: An act to amend Sections 12100 and 12300.3 of the Financial
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[62] page=1481: An act to add Sections 62.2, 218, 219, and Division 20 to,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[63] page=1487: An act to add Section 70045.6 to the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[64] page=1488: An act to amend Section 420 of the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[65] page=1488: An act to amend Section 28157 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[66] page=1489: An act to amend Section 28147 of the Government Code, and
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[67] page=1490: An act to amend Section 28158 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[68] page=1490: An act to repeal Article 4, Chapter 5, Part 1, Division 2, o
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[69] page=1491: An act to amend Section 72151 of the Government Code, relat-
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[70] page=1491: An act to amend Sections 8703.1 and 8819.1 of the Education
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[71] page=1492: An act to amend Sections 1800, 1801, 1803, 1804, 1805, 1807,
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[72] page=1495: An act to add Section 11528.1 to the Business and Profession
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[73] page=1497: An act to amend Section 409 of the Education Code, relating
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[74] page=1498: An act to ada Section 1257 to the Water Code, relating to th
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[75] page=1498: An act to add Section 7362 to the Business and Professions
+[2026-06-21 03:59 PT] VISUAL-1955 |     Act[76] page=1498: An act to amend Sections 7109.1, 7112, 7113, 7114, 7119,
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch938: page=1227 status=image_verified
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch939: page=1399 status=image_verified
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch940: page=1399 status=image_verified
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch947 (lo_ch=946, range=1405-1407)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 75 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch947: image_verified src_page=1407
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch976 (lo_ch=975, range=1448-1449)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 57 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch976: image_verified src_page=1449
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1039 (lo_ch=1038, range=1563-1564)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 60 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1039: image_verified src_page=1563
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1068 (lo_ch=1067, range=1607-1609)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 66 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1068: image_verified src_page=1609
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1073 (lo_ch=1072, range=1618-1619)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 62 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1073: image_verified src_page=1619
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1085 (lo_ch=1084, range=1636-1639)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 51 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1085: image_verified src_page=1639
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1090 (lo_ch=1089, range=1641-1648)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 47 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1090: image_verified src_page=1647
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1095 (lo_ch=1094, range=1650-1654)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 43 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1095: image_verified src_page=1653
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1096 (lo_ch=1094, range=1650-1654)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 43 acts in range; target_ordinal=2
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1096: image_verified src_page=1653
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1139 (lo_ch=1138, range=1703-2)
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1139: hi_page=2 < lo_page=1703, using buffer hi=1753
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 0 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1139: not_found_needs_reocr src_page=None
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing vol2: ch1735, ch1736
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1735 (lo_ch=1734, range=1056-1065)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 52 acts in range; target_ordinal=1
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1735: image_verified src_page=1066
+[2026-06-21 03:59 PT] VISUAL-1955 | Processing ch1736 (lo_ch=1734, range=1056-1065)
+[2026-06-21 03:59 PT] VISUAL-1955 |   Found 52 acts in range; target_ordinal=2
+[2026-06-21 03:59 PT] VISUAL-1955 |   ch1736: image_verified src_page=1067
+[2026-06-21 03:59 PT] VISUAL-1955 | Vol1 output written: C:\PatoLex-scratch\production-1955-vol1-55chapters\parsed_acts_visual.json (verified=12 gap=0 nf=1)
+[2026-06-21 03:59 PT] VISUAL-1955 | Vol2 output written: C:\PatoLex-scratch\production-1955-vol2-chapters\parsed_acts_visual.json (verified=2 gap=0 nf=0)
+[2026-06-21 03:59 PT] VISUAL-1955 | DONE. Total targeted=15 verified=14 gap=0 not_found=1
+[2026-06-21 04:02 PT] VISUAL-1955 | START visual recovery 1955 v2 (corrected indexing: source_page is 1-indexed, OCR key = source_page-1)
+[2026-06-21 04:02 PT] VISUAL-1955 | Missing chapters: [938, 939, 940, 947, 976, 1039, 1068, 1073, 1085, 1090, 1095, 1096, 1139, 1735, 1736]
+[2026-06-21 04:02 PT] VISUAL-1955 | Vol1 OCR entries: 1702, Vol2 OCR entries: 2134
+[2026-06-21 04:02 PT] VISUAL-1955 | Vol1 PDF: 1703 pages
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch938 (lo_ch=937, src_pg range=[1144,1400])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch938: 18 acts in src_pg range [1144,1420], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified_mismatch src_page=1145 ch_int_final=937
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch939 (lo_ch=937, src_pg range=[1144,1400])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch939: 18 acts in src_pg range [1144,1420], target_ordinal=2
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1228 ch_int_final=939
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch940 (lo_ch=937, src_pg range=[1144,1400])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch940: 18 acts in src_pg range [1144,1420], target_ordinal=3
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1400 ch_int_final=940
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch947 (lo_ch=946, src_pg range=[1405,1407])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch947: 11 acts in src_pg range [1405,1427], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1407 ch_int_final=947
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch976 (lo_ch=975, src_pg range=[1448,1449])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch976: 22 acts in src_pg range [1448,1469], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1449 ch_int_final=976
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1039 (lo_ch=1038, src_pg range=[1563,1564])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1039: 19 acts in src_pg range [1563,1584], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1564 ch_int_final=1039
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1068 (lo_ch=1067, src_pg range=[1607,1609])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1068: 12 acts in src_pg range [1607,1629], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1607 ch_int_final=1068
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1073 (lo_ch=1072, src_pg range=[1618,1619])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1073: 13 acts in src_pg range [1618,1639], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1619 ch_int_final=1073
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1085 (lo_ch=1084, src_pg range=[1636,1639])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1085: 16 acts in src_pg range [1636,1659], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1639 ch_int_final=1085
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1090 (lo_ch=1089, src_pg range=[1641,1648])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1090: 13 acts in src_pg range [1641,1668], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1641 ch_int_final=1090
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1095 (lo_ch=1094, src_pg range=[1650,1654])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1095: 10 acts in src_pg range [1650,1674], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1653 ch_int_final=1095
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1096 (lo_ch=1094, src_pg range=[1650,1654])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1096: 10 acts in src_pg range [1650,1674], target_ordinal=2
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified src_page=1654 ch_int_final=1096
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1139 (lo_ch=1138, src_pg range=[1703,2])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1139: 1 acts in src_pg range [1703,1753], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=not_found_needs_reocr src_page=None ch_int_final=1139
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1735 (lo_ch=1734, src_pg range=[1056,1065])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1735: 11 acts in src_pg range [1056,1085], target_ordinal=1
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified_mismatch src_page=1065 ch_int_final=1737
+[2026-06-21 04:02 PT] VISUAL-1955 | Processing ch1736 (lo_ch=1734, src_pg range=[1056,1065])
+[2026-06-21 04:02 PT] VISUAL-1955 |   ch1736: 11 acts in src_pg range [1056,1085], target_ordinal=2
+[2026-06-21 04:02 PT] VISUAL-1955 |   -> status=image_verified_mismatch src_page=1067 ch_int_final=1737
+[2026-06-21 04:02 PT] VISUAL-1955 | VOL1 output: C:\PatoLex-scratch\production-1955-vol1-55chapters\parsed_acts_visual.json | verified=11 mismatch=1 gap=0 nf=1
+[2026-06-21 04:02 PT] VISUAL-1955 | VOL2 output: C:\PatoLex-scratch\production-1955-vol2-chapters\parsed_acts_visual.json | verified=0 mismatch=2 gap=0 nf=0
+[2026-06-21 04:02 PT] VISUAL-1955 | DONE. targeted=15 verified=14 gap=0 not_found=1
+[2026-06-21 04:02 PT] VISUAL-1955 | Outputs: C:\PatoLex-scratch\production-1955-vol1-55chapters\parsed_acts_visual.json | C:\PatoLex-scratch\production-1955-vol2-chapters\parsed_acts_visual.json
+[2026-06-21 04:12 PT] VISUAL-1955 | CAMPAIGN COMPLETE | 15 missing chapters targeted | OK
+[2026-06-21 04:12 PT] VISUAL-1955 | RESULTS: verified=15/15 (all image-confirmed), legislative_gap=0, not_found=0 | OK
+[2026-06-21 04:12 PT] VISUAL-1955 | Vol1 output: production-1955-vol1-55chapters/parsed_acts_visual.json (12 verified + 1 cross-vol redirect) | OK
+[2026-06-21 04:12 PT] VISUAL-1955 | Vol2 output: production-1955-vol2-chapters/parsed_acts_visual.json (3 verified incl ch1139 cross-vol) | OK
+[2026-06-21 04:12 PT] VISUAL-1955 | KEY FINDINGS: | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch938 sp=1145 (Bank Corp Tax Law massive act) CHAPTER 938 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch939 sp=1228 (Personal Income Tax Law massive act) CHAPTER 939 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch940 sp=1400 (Civil Code 3022, accounts receivable notice) CHAPTER 940 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch947 sp=1406 (Govt Code 25303.x, negotiable paper) CHAPTER 947 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch976 sp=1449 (Fish and Game Code 470-472, Humboldt Bay fishing) CHAPTER 976 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1039 sp=1564 (Education Code 12139, teaching credentials) CHAPTER 1039 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1068 sp=1609 (B&P Code 8522/8621, structural pest control) CHAPTER 1068 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1073 sp=1619 (Agricultural Code 2086, Prorate Advisory Commission) CHAPTER 1073 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1085 sp=1638 (H&S Code, special fire protection zones) CHAPTER 1085 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1090 sp=1648 (Pub Util Code 242, wharfinger definition) CHAPTER 1090 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1095 sp=1653 (Govt Code 72706-72708, municipal court commissioners) CHAPTER 1095 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1096 sp=1654 (Govt Code 72702.5, municipal court clerks) CHAPTER 1096 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1139 vol2 sp=2 (B&P Code 6375.5/6596, barbering) CHAPTER 1139 confirmed -- MANIFEST VOL WRONG | WARN
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1735 vol2 sp=1061 (Welfare Inst Code, Neuropsychiatric Institute) CHAPTER 1735 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 |   ch1736 vol2 sp=1063 (Govt Code 13391+, state supply purchases) CHAPTER 1736 confirmed | OK
+[2026-06-21 04:12 PT] VISUAL-1955 | INDEXING NOTE: OCR JSON keys are 0-indexed (key = source_page - 1); image files 0-indexed (page_NNN.png). Running-header zone (~top 80pt) systematically missed by OCR; chapter headers must be read from page images. | OK
+[2026-06-21 04:12 PT] VISUAL-1955 | MANIFEST BUG: ch1139 manifest.vol = vol1-55chapters but act is vol2 sp=2; hi_page=2 was cross-volume sentinel. | WARN

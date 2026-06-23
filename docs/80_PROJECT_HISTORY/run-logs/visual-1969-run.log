@@ -1,0 +1,4 @@
+[2026-06-21 13:22 PT] VISUAL-1969 | Starting visual recovery output generation for 1969 | OK
+[2026-06-21 13:22 PT] VISUAL-1969 | VOL1: wrote C:/PatoLex-scratch/production-1969-vol1-chapters/parsed_acts_visual.json (8 acts: 8 verified) | OK
+[2026-06-21 13:22 PT] VISUAL-1969 | VOL2: wrote C:/PatoLex-scratch/production-1969-vol2-chapters/parsed_acts_visual.json (1 acts: 1 verified) | OK
+[2026-06-21 13:22 PT] VISUAL-1969 | SUMMARY: targeted=9 verified=9 gap=0 not_found=0 | OK

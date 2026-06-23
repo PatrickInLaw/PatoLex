@@ -1,0 +1,14 @@
+[2026-06-21 00:00 PT] START | visual-1972 campaign initiated | OK
+[2026-06-21 00:01 PT] MANIFEST | _residual_manifest.py 1972: N=1442 present=1441 missing=1 (ch.517, vol1, page_range=[895,899]) | OK
+[2026-06-21 00:02 PT] IMAGE-CHECK | pages_raw images confirmed present for source pages 894-899 (page_0893.png through page_0899.png); total vol1 images=2586 | OK
+[2026-06-21 00:03 PT] OCR-SCAN | Examined page_ocr_results.json keys 889-904 (source pages 890-905) for chapter headers; Ch.516 found on key 894 (source pg 895), Ch.518 found on key 898 (source pg 899), Ch.517 header absent from all engine texts | WARN: running head systematically missed
+[2026-06-21 00:04 PT] IMAGE-READ | page_0894.png (source 895): running head 'Ch. 516] 1972 REGULAR SESSION 895'; contains CHAPTER 515 and CHAPTER 516 headers; printed page 895 | OK
+[2026-06-21 00:05 PT] IMAGE-READ | page_0895.png (source 896): running head '898 STATUTES OF CALIFORNIA [Ch. 517'; printed page 898; body text mid-sentence re drainage area assessed valuation | OK
+[2026-06-21 00:05 PT] SCAN-GAP | PDF (1972_Vol1_Chapters.pdf, 2586 pages) jumps from printed pg 895 (PDF idx 894) -> printed pg 898 (PDF idx 895); printed pages 896-897 PHYSICALLY ABSENT from scan; chapter start page for Ch.517 is on missing printed pp.896-897 | WARN: physical scan gap
+[2026-06-21 00:06 PT] IMAGE-READ | page_0896.png (source 897): running head 'Ch. 517] 1972 REGULAR SESSION 899'; still Ch.517 body | OK
+[2026-06-21 00:07 PT] IMAGE-READ | page_0897.png (source 898): running head '900 STATUTES OF CALIFORNIA [Ch. 517'; still Ch.517 body | OK
+[2026-06-21 00:08 PT] SUMMARY-OCR | OCR'd Vol2_Summary.pdf (257pp) with Tesseract; found 'Ch 517 (SB 468) Burgener. San Diego flood control.' on summary p.74; full description confirms San Diego County Flood Control District drainage areas | OK
+[2026-06-21 00:09 PT] INDEX-OCR | OCR'd Vol2_Index.pdf (144pp); multiple references confirm Ch.517 = San Diego County Flood Control District drainage areas | OK
+[2026-06-21 00:10 PT] TITLE-RECON | Title reconstructed from: Summary Digest entry + body text reference to 'Section 17.1 added to San Diego County Flood Control District Act (Chapter 55, Statutes 1966, First Ex. Sess.)'; approval date inferred as July 28, 1972 (both adjacent chapters 516/518 approved July 28, 1972) | OK
+[2026-06-21 00:11 PT] OUTPUT | Written parsed_acts_visual.json to C:\PatoLex-scratch\production-1972-vol1-chapters\ with status=legislative_gap | OK
+[2026-06-21 00:12 PT] COMPLETE | 1972 visual campaign done: targeted=1, verified=0, legislative_gap=1, not_found=0 | OK

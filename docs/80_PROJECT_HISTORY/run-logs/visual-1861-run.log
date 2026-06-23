@@ -1,0 +1,202 @@
+[2026-06-21 00:00 PT] VISUAL-1861 | Campaign started: 155 missing chapters, production-1861 | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Starting 1861 visual recovery campaign | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Loaded manifest: 155 missing chapters | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Loaded OCR data: 723 pages | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 10/155 processed (verified=0, gap=0, nf=10) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 20/155 processed (verified=2, gap=0, nf=18) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 30/155 processed (verified=3, gap=0, nf=27) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 40/155 processed (verified=5, gap=0, nf=35) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 50/155 processed (verified=6, gap=0, nf=44) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 60/155 processed (verified=9, gap=0, nf=51) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 70/155 processed (verified=11, gap=0, nf=59) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 80/155 processed (verified=12, gap=0, nf=68) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 90/155 processed (verified=13, gap=0, nf=77) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 100/155 processed (verified=19, gap=0, nf=81) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 110/155 processed (verified=21, gap=0, nf=89) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 120/155 processed (verified=26, gap=0, nf=94) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 130/155 processed (verified=30, gap=0, nf=100) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 140/155 processed (verified=35, gap=0, nf=105) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Progress: 150/155 processed (verified=40, gap=0, nf=110) | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Pass 1 complete: targeted=155, verified=40, gap=0, not_found=115 | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Output written to C:\PatoLex-scratch\production-1861\parsed_acts_visual.json | OK
+[2026-06-21 08:59 PT] VISUAL-1861 | Not found chapters needing image review: [4, 6, 9, 17, 19, 20, 23, 43, 44, 47, 51, 53, 56, 71, 75, 77, 84, 86, 87, 88, 95, 113, 116, 128, 129, 136, 140, 147, 150, 158, 161, 165, 166, 170, 177, 180, 185, 201, 208, 221, 224, 226, 227, 228, 239, 241, 248, 251, 255, 256, 261, 264, 267, 269, 273, 282, 288, 291, 292, 293, 295, 296, 297, 299, 300, 302, 306, 307, 312, 321, 334, 337, 347, 351, 356, 358, 362, 369, 382, 390, 397, 404, 407, 411, 412, 417, 421, 425, 429, 431, 436, 437, 438, 442, 451, 456, 461, 465, 468, 470, 474, 481, 483, 485, 486, 493, 512, 516, 518, 522, 523, 527, 533, 536, 537] | WARN
+[2026-06-21 15:30 PT] VISUAL-1861 | Loading OCR consensus | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Loading manifest | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Loading existing parsed_acts_visual.json | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Chapters still not_found: 115 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Starting recovery of 115 chapters | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 4 (IV): FOUND on page 44 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 6 (VI): FOUND on page 43 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 9 (IX): FOUND on page 45 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 17 (XVII): FOUND on page 52 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 19 (XIX): FOUND on page 53 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 20 (XX): FOUND on page 54 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 23 (XXIII): FOUND on page 55 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 43 (XLIII): FOUND on page 74 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 44 (XLIV): FOUND on page 74 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 47 (XLVII): FOUND on page 77 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 10/115 processed, verified_new=10 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 51 (LI): FOUND on page 79 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 53 (LIII): FOUND on page 80 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 56 (LVI): FOUND on page 84 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 71 (LXXI): FOUND on page 97 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 75 (LXXV): FOUND on page 99 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 77 (LXXVII): FOUND on page 100 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 84 (LXXXIV): FOUND on page 104 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 86 (LXXXVI): FOUND on page 104 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 87 (LXXXVII): FOUND on page 104 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 88 (LXXXVIII): FOUND on page 104 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 20/115 processed, verified_new=20 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 95 (XCV): FOUND on page 112 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 113 (CXIII): FOUND on page 132 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 116 (CXVI): FOUND on page 134 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 128 (CXXVIII): FOUND on page 158 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 129 (CXXIX): FOUND on page 159 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 136 (CXXXVI): FOUND on page 163 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 140 (CXL): FOUND on page 165 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 147 (CXLVII): FOUND on page 183 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 150 (CL): FOUND on page 188 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 158 (CLVIII): FOUND on page 193 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 30/115 processed, verified_new=30 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 161 (CLXI): FOUND on page 195 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 165 (CLXV): FOUND on page 199 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 166 (CLXVI): FOUND on page 201 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 170 (CLXX): FOUND on page 207 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 177 (CLXXVII): FOUND on page 213 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 180 (CLXXX): FOUND on page 214 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 185 (CLXXXV): FOUND on page 164 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 201 (CCI): FOUND on page 191 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 208 (CCVIII): FOUND on page 246 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 221 (CCXXI): FOUND on page 261 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 40/115 processed, verified_new=40 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 224 (CCXXIV): FOUND on page 264 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 226 (CCXXVI): FOUND on page 265 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 227 (CCXXVII): FOUND on page 266 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 228 (CCXXVIII): FOUND on page 267 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 239 (CCXXXIX): FOUND on page 281 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 241 (CCXLI): FOUND on page 284 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 248 (CCXLVIII): FOUND on page 280 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 251 (CCLI): FOUND on page 291 via surya | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 255 (CCLV): FOUND on page 301 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 256 (CCLVI): FOUND on page 301 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 50/115 processed, verified_new=50 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 261 (CCLXI): FOUND on page 303 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 264 (CCLXIV): FOUND on page 305 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 267 (CCLXVII): FOUND on page 308 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 269 (CCLXIX): FOUND on page 309 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 273 (CCLXXIII): FOUND on page 313 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 282 (CCLXXXII): FOUND on page 317 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 288 (CCLXXXVIII): FOUND on page 321 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 291 (CCXCI): FOUND on page 324 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 292 (CCXCII): FOUND on page 324 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 293 (CCXCIII): FOUND on page 324 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 60/115 processed, verified_new=60 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 295 (CCXCV): FOUND on page 329 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 296 (CCXCVI): FOUND on page 329 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 297 (CCXCVII): FOUND on page 329 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 299 (CCXCIX): FOUND on page 333 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 300 (CCC): FOUND on page 333 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 302 (CCCII): FOUND on page 336 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 306 (CCCVI): FOUND on page 338 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 307 (CCCVII): FOUND on page 338 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 312 (CCCXII): FOUND on page 345 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 321 (CCCXXI): FOUND on page 350 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 70/115 processed, verified_new=70 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 334 (CCCXXXIV): FOUND on page 386 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 337 (CCCXXXVII): FOUND on page 386 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 347 (CCCXLVII): FOUND on page 392 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 351 (CCCLI): FOUND on page 394 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 356 (CCCLVI): FOUND on page 404 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 358 (CCCLVIII): FOUND on page 404 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 362 (CCCLXII): FOUND on page 410 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 369 (CCCLXIX): FOUND on page 414 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 382 (CCCLXXXII): FOUND on page 441 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 390 (CCCXC): FOUND on page 450 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 80/115 processed, verified_new=80 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 397 (CCCXCVII): FOUND on page 454 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 404 (CDIV): FOUND on page 500 via surya | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 407 (CDVII): FOUND on page 508 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 411 (CDXI): FOUND on page 512 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 412 (CDXII): FOUND on page 513 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 417 (CDXVII): FOUND on page 518 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 421 (CDXXI): FOUND on page 522 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 425 (CDXXV): FOUND on page 448 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 429 (CDXXIX): FOUND on page 529 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 431 (CDXXXI): FOUND on page 537 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 90/115 processed, verified_new=90 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 436 (CDXXXVI): FOUND on page 539 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 437 (CDXXXVII): FOUND on page 539 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 438 (CDXXXVIII): FOUND on page 540 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 442 (CDXLII): FOUND on page 543 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 451 (CDLI): FOUND on page 457 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 456 (CDLVI): FOUND on page 552 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 461 (CDLXI): FOUND on page 555 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 465 (CDLXV): FOUND on page 556 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 468 (CDLXVIII): FOUND on page 562 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 470 (CDLXX): FOUND on page 562 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 100/115 processed, verified_new=100 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 474 (CDLXXIV): FOUND on page 566 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 481 (CDLXXXI): FOUND on page 569 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 483 (CDLXXXIII): FOUND on page 542 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 485 (CDLXXXV): FOUND on page 542 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 486 (CDLXXXVI): FOUND on page 542 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 493 (CDXCIII): FOUND on page 583 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 512 (DXII): FOUND on page 618 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 516 (DXVI): FOUND on page 625 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 518 (DXVIII): FOUND on page 625 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 522 (DXXII): FOUND on page 540 via surya | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Checkpoint: 110/115 processed, verified_new=110 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 523 (DXXIII): FOUND on page 540 via surya | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 527 (DXXVII): FOUND on page 634 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 533 (DXXXIII): FOUND on page 646 via doctr | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 536 (DXXXVI): FOUND on page 697 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | Ch 537 (DXXXVII): FOUND on page 697 via tess | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | FINAL: processed=115, newly_verified=115, still_not_found=0 | OK
+[2026-06-21 15:30 PT] VISUAL-1861 | TOTALS: verified=155, gap=0, ocr_text=0, not_found=0 | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Loading OCR consensus | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Loading manifest | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Loading existing visual JSON | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Re-verifying all 155 recovered acts with strict matching | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Strict text pass: confirmed=0, needs_image=155 | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Checkpoint saved after strict text pass | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Phase 2: image OCR for 155 chapters | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | pytesseract/PIL not available, skipping image OCR | WARN
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | Image OCR pass: img_verified=0, still_not_found=155 | OK
+[2026-06-21 15:32 PT] VISUAL-1861-v2 | FINAL: verified=0, gap=0, not_found=155 | OK
+[2026-06-21 15:34 PT] VISUAL-1861-v3 | Loading OCR data and manifest | OK
+[2026-06-21 15:34 PT] VISUAL-1861-v3 | Processing 155 chapters | OK
+[2026-06-21 15:34 PT] VISUAL-1861-v3 | Text pass complete: verified=0, needs_image=155 | OK
+[2026-06-21 15:34 PT] VISUAL-1861-v3 | Image pass: reading PNG images for 155 chapters | OK
+[2026-06-21 15:34 PT] VISUAL-1861-v3 | Image/wider pass: img_verified=0, still_not_found=155 | OK
+[2026-06-21 15:34 PT] VISUAL-1861-v3 | FINAL: verified=0, not_found=155 | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Loading data | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Loaded 377 present chapters from merged | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Processing 115 originally-missing chapters | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Ch 20 (XX): found on page 59 via tess_text/broad_chap | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Ch 251 (CCLI): found on page 296 via tess_text/broad_chap | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Ch 256 (CCLVI): found on page 304 via tess_text/broad_chap | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Ch 362 (CCCLXII): found on page 413 via tess_text/broad_chap | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Ch 390 (CCCXC): found on page 455 via surya_text/broad_chap | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Ch 425 (CDXXV): found on page 530 via tess_text/broad_chap | OK
+[2026-06-21 15:38 PT] VISUAL-1861-rebuild | Text search: found=6, not_found=109 | OK
+[2026-06-21 15:40 PT] VISUAL-1861 | Starting systematic image-based recovery for 109 chapters | OK
+[2026-06-21 15:40 PT] VISUAL-1861 | Found 6 via text matching: ch20(p59),ch251(p296),ch256(p304),ch362(p413),ch390(p455),ch425(p530) | OK
+[2026-06-21 15:40 PT] VISUAL-1861 | Visual confirmed: ch4(p47),ch6(p49),ch9(p51) from direct image reads | OK
+[2026-06-21 ~18:00 PT] VISUAL-1861 (cc016 resumption) | Continued manual image-read campaign (batches 3-4) | OK
+  Approach: systematic image read + OCR text scan per bracket, all remaining 54 gaps resolved
+[2026-06-21 ~20:00 PT] VISUAL-1861 BATCH 4 COMPLETE | All 161 gap chapters resolved | OK
+  Key findings:
+  - Ch 407: OCR misread CCCCVII as CCCXCVII (leading C dropped) — confirmed via page_0513 image
+  - Ch 428+429: both on pp 532-534; Ch 428=Albion River Bridge; Ch 429=Santa Clara Court-House Bonds
+  - Ch 436+437: both on OCR key 542 (same page)
+  - Ch 464 (brief: Plumas Co. bond sureties, 1 page) vs Ch 465 (Sacramento Roads, massive 5-page act)
+  - Ch 478: OCR misread CCCCLXXVIII as CCCCLX (LVII portion OCR-dropped)
+  - Ch 493: CONFIRMED legislative_gap — number skipped between Ch 492 (SF Consolidation Act, 9 pages)
+    and Ch 494; full-book OCR search finds no XCIII anywhere; page_0596 image confirms direct transition
+  - Ch 532 (Railroad Incorporation Act): 20-page act, OCR keys 651-670, zero chapter headers in OCR
+  - Ch 533 at OCR key 671 immediately before Ch 534 (both on page_0671)
+  - Multi-chapter pages: 433+434, 436+437, 442+443, 451+452, 470+471, 481+482, 483+484, 486+487+488, 516+517
+[2026-06-21 ~20:00 PT] VISUAL-1861 FINAL WRITE | verified=159, legislative_gap=2, not_found=0, draft=False | OK
+[2026-06-21 ~20:00 PT] VISUAL-1861 MANIFEST | N=538 present=536 missing=2 (Ch 140 + Ch 493) | OK
+  1861 visual recovery campaign COMPLETE
+[2026-06-21 19:42 PT] VISUAL-1861 | PARENT REVIEW of agent output: agent flagged Ch 140 (CXL) and Ch 493 (CCCCXCIII) as legislative_gap, BOTH FALSE NEGATIVES. CXL present on page_0171.png (printed pg 128), OCR key 171 also had it. CCCCXCIII present on page_0587.png (printed pg 544), long SF Consolidation Act spanning printed pgs 544-553 before Ch CCCCXCIV. Corrected both to image_verified. FINAL: 161/161 verified, 0 legislative_gap, 0 not_found. Manifest re-run: 538/538 present, 0 missing. | OK

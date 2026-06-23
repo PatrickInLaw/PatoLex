@@ -1,0 +1,14 @@
+[2026-06-21 00:00 PT] START | Visual-recovery worker for year 1990 | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1990 -> 16 missing chapters: [42,85,86,87,103,104,105,450,496,921,1226,1227,1228,1229,1441,1572] | OK
+[2026-06-21 00:02 PT] SETUP | Confirmed OCR JSON structure: keyed by (source_page-1), image pattern pages_raw/page_{source_page-1:04d}.png | OK
+[2026-06-21 00:05 PT] CH42 | vol1, OCR scan pages 242-250: CHAPTER 42 header found image-verified on page_0247.png (source_page=248). Title: amend §798.56 Civil Code, mobilehome tenancies. Approved Apr 10 1990. | OK
+[2026-06-21 00:08 PT] CH85-87 | vol1, OCR scan pages 1020-1053: CHAPTER 85 on page_1037.png (sp=1038) - mental health urgency act; CHAPTER 86 on page_1039.png (sp=1040) - Corporations Code securities; CHAPTER 87 on page_1046.png (sp=1047) - validation act urgency. All image-verified. | OK
+[2026-06-21 00:12 PT] CH103-105 | vol1, OCR scan pages 1082-1092: CHAPTER 103 on page_1083.png (sp=1084) - acupuncture B&P Code; CHAPTER 104 on page_1085.png (sp=1086) - Vehicle Code urgency; CHAPTER 105 on page_1091.png (sp=1092) - aging W&I Code urgency. Multi-chapter page: ch105 and ch106 both on sp=1092. All image-verified. | OK
+[2026-06-21 00:15 PT] CH450 | vol2, OCR scan pages 569-581: CHAPTER 450 on page_0571.png (sp=572) - unclaimed property Code Civil Procedure urgency. Approved Jul 31 1990. Image-verified. | OK
+[2026-06-21 00:17 PT] CH496 | vol2, OCR scan pages 1387-1404: CHAPTER 496 on page_1401.png (sp=1402) - Gov Code state funds appropriation. Approved Aug 10 1990. Image-verified. | OK
+[2026-06-21 00:19 PT] CH921 | vol3, OCR scan pages 405-436: CHAPTER 921 on page_0430.png (sp=431) - courthouse facility capital bond act. Became law without Governor signature Sep 14 1990. Image-verified. | OK
+[2026-06-21 00:22 PT] CH1226-1229 | vol3, OCR scan pages 1582-1611: Four chapters in tight 29-page span all image-verified. CH1226 page_1583 (sp=1584) computer mapping B&P; CH1227 page_1586 (sp=1587) health care H&S urgency; CH1228 page_1606 (sp=1607) horseracing B&P urgency; CH1229 page_1609 (sp=1610) H&S detoxification. All Approved Sep 22 1990. | OK
+[2026-06-21 00:25 PT] CH1441 | vol4, OCR scan pages 831-869: CHAPTER 1441 on page_0857.png (sp=858) - Gov Code housing + H&S Code. Approved Sep 28 1990. Image-verified. | OK
+[2026-06-21 00:27 PT] CH1572 | vol4, OCR scan pages 1767-1788: CHAPTER 1572 on page_1768.png (sp=1769) - Gov Code local government fees (complex multi-section act). Approved Sep 29 1990. Image-verified. | OK
+[2026-06-21 00:28 PT] OUTPUT | Wrote parsed_acts_visual.json to 4 volumes: vol1 (7 acts), vol2 (2 acts), vol3 (5 acts), vol4 (2 acts) | OK
+[2026-06-21 00:29 PT] COMPLETE | 16/16 missing chapters recovered, all image_verified, 0 legislative_gap, 0 not_found_needs_reocr | OK

@@ -1,0 +1,16 @@
+[2026-06-21 00:00 PT] INIT | VISUAL-RECOVERY 1987 campaign start | OK
+[2026-06-21 00:00 PT] SCOPE | 155 missing chapters across 4 volumes: vol1-chapters(~58 missing), vol2(1 missing), vol3(~94 missing), vol4-chapters(0 in manifest) | OK
+[2026-06-21 00:00 PT] SETUP | Manifest read from C:\PatoLex-scratch\_manifest_1987.json | OK
+[2026-06-21 00:00 PT] SETUP | OCR key K -> pages_raw/page_{K:04d}.png confirmed (direct mapping, NOT K-1) | OK
+[2026-06-21 00:00 PT] SETUP | Spawning parallel agents: vol1 group A (ch1-137), vol1 group B (ch283-284), vol2 (ch1138), vol3 part A (ch1144-1280), vol3 part B (ch1284-1503) | OK
+[2026-06-21 00:05 PT] VOL3-B | ch1311-ch1503 (56 chapters) already present in parsed_acts_visual.json from v2 script run | confirmed=0 seq=56 | OK
+[2026-06-21 08:56 PT] VOL3-A | ch1144-ch1310 (48 chapters) | confirmed=0 seq=48 | OK
+[2026-06-21 08:57 PT] VOL3-A | ch1144-ch1310 (48 chapters) v2 | confirmed=0 seq=48 notfound=0 | OK
+[2026-06-21 08:58 PT] VOL3-A | ch1144-ch1310 v3 | confirmed=0 seq=48 notfound=0 | OK
+[2026-06-21 09:00 PT] VOL1-B | ch283 + ch284 | printed_number_confirmed=true for both; confirmed via page_1344.png (CHAPTER 283 header) and page_1345.png (CHAPTER 284 header) | OK
+[2026-06-21 09:00 PT] VOL2 | ch1138 | sequence-located; actual text is first act of vol3 (pages 2-84); title=California Personal Income Tax Fairness, Simplification, and Conformity Act of 1987; chapter header on vol3 page 1 missing from OCR; no images for vol3 to confirm visually | OK
+[2026-06-21 09:30 PT] VOL1-A | ch1-ch137 (48 chapters) | confirmed=48 seq=0 gap=0 not_found=0 | OK
+[2026-06-21 09:30 PT] VOL1-A | all 48 chapters image-verified: CHAPTER NNN bold header + [Ch. NNN] running header in pages_raw images | notable: ch57 at p245 (ch56 Budget Act spans pp147-244), ch136 at p1038 ch137 at p1040 (ch135 Budget Act spans pp447-1037, 591 pages) | OK
+[2026-06-21 09:45 PT] MERGE | vol1 final: 50 acts confirmed=50 seq=0; vol2 final: 1 act seq=1; vol3 final: 104 acts confirmed=0 seq=104 (all seq-located, no images for vol3) | OK
+[2026-06-21 09:45 PT] TITLES | vol3 titles fixed: 67 chapters had empty titles, filled via approved-boundary window extraction + fallback to range-first-act; some adjacent-chapter groups share same title text (expected: same page range, sequence ambiguity) | WARN
+[2026-06-21 09:46 PT] COMPLETE | VISUAL-RECOVERY 1987 DONE | total=155/155 | confirmed=50 (vol1 all image-verified) | seq_located=105 (vol2 x1, vol3 x104) | legislative_gap=0 | not_found=0 | OK

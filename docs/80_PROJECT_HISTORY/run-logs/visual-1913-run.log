@@ -1,0 +1,10 @@
+[2026-06-21 00:00 PT] START | Visual recovery campaign for year 1913 | OK
+[2026-06-21 00:01 PT] MANIFEST | 1913: N=699 present=694 missing=5 chapters=[151,152,403,608,609] | OK
+[2026-06-21 00:02 PT] IMAGES | pages_raw/ confirmed present; mapping: source_page -> page_{source_page-1:04d}.png | OK
+[2026-06-21 00:03 PT] CH151 | page_0290.png (sp=291): CHAPTER 151 confirmed visually. Title: "An act to amend section one thousand eight hundred and eighty-six of the Political Code of the State of California, relating to the minimum rate of interest, and sale of school bonds." OCR miss: chapter header not extracted by any engine (running head on continuation page; actual header on sp=291). | OK
+[2026-06-21 00:04 PT] CH152 | page_0291.png (sp=292): CHAPTER 152 confirmed visually. Title: "An act to amend section eight hundred fifty of the Code of Civil Procedure of the State of California relating to the requisites for notice of hearing in justices' courts." OCR miss: same pattern - chapter header page with clean image but garbled/missed by all engines. | OK
+[2026-06-21 00:05 PT] CH403 | page_0919.png (sp=920): CHAPTER 403 confirmed visually. Title: "An act appropriating money for the purchase of manual training furniture and equipment at San Jose State Normal School." Engines extracted ch 404-406 from this page but missed ch 403 at page top (running-head OCR-miss pattern). | OK
+[2026-06-21 00:06 PT] CH608 | page_1190.png (sp=1191): CHAPTER 608 confirmed visually. Title: "An act establishing a state normal school in Humboldt county, State of California, to be known as 'Humboldt State Normal School,' and making an appropriation for the maintenance of said school." | OK
+[2026-06-21 00:07 PT] CH609 | page_1191.png (sp=1192): CHAPTER 609 confirmed visually. Title: "An act making an appropriation for the location and survey of a proposed highway to connect the counties of Trinity, Tehama and Shasta with the road system of Humboldt county." | OK
+[2026-06-21 00:08 PT] OUTPUT | Writing parsed_acts_visual.json to production-1913-statutes/ | OK
+[2026-06-21 00:09 PT] COMPLETE | 5 targeted, 5 image_verified, 0 legislative_gap, 0 not_found | OK

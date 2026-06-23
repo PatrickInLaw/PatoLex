@@ -1,0 +1,19 @@
+[2026-06-21 00:00 PT] INIT | visual-recovery-1961: started autonomous campaign | OK
+[2026-06-21 00:01 PT] MANIFEST | ran _residual_manifest.py 1961: 2232 present=2223 missing=9 chapters=[684,1043,1044,1045,1046,1574,1575,1603,1867] | OK
+[2026-06-21 00:02 PT] PAGE-CHECK | vol1-61chapters: 2485 images (page_0000..page_2484); vol2-chapters: 2070 images (page_0000..page_2069) | OK
+[2026-06-21 00:03 PT] MAPPING | OCR key K -> pages_raw/page_{K-1:04d}.png confirmed: key 1400 -> page_1399.png = Ch. 683 text + header | OK
+[2026-06-21 00:04 PT] CH-684 | image page_1400.png (key 1401): CHAPTER 684 heading confirmed; title=amend Section 68540 Government Code, assignment of judges | VERIFIED
+[2026-06-21 00:05 PT] CH-1043 | image page_2204.png (key 2205): CHAPTER 1043 heading confirmed; title=amend Section 34322 Health and Safety Code, housing | VERIFIED
+[2026-06-21 00:06 PT] CH-1044 | image page_2205.png (key 2206): CHAPTER 1044 heading confirmed; title=add Section 34330 Health and Safety Code, housing | VERIFIED
+[2026-06-21 00:07 PT] CH-1045 | image page_2206.png (key 2207): CHAPTER 1045 heading confirmed; title=amend Sections 475/475a Penal Code, checks with intent to defraud | VERIFIED
+[2026-06-21 00:08 PT] CH-1046 | image page_2207.png (key 2208): CHAPTER 1046 heading confirmed; title=amend Section 16059 Education Code, school property | VERIFIED
+[2026-06-21 00:09 PT] CH-1574 | image page_0393.png (key 394): CHAPTER 1574 heading confirmed; title=amend Section 25500 Corporations Code, corporate securities | VERIFIED
+[2026-06-21 00:10 PT] CH-1575 | image page_0394.png (key 395): CHAPTER 1575 heading confirmed; title=amend Section 9051 Public Resources Code, soil conservation + appropriation; OCR garbled ch# as 'toto' | VERIFIED
+[2026-06-21 00:11 PT] CH-1603 | image page_0425.png (key 426): CHAPTER 1603 heading confirmed; title=amend Section 35111 Government Code, annexation of territory to cities | VERIFIED
+[2026-06-21 00:12 PT] CH-1867 | image page_0963.png (key 964): CHAPTER 1867 heading confirmed; title=add Article 10 (Section 50260) Government Code, human relations / intergroup harmony; ENTIRELY ABSENT from all OCR engines; image read required | VERIFIED
+[2026-06-21 00:13 PT] OUTPUT | wrote production-1961-vol1-61chapters/parsed_acts_visual.json (5 acts, all verified) | OK
+[2026-06-21 00:14 PT] OUTPUT | wrote production-1961-vol2-chapters/parsed_acts_visual.json (4 acts, all verified) | OK
+[2026-06-21 00:15 PT] SUMMARY | 1961 visual recovery complete: targeted=9 verified=9 legislative_gap=0 not_found=0 | OK
+[2026-06-21 00:16 PT] NOTE | Key finding: OCR systematically drops chapter running-heads on continuation pages; Ch. 1867 heading completely absent from all 4 engines despite clean page scan | WARN
+[2026-06-21 00:17 PT] NOTE | OCR garbled Ch. 1575 number as 'toto' in consensus; engine texts had noise but heading visible on image | WARN
+[2026-06-21 00:18 PT] NOTE | Chs 1043-1046 form a tight multi-chapter cluster across 4 consecutive pages (2204-2207); parser missed all 4 due to compact layout | WARN

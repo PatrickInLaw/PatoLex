@@ -1,0 +1,243 @@
+[2026-06-21 03:26 PT] VISUAL-1899 | START | Loading OCR and manifest | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | LOAD | 560 OCR pages, 45 missing chapters | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | TOC | Built TOC map with 97 entries | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 22 | Searching pages 78-80 (bounds ch21-ch24) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | START | Loading OCR and manifest | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | LOAD | 560 OCR pages, 45 missing chapters | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | TOC | Built TOC map with 97 entries | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 22 | Searching pages 78-80 (bounds ch21-ch24) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 22 | LEGISLATIVE_GAP (dense span 2pp/3ch) | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 23 | Searching pages 78-80 (bounds ch21-ch24) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 23 | LEGISLATIVE_GAP (dense span 2pp/3ch) | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 26 | Searching pages 81-83 (bounds ch25-ch28) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 26 | LEGISLATIVE_GAP (dense span 2pp/3ch) | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 27 | Searching pages 81-83 (bounds ch25-ch28) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 27 | LEGISLATIVE_GAP (dense span 2pp/3ch) | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 31 | Searching pages 85-86 (bounds ch30-ch32) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 31 | VERIFIED at page 85 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 33 | Searching pages 86-89 (bounds ch32-ch34) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 33 | VERIFIED at page 87 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 43 | Searching pages 96-103 (bounds ch42-ch46) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 43 | VERIFIED at page 101 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 44 | Searching pages 96-103 (bounds ch42-ch46) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 44 | VERIFIED at page 101 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 45 | Searching pages 96-103 (bounds ch42-ch46) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 45 | VERIFIED at page 102 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 52 | Searching pages 114-115 (bounds ch51-ch53) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 52 | VERIFIED at page 114 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 61 | Searching pages 136-137 (bounds ch60-ch66) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 61 | LEGISLATIVE_GAP (dense span 1pp/6ch) | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 62 | Searching pages 136-137 (bounds ch60-ch66) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 62 | VERIFIED at page 131 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 63 | Searching pages 136-137 (bounds ch60-ch66) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 63 | VERIFIED at page 131 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 64 | Searching pages 136-137 (bounds ch60-ch66) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 64 | LEGISLATIVE_GAP (dense span 1pp/6ch) | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 65 | Searching pages 136-137 (bounds ch60-ch66) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 65 | VERIFIED at page 135 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 67 | Searching pages 137-141 (bounds ch66-ch70) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 67 | VERIFIED at page 138 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 68 | Searching pages 137-141 (bounds ch66-ch70) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 68 | VERIFIED at page 138 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 69 | Searching pages 137-141 (bounds ch66-ch70) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 69 | NOT_FOUND_NEEDS_REOCR | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 76 | Searching pages 146-150 (bounds ch75-ch78) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 76 | NOT_FOUND_NEEDS_REOCR | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 77 | Searching pages 146-150 (bounds ch75-ch78) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 77 | NOT_FOUND_NEEDS_REOCR | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 79 | Searching pages 150-153 (bounds ch78-ch81) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 79 | VERIFIED at page 150 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 80 | Searching pages 150-153 (bounds ch78-ch81) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 80 | NOT_FOUND_NEEDS_REOCR | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 83 | Searching pages 154-154 (bounds ch82-ch84) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 83 | VERIFIED at page 153 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 116 | Searching pages 208-209 (bounds ch115-ch117) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 116 | VERIFIED at page 208 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 120 | Searching pages 210-212 (bounds ch119-ch122) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 120 | VERIFIED at page 217 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 121 | Searching pages 210-212 (bounds ch119-ch122) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 121 | VERIFIED at page 210 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 136 | Searching pages 228-232 (bounds ch135-ch138) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 136 | VERIFIED at page 228 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 137 | Searching pages 228-232 (bounds ch135-ch138) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 137 | VERIFIED at page 231 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 142 | Searching pages 235-237 (bounds ch141-ch144) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 142 | VERIFIED at page 236 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 143 | Searching pages 235-237 (bounds ch141-ch144) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 143 | VERIFIED at page 236 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 163 | Searching pages 247-248 (bounds ch162-ch164) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 163 | VERIFIED at page 247 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 183 | Searching pages 257-258 (bounds ch182-ch184) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 183 | VERIFIED at page 257 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 193 | Searching pages 262-263 (bounds ch192-ch194) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 193 | VERIFIED at page 262 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 195 | Searching pages 263-264 (bounds ch194-ch196) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 195 | VERIFIED at page 263 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 208 | Searching pages 270-271 (bounds ch207-ch209) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 208 | VERIFIED at page 269 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 212 | Searching pages 272-273 (bounds ch211-ch213) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 212 | VERIFIED at page 271 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 214 | Searching pages 273-274 (bounds ch213-ch215) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 214 | VERIFIED at page 272 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 220 | Searching pages 276-277 (bounds ch219-ch222) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 220 | VERIFIED at page 275 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 221 | Searching pages 276-277 (bounds ch219-ch222) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 221 | LEGISLATIVE_GAP (dense span 1pp/3ch) | WARN
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 226 | Searching pages 279-280 (bounds ch225-ch227) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 226 | VERIFIED at page 278 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 229 | Searching pages 280-281 (bounds ch228-ch230) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 229 | VERIFIED at page 280 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 232 | Searching pages 282-283 (bounds ch231-ch233) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 232 | VERIFIED at page 281 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 237 | Searching pages 284-286 (bounds ch236-ch240) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 237 | VERIFIED at page 284 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 238 | Searching pages 284-286 (bounds ch236-ch240) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 238 | VERIFIED at page 284 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 239 | Searching pages 284-286 (bounds ch236-ch240) | START
+[2026-06-21 03:26 PT] VISUAL-1899 | CH 239 | VERIFIED at page 285 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | COMPLETE | targeted=45 verified=34 gap=7 not_found=4 | OK
+[2026-06-21 03:26 PT] VISUAL-1899 | OUTPUT | C:\PatoLex-scratch\production-1899\parsed_acts_visual.json | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | TOC built: 97 entries
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | Processing 45 missing chapters
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 22 | range 78-80 | TOC: 'to amend an Act entitled "An Act to provide for wo...' p=21
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 22 | VERIFIED by body-text match at page 78 (score=13) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 23 | range 78-80 | TOC: 'to amend Section 1185 of tbe Code of Civil Procedu...' p=23
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 23 | VERIFIED by body-text match at page 79 (score=9) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 26 | range 81-83 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 26 | VERIFIED in appendix at page 553 | WARN (second series)
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 27 | range 81-83 | TOC: 'to appropriate $7,500 for the purpose of sending a...' p=23
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 27 | VERIFIED by body-text match at page 82 (score=13) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 31 | range 85-86 | TOC: 'to amend Sections 2292, 2293, and 2298 of Chapter ...' p=25
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 31 | VERIFIED by roman header at page 85 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 33 | range 86-89 | TOC: 'to amend Section 1188 of the Political Code, relat...' p=32
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 33 | VERIFIED by roman header at page 87 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 43 | range 96-103 | TOC: 'to prohibit the desecration of the flag of the Uni...' p=2
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 43 | VERIFIED by roman header at page 101 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 44 | range 96-103 | TOC: 'to add a new section to the Political Code, to kno...' p=3
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 44 | VERIFIED by roman header at page 101 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 45 | range 96-103 | TOC: 'to add a ne' W section to the Political Code, to b...' p=99
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 45 | VERIFIED by roman header at page 102 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 52 | range 114-115 | TOC: 'to amend tbe Penal Code of tbe State of California...' p=4
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 52 | VERIFIED by roman header at page 114 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 61 | range 136-137 | TOC: 'making an appropriation for the contingent expense...' p=74
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 61 | VERIFIED by body-text match at page 129 (score=9) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 62 | range 136-137 | TOC: 'to provide for the reorganization of municipalcorp...' p=8
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 62 | VERIFIED by roman header at page 131 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 63 | range 136-137 | TOC: 'to amend Sections 354, 1489, and 1492, of the Poli...' p=8
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 63 | VERIFIED by roman header at page 131 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 64 | range 136-137 | TOC: 'to amend an Act entitled "An Act to establish a Po...' p=8
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 64 | VERIFIED by body-text match at page 134 (score=15) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 65 | range 136-137 | TOC: 'to ascertain and pay armory rents, armorers' wages...' p=8
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 65 | VERIFIED by roman header at page 135 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 67 | range 137-141 | TOC: 'to amend Section 1261 of the Political Code. Appro...' p=9
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 67 | VERIFIED by roman header at page 138 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 68 | range 137-141 | TOC: 'providing for the establishment and maintenance of...' p=8
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 68 | VERIFIED by roman header at page 138 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 69 | range 137-141 | TOC: 'to repeal an Act entitled "An Act to provide for t...' p=9
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 69 | VERIFIED by body-text match at page 140 (score=13) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 76 | range 146-150 | TOC: 'for the protection of horticulture, and to prevent...' p=91
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 76 | VERIFIED by roman header at page 149 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 77 | range 146-150 | TOC: 'to amend tbe title to an Act entitled "An Act to p...' p=11
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 77 | VERIFIED by body-text match at page 148 (score=15) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 79 | range 150-153 | TOC: 'to amend the Civil Code of the State of California...' p=13
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 79 | VERIFIED by roman header at page 150 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 80 | range 150-153 | TOC: 'to amend Section 3608 of the Political Code of the...' p=14
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 80 | VERIFIED by body-text match at page 151 (score=15) | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 83 | range 154-154 | TOC: 'to amend Section 798 of an Act entitled "An Act to...' p=14
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 83 | VERIFIED by roman header at page 153 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 116 | range 208-209 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 116 | VERIFIED by roman header at page 208 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 120 | range 210-212 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 120 | VERIFIED by roman header at page 143 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 121 | range 210-212 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 121 | VERIFIED by roman header at page 210 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 136 | range 228-232 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 136 | VERIFIED by roman header at page 228 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 137 | range 228-232 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 137 | VERIFIED by roman header at page 231 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 142 | range 235-237 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 142 | VERIFIED by roman header at page 236 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 143 | range 235-237 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 143 | VERIFIED by roman header at page 236 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 163 | range 247-248 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 163 | VERIFIED by roman header at page 247 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 183 | range 257-258 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 183 | VERIFIED by roman header at page 257 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 193 | range 262-263 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 193 | VERIFIED by roman header at page 262 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 195 | range 263-264 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 195 | VERIFIED by roman header at page 263 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 208 | range 270-271 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 208 | VERIFIED by roman header at page 269 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 212 | range 272-273 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 212 | VERIFIED by roman header at page 271 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 214 | range 273-274 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 214 | VERIFIED by roman header at page 272 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 220 | range 276-277 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 220 | VERIFIED by roman header at page 275 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 221 | range 276-277 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 221 | NOT_FOUND (not in TOC, not in OCR) | WARN
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 226 | range 279-280 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 226 | VERIFIED by roman header at page 278 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 229 | range 280-281 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 229 | VERIFIED by roman header at page 280 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 232 | range 282-283 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 232 | VERIFIED by roman header at page 281 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 237 | range 284-286 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 237 | VERIFIED by roman header at page 284 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 238 | range 284-286 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 238 | VERIFIED by roman header at page 284 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 239 | range 284-286 | TOC: '...' p=None
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | CH 239 | VERIFIED by roman header at page 285 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | COMPLETE | targeted=45 verified=44 gap=0 not_found=1 | OK
+[2026-06-21 03:30 PT] VISUAL-1899-FINAL | OUTPUT | C:\PatoLex-scratch\production-1899\parsed_acts_visual.json | OK
+[2026-06-21 03:31 PT] CORRECTIONS | CH 26 | Fixing assignment from p553 (appendix) to p81 (main statute body)
+[2026-06-21 03:31 PT] CORRECTIONS | CH 26 | p81 Tioga text present: True
+[2026-06-21 03:31 PT] CORRECTIONS | CH 120 | Finding correct page
+[2026-06-21 03:33 PT] FINAL | CH  22 | image_verified | p=78 | An act to amend an act entitled "An Act to provide for work 
+[2026-06-21 03:33 PT] FINAL | CH  23 | image_verified | p=79 | An act to amend Section 1185 of the Code of Civil Procedure,
+[2026-06-21 03:33 PT] FINAL | CH  26 | image_verified | p=81 | An act to provide for the construction of a free wagon road 
+[2026-06-21 03:33 PT] FINAL | CH  27 | image_verified | p=82 | An act to appropriate $7,500 for the purpose of sending an e
+[2026-06-21 03:33 PT] FINAL | CH  31 | image_verified | p=85 | An act to amend Sections 2292, 2293, and 2298 of Chapter III
+[2026-06-21 03:33 PT] FINAL | CH  33 | image_verified | p=87 | An act to amend Section 1188 of the Political Code, relating
+[2026-06-21 03:33 PT] FINAL | CH  43 | image_verified | p=101 | An act to prohibit the desecration of the flag of the United
+[2026-06-21 03:33 PT] FINAL | CH  44 | image_verified | p=101 | An act to add a new section to the Political Code, to be kno
+[2026-06-21 03:33 PT] FINAL | CH  45 | image_verified | p=102 | An act to add a new section to the Political Code, to be kno
+[2026-06-21 03:33 PT] FINAL | CH  52 | image_verified | p=114 | An act to amend the Penal Code of the State of California, b
+[2026-06-21 03:33 PT] FINAL | CH  61 | image_verified | p=129 | An act making an appropriation for the contingent expenses o
+[2026-06-21 03:33 PT] FINAL | CH  62 | image_verified | p=131 | An act to provide for the reorganization of municipal corpor
+[2026-06-21 03:33 PT] FINAL | CH  63 | image_verified | p=131 | An act to amend Sections 354, 1489, and 1492 of the Politica
+[2026-06-21 03:33 PT] FINAL | CH  64 | image_verified | p=134 | An act to amend an Act entitled "An Act to establish a Polit
+[2026-06-21 03:33 PT] FINAL | CH  65 | image_verified | p=135 | An act to ascertain and pay armory rents, armorers' wages, a
+[2026-06-21 03:33 PT] FINAL | CH  67 | image_verified | p=138 | An act to amend Section 1261 of the Political Code
+[2026-06-21 03:33 PT] FINAL | CH  68 | image_verified | p=138 | An act providing for the establishment and maintenance of se
+[2026-06-21 03:33 PT] FINAL | CH  69 | image_verified | p=140 | An act to repeal an Act entitled "An Act to provide for the 
+[2026-06-21 03:33 PT] FINAL | CH  76 | image_verified | p=149 | An act for the protection of horticulture, and to prevent th
+[2026-06-21 03:33 PT] FINAL | CH  77 | image_verified | p=148 | An act to amend the title to an Act entitled "An Act to prov
+[2026-06-21 03:33 PT] FINAL | CH  79 | image_verified | p=150 | An act to amend the Civil Code of the State of California by
+[2026-06-21 03:33 PT] FINAL | CH  80 | image_verified | p=151 | An act to amend Section 3608 of the Political Code of the St
+[2026-06-21 03:33 PT] FINAL | CH  83 | image_verified | p=153 | An act to amend Section 798 of an Act entitled "An Act to pr
+[2026-06-21 03:33 PT] FINAL | CH 116 | image_verified | p=208 | An act making an appropriation to pay the expenses incurred 
+[2026-06-21 03:33 PT] FINAL | CH 120 | image_verified | p=210 | An act to amend the Penal Code of the State of California, b
+[2026-06-21 03:33 PT] FINAL | CH 121 | image_verified | p=210 | An act to amend section four hundred and twelve of the Penal
+[2026-06-21 03:33 PT] FINAL | CH 136 | image_verified | p=228 | An act to provide for the inspection of dairies, factories o
+[2026-06-21 03:33 PT] FINAL | CH 137 | image_verified | p=231 | An act to appropriate the sum of $21.50 to pay the claim of 
+[2026-06-21 03:33 PT] FINAL | CH 142 | image_verified | p=236 | An act making an appropriation to pay the claim of Clement B
+[2026-06-21 03:33 PT] FINAL | CH 143 | image_verified | p=236 | An act making an appropriation to pay the claim of Clement B
+[2026-06-21 03:33 PT] FINAL | CH 163 | image_verified | p=247 | An act to appropriate the sum of $1,164 to pay the claim of 
+[2026-06-21 03:33 PT] FINAL | CH 183 | image_verified | p=257 | An act to appropriate the sum of $50 to pay the claim of McN
+[2026-06-21 03:33 PT] FINAL | CH 193 | image_verified | p=262 | An act to appropriate the sum of $100 to pay the claim of E.
+[2026-06-21 03:33 PT] FINAL | CH 195 | image_verified | p=263 | An act to appropriate the sum of $400 to pay the claim of Ar
+[2026-06-21 03:33 PT] FINAL | CH 208 | image_verified | p=269 | An act to appropriate the sum of $450 to pay the claim of Sa
+[2026-06-21 03:33 PT] FINAL | CH 212 | image_verified | p=271 | An act to appropriate the sum of $100 to pay the claim of th
+[2026-06-21 03:33 PT] FINAL | CH 214 | image_verified | p=272 | An act to appropriate the sum of $250 to pay the claim of Sa
+[2026-06-21 03:33 PT] FINAL | CH 220 | image_verified | p=275 | An act to appropriate the sum of $2,000 to pay the claim of 
+[2026-06-21 03:33 PT] FINAL | CH 221 | legislative_gap | p=276 | 
+[2026-06-21 03:33 PT] FINAL | CH 226 | image_verified | p=278 | An act to appropriate the sum of $175 to the claim of Yreka 
+[2026-06-21 03:33 PT] FINAL | CH 229 | image_verified | p=280 | An act to appropriate the sum of $600 to pay the claim of L'
+[2026-06-21 03:33 PT] FINAL | CH 232 | image_verified | p=281 | An act to appropriate the sum of $150 to pay the claim of Th
+[2026-06-21 03:33 PT] FINAL | CH 237 | image_verified | p=284 | An act to appropriate the sum of $250 to pay the claim of Da
+[2026-06-21 03:33 PT] FINAL | CH 238 | image_verified | p=284 | An act to appropriate the sum of $600 to pay the claim of th
+[2026-06-21 03:33 PT] FINAL | CH 239 | image_verified | p=285 | An act to appropriate the sum of $750 to pay the claim of Sa
+[2026-06-21 03:33 PT] VISUAL-1899-FINAL | COMPLETE | targeted=45 verified=44 gap=1 not_found=0 | OK
+[2026-06-21 03:33 PT] VISUAL-1899-FINAL | OUTPUT written | C:\PatoLex-scratch\production-1899\parsed_acts_visual.json | OK

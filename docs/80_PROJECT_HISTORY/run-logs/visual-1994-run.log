@@ -1,0 +1,15 @@
+[2026-06-21 00:00 PT] INIT | visual-recovery-1994: started autonomous worker | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1994 -> N=1299 present=1297 missing=2: ch61 (vol1, pp917-924), ch1010 (vol3, pp2005-2186) | OK
+[2026-06-21 00:02 PT] VOL-CHECK | production-1994-vol1: pages_raw present, page images confirmed for range 0916-0923 | OK
+[2026-06-21 00:02 PT] VOL-CHECK | production-1994-vol3: pages_raw present, page images confirmed for range 2004-2186 | OK
+[2026-06-21 00:03 PT] IMAGE-MAP | Confirmed: manifest page_image_pattern = page_{source_page-1:04d}.png; key in ocr_consensus = source_page-1 (0-indexed). page_1indexed field = printed page number. | OK
+[2026-06-21 00:04 PT] CH61-OCR | Searched all 4 engines over pp917-924 for "CHAPTER 61": not found in any engine (running-head blind spot confirmed). Act-start text at key 916 (p917) = ch59, key 922 (p923) = ch61 body text | WARN
+[2026-06-21 00:05 PT] CH61-IMAGE | Read page_0916.png (printed p917): shows CHAPTER 59 and CHAPTER 60 (two acts on one page). Confirmed ch60 occupies pp917-922. | OK
+[2026-06-21 00:06 PT] CH61-IMAGE | Read page_0922.png (printed p923): running head "Ch. 61]", heading "CHAPTER 61" clearly visible. Act: amend Education Code sec 8209, appropriation augmentation, urgency. Approved/filed May 3 1994. source_page=923 confirmed. | OK
+[2026-06-21 00:07 PT] CH61-RESULT | Chapter 61 VERIFIED via image. status=image_verified source_page=923 | OK
+[2026-06-21 00:08 PT] CH1010-OCR | Searched all 4 engines over pp2005-2186 for "CHAPTER 100x/101x": zero chapter-number headers found. Only 1 act-start in range: OCR key 2010 (printed p2011). Range is 181 pages - massive omnibus act. | WARN
+[2026-06-21 00:09 PT] CH1010-IMAGE | Read page_2010.png (printed p2011): running head "Ch. 1010]", heading "CHAPTER 1010" clearly visible. Omnibus act amending hundreds of code sections across Business & Professions, Civil, Financial, Government, Water codes etc., relating to legal entities. Approved/filed September 29 1994. source_page=2011 confirmed. | OK
+[2026-06-21 00:10 PT] CH1010-RESULT | Chapter 1010 VERIFIED via image. status=image_verified source_page=2011. Act spans ~175 pages (printed 2011-2186). | OK
+[2026-06-21 00:11 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1994-vol1\parsed_acts_visual.json (ch61, 1 verified) | OK
+[2026-06-21 00:11 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1994-vol3\parsed_acts_visual.json (ch1010, 1 verified) | OK
+[2026-06-21 00:12 PT] SUMMARY | 1994 visual recovery: 2 targeted, 2 image_verified, 0 legislative_gap, 0 not_found. Both missing chapters confirmed via direct page image read. | OK

@@ -1,0 +1,13 @@
+[2026-06-21 PT] START | VISUAL-recovery worker: 1993 campaign | 3 missing chapters: 247, 272, 860 | OK
+[2026-06-21 PT] MANIFEST | python _residual_manifest.py 1993 -> missing=[247,272,860] in vol1 (247,272) and vol3 (860) | OK
+[2026-06-21 PT] IMAGE-CHECK | Confirmed page images present in vol1/pages_raw and vol3/pages_raw | OK
+[2026-06-21 PT] OCR-STRUCTURE | page_ocr_results.json keys are 0-indexed strings; page_1indexed is true source page; image = page_{source_page-1:04d}.png | OK
+[2026-06-21 PT] CH247 | OCR search in vol1 pages 2110-2115: act start found at page_1indexed=2113 (img page_2112.png) | OK
+[2026-06-21 PT] CH247 | Image read: running head 'Ch. 247' + 'CHAPTER 247' confirmed. Title: amend Health & Safety Code s1569.72 re residential care for elderly. Printed p1845. | image_verified OK
+[2026-06-21 PT] CH272 | Manifest page_range [20,2168] = vol-boundary span (lo_ch=271 at end of vol1, hi_ch=273 at start of vol2). Searched end of vol1 for act start. | OK
+[2026-06-21 PT] CH272 | Act start found at page_1indexed=2170 (img page_2169.png). Image read: running head '[Ch. 272' + 'CHAPTER 272' confirmed. Omnibus Transportation Act 1993. Printed p1902. | image_verified OK
+[2026-06-21 PT] CH860 | OCR search in vol3 pages 385-396: act start found at page_1indexed=392 (img page_0391.png) | OK
+[2026-06-21 PT] CH860 | Image read: running head 'Ch. 860 ]' + 'CHAPTER 860' confirmed. Title: amend Education Code s22129 re State Teachers' Retirement System. Printed p4567. Governor veto-line-item note on $300k appropriation. | image_verified OK
+[2026-06-21 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1993-vol1\parsed_acts_visual.json (2 acts: ch247, ch272) | OK
+[2026-06-21 PT] OUTPUT | Written: C:\PatoLex-scratch\production-1993-vol3\parsed_acts_visual.json (1 act: ch860) | OK
+[2026-06-21 PT] SUMMARY | targeted=3, image_verified=3, legislative_gap=0, not_found=0 | CAMPAIGN COMPLETE OK

@@ -1,0 +1,46 @@
+[2026-06-21 03:19 PT] START | visual-1889 worker: 42 chapters targeted | OK
+[2026-06-21 03:19 PT] CH  23 | FOUND page=81 engine=doctr_text roman=XXIII | OK
+[2026-06-21 03:19 PT] CH  48 | FOUND page=105 engine=doctr_text roman=XLVIII | OK
+[2026-06-21 03:19 PT] CH  93 | FOUND page=152 engine=doctr_text roman=XCIII | OK
+[2026-06-21 03:19 PT] CH 113 | FOUND page=187 engine=doctr_text roman=CXIII | OK
+[2026-06-21 03:19 PT] CH 128 | FOUND page=195 engine=doctr_text roman=CXXVIII | OK
+[2026-06-21 03:19 PT] CH 133 | FOUND page=198 engine=doctr_text roman=CXXXIII | OK
+[2026-06-21 03:19 PT] CH 137 | FOUND page=203 engine=doctr_text roman=CXXXVII | OK
+[2026-06-21 03:19 PT] CH 138 | FOUND page=204 engine=doctr_text roman=CXXXVIII | OK
+[2026-06-21 03:19 PT] CH 165 | FOUND page=256 engine=doctr_text roman=CLXV | OK
+[2026-06-21 03:19 PT] CH 166 | FOUND page=257 engine=surya_text roman=CLXVI | OK
+[2026-06-21 03:19 PT] CH 174 | FOUND page=265 engine=doctr_text roman=CLXXIV | OK
+[2026-06-21 03:19 PT] CH 184 | FOUND page=274 engine=doctr_text roman=CLXXXIV | OK
+[2026-06-21 03:19 PT] CH 206 | FOUND page=288 engine=doctr_text roman=CCVI | OK
+[2026-06-21 03:19 PT] CH 207 | FOUND page=358 engine=doctr_text roman=CCVII | OK
+[2026-06-21 03:19 PT] CH 223 | FOUND page=389 engine=doctr_text roman=CCXXIII | OK
+[2026-06-21 03:19 PT] CH 233 | FOUND page=400 engine=doctr_text roman=CCXXXIII | OK
+[2026-06-21 03:19 PT] CH 234 | FOUND page=402 engine=doctr_text roman=CCXXXIV | OK
+[2026-06-21 03:19 PT] CH 235 | FOUND page=402 engine=surya_text roman=CCXXXV | OK
+[2026-06-21 03:20 PT] CH 237 | FOUND page=404 engine=surya_text roman=CCXXXVII; OCR artifact COXXXVII (CO=CC confusion); sequence-confirmed ch236@403->ch239@406; image 0403.png examined | OK
+[2026-06-21 03:20 PT] CH 238 | FOUND page=405 engine=surya_text roman=CCXXXVIII; OCR artifact COXX VIII (CO=CC confusion); sequence-confirmed ch237@404->ch239@406; image 0404.png examined | OK
+[2026-06-21 03:20 PT] CH 239 | FOUND page=406 engine=surya_text roman=CCXXXIX | OK
+[2026-06-21 03:20 PT] CH 240 | FOUND page=407 engine=surya_text roman=CCXL | OK
+[2026-06-21 03:20 PT] CH 243 | FOUND page=409 engine=doctr_text roman=CCXLIII | OK
+[2026-06-21 03:20 PT] CH 244 | FOUND page=409 engine=doctr_text roman=CCXLIV | OK
+[2026-06-21 03:20 PT] CH 245 | FOUND page=411 engine=surya_text roman=CCXLV | OK
+[2026-06-21 03:20 PT] CH 249 | FOUND page=420 engine=doctr_text roman=CCXLIX | OK
+[2026-06-21 03:20 PT] CH 257 | FOUND page=444 engine=doctr_text roman=CCLVII | OK
+[2026-06-21 03:20 PT] CH 258 | FOUND page=445 engine=doctr_text roman=CCLVIII | OK
+[2026-06-21 03:20 PT] CH 261 | FOUND page=455 engine=doctr_text roman=CCLXI | OK
+[2026-06-21 03:20 PT] CH 265 | FOUND page=469 engine=doctr_text roman=CCLXV | OK
+[2026-06-21 03:20 PT] CH 269 | FOUND page=475 engine=surya_text roman=CCLXIX | OK
+[2026-06-21 03:20 PT] CH 271 | FOUND page=490 engine=surya_text roman=CCLXXI | OK
+[2026-06-21 03:20 PT] CH 272 | FOUND page=476 engine=doctr_text roman=CCLXXII | OK
+[2026-06-21 03:20 PT] CH 273 | FOUND page=478 engine=doctr_text roman=CCLXXIII | OK
+[2026-06-21 03:20 PT] CH 274 | FOUND page=479 engine=surya_text roman=CCLXXIV | OK
+[2026-06-21 03:20 PT] CH 275 | FOUND page=482 engine=surya_text roman=CCLXXV | OK
+[2026-06-21 03:20 PT] CH 276 | FOUND page=483 engine=surya_text roman=CCLXXVI; image 0482.png verified | OK
+[2026-06-21 03:20 PT] CH 277 | FOUND page=483 engine=surya_text roman=CCLXXVII; image 0482.png confirms two acts on same page | OK
+[2026-06-21 03:21 PT] CH 278 | FOUND page=484 via IMAGE READ; all OCR engines garbled (doctr=CULAAVIII, surya=COLXXVII, tess=CCLAXVITI); image 0483.png plainly shows CHAPTER CCLXXVIII; sequence-confirmed 276@483->277@483->278@484->279@485 | OK
+[2026-06-21 03:21 PT] CH 279 | FOUND page=485 engine=surya_text roman=CCLXXIX | OK
+[2026-06-21 03:21 PT] CH 280 | FOUND page=489 engine=doctr_text roman=CCLXXX | OK
+[2026-06-21 03:21 PT] CH 286 | FOUND page=504 engine=surya_text roman=CCLXXXVI | OK
+[2026-06-21 03:21 PT] DONE | verified=42 gap=0 not_found=0 -> C:\PatoLex-scratch\production-1889\parsed_acts_visual.json | OK
+[2026-06-21 03:21 PT] NOTE | source_page values corrected (+1 offset): OCR file keys are 0-indexed; true 1-indexed source_pages derived from page_1indexed field in OCR data; all output source_pages reflect corrected values | OK
+[2026-06-21 03:21 PT] NOTE | CC/CO OCR artifact pattern documented: surya/doctr on pages 403-405 read CC-prefix as CO (e.g. CCXXXVII->COXXXVII, CCXXXVIII->COXX VIII); likely print quality issue on those pages | OK

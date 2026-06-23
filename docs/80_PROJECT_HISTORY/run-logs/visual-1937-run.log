@@ -1,0 +1,26 @@
+[2026-06-20 00:00 PT] INIT | visual-1937 campaign started -- 19 missing chapters in production-1937-vol1-chapters | OK
+[2026-06-20 00:01 PT] MANIFEST | _manifest_1937.json read: 933 total, 914 present, 19 missing | OK
+[2026-06-20 00:02 PT] STRUCTURE | OCR file: dict keyed by string page_1indexed; pages_raw: page_{P-1:04d}.png; printed_page ~ source_page - 3 | OK
+[2026-06-20 00:05 PT] OCR-SCAN | Scanned all bracket page ranges for chapter headers via regex | OK
+[2026-06-20 00:06 PT] CH 317 | OCR page 699, image page_0698.png, printed p.396 -- CHAPTER 317 confirmed. Fish & Game Code / chumming district 20 | OK
+[2026-06-20 00:07 PT] CH 321 | OCR page 702, image page_0701.png, printed p.699 -- CHAPTER 321 confirmed (shares page with CH 320). City retirement pension system | OK
+[2026-06-20 00:08 PT] CH 335 | OCR pages 735-738 no regex match; image page_0735.png, printed p.734 -- CHAPTER 335 confirmed (bracket [Ch.335] visible). County fire protection districts merit system | OK
+[2026-06-20 00:09 PT] CH 351 | OCR page 765 enactment clause but no header; image page_0764.png, printed p.762 -- CHAPTER 351 confirmed. City/county fire services mutual aid | OK
+[2026-06-20 00:10 PT] CH 358 | OCR page 778 act text no header; image page_0777.png, printed p.775 -- CHAPTER 358 confirmed ([Ch.358]). Banking/NHA mortgage amendment | OK
+[2026-06-20 00:11 PT] CH 370 | OCR misread as '3870'; image page_1185.png, printed p.1183 -- CHAPTER 370 confirmed (printed number correct, OCR garbled). Harbors/Navigation Code ch.3 Humboldt Bay pilots | WARN (OCR garble)
+[2026-06-20 00:12 PT] CH 371 | image page_1186.png -- CHAPTER 371 confirmed. Harbors/Navigation Code San Diego pilots | OK
+[2026-06-20 00:13 PT] CH 372 | image page_1186.png (same page as 371/373) -- CHAPTER 372 confirmed. Harbors/Navigation Code SF harbor commission | OK
+[2026-06-20 00:14 PT] CH 373 | image page_1186.png (same page as 371/372) -- CHAPTER 373 confirmed. Harbors/Navigation Code San Diego harbor commission | OK
+[2026-06-20 00:15 PT] CH 374 | image page_1187.png, printed p.1185 -- CHAPTER 374 confirmed. Welfare/Institutions Code aid to needy children urgency | OK
+[2026-06-20 00:16 PT] CH 401 | OCR page 1330 no header match; image page_1329.png, printed p.1327 -- CHAPTER 401 confirmed. Use Tax Act exemption for vessels | OK
+[2026-06-20 00:17 PT] CH 413 | image page_1374.png, printed p.1372 -- CHAPTER 413 confirmed. Agricultural Code minimum milk prices | OK
+[2026-06-20 00:18 PT] CH 414 | image page_1379.png, printed p.1377 -- CHAPTER 414 confirmed ([Ch.414]). Business/Professions Code medicine/surgery ch.5 | OK
+[2026-06-20 00:19 PT] CH 419 | image page_1380.png, printed p.1378 -- CHAPTER 419 confirmed. Business/Professions Code blindness at childbirth prevention | OK
+[2026-06-20 00:20 PT] CH 427 | image page_1386.png, printed p.1384 -- CHAPTER 427 confirmed. Fish & Game Code districts urgency | OK
+[2026-06-20 00:21 PT] CH 428 | image page_1386.png, printed p.1384 (same page as 427) -- CHAPTER 428 confirmed. Fish & Game Code calico bass/crappie seasons | OK
+[2026-06-20 00:22 PT] CH 658 | OCR pages 1813-1814 no 658 header found; image page_1813.png, printed p.1811 -- CHAPTER 658 confirmed ([Ch.658]). Harbors/Navigation Code SF harbor commerce | OK
+[2026-06-20 00:23 PT] CH 807 | OCR pages 2284-2294 no 807 header found; image page_2292.png, printed p.2290 -- CHAPTER 807 confirmed ([Ch.807]). Taylor Grazing Act distribution | OK
+[2026-06-20 00:24 PT] CH 849 | OCR pages 2369-2370 no 849 header found; image page_2369.png, printed p.2367 -- CHAPTER 849 confirmed ([Ch.849]). Political Code county insurance | OK
+[2026-06-20 00:25 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1937-vol1-chapters\parsed_acts_visual.json | OK
+[2026-06-20 00:26 PT] SUMMARY | targeted=19 verified=19 not_found=0 mismatches=1(CH370 OCR garble 3870->370) | OK
+[2026-06-20 00:27 PT] COMPLETE | 1937 visual recovery campaign done -- all 19 chapters image-confirmed | OK

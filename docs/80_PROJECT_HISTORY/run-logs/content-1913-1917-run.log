@@ -1,0 +1,132 @@
+==============================================================================
+CONTENT-CORRECTNESS INVESTIGATION -- 1913 & 1917 "cohort" volumes (dup-audit H5)
+==============================================================================
+Detection + root-cause + proposal ONLY. No edits to parsed_acts_merged.json,
+certified, or the DB. Verification via LOCAL header-OCR (no agent vision tokens).
+Investigator: Claude Code (Opus). Date: 2026-06-22.
+
+Source data:
+  - audit candidates : C:\PatoLex-scratch\_dup_audit_candidates.json
+  - merged (1913)    : production-1913-statutes\parsed_acts_merged.json (636 acts)
+  - merged (1917)    : production-1917-vol1-chapters\parsed_acts_merged.json (773 acts)
+  - page images      : production-191X*\pages_raw\page_NNNN.png (idx = source_page-1)
+  - source PDFs      : chief-clerk-archive\1913_Statutes.pdf / 1917_Vol1_Chapters.pdf
+
+------------------------------------------------------------------------------
+[2026-06-22] PHASE 1 -- pull candidates | OK
+------------------------------------------------------------------------------
+1913 H5 candidates: 24 total (16 high/med, 8 low).
+1917 H5 candidates: 12 total ( 8 high/med, 4 low).
+The "filed chapter_int -> audit-read heading number" pairs (high/med):
+
+ 1913: 24->2(-22) 35->30(-5) 43->48(+5) 56->36(-20) 58->8(-50) 65->60(-5)
+       130->180(+50) 131->181(+50) 133->183(+50) 144->134(-10) 168->163(-5)
+       259->209(-50) 318->313(-5) 351->301(-50) 455->405(-50) 566->966(+400)
+ 1917: 43->48(+5) 155->150(-5) 163->168(+5) 259->299(+40) 332->322(-10)
+       354->304(-50) 605->600(-5) 773->173(-600)
+ (low-confidence rows have absurd diffs e.g. +3550/+3600 -- obvious OCR garbage.)
+
+------------------------------------------------------------------------------
+[2026-06-22] PHASE 2 -- characterize the offset pattern | OK
+------------------------------------------------------------------------------
+The offsets are NOT consistent and NOT a cascade. They are single-digit OCR
+substitutions in the FILED number, decomposed digit-by-digit:
+
+  22 of 24 high/med candidates differ from the filed number by exactly ONE digit.
+  Dominant confusion pairs (filed_digit -> audit-heading_digit):
+     5 -> 0 : 8 cases   (units place -> +/-5 ; tens place -> +/-50)
+     3 -> 8 : 6 cases
+     8 -> 3 : 2 cases
+     5 -> 9 : 2 cases
+     others (5->3, 4->3, 3->2, 7->1, dropped digit) : 1 each
+  The "+/-5 and +/-50" the audit flagged are simply a 5<->0 misread in the units
+  vs the tens column. The "+/-50" is NOT a 50-chapter sequence shift.
+
+Sequence-integrity check of the FILED chapter_int (the decisive test):
+  1913: 636 acts, range 1..699, ZERO duplicate chapter_int, only 63 sparse gaps
+        (genuine missing chapters); page order monotonic except 3 steps, all of
+        which are the flagged candidates themselves (heading-OCR noise, not a
+        real reorder).
+  1917: 773 acts, range 1..803, ZERO duplicate chapter_int, 30 sparse gaps,
+        page order PERFECTLY monotonic (0 inversions).
+  => The filed chapter_int forms a clean, monotonic, dup-free 1..N spine in both
+     volumes. A "+/-50 cascade" would have produced a block of duplicate/colliding
+     chapter_int values; there are none. This alone rules out a sequence bug.
+
+------------------------------------------------------------------------------
+[2026-06-22] PHASE 3 -- ground-truth via LOCAL header-OCR | OK
+------------------------------------------------------------------------------
+NOTE on the arbiter: in these volumes the page-TOP running head is the PRINTED
+PAGE NUMBER + "FORTIETH SESSION." / "STATUTES OF CALIFORNIA." -- NOT "CHAPTER N".
+"CHAPTER N" appears only as the body act-heading. Pages routinely carry 2-3 acts.
+So the arbiter used was: (a) the full-page multi-psm header scan (all CHAPTER-N
+headers on the page, deduped) and (b) confirmation that filed N sits between
+confirmed neighbors N-1 and N+1 on the adjacent pages.
+
+Full-page header scan result (filed number found on its own page):
+  1913: 12/16 FILED-CONFIRMED directly; 4 residuals resolved by neighbor check.
+  1917:  6/8  FILED-CONFIRMED directly; 2 residuals resolved by neighbor check.
+
+Sample ground-truth (which number is correct -- ALL came out FILED-correct):
+  1913 ch35  p95  : page header scan = [35]               -> FILED 35 (audit 30 = 5->0)
+  1913 ch56  p115 : = [56,57]                             -> FILED 56 (audit 36 = 5->3)
+  1913 ch65  p128 : = [65,66]                             -> FILED 65 (audit 60 = 5->0)
+  1913 ch130 p275 : =[180,131]; ch129 confirmed p274      -> FILED 130 (audit 180 = 3->8)
+  1913 ch168 p307 : =[163]; ch169 confirmed p309          -> FILED 168 (audit 163 = 8->3)
+  1913 ch318 p666 : =[]; ch317@p663 & ch319@p671 confirmed-> FILED 318 (audit 313 = 8->3)
+  1913 ch455 p942 : =[455]                                -> FILED 455 (audit 405 = 5->0)
+  1913 ch566 p1012: =[566]                                -> FILED 566 (audit 966 = 5->9)
+  1917 ch43  p39  : =[42,48]; ch42 & ch44@p40 confirmed   -> FILED 43 (audit 48 = 3->8)
+  1917 ch155 p240 : =[155,156]                            -> FILED 155 (audit 150 = 5->0)
+  1917 ch259 p448 : =[259,260,261]                        -> FILED 259 (audit 299 = 5->9)
+  1917 ch354 p487 : =[354,355,356]                        -> FILED 354 (audit 304 = 5->0)
+  1917 ch605 p933 : =[605]                                -> FILED 605 (audit 600 = 5->0)
+  1917 ch773 p1619: =[1773("773"+pgno1)]; ch772 & ch774 confirmed -> FILED 773 (audit 173 = 7->1)
+
+  Result: in EVERY high/med case the FILED chapter_int is correct; the audit's
+  "heading number" is a single-digit OCR misread of that same number (read from a
+  DIFFERENT degraded engine pass than the one the consensus chose). Per-engine
+  vote also showed the engines disagree among themselves on these digits
+  (e.g. p275: tess/cons read 183, doctr/surya read 133) -- textbook OCR digit noise.
+
+------------------------------------------------------------------------------
+[2026-06-22] PHASE 4 -- ROOT CAUSE | OK
+------------------------------------------------------------------------------
+ROOT CAUSE: ordinary per-page OCR digit-substitution noise in the BODY
+act-heading ("CHAPTER N"), surfaced by the dup-audit's H5 heuristic which
+compared the consensus-resolved chapter_int against a *fresh, un-consensused*
+re-read of the heading line. The two reads came from different engine passes;
+where the heading digit is a 5/0 or 3/8 the fresh read disagrees, producing the
+illusory "+/-5 / +/-50 cohort". The 1913 & 1917 volumes stand out only because
+their print/scan quality makes 5<->0 and 3<->8 slightly more frequent -- there is
+NO systematic merge/sequence bug. The filed chapter_int spine is sound
+(monotonic, dup-free, 1..N) in both volumes.
+
+VERDICT: NOT a systematic per-volume bug. NO deterministic "shift block X..Y by
++50" correction is warranted -- applying one would CORRUPT correct data. The
+filed chapter_int values are already right; it is the AUDIT's heading re-read
+that is wrong on these rows.
+
+------------------------------------------------------------------------------
+[2026-06-22] PHASE 5 -- PROPOSAL (do NOT apply) | OK
+------------------------------------------------------------------------------
+1. DATA FIX: none. Do not modify any filed chapter_int for the 1913/1917 H5
+   candidates. All high/med rows verified filed-correct. Count to "fix": 0.
+
+2. AUDIT FIX (the real defect is in the dup-audit, not the corpus): the H5
+   heuristic should not flag a heading mismatch when:
+     (a) the filed chapter_int sits in clean monotonic order between its
+         confirmed page-neighbors, AND
+     (b) the disagreement is a single-digit substitution on a known OCR-confusable
+         pair (5/0, 3/8, 8/3, 5/9, 7/1, dropped digit).
+   Adding that guard would clear all 24 (1913) + 12 (1917) H5 candidates as
+   false positives, and would similarly de-noise the other "cohort" years
+   (1907/1919/1921/1923 show the identical 5->0 / 3->8 signature in the same log).
+
+3. RESIDUAL RISK: negligible for the data (we verified the spine). The only
+   residual is the small set of genuine sequence GAPS (1913: 63, 1917: 30) which
+   are a SEPARATE lostheader/missing-chapter question, not an H5 mis-number, and
+   are out of scope here.
+
+Durable lesson written: docs\80_PROJECT_HISTORY\lessons\LESSON_H5_digit_misread_not_sequence_bug.md
+==============================================================================

@@ -1,0 +1,46 @@
+[2026-06-21 03:43 PT] VISUAL | Loading OCR JSON...
+[2026-06-21 03:43 PT] VISUAL | Loaded 286 OCR pages
+[2026-06-21 03:43 PT] VISUAL | Loading manifest...
+[2026-06-21 03:43 PT] VISUAL | Targeting 17 missing chapters: [35, 36, 41, 62, 67, 68, 76, 77, 83, 123, 132, 135, 136, 138, 139, 167, 168]
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 35 (bracket pages 90-94) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 35 on source_page 91 (key 90) title='An Act to amend an Act entitled "An Act to form Agricultural'
+[2026-06-21 03:43 PT] VISUAL | Opened PDF: C:\PatoLex-scratch\chief-clerk-archive\1885-86_Statutes.pdf (294 pages)
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 36 (bracket pages 90-94) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 36 on source_page 92 (key 91) title='An Act to prevent the spreading of, fruit and fruit tree pests and'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 41 (bracket pages 98-98) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 41 on source_page 98 (key 97) title='An Act making an appropriation for the deficiency in the appro-'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 62 (bracket pages 112-113) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 62 on source_page 112 (key 111) title='An Act making an appropriation for the deficiency in the appro-'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 67 (bracket pages 114-115) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 67 on source_page 114 (key 113) title='An Act making an appropriation for the deficiency in the appro-'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 68 (bracket pages 114-115) ---
+[2026-06-21 03:43 PT] VISUAL |   Not found in OCR for ch 68, scanning images pages 99-130...
+[2026-06-21 03:43 PT] VISUAL |   ch 68: not_found_needs_reocr
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 76 (bracket pages 117-119) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 76 on source_page 118 (key 117) title='An Act making an appropriation jor the deficiency in the appro.'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 77 (bracket pages 117-119) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 77 on source_page 118 (key 117) title='An Act making an appropriation for the deficiency in the appro-'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 83 (bracket pages 120-121) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 83 on source_page 121 (key 120) title='An Act making an appropriation for the deficiency in the appro-'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 123 (bracket pages 155-160) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 123 on source_page 159 (key 158) title='An Act to enable Joln Houglund, Jumes Reid, Mrs. Rebecca C.'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 132 (bracket pages 166-176) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 132 on source_page 167 (key 166) title='An Act for the relief of thc inlub-'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 135 (bracket pages 176-178) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 135 on source_page 177 (key 176) title='An Act to amend section one hundred and sixty-four of an Act'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 136 (bracket pages 176-178) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 136 on source_page 178 (key 177) title='An Act to allow compensation to Sheriffs for conveying prisoners'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 138 (bracket pages 178-182) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 138 on source_page 179 (key 178) title='An Act to amend an Act entitled (6 An Act to provide for the'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 139 (bracket pages 178-182) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 139 on source_page 181 (key 180) title='An Act to amend section eleven hundred and sixty-four of an Act'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 167 (bracket pages 269-273) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 167 on source_page 270 (key 269) title='An Act to amend section two hundred and seventy-four of an Act'
+[2026-06-21 03:43 PT] VISUAL | --- Chapter 168 (bracket pages 269-273) ---
+[2026-06-21 03:43 PT] VISUAL |   OCR FOUND ch 168 on source_page 272 (key 271) title='An Act to amend section two thousand three hundred and forty-'
+[2026-06-21 03:43 PT] VISUAL | Wrote C:\PatoLex-scratch\production-1885-86\parsed_acts_visual.json
+[2026-06-21 03:43 PT] VISUAL | SUMMARY: targeted=17 verified=16 legislative_gap=0 not_found=1
+[2026-06-21 03:55 PT] VISUAL | CORRECTION ch 68: OCR consensus/tess garbled "CHAPTER LXVIII" as "CHAPLER LAVITI" -- missed by engine scan. Doctr read "CHAPTER LX VIII" correctly. Page image (source_page 115) UNAMBIGUOUS: CHAPTER LXVIII. Title: "An Act making an appropriation for the deficiency in the appropriation for arrest of criminals outside the limits of the State, for the thirty-fourth fiscal year." Status upgraded to image_verified. | OK
+[2026-06-21 03:55 PT] VISUAL | CORRECTION ch 67: Initial low-res image read of source_page 114 was truncated (showed only CHAPTER LXVI). Hi-res rerender confirms source_page 114 contains BOTH CHAPTER LXVI (ch 66) and CHAPTER LXVII (ch 67). All 4 OCR engines agree. Title confirmed: "An Act making an appropriation for the deficiency in the appropriation for support of Insane Asylum at Napa, for the thirty-fourth fiscal year." | OK
+[2026-06-21 03:55 PT] VISUAL | FINAL SUMMARY: targeted=17 verified=17 legislative_gap=0 not_found=0. All 17 chapters image-confirmed. Titles corrected for ch 68 (garbled OCR header), ch 123 (garbled names), ch 132 (garbled title). parsed_acts_visual.json written (draft=false). | OK
+[2026-06-21 03:55 PT] VISUAL | RESIDUAL CHECK: _residual_manifest.py 1885 -> N=169 present=169 missing=0. FULL COVERAGE ACHIEVED. | OK

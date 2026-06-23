@@ -1,0 +1,57 @@
+[2026-06-21 04:02 PT] VISUAL-1979 | === VISUAL RECOVERY 1979 START === | OK
+[2026-06-21 04:02 PT] VISUAL-1979 | Loading OCR for production-1979-vol3 (16 items) | OK
+[2026-06-21 04:02 PT] VISUAL-1979 | OCR loaded: 1597 pages | OK
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 978, page_range [25, 30], lo_ch=977, hi_ch=979 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 978: NOT found in text. All chapters seen: [1, 2, 3, 4, 5, 7, 9, 45, 55, 974, 975, 976, 977, 979, 981] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 978: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1030, page_range [218, 240], lo_ch=1029, hi_ch=1033 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1030: CONFIRMED on page 227, all_ch_on_range=[1, 2, 3, 6, 7, 8, 10, 18, 25, 1029, 1030, 1033, 10383] | OK
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1031, page_range [218, 240], lo_ch=1029, hi_ch=1033 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1031: NOT found in text. All chapters seen: [1, 2, 3, 6, 7, 8, 10, 18, 25, 1029, 1030, 1033, 10383] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1031: not_found_needs_reocr | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1032, page_range [218, 240], lo_ch=1029, hi_ch=1033 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1032: NOT found in text. All chapters seen: [1, 2, 3, 6, 7, 8, 10, 18, 25, 1029, 1030, 1033, 10383] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1032: not_found_needs_reocr | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1039, page_range [297, 302], lo_ch=1038, hi_ch=1041 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1039: NOT found in text. All chapters seen: [2, 3, 6, 9, 10, 12, 259, 1036, 1037, 1038, 1041, 1042, 1088] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1039: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1040, page_range [297, 302], lo_ch=1038, hi_ch=1041 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1040: NOT found in text. All chapters seen: [2, 3, 6, 9, 10, 12, 259, 1036, 1037, 1038, 1041, 1042, 1088] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1040: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1068, page_range [445, 450], lo_ch=1067, hi_ch=1069 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1068: NOT found in text. All chapters seen: [1, 2, 3, 4, 19, 265, 782, 1032, 1052, 1067, 1069, 1222, 1441, 1502, 1764] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1068: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1119, page_range [752, 768], lo_ch=1118, hi_ch=1121 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1119: NOT found in text. All chapters seen: [1, 2, 3, 4, 5, 6, 7, 8, 73, 161, 1117, 1118, 1121, 1122, 1123, 1771] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1119: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1120, page_range [752, 768], lo_ch=1118, hi_ch=1121 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1120: NOT found in text. All chapters seen: [1, 2, 3, 4, 5, 6, 7, 8, 73, 161, 1117, 1118, 1121, 1122, 1123, 1771] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1120: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1150, page_range [886, 1013], lo_ch=1149, hi_ch=1154 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1150: NOT found in text. All chapters seen: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 45, 62, 72, 83, 338, 342, 385, 434, 442, 554, 1148, 1149, 1154, 1155, 1156, 1157, 1159] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1150: not_found_needs_reocr | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1151, page_range [886, 1013], lo_ch=1149, hi_ch=1154 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1151: NOT found in text. All chapters seen: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 45, 62, 72, 83, 338, 342, 385, 434, 442, 554, 1148, 1149, 1154, 1155, 1156, 1157, 1159] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1151: not_found_needs_reocr | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1152, page_range [886, 1013], lo_ch=1149, hi_ch=1154 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1152: NOT found in text. All chapters seen: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 45, 62, 72, 83, 338, 342, 385, 434, 442, 554, 1148, 1149, 1154, 1155, 1156, 1157, 1159] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1152: not_found_needs_reocr | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1153, page_range [886, 1013], lo_ch=1149, hi_ch=1154 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1153: NOT found in text. All chapters seen: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 45, 62, 72, 83, 338, 342, 385, 434, 442, 554, 1148, 1149, 1154, 1155, 1156, 1157, 1159] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1153: not_found_needs_reocr | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1158, page_range [1017, 1022], lo_ch=1157, hi_ch=1159 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1158: NOT found in text. All chapters seen: [1, 2, 3, 5, 8, 12, 278, 1154, 1155, 1156, 1157, 1159, 1160] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1158: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1205, page_range [1410, 1418], lo_ch=1204, hi_ch=1206 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1205: NOT found in text. All chapters seen: [1, 2, 3, 4, 6, 7, 567, 1203, 1204, 1206] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1205: legislative_gap | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Processing ch 1207, page_range [1418, 1422], lo_ch=1206, hi_ch=None | OK
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1207: NOT found in text. All chapters seen: [1, 2, 3, 4, 1206] | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 |   ch 1207: not_found_needs_reocr | WARN
+[2026-06-21 04:02 PT] VISUAL-1979 | Output written to C:\PatoLex-scratch\production-1979-vol3\parsed_acts_visual.json | OK
+[2026-06-21 04:02 PT] VISUAL-1979 | SUMMARY: targeted=16 verified=1 gap=8 not_found=7 | OK
+[2026-06-21 04:02 PT] VISUAL-1979 | === VISUAL RECOVERY 1979 COMPLETE === | OK
+[2026-06-21 04:12 PT] VISUAL-1979 | === FINAL WRITE: 16 acts, 16 image_verified, 0 gap, 0 not_found === | OK
+[2026-06-21 04:12 PT] VISUAL-1979 | Output: C:\PatoLex-scratch\production-1979-vol3\parsed_acts_visual.json | OK
+[2026-06-21 04:13 PT] VISUAL-1979 | === FINAL WRITE: 16 acts, 16 image_verified, 0 gap, 0 not_found === | OK
+[2026-06-21 04:13 PT] VISUAL-1979 | Output: C:\PatoLex-scratch\production-1979-vol3\parsed_acts_visual.json | OK

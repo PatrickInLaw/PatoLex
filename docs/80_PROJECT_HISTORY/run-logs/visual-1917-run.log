@@ -1,0 +1,7 @@
+[2026-06-21 10:30 PT] INIT | Visual recovery campaign for 1917: manifest shows 4 missing chapters [591, 592, 756, 785] out of 803 total | OK
+[2026-06-21 10:31 PT] EXPLORE | Volume: production-1917-vol1-chapters; pages_raw/ has PNG images named page_NNNN.png (0-indexed); page_N.png = source_page N+1; OCR in ocr_consensus/page_ocr_results.json (1976 pages) | OK
+[2026-06-21 10:32 PT] VERIFY_591 | Ch.591 confirmed image_verified on page_0904.png (source_page=905): cooperation act for irrigation districts under multiple state laws -- Approved May 23 1917 in effect July 27 1917 | OK
+[2026-06-21 10:33 PT] VERIFY_592 | Ch.592 confirmed image_verified on page_0905.png (source_page=906): Happy Valley irrigation district validation act -- Approved May 23 1917 in effect July 27 1917 | OK
+[2026-06-21 10:34 PT] VERIFY_756 | Ch.756 confirmed image_verified on page_1572.png (source_page=1573): CCP section 348 amendment relating to bank deposit limitation of time for actions -- Approved June 1 1917 in effect July 31 1917 | OK
+[2026-06-21 10:35 PT] VERIFY_785 | Ch.785 confirmed image_verified on page_1644.png (source_page=1645): Political Code new section 1617.5 for school property sale/lease by city districts with 55k+ daily attendance -- Approved June 1 1917 in effect July 31 1917 | OK
+[2026-06-21 10:36 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1917-vol1-chapters\parsed_acts_visual.json targeted=4 verified=4 legislative_gap=0 not_found=0 | OK

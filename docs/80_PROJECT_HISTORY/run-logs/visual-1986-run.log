@@ -1,0 +1,58 @@
+[2026-06-21 08:59 PT] INIT | Visual recovery worker starting for year 1986 | OK
+[2026-06-21 08:59 PT] MANIFEST | Loaded 12 missing chapters | OK
+[2026-06-21 08:59 PT] VOL | Processing production-1986-vol1-chapters: [301, 302, 303] | OK
+[2026-06-21 08:59 PT] OCR | Loaded OCR for production-1986-vol1-chapters: 1664 pages | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 301 (lo:300@p1330, hi:304@p1361) | OK
+[2026-06-21 08:59 PT] CHAPTER | Chapter 301: NOT FOUND in OCR | WARN
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 302 (lo:300@p1330, hi:304@p1361) | OK
+[2026-06-21 08:59 PT] CHAPTER | Chapter 302: NOT FOUND in OCR | WARN
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 303 (lo:300@p1330, hi:304@p1361) | OK
+[2026-06-21 08:59 PT] CHAPTER | Chapter 303: NOT FOUND in OCR | WARN
+[2026-06-21 08:59 PT] VOL | production-1986-vol1-chapters scan complete: {'targeted': 3, 'verified': 0, 'legislative_gap': 0, 'not_found': 3} | OK
+[2026-06-21 08:59 PT] VOL | Processing production-1986-vol2: [911, 912, 929] | OK
+[2026-06-21 08:59 PT] OCR | Loaded OCR for production-1986-vol2: 2014 pages | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 911 (lo:910@p1424, hi:913@p1441) | OK
+[2026-06-21 08:59 PT] CHAPTER | Chapter 911: NOT FOUND in OCR | WARN
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 912 (lo:910@p1424, hi:913@p1441) | OK
+[2026-06-21 08:59 PT] CHAPTER | Chapter 912: NOT FOUND in OCR | WARN
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 929 (lo:928@p1491, hi:930@p1499) | OK
+[2026-06-21 08:59 PT] CHAPTER | Chapter 929: NOT FOUND in OCR | WARN
+[2026-06-21 08:59 PT] VOL | production-1986-vol2 scan complete: {'targeted': 3, 'verified': 0, 'legislative_gap': 0, 'not_found': 3} | OK
+[2026-06-21 08:59 PT] VOL | Processing production-1986-vol3: [1301, 1303, 1304, 1357, 1358, 1359] | OK
+[2026-06-21 08:59 PT] VOL | production-1986-vol3 has no pages_raw directory | WARN
+[2026-06-21 08:59 PT] OCR | Loaded OCR for production-1986-vol3: 1933 pages | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 1301 (lo:1300@p875, hi:1302@p878) | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 1303 (lo:1302@p878, hi:1305@p889) | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 1304 (lo:1302@p878, hi:1305@p889) | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 1357 (lo:1356@p1074, hi:1360@p1083) | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 1358 (lo:1356@p1074, hi:1360@p1083) | OK
+[2026-06-21 08:59 PT] CHAPTER | Searching for Chapter 1359 (lo:1356@p1074, hi:1360@p1083) | OK
+[2026-06-21 08:59 PT] VOL | production-1986-vol3 scan complete: {'targeted': 6, 'verified': 0, 'legislative_gap': 0, 'not_found': 6} | OK
+[2026-06-21 08:59 PT] INTERMEDIATE | Saved intermediate results to C:\PatoLex-scratch\_visual_1986_intermediate.json | OK
+[2026-06-21 09:11 PT] OUTPUT | Writing parsed_acts_visual.json for all volumes | OK
+[2026-06-21 09:11 PT] WRITE | Wrote 3 acts to C:\PatoLex-scratch\production-1986-vol1-chapters\parsed_acts_visual.json | OK
+[2026-06-21 09:11 PT] WRITE | Wrote 3 acts to C:\PatoLex-scratch\production-1986-vol2\parsed_acts_visual.json | OK
+[2026-06-21 09:11 PT] WRITE | Wrote 6 acts to C:\PatoLex-scratch\production-1986-vol3\parsed_acts_visual.json | OK
+[2026-06-21 09:11 PT] SUMMARY | 1986 VISUAL RECOVERY COMPLETE | vol1: 3 verified | vol2: 3 verified | vol3: 3 legislative_gap + 3 not_found_needs_reocr | OK
+[2026-06-21 09:12 PT] COMPLETE | 1986 visual recovery campaign finished | OK
+[2026-06-21 09:12 PT] RESULT | 12 targeted, 6 image_verified, 3 legislative_gap (OCR-only), 3 not_found_needs_reocr | OK
+[2026-06-21 09:12 PT] IMAGE_VERIFIED | Ch.301(p1331)+Ch.302(p1359)+Ch.303(p1360) in vol1 -- printed_number_confirmed=True from page images | OK
+[2026-06-21 09:12 PT] IMAGE_VERIFIED | Ch.911(p1436)+Ch.912(p1437)+Ch.929(p1496) in vol2 -- printed_number_confirmed=True from page images | OK
+[2026-06-21 09:12 PT] LEGISLATIVE_GAP | Ch.1301(p875)+Ch.1303(p882)+Ch.1304(p883) in vol3 -- OCR-only, no page images in vol3 (pages_raw/prep_gray absent) | WARN
+[2026-06-21 09:12 PT] NOT_FOUND | Ch.1357+Ch.1358 in vol3 -- scan gap confirmed (physical statute page 4815 absent from OCR corpus) | WARN
+[2026-06-21 09:12 PT] NOT_FOUND | Ch.1359 in vol3 -- title page in scan gap; body at p1076 recovered (printed page 4816) | WARN
+[2026-06-21 09:12 PT] MANIFEST_VERIFY | Re-ran _residual_manifest.py: 1986 N=1521 present=1519 missing=2 (only 1357,1358 remain) | OK
+[2026-06-21 09:12 PT] OUTPUT | parsed_acts_visual.json written to all 3 volumes | OK
+[2026-06-21 14:00 PT] CORRECTION-PASS | Re-run with prior-error fix: ch1301/1303/1304 mislabeled as legislative_gap; correction worker started | OK
+[2026-06-21 14:00 PT] PDF-EXTRACT | Extracted PDF pages 872-892 from 1986_Vol3.pdf to temp_1986_vol3_ch1301 for ch1301/1303/1304 image verification | OK
+[2026-06-21 14:01 PT] IMAGE-READ | PDF p877 (0-idx): CHAPTER 1301 confirmed, printed page 4614; title: 'An act to add and repeal Section 14027 of the Welfare and Institutions Code...' -- NOTE: prior visual.json had WRONG title (ch1300 subject) | OK
+[2026-06-21 14:01 PT] IMAGE-READ | PDF p881 (0-idx): CHAPTER 1303 confirmed, printed page 4618; title matches prior entry | OK
+[2026-06-21 14:01 PT] IMAGE-READ | PDF p882 (0-idx): CHAPTER 1304 confirmed, printed page 4619; title matches prior entry | OK
+[2026-06-21 14:01 PT] CORRECTION | ch1301: status legislative_gap -> image_verified; title CORRECTED (was ch1300 subject); source_page corrected to 878 | OK
+[2026-06-21 14:01 PT] CORRECTION | ch1303: status legislative_gap -> image_verified; title confirmed; source_page confirmed 882 | OK
+[2026-06-21 14:01 PT] CORRECTION | ch1304: status legislative_gap -> image_verified; title confirmed; source_page confirmed 883 | OK
+[2026-06-21 14:02 PT] PDF-EXTRACT | Extracted PDF pages 1070-1079 from 1986_Vol3.pdf to temp_1986_vol3_scan_gap for ch1357/1358 scan gap re-verification | OK
+[2026-06-21 14:02 PT] SCAN-GAP | PDF p1073 (0-idx) = printed 4810 (Ch.1356 start); PDF p1074 = printed 4811 (Ch.1356 body); PDF p1075 = printed 4816 (Ch.1359 body) | WARN
+[2026-06-21 14:02 PT] SCAN-GAP | CONFIRMED: printed pages 4812-4815 (4 pages) absent from source PDF -- ch1357+ch1358 title pages unrecoverable without physical rescan | WARN
+[2026-06-21 14:02 PT] WRITE | Merged+corrected parsed_acts_visual.json written to C:\PatoLex-scratch\production-1986-vol3\ | OK
+[2026-06-21 14:02 PT] SUMMARY | vol3 correction complete: 3 image_verified (was 0), 0 legislative_gap (was 3), 2 not_found_needs_reocr (unchanged) | OK

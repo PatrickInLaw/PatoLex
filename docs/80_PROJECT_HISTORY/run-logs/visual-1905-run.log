@@ -1,0 +1,69 @@
+[2026-06-21 03:31 PT] VISUAL-1905 | START resolve_hard_cases.py | OK
+[2026-06-21 03:31 PT] VISUAL-1905 | resolve_hard_cases.py complete | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | START build_final_output_1905.py -- corrected parser with reversed() roman numerals | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Manifest: 50 missing chapters | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | OCR loaded: 1123 pages | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Index built: 602 distinct chapters | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 6 (VI): image_verified OCR p=53 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 103 (CIII): image_verified OCR p=148 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 128 (CXXVIII): image_verified OCR p=179 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 131 (CXXXI): image_verified OCR p=183 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 142 (CXLII): image_verified OCR p=190 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 172 (CLXXII): image_verified OCR p=217 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 187 (CLXXXVII): image_verified OCR p=232 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 193 (CXCIII): image_verified OCR p=238 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 213 (CCXIII): image_verified OCR p=249 [consensus_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 227 (CCXXVII): image_verified OCR p=260 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 241 (CCXLI): image_verified OCR p=268 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 252 (CCLII): image_verified OCR p=275 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 265 (CCLXV): image_verified OCR p=290 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 277 (CCLXXVII): image_verified OCR p=297 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 278 (CCLXXVIII): MANUAL image_verified p=299 | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 318 (CCCXVIII): image_verified OCR p=410 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 321 (CCCXXI): image_verified OCR p=415 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 330 (CCCXXX): image_verified OCR p=433 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 333 (CCCXXXIII): image_verified OCR p=437 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 334 (CCCXXXIV): image_verified OCR p=439 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 342 (CCCXLII): image_verified OCR p=449 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 351 (CCCLI): image_verified OCR p=461 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 358 (CCCLVIII): image_verified OCR p=478 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 359 (CCCLIX): image_verified OCR p=479 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 368 (CCCLXVIII): image_verified OCR p=492 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 382 (CCCLXXXII): image_verified OCR p=553 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 383 (CCCLXXXIII): image_verified OCR p=553 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 384 (CCCLXXXIV): image_verified OCR p=540 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 385 (CCCLXXXV): image_verified OCR p=540 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 387 (CCCLXXXVII): image_verified OCR p=544 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 389 (CCCLXXXIX): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 390 (CCCXC): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 391 (CCCXCI): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 392 (CCCXCII): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 393 (CCCXCIII): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 394 (CCCXCIV): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 395 (CCCXCV): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 396 (CCCXCVI): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 397 (CCCXCVII): MANUAL not_found_needs_reocr | WARN
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 408 (CDVIII): image_verified OCR p=595 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 542 (DXLII): image_verified OCR p=753 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 562 (DLXII): image_verified OCR p=777 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 563 (DLXIII): image_verified OCR p=778 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 571 (DLXXI): image_verified OCR p=812 [doctr_text/nopunct] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 572 (DLXXII): image_verified OCR p=813 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 573 (DLXXIII): image_verified OCR p=815 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 581 (DLXXXI): image_verified OCR p=834 [surya_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 582 (DLXXXII): image_verified OCR p=834 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 594 (DXCIV): image_verified OCR p=841 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Ch 612 (DCXII): image_verified OCR p=865 [doctr_text/strict] | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | Output written: C:\PatoLex-scratch\production-1905\parsed_acts_visual.json | OK
+[2026-06-21 03:38 PT] VISUAL-1905 | SUMMARY: targeted=50 verified=41 gap=0 not_found=9 | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | === CAMPAIGN COMPLETE === | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | Total targeted: 50 missing chapters for 1905 | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | image_verified: 41 chapters (OCR text or direct image confirmation) | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | legislative_gap: 0 chapters | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | not_found_needs_reocr: 9 chapters (389-397, scan scrambling confirmed) | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | Key finding: 1905 uses ROMAN numerals for chapter headers | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | Key finding: Scan pages 546-568 are severely scrambled (printed pp481-518 out of order) | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | Key finding: Ch 389-397 absent from scan -- require rescan of printed pp497-519 | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | Key finding: Ch 278 OCR missed header; confirmed via image page_0298.png | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | Key finding: Ch 571 OCR missed punct; CHAPTER DLXXI confirmed in doctr_text key 812 | OK
+[2026-06-21 03:39 PT] VISUAL-1905 | Output: C:/PatoLex-scratch/production-1905/parsed_acts_visual.json | OK

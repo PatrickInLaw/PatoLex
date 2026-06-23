@@ -1,0 +1,37 @@
+PatoLex merge-attrition recovery run log
+Campaign: recover merge-attrition chapters in 1901, 1909, 1911 (CPU-only, additive visual channel)
+Method: chapters physically printed + already present in OCR text passes (consensus_text); merge low-pass dropped them. Pulled out of existing passes, written append-safe to parsed_acts_visual.json (status=ocr_text_verified, printed_number_confirmed=false). NO GPU, NO DB/merged/certified writes.
+
+[2026-06-22] SETUP | Read _residual_manifest.py / _recall_allyears.py / _spot_ocr.py; ran residual manifests | OK
+  baseline residuals: 1901 missing=22 (N=275), 1909 missing=5 (N=729), 1911 missing=130 (N=753) -> 157 total
+
+[2026-06-22] 1901 | Roman headers (CHAPTER XX..CCXLIV) OCR-garbled; arabic detector skipped them. Resolved all 22 from consensus_text page reads (2 were merge-collision drops present-by-chapter_int: 29,204). | OK
+  recovered: 20,21,29,78,109,115,116,118,123,131,136,155,174,177,178,193,202,204,238,239,240,241
+  residual after: 0
+
+[2026-06-22] 1909 | 5 missing (547,551,608,690,691) all confirmed on pages 925/927/970/1113. Appended to parsed_acts_visual.json. | OK
+  residual after: 0
+
+[2026-06-22] 1911 | 130 missing. Auto exact-number extract (consensus_text) -> 35 safe with titles. Discarded all fuzzy matches (unsafe: grabbed neighbor numbers). Remaining 95 routed to 6 fork agents for direct page reads. | OK
+  fork A (14): 13 resolved, ch110 NOT_FOUND
+  fork B (15): 14 resolved (199,337 body-derived), ch356 NOT_FOUND
+  fork C (19): 18 resolved, ch387 NOT_FOUND
+  fork D (19): 19 resolved
+  fork E (14): 12 resolved, ch90 + ch252 NOT_FOUND
+  fork F (14): 14 resolved (553, 631 flagged-then-confirmed by sequence/body)
+  appended 125 to parsed_acts_visual.json; de-duped by chapter_int_final
+  NOT_FOUND (5): 90, 110, 252, 356, 387 -- printed headers OCR-LOST in page-boundary gaps (no
+    'An act' title line survives in consensus text). Real, physically-printed chapters whose
+    header+title text did not survive OCR; honest non-recovery rather than a fabricated number.
+  residual after: 5 (was 130)
+
+[2026-06-22] RESULTS | _recall_allyears.py corpus scoreboard | OK
+  per-year recovered / remaining residual:
+    1901: recovered 22/22  -> residual 0  (was 22)
+    1909: recovered  5/5   -> residual 0  (was 5)
+    1911: recovered 125/130 -> residual 5 (was 130)
+  total recovered: 152 of 157 merge-attrition chapters (96.8%)
+  genuinely-hard remainder (5): 1911 ch 90, 110, 252, 356, 387 (OCR-lost headers in page gaps)
+  corpus residual: 466 -> 314 (-152); OCR-era AFTER coverage now 95688/96002 = 99.7%
+  All writes additive-only to parsed_acts_visual.json (status=ocr_text_verified,
+  printed_number_confirmed=false). No DB/merged/certified writes. No GPU/re-OCR. No rm.

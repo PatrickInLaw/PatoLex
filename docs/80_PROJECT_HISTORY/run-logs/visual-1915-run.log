@@ -1,0 +1,39 @@
+[2026-06-20 03:30 PT] START | visual-1915 -- recovering 31 missing chapters for 1915 vol1 from page images | OK
+[2026-06-20 03:30 PT] PHASE | Read manifest: 31 missing chapters identified; image formula: source_page P -> page_{P-1:04d}.png | OK
+[2026-06-20 03:31 PT] PHASE | OCR scan: inspected page_ocr_results.json (1922 pages); OCR garbled ~80% of chapter headers in target ranges; image reads required | OK
+
+[2026-06-20 03:32 PT] CH94   | source_page=172 | printed=94 | image=page_0171.png | CONFIRMED OK
+[2026-06-20 03:33 PT] CH150  | source_page=316 | printed=150 | image=page_0315.png | CONFIRMED OK
+[2026-06-20 03:33 PT] CH151  | source_page=321 | printed=151 | image=page_0320.png | CONFIRMED OK
+[2026-06-20 03:34 PT] CH152  | source_page=322 | printed=152 | image=page_0321.png | CONFIRMED OK
+[2026-06-20 03:34 PT] CH154  | source_page=323 | printed=154 | image=page_0322.png | CONFIRMED OK
+[2026-06-20 03:35 PT] CH250  | source_page=467 | printed=250 | image=page_0466.png | CONFIRMED OK
+[2026-06-20 03:35 PT] CH255  | source_page=469 | printed=255 | image=page_0468.png | CONFIRMED OK
+[2026-06-20 03:36 PT] CH257  | source_page=470 | printed=257 | image=page_0469.png | CONFIRMED OK
+[2026-06-20 03:36 PT] CH258  | source_page=471 | printed=258 | image=page_0470.png | CONFIRMED OK
+[2026-06-20 03:37 PT] CH381  | source_page=604 | printed=381 | image=page_0603.png | CONFIRMED OK
+[2026-06-20 03:37 PT] CH402  | source_page=656 | printed=402 | image=page_0655.png | CONFIRMED OK
+[2026-06-20 03:38 PT] CH427  | source_page=715 | printed=427 | image=page_0714.png | CONFIRMED OK
+[2026-06-20 03:38 PT] CH482  | source_page=820 | printed=482 | image=page_0819.png | CONFIRMED OK
+[2026-06-20 03:39 PT] CH483  | source_page=821 | printed=483 | image=page_0820.png | CONFIRMED OK
+[2026-06-20 03:39 PT] CH485  | source_page=822 | printed=485 | image=page_0821.png | CONFIRMED OK
+[2026-06-20 03:40 PT] CH486  | source_page=822 | printed=486 | image=page_0821.png | CONFIRMED OK (same page as 485)
+[2026-06-20 03:40 PT] CH487  | source_page=823 | printed=487 | image=page_0822.png | CONFIRMED OK
+[2026-06-20 03:41 PT] CH498  | source_page=834 | printed=498 | image=page_0833.png | CONFIRMED OK
+[2026-06-20 03:41 PT] CH499  | source_page=835 | printed=499 | image=page_0834.png | CONFIRMED OK
+[2026-06-20 03:42 PT] CH527  | source_page=868 | printed=527 | image=page_0867.png | CONFIRMED OK
+[2026-06-20 03:42 PT] CH566  | source_page=950 | printed=566 | image=page_0949.png | CONFIRMED OK
+[2026-06-20 03:43 PT] CH567  | source_page=950 | printed=567 | image=page_0949.png | CONFIRMED OK (same page as 566)
+[2026-06-20 03:43 PT] CH569  | source_page=955 | printed=569 | image=page_0954.png | CONFIRMED OK
+[2026-06-20 03:44 PT] CH570  | source_page=956 | printed=570 | image=page_0955.png | CONFIRMED OK
+[2026-06-20 03:44 PT] CH571  | source_page=957 | printed=571 | image=page_0956.png | CONFIRMED OK
+[2026-06-20 03:45 PT] CH572  | source_page=959 | printed=572 | image=page_0958.png | CONFIRMED OK
+[2026-06-20 03:45 PT] CH616  | source_page=1171 | printed=616 | image=page_1170.png | CONFIRMED OK
+[2026-06-20 03:46 PT] CH617  | source_page=1172 | printed=617 | image=page_1171.png | CONFIRMED OK
+[2026-06-20 03:46 PT] CH655  | source_page=1298 | printed=655 | image=page_1297.png | CONFIRMED OK
+[2026-06-20 03:47 PT] CH656  | source_page=1299 | printed=656 | image=page_1298.png | CONFIRMED OK
+[2026-06-20 03:47 PT] CH693  | source_page=1373 | printed=693 | image=page_1372.png | CONFIRMED OK
+
+[2026-06-20 03:48 PT] PHASE | All 31 chapters image-verified; 0 not_found; 0 printed-number mismatches | OK
+[2026-06-20 03:48 PT] PHASE | Writing parsed_acts_visual.json to production-1915-vol1-chapters | OK
+[2026-06-20 03:49 PT] DONE  | 31/31 verified; output written to C:\PatoLex-scratch\production-1915-vol1-chapters\parsed_acts_visual.json | OK

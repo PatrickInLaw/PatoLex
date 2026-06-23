@@ -1,0 +1,28 @@
+[2026-06-21 04:30 PT] START    | Visual recovery campaign 1907 — 15 missing chapters | OK
+[2026-06-21 04:31 PT] MANIFEST | _residual_manifest.py 1907: N=539, present=524, missing=15 | OK
+[2026-06-21 04:31 PT] MANIFEST | Missing: [94,146,147,178,179,253,256,304,384,385,442,443,446,447,483] | OK
+[2026-06-21 04:32 PT] OCR-LOAD | page_ocr_results.json loaded: pages 2-1401, 1397 total | OK
+[2026-06-21 04:33 PT] PASS-1   | Initial regex CHAPTER N search: 5 found (146,178,442,443,447), 10 not found | WARN
+[2026-06-21 04:34 PT] PASS-2   | Broad OCR-corruption pattern C.{0,3}APTER N: found 94,147,253,304,384 | OK
+[2026-06-21 04:35 PT] PASS-3   | Manual page-text inspection, wider range search | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 94  -> p193 (consensus/tess: 'CIAPTER 94', surya: 'CITAPTER 94') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 146 -> p299 (consensus/doctr/surya: 'CHAPTER 146') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 147 -> p300 (doctr/surya: 'CIAPTER 147') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 178 -> p328 (doctr/surya: 'CHAPTER 178') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 179 -> p329 (consensus/surya: 'CITAPTER 179') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 253 -> p436 (doctr/surya: 'CIIAPTER 253') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 256 -> p443 (doctr/surya: 'CITAPTER 256') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 304 -> p513 (consensus/doctr/tess: 'CIIAPTER 304') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 384 -> p704 (consensus/doctr/surya/tess: 'CIIAPTER 384') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 385 -> p706 (consensus/doctr/surya: 'CILAPTER 385') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 442 -> p820 (surya: 'CHAPTER 442') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 443 -> p824 (doctr/surya: 'CHAPTER 443') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 446 -> p831 (consensus: 'CHAPTISR 446', surya: 'CHAPTCR 446', doctr: 'CHAPTER +46') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 447 -> p832 (surya/doctr: 'CHAPTER 447'; consensus dropped digit: 'CHAPTER 47') | OK
+[2026-06-21 04:36 PT] FOUND    | Ch 483 -> p879 (consensus/surya: 'CITAPTER 483') | OK
+[2026-06-21 04:37 PT] PATTERN  | Root cause: OCR reads CH as CI, CIT, CII, CIL in ~10/15 chapters (running header zone corruption) | WARN
+[2026-06-21 04:37 PT] OUTPUT   | parsed_acts_visual.json written: 15 acts, 15 image_verified, 0 gap, 0 not_found | OK
+[2026-06-21 04:38 PT] COMPLETE | 1907 visual recovery: 15/15 verified, 0 legislative gaps, 0 unresolved | OK
+[2026-06-21 05:05 PT] FIX      | Off-by-one in img_path corrected: source_page (= OCR dict key K) maps to page_{K:04d}.png, NOT K-1. Verified by Read of page_0193.png = printed p142 CHAPTER 94 (and page_0192.png = p141, ch92/93 sewage act). Matches 1979 agent finding. | WARN
+[2026-06-21 05:06 PT] FIX      | Regenerated parsed_acts_visual.json; all 15 img_path now point to correct page_NNNN.png; stale 'Image page_NNNN.png' note suffix stripped | OK
+[2026-06-21 05:07 PT] VERIFY   | All 15 img_path validated: basename == page_{source_page:04d}.png and file exists | OK

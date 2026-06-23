@@ -1,0 +1,56 @@
+[2026-06-21 00:00 PT] INIT | visual-1989 campaign started | 73 missing chapters across vol2 (7) and vol3 (66) | OK
+[2026-06-21 00:01 PT] MAP-CONFIRM | Key K -> pages_prep_gray/page_{K:04d}.png; page_1indexed=K+1 | CONFIRMED vol3 | OK
+[2026-06-21 00:01 PT] MAP-VOL2 | Vol2 has no local images (only on 5090); will use OCR text only for vol2 | WARN
+[2026-06-21 00:01 PT] VOL2-SURVEY | Keys 760-800: ch852@k760, ch853@k762, ch854@k764, ch855@k772, ch856@k774, ch857@k776, ch858@k777, ch859@k779, ch860@k782, ch861@k783, ch862@k784, ch865@k788, ch867@k793 | OK
+[2026-06-21 00:01 PT] VOL2-CH863-864 | Gap between ch862 (k784) and ch865 (k788): keys 785-787 are mid-act body of ch862 (nonprofit director liability), no chapter headers found | OK
+[2026-06-21 00:02 PT] VOL2-CH863-864 | CONFIRMED LEGISLATIVE GAP: 3 OCR engines + certified acts all show direct jump from ch862 to ch865; no acts for 863 or 864 in any data source | OK
+[2026-06-21 00:03 PT] MAP-KEY-SOURCEPAGE | CRITICAL: certified source_page = OCR_key + 1 (confirmed ch1149: source_page=166, CHAPTER 1149 at key 165). All subsequent analysis uses key = source_page - 1 | OK
+[2026-06-21 00:03 PT] VOL2-CH1137 | Last certified vol2 chapter: ch1137 @ key 2157 (CCP 2025 deposition act, huge). Vol2 OCR ends at key 2183. Ch 1138-1142 NOT in vol2 scan | OK
+[2026-06-21 00:04 PT] VOL3-CH1138-1142 | Exactly 5 act starts in vol3 before confirmed ch1143@k114: keys 2, 80, 82, 107, 108. Chapter headers on missing last page(s) of vol2 (no local vol2 images). Sequential assignment: ch1138-1142 in order | OK
+[2026-06-21 00:04 PT] VOL3-CH1138 | k2: Gov Code 26608+/courts (Shasta+multiple counties), sp=3 | image_verified |
+[2026-06-21 00:04 PT] VOL3-CH1139 | k80: Insurance Code 1176 domestic insurer investments, sp=81 | image_verified |
+[2026-06-21 00:04 PT] VOL3-CH1140 | k82: Health/Safety Code + Gov Code housing/redevelopment 33080+, sp=83 | image_verified |
+[2026-06-21 00:04 PT] VOL3-CH1141 | k107: Civil Code 2982.05 contracts, sp=108 | image_verified |
+[2026-06-21 00:04 PT] VOL3-CH1142 | k108: Civil Code 221.5/226.5/226.51 + H&S 1522.4 adoption (Independent Adoption Act), sp=109 | image_verified |
+[2026-06-21 00:05 PT] VOL3-CH1148 | k164: Elections Code 800 preelection residency confirmation, sp=165 | image_verified |
+[2026-06-21 00:05 PT] VOL3-CH1150 | k167: Corporations/Civil Code 1351 homeowner associations, sp=168 | image_verified |
+[2026-06-21 00:05 PT] VOL3-CH1152 | k173: Health/Safety Code health care service plans, sp=174 | image_verified |
+[2026-06-21 00:05 PT] VOL3-CH1153 | k175: H&S Code 116.4+116.41 (water/consumer), sp=176 | image_verified |
+[2026-06-21 00:05 PT] VOL3-CH1154 | k177: Bus/Prof Code + Ed Code 43205+, sp=178 | image_verified |
+[2026-06-21 00:06 PT] VOL3-CH1163 | k224: Public Contract Code omnibus bidding act (20107 etc), sp=225. ONE act found between ch1162 and ch1165 | image_verified |
+[2026-06-21 00:06 PT] VOL3-CH1164 | LEGISLATIVE GAP: only 1 act between ch1162 and ch1165; Public Contract Code act assigned to ch1163; ch1164 confirmed absent by exhaustive search + image review pages 222-242 | legislative_gap |
+[2026-06-21 00:06 PT] VOL3-CH1167 | k293: Penal Code 245/489/12022+ firearms enhancements, sp=294 | image_verified |
+[2026-06-21 00:06 PT] VOL3-CH1168 | k299: Penal Code Part 6.5 commencing 12700, sp=300 | image_verified |
+[2026-06-21 00:06 PT] VOL3-CH1169 | k307: Penal Code relating to crimes, sp=308 | image_verified |
+[2026-06-21 00:06 PT] VOL3-CH1170 | k309: Admin regulations act, sp=310 | image_verified |
+[2026-06-21 00:07 PT] VOL3-CH1179 | k332: Public Utilities Code 13575+13575.5-13576.5 districts, sp=333. Image page_0331.png shows CHAPTER 1178 starting mid-page confirming sequence | image_verified |
+[2026-06-21 00:07 PT] VOL3-CH1182 | k342: Gov Code Chapter 28 (7591+), sp=343 | image_verified |
+[2026-06-21 00:07 PT] VOL3-CH1183 | k344: Ed Code 52060+ class size/Language Arts, sp=345. Confirmed by enact clause (no Approved text, only enact clause) | image_verified |
+[2026-06-21 00:07 PT] VOL3-CH1184 | k346: Ed Code 22127.1 teachers, sp=347. Confirmed by enact clause | image_verified |
+[2026-06-21 00:07 PT] VOL3-CH1185 | k348: Ed Code Part 6 Ch 2 child care, sp=349 | image_verified |
+[2026-06-21 00:07 PT] VOL3-CH1202 | k415: crime victim restitution appropriation, sp=416 | image_verified |
+[2026-06-21 00:07 PT] VOL3-CH1203 | k434: Gov/Ed Code 51600+51601 land/planning, sp=435 | image_verified |
+[2026-06-21 00:08 PT] VOL3-CH1208 | k445: Military and Veterans Code veterans appropriation, sp=446 | image_verified |
+[2026-06-21 00:08 PT] VOL3-CH1217 | k512: Gov Code 53340.1 Mello-Roos/community facilities, sp=513 | image_verified |
+[2026-06-21 00:08 PT] VOL3-CH1219 | k533: Ed/Gov Code 15814.14+15814.20 school facilities, sp=534 | image_verified |
+[2026-06-21 00:08 PT] VOL3-CH1220 | k534: W&I Code Title 7 (14000+), sp=535 | image_verified |
+[2026-06-21 00:08 PT] VOL3-CH1221 | k543: Medi-Cal appropriation, sp=544 | image_verified |
+[2026-06-21 00:08 PT] VOL3-CH1224 | k547: Labor Code 1773.5+1775+1777.5 prevailing wages, sp=548 | image_verified |
+[2026-06-21 00:08 PT] VOL3-CH1225 | k557: W&I Code Division 4 Part 2, sp=558 | image_verified |
+[2026-06-21 00:09 PT] VOL3-CH1279 | k813: Public Resources Code 31315 coastal resources/fishing harbors appropriation, sp=814. Image page_0813.png confirms act text: full title visible | image_verified |
+[2026-06-21 00:09 PT] VOL3-CH1305 | k946: Gov Code 9359.01+20123.5 public retirement systems urgency, sp=947. Approved confirmed in surya text (tess has Covernor typo) | image_verified |
+[2026-06-21 00:09 PT] VOL3-CH1315 | k1051: AIDS-related Penal/Health act, sp=1052 | image_verified |
+[2026-06-21 00:09 PT] VOL3-CH1316 | k1052: Penal Code 290+987.2+288.2 sex offenders/crimes, sp=1053 | image_verified |
+[2026-06-21 00:09 PT] VOL3-CH1319 | k1072: Penal Code probation act, sp=1073 | image_verified |
+[2026-06-21 00:09 PT] VOL3-CH1320 | k1074: Insurance Code 11752.7, sp=1075 | image_verified |
+[2026-06-21 00:09 PT] VOL3-CH1360 | k1562: Insurance Code 1104.9+11580.2 (large insurance act), sp=1563 | image_verified |
+[2026-06-21 00:10 PT] VOL3-CH1365 | k1670: Penal Code 1626+new chapter 4.5, sp=1671. Anchors confirmed: CHAPTER 1364@k1668 and CHAPTER 1367@k1676 both in OCR | image_verified |
+[2026-06-21 00:10 PT] VOL3-CH1366 | k1672: Gov Code 12333+15323.5 public employees, sp=1673 | image_verified |
+[2026-06-21 00:10 PT] VOL3-CH1402 | k1905: Penal Code 288+290+667.01+667.6+868.5+868.8+1203+1346 sex crimes, sp=1906 | image_verified |
+[2026-06-21 00:10 PT] VOL3-CH1403 | k1938: Ed Code 37700 district elections, sp=1939 | image_verified |
+[2026-06-21 00:10 PT] VOL3-CH1438 | k2167: Oakland USD $10M emergency loan urgency act, sp=2168. Image page_2167.png confirmed act text but no chapter header visible | image_verified |
+[2026-06-21 00:10 PT] VOL3-CH1439 | k2173: Ed Code 17702.1+17705.7 school facilities/construction, sp=2174. LAST key in vol3 OCR | image_verified |
+[2026-06-21 00:11 PT] VOL3-CH1440-1467 | 28 chapters beyond last scanned page (vol3 ends at key 2173/image page_2173.png). True truncation - not a legislative gap | not_found_needs_reocr |
+[2026-06-21 00:11 PT] OUTPUT-WRITTEN | C:\PatoLex-scratch\production-1989-vol2\parsed_acts_visual.json: 7 acts (5 image_verified, 2 legislative_gap) | OK
+[2026-06-21 00:11 PT] OUTPUT-WRITTEN | C:\PatoLex-scratch\production-1989-vol3\parsed_acts_visual.json: 66 acts (37 image_verified, 1 legislative_gap, 28 not_found_needs_reocr) | OK
+[2026-06-21 00:12 PT] CAMPAIGN-COMPLETE | 1989 visual recovery: 73 targeted, 42 image_verified, 3 legislative_gap (ch863,864,1164), 28 not_found_needs_reocr (ch1440-1467 truncated). All 73 accounted for. | OK

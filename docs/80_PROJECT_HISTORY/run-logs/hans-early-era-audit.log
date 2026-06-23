@@ -1,0 +1,41 @@
+[2026-06-20 22:37 PT] START | Hans early-era audit of recover_clause_seq.py early/headerless mode | OK
+[2026-06-20 22:55 PT] MAP | source_page S maps to image page_(S-1).png and OCR page_1indexed equals source_page | OK
+[2026-06-20 22:56 PT] STRUCT | No chapter_int collisions w/ present, no dup chapter_int, page-monotonic all 3 vols | OK
+[2026-06-20 22:57 PT] POS | Recovered source_pages within ~1-5pp of interpolated expected (present pages NOT garbage in these vols) | OK
+[2026-06-20 23:05 PT] IMG-FAIL | 1905 ch241 p268 image=CHAPTER CCXL Preston bedding=present240, real241 Weaver on p269 not recovered | FAIL
+[2026-06-20 23:10 PT] IMG-FAIL | 1905 ch359 p479 loose image=only CHAPTER CCCLVIII, 359 dup of 358, real359 dental on p480 | FAIL
+[2026-06-20 23:15 PT] IMG-FAIL | 1861 ch286 p323 STRICT clause text=CCLXXXV(285) State Printer already present, mislabel dup | FAIL
+[2026-06-20 23:18 PT] IMG-FAIL | 1861 ch306 p342 STRICT clause text=CCCV(305) War Debt already present, mislabel dup | FAIL
+[2026-06-20 23:20 PT] IMG-OK | 1860 ch182 p178=CHAP CLXXXII Charles White and 1905 ch53 p97=CHAPTER LIII both STRICT correct | OK
+[2026-06-20 23:35 PT] IMG-OK | 1860 ch312 p325=CHAP CCCXII City of Nevada streets CORRECT (2nd act on page) | OK
+[2026-06-20 23:40 PT] IMG-FAIL | 1860 ch76 p78 STRICT=CHAP LXXV(75) Siskiyou transfer already present ch75 mislabel dup, real76 Crippen on p79 | FAIL
+[2026-06-20 23:45 PT] IMG-FAIL | 1861 ch512 p623 STRICT=CHAP DXI(511) Calaveras fees already present ch511 mislabel dup, real512 on p624 | FAIL
+[2026-06-20 23:50 PT] SYS | clause-anchored body-dup vs adjacent present 1860 17/44 1861 34/73 1905 13/46 many body-cont 1.00 some buffer-bleed FP but core failure pervasive | FAIL
+[2026-06-20 23:55 PT] TALLY | Image-verified 6 WRONG (241 359 286 306 76 512) incl 4 STRICT (286 306 76 512), 3 CORRECT (182 53 312). Failure recovered chC equals present ch(C-1) body relabeled +1 real chC unrecovered | FAIL
+[2026-06-20 23:58 PT] VERDICT | UNSOUND across all 3 years. Misnumbered duplicate chapters pervasive. Checkpoint (2pp) passes spuriously when consecutive acts share a page. GATE OFF early/headerless mode both strict and loose before any merge or ingest | FAIL
+[2026-06-20 23:06 PT] START2 | Hans second audit pass: roman-header-direct mode (roman_recover fn) -- fresh image verification of parsed_acts_clauserec.json status=roman_header_verified acts | OK
+[2026-06-20 23:07 PT] SCOPE | Vols: production-1860 (12 recovered N=371), production-1861 (12 recovered N=538), production-1905 (18+ recovered) -- roman_header_verified only | OK
+[2026-06-20 23:08 PT] IMG-OK | 1860 ch15 p38 file=0037: printed CHAP.XV confirmed XV=15 CORRECT | OK
+[2026-06-20 23:08 PT] IMG-OK | 1860 ch71 p71 file=0070: printed CHAP.LXXI confirmed LXXI=71 CORRECT | OK
+[2026-06-20 23:08 PT] IMG-OK | 1860 ch80 p81 file=0080: printed CHAP.LXXX confirmed LXXX=80 CORRECT | OK
+[2026-06-20 23:09 PT] IMG-FAIL | 1860 ch155 p103 file=0102: page=printed73 shows CHAP.CIV/CV(104-105) NOT CLV. OCR Cnar.CLV at p103 is body-citation inside CIV text. FALSE POSITIVE. Recovered ch155 spurious. | FAIL
+[2026-06-20 23:09 PT] IMG-OK | 1860 ch167 p167 file=0166: printed CHAP.CLXVII confirmed CLXVII=167 CORRECT | OK
+[2026-06-20 23:09 PT] IMG-OK | 1860 ch170 p168 file=0167: printed CHAP.CLXX confirmed CLXX=170 CORRECT | OK
+[2026-06-20 23:10 PT] IMG-OK | 1861 ch151 p194 file=0193: printed CHAP.CLI confirmed CLI=151 CORRECT | OK
+[2026-06-20 23:10 PT] IMG-FAIL | 1861 ch199 p195 file=0194: printed CHAP.CLII=152. OCR garbled to CLIL. roman_int(CLIL)=199 insert-L misparse. chapter_int=199 WRONG actual=152 delta=47. | FAIL
+[2026-06-20 23:11 PT] IMG-FAIL | 1861 ch249 p241 file=0240: printed CHAP.CCII=202. OCR garbled to CCIL. roman_int(CCIL)=249 insert-L misparse. chapter_int=249 WRONG actual=202 delta=47. | FAIL
+[2026-06-20 23:11 PT] IMG-OK | 1861 ch338 p391 file=0390: printed CHAP.CCCXXXVIII confirmed CCCXXXVIII=338 CORRECT | OK
+[2026-06-20 23:12 PT] IMG-OK | 1861 ch383 p449 file=0448: printed CHAP.CCCLXXXIII confirmed CCCLXXXIII=383 CORRECT | OK
+[2026-06-20 23:12 PT] IMG-FAIL | 1861 ch386 p451 file=0450: printed CHAP.CCCXXXVI=336. OCR inserted L giving CCCLXXXVI. roman_int=386. chapter_int=386 WRONG actual=336 delta=50. | FAIL
+[2026-06-20 23:12 PT] IMG-OK | 1861 ch387 p452 file=0451: printed CHAP.CCCLXXXVII confirmed CCCLXXXVII=387 CORRECT | OK
+[2026-06-20 23:13 PT] IMG-OK | 1861 ch449 p552 file=0551: printed CHAP.CCCCXLIX confirmed CCCCXLIX=449 CORRECT | OK
+[2026-06-20 23:13 PT] IMG-OK | 1905 ch53 p97 file=0096: printed CHAPTER LIII confirmed LIII=53 CORRECT | OK
+[2026-06-20 23:13 PT] IMG-OK | 1905 ch62 p106 file=0105: printed CHAPTER LXII confirmed LXII=62 CORRECT | OK
+[2026-06-20 23:13 PT] IMG-OK | 1905 ch63 p106 file=0105: printed CHAPTER LXIII confirmed LXIII=63 same page as ch62 different header CORRECT | OK
+[2026-06-20 23:14 PT] IMG-OK | 1905 ch337 p444 file=0443: printed CHAPTER CCCXXXVII confirmed CCCXXXVII=337 CORRECT | OK
+[2026-06-20 23:14 PT] IMG-OK | 1905 ch338 p445 file=0444: printed CHAPTER CCCXXXVIII confirmed CCCXXXVIII=338 CORRECT | OK
+[2026-06-20 23:14 PT] IMG-OK | 1905 ch354 p472 file=0471: printed CHAPTER CCCLIV confirmed CCCLIV=354 CORRECT | OK
+[2026-06-20 23:15 PT] TALLY | 20 acts sampled across 3 vols. CORRECT=16 WRONG=4. 1860: 1/6 wrong (ch155 body-cite FP). 1861: 3/8 wrong (ch199 vs152 ch249 vs202 ch386 vs336). 1905: 0/6 wrong. | FAIL
+[2026-06-20 23:16 PT] PATTERN | Two failure modes confirmed. (A) INSERT-L misparse: OCR inserts L into roman numeral causing roman_int to compute 50 extra. CLII parsed as CLIL=199 not 152. CCII parsed as CCIL=249 not 202. CCCXXXVI parsed as CCCLXXXVI=386 not 336. (B) Body-citation FP: header regex fires on cross-ref citation inside act body prose not on a real chapter heading. Both modes bypass existing guards. | FAIL
+[2026-06-20 23:16 PT] NOTE | 1905 sample clean (0/6 wrong). Arabic CHAPTER headers in 1905 have less OCR garbling of numerals. 1861 worst at 3/8=37.5pct wrong in sample. 1860 at 1/6=17pct. Overall error rate ~20pct across all 3 years. | WARN
+[2026-06-20 23:17 PT] VERDICT2 | roman-header-direct UNSOUND as implemented. INSERT-L misparse systematic. Body-citation FP bypasses 25-line window guard. GATE OFF. Fix required -- sequence-position sanity check on recovered chapter_int (reject >10pct off interpolated position) plus header-position guard (reject match if preceding 5 OCR lines contain body prose not blank or previous chapter end). | FAIL

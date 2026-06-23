@@ -1,0 +1,82 @@
+PatoLex -- BROKEN-MERGE rerun for biennium-named transition years 1901 / 1909 / 1911
+Run by: Claude Code (research/fix agent). REVERSIBLE + VERIFIED. NO DB writes.
+========================================================================================
+
+[2026-06-21] PHASE: INVESTIGATE | root cause | OK
+----------------------------------------------------------------------------------------
+ROOT CAUSE (single bug, all three years): merge_passes.py n_for() extracts the FIRST
+4-digit year from the dir basename via regex production-(\d{4}). The biennium-named
+transition dirs hold the ODD-year regular session, but the regex grabs the EVEN leading
+year, so the merge capped at the WRONG (tiny even-year) oracle N:
+  production-1900-01 -> regex 1900 -> ORACLE[1900]=15   => merged capped at 15
+  production-1907-09 -> regex 1907 -> ORACLE[1907]=539  => merged capped at 539
+  production-1910-11 -> regex 1910 -> ORACLE[1910]=1    => merged capped at 1
+The full session text ALREADY EXISTED in parsed_acts_certified.json (and repaired/
+recovered/multiengine) in each dir; only the merge step was under-built due to the
+wrong cap. Confirmed by input inventory (distinct chapters <= true N):
+  1901: certified=252  repaired=253  recovered=252  fixed=217  (merged was 14)
+  1909: certified=551  repaired=546  recovered=540  multiengine=140 fixed=501 (merged was 485)
+  1911: certified=397  repaired=400  recovered=395  multiengine=284 fixed=368 (merged was 1)
+chaptered_v2 absent in all three (not required; certified is the lead trusted pass).
+
+[2026-06-21] PHASE: BACKUP | reversible | OK
+----------------------------------------------------------------------------------------
+Copied existing parsed_acts_merged.json -> parsed_acts_merged.BAK.json in each dir
+(NOT deleted; retained for restore):
+  production-1900-01\parsed_acts_merged.BAK.json
+  production-1907-09\parsed_acts_merged.BAK.json
+  production-1910-11\parsed_acts_merged.BAK.json
+
+[2026-06-21] PHASE: REGENERATE | existing tooling, correct N | OK
+----------------------------------------------------------------------------------------
+Used the EXISTING merge_passes.merge_dir(D, N) (no reinvented merge), supplying the
+correct odd-year oracle N (the only fix). Temp driver lived under C:\PatoLex-scratch
+(removed after use). Per-year merged distinct BEFORE -> AFTER:
+  1901 (N=275): 14  -> 252  (raw 254, maxCh 275; src certified 250/repaired 1/fixed 1; collapsed 2)
+  1909 (N=729): 485 -> 670  (raw 678, maxCh 729; src certified 550/multiengine 120; collapsed 8; 13 low-pass dropped)
+  1911 (N=753): 1   -> 623  (raw 632, maxCh 753; src certified 397/repaired 3/multiengine 222/lostheader 1; collapsed 9; 51 low-pass dropped)
+OCR page-headers available in all three (dedup ground-truth active). certified, DB, and
+other years' dirs UNTOUCHED.
+
+[2026-06-21] PHASE: VERIFY | _recall_allyears.py | OK
+----------------------------------------------------------------------------------------
+Anti-double-count assert: PASSES both before and after (214 distinct production dirs,
+none counted under two oracle years).
+Corpus scoreboard (OCR era 1850-1999, mapped years):
+                       BEFORE          AFTER
+  before(merge-only)   88197/95273     89057/95273   (92.6% -> 93.5%)
+  after(full)          93319/95273     94179/95273   (97.9% -> 98.9%)
+  RESIDUAL             1954            1094           (dropped 860)
+  corpus incl unmapped 97.2%           98.1%
+Per-year residual (mapped):
+  1911: 752 -> 130   (after 1 -> 623)
+  1901: 260 -> 22    (after 15 -> 253; +1 vs merged via clauserec)
+Every regenerated merged is >> its backup. No restore needed.
+
+[2026-06-21] PHASE: 1909 STATUS | reported, not forced | WARN/INFO
+----------------------------------------------------------------------------------------
+1909 (oracle 729) is DELIBERATELY NOT on the _recall_allyears.py scoreboard: its data
+physically lives in production-1907-09, but that dir is already consumed by the
+production-1907* glob (capped at 539) for oracle 1907. _recall_allyears.py reports 1909
+as UNMAPPED (weight 729) under its anti-double-count guard; aliasing 1909 to that dir
+would trip the assert. Per task instructions, NOT forced -- left for a human to resolve
+the 1907/1909 dir-ownership remap. The 1909 merged file ITSELF is now correctly rebuilt
+(485 -> 670, capped at the right N=729) and ready for that future remap; this rebuild is
+harmless to the current scoreboard (1909 not counted, 1907 path untouched, assert green).
+
+[2026-06-21] PHASE: CLEANUP | temp files | OK
+----------------------------------------------------------------------------------------
+Removed temp scripts from C:\PatoLex-scratch (_inspect_merge_inputs.py, _check_nfor.py,
+_rerun_merge_fix.py). .BAK.json files RETAINED in each dir (do not delete).
+
+SUMMARY (root cause -> old->new merged -> residual):
+  1901  n_for grabbed 1900 (N=15)  : merged 14  -> 252   year residual 260 -> 22
+  1909  n_for grabbed 1907 (N=539) : merged 485 -> 670   (unmapped on scoreboard; left for human remap)
+  1911  n_for grabbed 1910 (N=1)   : merged 1   -> 623   year residual 752 -> 130
+  Corpus residual 1954 -> 1094 ; anti-double-count assert PASSES. Nothing restored/blocked.
+
+NOTE (durable-doc followup for a human): the underlying merge_passes.n_for() bug will
+re-mis-cap ANY biennium-named dir if the merge is re-run via the glob CLI. A durable fix
+is to teach n_for()/merge CLI the same YEAR_DIR_ALIAS mapping _recall_allyears.py uses
+(1900-01->1901, 1907-09->1909, 1910-11->1911, plus the 19th-c biennia). Not done here
+(scope was regenerate-with-correct-N only); flagged for the owner.

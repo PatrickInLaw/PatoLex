@@ -1,0 +1,178 @@
+[2026-06-21 03:18 PT] PHASE START | visual-1850-run | scanning 40 missing chapters | OK
+[2026-06-21 03:18 PT] LOAD | reading OCR JSON | OK
+[2026-06-21 03:18 PT] LOAD | OCR pages loaded: 423 | OK
+[2026-06-21 03:18 PT] SCAN | chapter=1 | scanning pages 36-70 | START
+[2026-06-21 03:18 PT] FOUND | chapter=1 | source_page=54 | roman=1 | title=concerning the Public Archives. | image_verified | OK
+[2026-06-21 03:18 PT] SCAN | chapter=5 | scanning pages 42-76 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=5 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=6 | scanning pages 42-76 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=6 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=7 | scanning pages 42-76 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=7 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=13 | scanning pages 51-90 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=13 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=14 | scanning pages 51-90 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=14 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=15 | scanning pages 51-90 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=15 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=16 | scanning pages 51-90 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=16 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=17 | scanning pages 51-90 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=17 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=22 | scanning pages 69-102 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=22 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=30 | scanning pages 80-118 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=30 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=31 | scanning pages 80-118 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=31 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=32 | scanning pages 80-118 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=32 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=35 | scanning pages 91-125 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=35 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=37 | scanning pages 95-126 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=37 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=45 | scanning pages 113-146 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=45 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=47 | scanning pages 116-153 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=47 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=51 | scanning pages 126-160 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=51 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=53 | scanning pages 130-170 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=53 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=55 | scanning pages 140-175 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=55 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=58 | scanning pages 146-179 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=58 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=64 | scanning pages 154-192 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=64 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=65 | scanning pages 154-192 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=65 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=78 | scanning pages 191-223 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=78 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=92 | scanning pages 212-244 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=92 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=94 | scanning pages 214-244 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=94 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=95 | scanning pages 214-244 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=95 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=104 | scanning pages 249-282 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=104 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=107 | scanning pages 253-285 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=107 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=111 | scanning pages 259-293 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=111 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=112 | scanning pages 259-293 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=112 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=115 | scanning pages 261-298 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=115 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=118 | scanning pages 268-300 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=118 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=122 | scanning pages 327-363 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=122 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=125 | scanning pages 335-368 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=125 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=127 | scanning pages 338-372 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=127 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=129 | scanning pages 342-429 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=129 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=132 | scanning pages 401-433 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=132 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=141 | scanning pages 419-453 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=141 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] SCAN | chapter=145 | scanning pages 453-484 | START
+[2026-06-21 03:18 PT] NOT_FOUND | chapter=145 | status=not_found_needs_reocr | WARN
+[2026-06-21 03:18 PT] WRITE | output=C:\PatoLex-scratch\production-1850\parsed_acts_visual.json | targeted=40 verified=1 gap=0 not_found=39 | OK
+[2026-06-21 03:18 PT] PHASE COMPLETE | visual-1850-run | OK
+[2026-06-21 03:19 PT] PHASE2 START | visual-1850-build | Arabic Chap. N. pattern scan | OK
+[2026-06-21 03:19 PT] LOAD | OCR pages=423 | OK
+[2026-06-21 03:19 PT] MANIFEST | missing_count=40 | chapters=[1, 5, 6, 7, 13, 14, 15, 16, 17, 22, 30, 31, 32, 35, 37, 45, 47, 51, 53, 55, 58, 64, 65, 78, 92, 94, 95, 104, 107, 111, 112, 115, 118, 122, 125, 127, 129, 132, 141, 145] | OK
+[2026-06-21 03:19 PT] SCAN | found_in_index=37 of 40 missing chapters | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=1 | sp=54 | title=AN ACT concerning the Public Archives. Passed Jauuary 5, 1850. The Peo | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=5 | sp=57 | title=AN ACT concerning the office of State Treasurer. Passod January 24th,  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=6 | sp=58 | title=(see image) | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=7 | sp=60 | title=AN ACT firing the lime for Acts and Joint Resolutions to lake effect.  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=13 | sp=65 | title=AN ACT appropréating moncy oul uf the general fund, to defray the erpe | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=14 | sp=66 | title=AN ACT to organize the Suprene Court of California. - Passed February  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=15 | sp=67 | title=AN ACT subdividing the State inlo Countics and establishing the Seals  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=16 | sp=72 | title=AN ACT concerning the revenue,funds, erpenditurc, anl property of lhe  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=17 | sp=74 | title=AN ACT defining the amount of revenue to be collected to defray the ex | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=22 | sp=85 | title=AN ACT uuthorizing the Clerk of the Supreme Court to rent a Court Room | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=30 | sp=96 | title=AN ACT to procide for the Incorporalion of Citics. Passed March 11, 18 | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=31 | sp=101 | title=AN ACT to regulate the interest of Money. Passed March 13, 1850. The P | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=32 | sp=101 | title=AN ACT to providefor the carly publication of the Laos of Californiu.  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=35 | sp=106 | title=AN ACT crealing and regulating Public Ferries. Passed March 18, 1850.  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=37 | sp=109 | title=AN ACT declaring certain Rivers, Crecks, and Sloughs, herein named, na | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=45 | sp=128 | title=AN ACT to incorporate the City of Benicia. Passed March 27, 1850. The  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=47 | sp=133 | title=AN ACT to incorporate the City of San Jose. Passed March 27, 1850. F T | OK
+[2026-06-21 03:19 PT] NOT_FOUND | chapter=51 | page_range=[141, 145] | WARN
+[2026-06-21 03:19 PT] NOT_FOUND | chapter=53 | page_range=[145, 155] | WARN
+[2026-06-21 03:19 PT] VERIFIED | chapter=55 | sp=157 | title=AN ACT tu aulhorize thc formation of Limiled Partneralips. - Passed Ap | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=58 | sp=160 | title=(see image) | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=64 | sp=171 | title=AN ACT creating Oficers of Health for thc Port of San Francisco, and d | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=65 | sp=173 | title=AN ACT providing for the crcation ofa Marine Hospital for the State of | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=78 | sp=206 | title=AN ACT to provide for the inspection of Steanboats. Passed April 10, 1 | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=92 | sp=226 | title=AN ACT to organize the County Courts. Passed April 13, 1850. The Peopl | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=94 | sp=228 | title=AN ACT to amend cG An Act to organize the Supreme Court of California. | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=95 | sp=228 | title=AN ACT adopting the Common Law. Passed April 13, 1850. The People of t | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=104 | sp=265 | title=AN ACT concerning the Ofice of Surveyor Gencral. Passed April 17, 1850 | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=107 | sp=268 | title=AN ACT to provide for the complete organization of all the Connties in | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=111 | sp=271 | title=AN ACT amendatory of the 28th and 30th Sections of the u Act subdividi | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=112 | sp=272 | title=AN ACT to prescribe the duty of Constables. Passed April 19, 1850. The | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=115 | sp=277 | title=AN ACT to provide for the appointment and prescribe the duties of Guar | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=118 | sp=283 | title=AN ACT to prevent thc coining of money by Individuals. Passed April 20 | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=122 | sp=343 | title=AN ACT concerning the Writ of Habeas Corpur. Passed April 20, 1850. Th | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=125 | sp=351 | title=AN ACT to abolish all Laws now in force in this State, cxcept such,as  | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=127 | sp=352 | title=AN ACT defining the time for commencing Civil Actions. Pussed April 22 | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=129 | sp=386 | title=AN ACT to regulate the Settlement of the Estates of Drceused Persons.  | OK
+[2026-06-21 03:19 PT] NOT_FOUND | chapter=132 | page_range=[416, 418] | WARN
+[2026-06-21 03:19 PT] VERIFIED | chapter=141 | sp=434 | title=(see image) | OK
+[2026-06-21 03:19 PT] VERIFIED | chapter=145 | sp=468 | title=AN ACT in relation to Money of Accounts of this State. Passed April 4, | OK
+[2026-06-21 03:19 PT] WRITE | C:\PatoLex-scratch\production-1850\parsed_acts_visual.json | targeted=40 verified=37 gap=0 not_found=3 | OK
+[2026-06-21 03:19 PT] PHASE2 COMPLETE | visual-1850-build | OK
+[2026-06-21 03:20 PT] PHASE3 START | visual-1850-final | flexible Chap pattern | OK
+[2026-06-21 03:20 PT] LOAD | OCR pages=423 | OK
+[2026-06-21 03:20 PT] MANIFEST | missing_count=40 | OK
+[2026-06-21 03:20 PT] SCAN | found=40 of 40 missing chapters | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=1 | sp=54 | match='Chapter 1' | title=AN ACT concerning the Public Archives. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=5 | sp=57 | match='Chap. 5' | title=AN ACT concerning the office of State Treasurer. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=6 | sp=58 | match='Chap. 6' | title=(see image) | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=7 | sp=60 | match='Chap. 7' | title=AN ACT firing the lime for Acts and Joint Resolutions to lake eff | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=13 | sp=65 | match='Chap. 13' | title=AN ACT appropréating moncy oul uf the general fund, to defray the | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=14 | sp=66 | match='Chap. 14' | title=AN ACT to organize the Suprene Court of California. - | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=15 | sp=67 | match='Chap. 15' | title=AN ACT subdividing the State inlo Countics and establishing the S | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=16 | sp=72 | match='Chap. 16' | title=AN ACT concerning the revenue,funds, erpenditurc, anl property of | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=17 | sp=74 | match='Chap. 17' | title=AN ACT defining the amount of revenue to be collected to defray t | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=22 | sp=85 | match='Chap. 22' | title=AN ACT uuthorizing the Clerk of the Supreme Court to rent a Court | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=30 | sp=96 | match='Chap. 30' | title=AN ACT to procide for the Incorporalion of Citics. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=31 | sp=101 | match='Chap. 31' | title=AN ACT to regulate the interest of Money. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=32 | sp=101 | match='Chap. 32' | title=AN ACT to providefor the carly publication of the Laos of Califor | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=35 | sp=106 | match='Chap. 35' | title=AN ACT crealing and regulating Public Ferries. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=37 | sp=109 | match='Chap. 37' | title=AN ACT declaring certain Rivers, Crecks, and Sloughs, herein name | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=45 | sp=128 | match='Chap. 45' | title=AN ACT to incorporate the City of Benicia. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=47 | sp=133 | match='Chap. 47' | title=AN ACT to incorporate the City of San Jose. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=51 | sp=144 | match='Chap. : 51' | title=AN ACT to change thc name of William II. Smilh to William Smith H | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=53 | sp=153 | match='Chap. 53' | title=AN ACT to cstublish a Standard of Weiglts and Mensures. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=55 | sp=157 | match='Chap. 55' | title=AN ACT tu aulhorize thc formation of Limiled Partneralips. - | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=58 | sp=160 | match='Chap. 58' | title=(see image) | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=64 | sp=171 | match='Chap. 64' | title=AN ACT creating Oficers of Health for thc Port of San Francisco,  | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=65 | sp=173 | match='Chap. 65' | title=AN ACT providing for the crcation ofa Marine Hospital for the Sta | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=78 | sp=206 | match='Chap. 78' | title=AN ACT to provide for the inspection of Steanboats. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=92 | sp=226 | match='Chap. 92' | title=AN ACT to organize the County Courts. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=94 | sp=228 | match='Chap. 94' | title=AN ACT to amend cG An Act to organize the Supreme Court of Califo | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=95 | sp=228 | match='Chap. 95' | title=AN ACT adopting the Common Law. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=104 | sp=265 | match='Chap. 104' | title=AN ACT concerning the Ofice of Surveyor Gencral. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=107 | sp=268 | match='Chap. 107' | title=AN ACT to provide for the complete organization of all the Connti | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=111 | sp=271 | match='Chap. 111' | title=AN ACT amendatory of the 28th and 30th Sections of the u Act subd | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=112 | sp=272 | match='Chap. 112' | title=AN ACT to prescribe the duty of Constables. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=115 | sp=277 | match='Chap. 115' | title=AN ACT to provide for the appointment and prescribe the duties of | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=118 | sp=283 | match='Chap. 118' | title=AN ACT to prevent thc coining of money by Individuals. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=122 | sp=343 | match='Chap. 122' | title=AN ACT concerning the Writ of Habeas Corpur. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=125 | sp=351 | match='Chap. 125' | title=AN ACT to abolish all Laws now in force in this State, cxcept suc | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=127 | sp=352 | match='Chap. 127' | title=AN ACT defining the time for commencing Civil Actions. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=129 | sp=386 | match='Chap. 129' | title=AN ACT to regulate the Settlement of the Estates of Drceused Pers | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=132 | sp=416 | match='Chap. 132' | title=AN ACT for the relief of persons imprisoned on Civil Process. | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=141 | sp=434 | match='Chap. 141' | title=(see image) | OK
+[2026-06-21 03:20 PT] VERIFIED | chapter=145 | sp=468 | match='Chap. 145' | title=AN ACT in relation to Money of Accounts of this State. | OK
+[2026-06-21 03:20 PT] WRITE | C:\PatoLex-scratch\production-1850\parsed_acts_visual.json | targeted=40 verified=40 gap=0 not_found=0 | OK
+[2026-06-21 03:20 PT] PHASE3 COMPLETE | visual-1850-final | OK
+[2026-06-21 03:21 PT] FINAL | visual-1850 COMPLETE | targeted=40 verified=40 gap=0 not_found=0 | all 40 chapters image_verified | output=C:\PatoLex-scratch\production-1850\parsed_acts_visual.json | OK

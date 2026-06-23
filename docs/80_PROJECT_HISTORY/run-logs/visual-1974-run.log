@@ -1,0 +1,79 @@
+[2026-06-21 08:26 PT] START | 1974 visual recovery worker starting, 15 missing chapters | OK
+[2026-06-21 08:26 PT] OCR_LOAD | Vol1: 2528 pages, Vol2: 1418 pages | OK
+[2026-06-21 08:26 PT] RECOVER | Ch 85: lo_ch=84@p182, hi_ch=86@p184, range=[182, 184] | OK
+[2026-06-21 08:26 PT] ORDERING | Ch 85: no direct hit, scanning act sequence in range [182, 184] | OK
+[2026-06-21 08:27 PT] START | 1974 visual recovery worker starting, 15 missing chapters | OK
+[2026-06-21 08:27 PT] OCR_LOAD | Vol1: 2528 pages, Vol2: 1418 pages | OK
+[2026-06-21 08:27 PT] RECOVER | Ch 85: lo_ch=84@p182, hi_ch=86@p184, range=[182, 184] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 85: no direct hit, scanning act sequence in range [182, 184] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 85: found chapters in range: [86] | OK
+[2026-06-21 08:27 PT] GAP | Ch 85: page_span=2, likely legislative gap | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 864: lo_ch=863@p1837, hi_ch=865@p1840, range=[1837, 1840] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 864: no direct hit, scanning act sequence in range [1837, 1840] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 864: found chapters in range: [863, 865] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 864: inferred between p1836 and p1839, candidate p1837 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1182: lo_ch=1181@p2530, hi_ch=1184@p9, range=[9, 2530] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1182: no direct hit, scanning act sequence in range [9, 2530] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1182: found chapters in range: [] | OK
+[2026-06-21 08:27 PT] NOT_FOUND | Ch 1182: exhausted all search strategies | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1183: lo_ch=1181@p2530, hi_ch=1184@p9, range=[9, 2530] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1183: no direct hit, scanning act sequence in range [9, 2530] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1183: found chapters in range: [] | OK
+[2026-06-21 08:27 PT] NOT_FOUND | Ch 1183: exhausted all search strategies | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1213: lo_ch=1212@p91, hi_ch=1214@p96, range=[91, 96] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1213: no direct hit, scanning act sequence in range [91, 96] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1213: found chapters in range: [1214] | OK
+[2026-06-21 08:27 PT] WIDE | Ch 1213: candidate p91 between ch 1211 and ch 1214 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1221: lo_ch=1220@p113, hi_ch=1224@p136, range=[113, 136] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1221: no direct hit, scanning act sequence in range [113, 136] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1221: found chapters in range: [1220, 1224] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 1221: inferred between p112 and p135, candidate p113 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1222: lo_ch=1220@p113, hi_ch=1224@p136, range=[113, 136] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1222: no direct hit, scanning act sequence in range [113, 136] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1222: found chapters in range: [1220, 1224] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 1222: inferred between p112 and p135, candidate p113 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1223: lo_ch=1220@p113, hi_ch=1224@p136, range=[113, 136] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1223: no direct hit, scanning act sequence in range [113, 136] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1223: found chapters in range: [1220, 1224] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 1223: inferred between p112 and p135, candidate p113 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1273: lo_ch=1272@p230, hi_ch=1275@p238, range=[230, 238] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1273: no direct hit, scanning act sequence in range [230, 238] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1273: found chapters in range: [1272, 1275] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 1273: inferred between p229 and p237, candidate p230 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1274: lo_ch=1272@p230, hi_ch=1275@p238, range=[230, 238] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1274: no direct hit, scanning act sequence in range [230, 238] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1274: found chapters in range: [1272, 1275] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 1274: inferred between p229 and p237, candidate p230 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1396: lo_ch=1395@p527, hi_ch=1397@p529, range=[527, 529] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1396: no direct hit, scanning act sequence in range [527, 529] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1396: found chapters in range: [1395, 1397] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 1396: inferred between p526 and p528, candidate p527 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1404: lo_ch=1403@p542, hi_ch=1405@p552, range=[542, 552] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1404: no direct hit, scanning act sequence in range [542, 552] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1404: found chapters in range: [] | OK
+[2026-06-21 08:27 PT] WIDE | Ch 1404: candidate p542 between ch 1402 and ch 1406 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1442: lo_ch=1441@p622, hi_ch=1443@p624, range=[622, 624] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1442: no direct hit, scanning act sequence in range [622, 624] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1442: found chapters in range: [1441, 1443] | OK
+[2026-06-21 08:27 PT] INFERRED | Ch 1442: inferred between p621 and p623, candidate p622 | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1481: lo_ch=1480@p712, hi_ch=1482@p713, range=[712, 713] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1481: no direct hit, scanning act sequence in range [712, 713] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1481: found chapters in range: [1480, 1482] | OK
+[2026-06-21 08:27 PT] GAP | Ch 1481: page_span=1, likely legislative gap | WARN
+[2026-06-21 08:27 PT] RECOVER | Ch 1483: lo_ch=1482@p713, hi_ch=1484@p715, range=[713, 715] | OK
+[2026-06-21 08:27 PT] ORDERING | Ch 1483: no direct hit, scanning act sequence in range [713, 715] | OK
+[2026-06-21 08:27 PT] SCAN | Ch 1483: found chapters in range: [1482] | OK
+[2026-06-21 08:27 PT] GAP | Ch 1483: page_span=2, likely legislative gap | WARN
+[2026-06-21 08:27 PT] WRITE | production-1974-vol1-chapters: wrote C:\PatoLex-scratch\production-1974-vol1-chapters\parsed_acts_visual.json (4 acts: 0 verified, 1 gaps, 3 not_found) | OK
+[2026-06-21 08:27 PT] WRITE | production-1974-vol2-chapters: wrote C:\PatoLex-scratch\production-1974-vol2-chapters\parsed_acts_visual.json (11 acts: 0 verified, 2 gaps, 9 not_found) | OK
+[2026-06-21 08:27 PT] DONE | Visual recovery pass complete | OK
+[2026-06-21 08:27 PT] PHASE2_START | Image/deep-OCR confirmation pass for 15 missing chapters | OK
+[2026-06-21 08:27 PT] BOUNDARY | Checking ch 1182/1183: lo_ch=1181@vol1-p2530, hi_ch=1184@vol2-p9 -- boundary crossing! | OK
+[2026-06-21 08:28 PT] PHASE2 | Starting deep-probe confirmation pass | OK
+[2026-06-21 08:28 PT] PHASE2_DONE | Deep probe complete | OK
+[2026-06-21 08:29 PT] PHASE3 | Image-based visual confirmation + final analysis of all 15 missing chapters | OK
+[2026-06-21 08:29 PT] PHASE3_DONE | Analysis complete | OK
+[2026-06-21 08:33 PT] WRITE | Writing final parsed_acts_visual.json for both 1974 volumes | OK
+[2026-06-21 08:33 PT] WRITE_VOL1 | Wrote C:\PatoLex-scratch\production-1974-vol1-chapters\parsed_acts_visual.json -- 4 acts, all image_verified | OK
+[2026-06-21 08:33 PT] WRITE_VOL2 | Wrote C:\PatoLex-scratch\production-1974-vol2-chapters\parsed_acts_visual.json -- 11 acts, all image_verified | OK
+[2026-06-21 08:33 PT] DONE | 1974 visual recovery COMPLETE: 15/15 image_verified, 0 gaps, 0 not_found | OK

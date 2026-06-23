@@ -1,0 +1,324 @@
+LOCAL HEADER-OCR RECOVERY -- run log
+Tool: C:\PatoLex-scratch\_header_ocr.py  (+ _scan_headers.py, _validate_*.py, _apply_1866.py)
+Goal: token-efficient LOCAL recovery of "missing" chapters whose page-TOP running-head
+("CHAPTER N" / "Chap. N" / roman) was skipped/garbled by full-page OCR. No agent vision
+tokens; no DB writes; additive only; merged/certified files untouched.
+
+Engine: Tesseract 5.4.0 (C:\Users\patolex\AppData\Local\Tesseract-OCR\tesseract.exe)
+Python: C:\PatoLex-scratch\ocr-engines\surya-venv\Scripts\python.exe (has pytesseract, PIL, PyMuPDF, surya)
+
+================================================================================
+TOOL DESIGN
+================================================================================
+[2026-06-21] DESIGN | _header_ocr.py | OK
+  * header_ocr_page(img): crops top strips (fracs 0.10/0.14/0.18/0.22) of the page
+    image, upscales 2x, runs Tesseract --oem 1 at psm 6/7/11, parses the first
+    legible chapter number. Optional Surya fallback (lazy-loaded).
+  * parse_chapter_from_text(): arabic ("CHAPTER 482","CHAP. 482","[Ch. 482]") and
+    roman ("CHAP. XXVI","CHAPTER CCCCLXXXII"). roman_to_int handles archaic ADDITIVE
+    forms (CCCC=400, XXXX=40, VIIII=9) AND standard subtractive (XL, CD, CM).
+  * OCR-tolerance (critical for early-era): the chapter word "CHAP."/"Chap." is
+    routinely corrupted by Tesseract to "Cuap."/"CHap."/"Cnap."/"Cuar." -- lead-in
+    regex accepts C/O + 2-3 letters + (p|r). Roman tokens normalize O->C, U->V
+    (the 'CCC' triple often OCRs as 'CCO'). A leading word-boundary + required
+    separator suppress false hits from prose/dates ("March 12" no longer matches).
+  * Parser self-test: 12/12 cases pass (incl. all additive-roman forms).
+
+================================================================================
+VALIDATION (go/no-go)  -- threshold: >=85% exact match
+================================================================================
+[2026-06-21] VALIDATE-ARABIC | year 1935 (production-1935-vol1-chapters, image_verified) | OK
+  Ground truth: parsed_acts_merged.json (791 chapters, chapter_int -> source_page).
+  Sampled 30 known chapters; ran header-OCR on each chapter's source-page image.
+  RESULT: EXACT match 28/30 = 93.3%.  Off-by-1 = 2/30 (explained: chapter starts
+  mid-page, so the very-top running head shows the PREVIOUS chapter). NOFIND 0,
+  WRONG 0.
+  VERDICT: GO (93.3% >= 85%).
+
+[2026-06-21] VALIDATE-ROMAN | year 1865-66 (early-era roman) from PDF | OK (engine), WARN (source_page)
+  Rendered known-chapter pages on demand from 1865-66_Statutes.pdf (PyMuPDF).
+  FINDING 1 (engine works): the roman header path reads real printed headers
+  correctly -- e.g. PDF pg101 "CHap. XXIV"=24, pg102 "Cuap. XXVI"=26, pg316
+  "Cuar. CCOXXIX"=329 (after O->C normalization). The OCR-tolerant lead-in + roman
+  normalization were REQUIRED; the first-cut regex (literal "CH") missed ~all of
+  these and produced date/page-number false positives.
+  FINDING 2 (data caveat -- DURABLE): for the early-era 1865-66 volume the merged
+  parsed_acts_merged.json `source_page` is in the right coordinate system for
+  PRESENT chapters (pg101->ch25, pg106->ch33/34 confirmed) BUT some recorded
+  source_pages point at mid-act CONTINUATION pages with no header at all (e.g.
+  ch13 "source_page 113" is continuation text, no "Chap." header). So a naive
+  point-lookup on source_page is unreliable for the missing-chapter set; the
+  manifest's page_RANGES (bracketed by reliable PRESENT neighbors) are the sound
+  driver.
+  FINDING 3 (limiting factor): pages hold 2-3 short acts; a single psm-6 pass
+  reliably reads the FIRST header and drops lower ones. Mitigation: union psm
+  6/4/11 in _scan_headers.headers_on_page(). Helps but does not fully close the
+  gap -- some genuine headers still missed at 230 dpi.
+
+  GO/NO-GO: GO overall (1935 arabic validation = 93.3% exact, the formal gate).
+  The roman ENGINE is sound; the residual risk for biennials is page-LOCATION
+  (multi-act pages + imperfect source_page), not number-READING. Application is
+  run in CONFIRM-ONLY mode: a missing chapter is written ONLY when its exact
+  oracle number is read as a clean header in its candidate page range -- so a
+  miss costs coverage, never a wrong claim.
+
+================================================================================
+APPLICATION -- 1866 (production-1865-66)
+================================================================================
+[2026-06-21] MANIFEST | _residual_manifest.py 1866 | OK
+  Added YEAR_DIR_ALIAS {1866:[production-1865-66], 1864/1868/1870 too} to
+  pipeline/analysis/_residual_manifest.py so the biennial dir is found.
+  BEFORE: present=468  missing=182  (N oracle=650).
+
+[2026-06-21] APPLY | _apply_1866.py (CONFIRM-ONLY, append-safe) | OK
+  For each of the 182 missing chapters, scanned its manifest page_range (+-2 pad)
+  with the full-page multi-psm header scanner; CONFIRMED a chapter only when its
+  exact oracle number appeared as a clean printed header in-range.
+  Wrote production-1865-66/parsed_acts_visual.json (recovered_acts): 103 acts,
+  all status=image_verified, origin=local_header_ocr, printed_number_confirmed=true,
+  chapter_int_final=oracle, source_page=PDF page where header was read.
+  Integrity: 103 acts, 0 malformed, 0 duplicates (chapters 2..644). merged.json
+  (Jun20) and certified.json (Jun16) UNTOUCHED. No DB writes.
+  RESULT: attempted=182  confirmed=103  (56.6% recall, zero agent vision tokens).
+
+[2026-06-21] RESIDUAL | _residual_manifest.py 1866 (re-run) | OK
+  AFTER: present=571  missing=79  (was present=468 missing=182).
+  1866 residual reduced 182 -> 79 by local header-OCR alone.
+
+[2026-06-22] APPLY | _apply_1868.py (production-1867-68, 1867-68_Statutes.pdf, ROMAN) | OK
+  1868: before/after/residual = present 502 -> 526, residual 43 -> 19 (24 recovered).
+  Confirm-only, additive CCCC=400; surya-venv python; foreground/synchronous,
+  progressive save every 15; scan cache _hdrscan_cache_1868.json. No DB/merged/
+  certified writes. Recovered chapters: 145,338,387,393,411,426,427,457,464,467,
+  472,473,474,475,476,479,481,482,484,486,487,489,503,517.
+  Residual 19 [44,184,189,368,383,388,425,428,458,463,465,468,477,478,483,485,
+  488,495,508] -- dominated by multi-act-page header misses (2nd/3rd act header on
+  a shared page eludes OCR: e.g. 425/428 in 609-627, 463/465/468 in 686-702,
+  477/478/483/485/488 in 700-739); a few short ranges (44, 184, 189, 495, 508) are
+  garbled single headers. No scan gaps -- all ranges rendered cleanly.
+
+[2026-06-22] APPLY | _apply_1870.py (production-1869-70, 1869-70_Statutes.pdf, ROMAN) | OK
+  1870: before/after/residual = present 451 -> 518, residual 132 -> 65 (67 recovered).
+  Confirm-only, additive CCCC=400 (ch 400 confirmed); surya-venv python; foreground/
+  synchronous, progressive save every 15; scan cache _hdrscan_cache_1870.json. No DB/
+  merged/certified writes. 67 acts, 0 dupes, all image_verified/printed_number_confirmed/
+  origin=local_header_ocr, chapter_int_final==chapter_int.
+  Recovered (67): 11,63,103,185,196,202,226,246,279,283,284,288,332,338,339,349,376,
+  387,392,400,402,410,413,416,418,419,421,423,427,428,429,430,432,433,434,435,436,437,
+  438,439,441,446,448,449,451,454,456,460,466,467,470,471,474,476,481,486,489,492,493,
+  494,495,497,507,524,531,549,552.
+  Residual 65 [3,27,29,35,37,43,45,70,102,120,121,128,142,143,161,173,175,181,187,198,
+  205,221,223,224,253,275,295,347,361,367,368,374,378,383,384,386,388,401,405,431,...]
+  -- dominated by multi-act-page header misses (2nd/3rd short act on a shared page) and
+  garbled single headers; avg residual page-span now 6.2 (was 14.0). No scan gaps.
+
+[2026-06-22] APPLY | _apply_1872.py (production-1871-72, 1871-72_Statutes.pdf, ROMAN) | OK
+  1872: before/after/residual = present 540 -> 592, residual 97 -> 45 (52 recovered).
+  Confirm-only, additive CCCC=400; surya-venv python; foreground/synchronous,
+  progressive save every 15; scan cache _hdrscan_cache_1872.json. No DB/merged/
+  certified writes. 52 acts, 0 dupes, all image_verified/printed_number_confirmed/
+  origin=local_header_ocr, chapter_int_final==chapter_int.
+  Span-safety: manifest mis-anchored ch 538/539 to [179,863] (neighbor ch 537
+  mis-paged to p179 while ch 540 sits at p863); _apply_1872 caps ranges >60 pages
+  and scans a bounded 30-page backward window from the trusted HIGH anchor -- this
+  recovered 539 (538 stays residual) without a 685-page scan.
+  Recovered (52): 31,61,83,87,89,137,171,282,286,297,305,345,361,385,387,388,405,
+  406,407,411,427,428,429,430,431,432,441,447,457,461,462,465,467,471,472,474,475,
+  476,477,478,482,484,485,488,489,526,528,539,585,587,602,604.
+  Residual 45 [43,62,103,125,126,127,128,152,153,262,264,285,288,335,338,363,364,
+  383,417,418,426,433,434,435,436,437,438,439,443,448,458,463,464,468,473,479,480,
+  481,483,486,487,493,538,584,618] -- dominated by multi-act-page header misses
+  (2nd/3rd short act on a shared page eludes OCR: e.g. 125-128 in 222-229, 433-439
+  in 706-714, 479-481 in their shared range) and a few garbled single headers. No
+  scan gaps -- all bounded ranges rendered cleanly.
+
+================================================================================
+VERDICT / VIABILITY FOR BIENNIALS 1868-1878
+================================================================================
+[2026-06-21] VERDICT | OK
+  * Go/no-go: GO (1935 arabic gate = 93.3% exact; roman engine proven on real
+    1865-66 images).
+  * 1866: 103/182 missing recovered locally, residual 182 -> 79, no vision tokens,
+    no DB writes, merged/certified untouched, append-safe superset.
+  * Viability 1868-1878: VIABLE as a token-free FIRST pass. It recovers ~half-plus
+    of each biennial's residual at zero agent-vision cost, leaving a much smaller
+    set for the visual-agent fallback. NOT a full substitute: the ~79 still-missing
+    are dominated by multi-act-page header loss (a page's 2nd/3rd act header eludes
+    OCR) and a few genuinely garbled/edge headers -- read those on the page image.
+  * Cost note: dominant runtime is the "not found" chapters (each scans its whole
+    page range x3 psm). The apply is resumable (skips confirmed; persists a
+    page->chapters scan cache) so each biennial can be chunked. Reuse _apply_1866.py
+    as a template (swap VOL/PDF/MANIFEST and the manifest year alias).
+
+[2026-06-22] 1874 (production-1873-74, 1873-74_Statutes.pdf, N=679, early-era ROMAN, additive CCCC=400):
+  before/after/residual = 506 / 616 / 63   (recovered 110 of 173 missing, CONFIRM-ONLY).
+  Tool: _apply_1874.py (modeled on _apply_1872.py; kept MAX_SPAN=60 mis-anchor guard,
+  but on a mis-anchor it now scans a BOUNDED dual window around BOTH the lo and hi
+  anchor page -- never the full span -- because the template's "trust HIGH anchor" rule
+  is wrong when the HIGH anchor is the mis-paged one). 2 mis-anchored items in 1874:
+    ch 533 (range [180,858]): true header is pg860 (sequential 531=856,532=858,533=860).
+      The dual-window scan first emitted a SPURIOUS 533 on noisy pg179 (mis-paged-neighbor
+      region read [27,77,131,533]); caught in post-run verification and CORRECTED to the
+      verified pg860 via _fix533_1874.py. Number+page both now verified.
+    ch 587 (range [183,915]): correctly left RESIDUAL -- its header is genuinely
+      OCR-garbled in the dense pg913-915 region (pg915 read [586,532,588,570,636,585],
+      no clean 587), so CONFIRM-ONLY did not write it. No wrong number emitted.
+  Verification: all 110 confirmed chapters' cited page matches the cached header read
+  (0 mismatches); ch 533's pg860 independently re-scanned -> reads [533].
+  Remaining 63 residual: dominated by multi-act-page header loss (a page's 2nd/3rd act
+  header eludes OCR, e.g. clusters 462-468, 423-428) plus genuinely garbled/edge headers
+  (41,43,53,55,...). These need the page-image visual fallback. No DB/merged/certified
+  writes; additive superset to production-1873-74/parsed_acts_visual.json.
+
+[2026-06-22] APPLY-1876 | year 1876 (production-1875-76, early-era ROMAN, additive CCCC=400) | OK
+  1876: before/after/residual = 138/79/59   (recovered 79 of 138; residual 138 -> 59)
+  Tool: _apply_1876.py (modeled on _apply_1874.py dual-window guard) + _scan_headers.py +
+    _header_ocr.py + _render_page.py/PyMuPDF. INTERPRETER surya-venv python. CONFIRM-ONLY:
+    a chapter written ONLY when its EXACT oracle number reads as a clean in-range printed
+    header (status=image_verified, printed_number_confirmed=true, origin=local_header_ocr,
+    chapter_int_final==oracle). In-script POST-CHECK re-read every found page (0 rejected
+    this run -- no spurious mis-paged entries, unlike 1874's ch587 case). Independent
+    re-scan spot-check: pg994 -> [613], pg824 -> [496]. attempted=138 confirmed=79.
+  DUAL-SERIES CORRECTION (durable finding -> SEE lessons): 1875-76 has TWO physical volumes
+    sharing the SAME chapter-number range 1..613 -- production-1875-76 (main Statutes vol,
+    maps into 1875-76_Statutes.pdf, source_page == PDF page, offset 0) and
+    production-1875-76-code (Code-Amendments vol, a SEPARATE smaller PDF, own page numbering
+    13..129, NOT in 1875-76_Statutes.pdf; 69 acts, 15 chapter numbers overlap the main vol).
+    _residual_manifest.py collapses both volumes into one chapter->page map, so any missing
+    chapter whose nearest present neighbors come one-from-each-volume gets a GARBAGE
+    page_range (17 such, max span 820, e.g. ch467: lo_pg751 main / hi_pg39 code). The 1874
+    dual-WINDOW guard alone does NOT fix this (it would scan the code vol's page 39 region
+    of the WRONG PDF). FIX: re-derive anchors from the MAIN volume's present chapters ONLY
+    (dropping the 15 overlap chapters) and scan the bounded sequential window (cap 40 pp)
+    between the nearest present main-vol neighbors. This converted the 820-pp bogus spans
+    into tight 8-15 pp windows and correctly recovered the formerly-mis-anchored cluster
+    members (419@646, 468/469@752, 496@824, 512@848, 519@859) while leaving their true
+    misses (417,418,452,467,497,498,518,522) residual. NO wrong number emitted.
+  Remaining 59 residual: dominated by multi-act-page 2nd/3rd-header OCR loss (clusters
+    417-418, 427-428, 442-443, 458-459, 476-477) plus genuinely garbled/edge headers
+    (3,9,24,47,63,91,104,117,...). These need the page-image visual fallback. No DB/merged/
+    certified writes; additive superset to production-1875-76/parsed_acts_visual.json.
+
+[2026-06-22] MULTIACT-METHOD | NEW band-free mid-page header recovery (_scan_headers_multiact.py + _apply_multiact.py) | OK
+  Goal: recover the residual chapters where 2-3 short acts share one printed page and the
+    page's 2nd/3rd "CHAPTER N" header sits MID-PAGE, eluding the top-favoring scanners
+    (_header_ocr top-strip crop; _scan_headers full-page psm 6/4/11 block union).
+  Technique: run Tesseract psm 11 (SPARSE) + psm 6 (block) over the FULL page at multiple
+    render DPIs (200/240/300). Sparse mode segments isolated text regions, so a mid-page
+    header set off by whitespace reads as its own line instead of dissolving into the body
+    block. (An earlier 8-band slicing design worked but cost ~10s/page and MANUFACTURED
+    roman misreads; the sparse full-page pass is ~3s/page, equal recall, no sibling noise.)
+  PRECISION GUARD (critical, roman volumes): roman headers are DPI-FRAGILE -- the glyph count
+    of a CCCC.../DCXVIII... token shifts with resolution. A confirm therefore requires the
+    EXACT oracle number to read at >=2 distinct render DPIs (vote>=2); a single-DPI read is
+    left residual. Verified on 1872: a multi-DPI re-audit of all 17 confirmations showed the
+    printed roman token matches the oracle EXACTLY in every case (CCCCXCIII=493, DCXVIII=618,
+    CCLXXXVIII=288, ...); a naive single-different-DPI (240) re-read had falsely "mismatched"
+    11/17 purely from DPI fragility -- multi-DPI agreement is the correct test, vote count
+    alone (within one DPI) is NOT (a real mid-page win and a sibling misread both poll once).
+  Also: only TIGHT windows scanned (multi-act pages share a page with a present neighbor);
+    windows wider than 12 pp are garbled/edge cases, skipped for the visual fallback.
+  CONFIRM-ONLY, additive: origin=local_header_ocr_multiact, status=image_verified,
+    printed_number_confirmed=true, chapter_int_final==oracle, dpi_votes recorded. No DB/
+    merged/certified writes. Durable lesson: LESSON_2026-06-22_multiact_band_scan_header_ocr.md
+
+[2026-06-22] 1872 multiact: residual 45->28 (+17)
+  Recovered (all roman, multi-DPI-verified printed token == oracle): 43,62,288,383,426,443,
+    448,463,464,468,480,481,483,486,487,493,618. Confirmations audited at 150/200/240/300 dpi:
+    16 STRONG (>=2 DPIs) + 1 WEAK (481, single-DPI but token CCCCLXXXI unambiguous) + 0 FAIL.
+    (481 predates the >=2-vote guard now enforced for the remaining years.) Manifest
+    regenerated: present 592->609, missing 45->28. Remaining 28 = genuinely garbled/edge
+    headers + wide-window non-multi-act cases (the true hard core for visual fallback).
+
+[2026-06-22] 1868 multiact: residual 19->14 (+5)
+  (First year run under the now-enforced >=2-DPI vote guard.) Recovered (all roman,
+    multi-DPI-confirmed): 388,463,468,478,488. The guard correctly LEFT residual several
+    single-DPI-only reads (44,189,383,428,508 -- DPI-fragile, not trusted) and wide-window
+    non-multi-act cases (184,368,458,465,483,495). Manifest regenerated: present 526->531,
+    missing 19->14. Remaining 14 = single-DPI-fragile + wide-window garbled (visual fallback).
+  Audit (multi-DPI, _mq_audit.py): 5/5 STRONG, 0 WEAK, 0 FAIL -- every token correct
+    (CCCLXXXVIII=388, CCCCLXIII=463, CCCCLXVIII=468, CCCCLXXVIII=478, CCCCLXXXVIII=488).
+
+[2026-06-22] 1870 multiact: residual 65->55 (+10)
+  Recovered (all roman, >=2-DPI vote-confirmed): 128,221,347,367,383,468,475,478,488,576.
+    Lower yield than 1872 -- 1870's residual is heavier on wide-window (skipped, e.g.
+    361/378/482-484 spans 27-58pp) and single-DPI-fragile reads (44,173,205,253,275,295,447,
+    558 -- all correctly LEFT residual by the vote guard, never a wrong number). Manifest
+    regenerated: present 518->528, missing 65->55. attempted=46 confirmed=10.
+  Audit (multi-DPI): 10/10 STRONG, 0 FAIL -- tokens correct (CXXVIII=128, CCXXI=221,
+    CCCXLVII=347, CCCLXVII=367, CCCLXXXIII=383, CCCCLXVIII=468, CCCCLXXV=475, CCCCLXXVIII=478,
+    CCCCLXXXVIII=488, DLXXVI=576).
+
+[2026-06-22] 1874 multiact: residual 63->38 (+25)
+  Best biennial yield. Recovered (all roman, >=2-DPI vote-confirmed): 43,65,84,86,123,224,304,
+    317,318,337,338,364,392,418,423,425,428,468,473,498,515,526,527,668,673. Several multi-act
+    shared-page pairs landed together (317/318 pg543; 526/527 pg852). The vote guard left the
+    usual single-DPI-fragile reads residual (41,55,83,385,426,458,472,478,634,658,672,675) and
+    skipped wide-window garbled clusters (462-466, 587 span 74pp, 665). Manifest regenerated:
+    present 616->641, missing 63->38. attempted=55 confirmed=25.
+  Audit (multi-DPI): 25/25 STRONG, 0 FAIL -- every printed token == oracle (XLIII=43, LXV=65,
+    LXXXIV=84, ..., DXXVI=526, DXXVII=527, DCLXVIII=668, DCLXXIII=673). Method is rock-solid.
+
+[2026-06-22] 1876 multiact: residual 59->50 (+9)  [DUAL-SERIES, main-volume anchored]
+  Lower yield (like 1870) -- 1876's residual is heavy on single-DPI-fragile reads and wide-window
+    garbled clusters (the dual-series cross-volume page collapse inflates many spans, e.g. avg
+    page-span 124pp, max 820 -- correctly skipped). Recovered (all roman, >=2-DPI vote-confirmed):
+    9,24,104,223,483,488,489,490,544. Multi-act shared-page clusters landed together (488/489 pg795,
+    489/490). Manifest regenerated (reads MAIN-volume parsed_acts_visual.json): present 554->563,
+    missing 59->50. attempted=42 confirmed=9.
+  OPS NOTE: a stray duplicate `_apply_multiact.py 1876 --dry-run` process ran concurrently and
+    interleaved its WOULD-CONFIRM lines into the same progress log. HARMLESS to data -- dry-run is
+    CONFIRM-ONLY + writes NOTHING; its WOULD-CONFIRM set matched the real run's CONFIRMED set
+    exactly (consistency check passed). Final state verified via the regenerated manifest (reads
+    the actual visual.json), not the polluted log. Real run = task bpv6xz5pb, confirmed=9.
+  Audit (multi-DPI): 9/9 STRONG, 0 FAIL -- tokens correct (IX=9, XXIV=24, CIV=104, CCXXIII=223,
+    CCCCLXXXIII=483, CCCCLXXXVIII=488, CCCCLXXXIX=489, CCCCXC=490, DXLIV=544). Dual-series sound.
+
+[2026-06-22] 1876 multiact: residual 50->50 (+0) -- RE-VERIFY (synchronous foreground)
+  Re-ran _apply_multiact.py 1876 to confirm the prior pass landed and is append-safe. Idempotent:
+    attempted=33 confirmed=0 (the 9 multiact chapters already present, skipped). visual.json integrity
+    checked: 88 acts / 88 distinct chapters / 0 duplicates; all 9 local_header_ocr_multiact entries
+    well-formed (status=image_verified, printed_number_confirmed=true, dpi_votes>=2): 9,24,104,223,
+    483,488,489,490,544. Manifest re-derived: present 563, missing 50. 1876 multiact COMPLETE -- no
+    new residual recoverable by the band scanner (remaining 50 are single-DPI-fragile / wide-window
+    garbled clusters correctly left for visual fallback).
+
+[2026-06-22] 1866 multiact: residual 79->61 (+18)
+  Ran _apply_multiact.py 1866 (synchronous foreground). Multi-act band scan (psm6 block + psm11 sparse
+    union @ 200/240/300 dpi, confirm requires >=2 distinct-DPI votes) recovered 18 mid-page secondary-act
+    headers: ch 24,28,32,72,74,176,193,194,216,226,262,270,281,296,428,439,442,576. All append-safe
+    additions to parsed_acts_visual.json (103 -> 121 acts); every new entry well-formed
+    (status=image_verified, printed_number_confirmed=true, origin=local_header_ocr_multiact,
+    chapter_int==chapter_int_final, dpi_votes>=2); 0 bad metadata. attempted=55 confirmed=18.
+    Manifest re-derived: present 571 -> 589, missing 79 -> 61. Remaining 61 are single-DPI-fragile reads
+    (e.g. ch38,52,114,143,187,282,433,482,518,638) or wide-window (>12pp) garbled clusters correctly
+    left for the visual fallback. No DB/merged/certified writes; additive only.
+
+[2026-06-22] 1878 multiact: residual 55->46 (+9). Dual-series (production-1877-78 +
+    -code sibling), main-volume-anchor windows. Band-scan (psm6 block + psm11 sparse
+    union @ 200/240/300dpi, >=2 distinct-DPI votes) recovered 9 mid-page secondary-act
+    headers: ch13@pg87, ch93@pg176, ch224@pg340, ch229@pg346, ch237@pg355, ch367@pg619,
+    ch427@pg699, ch437@pg708, ch660@pg1088 (early-era roman, additive CCCC=400). All
+    CONFIRM-ONLY exact-oracle, status=image_verified, printed_number_confirmed=true,
+    origin=local_header_ocr_multiact, post-checked. Appended to existing 92-act visual.json
+    (now 101). Remaining 46 are single-DPI-fragile (ch268/387/428...) or wide-window
+    (>12pp) garbled clusters left for the visual fallback. Completes the biennial
+    multi-act sweep (1878 = last biennial). No DB/merged/certified writes; additive only.
+    AUDIT (_mq_audit.py 1878, multi-DPI 150/200/240/300): 9/9 STRONG, 0 WEAK, 0 FAIL --
+    every printed roman token == oracle (XIII=13, COCCXXVII=427 additive, DCLX=660).
+
+[2026-06-22] BIENNIAL MULTI-ACT SWEEP COMPLETE -- all 7 biennials (1866-1878):
+    Per-year residual before->after (recovered):
+      1868  19->14 (+5)   | audit 5/5 STRONG
+      1872  45->28 (+17)  | audit 16 STRONG + 1 WEAK
+      1870  65->55 (+10)  | audit 10/10 STRONG
+      1874  63->38 (+25)  | audit 25/25 STRONG
+      1876  59->50 (+9)   | audit 9/9 STRONG
+      1866  79->61 (+18)  | audit 18/18 STRONG
+      1878  55->46 (+9)   | audit 9/9 STRONG
+    TOTAL: 385 residual -> 292 residual, +93 chapters recovered locally (0 agent vision tokens).
+    Audit aggregate: 92 STRONG + 1 WEAK + 0 FAIL of 93 confirmations -- every printed roman
+    token matched oracle exactly (multi-DPI 150/200/240/300 re-read). Method: full-page band-FREE
+    scan, psm6 block + psm11 sparse union @ multiple DPIs, CONFIRM-ONLY with >=2 distinct-DPI vote
+    guard. Remaining 292 are single-DPI-fragile reads or wide-window (>12pp) garbled clusters,
+    correctly deferred to the visual fallback. Additive only; no DB/merged/certified writes.

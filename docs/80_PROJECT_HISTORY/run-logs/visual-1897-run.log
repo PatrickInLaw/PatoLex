@@ -1,0 +1,14 @@
+[2026-06-21 00:00 PT] START | VISUAL-recovery worker 1897 | OK
+[2026-06-21 00:01 PT] MANIFEST | python _residual_manifest.py 1897 -> N=278 present=274 missing=4: [53, 62, 73, 178] | OK
+[2026-06-21 00:02 PT] IMAGE-CHECK | pages_raw absent for production-1897; falling back to OCR text (tess+doctr+surya) | WARN
+[2026-06-21 00:03 PT] OCR-STRUCT | page_ocr_results.json: dict keyed by str(source_page-1), has tess_text/doctr_text/surya_text/consensus_text per page | OK
+[2026-06-21 00:05 PT] CH-53 | CHAPTER LIII found at bottom of source_page 104 (surya+doctr+tess) after Ch 52 approval clause; parser missed second header on page | OK
+[2026-06-21 00:05 PT] CH-53 | Title: An Act providing for the election or appointment of a separate Judge of the Superior Court for each of the Counties of Yuba and Sutter... | OK
+[2026-06-21 00:06 PT] CH-62 | CHAPTER LXII found source_page 112; surya reads LXII correctly; doctr+tess misread LXII->LXIII (Roman numeral OCR artifact: trailing I+period merged) | OK
+[2026-06-21 00:06 PT] CH-62 | Title: An Act to add a new section to the Penal Code... section one hundred and eighty, re private deposits in county treasury by County Treasurers | OK
+[2026-06-21 00:07 PT] CH-73 | CHAPTER LXXIII found source_page 119 (after Ch 72 header, same page); both surya+doctr confirm; parser recorded Ch 72 only, missed second header | OK
+[2026-06-21 00:07 PT] CH-73 | Title: An Act to amend section 3633 of the Political Code re assessment of property of persons neglecting/refusing Assessor statement | OK
+[2026-06-21 00:08 PT] CH-178 | CHAPTER CLXXVIII confirmed source_page 297 by all 3 engines; tess artifact 'CLXXVIIL' vs surya/doctr 'CLXXVIII'; follows Ch 177 on same page | OK
+[2026-06-21 00:08 PT] CH-178 | Title: An Act to amend supplemental Act re organization/government of irrigation districts (Wright law), re abandonment and disorganization | OK
+[2026-06-21 00:09 PT] OUTPUT | Wrote C:\PatoLex-scratch\production-1897\parsed_acts_visual.json (4 recovered, 0 legislative_gap, 0 not_found) | OK
+[2026-06-21 00:09 PT] COMPLETE | 1897 VISUAL-recovery: 4 targeted, 4 verified (ocr_text_verified), 0 gaps, 0 not_found | OK

@@ -1,0 +1,17 @@
+[2026-06-21 00:00 PT] START | Visual recovery campaign for year 1981 | OK
+[2026-06-21 00:00 PT] MANIFEST | 3 missing chapters: 207 (vol1-chapters), 378 (vol2), 945 (vol3) | OK
+[2026-06-21 00:00 PT] VOLUMES | All 3 volumes confirmed with pages_raw + ocr_consensus | OK
+[2026-06-21 00:00 PT] IMAGES | Image pattern confirmed: key K -> page_{K:04d}.png (0-based) | OK
+[2026-06-21 00:00 PT] AGENTS | Launched 3 parallel visual-recovery agents (ch207, ch378, ch945) | OK
+[2026-06-21 00:00 PT] CH207 | image_verified | source_page=1129 | Streets and Highways Code / highway lighting districts | OK
+[2026-06-21 00:00 PT] CH945 | image_verified | source_page=359 | Penal Code s.12051 / firearms | OK
+[2026-06-21 00:00 PT] CH378 | ocr_text_verified (title not recovered) | source_page=63 | header at bottom of page_0062.png not legible; urgency clause confirms public entities / bond financing act; needs re-OCR of bottom margin | WARN
+[2026-06-21 00:00 PT] OUTPUT | Written parsed_acts_visual.json to all 3 volumes | OK
+[2026-06-21 00:00 PT] SUMMARY | targeted=3 image_verified=2 ocr_text_verified=1 legislative_gap=0 not_found=0 | OK
+[2026-06-21 PT] RESTART | Fresh agent launched to re-examine Ch378 (residual=1 per scoreboard) | OK
+[2026-06-21 PT] CH378-RECHECK | Confirmed PHYSICAL SCAN GAP: key 62 printed_page=1561, key 63 printed_page=1564; pages 1562-1563 absent from PDF | WARN
+[2026-06-21 PT] CH378-RECHECK | Prior status 'ocr_text_verified' was incorrect — corrected to 'not_found_needs_reocr' (physical scan gap, re-OCR of existing scan cannot recover) | WARN
+[2026-06-21 PT] CH378-TITLE | Title recovered from 1981 Summary Digest (Vol4_Summary.pdf p102): SB 117 (Ayala), Improvement Bond Act of 1915, special reserve fund amendment, urgency statute | OK
+[2026-06-21 PT] CH378-OUTPUT | Updated production-1981-vol2/parsed_acts_visual.json with corrected entry | OK
+[2026-06-21 PT] SCOREBOARD | residual=1 for 1981 confirmed — cannot be resolved without physical re-scan of printed pages 1562-1563 | WARN
+[2026-06-21 PT] FINAL | targeted=1 (Ch378) | verified=0 | legislative_gap=0 | not_found=1 (physical scan gap) | OK

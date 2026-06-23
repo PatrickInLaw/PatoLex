@@ -1,0 +1,112 @@
+map-biennial-budget-run.log
+Task: Map the 17 "unmapped" oracle session-years in the OCR-recall scoreboard
+      (pipeline/analysis/_recall_allyears.py) to their real (differently-named) data dirs,
+      re-measure, and report the TRUE coverage. Measurement/analysis only; the only file
+      edited is the scoreboard script.
+
+[2026-06-21 ~PT] PHASE 1 | Confirm oracle rows (TSV) for the 17 | OK
+  All 17 are session_type=regular in ca_chapter_counts.tsv. Oracle totals (N):
+    biennial(even-yr label "YYYY-YY Regular Session"): 1866=650 1868=545 1870=583
+        1872=637 1874=679 1876=613 1878=673
+    transition:                                          1901=275 1909=729 1911=753
+    mid-century budget ("Regular (Budget) Session"):     1952=14 1954=10 1956=13 1958=10
+        1960=14 1962=12 1964=1
+
+[2026-06-21 ~PT] PHASE 2 | Locate the real dirs | OK (with two structural surprises)
+  Structure CONFIRMED (not assumed):
+   - 19th-c biennial: oracle even-yr row -> production-YYYY-YY span dir (+ "-code" sibling =
+     same session's code-amendment volume, SAME chapter numbering -> set-unioned, never summed).
+   - transition 1901->production-1900-01, 1911->production-1910-11.
+   - budget "-NNchapters" sub-volumes: the even-yr budget chapters are bound into the FOLLOWING
+     odd-yr volume; suffix NN = budget calendar year (1953_Vol1_52Chapters.pdf = the 1952 chapters).
+     Confirmed by source-PDF names under chief-clerk-archive/.
+
+  SURPRISE A (1909 collision): 1909's data physically lives in production-1907-09 (certified
+     confident max=729 == oracle 1909). BUT the existing greedy glob `production-1907*` already
+     consumes production-1907-09 for oracle 1907 (capping it at 539). Note production-1906-07 is the
+     truer 1907 volume (certified max=539). Aliasing 1909 to production-1907-09 = double-count.
+     -> 1909 left UNMAPPED by design (data present, dir owned by 1907; remapping 1907 is out of scope).
+
+  SURPRISE B (budget collision): the greedy odd-year glob `production-1953*` etc. ALSO sweeps the
+     "-NNchapters" budget sub-volume into the adjacent odd-year regular session. Verified harmless:
+     excluding the budget dir costs the odd years <=1 chapter total (only 1953 -1; all others 0 --
+     budget chapters 1..N are already covered by the odd year's vol1). -> added BUDGET_OWNED_DIRS
+     exclusion so the budget sub-volume is handed solely to the budget year's alias (no double-count).
+
+  SURPRISE C (broken merge for 1901/1909/1911): parsed_acts_merged.json holds only the tiny extra-
+     session fragment, but parsed_acts_certified.json holds the full session. Certified-confident
+     ceiling (capped at N): 1901=252/275, 1909=544/729, 1911=394/753. This is a DATA/merge artifact,
+     NOT a mapping artifact; the merge step must be re-run (out of scope for this measurement task).
+
+[2026-06-21 ~PT] PHASE 3 | Implement alias + anti-double-count + budget-dir exclusion | OK
+  Edited ONLY pipeline/analysis/_recall_allyears.py:
+    - YEAR_DIR_ALIAS dict (explicit, commented; fires only when the glob finds nothing).
+    - BUDGET_OWNED_DIRS set excluded from every glob match.
+    - counted_basenames assert: aborts if any dir is counted under two oracle years.
+  ALIAS TABLE (oracle year -> dir basename(s)):
+    1866 -> production-1865-66
+    1868 -> production-1867-68
+    1870 -> production-1869-70
+    1872 -> production-1871-72
+    1874 -> production-1873-74, production-1873-74-code
+    1876 -> production-1875-76, production-1875-76-code
+    1878 -> production-1877-78, production-1877-78-code
+    1901 -> production-1900-01
+    1911 -> production-1910-11
+    1909 -> (none; collision with 1907 -- reported unlocated-under-no-double-count)
+    1952 -> production-1953-vol1-52chapters
+    1954 -> production-1955-vol1-54chapters
+    1956 -> production-1957-vol1-56chapters
+    1958 -> production-1959-vol1-58chapters
+    1960 -> production-1961-vol1-60chapters
+    1962 -> production-1963-vol1-62chapters
+    1964 -> production-1965-vol1-64chapters
+
+[2026-06-21 ~PT] PHASE 4 | Re-run scoreboard | OK
+  Anti-double-count assertion PASSED: "ANTI-DOUBLE-COUNT OK: 214 distinct production dirs,
+  none counted under two oracle years".
+
+  Per-year (the 17): year  N  before after resid  pct
+    1866  650  468  468  182  72.0
+    1868  545  502  502   43  92.1
+    1870  583  451  451  132  77.4
+    1872  637  540  540   97  84.8
+    1874  679  506  506  173  74.5
+    1876  613  475  475  138  77.5
+    1878  673  526  526  147  78.2
+    1901  275   14   15  260   5.5   (broken merge; certified ceiling 252/275)
+    1909  729   --   --   --   --    UNMAPPED (collision; certified ceiling 544/729)
+    1911  753    1    1  752   0.1   (broken merge; certified ceiling 394/753)
+    1952   14   14   14    0  100.0
+    1954   10   10   10    0  100.0
+    1956   13   12   12    1   92.3
+    1958   10   10   10    0  100.0
+    1960   14   14   14    0  100.0
+    1962   12   12   12    0  100.0
+    1964    1    1    1    0  100.0
+
+  CORPUS-WIDE before/after THIS change:
+    BEFORE: mapped_years=91,  corpus-wide (incl unmapped @0%) = 93.48%, unmapped weight=6211
+    AFTER:  mapped_years=107, corpus-wide (incl unmapped @0%) = 97.18%, unmapped weight=729 (1909 only)
+    (mapped-only AFTER pct = 97.9%; the drop from the old 99.9% is expected -- the old 99.9% was over
+     a smaller, easier 91-year set; the 16 newly-added biennial years carry real recovery residual.)
+
+[2026-06-21 ~PT] PHASE 5 | Flag years needing real recovery work | OK
+  NOW ~COMPLETE (residual 0-1, mapping artifact fully resolved):
+    all 7 budget years (1952/54/56/58/60/62/64).
+  REAL recovery residual (19th-c biennial OCR under-recovery -- genuine coverage gap, NOT mapping):
+    1866(-182), 1874(-173), 1878(-147), 1876(-138), 1870(-132), 1872(-97), 1868(-43).
+    Total biennial residual = 912 chapters across these 7 years.
+  BROKEN-MERGE (data exists in certified.json; merge step must be re-run -- NOT a coverage hole):
+    1901 (merged 15 vs certified 252/275), 1911 (merged 1 vs certified 394/753),
+    1909 (UNMAPPED + merged 485 vs certified 544/729; ALSO needs the 1907/1909 dir collision resolved).
+
+UNLOCATED / UNRESOLVED:
+  1909 -- data present in production-1907-09 but that dir is owned by oracle 1907's glob; not aliased
+          to avoid double-count. Resolution requires deciding the 1907<->1909 dir ownership
+          (production-1906-07 = true 1907 vol, max539; production-1907-09 = true 1909 vol, max729),
+          which is a remap of an already-green year -> deferred, out of scope for measurement.
+
+Temp scripts (scratch only, not committed): C:\PatoLex-scratch\_inspect_budget.py, _inspect_acts.py,
+  _verify_alias.py, _probe_dir.py, _check_1907.py, _check_odd.py, _test_exclude.py, _report_17.py,
+  _read_baseline.py.

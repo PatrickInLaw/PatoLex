@@ -1,0 +1,105 @@
+PatoLex -- DURABLE n_for() biennium/budget alias fix (PREVENT RECURRENCE only)
+Task: teach merge_passes.n_for() the SAME production-dir <-> oracle-year alias _recall_allyears.py
+uses, so a re-merge of a biennium/budget-named dir caps at the TRUE regular-session N instead of the
+leading-year regex's tiny extra/budget-session N (the bug that corrupted 1901/1907/1909/1911).
+CODE CHANGE ONLY. No data/merged/certified/DB writes. No git (parent commits).
+================================================================================================
+
+[2026-06-22 PT] PHASE: ROOT CAUSE | confirmed | OK
+------------------------------------------------------------------------------------------------
+merge_passes.n_for() used `re.search(r"production-(\d{4})", name)` -> grabs the FIRST 4-digit year.
+For biennium dirs (production-1865-66, -1900-01, -1906-07, -1907-09, -1910-11) and budget sub-volume
+dirs (production-1953-vol1-52chapters ...) the leading year is NOT the oracle regular session-year, so
+ORACLE[leadingyear] was a tiny extra/budget row -> the merge capped N far too low (e.g. 1906-07 -> 1906
+-> N=64 instead of 1907 -> 539). See LESSON_2026-06-22_biennial_volume_offset_merge_cap.md and the
+merge-rerun-1901-1909-1911 / rebuild-1907-merge run logs.
+
+[2026-06-22 PT] PHASE: FIX | centralize alias + alias-resolve n_for | OK
+------------------------------------------------------------------------------------------------
+NEW shared module: pipeline/year_dir_alias.py (single source of truth; sibling of config.py; imports
+  NOTHING from ingest/ or analysis/ -> no import cycle). Exposes:
+    YEAR_DIR_ALIAS    -- oracle-year -> dir basenames (VERBATIM copy moved out of _recall_allyears.py)
+    BUDGET_OWNED_DIRS -- basenames the greedy odd-year glob must exclude
+    DIR_TO_YEAR       -- inverse (basename -> oracle year), asserted 1:1 at import
+    regular_oracle()  -- session_year -> total_chapters for REGULAR rows only (the cap rule)
+    n_for_dir(name,oracle) -> (regular-N, year) for an aliased dir, else (None, None)
+  Caps at the REGULAR-session N (read straight from the oracle TSV), NOT max-across-session-types --
+  required because budget years (e.g. 1952 regular=14 vs extras 33/34) would otherwise over-admit.
+
+merge_passes.py: loads year_dir_alias.py by absolute path via importlib (file is run as a standalone
+  script; package import would be fragile). n_for() now consults the alias FIRST; aliased dirs resolve
+  to their true regular-N+year; NORMAL production-<year>* dirs keep the ORIGINAL leading-year-regex
+  behavior unchanged (ORACLE max-across-types). No interface change to n_for()'s (N, year) return.
+
+_recall_allyears.py: its in-file BUDGET_OWNED_DIRS / YEAR_DIR_ALIAS definitions REPLACED by re-binds
+  to the shared module (BUDGET_OWNED_DIRS = _alias.BUDGET_OWNED_DIRS, etc.) -- so merge and scoreboard
+  CANNOT drift. Loaded by the same absolute-path importlib shim. No other logic touched.
+
+[2026-06-22 PT] PHASE: VERIFY | n_for() resolution table | OK
+------------------------------------------------------------------------------------------------
+Read-only temp checks under C:\PatoLex-scratch (removed after). n_for() on every aliased dir:
+  dir                                 -> year -> N
+  production-1865-66                  -> 1866 -> 650   [expected 650  MATCH]
+  production-1867-68                  -> 1868 -> 545
+  production-1869-70                  -> 1870 -> 583
+  production-1871-72                  -> 1872 -> 637
+  production-1873-74(+ -code)         -> 1874 -> 679
+  production-1875-76(+ -code)         -> 1876 -> 613
+  production-1877-78(+ -code)         -> 1878 -> 673
+  production-1900-01                  -> 1901 -> 275
+  production-1906-07                  -> 1907 -> 539   [expected 539  MATCH]
+  production-1907-09                  -> 1909 -> 729   [expected 729  MATCH]
+  production-1910-11                  -> 1911 -> 753
+  production-1953-vol1-52chapters     -> 1952 -> 14    [expected 14   MATCH]
+  production-1955-vol1-54chapters     -> 1954 -> 10
+  production-1957-vol1-56chapters     -> 1956 -> 13
+  production-1959-vol1-58chapters     -> 1958 -> 10
+  production-1961-vol1-60chapters     -> 1960 -> 14
+  production-1963-vol1-62chapters     -> 1962 -> 12
+  production-1965-vol1-64chapters     -> 1964 -> 1
+  ALL FOUR brief-specified anchors MATCH. DIR_TO_YEAR is 1:1 (21 dirs == 21 alias slots).
+NORMAL dirs keep regex behavior: production-1915->1915->771, production-1850->1850->146,
+  production-1863-64->1863->536, production-1883->1883->96. (Unchanged.)
+
+[2026-06-22 PT] PHASE: VERIFY | _recall_allyears.py scoreboard UNCHANGED | OK
+------------------------------------------------------------------------------------------------
+python _recall_allyears.py runs clean; anti-double-count assert PASSES (215 distinct dirs).
+Scoreboard IDENTICAL to the documented post-rebuild-1907 baseline:
+  mapped years 108; oracleN 96014; effN 96002 (minus 12 leg-gaps)
+  BEFORE (merge) 89771 = 93.5% ; AFTER (full) 95491 = 99.5% ; RESIDUAL 511
+  unmapped years [] (weight 0)
+  1907 resid 7 (529/539->532), 1909 resid 5 (670/729->724) -- unchanged.
+This is merge-side-only: no merged.json regenerated, so the scoreboard MUST be (and is) unchanged.
+
+[2026-06-22 PT] PHASE: ADVERSARIAL REVIEW (Hans) | OK
+------------------------------------------------------------------------------------------------
+Coverage: every production-DDDD-DD* and every -NNchapters dir on disk classified.
+  - Alias covers ALL dirs whose leading year != true regular year (1865-66..1877-78 biennia +code,
+    1900-01, 1906-07, 1907-09, 1910-11, the seven mid-century budget -NNchapters).
+  - Correctly NOT aliased (leading year IS the regular session year, regex already right):
+    production-1863-64 (1863 reg), 1883-84 / 1883-84-regular (1883 reg), 1885-86 (1885 reg), and the
+    regular vol1 -NNchapters dirs (1927-vol1-26chapters->1927, 1929->1929, 1955-vol1-55chapters->1955,
+    1957-vol1-57chapters->1957, etc.). These resolve correctly via the unchanged regex fallback.
+  - No aliased dir resolves to a year lacking a regular oracle row; no alias target missing on disk.
+  - Inverse map asserted 1:1 at import (no dir -> two years).
+  - Import cycle: NONE. year_dir_alias.py imports only csv/os; both consumers load it by abs path.
+FINDINGS (flagged, out of scope -- not changed):
+  (F1) pipeline/analysis/_residual_manifest.py keeps its OWN partial, divergent alias copy that maps
+       1864->production-1863-64 (contradicts the shared module, where 1863-64 = regular 1863, not an
+       aliased even-year). It is a diagnostic script (manifest output only, no cap), task scope was
+       merge_passes <-> _recall_allyears, and rewiring it could shift diagnostic output -- LEFT AS-IS
+       and flagged for a follow-up to also source the shared module.
+  (F2) production-1863-64 -> 1863 -> N=536: oracle has TWO regular rows for session_year 1863 (S14=536
+       "1863 Regular", S15=476 "1863-64 Regular"); merge_passes.ORACLE max()s -> 536. Pre-existing,
+       unchanged by this fix; noted for awareness.
+
+[2026-06-22 PT] PHASE: CLEANUP | OK
+------------------------------------------------------------------------------------------------
+Temp scripts (_verify_nfor_alias.py, _adversarial_alias_audit.py, _smoke_shared.py) removed from
+C:\PatoLex-scratch. No data/merged/certified/DB file touched. No merges run. No git.
+
+SUMMARY:
+  NEW pipeline/year_dir_alias.py = single source of truth (alias + inverse + regular-N resolver).
+  merge_passes.n_for() resolves biennium/budget dirs through it (true regular-N); normal dirs unchanged.
+  _recall_allyears.py now re-binds its alias constants to the shared module (no drift).
+  All 4 brief anchors match; scoreboard byte-identical; assert PASS (215 dirs); no import cycle.
