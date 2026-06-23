@@ -51,8 +51,13 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   (truly-missing leaves). Both already documented (`HUMAN_REVIEW_LIST_2026-06-22.md`,
   `ARCHIVES_SCAN_REQUEST_2026-06-22.md`). Archivist doc says 9; live residual is 8 (1927 + 1986/1359
   already recovered) — minor doc staleness, flagged.
-- **Hans follow-up (b), non-blocking:** the Qwen2.5-VL pass on 1953/1956 ran ~20× slower
-  (~109s/page vs ~4.8s) with no image-size explanation — smells of VRAM thrash/GPU contention. Reads
-  were still correct (monotone, no invented chapters). Root-cause before running the VLM tool at scale.
+- **Hans follow-up (b) — RESOLVED as WONTFIX (Patrick decision 2026-06-23):** the Qwen2.5-VL pass on
+  1953/1956 ran ~20× slower (~109s/page vs ~4.8s, likely VRAM thrash). Reads were still correct
+  (monotone, no invented chapters). Decision: **NOT root-causing** — the OCR-era VLM header-recovery
+  is complete and there is **no remaining VLM-at-scale job** (the residual 79 is human-review + archivist,
+  not VLM; the modern era is born-digital). The optional 72B pass at the 71 human-review chapters was
+  declined in favor of human transcription off existing images. **The local-VLM header-recovery tool is
+  retired** for this corpus segment; if it is ever revived at scale (e.g. constitution OCR), root-cause
+  the perf first.
 - Larger pending threads unchanged: proposition/initiative parser track (gated), DB ingest of the
   recovered scratch JSON into Postgres, constitution parallel archive.
