@@ -14,3 +14,15 @@
 [2026-06-22 16:00 PT] VLM | PERF: model load ~12s warm (~200s cold dl), 16.6GB VRAM (of 32GB), ~4.0s/page @ 350dpi. Full ~187 residual ~ 30-45 min GPU wall. | OK
 [2026-06-22 16:00 PT] VLM | GO/NO-GO = GO. Tool: C:\PatoLex-scratch\_vlm_header_recover.py (year-driven, --confirm gated, append-safe, NO DB writes, self-logs). Venv: C:\PatoLex-scratch\ocr-engines\qwenvl-venv | OK
 [2026-06-22 16:00 PT] VLM | FULL-RUN INVOCATION (background, per year): C:/PatoLex-scratch/ocr-engines/qwenvl-venv/Scripts/python.exe C:/PatoLex-scratch/_vlm_header_recover.py <year> --confirm   (years: 1866 1868 1870 1872 1874 1876 1878; run _residual_manifest.py <year> first) | OK
+[2026-06-22 16:01 PT] VLM | 1866 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 16:01 PT] VLM | 1866 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-22 16:08 PT] VLM | 1866 LIFT: recovered 0/42 missing chapters (3.4s/page, 121 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1866.json | OK
+[2026-06-22 21:10 PT] VLM | 1866 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 21:10 PT] VLM | 1866 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-22 21:11 PT] VLM | 1866 LIFT: recovered 0/3 missing chapters (3.8s/page, 3 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1866.json | OK
+[2026-06-22 21:11 PT] VLM | 1866 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 21:12 PT] VLM | 1866 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-22 21:12 PT] VLM | 1866 LIFT: recovered 3/3 missing chapters (3.8s/page, 3 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1866.json | OK
+[vlm-apply] 1866: applied 3 candidates -> production-1865-66/parsed_acts_visual.json
+[2026-06-22 21:14 PT] VLM | 1866 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 21:15 PT] VLM | 1866 model loaded in 12s; vram_alloc=16.6GB | OK
