@@ -63,3 +63,51 @@
 [vlm-apply] 1872: applied 2 candidates -> production-1871-72/parsed_acts_visual.json
 [2026-06-22 22:20 PT] VLM | 1876 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
 [2026-06-22 22:21 PT] VLM | 1876 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-23 06:51 PT] VLM | 1907 DRY: targets=7 chapters, would render 26 unique pages @ 350dpi from None | OK
+[2026-06-23 06:52 PT] VLM | 1911 DRY: targets=3 chapters, would render 11 unique pages @ 350dpi from None | OK
+[2026-06-23 06:52 PT] VLM | 1953 DRY: targets=2 chapters, would render 8 unique pages @ 350dpi from None | OK
+[2026-06-23 06:52 PT] VLM | 1956 DRY: targets=1 chapters, would render 5 unique pages @ 350dpi from None | OK
+[2026-06-23 06:54 PT] VLM | 1907 DRY: targets=7 chapters, would render 26 unique pages @ 350dpi from 1906-07_Statutes.pdf | OK
+[2026-06-23 06:54 PT] VLM | 1911 DRY: targets=3 chapters, would render 11 unique pages @ 350dpi from 1910-11_Statutes.pdf | OK
+[2026-06-23 06:54 PT] VLM | 1953 DRY: targets=2 chapters, would render 8 unique pages @ 350dpi from 1953_Vol1_Chapters.pdf | OK
+[2026-06-23 06:54 PT] VLM | 1956 DRY: targets=1 chapters, would render 5 unique pages @ 350dpi from 1957_Vol1_56Chapters.pdf | OK
+[vlm-misc] DRIVER START -- years 1907/1911/1953/1956 (alias-corrected manifests)
+[vlm-misc] === 1907 recover ===
+[2026-06-23 06:55 PT] VLM | 1907 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-23 06:55 PT] VLM | 1907 model loaded in 15s; vram_alloc=16.6GB | OK
+[2026-06-23 06:57 PT] VLM | 1907 LIFT: recovered 7/7 missing chapters (4.8s/page, 26 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1907.json | OK
+[vlm-misc] 1907 recover rc=0 out_tail="aw p720] parsed=[] :: 'NONE'\n  [raw p721] parsed=[352] :: 'CHIAPTER 352'\n  [raw p722] parsed=[353] :: 'CHAPTER 353'\n  [raw p724] parsed=[355, 356] :: 'CHAPTER 355\\nCHAPTER 356'\n  [raw p725] parsed=[357, 358] :: 'CHAPTER 357\\nCHAPTER 358'\n  [raw p755] parsed=[376] :: 'CHAPTER 376'\n  [raw p756] parsed=[] :: 'NONE'\n  [raw p757] parsed=[377] :: 'CHAPTER 377'\n  [raw p758] parsed=[378] :: 'CHAPTER 378'\n[2026-06-23 06:57 PT] VLM | 1907 LIFT: recovered 7/7 missing chapters (4.8s/page, 26 pages, vram=16.6GB) -> C:\\PatoLex-scratch\\_vlm_out\\vlm_1907.json | OK\nRECOVERED: [1, 131, 137, 237, 352, 356, 377]\n"
+[vlm-misc] 1907 recover STDERR_tail='weights:  65%|######5   | 475/729 [00:08<00:00, 279.21it/s]\nLoading weights:  73%|#######2  | 529/729 [00:08<00:00, 336.10it/s]\nLoading weights:  80%|#######9  | 582/729 [00:08<00:00, 381.87it/s]\nLoading weights:  87%|########6 | 634/729 [00:08<00:00, 404.93it/s]\nLoading weights:  95%|#########4| 690/729 [00:09<00:00, 435.32it/s]\nLoading weights: 100%|##########| 729/729 [00:09<00:00, 79.81it/s] \n'
+[vlm-misc] === 1907 apply ===
+[vlm-apply] 1907: applied 7 candidates -> production-1907-09/parsed_acts_visual.json
+[vlm-misc] 1907 apply rc=0 out='applied 7 to production-1907-09 (of 7 candidates)'
+[vlm-misc] === 1911 recover ===
+[2026-06-23 06:57 PT] VLM | 1911 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-23 06:57 PT] VLM | 1911 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-23 06:58 PT] VLM | 1911 LIFT: recovered 3/3 missing chapters (4.7s/page, 11 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1911.json | OK
+[vlm-misc] 1911 recover rc=0 out_tail=":: 'CHIAPTER 90'\n  [raw p311] parsed=[91, 92] :: 'CHAPTER 91\\nCHAPTER 92'\n  [raw p482] parsed=[249, 250] :: 'CHAPTER 249\\nCHAPTER 250'\n  [raw p483] parsed=[251] :: 'CHAPTER 251'\n  [raw p484] parsed=[] :: 'NONE'\n  [raw p485] parsed=[252] :: 'CHAPTER 252'\n  [raw p486] parsed=[253, 254] :: 'CHAPTER 253\\nCHAPTER 254'\n  [raw p670] parsed=[355, 356] :: 'CHAPTER 355\\nCHAPTER 356'\n  [raw p671] parsed=[357] :: 'CHAPTER 357'\n[2026-06-23 06:58 PT] VLM | 1911 LIFT: recovered 3/3 missing chapters (4.7s/page, 11 pages, vram=16.6GB) -> C:\\PatoLex-scratch\\_vlm_out\\vlm_1911.json | OK\nRECOVERED: [90, 252, 356]\n"
+[vlm-misc] 1911 recover STDERR_tail='weights:  50%|####9     | 361/729 [00:05<00:02, 131.59it/s]\nLoading weights:  61%|######    | 443/729 [00:05<00:00, 311.66it/s]\nLoading weights:  73%|#######2  | 529/729 [00:05<00:00, 451.04it/s]\nLoading weights:  84%|########3 | 612/729 [00:05<00:00, 551.14it/s]\nLoading weights:  96%|#########5| 697/729 [00:05<00:00, 629.11it/s]\nLoading weights: 100%|##########| 729/729 [00:05<00:00, 123.20it/s]\n'
+[vlm-misc] === 1911 apply ===
+[vlm-apply] 1911: applied 3 candidates -> production-1910-11/parsed_acts_visual.json
+[vlm-misc] 1911 apply rc=0 out='applied 3 to production-1910-11 (of 3 candidates)'
+[vlm-misc] === 1953 recover ===
+[2026-06-23 06:58 PT] VLM | 1953 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-23 06:59 PT] VLM | 1953 model loaded in 11s; vram_alloc=16.6GB | OK
+[2026-06-23 07:13 PT] VLM | 1953 LIFT: recovered 1/2 missing chapters (109.2s/page, 8 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1953.json | OK
+[vlm-misc] 1953 recover rc=0 out_tail=".5-VL-7B-Instruct ... | OK\n[2026-06-23 06:59 PT] VLM | 1953 model loaded in 11s; vram_alloc=16.6GB | OK\n  [raw p39] parsed=[33] :: 'CHAPTER 33'\n  [raw p40] parsed=[34] :: 'CHAPTER 34'\n  [raw p41] parsed=[35] :: 'CHAPTER 35'\n  [raw p145] parsed=[71] :: 'CHAPTER 71'\n  [raw p146] parsed=[72] :: 'CHAPTER 72'\n  [raw p147] parsed=[2] :: 'CHAPTEr 2'\n  [raw p148] parsed=[] :: 'CH. 72]'\n  [raw p149] parsed=[] :: 'Article 2. Hearing'\n[2026-06-23 07:13 PT] VLM | 1953 LIFT: recovered 1/2 missing chapters (109.2s/page, 8 pages, vram=16.6GB) -> C:\\PatoLex-scratch\\_vlm_out\\vlm_1953.json | OK\nRECOVERED: [34]\n"
+[vlm-misc] 1953 recover STDERR_tail='weights:  56%|#####6    | 409/729 [00:05<00:01, 228.67it/s]\nLoading weights:  68%|######7   | 493/729 [00:05<00:00, 377.23it/s]\nLoading weights:  80%|#######9  | 583/729 [00:05<00:00, 507.66it/s]\nLoading weights:  91%|#########1| 665/729 [00:05<00:00, 585.23it/s]\nLoading weights: 100%|#########9| 728/729 [00:05<00:00, 594.63it/s]\nLoading weights: 100%|##########| 729/729 [00:05<00:00, 122.14it/s]\n'
+[vlm-misc] === 1953 apply ===
+[vlm-apply] 1953: applied 1 candidates -> production-1953-vol1-52chapters/parsed_acts_visual.json
+[vlm-misc] 1953 apply rc=0 out='applied 1 to production-1953-vol1-52chapters (of 1 candidates)'
+[vlm-misc] === 1956 recover ===
+[2026-06-23 07:13 PT] VLM | 1956 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-23 07:13 PT] VLM | 1956 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-23 07:21 PT] VLM | 1956 LIFT: recovered 1/1 missing chapters (90.4s/page, 5 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1956.json | OK
+[vlm-misc] 1956 recover rc=0 out_tail="[2026-06-23 07:13 PT] VLM | 1956 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK\n[2026-06-23 07:13 PT] VLM | 1956 model loaded in 12s; vram_alloc=16.6GB | OK\n  [raw p289] parsed=[9] :: 'CHAPTER 9'\n  [raw p290] parsed=[] :: 'CH. 9]'\n  [raw p291] parsed=[9] :: 'CHAP. 9'\n  [raw p292] parsed=[] :: 'CH. 9]'\n  [raw p293] parsed=[10, 11] :: 'CHAPTER 10\\nCHAPTER 11'\n[2026-06-23 07:21 PT] VLM | 1956 LIFT: recovered 1/1 missing chapters (90.4s/page, 5 pages, vram=16.6GB) -> C:\\PatoLex-scratch\\_vlm_out\\vlm_1956.json | OK\nRECOVERED: [10]\n"
+[vlm-misc] 1956 recover STDERR_tail='weights:  55%|#####5    | 404/729 [00:05<00:01, 223.08it/s]\nLoading weights:  67%|######6   | 487/729 [00:05<00:00, 374.83it/s]\nLoading weights:  78%|#######7  | 565/729 [00:05<00:00, 480.45it/s]\nLoading weights:  90%|########9 | 653/729 [00:05<00:00, 580.16it/s]\nLoading weights: 100%|#########9| 726/729 [00:05<00:00, 610.58it/s]\nLoading weights: 100%|##########| 729/729 [00:05<00:00, 121.88it/s]\n'
+[vlm-misc] === 1956 apply ===
+[vlm-apply] 1956: applied 1 candidates -> production-1957-vol1-56chapters/parsed_acts_visual.json
+[vlm-misc] 1956 apply rc=0 out='applied 1 to production-1957-vol1-56chapters (of 1 candidates)'
+[vlm-misc] DRIVER DONE
+[vlm-apply] 1907: applied 7 candidates -> production-1906-07/parsed_acts_visual.json
+[vlm-apply] 1953: applied 1 candidates -> production-1953-vol1-chapters/parsed_acts_visual.json

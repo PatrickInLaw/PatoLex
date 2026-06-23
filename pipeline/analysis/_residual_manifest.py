@@ -51,10 +51,16 @@ _yda_spec = _ilu.spec_from_file_location("year_dir_alias", _yda_path)
 _yda = _ilu.module_from_spec(_yda_spec)
 _yda_spec.loader.exec_module(_yda)
 YEAR_DIR_ALIAS = _yda.YEAR_DIR_ALIAS
+BUDGET_OWNED_DIRS = _yda.BUDGET_OWNED_DIRS  # dirs the greedy odd-year glob must EXCLUDE so they are
+# handed solely to their own alias year -- WITHOUT this, the greedy `production-<yr>*` glob sweeps a
+# transition/budget sibling (e.g. production-1907-09 = the 1909 regular session) into the wrong year,
+# whose fully-present chapters make this manifest report missing=0 (the 2026-06-23 1907 bug). Mirrors
+# _recall_allyears.py line ~85 -- the scoreboard already applies this exact exclusion.
 
 def main(yr):
     N = oracle_N(yr)
-    dirs = [d for d in glob.glob(os.path.join(SCR, f"production-{yr}*")) if os.path.isdir(d)]
+    dirs = [d for d in glob.glob(os.path.join(SCR, f"production-{yr}*"))
+            if os.path.isdir(d) and os.path.basename(d) not in BUDGET_OWNED_DIRS]
     for alias in YEAR_DIR_ALIAS.get(yr, []):
         ad = os.path.join(SCR, alias)
         if os.path.isdir(ad) and ad not in dirs:

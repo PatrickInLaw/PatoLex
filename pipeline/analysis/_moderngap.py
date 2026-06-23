@@ -11,9 +11,19 @@ whose volumes do not map this way (biennium-named dirs like 1900-01 carry a diff
 numbering and do NOT cleanly hold a single session) are NOT silently dropped: they are listed with
 their oracle weight so the denominator is fully transparent. The headline % is over MAPPED sessions;
 the unmapped weight is stated explicitly (this is the limitation Hans flagged in cc015)."""
-import os, json, glob, csv, re
+import os, json, glob, csv, re, importlib.util
 SCRATCH = r"C:\PatoLex-scratch"
 ORACLE = r"C:\GitHub\PatoLex\docs\30_SYSTEM_DESIGN\sources\ca_chapter_counts.tsv"
+
+# Shared production-dir <-> oracle-year alias (single source of truth). Without the BUDGET_OWNED_DIRS
+# exclusion below, the greedy `production-<yr>*` glob double-counts a budget/transition sibling volume
+# (e.g. production-1953-vol1-52chapters = the 1952 budget vol) into the wrong year. Mirrors the active
+# scoreboard _recall_allyears.py + _residual_manifest.py (the 2026-06-23 three-tools glob-vs-alias fix).
+_ALIAS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "year_dir_alias.py")
+_aspec = importlib.util.spec_from_file_location("patolex_year_dir_alias", _ALIAS_PATH)
+_alias = importlib.util.module_from_spec(_aspec); _aspec.loader.exec_module(_alias)
+BUDGET_OWNED_DIRS = _alias.BUDGET_OWNED_DIRS
+YEAR_DIR_ALIAS = _alias.YEAR_DIR_ALIAS
 
 oracle = {}
 with open(ORACLE, encoding="utf-8") as f:
@@ -44,7 +54,12 @@ def chapters(path, N):
     return allc, full
 
 def dirs_for(yr):
-    return [d for d in glob.glob(os.path.join(SCRATCH, f"production-{yr}*")) if os.path.isdir(d)]
+    dirs = [d for d in glob.glob(os.path.join(SCRATCH, f"production-{yr}*"))
+            if os.path.isdir(d) and os.path.basename(d) not in BUDGET_OWNED_DIRS]
+    if not dirs and yr in YEAR_DIR_ALIAS:  # glob missed it -> consult the explicit alias
+        dirs = [os.path.join(SCRATCH, b) for b in YEAR_DIR_ALIAS[yr]
+                if os.path.isdir(os.path.join(SCRATCH, b))]
+    return dirs
 
 mapped, unmapped = [], []
 for yr, N in sorted(oracle.items()):

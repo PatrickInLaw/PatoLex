@@ -1,5 +1,21 @@
 # OCR-Era Chapter-Recovery Campaign — Final Report — 2026-06-22
 
+> **UPDATE 2026-06-23 (cc018): residual 91 → 79; the "misc" bucket is ELIMINATED.**
+> The 91 residual had been bucketed 71 human-review (biennial) + 9 archivist + ~11 "misc." On
+> review the "misc" was poorly characterized. It resolved to **12 genuinely-missing chapters** in
+> 4 transition/budget years — **1907×7, 1911×3, 1953×1, 1956×1** — that the recovery tooling had
+> never *seen*, because `_residual_manifest.py` and `_vlm_apply.py` both carried the
+> `production-<year>*` **glob-vs-alias bug** (they swept the wrong sibling volume — e.g.
+> `production-1907-09` = the 1909 session, not 1907 → `production-1906-07`) and so reported
+> `missing=0` / credited the wrong year. After guarding all three tools with `BUDGET_OWNED_DIRS`
+> (mirroring the scoreboard) and adding the 4 source-PDF mappings to the Qwen2.5-VL tool, **all 12
+> were recovered (`image_verified`, local VLM, zero Claude vision tokens) and correctly credited.**
+> The archivist bucket is also corrected to **8** (the doc's 9 included 1927 + 1986/1359 which were
+> already recovered). **New residual = 79 = 71 biennial human-review + 8 archivist, nothing
+> un-categorized.** Scoreboard 95,923/96,002 = 99.9%. Hans verdict: **SHIP**. See
+> `lessons/LESSON_2026-06-23_glob_vs_alias_three_tools.md`.
+
+
 **Scope:** the OCR era of the PatoLex corpus, session-years **1850–1999**.
 **Goal (Patrick, GATE):** full per-year chapter coverage before the project moves forward —
 "any omissions will break the entire project."
