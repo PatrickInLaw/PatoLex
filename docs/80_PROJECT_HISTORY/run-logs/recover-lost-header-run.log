@@ -1,0 +1,43 @@
+recover-lost-header-run.log
+===========================
+Task: recover post-certification "interior numeral loss" chapters by header-independent
+boundary detection + sequence/position numbering. NEW files only; no DB writes; no commits.
+Execution host: 5090 (data + repo C:\github\PatoLex, scratch C:\Users\patolex\PatoLex-scratch).
+
+[2026-06-16 ~early] STEP1 | git pull 5090 to HEAD (07f01d2, certify_chapters.py present) | OK
+[2026-06-16] STEP1 | residual_after_certify.py: post-cert residual measured | OK
+    corpus: oracle N=118,206, distinct confident=84,320 (71.33%), missing=33,886
+    worst-by-#missing are the very-low-% sessions (1956@2.4%, 1960@3.4%, ...) = whole-volume
+    UNPARSED, NOT interior loss -> different problem (re-OCR/re-parse missing volumes).
+[2026-06-16] STEP1 | residual_profile.py: classify residual by shape | OK
+    interior residual (between present anchors) = 11,687 of 33,886.
+    dense>=85%: 56 sessions, missing 3,432, interior 3,384 (true target)
+    mid 50-85%: 39 sessions, missing 7,091, interior 7,031 (target)
+    sparse<50%: 20 sessions, missing 23,363, interior only 1,272 (mostly unparsed volumes)
+[2026-06-16] DEV | inspect_gap.py on 1961: confirmed interior-loss pattern | OK
+    e.g. real ch143 prints "CHAPTER 148"; ch213 prints "CHAPTER 2138" -> certify's
+    witness-guard aborts because misread numeral is in-range != slot. Boundary IS in OCR
+    (An Act + [Approved ...]); number recoverable ONLY by position.
+[2026-06-16] STEP2 | wrote pipeline/ingest/recover_lost_header.py | OK
+    header-independent boundary (CHAPTER line w/ untrusted numeral + An-Act title + approval/
+    enact witness), reuses recover_chaptered guards (quoted/body-ref/resolution/spillover).
+    Position fill: #candidates==#open_slots between clean confident anchors (same volume,
+    page-ordered); 1-slot/1-cand dominant safe case. Ambiguous -> needs_reocr (no guess).
+[2026-06-16] STEP2 | dev runs 1961/1941/1951/1982 | OK  (0 dups each)
+[2026-06-16] STEP3 | --all pass: 115 sessions | OK
+    GRAND recovered=578, needs_reocr boundaries=460, duplicate numbers introduced=0
+    early era (1849-1899 roman headers) recovered 0 (out of scope: arabic detector); wins
+    concentrated 1907-1989 arabic chaptered era.
+[2026-06-16] STEP3 | rescore_with_lostheader.py BEFORE/AFTER (biennium-correct) | OK
+    distinct BEFORE 84,320 (71.33%) -> AFTER 84,898 (71.82%); gain=578 == recovered
+    (gain==recovered confirms 0 collisions). residual 33,884 -> 33,306.
+[2026-06-16] STEP3 | lostheader_stats.py | OK
+    gap_open_slots: {1:538, 2:34, 3:6}. printed!=slot (true lost-header)=270, printed==slot=308.
+    every recovered act has approval and/or enact witness.
+[2026-06-16] PRECISION | spotcheck_lostheader.py 20 acts (stratified POS-ONLY/MATCH/multi) | OK
+    20/20 correct: each a real distinct "An act ..." + [Approved]/enact footer; garbled
+    printed numeral (148->143, 2138->213, 480->430, 885->835, 1772->772, ...) mapped to the
+    positional slot. 0 false positives, 0 misplacements, 0 dups.
+OUTPUT (new, uncommitted, per volume): production-<label>/parsed_acts_lostheader.json
+    {recovered_acts[status=seq_assigned_no_header], needs_reocr[status=boundary_no_slot]}
+SUMMARIES: scratch/_residual_after_certify.json, _lostheader_summary.json, _rescore_lostheader.json

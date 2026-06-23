@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\patolex\PatoLex-scratch\_certify_chapters.py", line 539, in <module>
+    main()
+  File "C:\Users\patolex\PatoLex-scratch\_certify_chapters.py", line 427, in main
+    r = rr.repair_session(stream, N)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\github\PatoLex\pipeline\ingest\renumber_repair.py", line 322, in repair_session
+    cand = [i for i in range(lo_pos + 1, hi_pos) if is_candidate(i)]
+                                                    ^^^^^^^^^^^^^^^
+  File "C:\github\PatoLex\pipeline\ingest\renumber_repair.py", line 312, in is_candidate
+    assert n not in taken, (
+           ^^^^^^^^^^^^^^
+AssertionError: unreachable: in-range determined non-anchor act carries an anchor number

@@ -1,0 +1,540 @@
+{
+  "by_era": {
+    "early20c_1900_1949": {
+      "oracle_N": 26573,
+      "before_distinct": 17647,
+      "after_distinct": 17771,
+      "before_pct": 66.41,
+      "after_pct": 66.88,
+      "gain": 124
+    },
+    "early_1850_1879": {
+      "oracle_N": 8020,
+      "before_distinct": 2155,
+      "after_distinct": 5015,
+      "before_pct": 26.87,
+      "after_pct": 62.53,
+      "gain": 2860
+    },
+    "late19c_1880_1899": {
+      "oracle_N": 2037,
+      "before_distinct": 1813,
+      "after_distinct": 1818,
+      "before_pct": 89.0,
+      "after_pct": 89.25,
+      "gain": 5
+    },
+    "mid20c_1950_1988": {
+      "oracle_N": 66172,
+      "before_distinct": 46255,
+      "after_distinct": 46317,
+      "before_pct": 69.9,
+      "after_pct": 69.99,
+      "gain": 62
+    },
+    "modern_1989_1999": {
+      "oracle_N": 15301,
+      "before_distinct": 13399,
+      "after_distinct": 13399,
+      "before_pct": 87.57,
+      "after_pct": 87.57,
+      "gain": 0
+    }
+  },
+  "totals": {
+    "oracle_N": 118103,
+    "before_distinct": 81269,
+    "after_distinct": 84320,
+    "before_pct": 68.81,
+    "after_pct": 71.4,
+    "distinct_gain": 3051,
+    "acts_newly_certified": 3170,
+    "by_rule": {
+      "R1_own_clean_header": 2928,
+      "R2_position_fill": 242
+    },
+    "volumes_written": 208
+  },
+  "precision": {
+    "introduced_duplicate_confident": 0,
+    "introduced_out_of_range_confident": 0,
+    "sacred_violations_confident_demoted_or_renumbered": 0,
+    "preexisting_duplicate_confident": 0,
+    "preexisting_out_of_range_confident": 197,
+    "PASS": true,
+    "sacred_violation_examples": [],
+    "introduced_examples": [],
+    "preexisting_examples": [
+      [
+        "1873-74",
+        "preexisting_oor",
+        920,
+        1029
+      ],
+      [
+        "1883 Regular Session",
+        "preexisting_oor",
+        24,
+        80
+      ],
+      [
+        "1883 Regular Session",
+        "preexisting_oor",
+        25,
+        95
+      ],
+      [
+        "1883 Regular Session",
+        "preexisting_oor",
+        28,
+        96
+      ],
+      [
+        "1883 Regular Session",
+        "preexisting_oor",
+        29,
+        101
+      ],
+      [
+        "1883 Regular Session",
+        "preexisting_oor",
+        30,
+        102
+      ],
+      [
+        "1883 Regular Session",
+        "preexisting_oor",
+        31,
+        103
+      ],
+      [
+        "1883 Regular Session",
+        "preexisting_oor",
+        32,
+        105
+      ]
+    ]
+  },
+  "sessions_changed": [
+    {
+      "session": "1849-1850",
+      "N": 146,
+      "before": 0,
+      "after": 91,
+      "gain": 91
+    },
+    {
+      "session": "1851",
+      "N": 139,
+      "before": 0,
+      "after": 103,
+      "gain": 103
+    },
+    {
+      "session": "1852",
+      "N": 202,
+      "before": 0,
+      "after": 93,
+      "gain": 93
+    },
+    {
+      "session": "1853",
+      "N": 180,
+      "before": 0,
+      "after": 89,
+      "gain": 89
+    },
+    {
+      "session": "1854",
+      "N": 71,
+      "before": 0,
+      "after": 38,
+      "gain": 38
+    },
+    {
+      "session": "1855",
+      "N": 231,
+      "before": 0,
+      "after": 145,
+      "gain": 145
+    },
+    {
+      "session": "1856",
+      "N": 152,
+      "before": 0,
+      "after": 108,
+      "gain": 108
+    },
+    {
+      "session": "1857",
+      "N": 277,
+      "before": 0,
+      "after": 184,
+      "gain": 184
+    },
+    {
+      "session": "1858",
+      "N": 358,
+      "before": 0,
+      "after": 280,
+      "gain": 280
+    },
+    {
+      "session": "1859",
+      "N": 330,
+      "before": 0,
+      "after": 253,
+      "gain": 253
+    },
+    {
+      "session": "1860",
+      "N": 455,
+      "before": 0,
+      "after": 219,
+      "gain": 219
+    },
+    {
+      "session": "1861",
+      "N": 538,
+      "before": 0,
+      "after": 340,
+      "gain": 340
+    },
+    {
+      "session": "1862",
+      "N": 455,
+      "before": 0,
+      "after": 252,
+      "gain": 252
+    },
+    {
+      "session": "1863-64 adjourned",
+      "N": 476,
+      "before": 0,
+      "after": 338,
+      "gain": 338
+    },
+    {
+      "session": "1865-66",
+      "N": 280,
+      "before": 0,
+      "after": 190,
+      "gain": 190
+    },
+    {
+      "session": "1867-68",
+      "N": 545,
+      "before": 445,
+      "after": 451,
+      "gain": 6
+    },
+    {
+      "session": "1869-70",
+      "N": 583,
+      "before": 278,
+      "after": 288,
+      "gain": 10
+    },
+    {
+      "session": "1871-72",
+      "N": 637,
+      "before": 449,
+      "after": 454,
+      "gain": 5
+    },
+    {
+      "session": "1873-74",
+      "N": 679,
+      "before": 365,
+      "after": 376,
+      "gain": 11
+    },
+    {
+      "session": "1875-76",
+      "N": 613,
+      "before": 294,
+      "after": 349,
+      "gain": 55
+    },
+    {
+      "session": "1877 Regular Session",
+      "N": 673,
+      "before": 324,
+      "after": 374,
+      "gain": 50
+    },
+    {
+      "session": "1880 Regular Session",
+      "N": 126,
+      "before": 115,
+      "after": 118,
+      "gain": 3
+    },
+    {
+      "session": "1889 Regular Session",
+      "N": 290,
+      "before": 237,
+      "after": 238,
+      "gain": 1
+    },
+    {
+      "session": "1895 Regular Session",
+      "N": 223,
+      "before": 212,
+      "after": 213,
+      "gain": 1
+    },
+    {
+      "session": "1903 Regular Session",
+      "N": 385,
+      "before": 351,
+      "after": 353,
+      "gain": 2
+    },
+    {
+      "session": "1907 Regular Session",
+      "N": 539,
+      "before": 482,
+      "after": 483,
+      "gain": 1
+    },
+    {
+      "session": "1909 Regular Session",
+      "N": 729,
+      "before": 527,
+      "after": 539,
+      "gain": 12
+    },
+    {
+      "session": "1911 Regular Session",
+      "N": 753,
+      "before": 387,
+      "after": 394,
+      "gain": 7
+    },
+    {
+      "session": "1913 Regular Session",
+      "N": 699,
+      "before": 506,
+      "after": 520,
+      "gain": 14
+    },
+    {
+      "session": "1917 Regular Session",
+      "N": 803,
+      "before": 658,
+      "after": 662,
+      "gain": 4
+    },
+    {
+      "session": "1919 Regular Session",
+      "N": 669,
+      "before": 439,
+      "after": 448,
+      "gain": 9
+    },
+    {
+      "session": "1921 Regular Session",
+      "N": 915,
+      "before": 670,
+      "after": 680,
+      "gain": 10
+    },
+    {
+      "session": "1923 Regular Session",
+      "N": 479,
+      "before": 361,
+      "after": 366,
+      "gain": 5
+    },
+    {
+      "session": "1927 Regular Session",
+      "N": 898,
+      "before": 813,
+      "after": 816,
+      "gain": 3
+    },
+    {
+      "session": "1929 Regular Session",
+      "N": 891,
+      "before": 710,
+      "after": 715,
+      "gain": 5
+    },
+    {
+      "session": "1931 Regular Session",
+      "N": 1220,
+      "before": 992,
+      "after": 993,
+      "gain": 1
+    },
+    {
+      "session": "1933 Regular Session",
+      "N": 1059,
+      "before": 866,
+      "after": 867,
+      "gain": 1
+    },
+    {
+      "session": "1935 Regular Session",
+      "N": 853,
+      "before": 678,
+      "after": 683,
+      "gain": 5
+    },
+    {
+      "session": "1939 Regular Session",
+      "N": 1124,
+      "before": 860,
+      "after": 867,
+      "gain": 7
+    },
+    {
+      "session": "1941 Regular Session",
+      "N": 1284,
+      "before": 872,
+      "after": 883,
+      "gain": 11
+    },
+    {
+      "session": "1943 Regular Session",
+      "N": 1137,
+      "before": 833,
+      "after": 845,
+      "gain": 12
+    },
+    {
+      "session": "1947 Regular Session",
+      "N": 1577,
+      "before": 1465,
+      "after": 1474,
+      "gain": 9
+    },
+    {
+      "session": "1949 Regular Session",
+      "N": 1603,
+      "before": 1398,
+      "after": 1404,
+      "gain": 6
+    },
+    {
+      "session": "1951 Regular Session",
+      "N": 1765,
+      "before": 1416,
+      "after": 1424,
+      "gain": 8
+    },
+    {
+      "session": "1952 Regular Session",
+      "N": 1895,
+      "before": 32,
+      "after": 33,
+      "gain": 1
+    },
+    {
+      "session": "1953 Regular Session",
+      "N": 1895,
+      "before": 1716,
+      "after": 1727,
+      "gain": 11
+    },
+    {
+      "session": "1955 Regular Session",
+      "N": 1966,
+      "before": 1829,
+      "after": 1837,
+      "gain": 8
+    },
+    {
+      "session": "1957 Regular Session",
+      "N": 2424,
+      "before": 2249,
+      "after": 2252,
+      "gain": 3
+    },
+    {
+      "session": "1961 Regular Session",
+      "N": 2232,
+      "before": 1951,
+      "after": 1954,
+      "gain": 3
+    },
+    {
+      "session": "1965 Regular Session",
+      "N": 2070,
+      "before": 1958,
+      "after": 1959,
+      "gain": 1
+    },
+    {
+      "session": "1967 Regular Session",
+      "N": 1725,
+      "before": 1639,
+      "after": 1644,
+      "gain": 5
+    },
+    {
+      "session": "1968 Regular Session",
+      "N": 1474,
+      "before": 1325,
+      "after": 1328,
+      "gain": 3
+    },
+    {
+      "session": "1969 Regular Session",
+      "N": 1619,
+      "before": 1485,
+      "after": 1489,
+      "gain": 4
+    },
+    {
+      "session": "1970 Regular Session",
+      "N": 1628,
+      "before": 1522,
+      "after": 1526,
+      "gain": 4
+    },
+    {
+      "session": "1971 Regular Session",
+      "N": 1821,
+      "before": 1501,
+      "after": 1504,
+      "gain": 3
+    },
+    {
+      "session": "1977 Regular Session",
+      "N": 1261,
+      "before": 1205,
+      "after": 1207,
+      "gain": 2
+    },
+    {
+      "session": "1978 Regular Session",
+      "N": 1432,
+      "before": 1396,
+      "after": 1399,
+      "gain": 3
+    },
+    {
+      "session": "1982 Regular Session",
+      "N": 1644,
+      "before": 1426,
+      "after": 1427,
+      "gain": 1
+    },
+    {
+      "session": "1985 Regular Session",
+      "N": 1607,
+      "before": 1520,
+      "after": 1521,
+      "gain": 1
+    },
+    {
+      "session": "1988 Regular Session",
+      "N": 1647,
+      "before": 1370,
+      "after": 1371,
+      "gain": 1
+    }
+  ]
+}
