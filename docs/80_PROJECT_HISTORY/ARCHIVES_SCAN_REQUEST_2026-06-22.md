@@ -130,3 +130,38 @@ patrick@kolasinski-law.com
 `docs/80_PROJECT_HISTORY/SCAN_GAP_VERIFICATION_2026-06-22.md` and
 `docs/80_PROJECT_HISTORY/EXTERNAL_ACQUISITION_2026-06-22.md`. The 1905 leaf and 1985 ch. 507
 are intentionally excluded — already recovered / over-counted, not missing.*
+
+---
+
+## 5. IMPORTANT — what this request does and does NOT cover
+
+This packet (the nine chapters in §2) is the **only** set that genuinely needs a re-scan.
+Those nine pages are **physically absent from every digital copy we and the public have** —
+the printed page numbers skip, so the leaf was never digitized by anyone. A scan from a
+complete bound set is the only way to recover them.
+
+**A SEPARATE, LARGER SET DOES *NOT* NEED SCANNING.** The OCR-recovery campaign also has
+**~71 biennial-era chapters (session-years 1866, 1868, 1870, 1872, 1874, 1876, 1878)** that
+are still un-transcribed — but for an entirely different reason. **The printed page IS present
+in our existing scans.** Our automated OCR (Tesseract + Surya + a local vision model) simply
+could not read those particular headings — they are tiny multi-act entries with degraded
+running heads on a shared plate. A human can open our existing PDF and read the chapter number
+and title directly. **These are tracked in `HUMAN_REVIEW_LIST_2026-06-22.md` and require NO
+archivist scan.** Please do **not** add them to any scanning quote.
+
+**The one exception — low-resolution fallback.** If, when a person opens our existing scan for
+one of those ~71 pages, the **scan resolution is too low to read the printed number/title with
+confidence**, then a **higher-resolution re-scan of that specific page** would help — but only
+for the specific pages that prove illegible at our current resolution, and only if human review
+confirms the page is present-but-unreadable. That is a contingent, page-by-page follow-up, **not**
+part of this primary request. If it materializes, those pages would be requested as a small
+addendum to §2 with the same volume/printed-page format.
+
+| Set | Count | Page present in our scan? | Needs archivist scan? | Tracked in |
+|---|---|---|---|---|
+| Truly-missing leaves (this request) | 9 chapters / 6 volumes | **No** (leaf physically absent) | **Yes** (primary ask, §2) | this document |
+| Machine-unreadable biennial chapters | ~71 chapters / 7 session-years | **Yes** (page present, OCR failed) | **No** — human reads our existing image | `HUMAN_REVIEW_LIST_2026-06-22.md` |
+| └ low-res fallback subset | only those that prove illegible | Yes, but too low-res to read | **Only if** human review confirms unreadable | (addendum, if needed) |
+
+*§5 added 2026-06-22 to make the scan-vs-no-scan distinction explicit, so the archivist quote
+covers only the nine genuinely-missing leaves.*
