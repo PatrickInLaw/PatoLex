@@ -136,3 +136,5 @@ Patrick-directed autonomous run (asleep, broad mandate "everything you can do wi
 - Hardcoded old-path references remain in many pipeline scripts + historical logs; they resolve via `PATOLEX_LOCATION_ROOT`/`config.py` — **not** mass-rewritten (historical logs are point-in-time records, intentionally left).
 - 1854 v2 is **parse-level corrected + verified**; not ingested (ingest not a current task).
 - 1989/1941/1964 residuals: 1989 confirmed a source-truncation gap; 1941/1964 PDFs on-box but not yet opened.
+
+**/ucp 2026-06-22 21:22 PT:** Local-VLM hard-cluster recovery IN PROGRESS (Qwen2.5-VL-7B in qwenvl-venv, zero Claude tokens). Root-caused + fixed the 0/42 bug (1866 prints abbreviated 'CHAP.', parser required 'CHAPTER'); added raw-read logging + `_vlm_apply.py` (candidates->visual.json). 1866 done: 32/42 hard chapters recovered (76%). **Corpus OCR-era residual 207 -> 175, 99.8%.** 1868 running; 1870/72/74/76/78 queued. Resilient driver cron 524e09e1 (survives dead workers, thermal-guarded >80C) + this /ucp heartbeat 24b89adc. GPU thermal logger running (~42C). Floor target = 9 archivist chapters + genuinely-illegible stragglers.
