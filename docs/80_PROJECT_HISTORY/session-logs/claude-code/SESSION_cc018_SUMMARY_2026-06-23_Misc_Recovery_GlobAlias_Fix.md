@@ -29,12 +29,23 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
 - **Hans (verify-auditor, Opus) verdict: SHIP** — fix correct, all 12 in right dirs, cleanup total,
   no double-count, no over-cap, no invented chapters. Two non-blocking follow-ups (one done).
 
+- **Tree hygiene cleanup (Patrick-flagged).** 19 analysis scripts created earlier this session (pre
+  autocompact) had been left untracked — a dirty tree accumulated because commits cherry-picked paths
+  instead of sweeping. Triaged all 19: **9 KEEP** (a coherent config.py-resolved lost-header
+  toolchain — measure→profile→size→score→dump→spotcheck, no committed dupes) committed to
+  `pipeline/analysis/`; **10 DEAD** (hardcoded 1850/1971 one-off probes, superseded by the
+  productionized lost-header pipeline) moved to `pipeline/analysis/archive/`. Documented both with
+  READMEs (active-dir index + archive inventory incl. the durable prototype→production finding).
+
 ## Decisions Made
 - The "misc" bucket is **eliminated**, not deferred — these were real gaps recoverable with the
   already-proven local-VLM tooling, so we recovered them rather than handing them to the archivist.
 - New single-series recovery years stay **off** `BIENNIAL_YEARS` → legacy manifest-range page-finder.
 - Apply `BUDGET_OWNED_DIRS` guard to `_moderngap.py` too (Hans follow-up a) — fix every occurrence of
   the bug class in the same session, per the new lesson.
+- **Process fix:** stop cherry-picking paths into commits and orphaning the rest — verify the tree is
+  clean (zero untracked, or untracked is intentional + documented) at every commit. Archive dead
+  scratch instead of letting it rot untracked.
 
 ## Files Changed (repo)
 - `pipeline/analysis/_residual_manifest.py` — BUDGET_OWNED_DIRS exclusion (the fix).
