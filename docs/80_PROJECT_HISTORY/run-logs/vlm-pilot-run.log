@@ -46,3 +46,11 @@
 [vlm-apply] 1874: applied 10 candidates -> production-1873-74/parsed_acts_visual.json
 [2026-06-22 21:43 PT] VLM | 1876 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
 [2026-06-22 21:43 PT] VLM | 1876 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-22 21:51 PT] VLM | 1876 LIFT: recovered 17/39 missing chapters (3.5s/page, 135 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1876.json | OK
+[vlm-apply] 1876: applied 17 candidates -> production-1875-76/parsed_acts_visual.json
+[2026-06-22 21:51 PT] VLM | 1878 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 21:52 PT] VLM | 1878 model loaded in 12s; vram_alloc=16.6GB | OK
+[2026-06-22 22:02 PT] VLM | 1878 LIFT: recovered 24/35 missing chapters (6.1s/page, 99 pages, vram=16.6GB) -> C:\PatoLex-scratch\_vlm_out\vlm_1878.json | OK
+[vlm-apply] 1878: applied 24 candidates -> production-1877-78/parsed_acts_visual.json
+[2026-06-22 22:04 PT] VLM | 1872 loading Qwen/Qwen2.5-VL-7B-Instruct ... | OK
+[2026-06-22 22:04 PT] VLM | 1872 model loaded in 12s; vram_alloc=16.6GB | OK
