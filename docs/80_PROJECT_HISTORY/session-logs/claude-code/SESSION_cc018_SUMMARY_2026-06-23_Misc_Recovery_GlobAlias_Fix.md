@@ -62,8 +62,8 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   printed CLXI=161 missing-a-C, 1876 ch.438 printed CCCXXXVIII=338) → applied as origin=human_review_pk
   WITH the titles he transcribed (VLM had left titles blank). Residual **32 → 20**, corpus 99.97%.
   **Big finding: the 1872 volume has MULTIPLE MISSING LEAVES** (printed pp 131-134, 515-516, 586-587,
-  776-777 → ch.125-128/363-364/417-418/538 = 8 chapters) — added to the archivist list (§2b), which
-  grows 8 → ~16. 3 to resolve first (1872/439 faint-or-gap near present ch.440; 1874/678-679 end-of-vol
+  776-777 → ch.125-128/363-364/417-418/538 = 9 chapters) — added to the archivist list (§2b), which
+  grows 8 → 17. 3 to resolve first (1872/439 faint-or-gap near present ch.440; 1874/678-679 end-of-vol
   beyond our render window). His odd reads (CCCCXL/440, DCLXXVII/677) were ALREADY-PRESENT adjacent
   chapters, so 439/678/679 are genuinely still absent.
 

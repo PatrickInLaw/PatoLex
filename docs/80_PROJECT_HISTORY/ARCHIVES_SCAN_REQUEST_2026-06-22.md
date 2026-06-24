@@ -57,7 +57,7 @@ digitized. Four gaps, eight chapters:
 | 9 | 1872 Regular Session | **586–587** | 585–588 | Ch. 417, 418 |
 | 10 | 1872 Regular Session | **776–777** | 775–778 | Ch. 538 |
 
-Total (2b): 1 volume, ~10 printed pages, **8 chapters**.
+Total (2b): 1 volume, ~10 printed pages, **9 chapters**.
 
 **Also needs a closer look (NOT yet confirmed scan-gap vs. parse-miss — resolve before the trip):**
 - **1872 ch. 439** — printed ~p654 (the adjacent ch. 440 is present at its own spot); 439's heading
@@ -65,7 +65,7 @@ Total (2b): 1 volume, ~10 printed pages, **8 chapters**.
 - **1874 ch. 678, 679** — end of the 1873-74 volume, just after ch. 677 (~printed p946); our review
   sample cut off before them. Re-render the volume tail (printed ~p947 onward) to confirm present vs gap.
 
-**Running total for the archive trip: the original 8 (§2) + 8 (§2b) = ~16 chapters confirmed
+**Running total for the archive trip: the original 8 (§2) + 9 (§2b) = 17 chapters confirmed
 scan-needed, + 3 to resolve first.**
 
 ---
