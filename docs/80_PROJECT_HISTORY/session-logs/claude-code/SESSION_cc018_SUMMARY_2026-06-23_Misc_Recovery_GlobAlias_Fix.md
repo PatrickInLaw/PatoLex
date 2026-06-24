@@ -99,9 +99,15 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   clean) lifted 29→47. Short PDF of the 24 remaining delivered (`PatoLex_HumanReview_REMAINING_24.pdf`).
   Findings → `LESSON_2026-06-23_vlm_recovery_ops_dpi_thrash.md` (VRAM-thrash, 250>350 dpi readability,
   typo false-positive, "TRUE-GAP" mislabel for consecutive chapters).
-  - **NOT yet applied:** the 47 recovered reads are still report-only (`_vlm_out/review*.json`). Decide
-    whether to apply additively (image_verified, origin=vlm_review_assist) + re-score + Hans, OR leave to
-    Patrick's manual review. Awaiting Patrick.
+  - **APPLIED (Patrick approved):** 47 landed additively into the 7 biennial statutes
+    `parsed_acts_visual.json` (image_verified, origin=vlm_review_assist; 1870 ch.143 noted as the
+    CLXIII typo). Residual **79 → 32**. Verified vs Patrick's 5 ground-truth reads. Hans audit of the
+    apply running. The 24 unrecovered are in `PatoLex_HumanReview_REMAINING_24.pdf`.
+- **SCOREBOARD REPORTING FIX (Patrick caught):** `_recall_allyears.py` was `round(...,1)`-ing 99.967%
+  UP to "100.0%" with 32 chapters still missing — a false-complete signal, dangerous for a corpus whose
+  premise is "any omission breaks it." Added a `pct()` helper that FLOORS to 2 decimals and returns
+  100.0 ONLY when num>=den exactly. Now prints **99.96% / RESIDUAL=32** honestly. Counts were always
+  right; only the % was lying.
 - **Corrections logged for the corrections/citation-re-derivation prereq (not applied):** 1870 relabel
   p210 163→143 + recover real ch.163 (p291-292); 1854 ingest from dualseries_v2; 1861 clauserec ch.18
   superseded by visual.

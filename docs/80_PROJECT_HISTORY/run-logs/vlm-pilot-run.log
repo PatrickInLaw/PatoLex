@@ -163,3 +163,11 @@
 [vlm-repass2] 1876: [(91, 'TRUE-GAP'), (403, 'TRUE-GAP'), (421, 'FOUND'), (431, 'TRUE-GAP'), (438, 'TRUE-GAP'), (442, 'TRUE-GAP'), (443, 'FOUND'), (447, 'FOUND'), (497, 'FOUND'), (498, 'FOUND'), (522, 'FOUND')]
 [vlm-repass2] 1878: [(173, 'TRUE-GAP'), (428, 'FOUND'), (441, 'TRUE-GAP'), (447, 'FOUND'), (448, 'FOUND'), (484, 'TRUE-GAP'), (534, 'TRUE-GAP')]
 [vlm-repass2] DONE FOUND=17 TYPO=2 GAP=20 FAINT=3
+[vlm-apply-review] 1866: applied 9 -> production-1865-66/parsed_acts_visual.json
+[vlm-apply-review] 1868: applied 1 -> production-1867-68/parsed_acts_visual.json
+[vlm-apply-review] 1870: applied 8 -> production-1869-70/parsed_acts_visual.json
+[vlm-apply-review] 1872: applied 4 -> production-1871-72/parsed_acts_visual.json
+[vlm-apply-review] 1874: applied 1 -> production-1873-74/parsed_acts_visual.json
+[vlm-apply-review] 1876: applied 17 -> production-1875-76/parsed_acts_visual.json
+[vlm-apply-review] 1878: applied 7 -> production-1877-78/parsed_acts_visual.json
+[vlm-apply-review] TOTAL 47
