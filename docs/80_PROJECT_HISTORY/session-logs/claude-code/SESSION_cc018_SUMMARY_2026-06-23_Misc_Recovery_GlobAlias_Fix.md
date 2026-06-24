@@ -92,10 +92,16 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   the perf first.
 - Larger pending threads unchanged: proposition/initiative parser track (gated), DB ingest of the
   recovered scratch JSON into Postgres, constitution parallel archive.
-- **IN FLIGHT (VLM review-assist):** 6-year pass running (1876/1878 left). On completion: apply confirmed
-  DIRECT reads additively (image_verified, origin=vlm_review_assist) + re-score; hold TYPO-reconciled for
-  manual check; regenerate a SHORT PDF of only UNRESOLVED for Patrick; Hans pass before final. Note:
-  1872/1874 DIRECT rates lower than 1866 (3/14, 1/4) — investigate whether windows or genuine misses.
+- **VLM review-assist COMPLETE: 71 → 24** (47 machine-recovered, reliable exact-numeral reads; 1866
+  ch.143 matches Patrick's hand-read). Re-pass after Patrick's "verify pagination first" steer:
+  pagination verified ACCURATE (offset +0) → brackets were right → no wide-band re-render needed; cheap
+  cached re-read at 250 dpi (after a 350-dpi/full-VRAM thrash at 156 s/page — killed, cleared, relaunched
+  clean) lifted 29→47. Short PDF of the 24 remaining delivered (`PatoLex_HumanReview_REMAINING_24.pdf`).
+  Findings → `LESSON_2026-06-23_vlm_recovery_ops_dpi_thrash.md` (VRAM-thrash, 250>350 dpi readability,
+  typo false-positive, "TRUE-GAP" mislabel for consecutive chapters).
+  - **NOT yet applied:** the 47 recovered reads are still report-only (`_vlm_out/review*.json`). Decide
+    whether to apply additively (image_verified, origin=vlm_review_assist) + re-score + Hans, OR leave to
+    Patrick's manual review. Awaiting Patrick.
 - **Corrections logged for the corrections/citation-re-derivation prereq (not applied):** 1870 relabel
   p210 163→143 + recover real ch.163 (p291-292); 1854 ingest from dualseries_v2; 1861 clauserec ch.18
   superseded by visual.

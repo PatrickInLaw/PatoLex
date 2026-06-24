@@ -141,3 +141,25 @@
 [vlm-review] 1874 STDERR_tail='9 [00:06<00:00, 376.25it/s]\nLoading weights:  79%|#######8  | 573/729 [00:06<00:00, 486.59it/s]\nLoading weights:  90%|######### | 659/729 [00:06<00:00, 571.60it/s]\nLoading weights: 100%|#########9| 726/729 [00:06<00:00, 595.01it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 114.77it/s]\n'
 [vlm-review] === 1876 ===
 [vlm-review] 1876: 22 targets, 140 unique pages to read
+[vlm-review] 1876: read 140 pages in 493s
+[vlm-review] 1876: DIRECT=11 TYPO=0 UNRESOLVED=11
+[vlm-review] 1876 rc=0 tail="VII'\n  ch 478 DIRECT     p789   raw='CHAP. CCCCLXXVIII'\n  ch 497 UNRESOLVED pNone   raw=''\n  ch 498 UNRESOLVED pNone   raw=''\n  ch 503 DIRECT     p826   raw='CHAP. DI.\\nCHAP. DIII.\\nCHAP. DIV.\\nCHAP. DV.\\nCHAP. DVI.'\n  ch 508 DIRECT     p837   raw='CHAP. DVIII.\\nCHAP. DIX.'\n  ch 518 DIRECT     p857   raw='CHAP. DXVIII'\n  ch 522 UNRESOLVED pNone   raw=''\n  ch 541 DIRECT     p881   raw='CHAP. DXLI'\n"
+[vlm-review] 1876 STDERR_tail='9 [00:05<00:00, 378.94it/s]\nLoading weights:  79%|#######8  | 573/729 [00:05<00:00, 470.24it/s]\nLoading weights:  89%|########9 | 649/729 [00:06<00:00, 544.88it/s]\nLoading weights:  99%|#########9| 725/729 [00:06<00:00, 594.57it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 118.07it/s]\n'
+[vlm-review] === 1878 ===
+[vlm-review] 1878: 11 targets, 103 unique pages to read
+[vlm-review] 1878: read 103 pages in 511s
+[vlm-review] 1878: DIRECT=4 TYPO=0 UNRESOLVED=7
+[vlm-review] 1878 rc=0 tail="\n  ch 428 UNRESOLVED pNone   raw=''\n  ch 441 UNRESOLVED pNone   raw=''\n  ch 447 UNRESOLVED pNone   raw=''\n  ch 448 UNRESOLVED pNone   raw=''\n  ch 449 DIRECT     p763   raw='CHAP. CCCCXLIX.\\nCHAP. CCCCL.'\n  ch 484 UNRESOLVED pNone   raw=''\n  ch 534 UNRESOLVED pNone   raw=''\n  ch 642 DIRECT     p1055   raw='CHAP. DCXLII.\\nCHAP. DCXLIII.'\n  ch 662 DIRECT     p1089   raw='CHAP. DCLXI.\\nCHAP. DCLXII.'\n"
+[vlm-review] 1878 STDERR_tail='9 [00:05<00:00, 311.46it/s]\nLoading weights:  73%|#######3  | 534/729 [00:05<00:00, 429.25it/s]\nLoading weights:  86%|########6 | 629/729 [00:06<00:00, 542.82it/s]\nLoading weights:  98%|#########8| 717/729 [00:06<00:00, 612.75it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 117.40it/s]\n'
+[vlm-review] DRIVER DONE
+[vlm-repass] START -- tuned prompt + adaptive-band re-anchor over the 42 UNRESOLVED
+[vlm-repass2] START -- cheap re-read of cached bracket pages, better prompt, strict match
+[vlm-repass2] 1866: [(143, 'TRUE-GAP'), (423, 'TRUE-GAP'), (448, 'FAINT')]
+[vlm-repass2] START -- cheap re-read of cached bracket pages, better prompt, strict match
+[vlm-repass2] 1866: [(143, 'FOUND'), (423, 'FOUND'), (448, 'FAINT')]
+[vlm-repass2] 1870: [(143, 'TYPO'), (384, 'FOUND'), (431, 'FOUND'), (453, 'FOUND'), (483, 'FOUND'), (491, 'TRUE-GAP'), (525, 'FOUND')]
+[vlm-repass2] 1872: [(125, 'TRUE-GAP'), (126, 'TYPO'), (127, 'TRUE-GAP'), (128, 'TRUE-GAP'), (363, 'TRUE-GAP'), (364, 'TRUE-GAP'), (417, 'TRUE-GAP'), (418, 'TRUE-GAP'), (435, 'FOUND'), (439, 'TRUE-GAP'), (538, 'TRUE-GAP')]
+[vlm-repass2] 1874: [(261, 'TRUE-GAP'), (678, 'FAINT'), (679, 'FAINT')]
+[vlm-repass2] 1876: [(91, 'TRUE-GAP'), (403, 'TRUE-GAP'), (421, 'FOUND'), (431, 'TRUE-GAP'), (438, 'TRUE-GAP'), (442, 'TRUE-GAP'), (443, 'FOUND'), (447, 'FOUND'), (497, 'FOUND'), (498, 'FOUND'), (522, 'FOUND')]
+[vlm-repass2] 1878: [(173, 'TRUE-GAP'), (428, 'FOUND'), (441, 'TRUE-GAP'), (447, 'FOUND'), (448, 'FOUND'), (484, 'TRUE-GAP'), (534, 'TRUE-GAP')]
+[vlm-repass2] DONE FOUND=17 TYPO=2 GAP=20 FAINT=3
