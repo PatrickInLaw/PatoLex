@@ -101,8 +101,13 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   typo false-positive, "TRUE-GAP" mislabel for consecutive chapters).
   - **APPLIED (Patrick approved):** 47 landed additively into the 7 biennial statutes
     `parsed_acts_visual.json` (image_verified, origin=vlm_review_assist; 1870 ch.143 noted as the
-    CLXIII typo). Residual **79 → 32**. Verified vs Patrick's 5 ground-truth reads. Hans audit of the
-    apply running. The 24 unrecovered are in `PatoLex_HumanReview_REMAINING_24.pdf`.
+    CLXIII typo). Residual **79 → 32**. Verified vs Patrick's 5 ground-truth reads. The 24 unrecovered
+    are in `PatoLex_HumanReview_REMAINING_24.pdf`. **Hans (Opus) verdict: SOUND** — 47 correctly
+    counted/placed (zero `-code` leakage), faithfully sourced from cleared hits, in-range,
+    non-duplicating, additive/reversible, residual=32 reconciles per-year. One CONCERN fixed:
+    provenance notes overstated (computed roman implied verbatim transcription); rewrote all 47 to
+    carry the ACTUAL raw read where retained (first-pass) and "raw header glyphs not retained" for
+    repass-found (`_fix_notes.py`).
 - **SCOREBOARD REPORTING FIX (Patrick caught):** `_recall_allyears.py` was `round(...,1)`-ing 99.967%
   UP to "100.0%" with 32 chapters still missing — a false-complete signal, dangerous for a corpus whose
   premise is "any omission breaks it." Added a `pct()` helper that FLOORS to 2 decimals and returns
