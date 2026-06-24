@@ -59,14 +59,15 @@ digitized. Four gaps, eight chapters:
 
 Total (2b): 1 volume, ~10 printed pages, **9 chapters**.
 
-**Also needs a closer look (NOT yet confirmed scan-gap vs. parse-miss — resolve before the trip):**
-- **1872 ch. 439** — printed ~p654 (the adjacent ch. 440 is present at its own spot); 439's heading
-  did not surface. May be a faint heading or a smaller gap near p654.
-- **1874 ch. 678, 679** — end of the 1873-74 volume, just after ch. 677 (~printed p946); our review
-  sample cut off before them. Re-render the volume tail (printed ~p947 onward) to confirm present vs gap.
+**RESOLVED 2026-06-23 (PK human review) — all 3 recovered, NONE were scan gaps:**
+- **1872 ch. 439** — present at printed p.655 (CCCCXXXIX), right after ch.438; our stored 438 page was
+  mis-OCR'd, which is what made it look ambiguous.
+- **1874 ch. 678** — present at printed p.957 (DCLXXVIII, Reclamation District 124).
+- **1874 ch. 679** — present at printed p.957 (DCLXXIX) as a **redirect stub** ("[See volume of
+  Amendments to the Codes.]"); substantive text is in the Code Amendments volume.
 
 **Running total for the archive trip: the original 8 (§2) + 9 (§2b) = 17 chapters confirmed
-scan-needed, + 3 to resolve first.**
+scan-needed. The human-review residual is fully classified; nothing else pending.**
 
 ---
 

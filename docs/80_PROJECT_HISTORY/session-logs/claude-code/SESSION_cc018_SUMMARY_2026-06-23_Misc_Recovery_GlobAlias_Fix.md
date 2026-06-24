@@ -66,6 +66,14 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   grows 8 → 17. 3 to resolve first (1872/439 faint-or-gap near present ch.440; 1874/678-679 end-of-vol
   beyond our render window). His odd reads (CCCCXL/440, DCLXXVII/677) were ALREADY-PRESENT adjacent
   chapters, so 439/678/679 are genuinely still absent.
+- **Resolve-3 closed (PK):** all 3 recovered, none scan gaps — 1872/439 (printed p.655, our stored 438
+  page was mis-OCR'd), 1874/678 (p.957), 1874/679 (p.957, a REDIRECT STUB "[See volume of Amendments to
+  the Codes.]"). **Residual 20 → 17. Corpus 99.98% (95,985/96,002).** The entire 71-chapter human-review
+  set is now fully classified: 47 VLM + 15 PK recovered, 9 → archivist. **All 17 remaining are physical
+  scan gaps** (8 original + 9 new 1872 leaves) — archive trip only.
+- **Feedback (PK):** review-PDF labels used PDF SEQUENCE page numbers, but a researcher cites the PRINTED
+  running-head page numbers — show printed (or both) in future human deliverables. Our data only stores
+  the PDF source_page, so printed-page would need deriving (per-volume offset).
 
 ## Decisions Made
 - The "misc" bucket is **eliminated**, not deferred — these were real gaps recoverable with the
