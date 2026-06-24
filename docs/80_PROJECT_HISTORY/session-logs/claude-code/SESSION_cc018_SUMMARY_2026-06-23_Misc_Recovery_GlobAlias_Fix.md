@@ -57,6 +57,16 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   near-full VRAM as the single VLM process (16.6GB weights + 350-dpi image activations), not a leak;
   Task-Manager-vs-nvidia-smi memory discrepancy explained by WDDM-vs-CUDA accounting under RDP.
 
+- **Patrick completed the 24-chapter human review** (`PatoLex_HumanReview_REMAINING_24-PK_Complete.pdf`).
+  Parsed his annotations: **12 recovered** (10 clean + 2 source scrivener typos he caught: 1874 ch.261
+  printed CLXI=161 missing-a-C, 1876 ch.438 printed CCCXXXVIII=338) → applied as origin=human_review_pk
+  WITH the titles he transcribed (VLM had left titles blank). Residual **32 → 20**, corpus 99.97%.
+  **Big finding: the 1872 volume has MULTIPLE MISSING LEAVES** (printed pp 131-134, 515-516, 586-587,
+  776-777 → ch.125-128/363-364/417-418/538 = 8 chapters) — added to the archivist list (§2b), which
+  grows 8 → ~16. 3 to resolve first (1872/439 faint-or-gap near present ch.440; 1874/678-679 end-of-vol
+  beyond our render window). His odd reads (CCCCXL/440, DCLXXVII/677) were ALREADY-PRESENT adjacent
+  chapters, so 439/678/679 are genuinely still absent.
+
 ## Decisions Made
 - The "misc" bucket is **eliminated**, not deferred — these were real gaps recoverable with the
   already-proven local-VLM tooling, so we recovered them rather than handing them to the archivist.

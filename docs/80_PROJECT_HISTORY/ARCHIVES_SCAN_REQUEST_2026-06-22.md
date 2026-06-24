@@ -43,6 +43,33 @@ Total: 6 volumes, ~13 printed pages (with margin), 9 recovered chapters.
 
 ---
 
+## 2b. ADDITIONAL — 1872 Regular Session missing leaves (found 2026-06-23, manual review)
+
+During human review of the OCR-era residual, Patrick Kolasinski confirmed by eye that the
+**1871-72 Statutes volume** (1872 Regular Session) is missing **multiple printed leaves** in our
+scan — the running-head page numbers jump across each gap, so the intervening chapters were never
+digitized. Four gaps, eight chapters:
+
+| # | Volume | Target printed pages | Scan window (incl. margin) | Chapters on those pages |
+|---|---|---|---|---|
+| 7 | 1872 Regular Session (1871-72 Statutes) | **131–134** | 130–135 | Ch. 125, 126, 127, 128 |
+| 8 | 1872 Regular Session | **515–516** | 514–517 | Ch. 363, 364 |
+| 9 | 1872 Regular Session | **586–587** | 585–588 | Ch. 417, 418 |
+| 10 | 1872 Regular Session | **776–777** | 775–778 | Ch. 538 |
+
+Total (2b): 1 volume, ~10 printed pages, **8 chapters**.
+
+**Also needs a closer look (NOT yet confirmed scan-gap vs. parse-miss — resolve before the trip):**
+- **1872 ch. 439** — printed ~p654 (the adjacent ch. 440 is present at its own spot); 439's heading
+  did not surface. May be a faint heading or a smaller gap near p654.
+- **1874 ch. 678, 679** — end of the 1873-74 volume, just after ch. 677 (~printed p946); our review
+  sample cut off before them. Re-render the volume tail (printed ~p947 onward) to confirm present vs gap.
+
+**Running total for the archive trip: the original 8 (§2) + 8 (§2b) = ~16 chapters confirmed
+scan-needed, + 3 to resolve first.**
+
+---
+
 ## 3. Verified contacts
 
 Two California institutions hold the bound *Statutes of California* set and provide paid
