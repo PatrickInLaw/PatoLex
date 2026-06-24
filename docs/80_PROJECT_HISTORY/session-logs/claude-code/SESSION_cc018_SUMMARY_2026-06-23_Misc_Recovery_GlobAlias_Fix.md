@@ -37,6 +37,26 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   productionized lost-header pipeline) moved to `pipeline/analysis/archive/`. Documented both with
   READMEs (active-dir index + archive inventory incl. the durable prototype→production finding).
 
+- **Scrivener Roman-numeral transposition finding** (Patrick, by eye): 1870 ch.143 printed `CLXIII`=163;
+  OCR read the typo → act stored as ch.163 (hiding 143, masking the real ch.163 at p291-292). Targeted
+  scan found exactly 1 corpus-wide. Lesson committed (`d0d6f24`).
+- **Combined human-review PDF** (`C:\PatoLex-scratch\_archive_trip\PatoLex_HumanReview_71chapters.pdf`):
+  one file, bookmark-per-chapter, each with a label page + just its source pages. Patrick reviewed first
+  5 items, reported a bug → **fixed the window finder**: it was clamping wide brackets to 12p on one
+  side and dropping chapters on the far side (ch.343 missed). Now uses the FULL sequence-consistent
+  bracket; same-bracket clusters merged. Added real 1870 ch.163 as a flagged supplement. (523 pages.)
+- **VLM review-assist** (`_vlm_review_assist.py`): re-runs Qwen2.5-VL over the CORRECTED full-bracket
+  windows + typo reconciliation, writes a REPORT (no auto-apply). **1866 validation: 7/10 recovered,
+  zero false reads**, recovered the 343 cluster the original pass missed (proving mislocation, not
+  illegibility), and adjudicated Patrick's 197/198 (print is CXCVIII=198). 6-year pass running.
+- **Duplicate-chapter triage** (62 within-vol dup numbers): **0 real typo collisions** — all are
+  cross-file union artifacts (60 = 1854 stale-merged vs corrected dualseries_v2; 1 = 1861 clauserec; 1
+  = same-act). Ingest-hygiene only.
+- **GPU monitor**: first attempt (`nvidia-smi -l -f`) silently wrote 0 lines (block-buffered) — replaced
+  with a python per-sample-flush monitor (`_gpu_monitor.py` → `gpu-monitor-run.log`). Diagnosed the
+  near-full VRAM as the single VLM process (16.6GB weights + 350-dpi image activations), not a leak;
+  Task-Manager-vs-nvidia-smi memory discrepancy explained by WDDM-vs-CUDA accounting under RDP.
+
 ## Decisions Made
 - The "misc" bucket is **eliminated**, not deferred — these were real gaps recoverable with the
   already-proven local-VLM tooling, so we recovered them rather than handing them to the archivist.
@@ -72,3 +92,12 @@ Local Qwen2.5-VL only; **zero Claude vision tokens**; additive scratch JSON only
   the perf first.
 - Larger pending threads unchanged: proposition/initiative parser track (gated), DB ingest of the
   recovered scratch JSON into Postgres, constitution parallel archive.
+- **IN FLIGHT (VLM review-assist):** 6-year pass running (1876/1878 left). On completion: apply confirmed
+  DIRECT reads additively (image_verified, origin=vlm_review_assist) + re-score; hold TYPO-reconciled for
+  manual check; regenerate a SHORT PDF of only UNRESOLVED for Patrick; Hans pass before final. Note:
+  1872/1874 DIRECT rates lower than 1866 (3/14, 1/4) — investigate whether windows or genuine misses.
+- **Corrections logged for the corrections/citation-re-derivation prereq (not applied):** 1870 relabel
+  p210 163→143 + recover real ch.163 (p291-292); 1854 ingest from dualseries_v2; 1861 clauserec ch.18
+  superseded by visual.
+- Scratch tooling (not in repo, under `C:\PatoLex-scratch`): `_vlm_review_assist.py`, `_vlm_review_driver.py`,
+  `_build71pdf.py`, `_win71.py`, `_scrivener_scan*.py`, `_gpu_monitor.py`, etc.
