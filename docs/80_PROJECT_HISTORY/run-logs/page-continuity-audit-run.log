@@ -1033,3 +1033,30 @@
 [2026-06-27 07:38 PT] PAGE-AUDIT | REGRESSION GATE: 1872 still exactly 4 known gaps (131-134,515-516,586-587,776-777) all even/HIGH; previously-auditable vols intact (0 auditable->not); new big gaps spot-verified real (1990-vol2 3295->3313=18pp; 1989-vol2 2831->2836=4pp) | OK
 [2026-06-27 07:51 PT] PAGE-AUDIT | HANS: SOUND (conditional). Fixed B1 (doc falsely claimed filter no-ops on 3-digit/legacy corpus; truth: applies to ~134/225 incl 1872, safe via delete-only+DP-robustness) + W1 (softened distinct-range localization: adjacent drops can merge, count stays correct) + W3 (renamed ANCHOR_RUN->ANCHOR_RUN_LEN) + W4 (date line) | OK
 [2026-06-27 07:51 PT] PAGE-AUDIT | DELIVERABLE regenerated + LESSON_2026-06-27_page_continuity_position_anchoring_4digit.md written + lessons index updated. Cohort-B audit recovery COMPLETE | OK
+[2026-06-28 06:22 PT] PAGE-AUDIT | START scope=2000 volumes=6 (skip 0) workers=16 tess=tesseract.exe | OK
+[2026-06-28 06:22 PT] PAGE-AUDIT | production-2000-vol1: clean, 0 gaps (1752p; read=0.986) 17s | OK
+[2026-06-28 06:22 PT] PAGE-AUDIT | production-2000-vol2: clean, 0 gaps (1664p; read=0.999) 16s | OK
+[2026-06-28 06:23 PT] PAGE-AUDIT | production-2000-vol3: clean, 0 gaps (1900p; read=0.999) 19s | OK
+[2026-06-28 06:23 PT] PAGE-AUDIT | production-2000-vol4: clean, 0 gaps (1718p; read=0.999) 17s | OK
+[2026-06-28 06:23 PT] PAGE-AUDIT | production-2000-vol5: clean, 0 gaps (1860p; read=0.999) 19s | OK
+[2026-06-28 06:24 PT] PAGE-AUDIT | production-2000-vol6: clean, 0 gaps (1438p; read=0.974) 17s | OK
+[2026-06-28 06:24 PT] PAGE-AUDIT | DONE scope=2000: 0 missing pp across 0 vols; 0 vols NOT AUDITABLE; 6 total; 104s | OK
+[2026-06-28 06:24 PT] PAGE-AUDIT | START scope=measures volumes=3 (skip 0) workers=16 tess=tesseract.exe | OK
+[2026-06-28 06:24 PT] PAGE-AUDIT | production-measures-1915: NOT AUDITABLE (too_few_pages; 2p; read=1.0) 0s | WARN
+[2026-06-28 06:24 PT] PAGE-AUDIT | production-measures-1935: NOT AUDITABLE (weak_offset; 26p; read=0.423) 1s | WARN
+[2026-06-28 06:24 PT] PAGE-AUDIT | production-measures-1990: clean, 0 gaps (544p; read=0.985) 7s | OK
+[2026-06-28 06:24 PT] PAGE-AUDIT | DONE scope=measures: 0 missing pp across 0 vols; 2 vols NOT AUDITABLE; 3 total; 8s | OK
+[2026-06-28 06:24 PT] PAGE-AUDIT | START scope=1871-72 volumes=1 (skip 0) workers=16 tess=tesseract.exe | OK
+[2026-06-28 06:24 PT] PAGE-AUDIT | production-1871-72: 10 missing pp in 4 gap(s) -> 131-134(4); 515-516(2); 586-587(2); 776-777(2) (1064p; read=0.918) 12s | WARN
+[2026-06-28 06:24 PT] PAGE-AUDIT | DONE scope=1871-72: 10 missing pp across 1 vols; 0 vols NOT AUDITABLE; 1 total; 12s | OK
+[2026-06-28 06:26 PT] RECOVER | no_page_images recovery START: 10 target vols (1883-84-regular, 2000-vol1..6, measures-1915/1935/1990) | OK
+[2026-06-28 06:26 PT] RECOVER | rendered 9 vols @ zoom=1.6 RGB png; 1883-84-regular UNRECOVERABLE (source PDF missing, archive has only 15pg fragment) | OK
+[2026-06-28 06:26 PT] RECOVER | re-audit: 2000-vol1..6 AUDITABLE clean (0 gaps); measures-1990 AUDITABLE clean; measures-1915 too_few_pages(2p); measures-1935 weak_offset(26p) | OK
+[2026-06-28 06:26 PT] RECOVER | merged into _audit_all.jsonl/.json: auditable 203 to 210, not-auditable 22 to 15, missing pp 175 (unchanged) | OK
+[2026-06-28 06:26 PT] RECOVER | REGRESSION 1872 PASS: exactly 4 known gaps 131-134/515-516/586-587/776-777 (10pp), byte-identical | OK
+[2026-06-28 06:29 PT] PAGE-AUDIT | START scope=production-1871-72 volumes=1 (skip 0) workers=12 tess=tesseract.exe | OK
+[2026-06-28 06:29 PT] PAGE-AUDIT | production-1871-72: 10 missing pp in 4 gap(s) -> 131-134(4); 515-516(2); 586-587(2); 776-777(2) (1064p; read=0.918) 14s | WARN
+[2026-06-28 06:29 PT] PAGE-AUDIT | DONE scope=production-1871-72: 10 missing pp across 1 vols; 0 vols NOT AUDITABLE; 1 total; 14s | OK
+[2026-06-28 06:34 PT] RECOVER | HANS verdict SOUND (no blockers; 2 cosmetic nits). Independently re-OCR'd offsets, re-ran 1872 (byte-identical), recomputed totals (210/15/49/175), confirmed no dup vol rows, json==jsonl. | OK
+[2026-06-28 06:34 PT] RECOVER | Fixed both nits: WIDER-FINDING heading no longer says 'ingested' (DB not checked); 1883-84-regular reason-string flagged as manual annotation in doc. | OK
+[2026-06-28 06:34 PT] RECOVER | DONE. Deliverable PAGE_CONTINUITY_AUDIT_2026-06-23.md updated. 7/10 recovered to auditable (all clean); 3 not-auditable w/ real reasons. Wider gap flagged: 2000 vol1..6 never OCR'd/parsed in file corpus. | OK
