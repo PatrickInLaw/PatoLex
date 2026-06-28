@@ -1060,3 +1060,6 @@
 [2026-06-28 06:34 PT] RECOVER | HANS verdict SOUND (no blockers; 2 cosmetic nits). Independently re-OCR'd offsets, re-ran 1872 (byte-identical), recomputed totals (210/15/49/175), confirmed no dup vol rows, json==jsonl. | OK
 [2026-06-28 06:34 PT] RECOVER | Fixed both nits: WIDER-FINDING heading no longer says 'ingested' (DB not checked); 1883-84-regular reason-string flagged as manual annotation in doc. | OK
 [2026-06-28 06:34 PT] RECOVER | DONE. Deliverable PAGE_CONTINUITY_AUDIT_2026-06-23.md updated. 7/10 recovered to auditable (all clean); 3 not-auditable w/ real reasons. Wider gap flagged: 2000 vol1..6 never OCR'd/parsed in file corpus. | OK
+[2026-06-28 09:06 PT] PAGE-AUDIT | START scope=production-1883-84-regular volumes=1 (skip 0) workers=23 tess=tesseract.exe | OK
+[2026-06-28 09:06 PT] PAGE-AUDIT | production-1883-84-regular: clean, 0 gaps (448p; read=0.817) 4s | OK
+[2026-06-28 09:06 PT] PAGE-AUDIT | DONE scope=production-1883-84-regular: 0 missing pp across 0 vols; 0 vols NOT AUDITABLE; 1 total; 4s | OK

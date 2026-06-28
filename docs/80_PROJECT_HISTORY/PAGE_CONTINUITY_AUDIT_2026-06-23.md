@@ -1,6 +1,6 @@
 # PatoLex OCR-Era Page-Continuity Audit (Missing Leaves)
 
-**Date:** 2026-06-23, UPDATED 2026-06-27 (Cohort-B recovery: position-anchoring + 4-digit pagination), UPDATED 2026-06-28 (no_page_images recovery + render-gap root cause). Filename retains the original 2026-06-23 date; this is the same living deliverable.  
+**Date:** 2026-06-23, UPDATED 2026-06-27 (Cohort-B recovery: position-anchoring + 4-digit pagination). Filename retains the original 2026-06-23 date; this is the same living deliverable.  
 **Tool:** `C:\PatoLex-scratch\page_continuity_audit.py` (deterministic; no GPU/VLM/LLM)  
 **Scope:** all `production-*` volumes under `C:\PatoLex-scratch` (225 dirs)
 
@@ -8,13 +8,19 @@
 
 - **Missing printed pages detected (over the AUDITABLE subset): 175**
 - **Volumes affected (>=1 gap): 49**
-- Volumes audited clean (0 gaps): 161
-- Volumes audited (total): 210
-- Volumes NOT auditable: 15 (~1,332 pages NOT checked)
+- Volumes audited clean (0 gaps): 162
+- Volumes audited (total): 211
+- Volumes NOT auditable: 14 (~3,112 pages NOT checked)
 
-> **This 175 is a FLOOR over the 210 auditable volumes, NOT a corpus-wide figure.** The 15 not-auditable volumes are unchecked for missing leaves -- a dropped statute-body leaf inside any of them is invisible to this page-number method. See section (d) for why each is not auditable.
+> **This 175 is a FLOOR over the 211 auditable volumes, NOT a corpus-wide figure.** The 14 not-auditable volumes (~3,112 pages) are unchecked for missing leaves -- a dropped statute-body leaf inside any of them is invisible to this page-number method. See section (d) for why each is not auditable.
 
-> **2026-06-28 recovery:** the 10 `no_page_images` volumes were investigated and rendered where a source PDF existed. **7 moved to AUDITABLE and all 7 are CLEAN (0 gaps)** -- the six born-digital `production-2000-vol1..6` (10,332 pp) plus `production-measures-1990` (544 pp). The missing-page total is therefore UNCHANGED at 175 (no new leaf drops found). Three remain not-auditable for real reasons (one with its source PDF missing from the archive, two tiny measures fragments). See the **ROOT CAUSE** section below. The 1872 regression check still reports EXACTLY its four known leaves.
+## Findings & corrections (2026-06-28)
+
+- **1883-84-regular -- NOT unrecoverable (corrected; earlier claim was false).** It was flagged "source PDF missing -- re-acquire." In fact the 1883-84 regular-session statutes are the **misfiled 448-page `1883-84_Code.pdf`** (documented in `lessons/LESSON_2026-06-11`). Rendered from that PDF and audited **CLEAN (448 pp, 0 gaps)** -- no re-acquisition needed. (Moved auditable 210->211, not-auditable 15->14.)
+- **Year-2000 OCR dirs -- NO coverage hole (DB-confirmed 2026-06-28).** The six `production-2000-vol*` dirs were page-classified but never OCR'd/parsed in the file corpus. A read-only query of `localhost:5432/patolex` confirms the year-2000 statutes ARE ingested: **2,033 enactment rows, chapter_number 1..1092**, via the born-digital text-extract path. The empty OCR dirs are stale scaffolding, not a gap. (Side-notes, both already-tracked ingest prerequisites: year-2000 has ~2x neighbor rows = the Gate-F<->born-digital overlap dedup; 945 of those rows have NULL source_document_id = the Gate-F provenance backfill.)
+- **measures-\* not-auditable = the proposition/initiative track** (no page-render pipeline by design), not a coverage gap.
+
+> NOTE: the root-cause/findings narrative is regenerated-away by `_make_report.py` (it lives in the doc, not the generator template). If the report is regenerated, re-add this section. The canonical results (`_audit_all.jsonl`) carry the corrected data.
 
 ## How to read these numbers (gap confidence -- READ BEFORE THE ARCHIVE TRIP)
 
@@ -32,7 +38,7 @@ The 175 missing pages span **82 detected gaps**. They are NOT all equal confiden
 
 1. **The `-NNchapters` partial scans are the SOLE digitization of their page range -- their gaps may be REAL.** In the 1929-1963 span each `...-vol1-NNchapters` directory (e.g. `1953-vol1-52chapters`) is a separate scan that covers the FRONT portion of the year (e.g. 1953-52chapters = printed ~3-604) while its `...-chapters` sibling covers the CONTINUATION (printed ~608-2560). They are CONTIGUOUS, not overlapping -- so the 'clean' sibling does NOT contain the pages where the partial reports gaps and CANNOT vouch for them. 13 of the 49 affected volumes are these partials; their gaps were spot-verified as genuine sequence breaks (e.g. 1953 printed 138-139). Treat them as real candidate losses on the same confidence scale as any other volume, NOT as dismissable scan artifacts. Partials in the affected list: production-1929-vol1-29chapters, production-1941-vol1-41chapters, production-1943-vol1-42chapters, production-1947-vol1-46chapters, production-1949-vol1-49chapters-prior, production-1951-vol1-50chapters, production-1953-vol1-52chapters, production-1955-vol1-54chapters, production-1957-vol1-56chapters, production-1957-vol2-57chapters, production-1959-vol1-58chapters, production-1961-vol1-60chapters, production-1963-vol1-62chapters.
 
-2. **The 2026-06-27 Cohort-B recovery moved the modern multi-volume vol3/vol4/vol5 volumes (continuous 4-digit pagination) from NOT-AUDITABLE to AUDITABLE.** They had near-perfect readability (read~=1.0) but previously failed `low_support` because the old 3-digit cap truncated their real 4-digit page stream and garbled 4-digit corner reads blocked a stable fit; the raised cap + position-anchoring noise filter fixed both (see the Cohort-B method note below). The residual NOT-AUDITABLE list is now mostly: genuinely missing page images (10 `no_page_images`), tiny fragments (2 `too_few_pages`), the early 1850s scans whose corner numbers are too faint to read reliably (low_support at read~0.8-0.9), and a few residual multi-stream / reset-numbered volumes the monotone fit still cannot represent. Two refusals keep this honest rather than lossy: RESOLUTION volumes are excluded by content (their 'RESOLUTION CHAPTER N' numbers would otherwise be misread as page numbers; resolutions are out of corpus scope), and `partial_numbering` volumes are refused when the fittable numbered body covers too small a fraction of the volume to localize gaps representatively. The model refuses rather than inventing gaps -- a KNOWN LIMITATION, not a data loss.
+2. **The 2026-06-27 Cohort-B recovery moved the modern multi-volume vol3/vol4/vol5 volumes (continuous 4-digit pagination) from NOT-AUDITABLE to AUDITABLE.** They had near-perfect readability (read~=1.0) but previously failed `low_support` because the old 3-digit cap truncated their real 4-digit page stream and garbled 4-digit corner reads blocked a stable fit; the raised cap + position-anchoring noise filter fixed both (see the Cohort-B method note below). The residual NOT-AUDITABLE list is now mostly: genuinely missing page images (0 `no_page_images`), tiny fragments (3 `too_few_pages`), the early 1850s scans whose corner numbers are too faint to read reliably (low_support at read~0.8-0.9), and a few residual multi-stream / reset-numbered volumes the monotone fit still cannot represent. Two refusals keep this honest rather than lossy: RESOLUTION volumes are excluded by content (their 'RESOLUTION CHAPTER N' numbers would otherwise be misread as page numbers; resolutions are out of corpus scope), and `partial_numbering` volumes are refused when the fittable numbered body covers too small a fraction of the volume to localize gaps representatively. The model refuses rather than inventing gaps -- a KNOWN LIMITATION, not a data loss.
 
 ## (c) Affected volumes -- missing printed-page ranges
 
@@ -92,7 +98,7 @@ Per-gap tag: **H** = even-parity jump (HIGH confidence real leaf drop); **L** = 
 
 ## (d) Volumes NOT auditable (honest coverage)
 
-These volumes could not be audited for printed-page continuity. Reason codes: `no_page_images_source_pdf_missing` = the volume was OCR'd from page images that no longer exist on disk AND no source PDF remains in the archive to re-render them (NOTE: this exact reason string is a MANUAL annotation on the `production-1883-84-regular` row -- the audit tool itself only emits the generic `no_page_images`; the row was hand-edited during the 2026-06-28 merge to record the verified source-missing provenance, and is otherwise consistent: npages 0, auditable false); `low_support`/`weak_offset`/`too_few_pages` = a fragment or too few legible printed page numbers to fit a reliable numbering sequence; `no_digits`/`no_support` = page-number band not legibly recoverable.
+These volumes could not be audited for printed-page continuity. Reason codes: `no_page_images` = no rendered page images available on disk; `low_support`/`weak_offset`/`too_few_pages` = a fragment or too few legible printed page numbers to fit a reliable numbering sequence; `no_digits`/`no_support` = page-number band not legibly recoverable.
 
 | Volume | Reason | Pages | Page-number readability |
 |---|---|---|---|
@@ -106,13 +112,10 @@ These volumes could not be audited for printed-page continuity. Reason codes: `n
 | production-1859 | low_support | 427 | 0.899 |
 | production-1860 | low_support | 453 | 0.876 |
 | production-1883-84 | low_support | 15 | 0.533 |
-| production-1883-84-regular | no_page_images_source_pdf_missing | 0 | None |
 | production-1927-vol1-26chapters | too_few_pages | 4 | 0.25 |
 | production-1929-vol1-28chapters | too_few_pages | 6 | 0.333 |
 | production-measures-1915 | too_few_pages | 2 | 1.0 |
 | production-measures-1935 | weak_offset | 26 | 0.423 |
-
-**Recovered out of this table on 2026-06-28** (rendered from source PDF, then audited -- all CLEAN): production-2000-vol1 (1752 pp), production-2000-vol2 (1664 pp), production-2000-vol3 (1900 pp), production-2000-vol4 (1718 pp), production-2000-vol5 (1860 pp), production-2000-vol6 (1438 pp), production-measures-1990 (544 pp). See per-volume detail (section b) for their offsets/support and the ROOT CAUSE section for why they lacked renders.
 
 ## (b) Per-volume detail (all auditable volumes)
 
@@ -139,6 +142,7 @@ Readability = fraction of pages whose top-strip OCR yielded >=1 digit candidate.
 | production-1880 | page-renders/1880_Statutes | 300 | 0.807 | -47 | 10 | 206 | 0 | 0 |
 | production-1880-code | page-renders/1880_Code | 364 | 0.819 | -165 | 4 | 113 | 0 | 0 |
 | production-1881 | page-renders/1881_Statutes | 151 | 0.464 | -46 | 6 | 30 | 0 | 0 |
+| production-1883-84-regular | 1883-84_Code.pdf (rendered 2026-06-28 -- misfiled regular-session statutes per LESSON_2026-06-11) | 448 | 0.817 | None | None | None | 0 | 0 |
 | production-1885-86 | page-renders/1885-86_Statutes | 294 | 0.83 | -51 | 7 | 190 | 0 | 0 |
 | production-1887 | page-renders/1887_Statutes | 306 | 0.781 | -51 | 10 | 211 | 0 | 0 |
 | production-1889 | page-renders/1889_Statutes | 792 | 0.914 | -55 | 4 | 543 | 0 | 0 |
@@ -331,29 +335,6 @@ Readability = fraction of pages whose top-strip OCR yielded >=1 digit candidate.
 | production-2000-vol6 | page-renders/2000_Vol6 | 1438 | 0.974 | -359 | 4 | 778 | 0 | 0 |
 | production-measures-1990 | page-renders/Measures_1990 | 544 | 0.985 | 219 | 221 | 477 | 0 | 0 |
 
-> The seven rows above were recovered on 2026-06-28 (see ROOT CAUSE). The six `2000` volumes form one continuously-paginated 6-volume set (printed pages run vol1 ~10-1200, vol2 ~1219-2700, vol3 ~2881-4500, vol4 ~4779-6300, vol5 ~6495-8200, vol6 continuing) -- the cumulative base offsets confirm the cross-volume continuous pagination, exactly as for the 1990s multi-volume years.
-
-## ROOT CAUSE -- why these 10 volumes had no rendered page images (Job B)
-
-The 10 `no_page_images` volumes are NOT one failure; they are **three distinct cohorts** with three distinct causes. Investigation was deterministic (directory/PDF inspection, OCR-consensus `img_path` provenance, source-PDF page-count matching).
-
-**Cohort 1 -- `production-2000-vol1..6` (6 volumes): a real, isolated ingest GAP -- the OCR pipeline never ran on the year 2000.**
-These dirs contain ONLY `page_classification.json` (+ empty `pages_raw/`, empty `pages_prep_gray/`, empty `ocr_consensus/`). There is NO `ocr_consensus/page_ocr_results.json`, NO `OCR_COMPLETE.marker`, and NO `parsed_acts_*.json`. The page-classification step ran (it records e.g. vol1 `total_pages: 1752`, `born_digital: true`), but the OCR/parse stages never executed and the prep-gray page images were never produced -- hence no renders to audit. **This points to a coverage hole WIDER than the audit:** in the file corpus the year-2000 statutes were classified but never OCR'd and never parsed from these dirs (whether the enactments nonetheless reached the DB via another path was not checked -- this audit is no-DB; see the WIDER FINDING caveat below). The good news is the source is intact and clean: all six `2000_VolN.pdf` files are present in `chief-clerk-archive`, are **born-digital with a real text layer**, and their page counts match `page_classification.json` exactly (1752/1664/1900/1718/1860/1438). They render cleanly and audit CLEAN. **FLAGGED SEPARATELY below as a wider corpus gap.**
-
-**Cohort 2 -- `production-measures-1915 / -1935 / -1990` (3 volumes): NOT a gap -- wrong document type for this audit (the proposition/initiative parser track).**
-These dirs contain ONLY `parsed_measures.json` -- the separate proposition/initiative parser track (per the corpus-scope memory: voter-initiative "MEASURES SUBMITTED TO VOTE OF ELECTORS", proposition-keyed, NOT statute chapters). They never had a page-render pipeline because they are not statute-chapter volumes; the measures parser works directly off the measures PDFs without producing prep-gray/render images. The source measures PDFs DO exist and were rendered for completeness: `1915_Vol1_Measures.pdf` is **only 2 pages** (`too_few_pages`), `1935_Vol1_Measures.pdf` is **26 pages** of sparse proposition pagination (`weak_offset`, read 0.42), and `1990_Vol1_Measures.pdf` is **544 pages** (audited CLEAN). Continuity-auditing tiny proposition booklets for "missing leaves" via statute running-head page numbers is not meaningful -- the two small ones legitimately refuse, and the large one is clean.
-
-**Cohort 3 -- `production-1883-84-regular` (1 volume): page images deleted AND source PDF missing from the archive -- genuinely unrecoverable here.**
-This volume WAS fully processed: 440 consensus pages, `OCR_COMPLETE.marker`, and a full `parsed_acts_certified.json`. Its OCR `img_path` provenance points at a now-deleted `production-1883-84-regular\pages_prep_gray\page_NNNN.png` set. But its source PDF is **NOT in the archive**: the only 1883-84 statutes PDFs present (`1883-84_Statutes.pdf`, `1883-84_Statutes_1E.pdf`) are **15-page image-only fragments** -- far too short to be the 440-page regular-session volume (verified: "TWENTY-FIFTH SESSION", a real ~440-page 1883 statutes book). A corpus-wide scan for any 400-500 page PDF found no 1883-84 statutes candidate. So this volume cannot be re-rendered from the on-disk corpus. It is parsed/certified (its enactments are not lost), but it cannot be page-continuity-audited until the source scan is re-acquired. (The sibling `production-1883-84`, 13/15 consensus pages, is the same fragment-PDF story and was already `low_support`.)
-
-### WIDER FINDING (RESOLVED 2026-06-28 -- DB-confirmed NO HOLE): year-2000 statute production dirs classified but never OCR'd/parsed, yet the statutes ARE ingested via the born-digital path
-
-Cohort 1 is the only one of the three that implies a coverage hole beyond the audit. **In the FILE corpus, the six year-2000 statute production dirs (10,332 pages of born-digital text) were page-classified but the OCR and parse stages never ran** -- they have no `ocr_consensus/page_ocr_results.json`, no `OCR_COMPLETE.marker`, and no `parsed_acts_*.json`, unlike every audited neighbor (each of which carries those artifacts). The page-classification step is the ONLY stage that left output.
-
-**DB CHECK DONE 2026-06-28 (`localhost:5432/patolex`, read-only):** year-2000 chaptered statutes ARE present -- **2,033 `enactment` rows for chaptered_date year 2000, chapter_number range 1..1092** (full statute range covered). So the empty `production-2000-vol*` OCR dirs are **stale/abandoned scaffolding, NOT a coverage hole** -- the year-2000 statutes reached the DB via the born-digital text-extraction path (and/or the Gate-F official-XML layer), not via these OCR bundles. The file-corpus "gap" is the born-digital pipeline working as designed (no OCR/page-renders by that path). **No corpus hole; close the ticket** -- optionally clean up the six stale OCR scaffolding dirs.
-
-Two side-observations from the same query (both already-known, tracked elsewhere): (1) year 2000 has ~2x the enactment rows of its neighbors (2,033 vs 1998=969 / 1999=871 / 2001=980 / 2002=1,171) with max chapter only 1,092 -- the known **Gate-F <-> born-digital overlap** (same chapters ingested by two layers with different citation keys; arbitration is a single-ingest dedup prerequisite). (2) 945 of the year-2000 rows have NULL `source_document_id` -- the already-tracked Gate-F provenance-backfill prerequisite.
-
 ## (e) Reproducible command + method note
 
 ```
@@ -363,8 +344,6 @@ C:/PatoLex-scratch/ocr-engines/qwenvl-venv/Scripts/python.exe \
 ```
 
 Per-volume: `python page_continuity_audit.py <year|all|production-NAME>`.
-
-**Recovery renders (2026-06-28).** The seven recovered volumes were rendered with PyMuPDF (`fitz`) at a fixed `fitz.Matrix(1.6, 1.6)` zoom, RGB, no alpha, saved as `page-renders/<dir>/NNNN.png` (0-based, `NNNN == pdf_seq`). The 1.6 zoom is the constant matching the pre-existing renders (derived empirically: existing `page-renders/1871-72_Statutes/0000.png` is 605x1002 px over a 378x626 pt PDF page = 1.6005; `1991_Vol1` and `1899_Statutes` likewise = 1.60). Render-dir names (`2000_Vol1`..`2000_Vol6`, `Measures_1990`) were chosen so the audit's `render_dir_for()` separator-stripped match resolves them from the `production-2000-vol*` / `production-measures-*` dir names. Source PDFs are `chief-clerk-archive/2000_VolN.pdf` and `chief-clerk-archive/<YEAR>_Vol1_Measures.pdf`. Render script: `C:\PatoLex-scratch\_recover\render_missing.py` (read-only on PDFs; writes only PNGs).
 
 **Method.** The printed running-head page number is NOT present in the full-page consensus OCR (it is a top-outer-corner number dropped/garbled by full-page consensus -- verified). The tool therefore RE-OCRs a thin top strip (top ~11% of the page height) of each rendered page image with Tesseract in sparse-text mode (`--psm 11`) under a digit whitelist, recovering the corner page number. It models `printed = pdf_seq + offset`, where `offset` is piecewise-constant and MONOTONE NON-DECREASING (each physically dropped leaf bumps the offset UP by the number of leaves lost; nothing can lower it). Each OCR'd page-number candidate votes an offset; the tool fits the best monotone-non-decreasing offset step-function over the numbered body by dynamic programming, scoring (supported pages) minus a per-step penalty. EVERY offset INCREASE in the optimal path -- walked per-page across the fitted body -- is a missing leaf, reported AND LOCALIZED at its own position; two leaf-drops separated by readable numbered pages are reported as two distinct ranges. (Caveat: when two drops are adjacent with only unreadable/filter-removed pages between them, the DP may MERGE them into one reported range -- the TOTAL missing-page COUNT stays correct, but the split between the two drops is not recoverable in that case.) Because a real leaf-drop is corroborated by an entire post-gap segment while a transient OCR misread is a single stray vote, the step penalty plus a per-segment support/density floor make isolated misreads unable to create a phantom gap. Front matter (roman-numeral / unnumbered title pages) and trailing index matter fall outside the fitted body window and are not scored.
 
