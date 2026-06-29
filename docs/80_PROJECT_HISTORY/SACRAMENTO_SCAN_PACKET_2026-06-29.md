@@ -1,5 +1,14 @@
 # Sacramento Scan Packet — Consolidated Missing-Leaf + Chapter-Recovery Trip — 2026-06-29
 
+> ⚠️ **DRAFT — NOT a final scan list.** This covers the 126 high-confidence dropped leaves + 49
+> odd-parity "inspect" gaps + 17 chapter recoveries. It is **incomplete**: three audit unknowns are
+> still open and could add to (or trim) what actually needs scanning — (1) the 49 odd-parity gaps are
+> unresolved (real torn leaf vs printing artifact), (2) the 9 unauditable 1850s volumes (3,059 pp)
+> may hide leaves we cannot currently see, (3) extra/special-session coverage is unmeasured. Do NOT
+> treat this as the trip list until those are closed. Authoritative status:
+> `OCR_ERA_COMPLETENESS_STATUS_2026-06-29.md`.
+
+
 **Purpose.** ONE carry-to-Sacramento document that merges the two existing missing-paper
 sources — the page-level missing-leaf audit and the chapter-level archivist request — into a
 single packet organized **by physical volume**, with every printed page listed **once**.

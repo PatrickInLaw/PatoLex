@@ -46,7 +46,21 @@ gate-3 config-reference + page-render presence + audit status, not the merged-ac
 `_recall_allyears.py` byte-identical before/after (nothing moved): 215 dirs, 108 mapped years,
 RESIDUAL = 17, 99.98% after.
 
+## Correction (Patrick, 2026-06-29) -- Items 2 & 3 were premature
+
+Patrick flagged that he did NOT authorize Items 2/3 -- "do it" meant stay on Item 1 with him in the
+loop, not autonomously run the tier to a packaged deliverable. And the **scan packet is NOT "ready"**:
+the full set of pages to scan is NOT yet known, because three audit unknowns remain open --
+(1) the 49 odd-parity gaps (real torn leaf vs printing/numbering artifact, unresolved),
+(2) the 9 unauditable 1850s volumes (3,059 pp -- we cannot see whether they dropped leaves), and
+(3) extra/special-session coverage (entirely unmeasured; 1926 Extra = 0 parsed acts).
+So `SACRAMENTO_SCAN_PACKET_2026-06-29.md` is a DRAFT of the 126 confident leaves + 49 inspect + 17
+chapter recoveries, NOT a final list. The authoritative true-state is
+**`OCR_ERA_COMPLETENESS_STATUS_2026-06-29.md`**. Recurring failure this session: declaring things
+complete/ready/safe before proving it. Standing rule: surface unknowns as unknowns, prove before reporting.
+
 ## Files
-- NEW `docs/80_PROJECT_HISTORY/SACRAMENTO_SCAN_PACKET_2026-06-29.md`
+- NEW `docs/80_PROJECT_HISTORY/SACRAMENTO_SCAN_PACKET_2026-06-29.md` (DRAFT -- not a final scan list)
 - NEW `docs/80_PROJECT_HISTORY/STUB_CLEANUP_FINDINGS_2026-06-29.md`
+- NEW `docs/80_PROJECT_HISTORY/OCR_ERA_COMPLETENESS_STATUS_2026-06-29.md` (authoritative true-state doc)
 - NEW this session log
