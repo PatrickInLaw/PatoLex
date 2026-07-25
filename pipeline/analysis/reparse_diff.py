@@ -64,6 +64,12 @@ SCRATCH = Path(os.environ.get("PATOLEX_LOCATION_ROOT", r"C:\PatoLex-scratch"))
 
 
 def _load_parser(path, name):
+    # The parser does `import config` (and siblings) at module level, so
+    # pipeline/ must be importable regardless of the cwd this is launched from.
+    # Without this the BEFORE module dies with ModuleNotFoundError: config.
+    pipeline_dir = str(_REPO / "pipeline")
+    if pipeline_dir not in sys.path:
+        sys.path.insert(0, pipeline_dir)
     spec = importlib.util.spec_from_file_location(name, str(path))
     mod = importlib.util.module_from_spec(spec)
     sys.modules[name] = mod
@@ -72,15 +78,63 @@ def _load_parser(path, name):
 
 
 def _materialise_before(ref, workdir):
-    """git show <ref>:<parser> -> a temp file we can import."""
+    """git show <ref>:<parser> -> a temp file we can import, WITH ITS WRITES REMOVED.
+
+    ★ THIS NEUTERING IS LOAD-BEARING. Read before touching it.
+
+    The BEFORE parser predates the `write=` kwarg, so `parse_volume(label,
+    write=False)` raises TypeError on it. An earlier version of this harness
+    "handled" that by falling back to `parse_volume(label)` -- i.e. the DEFAULT,
+    which WRITES `parsed_acts_fixed.json` straight into the live volume
+    directory. That fallback would have fired on EVERY volume (the kwarg is
+    absent from every pre-cc019 ref) and silently overwritten the corpus with
+    PRE-FIX output while this script claimed to touch nothing. Caught in
+    self-review, 2026-07-25.
+
+    Rather than trust a runtime guard, the write is removed from the SOURCE
+    before import, and the patch is ASSERTED. If the expected call site is not
+    found -- e.g. a future refactor renames it -- this raises instead of
+    silently importing a parser that can write.
+
+    Redirecting SCRATCH_ROOT is NOT a valid alternative: the OCR input is read
+    from the same root, so redirecting it breaks the read.
+    """
     out = subprocess.run(
         ["git", "show", "%s:%s" % (ref, _PARSER_REL)],
         cwd=str(_REPO), capture_output=True, text=True, encoding="utf-8",
     )
     if out.returncode != 0:
         raise SystemExit("git show %s:%s failed:\n%s" % (ref, _PARSER_REL, out.stderr))
+
+    src = out.stdout
+    needle = "out_path.write_text("
+    n = src.count(needle)
+    if n != 1:
+        raise SystemExit(
+            "reparse_diff: expected exactly 1 `%s` in %s:%s, found %d. "
+            "Refusing to import a BEFORE parser whose write path is unverified."
+            % (needle, ref, _PARSER_REL, n))
+    # `_DIFF_NEVER_WRITE and out_path.write_text(...)` -- the constant is False,
+    # so Python short-circuits and write_text is never called. Keeps the
+    # expression syntactically intact across the original's line breaks.
+    src = src.replace(needle, "_DIFF_NEVER_WRITE and out_path.write_text(", 1)
+    src = "_DIFF_NEVER_WRITE = False\n" + src
+
+    # Also neuter the append-only date-review worklist. It is written from
+    # flush_act during the parse, NOT at write time, so removing the JSON write
+    # alone still leaves a shared-file side effect.
+    if "def _append_date_review(record" in src:
+        src = src.replace(
+            "def _append_date_review(record: dict):",
+            "def _append_date_review(record: dict):\n    return  # neutered by reparse_diff",
+            1)
+    elif "_append_date_review" in src:
+        raise SystemExit(
+            "reparse_diff: _append_date_review present but its definition was not "
+            "matched -- refusing to run with an un-neutered side effect.")
+
     dest = Path(workdir) / "ingest_from_ocr_BEFORE.py"
-    dest.write_text(out.stdout, encoding="utf-8")
+    dest.write_text(src, encoding="utf-8")
     return dest
 
 
@@ -102,17 +156,13 @@ def _path_of(act):
 
 def diff_volume(label, mod_before, mod_after):
     t0 = time.time()
+    # BEFORE has had its write path removed at source (see _materialise_before),
+    # so it is called with NO write kwarg -- the pre-cc019 signature -- and
+    # cannot write regardless. There is deliberately NO TypeError fallback: a
+    # fallback here is what previously would have written pre-fix output into
+    # the live corpus.
     try:
-        r_before = mod_before.parse_volume(label, write=False)
-    except TypeError:
-        # BEFORE predates the write= kwarg -- redirect its output to a temp file
-        # so the corpus is still never touched.
-        with tempfile.TemporaryDirectory() as td:
-            saved = mod_before.SCRATCH_ROOT
-            try:
-                r_before = mod_before.parse_volume(label)
-            finally:
-                mod_before.SCRATCH_ROOT = saved
+        r_before = mod_before.parse_volume(label)
     except Exception as e:
         return {"volume": label, "error": "BEFORE: %s" % e}
     try:
@@ -122,6 +172,40 @@ def diff_volume(label, mod_before, mod_after):
 
     if r_before is None or r_after is None:
         return {"volume": label, "error": "parse returned None (missing OCR?)"}
+
+    # ★ BASELINE FIDELITY CHECK -- without this the whole diff is unfounded.
+    #
+    # The diff is only meaningful if BEFORE reproduces what is ACTUALLY on disk.
+    # If the on-disk parsed_acts_fixed.json was produced by some other code path,
+    # a hand edit, or a different ref, then "BEFORE" is a fiction and every
+    # gained/lost number below is measured against the wrong baseline.
+    #
+    # Reported, not fatal: a mismatch is informative (it means the corpus state
+    # has a provenance we do not understand) and must surface rather than abort
+    # the sweep silently.
+    on_disk = SCRATCH / ("production-" + label) / "parsed_acts_fixed.json"
+    baseline = {"checked": False}
+    if on_disk.exists():
+        try:
+            disk = json.loads(on_disk.read_text(encoding="utf-8"))
+            disk_ch = set()
+            for a in disk.get("confident_acts", []):
+                c = a.get("chapter_int_final") or a.get("chapter_int") or a.get("chapter")
+                if isinstance(c, int):
+                    disk_ch.add(c)
+            before_ch = set(_acts_index(r_before))
+            baseline = {
+                "checked": True,
+                "on_disk_confident": len(disk.get("confident_acts", [])),
+                "before_confident": len(r_before.get("confident", [])),
+                "chapters_on_disk": len(disk_ch),
+                "chapters_before": len(before_ch),
+                "matches": disk_ch == before_ch,
+                "only_on_disk": sorted(disk_ch - before_ch)[:20],
+                "only_in_before": sorted(before_ch - disk_ch)[:20],
+            }
+        except Exception as e:
+            baseline = {"checked": False, "error": str(e)}
 
     a_before = _acts_index(r_before)
     a_after = _acts_index(r_after)
@@ -164,6 +248,7 @@ def diff_volume(label, mod_before, mod_after):
         "date_removed": date_removed,
         "date_changed": date_changed,
         "enactment_paths_after": paths,
+        "baseline_fidelity": baseline,
     }
 
 
@@ -208,7 +293,18 @@ def main():
             if row.get("error"):
                 print("[%d/%d] %-22s ERROR %s" % (i, len(labels), label, row["error"]))
                 continue
-            flag = "  <-- LOST %d" % len(row["lost"]) if row["lost"] else ""
+            flags = []
+            if row["lost"]:
+                flags.append("LOST %d" % len(row["lost"]))
+            if row["date_changed"]:
+                # A date that MOVED is more alarming than one that appeared:
+                # it means the parser now reads a different date off the same
+                # text. Surface it as loudly as a lost chapter.
+                flags.append("DATE-MOVED %d" % len(row["date_changed"]))
+            bf = row.get("baseline_fidelity") or {}
+            if bf.get("checked") and not bf.get("matches"):
+                flags.append("BASELINE-MISMATCH")
+            flag = ("  <-- " + " / ".join(flags)) if flags else ""
             print("[%d/%d] %-22s pages=%-5s chapters %d -> %d  (+%d/-%d)  dates +%d ~%d -%d  %.1fs%s"
                   % (i, len(labels), label, row["pages"],
                      row["chapters_before"], row["chapters_after"],
@@ -236,6 +332,22 @@ def main():
     print("  dates changed   : %d" % tot_dchg)
     print("  dates removed   : %d%s" % (tot_drem, "   <-- investigate" if tot_drem else ""))
     print("  enactment paths : %s" % json.dumps(paths, sort_keys=True))
+
+    bad_baseline = [r["volume"] for r in ok
+                    if (r.get("baseline_fidelity") or {}).get("checked")
+                    and not (r.get("baseline_fidelity") or {}).get("matches")]
+    unchecked = [r["volume"] for r in ok
+                 if not (r.get("baseline_fidelity") or {}).get("checked")]
+    print("  baseline fidelity: %d/%d volumes reproduce their on-disk artifact"
+          % (len(ok) - len(bad_baseline) - len(unchecked), len(ok)))
+    if bad_baseline:
+        print("    MISMATCH (%d): %s" % (len(bad_baseline), bad_baseline[:15]))
+        print("    -> BEFORE does not reproduce what is on disk. The on-disk")
+        print("       artifact has a provenance we do not understand, so the")
+        print("       gained/lost numbers above are measured against the WRONG")
+        print("       baseline for these volumes. Resolve before Phase 4.")
+    if unchecked:
+        print("    no on-disk artifact to compare (%d): %s" % (len(unchecked), unchecked[:15]))
     print("=" * 70)
 
     stamp = time.strftime("%Y%m%d-%H%M%S")

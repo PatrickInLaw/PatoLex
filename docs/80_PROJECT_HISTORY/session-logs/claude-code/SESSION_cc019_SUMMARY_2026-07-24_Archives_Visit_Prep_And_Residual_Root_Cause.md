@@ -328,6 +328,53 @@ The recovery chain — `merged` → `recovered` → `repaired` → `clauserec` �
 
 **Timing caveat, stated plainly:** the three timed volumes (1927 3pp, 1997, 1949) came back **byte-identical** to their June backups — but they were chosen by *size*, not by defect exposure, and cc019's fixes target **early-era** phenomena. **That is not evidence a reparse is a no-op.** The diff harness over early-era volumes is what settles it.
 
+---
+
+## 16. ★ Self-review of the reparse plan found a corpus-destroying bug in my own harness
+
+Patrick: *"Make a plan, have Hans review it, and consider all the ways it is wrong (your first plan always is), then fix it."* Correct instinct — the first version had a bug that would have damaged the corpus on its first run.
+
+### The severe one (mine, found in self-review before Hans reported)
+
+`reparse_diff.py` called `mod_before.parse_volume(label, write=False)`. **The BEFORE parser predates the `write=` kwarg**, so that raises `TypeError` — and my `except TypeError` fallback called `parse_volume(label)` with the **default `write=True`**.
+
+```python
+except TypeError:
+    with tempfile.TemporaryDirectory() as td:
+        saved = mod_before.SCRATCH_ROOT      # saved...
+        try:
+            r_before = mod_before.parse_volume(label)   # ...but NEVER reassigned
+```
+
+I saved `SCRATCH_ROOT` and **never redirected it**. So the fallback would have written `parsed_acts_fixed.json` into the **live volume directory, with PRE-FIX parser output** — silently reverting the corpus while the docstring claimed it touched nothing. It would have fired on **every volume**, since no pre-cc019 ref has the kwarg.
+
+**Fix:** the write is removed from the BEFORE **source** before import, and the patch is **asserted** — if the expected call site isn't found (e.g. a future rename), it raises rather than importing a parser that can write. The `except TypeError` fallback is deleted entirely; there is deliberately no fallback, because a fallback is what caused this. The append-only date-review worklist is neutered in the same pass.
+
+*(Redirecting `SCRATCH_ROOT` is not a valid alternative — the OCR input is read from the same root.)*
+
+### Second: the diff had no baseline fidelity check
+
+The diff is only meaningful if BEFORE **reproduces what is actually on disk**. If the on-disk `parsed_acts_fixed.json` came from some other code path or a hand edit, "BEFORE" is a fiction and every gained/lost number is measured against the wrong baseline. Now checked per volume and summarised corpus-wide, with a loud `BASELINE-MISMATCH` flag.
+
+### Third: a changed date is more alarming than a lost chapter
+
+My abort condition only mentioned LOST chapters. A date that **moved** means the parser reads a *different* date off the same text — silently wrong, versus visibly absent. Now flagged as loudly as a loss (`DATE-MOVED`).
+
+### Also fixed
+`_load_parser` didn't put `pipeline/` on `sys.path`, so the BEFORE module died on `import config` — the harness could not have run at all from `analysis/`.
+
+**NEW `pipeline/analysis/test_reparse_diff_safety.py` — 16/16.** Asserts the neutering holds, that BEFORE carries the pre-cc019 signature (wrong ref fails loudly), that suppressed appends open no file, and that no `except TypeError` fallback has crept back.
+
+### Plan gaps I identified but have NOT yet fixed (pending Hans)
+
+- **The DB is not addressed at all** — 35,332 enactments are already ingested from the *old* parse.
+- **Phase 5 has no exit criteria and no cost bound** — "most unknown cost" is not a plan.
+- **Gate F overlap** — the modern lapse fix affects 1982–1999, overlapping Gate F's 1991–2024 official-XML layer.
+- **No dry-run of `parse_all` itself** — the per-volume diff doesn't exercise its aggregation/worker behaviour.
+- **Phase 7 (fold in the 71) is sequenced too late** to serve as cross-validation.
+- **Rollback is incomplete** — a `parsed_acts_*` snapshot doesn't undo worklist appends or `_parse_outputs` clobbering (which is *not* in git).
+- **No acceptance criteria** — nothing defines what "success" looks like.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.
