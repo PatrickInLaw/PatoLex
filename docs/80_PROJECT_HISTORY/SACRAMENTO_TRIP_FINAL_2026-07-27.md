@@ -1,4 +1,24 @@
-> # ⛔ ON HOLD — DO NOT CARRY YET (2026-07-25)
+> # ✅ HOLD LIFTED — VERIFIED 2026-07-25
+>
+> **All 82 claimed gaps have now been checked against the page images.** Tier 1
+> (the 8 Monday volumes) held and **gained one chapter**. Tier 2 shrank. **Tier 3
+> was eliminated entirely.**
+>
+> | | Claimed | Verified |
+> |---|---:|---:|
+> | Printed pages | 175 | **~97** |
+> | Volumes | 45 | **20** |
+> | Monday (Tier 1) | 8 vols / 25 pp / 21 ch | **8 vols / 25 pp / 22 ch** |
+>
+> **Patrick's rule was right and it paid.** The unverified total was overstated by
+> roughly 45%, and the entire "inspect" tier was an artifact of a page-numbering
+> convention — see the systematic finding in Block 3.
+>
+> *(Historical hold notice retained below for the record.)*
+>
+> ---
+>
+> # ⛔ (superseded) ON HOLD — DO NOT CARRY YET (2026-07-25)
 >
 > **Patrick's standing rule: nothing goes to a library on an unverified count.**
 > Every count this project has produced without verification has been **overstated** —
@@ -144,17 +164,59 @@ Pull and check back matter + index of: **1913 · 1917 · 1919 · 1921 · 1923 ·
 
 ## BLOCK 3 — TIER 2, only if the day is going well (biggest first)
 
-Body-text loss, no named chapter lost. All audit-derived → **shoot ±3 and verify running heads.**
+> ### ✅ ALL 82 CLAIMED GAPS PIXEL-VERIFIED, 2026-07-25 — the list collapsed
+>
+> | | Claimed (June-29) | **Verified** |
+> |---|---:|---:|
+> | Printed pages | **175** | **~97** (+ ≤25 still adjudicating) |
+> | Volumes | **45** | **20** |
+> | Tier 3 "inspect" | 49 pp / 24 vols | **ZERO survive** |
+>
+> **28 CONFIRMED · ≥4 WRONG_LOCATION · ≥30 NOT_A_GAP · 50 divider-adjacent.**
+>
+> **The 1929 error was SYSTEMATIC.** 50 of 82 claimed gaps sit at the same
+> structural feature — the chapter-body → `CONCURRENT AND JOINT RESOLUTIONS`
+> transition. That is 2–4 scan pages yielding no top-strip digits: a blank verso,
+> an unnumbered divider half-title, and a section-opening page whose folio is a
+> **DROP FOLIO AT THE FOOT**, invisible to a top-strip reader. The audit's
+> monotone solver cannot represent "unnumbered but present," so it books an offset
+> step and **manufactures a gap** — right count, wrong location, ~50 times.
+>
+> **Every volume 1931–1967 in the packet (27 dirs, ~76 claimed pages) has NOT ONE
+> clean confirmed gap.** The entire odd-parity Tier 3 is divider artifact.
+>
+> Two further 1929 corrections: printed **1584 is NOT_A_GAP** (a duplicated scan
+> page), and 1974–1975 is again **WRONG_LOCATION** — true gap **1962–1963**, now
+> confirmed a third independent time.
 
-| Volume | Printed pages | Pages |
-|---|---|---|
-| 1990 Vol. 2 | 3295–3312 | 18 |
-| 1982 Vol. 2 | 2234–2245 | 12 |
-| 1991 Vol. 1 | 1244–1251; 1258–1259 | 10 |
-| 1982 Vol. 1 | 1256–1257; 1264–1265; 1282–1283; 1298–1299 | 8 |
-| 1953 Vol. 1 | 138–139; 299–300; 400–401; 514–515 | 8 |
+**These are the Tier-2 gaps that SURVIVED verification.** Body-text loss, no named chapter. Still shoot ±3 and read the running heads.
 
-**Everything beyond this → mail-order duplication request.** There is no reason body-text gaps need your one trip; the request text is in `ARCHIVES_VISIT_PACKET_2026-07-27.md` §5.
+| Volume | Printed pages | Pages | Status |
+|---|---|---|---|
+| **1990 Vol. 2** | 3295–3312 | 18 | ✅ confirmed |
+| **1982 Vol. 2** | 2234–2245 | 12 | ✅ confirmed |
+| **1991 Vol. 1** | 1244–1251; 1258–1259 | 10 | ✅ confirmed |
+| **1982 Vol. 1** | 1256–1257; 1264–1265; 1282–1283; 1298–1299 | 8 | ✅ confirmed |
+| **1983 Vol. 1** | 945–950 | 6 | ✅ confirmed |
+| **1989 Vol. 2** | 2128–2129; 2832–2835 | 6 | ✅ confirmed |
+| **1915 Vol. 1** | 1870–1871; **1548** | 3 | ✅ confirmed (1548 visually verified — text runs to the bottom of 1547) |
+| **1987 Vol. 2** | 2030–2031 | 2 | ✅ confirmed |
+| **1989 Vol. 1** | 1146–1147 | 2 | ✅ confirmed |
+| **1927 Vol. 1** | 1940 | 1 | ✅ confirmed (odd, clean) |
+| **1951 Vol. 1** | 1831 | 1 | ✅ confirmed (odd, clean) |
+| **1990 Vol. 4** | 6848 | 1 | ✅ confirmed (odd, clean) |
+
+**~70 pages across 11 volumes beyond Tier 1.** All post-1980 except 1915/1927/1951 — these are modern volumes, and a **mail-order duplication request handles them fine**. There is no reason they need your one trip.
+
+### ❌ REMOVED from the list — verified artifact
+
+**1953 Vol. 1 (all five claimed gaps), and every volume 1931–1967.** Worked example — 1953 Vol. 1: printed **137 is the last page of Ch. 14, ending mid-page with the bottom third blank**; the next scan page is the resolutions divider; the one after is printed **141**, with `( 141 )` printed **at the foot**. The claimed missing "138–139" are **the blank verso and the divider's blank side. No statute text exists on them.**
+
+### ⏳ Still adjudicating (~21 gaps)
+
+Divider-adjacent cases where the preceding page's text may or may not terminate. Measured by bottom-band ink density: ~29 are settled artifact (ratio ≤0.30, often 0.00), ~9 are partial and need eyes, ~12 run on and are real candidates — **but almost all of those sit at the boundary into the resolutions section, which is out of corpus scope anyway.**
+
+**Do not carry any of this group.**
 
 ---
 
