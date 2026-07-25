@@ -549,6 +549,46 @@ Also suspicious: **1875-76 ch.138 date moves to 1878** — a year that cannot ex
 
 **Phase 4 is blocked until these are explained.**
 
+---
+
+## 23. ✅ TRIP RECONCILED — `SACRAMENTO_TRIP_FINAL_2026-07-27.md`
+
+Both packets re-verified **from pixels** (Tesseract on rendered page-image top strips, cross-checked against consensus OCR). **Neither was safe to carry alone.**
+
+### ★ My 1929 pages were RIGHT — the June-29 "correction" is a false positive
+
+This **reverses §21's concession above.** Pixel-verified: printed **1961** (`Ch. 880`, mid-text) → **1964** (`Ch. 882`). **1962–1963 is the missing leaf**, exactly as the June-22 doc and my packet said.
+
+The June-29 packet's **1974–1975** sits on the **unnumbered `CONCURRENT AND JOINT RESOLUTIONS` section-divider half-title** (PDF 1973), which returns zero top-strip digits. `PAGE_CONTINUITY_AUDIT_2026-06-23.md:349` documents this exact failure: when an unreadable page sits between drops, the DP **merges** them — right *count*, wrong *location*. It reported the leaf 12 pages downstream. The volume's chapter body **ends** at printed 1973, so ch. 881 cannot be there.
+
+**Generalises:** every audit-derived range carries this localisation risk near dividers/plates/unreadable pages → **shoot ±3 and read running heads on site.**
+
+### ★ My worst defect: 1872 missing entirely
+
+**9 chapters** (125, 126, 127, 128, 363, 364, 417, 418, 538) across four leaves — **the largest single recovery on the trip**, and my packet dropped the volume while claiming to supersede the document that listed it. Verified: printed 130→135 and 513→517.
+
+### Other corrections to my packet
+- **1985 second leaf, printed 804–805** — real (inside Budget Act ch. 111 body, so the *chapter*-level scoreboard is structurally blind to it; that's why I never saw it).
+- **Missing tails**: 1929 ch. 880, 1986 ch. 1356.
+- **1972 ch. 517 IS in the June-29 page list** — I was wrong in §21. Only the *chapter annotation* was absent; both packets agree on printed 896–897.
+
+### What my packet uniquely got right, and was worth the session
+- **Venue.** The June-29 packet names no visit venue — only a mail-order contact block listing CSL **Government Publications** (*does not hold the title*), CSL **California History** (*closed Mondays*), and the **State Archives** (*bans phones and patron copying*). Following it would have cost the day. Witkin / `L325` / copy c.2 stands.
+- **1929 pages**, ch. 507 exclusion, the text-loss ("not title-only") warnings that protect the post-trip ingest, and the proposition presence check.
+
+### 175 pages is NOT actionable
+**45 distinct physical volumes** (not 49 — several `production-*` dirs are the same bound book). Retrieval, not photography, is the blocker: heavy folios, 3–5 simultaneous cap, ~3:30 paging cutoff → **7.5+ hours of logistics** in a 6.5-hour day. The June-29 packet is a **DRAFT** whose own status doc says not to treat it as the trip list.
+
+**Final: TIER 1 = 8 volumes / 25 needed pages / 21 chapters + 4 tails (~2–2.5 h), then the proposition check (~1 h), then Tier 2 biggest-first if time.** The 49 odd-parity pages **should not go to a library at all** — the 1929 finding means some are artifacts, and they are resolvable from page images already on the 5090 at zero cost.
+
+---
+
+## 24. Session renumbered cc019 → **cc021**
+
+The remote already used **cc019** (2026-06-23) *and* **cc020** (2026-06-29). This log is renamed via `git mv` to `SESSION_cc021_SUMMARY_2026-07-24_Parser_Defects_Residual_Recovery_And_Trip_Reconcile.md`. **The in-text "cc019" labels throughout this file and in the code comments refer to THIS session's work** and are left as-is — rewriting them across ~40 commit messages and dozens of code comments would be churn with no benefit. Read "cc019" in `pipeline/` comments as "the 2026-07-24 parser-defect session."
+
+`CHANGELOG.md`'s cc019 entry is likewise this session's; the remote's cc019 (page-continuity audit) is **not** in the CHANGELOG — part of the cc014–cc020 backfill gap already flagged.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

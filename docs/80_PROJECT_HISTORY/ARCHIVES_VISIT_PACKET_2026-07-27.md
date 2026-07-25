@@ -1,3 +1,20 @@
+> # ⛔ SUPERSEDED — DO NOT CARRY THIS
+> **Use `SACRAMENTO_TRIP_FINAL_2026-07-27.md`.**
+>
+> This packet was built on `ARCHIVES_SCAN_REQUEST_2026-06-22.md` on a branch that
+> did not yet have the `cc019`(remote)/`cc020` work. It has two material defects:
+> - **1872 is missing entirely** — 9 lost chapters across four leaves, the single
+>   largest recovery available on the trip.
+> - **1985's second leaf (printed 804–805) is missing** — real, verified.
+> - Also missing the ch. 880 (1929) and ch. 1356 (1986) tails.
+>
+> **What this packet got RIGHT and should be preserved:** the venue research
+> (Witkin, `L325`, copy c.2 — the June-29 packet's contacts would have sent you to
+> a section that does not hold the title, one closed on Mondays, and one that bans
+> photography), the **1929 pages 1962–1963** (the June-29 "correction" to 1974–1975
+> is a section-divider false positive), the ch. 507 exclusion, and the §3
+> proposition presence check. All carried forward into the FINAL list.
+
 # Archives Visit Packet — Monday 2026-07-27
 
 **Single non-repeatable visit. Verified against page-level PDF evidence on 2026-07-24 (cc019), not against the residual scoreboard.**
