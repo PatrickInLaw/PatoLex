@@ -1,5 +1,59 @@
 # Changelog
 
+> **⚠ GAP — cc014 through cc018 (2026-06-20 → 2026-06-23) are NOT recorded below.** That span covered the entire
+> OCR chapter-recall campaign (94.3% of 91 mapped years → **95,923 / 96,002 = 99.9%**, all 108 session-years
+> 1850–1999 mapped), the 1854 dual-series contents-anchored parse (174/174), the corpus scratch-root relocation to
+> `C:\PatoLex-scratch`, and the `production-<year>*` glob-vs-alias bug fix. Their session logs are in
+> `session-logs/claude-code/`. **Not backfilled here by cc019** — writing five sessions' history from second-hand
+> summaries would put unverified claims in the system of record, which is the failure this file exists to prevent.
+> Backfill from the session logs themselves when convenient.
+
+## 2026-07-24
+
+- **cc019 — the residual "71 machine-unreadable chapters" were never an OCR problem; all 71 recovered, and three
+  parser-grammar defects fixed.** The 71 biennial-era chapters (1866–1878) had been routed to human transcription
+  or an archivist re-scan. Both were unnecessary. All seven volumes are **native 300 DPI, 1-bit, crisply legible**
+  (300 DPI is the native ceiling — re-scanning gains nothing), and **71/71 were recovered** from each volume's own
+  printed CONTENTS table via the contents-anchored technique cc015 used for 1854. Split: **62 ordinary acts + 5
+  `[See volume of Amendments to the Codes.]` + 4 special enactment paths**. Full record:
+  `RESIDUAL_71_CONTENTS_RECOVERY_2026-07-24.md`; root cause:
+  `lessons/LESSON_2026-07-24_residual_71_is_parser_grammar_not_ocr.md`.
+  - **THE RESIDUAL CAN NEVER REACH ZERO AS DEFINED.** 1874 ch.587/679 and 1876 ch.306/497/498 read
+    `[See volume of Amendments to the Codes.]` — enacted (several carry bill numbers) but printed in the **companion
+    Amendments volume**. No re-OCR, re-read, or archive scan of these seven PDFs will ever produce them. They need
+    reclassification against another source, not recovery.
+  - **DEFECT 1 (fixed) — three enactment paths, not one.** Acts that became law **unsigned** (ten-day lapse) or
+    **over the Governor's veto** carry no `[Approved …]` bracket at all, so any detection anchored on it was
+    structurally blind to two constitutionally distinct routes to law. Wording is unstable (three phrasings for the
+    lapse alone). New spelled-out-date parser — the body prints *"this twenty-seventh day of February, A. D.
+    eighteen hundred and sixty-six"* and **no such parser existed anywhere in the pipeline**. `test_enactment_paths.py` 27/27.
+  - **DEFECT 2 (fixed) — em-dash chapter headings.** Heading punctuation varies by era: `CHAP. CXLIII.` (1866,
+    space) vs `CHAP.—XCI.` (1876/78, **em dash**). **Not one pattern in the entire pipeline matched the em-dash
+    form.** `_DASH` was already defined but used only in the trailing *"—An Act to…"* position. Canonical regex
+    **5/9 → 9/9** on real printed forms, 0 false positives.
+  - **DEFECT D (fixed) — headings that never say "An Act."** `is_confident_act` required `AN_ACT_RE`; 1876 ch.508
+    (`[An amendment to the Code…]`, printed p.772) and 1870 ch.427 (`Charter of the City of Stockton…`) defeat it.
+    Now accepts the enacting clause — the legally operative signal.
+  - **DEFECT 3 (partial) — residual bracket ranges.** Derived from the preceding chapter's START page, so they break
+    on long acts: for 1872 ch.125–128 the emitted range points at **chapter 128's own body** (true pages 221–222,
+    not 224–227). Fixed the truthiness bug (a `source_page` of 0 was silently dropped), replaced undocumented ±4
+    magic numbers, added implausible-span detection. **Forward-scan not implemented** — needs page text the function
+    never receives. `test_residual_bracket.py` 16/16.
+  - **DEFECT F — the printed volumes contradict themselves in BOTH directions.** 1874 ch.261: contents right (p.358),
+    **body** running head misprinted `CHAPTER CLXI.`. 1866 ch.342: **contents** misprinted `242`, body fine.
+    **Neither source is trustworthy alone; agreement between contents and body is the reliable signal** — a free
+    cross-check, since both ship in every volume.
+  - **The date-extraction test suite was DEAD**, and had been since the module reorg — `test_date_parser_fix.py:68`
+    pointed at a path that no longer existed, so it died at import before its first assertion. **Zero live coverage
+    on `parse_act_date`.** `5080/parse_born_digital.py` had been unloadable for the same reason. Nothing caught
+    either: **the repo has no CI**, and `smoke_imports.py` is AST-based while the broken reference was a string path.
+  - **Archives visit packet** for 2026-07-27 (`ARCHIVES_VISIT_PACKET_2026-07-27.md`): venue double-verified as the
+    **Witkin State Law Library** (914 Capitol Mall, call number **L325**, copy c.2) — the State Archives at 1020 O St
+    **bans cell phones and patron copying of bound volumes**. Missing-leaf count corrected from the disputed 8/9 to
+    **9 fully-missing + 3 partial across 7 volumes**, all page ranges pixel-verified; 1972 Vol.1 ch.517 added (it was
+    omitted from the scan request). HathiTrust's **complete 19.5M-volume inventory** was scanned: six of seven
+    volumes are digitized nowhere.
+
 ## 2026-06-19
 
 - **cc013 — session-number remodel: oracle re-keyed on canonical session id; the missing 14th session (1863) added.**

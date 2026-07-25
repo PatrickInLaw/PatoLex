@@ -206,6 +206,16 @@ Still owed: this recovers **identity** (number, title, date, bill, page), **not 
 
 ---
 
+---
+
+## 11. Durable-doc hygiene
+
+- **`CHANGELOG.md`** — added the cc019 entry, and a **prominent gap banner** for cc014–cc018 (2026-06-20→23), which were entirely absent. **Deliberately NOT backfilled:** writing five sessions' history from second-hand summaries would put unverified claims into the system of record, which is the failure that file exists to prevent. Their session logs are the source; backfill from those.
+- **`ROADMAP.md`** — added a status banner rather than rewriting. The scope doc is the source of truth and restructuring it is Patrick's call, not a side effect of a parser session. The banner records five corrections, two of which are new work items:
+  - **A new prerequisite is implied:** the corpus **cannot be complete without the *Amendments to the Codes* volumes.** Chapters marked `[See volume of Amendments to the Codes.]` were enacted but printed there — 5 confirmed among the residual alone, **nine on a single 1876 contents page.** No existing prerequisite covers acquiring them.
+  - **Prerequisite (5)'s "51 acts wrong date" is likely an undercount** — the three defects ran across the entire OCR era, not just the residual. Re-measure after a reparse.
+- **`ARCHIVES_VISIT_PACKET_2026-07-27.md` §4** — closed; the 71 are recovered, nothing from them belongs on any list.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

@@ -183,7 +183,19 @@ Voter-approved initiatives amend statutes outside the "Chapter N" pipeline, so P
 
 ---
 
-## 4. TASK C — What NOT to scan (settled 2026-07-24)
+## 4. TASK C — What NOT to scan (CLOSED 2026-07-24 — all 71 recovered)
+
+> **★ UPDATE, same day: all 71 have since been RECOVERED from the volumes' own printed CONTENTS tables.**
+> Chapter number, act title, enactment date, bill number and printed page are captured for every one — see
+> `RESIDUAL_71_CONTENTS_RECOVERY_2026-07-24.md`. This section is now historical. **Nothing from the 71 belongs on
+> any list, in any form, for any reason.**
+>
+> Note also: **five of them were never in these volumes at all** — 1874 ch. 587/679 and 1876 ch. 306/497/498 read
+> `[See volume of Amendments to the Codes.]`. Their text is in the companion *Amendments to the Codes* volume. If
+> you happen to be standing in a library with that volume on the shelf, **that** is worth a look — but it is a
+> different book from the seven in §2, and it is not part of this trip's plan.
+
+
 
 **Do NOT put the 71 "human-review" chapters on any scan or photo list.** (1866:10, 1868:1, 1870:9, 1872:14, 1874:4, 1876:22, 1878:11 — tracked in `HUMAN_REVIEW_LIST_2026-06-22.md`.)
 

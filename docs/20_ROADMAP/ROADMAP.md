@@ -1,5 +1,28 @@
 # Roadmap
 
+> ## ⚠ STATUS BANNER — 2026-07-24 (cc019)
+>
+> **The "Current Status" section below was last revised 2026-06-09 (cc006) and does not reflect cc014–cc019.**
+> It is left intact rather than rewritten — restructuring the source-of-truth scope doc is Patrick's call, not a
+> side effect of a parser session. Corrections that supersede text below:
+>
+> - **OCR chapter recall finished at 99.9%** — 95,923 / 96,002, all 108 session-years 1850–1999 mapped (cc015–cc018).
+>   The "99.5%" figure below is stale.
+> - **The residual 71 "machine-unreadable" chapters are RECOVERED (71/71)** and were never an OCR problem — see
+>   `docs/80_PROJECT_HISTORY/RESIDUAL_71_CONTENTS_RECOVERY_2026-07-24.md`.
+> - **Prerequisite (5) is now partly done.** The parser fix for 19th-c Roman-numeral headings + `chaptered_date`
+>   landed in cc019 — but it was **three defects, not one**: em-dash headings (no pattern in the pipeline matched
+>   `CHAP.—XCI.`), acts that became law **unsigned or over the Governor's veto** (no `[Approved …]` bracket at all),
+>   and headings that never say "An Act". **These ran across the entire OCR era, not just the residual — the "51 acts
+>   wrong date" figure is likely an undercount and should be re-measured after a reparse.**
+> - **A new prerequisite is implied:** chapters marked `[See volume of Amendments to the Codes.]` were enacted but
+>   printed in a **companion volume** we do not hold in this series (5 confirmed among the residual alone; nine on a
+>   single 1876 contents page). **The corpus cannot be complete without the Amendments-to-the-Codes volumes**, and no
+>   current prerequisite covers acquiring them.
+> - **Track 2 (propositions):** retrieval is complete (97/97 files, none corrupt), but **7 elections 1911–1924 have no
+>   measures section anywhere in the Chief Clerk series**, and measures for **1993–2008 are embedded in the monolithic
+>   `YYYY_Vol1.pdf`** (1996+ born-digital, needing no OCR) — so the design doc's volume count is ~16 years short.
+
 ## Current Status
 
 **Gate:** Between E and F — **the historical OCR campaign is COMPLETE; the modern layer (Gate F) is largely built.**
