@@ -636,6 +636,47 @@ Of the 8 date moves: **2 true improvements** (lapse dates firing as designed), *
 
 **111/111 tests, suite 11/11.**
 
+---
+
+## 26. Verification run — fixes 1+4 confirmed, 3 was half-done, 2 opened a hole
+
+| | First run | After regression fixes |
+|---|---|---|
+| chapters gained | 295 | **465** |
+| chapters LOST | 31 | **23** (6 intended) |
+| `unsigned_lapse` | 0 | **977** |
+| `veto_override` | 0 | **still 0** ← broken |
+| new duplicate keys | — | 31 (reporting works) |
+| baseline fidelity | 208/208 | 208/208, zero mismatches |
+
+Nothing written — 5 volumes byte-identical (size+mtime+MD5), worklist unchanged at 576,092 bytes, safety test 16/16.
+
+### `veto_override` was unreachable across all 70,408 acts
+
+`detect_enactment_path` nested the veto check **inside** the lapse check — it required `_LAPSE_CORE` ("became a law") to match first. **But the body form of a veto override never says that.** Only the **contents table** uses that wording, and the parser reads bodies. The real body wording, quoted verbatim from the corpus by the flagged-acts triage:
+
+> *"Passed the Assembly notwithstanding the veto of the Governor, by the requisite Constitutional majority, January 31, 1855"*
+
+The branch could never fire. Fixed two ways: `VETO_OVERRIDE_RE` gains the body forms, and the veto check is now **independent** of the lapse check.
+
+**Why my tests missed it:** I built that classifier's fixtures from **contents-table** wording. The unit tests passed because I fed them the input distribution the code was written against — the same class of error as "a tested function that nothing calls": right function, **wrong input distribution**.
+
+### Fix 2 traded a false positive for a false negative
+
+**1917 ch. 55** is unambiguously *"Senate Concurrent Resolution No. 24"*, but its first content line OCR'd as **`Wuenrrss, By an act entitled…`** — a garbled "WHEREAS,". No arm of `RESOLUTION_HEAD_RE` fired, so it passed as a **confident act**. The old offset-based guard caught it; my first-content-line guard did not.
+
+Added an OCR-tolerant WHEREAS arm, deliberately tight (W/V + a single 6–11 letter word ending in `s` + comma + an expected continuation), with negative tests asserting it does **not** fire on act titles, `"Witnesses,"`, `"Whenever…"`, or the enacting clause. All three acts recovered by fix 2 remain confident.
+
+### Remaining, NOT fixed
+
+**17 unexplained losses** (23 − 6 intended), 16 in the 1858–1877 OCR-garbled early era plus **1862 ch. 10** — a **boundary-shift artifact** of fix 1: the loosened marker re-split pages 51–55 and ch. 10's header at p. 53 is now swallowed by the new ch. 9 boundary. Real text, not lost OCR, but a real confident-act regression.
+
+**1862 ch. 21 and ch. 63 are recovered as acts but flagged** — their dates OCR'd `"Fubruury 20, 1862"` and `"3larch 15, 1862"`. That's the **date** parser, not the marker regex.
+
+**7 of the 9 date-moves** sit on chapters that also appear in the new-duplicate-key list, so per the harness's own hazard note they are most likely key collisions rather than re-reads. **1875-76 ch. 138 → 1878** (a year outside the volume) is the one that still looks actively wrong.
+
+**126/126 tests, suite 11/11.**
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

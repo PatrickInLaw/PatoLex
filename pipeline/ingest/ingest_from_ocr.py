@@ -760,7 +760,15 @@ LAPSE_NUMERIC_RE = re.compile(
 VETO_OVERRIDE_RE = re.compile(
     r"over\s+the\s+Governor'?s?\s+objection"
     r"|constitutional\s+majority\s+of\s+both\s+Houses"
-    r"|notwithstanding\s+the\s+objections\s+of\s+the\s+Governor",
+    r"|notwithstanding\s+the\s+objections?\s+of\s+the\s+Governor"
+    # cc021: the BODY form. The contents table prints "became a law by a
+    # constitutional majority ... over the Governor's objections", but the act
+    # ITSELF prints the passage record, which does NOT contain "became a law":
+    #     "Passed the Assembly notwithstanding the veto of the Governor, by the
+    #      requisite Constitutional majority, January 31, 1855"
+    # Missing this is why veto_override was 0 across the whole corpus.
+    r"|notwithstanding\s+the\s+veto\s+of\s+the\s+Governor"
+    r"|Passed\s+the\s+(?:Assembly|Senate)\s+notwithstanding",
     re.IGNORECASE,
 )
 
@@ -798,7 +806,16 @@ RESOLUTION_RE = re.compile(
 RESOLUTION_HEAD_RE = re.compile(
     r"^\W{0,4}(?:(?:Senate|Assembly)\s+)?(?:Concurrent|Joint)\s+Resolution\b"
     r"|^\W{0,4}Resolution\s+No\b"
-    r"|^\W{0,4}Resolved\s*,?\s+by\s+the\s+(?:Assembly|Senate)\b",
+    r"|^\W{0,4}Resolved\s*,?\s+by\s+the\s+(?:Assembly|Senate)\b"
+    # cc021: a WHEREAS preamble, OCR-tolerant. Measured leak -- 1917 ch.55 is
+    # unambiguously "Senate Concurrent Resolution No. 24", but its first content
+    # line OCR'd as "Wuenrrss, By an act entitled..." so none of the arms above
+    # fired and it passed as a confident ACT.
+    # An act's first content line is its TITLE ("An act to..."); only a
+    # resolution opens with a WHEREAS preamble. Kept tight: must start with W/V,
+    # be a single 6-11 letter word ending in s, then a comma, then one of a few
+    # expected continuations -- so it cannot fire on ordinary prose or a title.
+    r"|^\W{0,4}[WV][A-Za-z]{4,9}[sS]\s*[,.]\s+(?:By|That|the|it|in|whereas)\b",
     re.IGNORECASE,
 )
 
@@ -836,9 +853,18 @@ def detect_enactment_path(text):
     """
     if not text:
         return ENACTMENT_PATH_APPROVED
+    # cc021 FIX: veto override is checked INDEPENDENTLY, not nested inside the
+    # lapse check. The first version required _LAPSE_CORE ("became a law") to
+    # match first -- but the BODY form of a veto override never says that:
+    #     "Passed the Assembly notwithstanding the veto of the Governor, by the
+    #      requisite Constitutional majority, January 31, 1855"
+    # Only the CONTENTS table uses the "became a law by a constitutional
+    # majority ... over the Governor's objections" wording, and the parser reads
+    # bodies, not contents. Result: veto_override was 0 across all 70,408 acts
+    # in the corpus -- the branch was effectively unreachable.
+    if VETO_OVERRIDE_RE.search(text):
+        return ENACTMENT_PATH_VETO_OVERRIDE
     if re.search(_LAPSE_CORE, text, re.IGNORECASE):
-        if VETO_OVERRIDE_RE.search(text):
-            return ENACTMENT_PATH_VETO_OVERRIDE
         return ENACTMENT_PATH_UNSIGNED
     return ENACTMENT_PATH_APPROVED
 

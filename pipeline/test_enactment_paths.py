@@ -569,6 +569,69 @@ check("heading-only first line falls through to the next",
       _ing.opening_line("CHAPTER 55.\nSenate Concurrent Resolution No. 6").startswith("Senate"), True)
 check("empty input -> empty string", _ing.opening_line(""), "")
 
+
+# ===========================================================================
+# VERIFICATION-RUN FIXES (2026-07-25). The re-run diff confirmed fixes 1 and 4,
+# but found veto_override still 0 corpus-wide and one new resolution leak.
+# ===========================================================================
+
+print("\n=== VER-1: veto_override must fire on the BODY form ===\n")
+# The corpus body NEVER says "became a law" for a veto override -- only the
+# CONTENTS table does, and the parser reads bodies. Verbatim corpus wording:
+VETO_BODY_FORM = ("Passed the Assembly notwithstanding the veto of the Governor, by the "
+                  "requisite Constitutional majority, January 31, 1855.")
+check("body-form veto override detected",
+      _ing.detect_enactment_path(VETO_BODY_FORM), _ing.ENACTMENT_PATH_VETO_OVERRIDE)
+check("VETO_OVERRIDE_RE matches 'notwithstanding the veto of the Governor'",
+      bool(_ing.VETO_OVERRIDE_RE.search(VETO_BODY_FORM)), True)
+# The contents form must still work.
+check("contents-form veto override still detected",
+      _ing.detect_enactment_path(CONTENTS_1870_CH143), _ing.ENACTMENT_PATH_VETO_OVERRIDE)
+# ...and a plain lapse must NOT be mislabelled as a veto override.
+check("plain lapse is still unsigned_lapse, not veto",
+      _ing.detect_enactment_path(CONTENTS_1870_CH431), _ing.ENACTMENT_PATH_UNSIGNED)
+check("ordinary signed act unaffected",
+      _ing.detect_enactment_path(CONTENTS_1876_CH91), _ing.ENACTMENT_PATH_APPROVED)
+
+print("\n=== VER-2: garbled WHEREAS preamble is a resolution ===\n")
+# 1917 ch.55 -- a genuine "Senate Concurrent Resolution No. 24" that LEAKED
+# THROUGH as a confident act because its first content line OCR'd as
+# "Wuenrrss, By an act entitled...".
+CH55_1917 = (
+    "CHAPTER 55.\n"
+    "Wuenrrss, By an act entitled an act granting certain tidelands to the city "
+    "of San Diego, approved May 1, 1911, certain lands were granted; and\n"
+    "Wuenrrss, It is desirable that the terms of said grant be clarified; now, "
+    "therefore, be it\n"
+    "Resolved by the Senate, the Assembly concurring, That the Legislature "
+    "hereby requests the Attorney General to institute proceedings.\n"
+    "[Filed with Secretary of State April 2, 1917.]"
+)
+check("garbled-WHEREAS resolution IS rejected",
+      _ing.is_confident_act(CH55_1917, volume_year=1917), False)
+check("RESOLUTION_HEAD_RE matches the garbled WHEREAS line",
+      bool(_ing.RESOLUTION_HEAD_RE.search("Wuenrrss, By an act entitled an act granting")), True)
+check("clean WHEREAS also matches",
+      bool(_ing.RESOLUTION_HEAD_RE.search("WHEREAS, By an act entitled")), True)
+
+# ...but the WHEREAS arm must NOT fire on act titles or ordinary prose.
+for not_res in [
+    "An act to provide for the funding of the levee indebtedness of the City of Marysville.",
+    "Witnesses, being duly sworn, shall be examined in open court.",
+    "The People of the State of California, represented in Senate and Assembly",
+    "Whenever the Board of Supervisors shall determine that a road is necessary",
+]:
+    check("WHEREAS arm does NOT fire on %r" % not_res[:38],
+          bool(_ing.RESOLUTION_HEAD_RE.search(not_res)), False)
+
+# And the three real acts recovered by fix 2 must STILL be confident.
+check("1897 ch.118 still confident",
+      _ing.is_confident_act(REAL_ACT_NAMING_A_RESOLUTION, volume_year=1897), True)
+check("1937 ch.933 still confident",
+      _ing.is_confident_act(MODERN_ACT_BLEEDING_INTO_RESOLUTIONS, volume_year=1937), True)
+check("1871-72 ch.637 still confident",
+      _ing.is_confident_act(CH637, volume_year=1872), True)
+
 print("\n" + "=" * 60)
 print("Results: %d passed, %d failed" % (PASS, FAIL))
 print("=" * 60)
