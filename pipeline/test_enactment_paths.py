@@ -632,6 +632,117 @@ check("1937 ch.933 still confident",
 check("1871-72 ch.637 still confident",
       _ing.is_confident_act(CH637, volume_year=1872), True)
 
+
+# ===========================================================================
+# cc021 APPROVAL CONNECTOR (2026-07-25). Measured across all 208 volumes:
+# the dominant flagged_acts cause was NOT a mangled keyword (60-77 acts) but
+# STRICT ADJACENCY between an intact keyword and an intact date -- with a
+# garbled "by Governor" sitting in the gap. Every fixture below is a real
+# corpus form from that measurement.
+# ===========================================================================
+
+print("\n=== KW-1: garbled 'by Governor' connector (the 1,364-act fix) ===\n")
+_CONNECTOR_FORMS = [
+    ("Approved by Governor March 4, 1889.", "1889-03-04"),
+    ("Approved hy Governor March 4, 1889.", "1889-03-04"),
+    ("Approved bv Governor March 4, 1889.", "1889-03-04"),
+    ("Approved by the Governor March 4, 1889.", "1889-03-04"),
+    ("Approved by Guvernor March 4, 1889.", "1889-03-04"),
+    ("Approved by Covernor March 4, 1889.", "1889-03-04"),
+    ("Approved bs Governor March 4, 1889.", "1889-03-04"),
+    ("Approved by Governo: March 4, 1889.", "1889-03-04"),
+    ("Filed with Secretary of State March 4, 1889.", "1889-03-04"),
+]
+for text, want in _CONNECTOR_FORMS:
+    check("connector %r" % text[:38], _ing.parse_act_date(text, volume_year=1889)[0], want)
+
+print("\n=== KW-2: K2 keyword garbles ===\n")
+for text, want in [
+    ("Pussed March 20, 1850.", "1850-03-20"),
+    ("Paseed March 27, 1850.", "1850-03-27"),
+    ("Arprovep March 30, 1852.", "1852-03-30"),
+    ("Approven, May 4, 1852.", "1852-05-04"),
+]:
+    check("keyword %r" % text[:26], _ing.parse_act_date(text, volume_year=int(want[:4]))[0], want)
+
+print("\n=== KW-3: the connector must NOT become a blanket gap ===\n")
+# KNOWN PRE-EXISTING LIMITATION, documented not asserted away.
+# A cross-reference date inside an amending clause ("...to amend an Act approved
+# April 30th, 1855...") is ADJACENT to the keyword, so the baseline parser
+# already matched it and returned the FIRST in-window hit. The connector does not
+# cause this and does not fix it. An earlier draft of this test asserted the
+# corrected answer -- i.e. claimed a fix that was never made. Recording the real
+# behaviour instead.
+#
+# This IS the 22-FP class the measurement found for the rejected blanket-gap
+# option; it exists at baseline too, at lower volume. Fixing it needs
+# approval-line POSITION logic, not keyword tolerance. Not attempted here.
+CROSSREF = ("An Act to amend an Act approved April 30th, 1855, relating to the "
+            "office of County Surveyor. Approved March 12, 1856.")
+check("cross-reference date wins (PRE-EXISTING, not caused by the connector)",
+      _ing.parse_act_date(CROSSREF, volume_year=1856)[0], "1855-04-30")
+
+# Arbitrary prose between keyword and month must NOT bridge.
+for text in [
+    "Approved in principle by the committee on ways and means March 4, 1889.",
+    "Approved for publication in the several newspapers of March 4, 1889.",
+]:
+    check("non-Governor prose does NOT bridge: %r" % text[:40],
+          _ing.parse_act_date(text, volume_year=1889)[0], None)
+
+print("\n=== KW-4: existing behaviour unchanged ===\n")
+check("plain adjacent approval still parses",
+      _ing.parse_act_date("[Approved February 18, 1876.]", volume_year=1876)[0], "1876-02-18")
+check("modern 'Approved by Governor' still parses",
+      _ing.parse_act_date("Approved by Governor February 28, 2008.", volume_year=2008)[0],
+      "2008-02-28")
+check("bare ordinal day still parses",
+      _ing.parse_act_date("Approved March 2d, 1880.", volume_year=1880)[0], "1880-03-02")
+check("no date still returns None",
+      _ing.parse_act_date("SEC. 2. This Act shall take effect immediately.",
+                          volume_year=1876)[0], None)
+check("year clamp still rejects out-of-window",
+      _ing.parse_act_date("Approved by Governor March 4, 1889.", volume_year=1950)[0], None)
+
+
+print("\n=== REG-3: 1862 ch.10 -- the ONE true regression of the 17 ===\n")
+# My first ENACT_MARKER_RE loosening was ASYMMETRIC: it tolerated rot in the
+# SECOND "of" but left the FIRST literal. 1862 ch.10's clause is hit in both
+# places, so both arms failed and flush_act DROPPED THE ACT ENTIRELY -- no
+# record, not even flagged, so it never reached the review worklist. Verbatim:
+CH10_1862_CLAUSE = ("The Prople af the State of California, represented in Senaie and "
+                    "Assembly, du enact an fellows:")
+check("1862 ch.10 clause now recognised", _ing.has_enact_marker(CH10_1862_CLAUSE), True)
+# Co-resident ch.11 -- rot in BOTH "of" slots.
+check("1862 ch.11 clause ('People af the State af California') recognised",
+      _ing.has_enact_marker("The People af the State af California, represented in Senate"),
+      True)
+# Other real follow-word garbles from the same volumes.
+for v in ["du enact an fellows", "do enact as filloes", "do enact ax folluics"]:
+    check("follow-word garble %r" % v, _ing.has_enact_marker(v), True)
+
+# The full act must now be confident -- its own [Approved] parses cleanly.
+CH10_1862 = (
+    "Crap. X.--An Act amendutory of and supplemental to an Act entitled an Act to "
+    "grant the right to construct a Turnpike Road between the Town of Jackson and "
+    "Ione City, in the County of Amador.\n"
+    "[Approved February 11, 1862.]\n"
+    + CH10_1862_CLAUSE + "\n"
+    "SECTION 1. The rights and privileges granted by the Act to which this is "
+    "amendatory are hereby extended for the term of five years from the passage hereof."
+)
+check("1862 ch.10 is a confident act again",
+      _ing.is_confident_act(CH10_1862, volume_year=1862), True)
+
+# Guard: the widened clause must still not fire on ordinary prose.
+for prose in [
+    "The people af this county have long desired a road to the valley.",
+    "and the State of Nevada shall be reimbursed for all expenses",
+    "due enactment of the foregoing shall follow the usual course",
+]:
+    check("prose still NOT an enacting clause: %r" % prose[:38],
+          _ing.has_enact_marker(prose), False)
+
 print("\n" + "=" * 60)
 print("Results: %d passed, %d failed" % (PASS, FAIL))
 print("=" * 60)

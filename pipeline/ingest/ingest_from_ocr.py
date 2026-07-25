@@ -497,9 +497,23 @@ AN_ACT_RE = re.compile(r"\bAn?\s+A[CEO][TI]\b", re.IGNORECASE)
 # The "People of the State [oa][fa] C..." arm still requires five literal anchor
 # words, so it cannot fire on ordinary prose. The "do en.. a. foll.." arm is
 # bounded on both sides by literal "do" and "foll", so its loose middle is safe.
+# cc021 ROUND 2 -- AN ASYMMETRY I INTRODUCED, and it cost a real statute.
+# The first attempt loosened the SECOND "of" ("State [oa][fa] California") but
+# left the FIRST one literal. 1862 ch.10 prints:
+#     "The Prople af the State of California, represented in Senaie and"
+#     "du enact an fellows"
+# -- the rot is in the FIRST "of", and "do"/"follows" are hit too. Both arms
+# failed, and flush_act's `if not has_enact_marker(full): return` DROPPED THE ACT
+# WITH NO RECORD AT ALL -- not even in flagged_acts, so it never reaches the
+# review worklist. Its own "[Approved February 11, 1862.]" parses cleanly; that
+# single gate was the only thing standing between it and full confidence.
+# Also recovers the co-resident 1862 ch.11 ("The People af the State af
+# California").
+# Loosened symmetrically: both "of" slots, "do" -> d[ou], and the follow-word to
+# f[aeiou]l... ("fellows", "filloes", "folluics" all occur).
 ENACT_MARKER_RE = re.compile(
-    r"P[eo]ople\s+of\s+the\s+State\s+[oa][fa]\s+C[a-z]{5,12}"
-    r"|do\s+en[a-z]{2,4}\s+a[a-z]\s+foll[a-z]*",
+    r"P[er]?[eo]ple\s+[oa][fa]\s+the\s+State\s+[oa][fa]\s+C[a-z]{5,12}"
+    r"|d[ou]\s+en[a-z]{2,4}\s+a[a-z]\s+f[aeiou]l[a-z]*",
     re.I,
 )
 _MONTHS = (
@@ -508,12 +522,75 @@ _MONTHS = (
     r"|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?"
     r"|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
 )
-_KW = r"(?:A[Pp]{1,3}[Rr]{1,3}[Oo]?[Vv]\w{0,6}|Pass(?:ed)?)"
+# ===========================================================================
+# cc021 (2026-07-25) -- THE DOMINANT flagged_acts CAUSE, and it was NOT what
+# anyone assumed.
+#
+# 7,822 acts sit in flagged_acts corpus-wide. 99.4% carry BOTH "An Act" and an
+# enacting clause and are >=200 chars; ZERO fail the length gate. The date gate
+# is essentially the only thing flagging them.
+#
+# The assumed cause was a mangled approval KEYWORD ("Pussed March 20, 1850",
+# "Arprovep. Avril 30. 1852"). MEASURED ACROSS ALL 208 VOLUMES: fixing keyword
+# spelling alone recovers 60-77 acts. A rounding error.
+#
+# THE REAL CAUSE IS STRICT ADJACENCY. Holding _KW completely unchanged and only
+# allowing a gap between it and the month: 2 -> 1,598 recoveries. 800x, with no
+# keyword change at all. Gap-length is bimodal -- 3.4% of gaps are <=10 chars,
+# then it jumps to 48% at <=15 and 85% at <=40. That cliff is exactly the width
+# of one phrase:
+#     239 " by Governor "     236 " hy Governor "    100 " bv Governor "
+#      84 " by the Governor "   40 " by Guvernor "     36 "tary of State "
+#      27 " by Governo: "       26 " bs Governor "     24 " by Covernor "
+#
+# APPROVED_MODERN_RE ALREADY models this idiom -- but it requires the LITERAL
+# strings "Governor" / "Secretary of State", so every OCR variant falls through
+# to APPROVED_RE, which then dies on adjacency.
+#
+# FIX CHOSEN: a TARGETED connector arm, not a blanket gap. Measured:
+#     K2 + guarded 40-char gap   1,748 recovered / 22 earlier-date FPs   (79:1)
+#     K2 + fuzzy-Governor arm    1,364 recovered /  1 earlier-date FP  (1364:1)
+# The blanket gap is a LOOSENING that admits cross-reference prose ("proved
+# April 30th, 1855" inside an amending clause on an 1856 act). The connector arm
+# fixes an actual unmodeled idiom. For a corpus ingested exactly once, a flagged
+# record is VISIBLE and recoverable later; a wrong date is SILENT and permanent.
+#
+# A POSITIONAL rule (accept a bare Month-DD-YYYY triple in the head window) was
+# measured and REJECTED: 3,701 recovered but 491 earlier-date FPs -- a 1.5%
+# corruption rate on confident acts vs 0.21% here. 12.8% of its no-keyword tier
+# sits in OPERATIVE-date language ("shall take effect ... July 1, 1909"), which
+# would stamp a wrong date on a real act.
+#
+# STILL MISSES ~4,000 (51%): 1,049 have a clean month but a corrupt year
+# ("Approven, May 4, 185"), 112 need a fuzzy month ("Avril", "jApal"), 203
+# neither. Day/year/month corruption is a separate axis this does not touch.
+# ===========================================================================
+#
+# K2 keyword: adds garbled APPROVED/PASSED forms. Worth only ~77 acts alone, but
+# combined with the connector arm it lifts 1,108 -> 1,364 at the same 1 FP.
+_KW = (r"(?:[AP][A-Za-z]{1,4}[OoUu0][VvUuYy][A-Za-z]{0,5}"
+       r"|A[Pp]{1,3}[Rr]{1,3}[Oo]?[Vv]\w{0,6}"
+       r"|P[A-Za-z]{2,4}[Ee][Dd]"
+       r"|Pass(?:ed)?)")
+
+# The connector between keyword and date. OPTIONAL, and it must CONTAIN a
+# recognisable Governor / Secretary-of-State token -- that requirement is what
+# keeps it from behaving like a blanket gap and swallowing cross-reference prose.
+# Cannot cross a sentence boundary or a newline.
+_APPROVAL_CONNECTOR = (
+    r"(?:[^\n.;:]{0,20}?"
+    r"(?:[GC][a-z]{0,3}[vu][a-z]{0,4}n[a-z]{0,2}"   # Governor / Guvernor / Covernor / Governo
+    r"|tary\s+of\s+State)"                           # (Secre)tary of State
+    # Trailing slack allows the punctuation the OCR often leaves on the token
+    # itself ("by Governo:" is a real corpus form, 27 instances). Kept short and
+    # lazy so it cannot run into the next sentence.
+    r"[^\n;]{0,12}?)?"
+)
 # Year broadened from the old 18[3-9]\d (1830-1899, which caused the
 # confirmed 1900 date-cliff) to 1850-2008+: (?:18|19|20)\d\d.
 _YEAR = r"((?:18|19|20)\d\d)"
 APPROVED_RE = re.compile(
-    _KW + r"\s*[,.]?\s*" + r"(" + _MONTHS + r")"
+    _KW + _APPROVAL_CONNECTOR + r"\s*[,.]?\s*" + r"(" + _MONTHS + r")"
     # Day ordinal suffix allows bare "d" ("2d", "3d", "23d") -- the standard
     # 19th-century legal-printing abbreviation for "nd"/"rd". Without it the
     # 1877-1910 general statutes hit a date-cliff (many "Approved <Mon> Nd, YYYY"

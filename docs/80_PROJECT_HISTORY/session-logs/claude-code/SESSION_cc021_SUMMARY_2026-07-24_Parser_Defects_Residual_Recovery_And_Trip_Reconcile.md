@@ -677,6 +677,81 @@ Added an OCR-tolerant WHEREAS arm, deliberately tight (W/V + a single 6–11 let
 
 **126/126 tests, suite 11/11.**
 
+---
+
+## 27. ★ The "23 lost chapters" were 1 real loss + 16 acts losing FRAUDULENT confidence
+
+**16 of 17 are present** with correct chapter number, header, and correctly-bounded text. They lost only *confidence* — **and the confidence they lost was fraudulent.**
+
+The old parser couldn't match the very common OCR form `Cuap, LV.—` (comma for period), so it emitted **merged blobs, not acts**:
+
+| Act | BEFORE buffer | AFTER |
+|---|---|---|
+| 1862 ch. 21 | **32,392 chars** | 2,031 |
+| 1858 ch. 357 | **41,969 chars** | 868 |
+| 1875-76 ch. 170 | 11,892 | 824 |
+
+Each blob held the act's **own garbled** `[Approved …]` *plus the clean dates of the following acts* — and `parse_act_date` grabbed a downstream one. **Demonstrably wrong in 5 cases:** 1858 ch. 357 carried ch. 358's date; 1863 ch. 3 (which prints **no date at all**) carried ch. 55's; 1862 ch. 21 emitted Feb 25 when its own text says "Fubruury 20".
+
+The "lost" text isn't lost — it's the *following* acts, now emitted as their own confident records. Confident counts **rose** in every affected volume: 1858 223→263, 1860 122→147, 1862 115→142, 1877-78 318→344.
+
+| Bucket | n |
+|---|---|
+| Genuine regression | **1** |
+| Correct behaviour (1 stub, 4 year-clamp) | 5 |
+| Date-parser failures a separate fix recovers | 11 |
+
+The 11 are garbled **months** (`Marcb`, `Jantary`, `3larch`, `Fubruury`), garbled **days** (`JJ`, `9%`, `80`), and one unsigned act whose only date is an SoS certification.
+
+### The one real regression — an asymmetry I introduced
+
+**1862 ch. 10.** My first `ENACT_MARKER_RE` loosening tolerated rot in the **second** "of" but left the **first** literal:
+
+> *"The Prople **af** the State **of** California… **du enact an fellows**"*
+
+Both arms failed, and `flush_act`'s `if not has_enact_marker(full): return` **dropped the act with no record at all** — not even flagged, so it never reached the review worklist. Its own `[Approved February 11, 1862.]` parses cleanly.
+
+Loosened symmetrically; also recovers co-resident ch. 11. **Boundary evidence:** on pages 50–56 the old parser emitted **3** acts, the new one emits **6**. Ch. 10 was the sole casualty of an otherwise large improvement.
+
+### 1875-76 ch. 138 — the true act was never lost
+
+Both acts are confident; the **true ch. 138 is byte-identical to BEFORE**. The "date moved to 1878" signal is a **pure measurement artifact** — a chapter-keyed dict takes the first record in reading order and masks the intact one behind it.
+
+Two real but *pre-existing* defects remain: the recovered act is mis-keyed 138 when its true chapter is **137** (printed `CXXXVII.` with the period read as `L`), and its year is an OCR misread of 1876 that the **±3 clamp admitted at delta 3**.
+
+---
+
+## 28. The approval-keyword premise was also wrong — 800× was hiding in adjacency
+
+Measured across all 208 volumes: fixing keyword **spelling** recovers **60–77 acts. A rounding error.**
+
+**The real blocker is strict adjacency.** `_KW` unchanged, gap allowed: **2 → 1,598**. What's in the gap is one phrase:
+
+```
+239 " by Governor "   236 " hy Governor "   100 " bv Governor "
+ 84 " by the Governor "  40 " by Guvernor "   36 "tary of State "
+```
+
+`APPROVED_MODERN_RE` **already models this idiom** but demands the literal strings, so every OCR variant falls through to `APPROVED_RE` and dies on adjacency.
+
+| Option | Recovered | Earlier-date FPs | Ratio |
+|---|---|---|---|
+| Guarded 40-char gap | 1,748 | 22 | 79:1 |
+| **Fuzzy-Governor connector** | **1,364** | **1** | **1364:1** ✅ |
+| Positional rule | 3,701 | 491 | **rejected** |
+
+Chose the **targeted connector**: a blanket gap *loosens* and admits cross-reference prose; the connector requires a Governor/Secretary token inside the gap. **For a corpus ingested once, a flagged record is visible and recoverable; a wrong date is silent and permanent.**
+
+The positional rule was rejected on measurement: **1.5% corruption** vs 0.21%, and **12.8% of its tier sits in operative-date language** (*"shall take effect … July 1, 1909"*).
+
+**Still misses ~4,000 (51%)** — corrupt years (`"Approven, May 4, 185"`), fuzzy months (`"Avril"`, `"jApal"`). A separate axis.
+
+### A test I had to correct
+
+I wrote a test asserting a cross-reference date does **not** win over the real approval. **It does** — at baseline, before any of my changes. The connector neither causes nor fixes it. Asserting the corrected answer would have been **claiming a fix I never made**. The test now records real behaviour and names what fixing it would require (approval-line *position* logic, not keyword tolerance).
+
+**156/156 tests, suite 11/11.**
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.
