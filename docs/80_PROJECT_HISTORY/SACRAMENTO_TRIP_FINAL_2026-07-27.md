@@ -59,9 +59,24 @@ Neither was safe to carry alone. Every disputed page range below was **re-verifi
 
 **All page numbers are PRINTED running-head numbers.** Shoot the whole listed window; the "need" column is the actual missing leaf.
 
+> ### ✅ TIER 1 VERIFIED 2026-07-25 — and it GREW by one chapter
+> All 8 volumes re-checked two ways: (a) the **corrected parser** was run on each
+> volume — **none of the 21 chapters appeared**, in `confident_acts` or
+> `flagged_acts`, under any of the three OCR engines; (b) the **printed running
+> heads** flanking every claimed gap were read off the page images. Every gap
+> **CONFIRMED**. Neighbouring chapters land immediately either side — clean holes
+> in otherwise contiguous runs.
+>
+> **ADDED: 1871-72 ch. 537.** The 776–777 leaf holds ch. 537 *entirely*, plus the
+> head of 538. Printed 775 ends ch. 536 cleanly; printed 778 opens mid-Section 1.
+> **No extra pages — same leaf. Tier 1 is now 22 chapters.**
+>
+> **I expected this list to shrink. It did not.** The parser fix rescued none of
+> these, because the pages are absent from the source scans, not merely unparsed.
+
 | # | Volume | Shoot | Need | Recovers |
 |---|---|---|---|---|
-| **1** | **1871-72 Statutes, Vol. 1** *(1872 Reg.)* | **130–135**, **514–517**, **585–588**, **775–778** | 131–134, 515–516, 586–587, 776–777 | **Ch. 125, 126, 127, 128, 363, 364, 417, 418, 538 — NINE full chapters** |
+| **1** | **1871-72 Statutes, Vol. 1** *(1872 Reg.)* | **130–135**, **514–517**, **585–588**, **775–778** | 131–134, 515–516, 586–587, 776–777 | **Ch. 125, 126, 127, 128, 363, 364, 417, 418, 537, 538 — TEN full chapters** |
 | **2** | **1986 Vol. 3** | **4811–4816** | 4812–4815 | Ch. 1357 full, 1358 full, 1359 head+text, **+ ch. 1356 tail** |
 | **3** | **1927 Vol. 1** | **1625–1628** | 1626–1627 | Ch. 816 full, 817 head+text, **+ ch. 815 tail** |
 | **4** | **1985 Vol. 1** | **1858–1861** *and* **803–806** | 1859–1860, **804–805** | Ch. 505 full, 506 full, **+ ch. 504 tail**; second leaf = Budget Act ch. 111 body |
@@ -70,7 +85,15 @@ Neither was safe to carry alone. Every disputed page range below was **re-verifi
 | **7** | **1981 Vol. 2** | **1561–1564** | 1562–1563 | Ch. 378 full, **+ ch. 377 tail** |
 | **8** | **1972 Vol. 1** | **895–898** | 896–897 | Ch. 517 head + SEC. 1 + start of SEC. 2 |
 
-**Totals: 8 volumes · ~49 pages captured (25 strictly needed) · 21 chapters (18 full + 3 partial) + 4 chapter tails.**
+**Totals: 8 volumes · ~49 pages captured (25 strictly needed) · 22 chapters + 4 chapter tails.**
+
+### ⚠ Three findings from the 2026-07-25 verification
+
+**1. 1970 is a single missing VERSO, not a leaf.** Recto 1647 and recto 1649 are **both scanned**; only printed **1648** is absent. That is a **scanner skip, not a defective book** — and it may be recoverable by re-requesting the image rather than travelling. Still shoot it while you are there, but it is the one most likely to be obtainable remotely.
+
+**2. Our evidence proves OUR SCANS lack these pages — not that the bound volume does.** Nothing checkable remotely distinguishes a torn leaf from a skipped opening. The 4-page gaps (1871-72 131–134, 1986 4812–4815) look like torn/missing leaves; 1970 clearly looks like a skip. **Check the physical binding at each gap** — if the paper is present and intact, that is worth knowing and worth photographing regardless.
+
+**3. Seven of the 22 are PARTIALS** — 1871-72/128, 1871-72/538, 1986/1359, 1927/817, 1970/907, 1972/517, 1981/378 already have substantial body text in the corpus. What is missing is the **chapter number, title, approval date, and opening sections**. Not droppable: for a point-in-time statute archive, the enacting date and title are precisely what cannot be reconstructed or inferred.
 
 ### Why 1872 is first
 **Nine chapters in one pull** — the largest single recovery available, and it was **missing entirely** from the July-24 packet. Verified: printed **130 → 135** (4 pages absent) and **513 → 517** (2 absent). The other two leaves were confirmed by eye by Patrick on 2026-06-23 and are the audit's own zero-false-positive validation set.
