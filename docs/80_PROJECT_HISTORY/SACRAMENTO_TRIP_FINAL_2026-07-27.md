@@ -79,13 +79,26 @@ Neither was safe to carry alone. Every disputed page range below was **re-verifi
 | **1** | **1871-72 Statutes, Vol. 1** *(1872 Reg.)* | **130–135**, **514–517**, **585–588**, **775–778** | 131–134, 515–516, 586–587, 776–777 | **Ch. 125, 126, 127, 128, 363, 364, 417, 418, 537, 538 — TEN full chapters** |
 | **2** | **1986 Vol. 3** | **4811–4816** | 4812–4815 | Ch. 1357 full, 1358 full, 1359 head+text, **+ ch. 1356 tail** |
 | **3** | **1927 Vol. 1** | **1625–1628** | 1626–1627 | Ch. 816 full, 817 head+text, **+ ch. 815 tail** |
-| **4** | **1985 Vol. 1** | **1858–1861** *and* **803–806** | 1859–1860, **804–805** | Ch. 505 full, 506 full, **+ ch. 504 tail**; second leaf = Budget Act ch. 111 body |
+| **4** | **1985 Vol. 1** | **1858–1861** *and* **803–806** | 1859–1860, **804–805** ✅ | Ch. 505 full, 506 full, **+ ch. 504 tail**; second leaf = Budget Act ch. 111 body |
 | **5** | **1970 Vol. 1** | **1647–1649** | 1648 | Ch. 906 full, Ch. 907 full |
 | **6** | **1929 Vol. 1** | **1961–1964** | **1962–1963** | Ch. 881 full, **+ ch. 880 tail** |
 | **7** | **1981 Vol. 2** | **1561–1564** | 1562–1563 | Ch. 378 full, **+ ch. 377 tail** |
 | **8** | **1972 Vol. 1** | **895–898** | 896–897 | Ch. 517 head + SEC. 1 + start of SEC. 2 |
 
 **Totals: 8 volumes · ~49 pages captured (25 strictly needed) · 22 chapters + 4 chapter tails.**
+
+### ✅ 1985 SECOND LEAF (printed 804–805) — VERIFIED 2026-07-25
+
+Read directly off the page images in `1985_Vol1_Chapters.pdf`:
+
+| PDF page | Printed running head |
+|---|---|
+| 802 | `Ch. 111 ]` · STATUTES OF 1985 · **803** |
+| 803 | **806** · STATUTES OF 1985 · `[ Ch. 111` |
+
+**803 → 806. Printed 804 and 805 are absent.** Both sides sit inside **Ch. 111, the 1985 Budget Act** — appropriation item tables (`Item / Amount`; College Opportunity Grants on 803, Office of Criminal Justice Planning on 806).
+
+**No chapter is lost — which is exactly why the chapter-level scoreboard never saw it.** Two pages of budget line-items vanished and nothing that counts chapters could notice. Same volume as the 1859–1860 pull, so one extra opening.
 
 ### ⚠ Three findings from the 2026-07-25 verification
 
