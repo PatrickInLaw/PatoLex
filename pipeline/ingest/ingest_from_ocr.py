@@ -408,7 +408,18 @@ _DASH = "—–‒‐‑\\-"
 # NOTE: keep the numeral character class letter-free. parse_chapter_number()
 # silently strips non-Roman characters, so an over-capturing group does not
 # fail loudly -- it returns a plausible WRONG number (e.g. "XCIAN" -> 91).
-_HDR_SEP = r"[\s.,—–‒‐‑-]*"
+# HANS FAIL (2026-07-25): the first draft was r"[\s.,—–‒‐‑-]*" -- it included a
+# COMMA and a PERIOD. The comma was speculative (no printed form needs it) and
+# produced real false-positive header matches on back-of-book index lines such
+# as "crabs, 47" and "charges, 1192" -- 55 confirmed on the modern volumes.
+# header_starts_act's AN_ACT_RE window happened to contain the damage, but the
+# commit's "0 false positives against body text" claim was measured against a
+# hand-written negative set, NOT the corpus, and was wrong as stated.
+# Only whitespace and dashes occur between the glyph and the numeral:
+#     "CHAP. CXLIII."   period + SPACE      (1866)
+#     "CHAP.—XCI."      period + EM DASH    (1876/78)
+# The optional period is already consumed by the preceding `\.?`.
+_HDR_SEP = r"[\s—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"
@@ -540,8 +551,12 @@ def spelled_ordinal_to_int(tok):
         tens, _, units = t.partition("-")
         if tens in _ORDINAL_TENS and units in _ORDINAL_WORDS:
             v = _ORDINAL_TENS[tens] + _ORDINAL_WORDS[units]
-            # only 21-29 and 31 are constructed this way
-            if 21 <= v <= 39:
+            # HANS (2026-07-25): the first draft accepted 21-39, admitting
+            # impossible days 32-39 ("thirty-fifth" -> 35). Only 21-29 and 31
+            # are legal constructed days; "thirtieth" is a whole word handled
+            # above. Rejecting here means a garbled ordinal returns None and the
+            # act falls through to "no date" rather than getting a fabricated one.
+            if 21 <= v <= 31:
                 return v
     return None
 
@@ -590,11 +605,32 @@ def spelled_year_to_int(tok):
 # The article is optional: "became law" and "became a law" both occur.
 _LAPSE_CORE = r"bec[ao]me(?:s)?\s+(?:a\s+)?law"
 
+# The free-text qualifier between "became law" and the date.
+#
+# HANS FAIL (2026-07-25) -- CROSS-ACT DATE POISONING, reproduced on real corpus
+# text. The first draft used `[^.]{0,120}?`, which on production-1865-66 page 24
+# (a printed CONTENTS page -- exactly the source type this feature reads) ran
+# past a page-number column AND a second act's title, and captured chapter 380's
+# APPROVED date as chapter 379's LAPSE date. The +/-3-year clamp does NOT catch
+# this: the stolen date is the same year, only weeks off. Silent, plausible,
+# wrong -- the worst failure mode for a corpus ingested exactly once.
+#
+# The qualifier is ALWAYS prose ("by operation of the Constitution", "by a
+# constitutional majority of both Houses, over the Governor's objections"). It
+# never legitimately contains a digit, and it never spans into another act. So
+# forbid, inside the gap:
+#   * a period        -- sentence boundary
+#   * any digit       -- page-number column, chapter number, another date
+#   * "An Act"        -- the next act's title has begun
+#   * "CHAP"          -- the next chapter heading has begun
+# and tighten the window 120 -> 80.
+_LAPSE_GAP = r"(?:(?!\bAn\s+Act\b)(?![Cc][Hh][Aa][Pp])[^.\d]){0,80}?"
+
 # Body form: "...it has become a law this twenty-seventh day of February,
 #             A. D. eighteen hundred and sixty-six."
 LAPSE_SPELLED_RE = re.compile(
     _LAPSE_CORE
-    + r"[^.]{0,120}?"                       # free-text qualifier, same sentence
+    + _LAPSE_GAP
     + r"\bthis\s+([a-z]+(?:[\s‐-―-]+[a-z]+)?)\s+day\s+of\s+"
     + r"(" + _MONTHS + r")\s*,?\s*"
     + r"(?:A\.?\s*D\.?\s*,?\s*)?"           # optional "A. D."
@@ -607,7 +643,7 @@ LAPSE_SPELLED_RE = re.compile(
 #                               February 27, 1866"
 LAPSE_NUMERIC_RE = re.compile(
     _LAPSE_CORE
-    + r"[^.]{0,120}?"
+    + _LAPSE_GAP
     + r"(" + _MONTHS + r")\s+"
     + r"((?:[IilOo]?\d+|[IilOo])(?:st|nd|rd|th|d)?)"
     + r"[,.]?\s*" + _YEAR + r"\b",
@@ -629,6 +665,20 @@ VETO_OVERRIDE_RE = re.compile(
 TEN_DAY_LAPSE_RE = re.compile(
     r"remained\s+with\s+the\s+Governor\s+ten\s+days"
     r"|having\s+remained\s+with\s+the\s+Governor",
+    re.IGNORECASE,
+)
+
+# These volumes carry a "Concurrent and Joint Resolutions" section after the
+# chapters (confirmed in all seven biennial volumes -- the printed CONTENTS runs
+# a SECOND table under that heading). Resolutions are NOT chapters and must never
+# be committed as acts. They use "Resolved by the Assembly, the Senate
+# concurring" rather than the enacting clause, so they should not reach the
+# fallback gate in is_confident_act -- but that gate is new, so reject them
+# explicitly rather than relying on the absence of a marker.
+RESOLUTION_RE = re.compile(
+    r"\b(?:CONCURRENT|JOINT)\s+RESOLUTION\b"
+    r"|\bResolved\s+by\s+the\s+(?:Assembly|Senate)\b"
+    r"|\bBe\s+it\s+resolved\b",
     re.IGNORECASE,
 )
 
@@ -852,9 +902,24 @@ def is_confident_act(full_text, volume_year=None):
         California ... do enact as follows") as an ALTERNATIVE to the literal
         "An Act". The enacting clause is the legally operative signal; the
         title wording is a printing convention.
+
+    HANS NOTE (2026-07-25): making the enacting clause an ALTERNATIVE gate makes
+    ENACT_MARKER_RE load-bearing where it previously was not, and it is
+    unanchored. Two guards were added:
+      * the clause must appear EARLY (first 2000 chars). An enacting clause is
+        printed immediately under the act title; a match deep in the body is a
+        quotation of another act, not this act's own clause.
+      * an explicit RESOLUTION guard. These volumes carry a Concurrent and Joint
+        Resolutions section which is NOT chapters. Resolutions use "Resolved by
+        the Assembly, the Senate concurring" rather than the enacting clause, so
+        they should not reach here -- but the fallback path is new, so reject
+        them explicitly rather than relying on that.
     """
+    if RESOLUTION_RE.search(full_text[:600]):
+        return False
     has_an_act = bool(AN_ACT_RE.search(full_text))
-    has_enacting_clause = has_enact_marker(full_text)
+    # Anchor the fallback: enacting clause must be in the act's opening.
+    has_enacting_clause = bool(ENACT_MARKER_RE.search(full_text[:2000]))
     has_date, _ = parse_act_date(full_text, volume_year=volume_year)
     return (
         (has_an_act or has_enacting_clause)

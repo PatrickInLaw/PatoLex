@@ -164,6 +164,117 @@ check("random prose is NOT a confident act",
       _ing.is_confident_act("The quick brown fox jumped over the lazy dog. " * 5,
                             volume_year=1876), False)
 
+
+# ===========================================================================
+# HANS FAIL REGRESSIONS (2026-07-25). Every case below is a defect Hans found
+# by running the regexes against the REAL corpus, not a hypothetical.
+# ===========================================================================
+
+print("\n=== HANS-1: cross-act date poisoning (the severe one) ===\n")
+# Reproduces the production-1865-66 p.24 shape: a printed CONTENTS page where
+# a lapse row is followed by a page-number column and then ANOTHER act with its
+# own approved date. The first draft's `[^.]{0,120}?` gap ran straight through
+# and stole the NEXT act's date. Same year, weeks off -- the +/-3yr clamp is blind.
+POISON_CONTENTS = (
+    "379  An Act concerning the office of Sheriff of Humboldt County--"
+    "became a law by constitutional provision, March 4, 1866    S. B. 449   797\n"
+    "380  An Act to authorize the Board of Supervisors--approved March 30, 1866"
+    "   S. B. 462   799"
+)
+iso, raw = _ing.parse_lapse_date(POISON_CONTENTS)
+check("lapse date is ch.379's own (Mar 4), NOT ch.380's (Mar 30)", iso, "1866-03-04")
+
+# Harder shape: the lapse row has NO date of its own. The parser must return
+# nothing rather than reaching forward and stealing the next act's date.
+POISON_NO_OWN_DATE = (
+    "379  An Act concerning the office of Sheriff of Humboldt County--"
+    "became a law by constitutional provision    S. B. 449   797\n"
+    "380  An Act to authorize the Board of Supervisors--approved March 30, 1866"
+)
+check("no own date -> None, does NOT steal the next act's date",
+      _ing.parse_lapse_date(POISON_NO_OWN_DATE)[0], None)
+
+# Gap must not cross a chapter heading either.
+POISON_CROSS_CHAP = (
+    "it has become a law\nCHAP. CCCLXXX.--An Act to do something--"
+    "approved March 30, 1866."
+)
+check("gap does not cross a CHAP heading",
+      _ing.parse_lapse_date(POISON_CROSS_CHAP)[0], None)
+
+print("\n=== HANS-2: _HDR_SEP must not match index lines ===\n")
+# The comma in the first draft's separator class matched back-of-book index
+# entries. 55 confirmed on real modern volumes.
+INDEX_LINES = [
+    "crabs, 47",
+    "charges, 1192",
+    "chattels, 88",
+    "cities, 1204",
+    "children, 813",
+    "counties, 47",
+]
+for line in INDEX_LINES:
+    check("index line %r does NOT match HEADER_RE" % line,
+          bool(_ing.HEADER_RE.match(line)), False)
+
+# ...while the real printed forms still do.
+for line, want in [("CHAP. CXLIII.", "CXLIII"), ("CHAP.—XCI.", "XCI"),
+                   ("CHAPTER 88.", "88"), ("CHAP.–CLXXIII.", "CLXXIII")]:
+    m = _ing.HEADER_RE.match(line)
+    check("real form %r still matches -> %s" % (line, want),
+          m.group(1) if m else None, want)
+
+print("\n=== HANS-3: spelled_ordinal_to_int must reject impossible days ===\n")
+check("'thirty-first' -> 31 (legal)", _ing.spelled_ordinal_to_int("thirty-first"), 31)
+for bad in ["thirty-second", "thirty-fifth", "thirty-ninth"]:
+    check("%r -> None (no such day)" % bad, _ing.spelled_ordinal_to_int(bad), None)
+
+print("\n=== HANS-4: resolutions must never be confident acts ===\n")
+RESOLUTION = """
+CONCURRENT RESOLUTION No. 14.
+
+Resolved by the Assembly, the Senate concurring, That the Legislature of the
+State of California hereby memorializes the Congress of the United States to
+take such action as may be necessary in the premises, and that copies hereof be
+transmitted to our Senators and Representatives.
+
+Adopted March 30, 1878.
+"""
+check("concurrent resolution is NOT a confident act",
+      _ing.is_confident_act(RESOLUTION, volume_year=1878), False)
+
+JOINT_RES = """
+JOINT RESOLUTION relative to the improvement of the Sacramento River.
+
+Be it resolved by the Senate and Assembly of the State of California, That the
+Congress of the United States be requested to appropriate the sum necessary.
+
+Approved March 30, 1878.
+"""
+check("joint resolution is NOT a confident act",
+      _ing.is_confident_act(JOINT_RES, volume_year=1878), False)
+
+print("\n=== HANS-4b: enacting-clause fallback must be ANCHORED early ===\n")
+# A quotation of another act's enacting clause deep inside a long body must not
+# qualify a buffer that is not itself an act.
+LATE_CLAUSE = ("Whereas the following language appears in a prior statute. " * 60
+               + " The People of the State of California, represented in Senate and "
+                 "Assembly, do enact as follows: [Approved March 30, 1878.]")
+check("enacting clause only deep in body -> NOT confident",
+      _ing.is_confident_act(LATE_CLAUSE, volume_year=1878), False)
+
+# The genuine 1876 ch.508 case must still pass (clause is early).
+check("1876 ch.508-style STILL confident (clause is early)",
+      _ing.is_confident_act(NON_AN_ACT, volume_year=1876), True)
+
+print("\n=== HANS: no catastrophic backtracking on adversarial input ===\n")
+import time as _time
+_adv = "became a law " + ("x" * 5000) + " January 1, 1866"
+_t0 = _time.time()
+_ing.parse_lapse_date(_adv)
+_elapsed = _time.time() - _t0
+check("5k-char adversarial input completes < 1s", _elapsed < 1.0, True)
+
 print("\n" + "=" * 60)
 print("Results: %d passed, %d failed" % (PASS, FAIL))
 print("=" * 60)

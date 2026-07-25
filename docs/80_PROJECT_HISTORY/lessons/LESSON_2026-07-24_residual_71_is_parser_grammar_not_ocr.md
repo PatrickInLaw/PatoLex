@@ -135,6 +135,43 @@ Five of the 71 residual chapters are in this class: **1874 ch. 587 and 679, 1876
 
 **The repo has no CI** — no `pytest.ini`, `pyproject.toml`, `conftest.py`, or workflows. Every test is hand-invoked, which is why a dead suite went unnoticed. `smoke_imports.py` cannot catch it (AST-based; the broken reference was a string path).
 
+---
+
+## ★ Hans FAIL and what it corrected (2026-07-25)
+
+An adversarial pass ran the new regexes **against the real corpus over SSH** — millions of lines of actual 19th-century statute text — rather than against a hand-written fixture set. It returned **FAIL**. Full report: `audits/2026-07-25_030205-verify-phase-report.md`.
+
+### The methodological lesson (the important part)
+
+**The commit claimed "0 false positives against body text." That claim was false.** It was measured against a **hand-written negative set of six lines**, not the corpus. Against real text, the separator class produced **55 confirmed false-positive header matches** on back-of-book index entries (`"crabs, 47"`, `"charges, 1192"`).
+
+**A regex change to a corpus parser is not verified until it has been run over the corpus.** Unit fixtures prove a pattern *can* match what you intended; only the corpus shows what *else* it matches. This applies to every remaining parser change in this project.
+
+### HANS-1 (severe) — cross-act date poisoning
+
+On `production-1865-66` page 24 — a printed CONTENTS page, **exactly the source type the feature reads** — the numeric lapse regex captured **chapter 380's *approved* date as chapter 379's *lapse* date.** The `[^.]{0,120}?` qualifier ran past a page-number column and a second act's title.
+
+**The ±3-year clamp cannot catch this**: the stolen date is the same year, only weeks off. Silent, plausible, and wrong — the worst possible failure for a corpus ingested exactly once.
+
+**Fix:** the gap now forbids periods, **digits**, `An Act`, and `CHAP`, and is tightened 120 → 80 chars. The qualifier is always prose and never legitimately contains a digit, so excluding digits is principled rather than a hack — it blocks the page-number column that caused the poisoning.
+
+### HANS-2 — the comma in `_HDR_SEP`
+
+The comma was **speculative** — no printed form requires it. Removed. Only whitespace and dashes occur between the glyph and the numeral.
+
+### HANS-3 — a third un-synced `HEADER_RE`
+
+`pipeline/5080/reparse.py` carried a third live copy, still em-dash-blind. It is a dead/tombstoned module, but leaving a broken copy invites a future copy-paste. **Synced**, with a comment saying why.
+
+### HANS-4 — smaller, real
+
+- `spelled_ordinal_to_int` accepted **impossible days 32–39** (`"thirty-fifth"` → 35). Clamped to 21–31.
+- `is_confident_act`'s new enacting-clause fallback made unanchored `ENACT_MARKER_RE` **load-bearing**. Now the clause must appear in the **first 2000 chars** (an enacting clause is printed under the title; a match deep in the body is a quotation of another act), and an explicit **`RESOLUTION_RE` guard** rejects the Concurrent/Joint Resolutions section that every one of these volumes carries after the chapters.
+
+### Doc-claim check
+
+Hans also challenged the headline "71/71 recovered" as potentially overclaiming, since 5 are Amendments-volume redirects and **no statutory body text was recovered for any of them**. The doc already states both limits explicitly — recovery is of **identity** (number, title, date, bill, page), and body-text OCR remains owed. Keeping the headline, with those qualifications kept prominent.
+
 ## Related
 
 - Confirms and generalizes `[[early-era-headers-consensus-bug]]` — the heading token is the corpus's most variable element across eras.

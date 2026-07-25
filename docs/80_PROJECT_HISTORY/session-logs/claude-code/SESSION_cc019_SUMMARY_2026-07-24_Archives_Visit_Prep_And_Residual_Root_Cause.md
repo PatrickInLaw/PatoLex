@@ -216,6 +216,28 @@ Still owed: this recovers **identity** (number, title, date, bill, page), **not 
   - **Prerequisite (5)'s "51 acts wrong date" is likely an undercount** — the three defects ran across the entire OCR era, not just the residual. Re-measure after a reparse.
 - **`ARCHIVES_VISIT_PACKET_2026-07-27.md` §4** — closed; the 71 are recovered, nothing from them belongs on any list.
 
+---
+
+## 12. ★ Hans FAIL — and the methodological correction
+
+Hans ran the new regexes **against the real corpus over SSH**, not against fixtures, and returned **FAIL**. Report: `audits/2026-07-25_030205-verify-phase-report.md`. All findings fixed; `test_enactment_paths.py` now **49/49** with a regression per finding.
+
+**The lesson worth keeping:** the commit claimed *"0 false positives against body text."* **That claim was false.** It was measured against a hand-written six-line negative set. Against the corpus, the separator produced **55 false-positive header matches** on index entries (`"crabs, 47"`).
+
+> **A regex change to a corpus parser is not verified until it has been run over the corpus.** Fixtures prove a pattern *can* match what you intended; only the corpus reveals what *else* it matches.
+
+| # | Finding | Severity | Fix |
+|---|---|---|---|
+| 1 | **Cross-act date poisoning** — on `production-1865-66` p.24 (a CONTENTS page) the lapse regex captured **ch.380's approved date as ch.379's lapse date**. Same year, weeks off — **the ±3yr clamp is blind to it** | **severe** | gap now forbids periods, **digits**, `An Act`, `CHAP`; 120→80 chars |
+| 2 | Comma in `_HDR_SEP` matched index lines | real | comma removed (it was speculative — no printed form needs it) |
+| 3 | Third un-synced `HEADER_RE` in `5080/reparse.py`, still em-dash-blind | real | synced despite being a dead module — a broken copy invites copy-paste |
+| 4 | `spelled_ordinal_to_int` accepted impossible days 32–39 | minor | clamped 21–31 |
+| 5 | `ENACT_MARKER_RE` unanchored, now load-bearing via the new fallback | minor | clause must be in first 2000 chars + explicit `RESOLUTION_RE` guard |
+
+**Why finding 1 mattered most:** these volumes carry a Concurrent/Joint Resolutions section and printed contents tables with multiple acts per visual block. A date-stealing regex would run unattended across the un-reviewed 1877–1994 forward campaign and write plausible wrong dates into a corpus ingested exactly once.
+
+**Also fixed:** `pipeline/README.md` labelled `ingest_from_ocr.py` blanket "SUPERSEDED / LOSSY" while cc019 called it "(CANONICAL parser)" — a real contradiction. Resolved: its **ingest half is superseded; its parser half is live and canonical.** The README's stale `pipeline/5080/` path is the same one that left `test_date_parser_fix.py` dead for a month. Its "no `__main__` guard" hazard is stale — a guard exists at line 1273 (verified).
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

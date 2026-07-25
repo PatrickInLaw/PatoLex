@@ -99,11 +99,18 @@ _DASH = "—–‒‐‑\\-"
 #   group(1) = numeral token (roman/arabic, possibly OCR-garbled)
 #   Optional inline tail beginning with a dash (the "—An Act ..." form).
 # Prefix: garbled "Chap" (C + 1-4 letters, dot optional) OR full "CHAPTER".
+# cc019 (2026-07-25, Hans finding): THIS FILE IS DEAD (see the DO NOT USE banner
+# at the top) but it carried a THIRD live copy of HEADER_RE that still had the
+# pre-cc019 em-dash blindness -- it could not match "CHAP.—XCI." (1876/78).
+# Kept in sync with the canonical pipeline/ingest/ingest_from_ocr.py:_HDR_SEP so
+# that nobody resurrects or copy-pastes the broken version. Do NOT run this
+# module; use ingest_from_ocr.parse_volume().
+_HDR_SEP = r"[\s—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"                                   # leading OCR noise
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"
     r"|[Cc][Hh][Aa][Pp][Tt][Ee][Rr]\s*)"               # garble OR full CHAPTER
-    r"\.?\s*"
+    r"\.?" + _HDR_SEP +
     r"([IVXLCDMivxlcdm0-9JjTtYyLl!|]{1,8})"             # numeral token
     r"\s*[.,;:]?"
     r"(?:\s*[" + _DASH + r"].*)?$",                     # optional inline —An Act…

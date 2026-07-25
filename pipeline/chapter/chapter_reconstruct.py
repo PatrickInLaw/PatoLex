@@ -31,7 +31,10 @@ SAMPLE  = os.path.join(OUT_DIR, "chapter_reconstruct_sample.tsv")
 # blindness ("CHAP.—XCI." in the 1876/78 volumes never matched). Keep in sync
 # with ingest_from_ocr.py:_HDR_SEP.
 _DASH = "—–‒‐‑\\-"
-_HDR_SEP = r"[\s.,—–‒‐‑-]*"
+# HANS FAIL (2026-07-25): comma removed -- it caused false-positive header
+# matches on index lines ("crabs, 47"). Keep byte-identical to
+# ingest_from_ocr.py:_HDR_SEP.
+_HDR_SEP = r"[\s—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"

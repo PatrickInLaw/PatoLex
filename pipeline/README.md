@@ -50,16 +50,25 @@ Hans audit caught (cc002, Phase 21 / Hans pass 3 C1).
   banks the per-token `consensus_output.json` (Phase C substrate) ONLY after a
   successful commit. It has a proper `if __name__ == "__main__":` guard.
 
-- **`pipeline/5080/ingest_from_ocr.py` — SUPERSEDED / LOSSY. Do NOT treat its DB
-  output as final.** Version-A, **single-engine parse**. It is still used early
-  in the chain to create the `source_document` rows + run the parse, but its DB
-  rows are **replaced** by `ingest_clean.py`'s consensus output. Never serve or
-  trust its committed text as canonical.
-  - **HAZARD (open, should be fixed): `ingest_from_ocr.py` has NO
-    `if __name__ == "__main__":` guard.** Its driver code runs at module top
-    level (lines ~494-507), so **merely `import`ing the module triggers a DB
-    ingest** of whatever volumes default in. Do not import it from other scripts;
-    add a `__main__` guard before reusing any of its functions.
+- **`pipeline/ingest/ingest_from_ocr.py` — SPLIT ROLE. Read this carefully; the
+  old blanket "SUPERSEDED / LOSSY" label was misleading and caused a real
+  contradiction (Hans, 2026-07-25).**
+  - Its **INGEST half is SUPERSEDED / LOSSY** — version-A, single-engine DB rows,
+    replaced by `ingest_clean.py`'s consensus output. Never serve or trust its
+    committed text as canonical. That is what the original warning meant.
+  - Its **PARSER half (STAGE 5, `parse_volume()`) is LIVE AND CANONICAL.** It is
+    the parse-side system of record, driven by `python -m ingest.parse_all`, and
+    it is the file to edit for heading/date-extraction work. `ingest_clean.py`
+    performs **no** heading or date extraction — it only consumes `iso_date`.
+  - **PATH CORRECTION:** this file moved from `pipeline/5080/` to
+    `pipeline/ingest/` in the module reorg. The stale path in this README (and in
+    `docs/60_OPERATIONS/BUILD_RUNBOOK.md`) outlived the move and left two other
+    modules pointing at a file that no longer existed — `test_date_parser_fix.py`
+    was **dead at import for a month**, and `5080/parse_born_digital.py` was
+    **unloadable**. Both fixed 2026-07-24 (cc019).
+  - **HAZARD RESOLVED:** the "no `if __name__ == '__main__':` guard" warning is
+    **stale** — a guard exists at `ingest_from_ocr.py:1273` (verified 2026-07-25).
+    Importing the module no longer triggers a DB ingest.
 
 **Current system of record (2026-06-02):** version-B multi-engine consensus,
 **1850-1875, 4262 acts** (verified via the `ocr_provenance` / `consensus_method`
