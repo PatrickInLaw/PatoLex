@@ -375,6 +375,61 @@ My abort condition only mentioned LOST chapters. A date that **moved** means the
 - **Rollback is incomplete** — a `parsed_acts_*` snapshot doesn't undo worklist appends or `_parse_outputs` clobbering (which is *not* in git).
 - **No acceptance criteria** — nothing defines what "success" looks like.
 
+---
+
+## 17. ⛔ THE FINDING OF THE SESSION — the recovery chain never reaches the database
+
+Hans's review of the reparse plan surfaced something bigger than the plan. **Verified independently in code before reporting it:**
+
+| Evidence | What it says |
+|---|---|
+| `ingest_clean.py:782` | `acts_path = scratch / "parsed_acts_fixed.json"` — **the only** `parsed_acts_*` file the canonical ingest opens |
+| `recover_all.py:3` | *"additive; **no DB**, no overwrite of parsed_acts_fixed"* |
+| `recover_early.py:334` | *"does NOT write parsed_acts_fixed.json"* |
+| `merge_passes.py:29` | consumes `fixed.json` as **input**, emits `merged.json` — **nothing reads it back** |
+| `BUILD_RUNBOOK.md:69` | canonical chain = *"OCR → parse → ingest_clean --commit"*; **recovery chain absent** |
+
+The recovery passes were deliberately built **additive and non-destructive** — correct for safety, but the consequence is that `merged` / `certified` / `recovered` / `repaired` / `clauserec` / `visual` **terminate in files nothing downstream consumes.**
+
+### Consequences
+
+- **The 99.9% recall figure (95,923/96,002) describes FILES, not the database.**
+- The 71 chapters recovered this session, and everything cc015–cc018 recovered, **would never reach Postgres**.
+- My plan's Phase 5 ("re-run the recovery chain") was **solving the wrong problem** — re-running it produces more files nothing reads.
+
+### The missing component
+
+**A bridge folding recovery output into the ingest path does not exist and never has.** It is new, unbuilt work — not a re-run. Three candidate shapes, and it is **Patrick's call**:
+
+1. **Merge-into-fixed** — simplest; destroys the additive-safety property protecting the campaign's work.
+2. **Teach `ingest_clean.py` the chain** — cleaner; changes the canonical ingest contract, needs its own Hans pass.
+3. **A third artifact** (`parsed_acts_ingestible.json`) — leaves both `fixed` and the chain untouched.
+
+Until decided, **a reparse changes only files nothing ingests.** Still worth doing — the corpus files become correct, a prerequisite either way — but nobody should believe it moves the DB.
+
+---
+
+## 18. Plan v2 — every v1 defect traced to a finding
+
+`REPARSE_PLAN_2026-07-25.md` rewritten. v1 was wrong in ways worth recording:
+
+| Finding | Source | Fix in v2 |
+|---|---|---|
+| **Recovery chain never reaches the DB** | Hans #1 | Blocking section; Phase 5 rewritten around a bridge |
+| **Harness wrote pre-fix output into the corpus** | self-review / Hans #2 | Fixed `5e4a423`; new Phase −1.1 gates the 5090 sync on it |
+| `pipeline/5080/` omitted from inventory | Hans #3 | Added — it writes **the same filename** into the same dirs, and `reparse.py` self-flags "ARCHIVED / UNSAFE" while staying live and importable |
+| `_vocab/chapter_corrections.tsv` | Hans #4 | A **positional** overlay keyed to pre-fix `in_act_order`; the fixes change ordering, so it has **no defined behaviour** after. Not a `parsed_acts_*` file → a glob snapshot misses it |
+| Phase 2/4 scope mismatch | Hans #5 | 11 `SKIP_LABELS` disclosed (4 are **code volumes**); a mismatch from this is **benign**, and v1 would have read it as a regression |
+| Rollback under-scoped | Hans #6 | Snapshot widened to 4 artifact classes; explicit "cannot fix" list |
+| Worklist poisons Phase 6 | Hans #7 | Integrity check before trusting it as a measurement input |
+| DB / `source_document` / Gate F unstated | Hans #8 | Explicit out-of-scope section |
+| Phase 5 cost hand-waved | Hans #9 | Named: **human reconciliation, 71 judgement calls**, no tooling built |
+| No baseline fidelity check | self-review | In the harness; Phase 1 gates on it |
+| Changed dates not an abort condition | self-review | Added — a moved date beats a lost chapter for danger |
+| No acceptance criteria | self-review | Phase 3 |
+
+**Hans's sharpest process catch:** Phase 0.5 said "sync the 5090 via `git pull`" — but **`git pull` only moves committed history**, and the harness fix was uncommitted when he reviewed. Syncing first would have shipped the corpus-destroying version to the box that *holds the corpus*. Now committed (`5e4a423`) and gated explicitly.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.
