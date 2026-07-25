@@ -465,6 +465,223 @@ _MONTH_NORM = {
     "aug": "August", "sep": "September", "oct": "October",
     "nov": "November", "dec": "December",
 }
+
+# ===========================================================================
+# cc019 (2026-07-24) -- DEFECT 1: acts that became law WITHOUT the Governor's
+# signature.
+#
+# There are THREE constitutionally distinct routes by which a California act
+# became law in this era. Before this change the pipeline modelled only the
+# first, so acts taking the other two were structurally invisible: they carry
+# NO "[Approved <date>]" bracket at all, parse_act_date returned None, and
+# is_confident_act() then demoted them to flagged_acts -- regardless of how
+# clean the scan was.
+#
+#   1. Signed by the Governor        -> "[Approved February 18, 1876.]"
+#   2. Became law UNSIGNED (10-day)  -> signature block + lapse notice
+#   3. Passed OVER the Governor's veto -> constitutional-majority notice
+#
+# Verified against the printed volumes (cc019 contents-anchored recovery, see
+# docs/80_PROJECT_HISTORY/RESIDUAL_71_CONTENTS_RECOVERY_2026-07-24.md). The
+# printed CONTENTS tables state the path explicitly, e.g.:
+#   1866 ch.143 "became law by the operation of Constitution, February 27, 1866"
+#   1866 ch.198 "became law by operation of the Constitution, March 8, 1866"
+#   1870 ch.431 "became a law by constitutional provision April 3, 1870"
+#   1870 ch.143 "became a law by a constitutional majority of both Houses,
+#                over the Governor's objections, March 4, 1870"   <- veto override
+#
+# NOTE the wording is NOT stable -- three different phrasings for path 2 alone.
+# So we anchor on the stable core "became (a) law" and treat the qualifier as
+# free text. Do NOT tighten this to any single phrasing.
+#
+# These CLUSTER: 1870 ch.428/429/430/431 are four consecutive unsigned
+# enactments all dated April 3, 1870 -- bills passed at the close of session
+# hit the ten-day window together.
+#
+# In the BODY the date is spelled out in words, not digits:
+#   "This bill having remained with the Governor ten days, (Sundays excepted,)
+#    and the Senate and Assembly being in session, it has become a law this
+#    twenty-seventh day of February, A. D. eighteen hundred and sixty-six."
+# No spelled-out-date parser existed anywhere in the pipeline before this.
+# ===========================================================================
+
+_ORDINAL_WORDS = {
+    "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5,
+    "sixth": 6, "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10,
+    "eleventh": 11, "twelfth": 12, "thirteenth": 13, "fourteenth": 14,
+    "fifteenth": 15, "sixteenth": 16, "seventeenth": 17, "eighteenth": 18,
+    "nineteenth": 19, "twentieth": 20, "thirtieth": 30,
+}
+_ORDINAL_TENS = {"twenty": 20, "thirty": 30}
+_CARDINAL_UNITS = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+    "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11,
+    "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15,
+    "sixteen": 16, "seventeen": 17, "eighteen": 18, "nineteen": 19,
+}
+_CARDINAL_TENS = {
+    "twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60,
+    "seventy": 70, "eighty": 80, "ninety": 90,
+}
+
+
+def spelled_ordinal_to_int(tok):
+    """'twenty-seventh' -> 27.  Returns None if not a day-of-month ordinal.
+
+    Accepts hyphen, en/em dash, or whitespace between the tens and units word
+    (19th-century printing and OCR are inconsistent about this).
+    """
+    if not tok:
+        return None
+    t = re.sub(r"[\s‐-―-]+", "-", tok.strip().lower())
+    if t in _ORDINAL_WORDS:
+        return _ORDINAL_WORDS[t]
+    if "-" in t:
+        tens, _, units = t.partition("-")
+        if tens in _ORDINAL_TENS and units in _ORDINAL_WORDS:
+            v = _ORDINAL_TENS[tens] + _ORDINAL_WORDS[units]
+            # only 21-29 and 31 are constructed this way
+            if 21 <= v <= 39:
+                return v
+    return None
+
+
+def spelled_year_to_int(tok):
+    """'eighteen hundred and sixty-six' -> 1866.
+
+    Also accepts the longer legal form 'one thousand eight hundred and
+    sixty-six'. Returns None if it does not parse to a plausible year.
+    """
+    if not tok:
+        return None
+    t = tok.strip().lower()
+    t = re.sub(r"[\s‐-―-]+", " ", t)
+    t = t.replace(" and ", " ")
+    words = [w for w in re.split(r"[\s-]+", t) if w]
+
+    total = 0
+    current = 0
+    for w in words:
+        if w == "thousand":
+            current = (current or 1) * 1000
+            total += current
+            current = 0
+        elif w == "hundred":
+            current = (current or 1) * 100
+            total += current
+            current = 0
+        elif w in _CARDINAL_UNITS:
+            current += _CARDINAL_UNITS[w]
+        elif w in _CARDINAL_TENS:
+            current += _CARDINAL_TENS[w]
+        else:
+            return None
+    total += current
+    return total if 1800 <= total <= 2100 else None
+
+
+# The stable core. Deliberately loose on the qualifier between "law" and the
+# date -- observed variants include "by the operation of Constitution",
+# "by operation of the Constitution", "by constitutional provision", and
+# "by a constitutional majority of both Houses, over the Governor's objections".
+# NOTE the vowel class: the BODY prints "it has become a law" while the
+# CONTENTS prints "became law" -- bec[ao]me covers both. An earlier draft used
+# a bare "become" and silently failed on every contents row.
+# The article is optional: "became law" and "became a law" both occur.
+_LAPSE_CORE = r"bec[ao]me(?:s)?\s+(?:a\s+)?law"
+
+# Body form: "...it has become a law this twenty-seventh day of February,
+#             A. D. eighteen hundred and sixty-six."
+LAPSE_SPELLED_RE = re.compile(
+    _LAPSE_CORE
+    + r"[^.]{0,120}?"                       # free-text qualifier, same sentence
+    + r"\bthis\s+([a-z]+(?:[\s‐-―-]+[a-z]+)?)\s+day\s+of\s+"
+    + r"(" + _MONTHS + r")\s*,?\s*"
+    + r"(?:A\.?\s*D\.?\s*,?\s*)?"           # optional "A. D."
+    + r"([a-z][a-z\s‐-―-]{8,60}?)"  # spelled-out year
+    + r"\s*[.;]",
+    re.IGNORECASE,
+)
+
+# Contents/short form, digits: "became law by operation of the Constitution,
+#                               February 27, 1866"
+LAPSE_NUMERIC_RE = re.compile(
+    _LAPSE_CORE
+    + r"[^.]{0,120}?"
+    + r"(" + _MONTHS + r")\s+"
+    + r"((?:[IilOo]?\d+|[IilOo])(?:st|nd|rd|th|d)?)"
+    + r"[,.]?\s*" + _YEAR + r"\b",
+    re.IGNORECASE,
+)
+
+# Path-3 discriminator. If this matches inside the enactment clause, the act
+# passed OVER a veto rather than lapsing unsigned. Constitutionally distinct --
+# record it distinctly, do not collapse into "unsigned".
+VETO_OVERRIDE_RE = re.compile(
+    r"over\s+the\s+Governor'?s?\s+objection"
+    r"|constitutional\s+majority\s+of\s+both\s+Houses"
+    r"|notwithstanding\s+the\s+objections\s+of\s+the\s+Governor",
+    re.IGNORECASE,
+)
+
+# Corroborating marker for the ten-day lapse. Not required (the wording varies)
+# but useful for classification confidence.
+TEN_DAY_LAPSE_RE = re.compile(
+    r"remained\s+with\s+the\s+Governor\s+ten\s+days"
+    r"|having\s+remained\s+with\s+the\s+Governor",
+    re.IGNORECASE,
+)
+
+ENACTMENT_PATH_APPROVED = "approved"
+ENACTMENT_PATH_UNSIGNED = "unsigned_lapse"
+ENACTMENT_PATH_VETO_OVERRIDE = "veto_override"
+
+
+def detect_enactment_path(text):
+    """Classify HOW the act became law.
+
+    Returns one of ENACTMENT_PATH_*. Defaults to 'approved' -- the overwhelming
+    majority -- so existing behaviour is unchanged for signed acts.
+    """
+    if not text:
+        return ENACTMENT_PATH_APPROVED
+    if re.search(_LAPSE_CORE, text, re.IGNORECASE):
+        if VETO_OVERRIDE_RE.search(text):
+            return ENACTMENT_PATH_VETO_OVERRIDE
+        return ENACTMENT_PATH_UNSIGNED
+    return ENACTMENT_PATH_APPROVED
+
+
+def parse_lapse_date(text):
+    """Date for an act that became law WITHOUT the Governor's signature.
+
+    Returns (iso_date_str, raw_match_str) or (None, ""). Tries the spelled-out
+    body form first, then the numeric contents form.
+    """
+    for m in LAPSE_SPELLED_RE.finditer(text or ""):
+        day = spelled_ordinal_to_int(m.group(1))
+        year = spelled_year_to_int(m.group(3))
+        if day is None or year is None:
+            continue
+        month_str = normalize_month(m.group(2))
+        try:
+            d = datetime.datetime.strptime(
+                "%s %d %d" % (month_str, day, year), "%B %d %Y")
+        except Exception:
+            continue
+        return d.strftime("%Y-%m-%d"), re.sub(r"\s+", " ", m.group(0)).strip()
+
+    for m in LAPSE_NUMERIC_RE.finditer(text or ""):
+        month_str = normalize_month(m.group(1))
+        day_str = normalize_day(m.group(2))
+        try:
+            d = datetime.datetime.strptime(
+                month_str + " " + day_str + " " + m.group(3), "%B %d %Y")
+        except Exception:
+            continue
+        return d.strftime("%Y-%m-%d"), re.sub(r"\s+", " ", m.group(0)).strip()
+
+    return None, ""
 _ROMAN = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
 _ROMAN_OCR_SUBST = {"J": "I", "T": "I", "1": "I", "!": "I", "|": "I"}
 
@@ -597,6 +814,17 @@ def parse_act_date(text, volume_year=None, _rejected_out=None):
         except Exception:
             continue
 
+    # cc019 DEFECT 1: acts that became law WITHOUT the Governor's signature.
+    # Tried LAST so signed acts are completely unaffected -- this branch is only
+    # reached when neither approval pattern matched, which previously always
+    # meant "(None, '')" and a silent demotion to flagged_acts.
+    iso, raw = parse_lapse_date(text)
+    if iso:
+        year_int = int(iso[:4])
+        if _year_ok(year_int):
+            return iso, raw
+        _record_rejected(raw, year_int)
+
     return None, ""
 
 
@@ -605,9 +833,34 @@ def has_enact_marker(full_text):
 
 
 def is_confident_act(full_text, volume_year=None):
+    """Is this buffer a real act we can commit?
+
+    cc019 DEFECT 1 + FINDING D -- two gates were too strict and silently
+    demoted real, legible acts to flagged_acts:
+
+      * has_date: unsigned/veto-override acts carry no "[Approved ...]" bracket
+        at all. parse_act_date now understands the lapse forms, so this gate is
+        satisfied for them too -- no change needed here beyond that.
+      * has_an_act: AN_ACT_RE requires the literal "An Act". Verified
+        counter-examples from the printed volumes (cc019 contents recovery):
+            1876 ch.508  "[An amendment to the Code, but which also repeals
+                          the Act of March 28, 1874, in relation to solvent
+                          debts]"     <- printed on p.772, a REAL act
+            1870 ch.427  "Charter of the City of Stockton--An Act to
+                          reincorporate the City of Stockton"
+        So accept an explicit enactment marker ("The People of the State of
+        California ... do enact as follows") as an ALTERNATIVE to the literal
+        "An Act". The enacting clause is the legally operative signal; the
+        title wording is a printing convention.
+    """
     has_an_act = bool(AN_ACT_RE.search(full_text))
+    has_enacting_clause = has_enact_marker(full_text)
     has_date, _ = parse_act_date(full_text, volume_year=volume_year)
-    return has_an_act and has_date is not None and len(full_text.strip()) >= 100
+    return (
+        (has_an_act or has_enacting_clause)
+        and has_date is not None
+        and len(full_text.strip()) >= 100
+    )
 
 
 def _next_nonempty(lines, i, k=4):

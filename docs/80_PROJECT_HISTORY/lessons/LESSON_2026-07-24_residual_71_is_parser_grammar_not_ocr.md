@@ -26,6 +26,8 @@ Two independent checks, same session:
 
 ---
 
+> **UPDATE 2026-07-24 (same session, after the full contents-anchored recovery of all 71):** defect 1 is broader than first written — there are **three** enactment paths, not two, and the wording is unstable. Two further structural classes were found (D and E below). All 71 residual chapters were recovered; see `RESIDUAL_71_CONTENTS_RECOVERY_2026-07-24.md`. Defects 1 and 2 are **fixed and tested**; defect 3 is **partially** fixed (detection + widening; the forward-scan remains open).
+
 ## Defect 1 — Acts that became law WITHOUT the Governor's signature carry no `[Approved …]` bracket
 
 **1866 ch. 143** has **no approval bracket at all.** In its place the printer set:
@@ -73,6 +75,65 @@ The candidate ranges are derived from the OCR'd `source_page` of neighbouring *p
 2. **Retire the "machine-unreadable" label.** It is factually wrong and it mis-routes the work to human transcription (or to an archive scan) when the actual fix is in code. `HUMAN_REVIEW_LIST_2026-06-22.md` and `OCR_RECOVERY_CAMPAIGN_FINAL_2026-06-22.md` should be corrected.
 3. **The 99.9% figure is sound but its residual is mis-attributed.** 95,923/96,002 stands. What is wrong is the *explanation* of the remaining 79 — most of the 71 are recoverable in code, not lost to bad paper.
 4. **These defects are almost certainly not confined to the residual.** A parser blind to unsigned enactments and to em-dash headings has been running across the entire OCR era. Chapters it *did* find may still carry a wrong or null `chaptered_date`, and acts may have been mis-attributed. **Audit scope should extend past the 71.**
+
+---
+
+## Defect 1, corrected and widened — THREE enactment paths
+
+| # | Path | Printed forms observed | Was modeled? |
+|---|---|---|---|
+| 1 | Signed by the Governor | `—approved February 18, 1876` | ✅ |
+| 2 | **Became law unsigned** (10-day lapse) | `became law by the operation of Constitution` · `became law by operation of the Constitution` · `became a law by constitutional provision` | ❌ |
+| 3 | **Passed over the Governor's veto** | `became a law by a constitutional majority of both Houses, over the Governor's objections` | ❌ |
+
+**The wording is not stable — three phrasings for path 2 alone.** Anchor on the stable core `bec[ao]me (a )?law` and treat the qualifier as free text.
+
+**A vowel cost a test.** The body prints *"it has **become** a law"*; the contents prints *"**became** law"*. A first-draft regex using a bare `become` passed the body fixture and silently failed every contents row. **Fixtures must come from real printed text, not invented strings** — an invented fixture would have used one spelling and hidden the bug.
+
+**These cluster.** 1870 ch. 428, 429, 430, 431 are four *consecutive* unsigned enactments dated April 3, 1870 — bills passed at the close of session hit the ten-day window together. That is why they concentrate in the residual rather than scattering.
+
+**Paths 2 and 3 are constitutionally distinct and must be stored distinctly**, not collapsed into "not approved".
+
+## Defect D — headings that never say "An Act"
+
+`is_confident_act` required `AN_ACT_RE`. Two real counter-examples:
+
+- **1876 ch. 508** — `[An amendment to the Code, but which also repeals the Act of March 28, 1874, in relation to solvent debts]` · S.B. 391 · **printed p. 772**. It *has* a page — the act is printed in this volume; only its heading is unconventional.
+- **1870 ch. 427** — `Charter of the City of Stockton—An Act to reincorporate the City of Stockton`.
+
+**Fix:** accept the enacting clause (*"The People of the State of California … do enact as follows"*) as an alternative to the literal "An Act". The enacting clause is the legally operative signal; the title wording is a printing convention.
+
+## Defect E — a whole class that is not in these volumes at all
+
+`[See volume of Amendments to the Codes.]` is a **common, legitimate contents entry**, not an artifact. On a single 1876 contents page, nine chapters carry it (488, 490, 497, 498, 499, 502, 504, 505, 506).
+
+Five of the 71 residual chapters are in this class: **1874 ch. 587 and 679, 1876 ch. 306, 497, 498.** They were enacted (several still carry bill numbers) but their text was printed in the companion *Amendments to the Codes* volume.
+
+**Consequence: the residual can never reach zero as currently defined.** No re-OCR, re-reading, or archive scan of the statutes volumes will ever produce them. They need reclassification against a separate source, not recovery.
+
+## Defect F — the printed volumes contradict themselves, in BOTH directions
+
+- **1874 ch. 261:** the contents is right (p. 358); the **body running head** is misprinted `CHAPTER CLXI.` where `CCLXI` belongs.
+- **1866 ch. 342:** the **contents** is misprinted `242`; the body is fine.
+
+**Neither the contents nor the body running heads can be trusted alone. Agreement between them is the reliable signal.** This is a durable rule for the whole corpus, not just these seven volumes, and it is the cheapest available cross-check — both sources are already in every volume.
+
+---
+
+## What was actually fixed (2026-07-24)
+
+| Defect | Status | Evidence |
+|---|---|---|
+| 2 — em-dash headings | **FIXED** | canonical regex 5/9 → **9/9** on real printed forms, 0 false positives. `ingest_from_ocr.py:393`, `chapter_reconstruct.py:29` |
+| 1 — three enactment paths | **FIXED** | new `LAPSE_SPELLED_RE` / `LAPSE_NUMERIC_RE` / `detect_enactment_path` / spelled-out-date parser. `test_enactment_paths.py` **27/27** |
+| D — non-"An Act" headings | **FIXED** | `is_confident_act` accepts the enacting clause |
+| 3 — bracket ranges | **PARTIAL** | truthiness bug fixed, magic numbers documented, implausible-span detection added (catches the real 1872 case). `test_residual_bracket.py` **16/16**. **Forward-scan NOT implemented** — needs page text `bracket_for` does not receive |
+| E — Amendments-volume class | **IDENTIFIED, not fixed** | needs a source outside these volumes |
+| F — self-contradicting volumes | **IDENTIFIED** | cross-check contents against body |
+
+**Also repaired en route:** `test_date_parser_fix.py` had been **dead since the module reorg** (zero live coverage on `parse_act_date`), and `5080/parse_born_digital.py` had been **unloadable** for the same reason. Three more files hardcode `C:\github\PatoLex\…`, a root that does not exist; `_residual_manifest.py` had two such roots and now honours `PATOLEX_LOCATION_ROOT`.
+
+**The repo has no CI** — no `pytest.ini`, `pyproject.toml`, `conftest.py`, or workflows. Every test is hand-invoked, which is why a dead suite went unnoticed. `smoke_imports.py` cannot catch it (AST-based; the broken reference was a string path).
 
 ## Related
 

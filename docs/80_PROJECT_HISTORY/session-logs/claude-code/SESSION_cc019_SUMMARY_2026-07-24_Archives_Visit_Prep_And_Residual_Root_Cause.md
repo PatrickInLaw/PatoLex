@@ -157,6 +157,55 @@ All 7 biennial volumes **do** carry a chapter-ordered printed CONTENTS in front 
 
 ---
 
+---
+
+## 9. ★ ALL 71 RESIDUAL CHAPTERS RECOVERED
+
+**71 of 71. Zero remaining. None require an archive visit.**
+
+Full record: `docs/80_PROJECT_HISTORY/RESIDUAL_71_CONTENTS_RECOVERY_2026-07-24.md`.
+
+**Method:** contents-anchored (cc015's 1854 technique). Tesseract located pages only — **every recorded value was read visually off the printed contents by Opus 5.** That distinction mattered: the OCR sweep wrongly classified **1878 ch. 418** as an Amendments-volume redirect; the printed page shows a real act at p. 620. Four chapters (1866/143, 1876/91, 1878/173, 1874/261) were independently read from *body* pages too — all four agree.
+
+| Class | Count | Meaning |
+|---|---|---|
+| Ordinary acts | **62** | Recoverable — parser fix |
+| `[See volume of Amendments to the Codes.]` | **5** | **In a companion volume. Not in this book.** |
+| Special enactment paths | **4** | 3 unsigned + 1 veto override |
+
+**The residual can never reach zero as defined.** 1874 ch. 587/679 and 1876 ch. 306/497/498 were enacted but printed in the *Amendments to the Codes* volume. No re-OCR or scan of these seven PDFs will find them.
+
+**Bracket defect quantified:** for 1872 ch. 125–128 the list gives PDF 224–227; true pages are **221–222** (offset printed + 90). The stated range lands on **chapter 128's own body**.
+
+**`HUMAN_REVIEW_LIST_2026-06-22.md` is superseded** — no human paging required; its brackets are wrong and its "multi-act cluster" labels describe the opposite of the page.
+
+Still owed: this recovers **identity** (number, title, date, bill, page), **not statutory text**. Body-text consensus OCR is still required before ingest.
+
+---
+
+## 10. Parser fixes — defects 1, 2, D landed; 3 partial
+
+| Defect | Status | Evidence |
+|---|---|---|
+| **2** em-dash headings | **FIXED** | 5/9 → **9/9**, 0 false positives |
+| **1** three enactment paths | **FIXED** | `test_enactment_paths.py` **27/27** |
+| **D** non-"An Act" headings | **FIXED** | `is_confident_act` accepts the enacting clause |
+| **3** bracket ranges | **PARTIAL** | `test_residual_bracket.py` **16/16**; forward-scan NOT implemented |
+| **E** Amendments-volume class | identified, needs external source | — |
+| **F** self-contradicting volumes | identified | cross-check contents vs body |
+
+**Defect 1 was broader than first written — three paths, not two:** signed, unsigned ten-day lapse, and **passed over the Governor's veto**. Wording is unstable (three phrasings for the lapse alone), so the regex anchors on `bec[ao]me (a )?law` with a free-text qualifier. New spelled-out-date parser (`"this twenty-seventh day of February, A. D. eighteen hundred and sixty-six"` → 1866-02-27) — none existed anywhere in the pipeline.
+
+**A vowel cost a test cycle:** the body prints *"has **become** a law"*, the contents prints *"**became** law"*. A draft using bare `become` passed the body fixture and failed every contents row. **Fixtures came from real printed text**, which is the only reason it surfaced.
+
+**Defect 3 deliberately bounded:** fixed the truthiness bug (`source_page == 0` was silently dropped), replaced undocumented `±4` magic numbers, and added implausible-span detection that catches the real 1872 case. The **forward-scan heading detection was NOT implemented** — it needs page text `bracket_for()` never receives, and writing it untested against unreachable data would be worse than flagging it. Documented in-code as an open limitation.
+
+**Full suite:** 33 + 27 + 16 + 9 passing, plus chapter parser / chap guards / dedup. Two pre-existing failures untouched (`ocr/test_consensus.py` 8/9, `analysis/test_recover_guards.py`) — both the same `No module named 'config'` sys.path issue in files this session never edited.
+
+**Also repaired:** `_residual_manifest.py` had **two** hardcoded roots, including `C:\GitHub\PatoLex\…` which exists nowhere; now honours `PATOLEX_LOCATION_ROOT`.
+
+---
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.
