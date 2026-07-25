@@ -172,6 +172,54 @@ The comma was **speculative** — no printed form requires it. Removed. Only whi
 
 Hans also challenged the headline "71/71 recovered" as potentially overclaiming, since 5 are Amendments-volume redirects and **no statutory body text was recovered for any of them**. The doc already states both limits explicitly — recovery is of **identity** (number, title, date, bill, page), and body-text OCR remains owed. Keeping the headline, with those qualifications kept prominent.
 
+---
+
+## ★★ CORPUS MEASUREMENT — the numbers that overturned two of my own fixes
+
+Measured on **1,732,428 real OCR lines / 27,595 pages across 19 volumes** (early-era 1865-66/1871-72/1875-76/1877-78 + 15 modern back-matter volumes). Probe scripts and reports live on the 5090 at `C:\PatoLex-scratch\cc019_regex_probe*.py` / `cc019_probe*_report.txt`.
+
+### Final before/after
+
+| Metric | R1 (original cc019) | R2 (after Hans) | **R4 (final)** |
+|---|---|---|---|
+| HEADER_RE matches | 2,986 | 2,861 | **2,976** |
+| Genuine headings missed vs R1 | — | **116** | **0** |
+| Index-line false positives | 9 | 0 | **0** |
+| Implausible-token FPs | 62 | 62 | **62** (pre-existing, separator-independent) |
+| Lapse matches | 12 (1 poisoned) | 16 | **58** |
+| p.25 cross-act poisoning | **PRESENT** | dead | **dead** |
+| Lapse recall (early-era) | — | 4/10 (40%) | **7/10 (70%)** |
+| Resolution-guard rejections | — | 2 (1 **wrong**) | **1 (correct)** |
+| Wall time, full scan | — | 2.9 s | **2.8 s**, max page 16 ms, 0 pages >100 ms |
+
+### Two of my "fixes" were wrong, and only the corpus said so
+
+**1. Removing the comma was a net recall regression.** Hans reported 55 index false positives; the true count is **9**. Acting on his number, I deleted the comma from the separator and lost **116 genuine early-era headings** — the 1860s–70s printed period was routinely OCR'd as a comma (`'Cuap, XLVI.—An Act to legalize...'`; leading tokens `CUAP`×66, `CUAR`×17, `CRAP`×5…). Per-volume: 1865-66 −34, 1871-72 −1, 1875-76 −39, 1877-78 −42.
+
+**The discriminator was in the data:** every genuine comma heading has a **Roman** numeral; every index false positive has an **Arabic** one. Comma allowed only before a Roman numeral → all 116 recovered, all 9 blocked, **0 new junk** (R4 is a strict subset of R1).
+
+**2. My digit ban was wrong on its stated premise, and cost far more than I knew.** I wrote that the lapse qualifier "never legitimately contains a digit." False — and not just for the one early-era case I found. **The entire 20th-century unsigned-enactment form carries both a period and digits:**
+
+> `[Became law without Governor's signature. Filed with Secretary of State October 1, 1982.]`
+
+Round 2 matched **0** of these. Round 4 finds **40** across 1982–1999, ownership correct in all 40 contexts. **My ban had silently suppressed every modern lapse act in the corpus.** What actually blocks the poisoning is the `An Act` / `CHAP` / `|` boundary tokens — verified: p.25 yields zero matches with the bans removed.
+
+**3. The em-dash claim was overstated.** I reported "5/9 → 9/9". At corpus scale the em-dash form is a **two-instance outlier**; 1875-76 and 1877-78 print `Cuap. XXI.—` (period + space) in **379 of 462** headings. The fix is correct but worth **+2 headings**, not a campaign. That figure came from a hand-built fixture set.
+
+**4. My positional resolution guard made itself inert.** Using `AN_ACT_RE` as act-evidence produced **0 rejections across 3,091 buffers**. Genuine resolutions *quote* the bills they concern — 1865-66 ch.500 contains *"entitled an Act to amend an Act to provide for..."* at offset 270, ahead of its own resolution marker. **Only the enacting clause is exclusive to an act**; resolutions never carry it. Anchoring on `ENACT_MARKER_RE` alone rejects ch.500 (`ENACT@None`) and keeps ch.637 (`ENACT@138`).
+
+### The rule this produces
+
+> **A regex change to a corpus parser is not verified until it has been run over the corpus — and "fixing" it on a reviewer's count without re-measuring can be worse than the original bug.**
+>
+> Fixtures prove a pattern *can* match what you intended. Only the corpus shows what else it matches, **what it stopped matching**, and whether the reviewer's number was right.
+
+### Residual known misses (measured, accepted)
+
+3 of 10 early-era lapse acts remain undated, each with a visible cause: **1865-66 ch.118** hyphenated line-break inside the month (`"Feb- ruary"`); **1865-66 ch.379** parenthetical ordinal (`"thirtieth (30th) day"`) — *the act the original bug poisoned; now safely undated rather than wrongly dated*; **1877-78 ch.586** OCR `"uf"` for `"of"`. Also 62 implausible-token header FPs that are **pre-existing and separator-independent** (present before cc019), from the fuzzy glyph class swallowing words like `CHARGED`, `CURRENCY`.
+
+**Not measured:** these are standalone-regex figures. The full parser was not run, so how many of the 62 header FPs and the 0 remaining lapse FPs survive downstream gates is unknown. The 40 modern lapse hits are counted per **page**, not per act.
+
 ## Related
 
 - Confirms and generalizes `[[early-era-headers-consensus-bug]]` — the heading token is the corpus's most variable element across eras.

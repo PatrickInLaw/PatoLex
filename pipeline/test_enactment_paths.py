@@ -275,6 +275,147 @@ _ing.parse_lapse_date(_adv)
 _elapsed = _time.time() - _t0
 check("5k-char adversarial input completes < 1s", _elapsed < 1.0, True)
 
+
+# ===========================================================================
+# CORPUS-MEASURED REGRESSIONS (2026-07-25). Every fixture below is a REAL line
+# or act taken from the 1.73M-line corpus scan. Several of these REFUTED an
+# earlier "fix" of mine -- keep them.
+# ===========================================================================
+
+print("\n=== CORPUS-1: comma separator -- 116 genuine early headings ===\n")
+# Removing the comma (round 2) lost these. The printed period was routinely
+# OCR'd as a comma in the 1860s-70s. All verbatim from the corpus scan.
+REAL_COMMA_HEADINGS = [
+    ("Cuap., XXII.—An Act concerning the County Clerk of Del Norte", "XXII"),
+    ("Cuap, XLVI.—An Act to legalize the Assessment of Taxes in the", "XLVI"),
+    ("CHAP, CXXXVIIL—An Act relative to the assessment in Swamp", "CXXXVIIL"),
+    ("Cuap, LIX.—An Act to authorize the Board of State Harbor :", "LIX"),
+]
+for line, want in REAL_COMMA_HEADINGS:
+    m = _ing.HEADER_RE.match(line)
+    check("comma heading %r -> %s" % (line[:34], want),
+          m.group(1) if m else None, want)
+
+print("\n=== CORPUS-2: ...but comma must NOT admit index lines ===\n")
+# All 9 measured false positives. Every one has an ARABIC numeral -- that is the
+# discriminator against the Roman-numeral real headings above.
+REAL_INDEX_FPS = [
+    "crabs, 874", "charges, 1192", "change, 131", "copies, 395",
+    "card, 828", "covers, 787", "charges, 1005", "CHAPTER, 1302",
+]
+for line in REAL_INDEX_FPS:
+    check("index line %r blocked" % line, bool(_ing.HEADER_RE.match(line)), False)
+
+print("\n=== CORPUS-3: the 2 real em-dash headings (the whole em-dash gain) ===\n")
+# At corpus scale the em-dash form is a TWO-INSTANCE outlier, not an era
+# convention. Both verbatim from the scan.
+for line, want in [
+    ("CHap.—XCI.—An Act to provide for the funding of the levee", "XCI"),
+    ("Cuap.—CLXXII—An Act to provide fer the building of a", "CLXXII"),
+]:
+    m = _ing.HEADER_RE.match(line)
+    check("em-dash heading %r -> %s" % (line[:30], want),
+          m.group(1) if m else None, want)
+
+print("\n=== CORPUS-4: the ACTUAL poisoning artifact (p.25, not p.24) ===\n")
+# Verbatim shape from production-1865-66 page 25.
+REAL_POISON = ("379 | Au Act for relief of Pliny M. Whitney, late Collector of Fishing "
+               "Licenses—became a law by operation of the Constitution, 380 | An Act to "
+               "transfer certain fands—approved March 30, 1866…… | S.B. 812")
+check("real p.25 artifact yields NO lapse date",
+      _ing.parse_lapse_date(REAL_POISON)[0], None)
+
+print("\n=== CORPUS-5: digit-bearing qualifier is LEGITIMATE (refuted my ban) ===\n")
+# 1875-76 ch.250 -- real, correctly printed, carries BOTH a digit and a period.
+# The digit ban silently dropped it.
+CH250 = ("[Became a law by virtue of Section 17, Article 1V. of the Constitution, "
+         "March 18, 1876.)")
+check("1875-76 ch.250 dates correctly", _ing.parse_lapse_date(CH250)[0], "1876-03-18")
+
+print("\n=== CORPUS-6: terminator + OCR-noise recall misses ===\n")
+# 1865-66 ch.322 -- lapse notice terminated by a COMMA.
+CH322 = ("it has become a law this twenty-third day of March, A. D. eighteen "
+         "hundred and sixty-six,")
+check("comma-terminated lapse notice dates", _ing.parse_lapse_date(CH322)[0], "1866-03-23")
+# 1865-66 ch.650 -- asterisk inside the spelled year.
+CH650 = ("it has become a law this tenth day of April, A. D. eighteen*hundred "
+         "and sixty-six.")
+check("asterisk in spelled year dates", _ing.parse_lapse_date(CH650)[0], "1866-04-10")
+
+print("\n=== CORPUS-7: resolution bleed-through must NOT reject a real act ===\n")
+# production-1871-72 ch.637 -- a GENUINE act; the volume's last chapter, whose
+# buffer bleeds into the following resolutions section header.
+CH637 = ("CHAPTER DCXXXVII. An Act to protect the wages of labor and the salaries "
+         "and fees of subordinate officers. [Approved April 1, 1872.] The People of "
+         "the State of California, represented in Senate and Assembly, do enact as "
+         "follows: Section 1. Every person who employs laborers upon the public works "
+         "of this State, and who fails to pay them, is guilty of a felony and shall be "
+         "punished accordingly under the provisions of this Act. "
+         "T r T bd 4 Th? CONCURRENT AND JOINT RESOLUTIONS. "
+         "Nusmnun [.—Senate Concurrent Resolution. {Adopted March 14, 1872")
+check("1871-72 ch.637 IS a confident act (resolution header bleeds in AFTER)",
+      _ing.is_confident_act(CH637, volume_year=1872), True)
+
+# ...but a genuine resolution, where the marker comes FIRST, is still rejected.
+check("genuine concurrent resolution still rejected",
+      _ing.is_confident_act(RESOLUTION, volume_year=1878), False)
+check("genuine joint resolution still rejected",
+      _ing.is_confident_act(JOINT_RES, volume_year=1878), False)
+
+
+# ===========================================================================
+# ROUND-4 corpus regressions (2026-07-25). From the re-measurement of the
+# corrected patterns over the same 1,732,428 lines.
+# ===========================================================================
+
+print("\n=== R4-1: the 116th comma heading (comma THEN period) ===\n")
+m = _ing.HEADER_RE.match("Cuapv,. CXCIII.—[See volume of Amendments to the Codes.]")
+check("'Cuapv,. CXCIII.' -> CXCIII", m.group(1) if m else None, "CXCIII")
+# ...and the index lines must STILL be blocked with the widened comma class.
+for line in REAL_INDEX_FPS:
+    check("index line %r still blocked" % line, bool(_ing.HEADER_RE.match(line)), False)
+
+print("\n=== R4-2: MODERN unsigned-lapse form (40 real matches, R2 found 0) ===\n")
+# The 20th-century notice carries BOTH a period and digits inside the qualifier.
+# The digit/period ban suppressed this form entirely.
+MODERN_LAPSE = ("[Became law without Governor's signature. Filed with Secretary of "
+                "State October 1, 1982.] The people of the State of California do "
+                "enact as follows: SECTION 1.")
+check("1982 modern lapse notice dates", _ing.parse_lapse_date(MODERN_LAPSE)[0], "1982-10-01")
+MODERN_1994 = ("CHAPTER 1297 An act to amend Section 21401 of the Vehicle Code. "
+               "[Became law without Governor's signature. Filed with Secretary of "
+               "State October 4, 1994.]")
+check("1994 modern lapse notice dates", _ing.parse_lapse_date(MODERN_1994)[0], "1994-10-04")
+# OCR noise seen in the corpus: day read as 'i', period instead of comma.
+check("OCR 'October i, 1982' -> day 1",
+      _ing.parse_lapse_date("[Became law without Governor's signature. Filed with "
+                            "Secretary of State October i, 1982.]")[0], "1982-10-01")
+
+print("\n=== R4-3: digest sentence is NOT an enactment ===\n")
+DIGEST = ("this bill would provide that it shall only become operative if both this "
+          "bill and SB 765 are enacted and become law effective on or before "
+          "January 1, 2000. Ch. 923 (AB 1571)")
+check("conditional 'become law effective ...' rejected",
+      _ing.parse_lapse_date(DIGEST)[0], None)
+
+print("\n=== R4-4: resolution guard must NOT be inert ===\n")
+# 1865-66 ch.500 -- a GENUINE resolution that QUOTES a bill title, so AN_ACT_RE
+# fires BEFORE the resolution marker. Using "An Act" as act-evidence made the
+# guard reject nothing at all across 3,091 buffers. Only the enacting clause is
+# exclusive to an act.
+CH500 = ("charged- Insane Asylum be and he is hereby discharged. [Adopted March 17, "
+         "1866.) Resolved, By the Senate, the Assembly concurring, that the "
+         "Governor be and is hereby requested to return Senate Bill Number Three "
+         "Hundred and Thirteen, (318,) entitled an Act to amend an Act to provide "
+         "for the establishment and maintenance of public and private roads, "
+         "approved May sixteenth, eighteen hundred and sixty-one, to the Senate.")
+check("genuine resolution quoting an act title IS rejected",
+      _ing.is_confident_act(CH500, volume_year=1866), False)
+check("real act with resolution header bleeding in AFTER is still kept",
+      _ing.is_confident_act(CH637, volume_year=1872), True)
+check("RESOLUTION_RE matches 'Resolved, By the Senate' (comma form)",
+      bool(_ing.RESOLUTION_RE.search("Resolved, By the Senate, the Assembly concurring")), True)
+
 print("\n" + "=" * 60)
 print("Results: %d passed, %d failed" % (PASS, FAIL))
 print("=" * 60)

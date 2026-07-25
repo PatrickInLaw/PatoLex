@@ -105,7 +105,7 @@ _DASH = "—–‒‐‑\\-"
 # Kept in sync with the canonical pipeline/ingest/ingest_from_ocr.py:_HDR_SEP so
 # that nobody resurrects or copy-pastes the broken version. Do NOT run this
 # module; use ingest_from_ocr.parse_volume().
-_HDR_SEP = r"[\s—–‒‐‑-]*"
+_HDR_SEP = r"[\s—–‒‐‑-]*(?:,[\s.]*(?=[IVXLCDMivxlcdm]))?[\s—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"                                   # leading OCR noise
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"

@@ -31,10 +31,12 @@ SAMPLE  = os.path.join(OUT_DIR, "chapter_reconstruct_sample.tsv")
 # blindness ("CHAP.—XCI." in the 1876/78 volumes never matched). Keep in sync
 # with ingest_from_ocr.py:_HDR_SEP.
 _DASH = "—–‒‐‑\\-"
-# HANS FAIL (2026-07-25): comma removed -- it caused false-positive header
-# matches on index lines ("crabs, 47"). Keep byte-identical to
-# ingest_from_ocr.py:_HDR_SEP.
-_HDR_SEP = r"[\s—–‒‐‑-]*"
+# Keep BYTE-IDENTICAL to ingest_from_ocr.py:_HDR_SEP -- see the measured
+# rationale there. Short version: the comma is required (the 1860s-70s printed
+# period was routinely OCR'd as a comma -- 116 genuine headings depend on it) but
+# only before a ROMAN numeral, which blocks the 9 measured index-line false
+# positives ("crabs, 874"), all of which carry Arabic numerals.
+_HDR_SEP = r"[\s—–‒‐‑-]*(?:,[\s.]*(?=[IVXLCDMivxlcdm]))?[\s—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"

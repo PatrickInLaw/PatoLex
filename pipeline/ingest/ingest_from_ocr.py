@@ -408,18 +408,44 @@ _DASH = "—–‒‐‑\\-"
 # NOTE: keep the numeral character class letter-free. parse_chapter_number()
 # silently strips non-Roman characters, so an over-capturing group does not
 # fail loudly -- it returns a plausible WRONG number (e.g. "XCIAN" -> 91).
-# HANS FAIL (2026-07-25): the first draft was r"[\s.,—–‒‐‑-]*" -- it included a
-# COMMA and a PERIOD. The comma was speculative (no printed form needs it) and
-# produced real false-positive header matches on back-of-book index lines such
-# as "crabs, 47" and "charges, 1192" -- 55 confirmed on the modern volumes.
-# header_starts_act's AN_ACT_RE window happened to contain the damage, but the
-# commit's "0 false positives against body text" claim was measured against a
-# hand-written negative set, NOT the corpus, and was wrong as stated.
-# Only whitespace and dashes occur between the glyph and the numeral:
-#     "CHAP. CXLIII."   period + SPACE      (1866)
-#     "CHAP.—XCI."      period + EM DASH    (1876/78)
-# The optional period is already consumed by the preceding `\.?`.
-_HDR_SEP = r"[\s—–‒‐‑-]*"
+# Separator between the CHAP glyph and the numeral. Three rounds to get right;
+# ALL numbers below are MEASURED on 1,732,428 real corpus lines / 27,595 pages
+# across 19 volumes (early-era 1865-66/1871-72/1875-76/1877-78 + 15 modern).
+#
+#   round 1 (cc019)  r"[\s.,—–‒‐‑-]*"   comma+period. Claimed "0 false positives"
+#                    -- FALSE, measured against a 6-line hand-written set.
+#   round 2 (Hans)   r"[\s—–‒‐‑-]*"     comma removed on Hans's report of 55 FPs.
+#                    OVER-CORRECTION: Hans's 55 is refuted (the real number is 9),
+#                    and removing the comma LOST 116 GENUINE early-era headings.
+#                    The 1860s-70s printed period was routinely OCR'd as a comma:
+#                        'Cuap., XXII.—An Act concerning the County Clerk...'
+#                        'Cuap, XLVI.—An Act to legalize the Assessment...'
+#                        'CHAP, CXXXVIIL—An Act relative to the assessment...'
+#                    Per-volume loss: 1865-66 -34, 1871-72 -1, 1875-76 -39,
+#                    1877-78 -42. A net recall regression on exactly the era the
+#                    pattern exists to serve.
+#   round 3 (this)   comma allowed ONLY when the numeral is ROMAN.
+#                    Every one of the 116 genuine comma headings has a Roman
+#                    numeral; every one of the 9 index false positives has an
+#                    Arabic one ('crabs, 874', 'charges, 1192', 'CHAPTER, 1302').
+#                    Recovers 115/116, blocks all 9, adds 0 new junk (measured:
+#                    R3 is a strict subset of R1; implausible-token count 62,
+#                    identical to R2).
+#   round 4 (this)   the 116th: 1877-78 p308 prints "Cuapv,. CXCIII.—" -- comma
+#                    THEN period. Allowing `[\s.]*` after the comma recovers it.
+#                    The Roman lookahead still blocks all 9 index lines, since
+#                    every one of them carries an Arabic numeral.
+#
+# Implemented as an optional comma with a Roman lookahead, so HEADER_RE still has
+# exactly ONE capture group (group(1) is consumed downstream -- do not add one).
+#
+# Reality check on the em-dash form this all started from: at corpus scale it is
+# a TWO-INSTANCE outlier (1875-76 p124, 1877-78 p273), not a systematic era
+# convention -- 1875-76/1877-78 print "Cuap. XXI.—" (period+space) in 379 of 462
+# headings. The em-dash fix is still correct, but it is worth +2 headings, not a
+# campaign. The earlier "5/9 -> 9/9" figure was a hand-built fixture set, not a
+# corpus measurement.
+_HDR_SEP = r"[\s—–‒‐‑-]*(?:,[\s.]*(?=[IVXLCDMivxlcdm]))?[\s—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"
@@ -570,9 +596,14 @@ def spelled_year_to_int(tok):
     if not tok:
         return None
     t = tok.strip().lower()
-    t = re.sub(r"[\s‐-―-]+", " ", t)
+    # Normalise ANY non-letter run to a single space before tokenising.
+    # Measured miss (1865-66 ch.650): the corpus contains "eighteen*hundred and
+    # sixty-six" -- an OCR artefact where the word space became "*". Splitting
+    # only on whitespace/hyphen left "eighteen*hundred" as one unknown token and
+    # returned None for a perfectly readable year.
+    t = re.sub(r"[^a-z]+", " ", t)
     t = t.replace(" and ", " ")
-    words = [w for w in re.split(r"[\s-]+", t) if w]
+    words = [w for w in t.split() if w]
 
     total = 0
     current = 0
@@ -603,28 +634,54 @@ def spelled_year_to_int(tok):
 # CONTENTS prints "became law" -- bec[ao]me covers both. An earlier draft used
 # a bare "become" and silently failed on every contents row.
 # The article is optional: "became law" and "became a law" both occur.
-_LAPSE_CORE = r"bec[ao]me(?:s)?\s+(?:a\s+)?law"
+# The trailing lookaheads exclude PROSPECTIVE/CONDITIONAL uses of "become law",
+# which are statements ABOUT a future enactment rather than a record OF one.
+# Measured false positive (1999 digest volume, the only one in 58 matches):
+#     "...would provide that it shall only become operative if both this bill and
+#      SB 765 are enacted and become law effective on or before January 1, 2000."
+# That is a digest sentence; the date is a condition, not an enactment date.
+_LAPSE_CORE = (r"bec[ao]me(?:s)?\s+(?:a\s+)?law"
+               r"(?!\s+effective)(?!\s+operative)(?!\s+on\s+or\s+before)")
 
 # The free-text qualifier between "became law" and the date.
 #
-# HANS FAIL (2026-07-25) -- CROSS-ACT DATE POISONING, reproduced on real corpus
-# text. The first draft used `[^.]{0,120}?`, which on production-1865-66 page 24
-# (a printed CONTENTS page -- exactly the source type this feature reads) ran
-# past a page-number column AND a second act's title, and captured chapter 380's
-# APPROVED date as chapter 379's LAPSE date. The +/-3-year clamp does NOT catch
-# this: the stolen date is the same year, only weeks off. Silent, plausible,
-# wrong -- the worst failure mode for a corpus ingested exactly once.
+# CROSS-ACT DATE POISONING guard. Verified against the real artifact:
+# production-1865-66 **page 25** (a printed CONTENTS page -- exactly the source
+# type this feature reads). The original `[^.]{0,120}?` ran past a page-number
+# column AND a second act's title and captured chapter 380's APPROVED date as
+# chapter 379's LAPSE date:
 #
-# The qualifier is ALWAYS prose ("by operation of the Constitution", "by a
-# constitutional majority of both Houses, over the Governor's objections"). It
-# never legitimately contains a digit, and it never spans into another act. So
-# forbid, inside the gap:
-#   * a period        -- sentence boundary
-#   * any digit       -- page-number column, chapter number, another date
-#   * "An Act"        -- the next act's title has begun
-#   * "CHAP"          -- the next chapter heading has begun
-# and tighten the window 120 -> 80.
-_LAPSE_GAP = r"(?:(?!\bAn\s+Act\b)(?![Cc][Hh][Aa][Pp])[^.\d]){0,80}?"
+#   "379 | Au Act for relief of Pliny M. Whitney ... became a law by operation
+#    of the Constitution, 380 | An Act to transfer certain fands--approved
+#    March 30, 1866"
+#
+# The +/-3-year clamp CANNOT catch this -- the stolen date is the same year, only
+# weeks off. Silent, plausible, wrong: the worst failure mode for a corpus that
+# is ingested exactly once.
+#
+# WHAT ACTUALLY BLOCKS IT is the "An Act" / "CHAP" / "|" guards, NOT a digit ban.
+# Measured: the poisoning span contains both "An Act" and a "|" page column, so
+# it is blocked twice over; the current gap yields 0 matches on that page.
+#
+# The first fix ALSO banned digits, on the stated reasoning that the qualifier
+# "never legitimately contains a digit". CORPUS MEASUREMENT REFUTED THAT --
+# 1875-76 ch.250 is a real, correctly printed lapse notice:
+#     "[Became a law by virtue of Section 17, Article 1V. of the Constitution,
+#      March 18, 1876.)"
+# It carries BOTH a digit ("Section 17") and a period ("1V."), and the digit ban
+# silently dropped it. Cost/benefit measured: the ban killed 1 poisoning and 1
+# true positive. Guarding on act-boundary tokens instead keeps both.
+#
+# So: forbid only true act-boundary markers, and cap the window tightly (70) so
+# the gap cannot wander into a following sentence.
+# Window sizing is measured, not guessed. The LONGEST legitimate qualifier in the
+# corpus is the veto-override form, at 77 chars:
+#     "by a constitutional majority of both Houses, over the Governor's objections, "
+# A 70-char cap silently dropped it. 90 clears the longest real form with margin
+# while staying far short of the next act. Length is NOT the poisoning guard --
+# the "An Act" / "CHAP" / "|" boundary tokens are; those block the p.25 artifact
+# regardless of window size.
+_LAPSE_GAP = r"(?:(?!\bAn\s+Act\b)(?![Cc][Hh][Aa][Pp])[^|]){0,90}?"
 
 # Body form: "...it has become a law this twenty-seventh day of February,
 #             A. D. eighteen hundred and sixty-six."
@@ -634,8 +691,15 @@ LAPSE_SPELLED_RE = re.compile(
     + r"\bthis\s+([a-z]+(?:[\s‐-―-]+[a-z]+)?)\s+day\s+of\s+"
     + r"(" + _MONTHS + r")\s*,?\s*"
     + r"(?:A\.?\s*D\.?\s*,?\s*)?"           # optional "A. D."
-    + r"([a-z][a-z\s‐-―-]{8,60}?)"  # spelled-out year
-    + r"\s*[.;]",
+    # Spelled-out year. The `*` and `.` in the class are OCR noise tolerance:
+    # measured miss on 1865-66 ch.650, printed/OCR'd "eighteen*hundred and
+    # sixty-six." spelled_year_to_int() re-splits on non-word chars, so admitting
+    # them here costs nothing and recovers the act.
+    + r"([a-z][a-z\s‐-―*.-]{8,60}?)"
+    # Terminator. Measured miss on 1865-66 ch.322, which ends the lapse notice
+    # with a COMMA, and on 1875-76 ch.250, which ends with ")". The original
+    # `[.;]` dropped both.
+    + r"\s*[.;,)]",
     re.IGNORECASE,
 )
 
@@ -675,9 +739,12 @@ TEN_DAY_LAPSE_RE = re.compile(
 # concurring" rather than the enacting clause, so they should not reach the
 # fallback gate in is_confident_act -- but that gate is new, so reject them
 # explicitly rather than relying on the absence of a marker.
+# NOTE the optional comma in "Resolved, By the Senate" -- measured: 1865-66
+# ch.500 prints exactly that, and a pattern requiring "Resolved by the" missed
+# the single clearest resolution marker in the buffer.
 RESOLUTION_RE = re.compile(
     r"\b(?:CONCURRENT|JOINT)\s+RESOLUTION\b"
-    r"|\bResolved\s+by\s+the\s+(?:Assembly|Senate)\b"
+    r"|\bResolved\s*,?\s+by\s+the\s+(?:Assembly|Senate)\b"
     r"|\bBe\s+it\s+resolved\b",
     re.IGNORECASE,
 )
@@ -915,11 +982,46 @@ def is_confident_act(full_text, volume_year=None):
         they should not reach here -- but the fallback path is new, so reject
         them explicitly rather than relying on that.
     """
-    if RESOLUTION_RE.search(full_text[:600]):
-        return False
-    has_an_act = bool(AN_ACT_RE.search(full_text))
+    head = full_text[:2000]
+    m_an_act = AN_ACT_RE.search(head)
+    m_clause = ENACT_MARKER_RE.search(head)
+    m_res = RESOLUTION_RE.search(head)
+
+    # Reject resolutions -- but ONLY when the resolution marker comes FIRST.
+    #
+    # CORPUS MEASUREMENT (2026-07-25): a flat "resolution marker in the first 600
+    # chars -> reject" rule wrongly rejected a GENUINE statute. production-1871-72
+    # ch.637 ("An Act to protect the wages of labor...", [Approved April 1, 1872])
+    # is the LAST chapter in its volume, so its buffer bleeds into the following
+    # "CONCURRENT AND JOINT RESOLUTIONS." section header at offset 554 -- inside
+    # the window. It has both "An Act" AND the full enacting clause well before
+    # that point.
+    #
+    # Position, not presence, is the discriminator: in a real resolution the
+    # resolution language comes first; in a bleed-through it comes after the act's
+    # own enacting clause.
+    #
+    # THE ANCHOR MUST BE THE ENACTING CLAUSE ALONE -- NOT "An Act".
+    # Measured (2026-07-25): using AN_ACT_RE as act-evidence made this guard
+    # COMPLETELY INERT (0 rejections across 3,091 act buffers). 1865-66 ch.500 is
+    # a genuine resolution that QUOTES a bill title -- "...requested to return
+    # Senate Bill Number Three Hundred and Thirteen, entitled an Act to amend an
+    # Act to provide for..." -- so AN_ACT_RE fired at offset 270, before the
+    # resolution marker at 522, and the buffer was kept.
+    #
+    # A quoted act title proves nothing: resolutions routinely name the bills
+    # they concern. Only the ENACTING CLAUSE ("The People of the State of
+    # California ... do enact as follows") is legally exclusive to an act --
+    # resolutions never carry it. Measured discriminator:
+    #     ch.500 (real resolution)  ENACT@None -> rejected
+    #     ch.637 (real act)         ENACT@138  -> kept
+    if m_res is not None:
+        if m_clause is None or m_res.start() < m_clause.start():
+            return False
+
+    has_an_act = m_an_act is not None
     # Anchor the fallback: enacting clause must be in the act's opening.
-    has_enacting_clause = bool(ENACT_MARKER_RE.search(full_text[:2000]))
+    has_enacting_clause = m_clause is not None
     has_date, _ = parse_act_date(full_text, volume_year=volume_year)
     return (
         (has_an_act or has_enacting_clause)

@@ -238,6 +238,38 @@ Hans ran the new regexes **against the real corpus over SSH**, not against fixtu
 
 **Also fixed:** `pipeline/README.md` labelled `ingest_from_ocr.py` blanket "SUPERSEDED / LOSSY" while cc019 called it "(CANONICAL parser)" — a real contradiction. Resolved: its **ingest half is superseded; its parser half is live and canonical.** The README's stale `pipeline/5080/` path is the same one that left `test_date_parser_fix.py` dead for a month. Its "no `__main__` guard" hazard is stale — a guard exists at line 1273 (verified).
 
+---
+
+## 13. ★★ Corpus measurement — it overturned two of my own fixes
+
+Measured on **1,732,428 real OCR lines / 27,595 pages / 19 volumes**. Full detail in the lesson file.
+
+| Metric | R1 (original) | R2 (after Hans) | **R4 (final)** |
+|---|---|---|---|
+| HEADER_RE matches | 2,986 | 2,861 | **2,976** |
+| Genuine headings missed vs R1 | — | **116** | **0** |
+| Index-line FPs | 9 | 0 | **0** |
+| Lapse matches | 12 (1 poisoned) | 16 | **58** |
+| p.25 poisoning | **PRESENT** | dead | **dead** |
+| Lapse recall (early era) | — | 40% | **70%** |
+| Resolution guard | — | 2 rejects (1 **wrong**) | **1 (correct)** |
+
+**Two of my "fixes" were wrong, and only the corpus revealed it:**
+
+1. **Removing the comma cost 116 genuine headings** to block 9 index lines. Hans's "55" was itself wrong (real: 9), and I acted on it without measuring. The discriminator was in the data all along — genuine comma headings carry **Roman** numerals, index lines **Arabic**. Comma-before-Roman recovers all 116, blocks all 9, adds zero junk.
+
+2. **My digit ban suppressed every modern lapse act in the corpus.** I asserted the qualifier "never legitimately contains a digit." The entire 20th-century form is `[Became law without Governor's signature. Filed with Secretary of State October 1, 1982.]` — period *and* digits. R2 found **0**; R4 finds **40** across 1982–1999.
+
+3. **My em-dash claim was overstated** — "5/9 → 9/9" came from a hand-built fixture set. At corpus scale the em-dash form is a **2-instance outlier** (1875-76/1877-78 print period+space in 379 of 462 headings). Correct fix, +2 headings, not a campaign.
+
+4. **My positional resolution guard made itself inert** — 0 rejections across 3,091 buffers, because genuine resolutions *quote* act titles. Anchored on the enacting clause instead (exclusive to acts; resolutions never carry it).
+
+> **The rule:** a regex change to a corpus parser is not verified until it has been run over the corpus — and "fixing" it on a reviewer's count without re-measuring can be worse than the original bug.
+
+**Accepted residual (measured):** 3/10 early-era lapse misses with visible causes (hyphenated month, parenthetical ordinal, OCR `uf`), and 62 implausible-token header FPs that are **pre-existing and separator-independent**. Performance clean: 2.8 s full scan, max page 16 ms, 0 pages >100 ms.
+
+**Not measured:** standalone regexes only — the full parser was not run, so downstream-gate survival of the remaining FPs is unknown; the 40 modern lapse hits are per-page, not per-act.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.
