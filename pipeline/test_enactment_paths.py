@@ -483,6 +483,92 @@ if rec3:
     check("veto-override path is NOT collapsed into unsigned",
           rec3.get("enactment_path"), _ing.ENACTMENT_PATH_VETO_OVERRIDE)
 
+
+# ===========================================================================
+# REGRESSION FIXES from the corpus reparse diff (2026-07-25). The diff found
+# 31 chapters the NEW parser lost. 10 were genuine regressions caused by MY
+# changes. Fixtures are the REAL OCR text from those acts.
+# ===========================================================================
+
+print("\n=== REG-1: ENACT_MARKER_RE must tolerate 1862-63 OCR ===\n")
+# flush_act does `if not has_enact_marker(full): return` -- a SILENT DROP, no
+# record at all. The strict pattern lost 7 real statutes once correct
+# segmentation stopped them borrowing a neighbour's legible clause.
+# Verbatim from production-1862 ch.63:
+MANGLED_CLAUSE = ("The People of the State af Culffornin, represented in Senate cel "
+                  "assembly, do enact ax folloves:")
+check("mangled 1862 enacting clause is recognised",
+      _ing.has_enact_marker(MANGLED_CLAUSE), True)
+for variant in [
+    "The People of the State of California, represented in Senate and Assembly, do enact as follows:",
+    "the people of the state af Calfornia, represented in senate and assembly",
+    "do enaet az follows",
+    "do enact ax folloves",
+]:
+    check("clause variant recognised: %r" % variant[:44],
+          _ing.has_enact_marker(variant), True)
+# ...but it must not fire on ordinary prose.
+for prose in [
+    "The people of this county have long desired a wagon road to the valley.",
+    "and the State of Nevada shall be reimbursed for all such expenses incurred",
+    "This Act shall take effect immediately.",
+]:
+    check("prose NOT treated as an enacting clause: %r" % prose[:40],
+          _ing.has_enact_marker(prose), False)
+
+print("\n=== REG-2: resolution guard v3 -- opening line, not offsets ===\n")
+# v2 anchored on the enacting clause. ENACT_MARKER_RE never matches 20th-century
+# volumes, so the guard degenerated to "any resolution phrase -> reject" and
+# killed three real acts. These are the real openings.
+REAL_ACT_NAMING_A_RESOLUTION = (
+    "CHAPTER 118. An Act making an appropriation to pay for the expenses incurred by "
+    "Assembly Concurrent Resolution No. 6, appointing a joint committee to investigate "
+    "the state printing office.\n[Approved March 20, 1897.]\n"
+    "The People of the State of California, represented in Senate and Assembly, "
+    "do enact as follows:\nSECTION 1. There is hereby appropriated the sum of "
+    "two thousand dollars out of any money in the State Treasury not otherwise "
+    "appropriated, for the purposes named in said resolution."
+)
+check("1897 ch.118 (act NAMING a resolution) is confident",
+      _ing.is_confident_act(REAL_ACT_NAMING_A_RESOLUTION, volume_year=1897), True)
+
+MODERN_ACT_BLEEDING_INTO_RESOLUTIONS = (
+    "CHAPTER 933. An act to repeal Chapter 11, comprising sections 4800 to 4897, "
+    "inclusive, of the Business and Professions Code, relating to the practice of "
+    "chiropractic.\n[Approved by the Governor July 1, 1937.]\n"
+    "SECTION 1. Chapter 11 of Division 2 of the Business and Professions Code is "
+    "hereby repealed and all proceedings pending thereunder shall abate.\n"
+    "CONCURRENT AND JOINT RESOLUTIONS\n"
+    "Assembly Concurrent Resolution No. 1--Relative to adjournment."
+)
+check("1937 ch.933 (modern act, resolutions header bleeds in) is confident",
+      _ing.is_confident_act(MODERN_ACT_BLEEDING_INTO_RESOLUTIONS, volume_year=1937), True)
+
+GENUINE_MODERN_RESOLUTION = (
+    "CHAPTER 55. Senate Concurrent Resolution No. 6--Relative to the adjournment of "
+    "the Legislature sine die.\n[Filed with Secretary of State April 2, 1917.]\n"
+    "WHEREAS, The business of the present session has been concluded; now, therefore, "
+    "be it Resolved by the Senate, the Assembly concurring, That the Legislature "
+    "adjourn sine die on the fifteenth day of April."
+)
+check("genuine modern resolution IS rejected",
+      _ing.is_confident_act(GENUINE_MODERN_RESOLUTION, volume_year=1917), False)
+
+# The 19th-century resolution (quotes an act title) must still be rejected.
+check("1865-66 ch.500 genuine resolution still rejected",
+      _ing.is_confident_act(CH500, volume_year=1866), False)
+# ...and the 1872 bleed-through act still kept.
+check("1871-72 ch.637 still kept", _ing.is_confident_act(CH637, volume_year=1872), True)
+
+print("\n=== REG-2b: opening_line() strips the chapter heading ===\n")
+check("strips 'CHAPTER 933.'",
+      _ing.opening_line("CHAPTER 933. An act to repeal Chapter 11").startswith("An act"), True)
+check("strips 'CHAP. CXLIII.--'",
+      _ing.opening_line("CHAP. CXLIII.--An Act for the relief of J. B. Cook").startswith("An Act"), True)
+check("heading-only first line falls through to the next",
+      _ing.opening_line("CHAPTER 55.\nSenate Concurrent Resolution No. 6").startswith("Senate"), True)
+check("empty input -> empty string", _ing.opening_line(""), "")
+
 print("\n" + "=" * 60)
 print("Results: %d passed, %d failed" % (PASS, FAIL))
 print("=" * 60)

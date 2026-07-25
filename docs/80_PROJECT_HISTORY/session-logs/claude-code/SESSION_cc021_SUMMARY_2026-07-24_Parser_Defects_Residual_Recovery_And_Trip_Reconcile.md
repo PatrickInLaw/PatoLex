@@ -589,6 +589,53 @@ The remote already used **cc019** (2026-06-23) *and* **cc020** (2026-06-29). Thi
 
 `CHANGELOG.md`'s cc019 entry is likewise this session's; the remote's cc019 (page-continuity audit) is **not** in the CHANGELOG — part of the cc014–cc020 backfill gap already flagged.
 
+---
+
+## 25. The 31 "lost" chapters — diagnosed and fixed
+
+**None was a "header stopped matching" failure.** Every header still matches. The 31 split by era into two mechanisms:
+
+- **Pre-1880 (21):** the comma fix works — *too well relative to the rest of the parser*. The old parser was **merging many acts into one blob** (1858 ch.357's BEFORE buffer was **1,005 lines**). The new comma headers cut those at their true boundaries. Once correctly bounded, each act must stand on **its own** date and **its own** enacting clause — and OCR garble in its own approval line then demotes it. **It was previously confident only by borrowing its neighbour's.**
+- **1893–1965 (10):** byte-identical segmentation before/after. **100% the new resolution guard.**
+
+| Bucket | n | Verdict |
+|---|---|---|
+| **1 — CORRECTION** | 11 | Desirable. 7 genuine resolutions correctly rejected; 1 placeholder stub (`[See volume of Amendments to the Codes.]`); 3 key-holder corrections where the new holder is right |
+| **2 — RE-SEGMENTATION → flagged** | 13 | Neutral. Correct chapter, full text, now in `flagged_acts` because its own approval line is garbled (`[Approved Apri] 26, 1858.]`, `[Approved March 80, 1878.]`). **Not lost.** |
+| **3 — REGRESSION, act VANISHES** | **7** | **Must fix.** `flush_act`'s `if not has_enact_marker(full): return` is a **silent drop, not even flagged** |
+| **4 — REGRESSION, resolution false positive** | **3** | **Must fix** |
+
+### Fix 1 — `ENACT_MARKER_RE` was too brittle (7 acts silently dropped)
+
+1862 ch. 10/21/63/114/123 and 1863 ch. 211/440. Real OCR from 1862 ch. 63:
+
+> *"The People of the State **af Culffornin**, represented in Senate cel assembly, do **enact ax folloves**"*
+
+Neither `State of California` nor `do enact as follow` matches. Loosened with tolerances each justified by a real reading — and **two I got wrong on the first attempt**: `of → [oa][fa]` (both letters rot, not just one — "State **af**") and `enact → en[a-z]{2,4}` (**the `c` itself is lost** — "ena**e**t"). Both arms stay bounded by literal anchors so they cannot fire on prose.
+
+### Fix 2 — the resolution guard, third iteration
+
+**Both previous versions were wrong, each measured:**
+- **v1** "resolution phrase in first 600 chars → reject" — killed genuine 1871-72 ch. 637 (buffer bleeds into the resolutions section header).
+- **v2** "reject if the phrase precedes the **enacting clause**" — looked principled, but **`ENACT_MARKER_RE` never matches 20th-century volumes**; they don't print the 19th-century formula. So `m_clause` is `None` for the entire modern era and the guard **degenerated straight back to v1's behaviour**, killing three real acts: **1897 ch. 118** (an appropriation act that *names* a resolution in its own title), **1937 ch. 933** and **1939 ch. 1124** (both the bleed-through case v1 was meant to fix).
+
+**v3 decides on the FIRST CONTENT LINE.** A genuine resolution announces itself (*"Senate Concurrent Resolution No. 14—Relative to…"*); a real act opens *"An act to…"*. Measured across all 10 modern cases: **7/7 correct rejections kept, 3/3 false ones removed**, without depending on a clause that doesn't exist in that era.
+
+### The two alarming date moves — both resolved, neither a bad re-read
+
+- **1875-76 ch. 138 → 1878:** a **duplicate-key artifact**. The new holder is a recovered act whose numeral `CXXXVIIL` was inflated 137→138 by the trailing-`L`→`I` rule, and whose "1878" is an OCR misread of 1876. **The true ch. 138 is still present and still confident** — just second in reading order, so `setdefault` hid it.
+- **1877-78 ch. 252:** the OLD holder was the volume's **errata page**, which had absorbed a Del Norte act and taken its date. **The new date is correct; the old was junk.**
+
+Of the 8 date moves: **2 true improvements** (lapse dates firing as designed), **2 corrections of junk holders**, **4 duplicate-key artifacts**.
+
+### Fix 3 — the diff was partly measuring itself
+
+`_acts_index`'s `setdefault` lets a mis-numbered act **hide a correct one**, reporting it as lost. Now `_acts_dupes()` surfaces duplicate keys per volume and the summary reports **new** duplicates explicitly, with the inflation cause named.
+
+**Still open (not fixed):** a numeral-sanity pass. Duplicate keys are a large **pre-existing** problem (274 before → 315 after in 14 early volumes); the +41 are new acts with inflated numerals. Net confident counts still rise sharply (1858 223→263, 1859 188→222, 1875-76 285→313, 1877-78 318→342), so the comma rule is a **large net win**.
+
+**111/111 tests, suite 11/11.**
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

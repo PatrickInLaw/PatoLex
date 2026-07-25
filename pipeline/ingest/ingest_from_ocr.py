@@ -472,9 +472,34 @@ HEADER_RE = re.compile(
     re.I,
 )
 AN_ACT_RE = re.compile(r"\bAn?\s+A[CEO][TI]\b", re.IGNORECASE)
+# The enacting clause. THIS GATE SILENTLY DROPS ACTS -- flush_act does
+#     if not has_enact_marker(full): return
+# i.e. no record at all, not even in flagged_acts. So its OCR tolerance is
+# load-bearing in a way the other patterns are not.
+#
+# cc019 REGRESSION FIX (2026-07-25). The strict form below dropped SEVEN REAL
+# STATUTES once the comma-header fix started segmenting acts correctly:
+#     1862 ch.10, 21, 63, 114, 123   1863 ch.211, 440
+# They were never "found" before either -- the OLD parser merged them into a
+# 500-1,000-line blob that ran on until it hit a LEGIBLE enacting clause in a
+# LATER act, so the gate passed on BORROWED EVIDENCE. Correct segmentation
+# exposed that each act's own clause is OCR-mangled, e.g. 1862 ch.63:
+#     "The People of the State af Culffornin, represented in Senate cel
+#      assembly, do enact ax folloves"
+# Neither "State of California" nor "do enact as follow" matches that.
+#
+# Tolerances added, each justified by a real corpus reading:
+#   of -> [oa][fa]                  "State af"  -- BOTH letters rot, not just one
+#   California -> C[a-z]{5,12}      "Culffornin", "Calfornia", "Culiforuia"
+#   enact -> en[a-z]{2,4}           "enact", "enaet" (the c itself is lost), "enarct"
+#   as -> a[a-z]                    "ax", "az"
+#   follow -> foll[a-z]*            "folloves", "followes"
+# The "People of the State [oa][fa] C..." arm still requires five literal anchor
+# words, so it cannot fire on ordinary prose. The "do en.. a. foll.." arm is
+# bounded on both sides by literal "do" and "foll", so its loose middle is safe.
 ENACT_MARKER_RE = re.compile(
-    r"People\s+of\s+the\s+State\s+of\s+California"
-    r"|do\s+enact\s+as\s+follow",
+    r"P[eo]ople\s+of\s+the\s+State\s+[oa][fa]\s+C[a-z]{5,12}"
+    r"|do\s+en[a-z]{2,4}\s+a[a-z]\s+foll[a-z]*",
     re.I,
 )
 _MONTHS = (
@@ -764,6 +789,40 @@ RESOLUTION_RE = re.compile(
     re.IGNORECASE,
 )
 
+# A genuine resolution ANNOUNCES ITSELF on its first content line:
+#     "Senate Concurrent Resolution No. 14--Relative to ..."
+#     "Assembly Joint Resolution No. 3--..."
+# A real act's first content line begins "An act to ...". That difference is the
+# discriminator; the mere PRESENCE of resolution words is not, because acts
+# routinely reference resolutions in their own titles.
+RESOLUTION_HEAD_RE = re.compile(
+    r"^\W{0,4}(?:(?:Senate|Assembly)\s+)?(?:Concurrent|Joint)\s+Resolution\b"
+    r"|^\W{0,4}Resolution\s+No\b"
+    r"|^\W{0,4}Resolved\s*,?\s+by\s+the\s+(?:Assembly|Senate)\b",
+    re.IGNORECASE,
+)
+
+_CHAP_HEAD_STRIP_RE = re.compile(
+    r"^[^A-Za-z0-9]*(?:CHAPTER|CHAP)[^A-Za-z0-9]*[IVXLCDMivxlcdm0-9]{1,8}[^A-Za-z0-9]*",
+    re.IGNORECASE,
+)
+
+
+def opening_line(full_text):
+    """First line of real content, with any leading CHAPTER heading removed.
+
+    Used by the resolution guard. Returns "" if nothing but headings.
+    """
+    for ln in (full_text or "").splitlines():
+        s = ln.strip()
+        if not s:
+            continue
+        s = _CHAP_HEAD_STRIP_RE.sub("", s).strip()
+        if s:
+            return s
+    return ""
+
+
 ENACTMENT_PATH_APPROVED = "approved"
 ENACTMENT_PATH_UNSIGNED = "unsigned_lapse"
 ENACTMENT_PATH_VETO_OVERRIDE = "veto_override"
@@ -1030,9 +1089,32 @@ def is_confident_act(full_text, volume_year=None):
     # resolutions never carry it. Measured discriminator:
     #     ch.500 (real resolution)  ENACT@None -> rejected
     #     ch.637 (real act)         ENACT@138  -> kept
-    if m_res is not None:
-        if m_clause is None or m_res.start() < m_clause.start():
-            return False
+    # ---- v3 (2026-07-25): decide on the FIRST CONTENT LINE ----
+    # The two comment blocks above describe v1 and v2. BOTH WERE WRONG, each
+    # measured against the corpus:
+    #   v1 "resolution phrase in first 600 chars -> reject" killed the GENUINE
+    #      1871-72 ch.637, whose buffer bleeds into the following
+    #      "CONCURRENT AND JOINT RESOLUTIONS" section header.
+    #   v2 "reject if the phrase precedes the ENACTING CLAUSE" looked principled
+    #      -- resolutions never carry that clause -- but ENACT_MARKER_RE NEVER
+    #      MATCHES 20th-CENTURY VOLUMES; they do not print the 19th-century
+    #      formula. So m_clause is None for the entire modern era and the guard
+    #      degenerated straight back to "any resolution phrase -> reject",
+    #      killing three real acts:
+    #        1897 ch.118  appropriation act that NAMES a resolution in its own
+    #                     title ("...expenses incurred by Assembly Concurrent
+    #                     Resolution No. 6...")
+    #        1937 ch.933  real act, buffer bleeds into the resolutions header --
+    #                     the very case v1 was supposed to fix
+    #        1939 ch.1124 same bleed-through
+    #
+    # A genuine resolution ANNOUNCES ITSELF on its opening line ("Senate
+    # Concurrent Resolution No. 14--Relative to..."); a real act opens "An act
+    # to...". Measured across all 10 modern cases: 7/7 correct rejections kept,
+    # 3/3 false rejections removed -- without depending on a clause that does
+    # not exist in that era.
+    if RESOLUTION_HEAD_RE.search(opening_line(full_text)):
+        return False
 
     has_an_act = m_an_act is not None
     # Anchor the fallback: enacting clause must be in the act's opening.

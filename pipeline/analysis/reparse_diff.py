@@ -139,7 +139,19 @@ def _materialise_before(ref, workdir):
 
 
 def _acts_index(result):
-    """{chapter_int: act} from a parse result, confident acts only."""
+    """{chapter_int: FIRST act} from a parse result, confident acts only.
+
+    ⚠ MEASUREMENT HAZARD -- documented 2026-07-25 after the first corpus diff.
+    `setdefault` means the first act in reading order wins a chapter key. When a
+    newly-recovered act carries an INFLATED Roman numeral (the `T`->`I` OCR
+    substitution, or the trailing-`L`->`I` rule) it can collide with a real act
+    and HIDE it, so a perfectly good act is reported as "lost" or its date as
+    "changed". Four of the eight date-moves in the first full diff were exactly
+    this artifact, not a re-read.
+
+    Use _acts_dupes() alongside this to surface the collisions rather than
+    silently resolving them.
+    """
     if not result:
         return {}
     idx = {}
@@ -148,6 +160,23 @@ def _acts_index(result):
         if isinstance(c, int):
             idx.setdefault(c, a)
     return idx
+
+
+def _acts_dupes(result):
+    """{chapter_int: [acts]} for every chapter key held by MORE THAN ONE act.
+
+    A duplicate key means the ingest's chapter key is ambiguous for that volume,
+    and it means this diff's gained/lost/date figures for that chapter are not
+    trustworthy. Surfaced, not swallowed.
+    """
+    if not result:
+        return {}
+    by_ch = {}
+    for a in result.get("confident", []):
+        c = a.get("chapter_int_final") or a.get("chapter_int") or a.get("chapter")
+        if isinstance(c, int):
+            by_ch.setdefault(c, []).append(a)
+    return {c: acts for c, acts in by_ch.items() if len(acts) > 1}
 
 
 def _path_of(act):
@@ -249,6 +278,11 @@ def diff_volume(label, mod_before, mod_after):
         "date_changed": date_changed,
         "enactment_paths_after": paths,
         "baseline_fidelity": baseline,
+        # Duplicate chapter keys make this volume's gained/lost/date figures
+        # unreliable -- see _acts_index's hazard note.
+        "dupe_keys_before": sorted(_acts_dupes(r_before)),
+        "dupe_keys_after": sorted(_acts_dupes(r_after)),
+        "dupe_keys_new": sorted(set(_acts_dupes(r_after)) - set(_acts_dupes(r_before))),
     }
 
 
@@ -332,6 +366,20 @@ def main():
     print("  dates changed   : %d" % tot_dchg)
     print("  dates removed   : %d%s" % (tot_drem, "   <-- investigate" if tot_drem else ""))
     print("  enactment paths : %s" % json.dumps(paths, sort_keys=True))
+
+    dupe_before = sum(len(r.get("dupe_keys_before") or []) for r in ok)
+    dupe_after = sum(len(r.get("dupe_keys_after") or []) for r in ok)
+    dupe_new = sum(len(r.get("dupe_keys_new") or []) for r in ok)
+    print("  duplicate chapter keys: %d -> %d  (NEW: %d)" % (dupe_before, dupe_after, dupe_new))
+    if dupe_new:
+        print("    A NEW duplicate key usually means a recovered act carries an")
+        print("    INFLATED Roman numeral (T->I, trailing L->I). It also makes this")
+        print("    volume's gained/lost/date numbers unreliable for that chapter --")
+        print("    the first act in reading order wins the key and hides the other.")
+        worst = sorted(ok, key=lambda r: -len(r.get("dupe_keys_new") or []))[:8]
+        for r in worst:
+            if r.get("dupe_keys_new"):
+                print("      %-24s %s" % (r["volume"], r["dupe_keys_new"][:12]))
 
     bad_baseline = [r["volume"] for r in ok
                     if (r.get("baseline_fidelity") or {}).get("checked")
