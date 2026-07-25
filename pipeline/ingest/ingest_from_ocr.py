@@ -1151,6 +1151,19 @@ def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged,
         "chapter_raw": chap_token, "title": title,
         "approved_date": approved_str, "iso_date": iso_date,
         "date_needs_review": date_needs_review,
+        # cc019 DEFECT 1 -- HOW this act became law. Three constitutionally
+        # distinct routes; only "approved" was ever modelled before.
+        #
+        # WIRED IN 2026-07-25, after a corpus-wide diff reported the path
+        # distribution as 100% "approved" / 0 unsigned / 0 veto_override across
+        # 70,230 acts. detect_enactment_path() existed, was unit-tested, and was
+        # CALLED BY NOTHING BUT ITS OWN TESTS. The date fix worked (parse_act_date
+        # dates lapse acts correctly) but the PATH was never recorded, so the
+        # legally meaningful distinction was silently dropped on the floor.
+        #
+        # A tested function that nothing calls is not a feature. The unit tests
+        # passed the whole time because they invoked it directly.
+        "enactment_path": detect_enactment_path(full),
         "text": body_text[:6000], "source_page": (start_page or 0) + 1,
         "in_act_order": in_act_order,  # 0-based reading-order position (Hans F7 act key)
         "confident": confident,

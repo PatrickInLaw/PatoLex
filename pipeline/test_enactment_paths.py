@@ -416,6 +416,73 @@ check("real act with resolution header bleeding in AFTER is still kept",
 check("RESOLUTION_RE matches 'Resolved, By the Senate' (comma form)",
       bool(_ing.RESOLUTION_RE.search("Resolved, By the Senate, the Assembly concurring")), True)
 
+
+# ===========================================================================
+# ★ WIRING TEST (2026-07-25). The unit tests above all passed while
+# detect_enactment_path() was called BY NOTHING BUT THEM. A corpus-wide diff
+# reported the enactment-path distribution as 100% "approved" across 70,230
+# acts -- because flush_act() never wrote the field onto the act record.
+#
+# A tested function that nothing calls is not a feature. These tests assert the
+# RECORD, not the function.
+# ===========================================================================
+
+print("\n=== WIRING: the act RECORD must carry enactment_path ===\n")
+
+
+def _flush(text, volume_year, chap="CXLIII"):
+    """Run the real flush_act and return the single record it produced."""
+    parsed, flagged = [], []
+    _ing.flush_act(
+        chap, 0, text.split("\n"), parsed, flagged, {},
+        volume_year=volume_year, session_label="test", in_act_order=0,
+    )
+    recs = parsed + flagged
+    return recs[0] if recs else None
+
+
+rec = _flush(BODY_1866_CH143, 1866)
+check("flush_act produced a record", rec is not None, True)
+if rec:
+    check("record HAS an enactment_path key", "enactment_path" in rec, True)
+    check("1866 ch.143 record path == unsigned_lapse",
+          rec.get("enactment_path"), _ing.ENACTMENT_PATH_UNSIGNED)
+    check("record still dates correctly", rec.get("iso_date"), "1866-02-27")
+
+SIGNED_BODY = """
+CHAP. XCI.--An Act to provide for the funding of the levee indebtedness of the City of Marysville.
+
+[Approved February 18, 1876.]
+
+The People of the State of California, represented in Senate and Assembly, do enact as follows:
+
+SECTION 1. The Funding Commissioners of the City of Marysville are hereby authorized and
+empowered to fund the indebtedness represented by the warrants outstanding against the Levee
+Fund of said city on the first day of April, eighteen hundred and seventy-six.
+"""
+rec2 = _flush(SIGNED_BODY, 1876, chap="XCI")
+check("signed act produced a record", rec2 is not None, True)
+if rec2:
+    check("signed act path == approved",
+          rec2.get("enactment_path"), _ing.ENACTMENT_PATH_APPROVED)
+
+VETO_BODY = """
+CHAPTER CXLIII.--An Act to provide and pay for services rendered for the City and County of San Francisco.
+
+The People of the State of California, represented in Senate and Assembly, do enact as follows:
+
+SECTION 1. The Auditor of the City and County of San Francisco is hereby authorized and directed
+to audit the demands herein named, and the Treasurer shall pay the same out of the General Fund.
+
+This bill, having been returned by the Governor with his objections, became a law by a
+constitutional majority of both Houses, over the Governor's objections, March 4, 1870.
+"""
+rec3 = _flush(VETO_BODY, 1870)
+check("veto-override act produced a record", rec3 is not None, True)
+if rec3:
+    check("veto-override path is NOT collapsed into unsigned",
+          rec3.get("enactment_path"), _ing.ENACTMENT_PATH_VETO_OVERRIDE)
+
 print("\n" + "=" * 60)
 print("Results: %d passed, %d failed" % (PASS, FAIL))
 print("=" * 60)

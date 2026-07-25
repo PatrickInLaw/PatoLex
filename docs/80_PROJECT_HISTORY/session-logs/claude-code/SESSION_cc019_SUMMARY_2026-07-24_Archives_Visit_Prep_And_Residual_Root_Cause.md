@@ -488,6 +488,67 @@ A dead suite hid for a month because nothing ran everything. Fixed the mechanism
 
 `KNOWN_FAILING` is now empty **and should stay that way** — a standing known failure is how a real one hides. If something lands there, fix it or write down why it can't be.
 
+---
+
+## 21. ⚠ BRANCH DIVERGENCE — my work was built on stale state
+
+`git push` rejected: **the remote had 17 commits I did not have**, including a `cc018`→`cc020` line of work done on another machine. **Zero file overlap**, so the merge was mechanically clean and the suite stayed 11/11 — but the *content* overlaps badly.
+
+**Session-number collision:** the remote already used **cc019** (2026-06-23, page-continuity audit) **and cc020** (2026-06-29). This session must renumber.
+
+### ★ My Monday packet is materially WRONG
+
+I built it on `ARCHIVES_SCAN_REQUEST_2026-06-22.md`, which has been **superseded twice** since — by `PAGE_CONTINUITY_AUDIT_2026-06-23.md` (deterministic corpus-wide missing-leaf audit) and `SACRAMENTO_SCAN_PACKET_2026-06-29.md`.
+
+| | My packet | Sacramento packet (06-29) |
+|---|---|---|
+| Printed pages | 15 | **175** (126 high-confidence + 49 inspect) |
+| Volumes | 7 | **49** |
+| Archivist chapters | 12 | **17** |
+
+Specific errors in mine:
+- **1929 ch. 881 is at printed pp. 1974–1975, not 1962–1963.** The June-22 numbers were *"a pre-audit manual estimate"*; the deterministic audit located the actual dropped leaf.
+- **1872 absent entirely from my packet** — 9 missing-leaf chapters across four gaps.
+- **1985's second leaf (pp. 804–805)** not listed by me.
+- **1927's two odd-parity inspect pages** (1940, 1965) not listed.
+
+Conversely **1972 ch. 517 — which I verified — is NOT in their packet.** Both sets are real; reconciliation is in flight.
+
+**Lesson:** I never checked whether the branch was current before building a non-repeatable-trip deliverable on a month-old document.
+
+---
+
+## 22. Reparse diff — RAN, no corpus touched, and it caught two of my own bugs
+
+Harness safety verified end-to-end: **5 sample volumes byte-identical (size + mtime + MD5) before/between/after**, `date-review-worklist.jsonl` unchanged at 576,092 bytes, and a corpus-wide sweep confirmed **0 of 208** `parsed_acts_fixed.json` modified.
+
+```
+CORPUS DELTA   volumes ok=216 err=0   wall=105.5s
+  chapters gained : 295
+  chapters LOST   : 31        <-- REGRESSION
+  dates changed   : 8
+  enactment paths : {"approved": 70230}   <-- 100% approved. ZERO unsigned/veto.
+  baseline fidelity: 208/208 reproduce their on-disk artifact
+```
+
+Gains concentrate exactly where predicted: 1858 +38, 1859 +30, 1865-66 +29, 1875-76 +28, 1863-64 +25, 1877-78 +24. Modern volumes gain nothing.
+
+### ★ Bug 1 (mine) — `detect_enactment_path` was called by NOTHING
+
+The distribution came back **100% `approved`, 0 unsigned, 0 veto_override across 70,230 acts**. Cause: `detect_enactment_path()` was defined at `ingest_from_ocr.py:772`, unit-tested, documented as a feature — and **called by nothing but its own tests**. `flush_act` never wrote the field onto the act record.
+
+The date fix worked; the **legally meaningful path distinction was dropped on the floor**. Now wired in, with **record-level** tests (`flush_act` → assert the record carries `enactment_path`), not just function-level ones. **94/94.**
+
+> **A tested function that nothing calls is not a feature.** The unit tests passed the entire time because they invoked it directly.
+
+### Bug 2 — 31 chapters LOST (under investigation)
+
+The fixes were meant to be strictly additive. Prime suspect is the **new resolution guard** in `is_confident_act`. Key distinction being measured: did each chapter *vanish*, or merely move `confident → flagged`? The latter is much milder.
+
+Also suspicious: **1875-76 ch.138 date moves to 1878** — a year that cannot exist in an 1875-76 volume — and 1877-78 ch.252 moves three months. Six other date moves are 1–2 day shifts and plausibly corrections.
+
+**Phase 4 is blocked until these are explained.**
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.
