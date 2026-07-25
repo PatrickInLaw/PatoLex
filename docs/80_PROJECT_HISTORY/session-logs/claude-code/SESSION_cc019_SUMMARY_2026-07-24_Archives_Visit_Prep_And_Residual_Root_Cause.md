@@ -296,6 +296,38 @@ Reports per volume and corpus-wide: confident/flagged counts, the **set** of cha
 
 `parse_volume()` gained `out_path` / `write` params; defaults preserve existing behaviour exactly. Also documented what it does **not** touch: only `parsed_acts_fixed.json`. The merged/clauserec/visual/certified outputs are the recovery passes' work from cc015–cc018 and must not be clobbered.
 
+---
+
+## 15. Reparse cost measured — and the risk that actually matters
+
+**A full corpus reparse is a sub-minute job.** Measured on the 5090.
+
+| | |
+|---|---|
+| `production-*` dirs | 225 |
+| Reparseable (have OCR) | **216** (9 lack it: `2000-vol1..6`, `measures-1915/1935/1990`) |
+| `parse_all.py` in-scope | **208** volumes / 328,881 pages / 3.65 GB |
+| Total pages | **332,608** · OCR JSON **3.44 GiB** |
+| Throughput | **7,701 pages/s**, ~88 MB/s single-process |
+| Single-process ETA | **~45–60 s** |
+| **16 workers (5090: 24 cores)** | **~15–30 s** |
+| 5090 state | 22% CPU, 32 GB free of 63.5, GPU idle, **no contention** |
+| Disk | overwrites in place; net new ≈ **+6 MB**. 542 GB free |
+
+**★ The cost is not the constraint. Downstream desync is.**
+
+The recovery chain — `merged` → `recovered` → `repaired` → `clauserec` → `certified` — was built **from** the June-12 `parsed_acts_fixed.json`. A reparse rewrites `fixed.json` **in place** and does *not* touch those artifacts. That is **worse than clobbering them**: they'd be silently stale relative to their own input, with nothing flagging the mismatch. If `fixed.json` content changes anywhere, the entire cc015–cc018 recovery chain is built on a superseded base.
+
+**This vindicates the diff-first decision.** Snapshot all `parsed_acts_*.json` (~298 MB × ~7 artifacts) before any in-place run.
+
+**Two further side effects found:**
+1. `_parse_outputs\date-review-worklist.jsonl` is **append-only** — a full run appends a duplicate generation rather than replacing.
+2. `parse_all.py` clobbers `_parse_outputs\parsed_acts_{label}.json` (197 files). Its docstring calls that dir "GIT-VERSIONED", but it lives under `C:\PatoLex-scratch`, **outside the repo** — those copies are *not* in git.
+
+**★ A flaw in my own harness, caught by this measurement.** `_append_date_review` fires from `flush_act` — during the parse, not at write time. So `write=False` suppressed the JSON write but **would still have appended a full duplicate generation** to the shared worklist. My "touches nothing" claim was false. Fixed with a `_SUPPRESS_DATE_REVIEW` flag scoped to dry-run parses; `parse_volume` now delegates to `_parse_volume_inner` inside a try/finally so the flag always restores.
+
+**Timing caveat, stated plainly:** the three timed volumes (1927 3pp, 1997, 1949) came back **byte-identical** to their June backups — but they were chosen by *size*, not by defect exposure, and cc019's fixes target **early-era** phenomena. **That is not evidence a reparse is a no-op.** The diff harness over early-era volumes is what settles it.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

@@ -47,6 +47,17 @@ import config  # SINGLE source of truth for data paths (the 3060 cutover knob); 
 DATE_REVIEW_WORKLIST = Path(config.path_for("parse_output_dir", "date-review-worklist.jsonl"))
 
 
+# cc019: set True for a DRY-RUN parse (parse_volume(..., write=False)) so a
+# before/after diff does not pollute the shared worklist.
+#
+# WHY THIS EXISTS: the worklist is APPEND-ONLY, and _append_date_review is called
+# from flush_act -- i.e. during the parse itself, not at write time. So a dry-run
+# parse that writes no JSON would STILL have appended a full duplicate generation
+# of review records to the shared file. Caught while measuring the reparse cost;
+# without this flag the diff harness's "touches nothing" claim was false.
+_SUPPRESS_DATE_REVIEW = False
+
+
 def _append_date_review(record: dict):
     """Append one JSON record (no trailing comma) to the date review worklist.
 
@@ -54,7 +65,11 @@ def _append_date_review(record: dict):
     Fields: session_label, volume_year, raw_match, parsed_year, chapter,
             source_page, in_act_order, timestamp_utc.
     Only call when a date WAS found by a regex but its year is implausible.
+
+    No-op when _SUPPRESS_DATE_REVIEW is set (dry-run / diff parses).
     """
+    if _SUPPRESS_DATE_REVIEW:
+        return
     line = json.dumps(record, ensure_ascii=False) + "\n"
     DATE_REVIEW_WORKLIST.parent.mkdir(parents=True, exist_ok=True)
     with open(str(DATE_REVIEW_WORKLIST), "a", encoding="utf-8") as fh:
@@ -1178,6 +1193,21 @@ def parse_volume(session_label, out_path=None, write=True):
         return None
     volume_year = int(_year_match.group(1))
 
+    # Dry-run must be side-effect-free EVERYWHERE, not just for the JSON write.
+    # _append_date_review fires from flush_act during the parse, so suppress it
+    # for the duration of a write=False run.
+    global _SUPPRESS_DATE_REVIEW
+    _prev_suppress = _SUPPRESS_DATE_REVIEW
+    _SUPPRESS_DATE_REVIEW = (not write) or _prev_suppress
+    try:
+        return _parse_volume_inner(
+            session_label, scratch, ocr_path, out_path, volume_year, write)
+    finally:
+        _SUPPRESS_DATE_REVIEW = _prev_suppress
+
+
+def _parse_volume_inner(session_label, scratch, ocr_path, out_path,
+                        volume_year, write):
     raw_ocr = json.loads(ocr_path.read_text(encoding="utf-8"))
     page_ocr_results = {int(k): v for k, v in raw_ocr.items()}
     lines = []
