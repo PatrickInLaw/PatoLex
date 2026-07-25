@@ -752,6 +752,49 @@ I wrote a test asserting a cross-reference date does **not** win over the real a
 
 **156/156 tests, suite 11/11.**
 
+---
+
+## 29. Numerals — the obvious fix was measured and refused
+
+**992 duplicate chapter keys / 2,027 acts / 134 of 216 volumes.** And the surprise: **611 are on the ARABIC path**, not Roman.
+
+### The Arabic branch had no validation whatsoever
+
+`int(t)` — accepting anything. **355 confident acts** at chapters like **90956**, 14383, 6548. Attention had gone to Roman numerals because they *look* fragile; the bigger hole was the branch that looked simple.
+
+**Fixed:** both paths bounded at 5,000 (largest real session: 1,527). Out-of-range → `chapter_int = 0` → flagged **with `chapter_raw` intact**.
+
+### Strict canonical Roman is the wrong grammar — and blind anyway
+
+**19th-century California printed the 400s additively**: `CCCCV`, `CCCCXXI`, `CCCCXCI` — not `CDV`.
+
+| Validator | Placement | Correct chapters destroyed |
+|---|---|---|
+| Strict canonical | raw token | **1,199 / 6,959 (17.2%)** |
+| Strict canonical | post-substitution | **396** — to fix 122 keys |
+| **Relaxed additive** | post-substitution | **9** — all genuine garbage |
+
+And it can't see the damage: `CXCVIL→CXCVII`, `CCCVIIT→CCCVIII`, `CCCLY→CCCL`, `CXXXVIIL→CXXXVIII` are **all canonical after transformation**. The substitutions **manufacture well-formed numerals out of garbage**, so a validator downstream of them is structurally blind to exactly the failure it was added to catch.
+
+No canonical validator added. The additive 400s now have regression tests so nobody "fixes" this later.
+
+### Deliberately NOT implemented — needs your call
+
+| Pass | Resolves | Cost |
+|---|---|---|
+| B — monotonic single-edit repair | 233/360 culprits; 223/303 dirty keys | **touches 1,103 non-duplicate acts** |
+| C — arbitration by sequence fit | 975/992 keys get a unique winner | never corrects the loser's value |
+
+Both **infer a corrected chapter number from page order** — data mutation on inference, where the ground truth is **circular**: an inflated value often lands exactly on a slot vacated by a missing neighbour and looks correct. **4 of the 11 named-token instances are on-sequence.**
+
+**The Y-strip class is the largest opportunity and least settled:** 316 acts where `Y` is silently deleted (`LY`→50, true 55 — *deflation*). `Y→V` fits where the current value doesn't in 138 cases, both fit in 24, neither in 20. And text alone cannot settle the trailing-`L` class: `XVIIL` is genuinely either `XVII`+blot or `XVIII` misread.
+
+**Not actionable without page images or the printed indexes.**
+
+**NEW** `lessons/LESSON_2026-07-25_numerals_dates_and_borrowed_confidence.md` records the durable rules.
+
+**187/187 tests, suite 11/11.**
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

@@ -979,6 +979,59 @@ def parse_lapse_date(text):
 _ROMAN = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
 _ROMAN_OCR_SUBST = {"J": "I", "T": "I", "1": "I", "!": "I", "|": "I"}
 
+# ===========================================================================
+# cc021 (2026-07-25) -- CHAPTER-NUMERAL PLAUSIBILITY. All figures MEASURED over
+# 216 volumes / 71,443 confident acts.
+#
+# THE CENSUS: 992 duplicated chapter keys / 2,027 acts / 134 of 216 volumes.
+#   611 of them are on the ARABIC path -- which performs NO VALIDATION AT ALL
+#   (`int(t)` accepts anything). 355 confident acts carry out-of-range Arabic
+#   chapters: 1967-vol2 ch.90956, 1957-vol2 ch.14383, 1907-09 ch.6548.
+#   That is the LARGER defect and no Roman rule touches it.
+#
+# WHY STRICT CANONICAL ROMAN IS THE WRONG FIX -- measured, and it is not close:
+#   * 19th-century California printed the 400s ADDITIVELY: CCCCV, CCCCXXI,
+#     CCCCXCI -- not CDV. Strict canonical is simply the wrong grammar for this
+#     corpus. Applied post-substitution it rejects 396 of 6,959 presumed-correct
+#     Roman acts (5.7%) to fix 122 keys. Applied to the RAW token it rejects
+#     1,199 (17.2%).
+#   * It is BLIND to all four named damage cases anyway: CXCVIL->CXCVII,
+#     CCCVIIT->CCCVIII, CCCLY->CCCL, CXXXVIIL->CXXXVIII are all CANONICAL AFTER
+#     TRANSFORMATION. The substitution rules MANUFACTURE well-formed numerals
+#     out of garbage, so a validator placed downstream of them cannot see it.
+#   * A RELAXED ADDITIVE validator rejects only 9 of 6,959 (0.13%) -- and all 9
+#     are genuine garbage (CCLIXVII, XLX, DLIIX, DCDXX, CCCXXIIV).
+#
+# WHAT THIS CHANGE DOES: makes implausible numerals VISIBLE, without mutating
+# any value. Nothing here guesses a "corrected" chapter number -- that requires
+# sequence inference and is a separate, explicitly-deferred decision (see the
+# lesson file). An act whose numeral fails these checks gets chapter_int 0,
+# which routes it to flagged_acts WITH its chapter_raw intact for review --
+# visible and recoverable, rather than silently ingested under a wrong key.
+# ===========================================================================
+
+# No California session has ever had anything close to this many chapters (the
+# largest, 1945, had 1,527). A value above this is definitionally an OCR artefact.
+MAX_PLAUSIBLE_CHAPTER = 5000
+
+# Relaxed ADDITIVE Roman grammar -- accepts the corpus's real CCCC-style 400s,
+# rejects only structurally impossible strings. Measured: 9 rejections corpus-wide.
+_ROMAN_ADDITIVE_RE = re.compile(r"^M*(CM|CD|D?C*)(XC|XL|L?X*)(IX|IV|V?I*)$")
+
+
+def numeral_is_plausible(value, roman_norm=None):
+    """Is a parsed chapter number structurally believable?
+
+    Returns (ok, reason). Does NOT correct anything.
+    """
+    if not isinstance(value, int) or value <= 0:
+        return False, "unparseable"
+    if value > MAX_PLAUSIBLE_CHAPTER:
+        return False, "out_of_range"
+    if roman_norm and not _ROMAN_ADDITIVE_RE.match(roman_norm):
+        return False, "non_additive_roman"
+    return True, ""
+
 
 def parse_chapter_number(tok):
     raw = tok.strip().strip(".,;:")
@@ -990,9 +1043,16 @@ def parse_chapter_number(tok):
     t = raw.upper()
     if t.isdigit():
         try:
-            return int(t)
+            v = int(t)
         except ValueError:
             return 0
+        # cc021: THE ARABIC PATH HAD NO VALIDATION AT ALL -- `int(t)` accepted
+        # anything, producing confident acts at chapter 90956 (1967-vol2), 14383
+        # (1957-vol2), 6548 (1907-09). 355 such acts corpus-wide, and 611 of the
+        # 992 duplicate chapter keys are on this path. Returning 0 routes them to
+        # flagged_acts WITH chapter_raw intact -- visible for review instead of
+        # silently ingested under an impossible key.
+        return v if 0 < v <= MAX_PLAUSIBLE_CHAPTER else 0
     sub = "".join(_ROMAN_OCR_SUBST.get(c, c) for c in t)
     sub = re.sub(r"(?<=I)L+$", lambda m: "I" * len(m.group(0)), sub)
     roman = "".join(c for c in sub if c in _ROMAN)
@@ -1003,7 +1063,12 @@ def parse_chapter_number(tok):
         cur = _ROMAN[c]
         val += cur if cur >= prev else -cur
         prev = cur
-    return val
+    # Same bound on the Roman path. Deliberately NOT applying a canonical-Roman
+    # validator here: 19th-c California printed the 400s additively (CCCCV, not
+    # CDV), so strict canonical would reject 396 CORRECT chapters to fix 122
+    # keys -- and it is blind to the real damage anyway, because the
+    # substitutions above manufacture canonical numerals out of garbage.
+    return val if 0 < val <= MAX_PLAUSIBLE_CHAPTER else 0
 
 
 def normalize_day(day_str):

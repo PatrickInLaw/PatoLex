@@ -743,6 +743,41 @@ for prose in [
     check("prose still NOT an enacting clause: %r" % prose[:38],
           _ing.has_enact_marker(prose), False)
 
+
+print("\n=== NUM-1: implausible chapter numbers are rejected, not ingested ===\n")
+# MEASURED: 355 confident acts carried out-of-range ARABIC chapters because the
+# arabic path had NO validation -- int(t) accepted anything. 611 of the 992
+# duplicate chapter keys are on this path.
+for tok, want in [("90956", 0), ("14383", 0), ("6548", 0), ("5001", 0)]:
+    check("implausible arabic %r -> 0 (routes to flagged)" % tok,
+          _ing.parse_chapter_number(tok), want)
+for tok, want in [("1", 1), ("88", 88), ("1527", 1527), ("5000", 5000)]:
+    check("plausible arabic %r kept" % tok, _ing.parse_chapter_number(tok), want)
+
+print("\n=== NUM-2: the ADDITIVE 400s must survive ===\n")
+# 19th-c California printed the 400s ADDITIVELY. Strict canonical Roman would
+# reject 396 CORRECT chapters to fix 122 duplicate keys -- measured, and refused.
+for tok, want in [("CCCCV", 405), ("CCCCXXI", 421), ("CCCCXCI", 491),
+                  ("CCCCXL", 440), ("DCCCC", 900)]:
+    check("additive Roman %r -> %d" % (tok, want), _ing.parse_chapter_number(tok), want)
+# ...and ordinary Roman still works.
+for tok, want in [("CXLIII", 143), ("XCI", 91), ("CLXXIII", 173), ("MCXXVII", 1127)]:
+    check("Roman %r -> %d" % (tok, want), _ing.parse_chapter_number(tok), want)
+
+print("\n=== NUM-3: numeral_is_plausible() reports WITHOUT correcting ===\n")
+check("in-range value ok", _ing.numeral_is_plausible(143)[0], True)
+check("out-of-range flagged", _ing.numeral_is_plausible(90956), (False, "out_of_range"))
+check("zero flagged", _ing.numeral_is_plausible(0), (False, "unparseable"))
+check("negative flagged", _ing.numeral_is_plausible(-3), (False, "unparseable"))
+# The RELAXED ADDITIVE validator accepts the real corpus forms and rejects only
+# structurally impossible ones (9 corpus-wide, all genuine garbage).
+for good in ["CCCCV", "CXLIII", "XCI", "MCXXVII", "CCCCXCI"]:
+    check("additive validator accepts %r" % good,
+          _ing.numeral_is_plausible(1, roman_norm=good)[0], True)
+for bad in ["CCLIXVII", "XLX", "DLIIX", "DCDXX", "CCCXXIIV"]:
+    check("additive validator rejects %r" % bad,
+          _ing.numeral_is_plausible(1, roman_norm=bad), (False, "non_additive_roman"))
+
 print("\n" + "=" * 60)
 print("Results: %d passed, %d failed" % (PASS, FAIL))
 print("=" * 60)
