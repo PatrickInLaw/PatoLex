@@ -270,6 +270,32 @@ Measured on **1,732,428 real OCR lines / 27,595 pages / 19 volumes**. Full detai
 
 **Not measured:** standalone regexes only — the full parser was not run, so downstream-gate survival of the remaining FPs is unknown; the 40 modern lapse hits are per-page, not per-act.
 
+---
+
+## 14. Reparse ≠ re-OCR — and the before/after diff harness
+
+**Question raised:** are we re-OCRing everything or just parsing? **Answer: just parsing.**
+
+`parse_volume()` reads `ocr_consensus/page_ocr_results.json` and consumes the already-banked `consensus_text`. **No OCR engine runs; no GPU is touched.** Verified in code, not assumed.
+
+| | Cost |
+|---|---|
+| Re-OCR | GPU-days — 3 engines over ~27k+ pages. **Not needed.** |
+| Reparse | CPU reading JSON already on disk. |
+
+The consensus text is unchanged; the cc019 fixes are entirely in how that text is *interpreted*. Now documented in the `parse_volume` docstring so nobody has to re-derive it.
+
+**Patrick's call: before/after diff, not an in-place reparse.** Correct instinct — the corpus is ingested exactly once, and a reparse moves chapter counts, which feed the recall oracle. The delta gets reviewed *before* anything lands.
+
+**NEW `pipeline/analysis/reparse_diff.py`** — runs two parsers over identical input:
+- **BEFORE** = `git show <ref>:pipeline/ingest/ingest_from_ocr.py` (default `f152284`, pre-fix)
+- **AFTER** = current working tree
+- Both with `write=False` — **no volume directory is touched**
+
+Reports per volume and corpus-wide: confident/flagged counts, the **set** of chapters (gained vs **lost**), per-chapter dates added/changed/removed, and the enactment-path distribution. **Lost chapters and removed dates are flagged loudly** — the fixes should be strictly additive, so either is a regression to investigate before running for real.
+
+`parse_volume()` gained `out_path` / `write` params; defaults preserve existing behaviour exactly. Also documented what it does **not** touch: only `parsed_acts_fixed.json`. The merged/clauserec/visual/certified outputs are the recovery passes' work from cc015–cc018 and must not be clobbered.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

@@ -1144,10 +1144,27 @@ def flush_act(chap_token, start_page, buf, acts_parsed, acts_flagged,
     (acts_parsed if confident else acts_flagged).append(act_rec)
 
 
-def parse_volume(session_label):
+def parse_volume(session_label, out_path=None, write=True):
+    """Parse one volume from banked OCR consensus text.
+
+    NO OCR IS PERFORMED. This reads `ocr_consensus/page_ocr_results.json` and
+    consumes the already-banked `consensus_text`; no engine runs and no GPU is
+    touched. A "reparse" is therefore CPU-over-JSON, not a re-OCR.
+
+    Writes ONLY `parsed_acts_fixed.json`. It does NOT touch
+    parsed_acts_merged.json / _clauserec.json / _visual.json / _certified.json --
+    those are produced by the downstream recovery passes and carry the cc015-cc018
+    campaign's work.
+
+    cc019: `out_path` / `write` added so a before/after diff can run WITHOUT
+    mutating the corpus. Defaults preserve the original behaviour exactly.
+      out_path -- write somewhere other than the volume dir (used by the diff
+                  harness so the live corpus is never touched).
+      write    -- False returns the parse result and writes nothing at all.
+    """
     scratch = SCRATCH_ROOT / ("production-" + session_label)
     ocr_path = scratch / "ocr_consensus" / "page_ocr_results.json"
-    out_path = scratch / "parsed_acts_fixed.json"
+    out_path = Path(out_path) if out_path else (scratch / "parsed_acts_fixed.json")
     if not ocr_path.exists():
         log("STAGE5-PARSE", session_label + ": OCR file missing: " + str(ocr_path), "FAIL")
         return None
@@ -1188,11 +1205,16 @@ def parse_volume(session_label):
                   acts_parsed, acts_flagged, page_ocr_results,
                   volume_year=volume_year, session_label=session_label,
                   in_act_order=act_order)
-    out_path.write_text(json.dumps(
-        {"confident_acts": acts_parsed, "flagged_acts": acts_flagged}, indent=2),
-        encoding="utf-8")
-    log("STAGE5-PARSE", session_label + ": confident=" + str(len(acts_parsed))
-        + " flagged=" + str(len(acts_flagged)) + " | wrote " + out_path.name, "OK")
+    if write:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(
+            {"confident_acts": acts_parsed, "flagged_acts": acts_flagged}, indent=2),
+            encoding="utf-8")
+        log("STAGE5-PARSE", session_label + ": confident=" + str(len(acts_parsed))
+            + " flagged=" + str(len(acts_flagged)) + " | wrote " + out_path.name, "OK")
+    else:
+        log("STAGE5-PARSE", session_label + ": confident=" + str(len(acts_parsed))
+            + " flagged=" + str(len(acts_flagged)) + " | DRY-RUN, nothing written", "OK")
     return {"confident": acts_parsed, "flagged": acts_flagged,
             "page_count": len(page_ocr_results), "mean_agreement":
             round(sum(v.get("agreement_ratio", 0) for v in page_ocr_results.values())
