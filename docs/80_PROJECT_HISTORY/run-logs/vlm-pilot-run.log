@@ -111,3 +111,63 @@
 [vlm-misc] DRIVER DONE
 [vlm-apply] 1907: applied 7 candidates -> production-1906-07/parsed_acts_visual.json
 [vlm-apply] 1953: applied 1 candidates -> production-1953-vol1-chapters/parsed_acts_visual.json
+[vlm-review] 1866: 10 targets, 87 unique pages to read
+[vlm-review] 1866: read 87 pages in 306s
+[vlm-review] 1866: DIRECT=7 TYPO=0 UNRESOLVED=3
+[vlm-review] DRIVER START (years 1868/1870/1872/1874/1876/1878)
+[vlm-review] === 1868 ===
+[vlm-review] 1868: 1 targets, 10 unique pages to read
+[vlm-review] 1868: read 10 pages in 66s
+[vlm-review] 1868: DIRECT=1 TYPO=0 UNRESOLVED=0
+[vlm-review] 1868 rc=0 tail="1868: 1 targets, 10 unique pages\n\n1868 RESULT: DIRECT=1 TYPO=0 UNRESOLVED=0  (of 1)\n  ch 483 DIRECT     p727   raw='CHAPTER CCCCLXXXIII'\n"
+[vlm-review] 1868 STDERR_tail='9 [00:06<00:00, 388.85it/s]\nLoading weights:  81%|########  | 587/729 [00:06<00:00, 485.19it/s]\nLoading weights:  91%|#########1| 667/729 [00:06<00:00, 566.13it/s]\nLoading weights: 100%|#########9| 728/729 [00:06<00:00, 559.80it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 114.66it/s]\n'
+[vlm-review] === 1870 ===
+[vlm-review] 1870: 9 targets, 61 unique pages to read
+[vlm-review] 1870: read 61 pages in 284s
+[vlm-review] 1870: DIRECT=2 TYPO=0 UNRESOLVED=7
+[vlm-review] 1870 rc=0 tail="es\n\n1870 RESULT: DIRECT=2 TYPO=0 UNRESOLVED=7  (of 9)\n  ch 143 UNRESOLVED pNone   raw=''\n  ch 181 DIRECT     p343   raw='CHAPTER CLXXXI.'\n  ch 384 UNRESOLVED pNone   raw=''\n  ch 431 UNRESOLVED pNone   raw=''\n  ch 453 UNRESOLVED pNone   raw=''\n  ch 483 UNRESOLVED pNone   raw=''\n  ch 484 DIRECT     p771   raw='CHAPTER CCCCLXXXIV'\n  ch 491 UNRESOLVED pNone   raw=''\n  ch 525 UNRESOLVED pNone   raw=''\n"
+[vlm-review] 1870 STDERR_tail='9 [00:05<00:00, 391.69it/s]\nLoading weights:  79%|#######8  | 575/729 [00:06<00:00, 489.66it/s]\nLoading weights:  90%|########9 | 655/729 [00:06<00:00, 571.25it/s]\nLoading weights:  99%|#########9| 725/729 [00:06<00:00, 601.67it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 115.45it/s]\n'
+[vlm-review] === 1872 ===
+[vlm-review] 1872: 14 targets, 47 unique pages to read
+[vlm-review] 1872: read 47 pages in 232s
+[vlm-review] 1872: DIRECT=3 TYPO=0 UNRESOLVED=11
+[vlm-review] 1872 rc=0 tail="\n  ch 363 UNRESOLVED pNone   raw=''\n  ch 364 UNRESOLVED pNone   raw=''\n  ch 417 UNRESOLVED pNone   raw=''\n  ch 418 UNRESOLVED pNone   raw=''\n  ch 433 DIRECT     p732   raw='CHAPTER CCCCXXXIII'\n  ch 434 DIRECT     p735   raw='CHAPTER CCCCXXXIV'\n  ch 435 UNRESOLVED pNone   raw=''\n  ch 436 DIRECT     p738   raw='CHAPTER CCCCXXXVI'\n  ch 439 UNRESOLVED pNone   raw=''\n  ch 538 UNRESOLVED pNone   raw=''\n"
+[vlm-review] 1872 STDERR_tail='9 [00:05<00:00, 351.99it/s]\nLoading weights:  77%|#######6  | 561/729 [00:06<00:00, 452.09it/s]\nLoading weights:  89%|########8 | 647/729 [00:06<00:00, 538.06it/s]\nLoading weights: 100%|#########9| 726/729 [00:06<00:00, 587.77it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 115.49it/s]\n'
+[vlm-review] === 1874 ===
+[vlm-review] 1874: 4 targets, 16 unique pages to read
+[vlm-review] 1874: read 16 pages in 57s
+[vlm-review] 1874: DIRECT=1 TYPO=0 UNRESOLVED=3
+[vlm-review] 1874 rc=0 tail="1874: 4 targets, 16 unique pages\n\n1874 RESULT: DIRECT=1 TYPO=0 UNRESOLVED=3  (of 4)\n  ch 261 UNRESOLVED pNone   raw=''\n  ch 587 DIRECT     p915   raw='CHAPTER DLXXXV.\\nCHAPTER DLXXXVI.\\nCHAPTER DLXXXVII.\\nCHAPTER DLXXXVIII.'\n  ch 678 UNRESOLVED pNone   raw=''\n  ch 679 UNRESOLVED pNone   raw=''\n"
+[vlm-review] 1874 STDERR_tail='9 [00:06<00:00, 376.25it/s]\nLoading weights:  79%|#######8  | 573/729 [00:06<00:00, 486.59it/s]\nLoading weights:  90%|######### | 659/729 [00:06<00:00, 571.60it/s]\nLoading weights: 100%|#########9| 726/729 [00:06<00:00, 595.01it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 114.77it/s]\n'
+[vlm-review] === 1876 ===
+[vlm-review] 1876: 22 targets, 140 unique pages to read
+[vlm-review] 1876: read 140 pages in 493s
+[vlm-review] 1876: DIRECT=11 TYPO=0 UNRESOLVED=11
+[vlm-review] 1876 rc=0 tail="VII'\n  ch 478 DIRECT     p789   raw='CHAP. CCCCLXXVIII'\n  ch 497 UNRESOLVED pNone   raw=''\n  ch 498 UNRESOLVED pNone   raw=''\n  ch 503 DIRECT     p826   raw='CHAP. DI.\\nCHAP. DIII.\\nCHAP. DIV.\\nCHAP. DV.\\nCHAP. DVI.'\n  ch 508 DIRECT     p837   raw='CHAP. DVIII.\\nCHAP. DIX.'\n  ch 518 DIRECT     p857   raw='CHAP. DXVIII'\n  ch 522 UNRESOLVED pNone   raw=''\n  ch 541 DIRECT     p881   raw='CHAP. DXLI'\n"
+[vlm-review] 1876 STDERR_tail='9 [00:05<00:00, 378.94it/s]\nLoading weights:  79%|#######8  | 573/729 [00:05<00:00, 470.24it/s]\nLoading weights:  89%|########9 | 649/729 [00:06<00:00, 544.88it/s]\nLoading weights:  99%|#########9| 725/729 [00:06<00:00, 594.57it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 118.07it/s]\n'
+[vlm-review] === 1878 ===
+[vlm-review] 1878: 11 targets, 103 unique pages to read
+[vlm-review] 1878: read 103 pages in 511s
+[vlm-review] 1878: DIRECT=4 TYPO=0 UNRESOLVED=7
+[vlm-review] 1878 rc=0 tail="\n  ch 428 UNRESOLVED pNone   raw=''\n  ch 441 UNRESOLVED pNone   raw=''\n  ch 447 UNRESOLVED pNone   raw=''\n  ch 448 UNRESOLVED pNone   raw=''\n  ch 449 DIRECT     p763   raw='CHAP. CCCCXLIX.\\nCHAP. CCCCL.'\n  ch 484 UNRESOLVED pNone   raw=''\n  ch 534 UNRESOLVED pNone   raw=''\n  ch 642 DIRECT     p1055   raw='CHAP. DCXLII.\\nCHAP. DCXLIII.'\n  ch 662 DIRECT     p1089   raw='CHAP. DCLXI.\\nCHAP. DCLXII.'\n"
+[vlm-review] 1878 STDERR_tail='9 [00:05<00:00, 311.46it/s]\nLoading weights:  73%|#######3  | 534/729 [00:05<00:00, 429.25it/s]\nLoading weights:  86%|########6 | 629/729 [00:06<00:00, 542.82it/s]\nLoading weights:  98%|#########8| 717/729 [00:06<00:00, 612.75it/s]\nLoading weights: 100%|##########| 729/729 [00:06<00:00, 117.40it/s]\n'
+[vlm-review] DRIVER DONE
+[vlm-repass] START -- tuned prompt + adaptive-band re-anchor over the 42 UNRESOLVED
+[vlm-repass2] START -- cheap re-read of cached bracket pages, better prompt, strict match
+[vlm-repass2] 1866: [(143, 'TRUE-GAP'), (423, 'TRUE-GAP'), (448, 'FAINT')]
+[vlm-repass2] START -- cheap re-read of cached bracket pages, better prompt, strict match
+[vlm-repass2] 1866: [(143, 'FOUND'), (423, 'FOUND'), (448, 'FAINT')]
+[vlm-repass2] 1870: [(143, 'TYPO'), (384, 'FOUND'), (431, 'FOUND'), (453, 'FOUND'), (483, 'FOUND'), (491, 'TRUE-GAP'), (525, 'FOUND')]
+[vlm-repass2] 1872: [(125, 'TRUE-GAP'), (126, 'TYPO'), (127, 'TRUE-GAP'), (128, 'TRUE-GAP'), (363, 'TRUE-GAP'), (364, 'TRUE-GAP'), (417, 'TRUE-GAP'), (418, 'TRUE-GAP'), (435, 'FOUND'), (439, 'TRUE-GAP'), (538, 'TRUE-GAP')]
+[vlm-repass2] 1874: [(261, 'TRUE-GAP'), (678, 'FAINT'), (679, 'FAINT')]
+[vlm-repass2] 1876: [(91, 'TRUE-GAP'), (403, 'TRUE-GAP'), (421, 'FOUND'), (431, 'TRUE-GAP'), (438, 'TRUE-GAP'), (442, 'TRUE-GAP'), (443, 'FOUND'), (447, 'FOUND'), (497, 'FOUND'), (498, 'FOUND'), (522, 'FOUND')]
+[vlm-repass2] 1878: [(173, 'TRUE-GAP'), (428, 'FOUND'), (441, 'TRUE-GAP'), (447, 'FOUND'), (448, 'FOUND'), (484, 'TRUE-GAP'), (534, 'TRUE-GAP')]
+[vlm-repass2] DONE FOUND=17 TYPO=2 GAP=20 FAINT=3
+[vlm-apply-review] 1866: applied 9 -> production-1865-66/parsed_acts_visual.json
+[vlm-apply-review] 1868: applied 1 -> production-1867-68/parsed_acts_visual.json
+[vlm-apply-review] 1870: applied 8 -> production-1869-70/parsed_acts_visual.json
+[vlm-apply-review] 1872: applied 4 -> production-1871-72/parsed_acts_visual.json
+[vlm-apply-review] 1874: applied 1 -> production-1873-74/parsed_acts_visual.json
+[vlm-apply-review] 1876: applied 17 -> production-1875-76/parsed_acts_visual.json
+[vlm-apply-review] 1878: applied 7 -> production-1877-78/parsed_acts_visual.json
+[vlm-apply-review] TOTAL 47

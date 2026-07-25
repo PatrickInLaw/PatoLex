@@ -43,6 +43,34 @@ Total: 6 volumes, ~13 printed pages (with margin), 9 recovered chapters.
 
 ---
 
+## 2b. ADDITIONAL — 1872 Regular Session missing leaves (found 2026-06-23, manual review)
+
+During human review of the OCR-era residual, Patrick Kolasinski confirmed by eye that the
+**1871-72 Statutes volume** (1872 Regular Session) is missing **multiple printed leaves** in our
+scan — the running-head page numbers jump across each gap, so the intervening chapters were never
+digitized. Four gaps, eight chapters:
+
+| # | Volume | Target printed pages | Scan window (incl. margin) | Chapters on those pages |
+|---|---|---|---|---|
+| 7 | 1872 Regular Session (1871-72 Statutes) | **131–134** | 130–135 | Ch. 125, 126, 127, 128 |
+| 8 | 1872 Regular Session | **515–516** | 514–517 | Ch. 363, 364 |
+| 9 | 1872 Regular Session | **586–587** | 585–588 | Ch. 417, 418 |
+| 10 | 1872 Regular Session | **776–777** | 775–778 | Ch. 538 |
+
+Total (2b): 1 volume, ~10 printed pages, **9 chapters**.
+
+**RESOLVED 2026-06-23 (PK human review) — all 3 recovered, NONE were scan gaps:**
+- **1872 ch. 439** — present at printed p.655 (CCCCXXXIX), right after ch.438; our stored 438 page was
+  mis-OCR'd, which is what made it look ambiguous.
+- **1874 ch. 678** — present at printed p.957 (DCLXXVIII, Reclamation District 124).
+- **1874 ch. 679** — present at printed p.957 (DCLXXIX) as a **redirect stub** ("[See volume of
+  Amendments to the Codes.]"); substantive text is in the Code Amendments volume.
+
+**Running total for the archive trip: the original 8 (§2) + 9 (§2b) = 17 chapters confirmed
+scan-needed. The human-review residual is fully classified; nothing else pending.**
+
+---
+
 ## 3. Verified contacts
 
 Two California institutions hold the bound *Statutes of California* set and provide paid

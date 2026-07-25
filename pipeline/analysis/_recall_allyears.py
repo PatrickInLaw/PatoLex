@@ -5,9 +5,19 @@ Reports residual (oracle N - after) per year and the corpus total -- the campaig
 Mapping: exact leading year `production-<year>*` (biennium-named dirs are reported as UNMAPPED with
 their oracle weight, never silently dropped). Writes a machine-readable table to
 C:\\PatoLex-scratch\\_recall_allyears.json and prints a human table sorted by residual."""
-import os, json, glob, csv, re, importlib.util
+import os, json, glob, csv, re, importlib.util, math
 SCRATCH = r"C:\PatoLex-scratch"
 ORACLE = r"C:\GitHub\PatoLex\docs\30_SYSTEM_DESIGN\sources\ca_chapter_counts.tsv"
+
+def pct(num, den):
+    """Completeness % that NEVER rounds UP to 100 while anything is missing. FLOOR to 2 decimals;
+    returns 100.0 ONLY when num >= den exactly. A residual of even ONE chapter must not read as 100%
+    (2026-06-23: round(99.967,1) was printing 100.0% with 32 chapters still missing -- false-complete)."""
+    if den <= 0:
+        return 0.0
+    if num >= den:
+        return 100.0
+    return math.floor(10000 * num / den) / 100
 
 # --- shared production-dir <-> oracle-year alias (single source of truth; loaded by abs path) -----
 # Run as a standalone script, so load the shared module by path (sibling of pipeline/config.py) to
@@ -108,7 +118,7 @@ for yr, N in sorted(oracle.items()):
     eff_N = N - len(leg)  # legislative gaps were never enacted -> reduce the true denominator
     rows.append({"year": yr, "N": N, "eff_N": eff_N, "before": len(before), "after": len(after),
                  "leg_gap": len(leg), "residual": eff_N - len(after),
-                 "pct": round(100 * len(after) / eff_N, 1) if eff_N else 100.0, "vols": len(dirs)})
+                 "pct": pct(len(after), eff_N), "vols": len(dirs)})
 
 tot_N = sum(r["eff_N"] for r in rows)        # true denominator = oracle N minus legislative gaps
 tot_oracleN = sum(r["N"] for r in rows)
@@ -120,8 +130,8 @@ unmap_wt = sum(n for _, n in unmapped)
 summary = {"mapped_years": len(rows), "tot_eff_N": tot_N, "tot_oracleN": tot_oracleN,
            "tot_before": tot_before, "tot_after": tot_after, "tot_residual": tot_resid,
            "legislative_gaps": tot_leg,
-           "pct_before": round(100 * tot_before / tot_N, 1) if tot_N else 0,
-           "pct_after": round(100 * tot_after / tot_N, 1) if tot_N else 0,
+           "pct_before": pct(tot_before, tot_N),
+           "pct_after": pct(tot_after, tot_N),
            "unmapped_years": [y for y, _ in unmapped], "unmapped_weight": unmap_wt}
 json.dump({"summary": summary, "rows": rows}, open(os.path.join(SCRATCH, "_recall_allyears.json"), "w"),
           indent=1)
@@ -130,7 +140,7 @@ print(f"ANTI-DOUBLE-COUNT OK: {len(counted_basenames)} distinct production dirs,
 print(f"OCR era 1850-1999 mapped years: {len(rows)}  oracleN={tot_oracleN} effN(minus {tot_leg} leg-gaps)={tot_N}")
 print(f"  BEFORE (merge only):  {tot_before}/{tot_N} = {summary['pct_before']}%")
 print(f"  AFTER (clause+VISUAL image+ocr_text-verified): {tot_after}/{tot_N} = {summary['pct_after']}%   RESIDUAL={tot_resid}")
-print(f"  NOTE: pct is over the {len(rows)} MAPPED years only; {len(unmapped)} biennium/budget session-years (oracle weight {unmap_wt}) are UNMEASURED -> corpus-wide incl. those at 0% = {round(100*tot_after/(tot_N+unmap_wt),1)}%")
+print(f"  NOTE: pct is over the {len(rows)} MAPPED years only; {len(unmapped)} biennium/budget session-years (oracle weight {unmap_wt}) are UNMEASURED -> corpus-wide incl. those at 0% = {pct(tot_after, tot_N+unmap_wt)}%")
 print(f"  unmapped (biennium-named, not measured): {summary['unmapped_years']} (weight {unmap_wt})")
 print(f"\nYears still short (residual desc):")
 print(f"  {'year':>5} {'effN':>5} {'before':>6} {'after':>6} {'resid':>5} {'leg':>4} {'pct':>5} vols")
