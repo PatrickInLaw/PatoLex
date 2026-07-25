@@ -27,6 +27,12 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# cc019: also put pipeline/ on the path. One test in this file reaches code that
+# does `import config` at module level, and without this it errored with
+# ModuleNotFoundError (8/9 passing) -- reported as a "known failure" for long
+# enough that it stopped being read as a bug. Same rot class that left
+# test_date_parser_fix.py dead for a month.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from consensus import (  # noqa: E402
     build_consensus, _choose_spine, tokenize, SINGLE_ENGINE_CONFIDENCE,

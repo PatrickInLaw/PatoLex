@@ -468,6 +468,26 @@ Real text, already on disk, already in the file ingest reads, dropped by one lin
 
 **Lesson, twice in one session: measure the problem before designing the solution.** Same error class as the comma removal — acting on a plausible diagnosis without the number. The first time cost 116 headings; this time it nearly cost an unnecessary architectural component.
 
+---
+
+## 20. Test suite: 8/11 with 3 rotting → **11/11 green**
+
+A dead suite hid for a month because nothing ran everything. Fixed the mechanism *and* the rot.
+
+**NEW `pipeline/run_all_tests.py`** — one command, runs all 11, and critically **distinguishes DEAD from FAIL**. A suite that dies at import never reaches an assertion and reports nothing — it looks like *absence of a problem*. That is exactly how `test_date_parser_fix.py` hid. `smoke_imports.py` could never have caught it: it's AST-based and the broken reference was a *string path*.
+
+**All three "known failures" cleared — same rot class:**
+
+| Suite | Before | After | Cause |
+|---|---|---|---|
+| `analysis/test_recover_guards.py` | **DEAD** | PASS | `recover_acts.py` does `import config` at module level; loading by path without `pipeline/` on `sys.path` killed it at import |
+| `ocr/test_consensus.py` | 8/9 | **9/9** | same |
+| `tests/smoke_imports.py` | 2 violations | **0** | **false positive in the checker itself** |
+
+**The `smoke_imports` one is worth recording.** It flagged `analysis/_diag_early5.py` and `_diag_fp.py` as having broken imports of `recover_early`. They don't — both do `sys.path.insert(… / "ingest")` first, and `recover_early` genuinely lives at `pipeline/ingest/recover_early.py`. The checker modelled only two resolution paths (flat sibling, `pipeline/` root) and not the third: **a file that adds its own `sys.path` root**. Fixed in the checker, scoped per-file so it cannot mask a genuine sibling break. **244 internal imports now resolve.**
+
+`KNOWN_FAILING` is now empty **and should stay that way** — a standing known failure is how a real one hides. If something lands there, fix it or write down why it can't be.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

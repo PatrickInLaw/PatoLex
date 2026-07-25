@@ -9,7 +9,16 @@ Covers the four Hans-audit fixes (read-only; no DB, no file writes):
 Run:  python -m analysis.test_recover_guards
 """
 import importlib.util
+import sys
 from pathlib import Path
+
+# cc019: this suite was DEAD -- recover_acts.py does `import config` at module
+# level, so loading it by path without pipeline/ on sys.path raised
+# ModuleNotFoundError and the file died at import, before its first assertion.
+# Same rot class that killed test_date_parser_fix.py for a month.
+_PIPELINE = str(Path(__file__).resolve().parents[1])
+if _PIPELINE not in sys.path:
+    sys.path.insert(0, _PIPELINE)
 
 _RA = Path(__file__).resolve().parents[1] / "ingest" / "recover_acts.py"
 _spec = importlib.util.spec_from_file_location("recover_acts", str(_RA))

@@ -54,10 +54,44 @@ def _imports(path):
                 out.append((node.module, node.lineno))
     return out, None
 
-def _resolves(dotted, importer_dir):
-    """Does dotted module path resolve to a .py file or package under importer_dir or a SOURCE_ROOT?"""
+def _self_added_roots(src):
+    """Extra sys.path roots a file adds for ITSELF, as pipeline-relative subdirs.
+
+    cc019 FALSE-POSITIVE FIX. The original resolver modelled only two cases:
+    (a) flat sibling, (b) pipeline/ on sys.path. There is a third, used
+    legitimately across analysis/: a script does
+
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "ingest"))
+        import recover_early
+
+    recover_early DOES exist at pipeline/ingest/recover_early.py, so the import
+    resolves fine at runtime -- but the checker reported it BROKEN. Two such
+    false positives (analysis/_diag_early5.py, analysis/_diag_fp.py) sat in the
+    output long enough to become "known failures", which is how a real one would
+    have been missed.
+
+    Scoped deliberately: only quoted names that are real pipeline subdirectories
+    are honoured, and only for the file that declares them -- so this cannot mask
+    a genuine sibling break elsewhere.
+    """
+    roots = []
+    for line in src.splitlines():
+        if "sys.path.insert" not in line and "sys.path.append" not in line:
+            continue
+        for quote in ('"', "'"):
+            parts = line.split(quote)
+            for tok in parts[1::2]:
+                cand = os.path.join(PIPELINE, tok)
+                if tok and os.path.isdir(cand):
+                    roots.append(cand)
+    return roots
+
+
+def _resolves(dotted, importer_dir, extra_roots=()):
+    """Does dotted module path resolve to a .py file or package under importer_dir,
+    a SOURCE_ROOT, or a root the importing file adds to sys.path itself?"""
     parts = dotted.split(".")
-    for base in [importer_dir] + SOURCE_ROOTS:
+    for base in [importer_dir] + SOURCE_ROOTS + list(extra_roots):
         p = os.path.join(base, *parts)
         if os.path.isfile(p + ".py") or os.path.isfile(os.path.join(p, "__init__.py")):
             return True
@@ -71,9 +105,15 @@ def main():
         if serr is not None:
             syntax_errs.append((os.path.relpath(path, PIPELINE), serr.lineno, serr.msg)); continue
         d = os.path.dirname(path)
+        # Honour sys.path roots this file adds for itself (see _self_added_roots).
+        try:
+            with open(path, "r", encoding="utf-8", errors="replace") as fh:
+                extra = _self_added_roots(fh.read())
+        except Exception:
+            extra = []
         for dotted, ln in imps:
             top = dotted.split(".")[0]
-            if top in internal and not _resolves(dotted, d):
+            if top in internal and not _resolves(dotted, d, extra):
                 violations.append((os.path.relpath(path, PIPELINE), ln, dotted))
     if syntax_errs:
         print(f"SYNTAX ERRORS ({len(syntax_errs)}):")
