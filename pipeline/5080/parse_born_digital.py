@@ -32,7 +32,14 @@ import fitz  # PyMuPDF
 # The source module has no __main__ guard and its MAIN block performs DB
 # ingest, so we force the argv<2 usage-exit branch and swallow the SystemExit;
 # all function/regex definitions precede that branch and are bound normally.
-_MOD = Path(__file__).with_name("ingest_from_ocr.py")
+# cc019 (2026-07-24): was Path(__file__).with_name("ingest_from_ocr.py"), which
+# resolves inside pipeline/5080/. ingest_from_ocr.py moved to pipeline/ingest/
+# in the module reorg, so this module has been UNLOADABLE since -- it raised
+# FileNotFoundError at import. Resolve against pipeline/ingest/ instead, with a
+# with_name() fallback so a future move back still works.
+_MOD = Path(__file__).resolve().parents[1] / "ingest" / "ingest_from_ocr.py"
+if not _MOD.exists():
+    _MOD = Path(__file__).with_name("ingest_from_ocr.py")
 _spec = importlib.util.spec_from_file_location("ingest_from_ocr_helpers", _MOD)
 _helpers = importlib.util.module_from_spec(_spec)
 _saved_argv = sys.argv

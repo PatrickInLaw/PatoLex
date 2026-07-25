@@ -67,14 +67,31 @@ def _load_module(path, name, argv_patch=None):
 
 _pipeline_dir = os.path.join(os.path.dirname(__file__), "5080")
 
+# cc019 (2026-07-24): this file was DEAD -- it died at import, before its first
+# assertion, and had since the module reorg. ingest_from_ocr.py moved from
+# pipeline/5080/ to pipeline/ingest/, but this loader still pointed at 5080/,
+# raising FileNotFoundError. test_chapter_parser.py:21 was updated for the same
+# reorg; this file was missed. Net effect: ZERO live regression coverage on
+# parse_act_date (including the _TEXT_NO_DATE case and the +/-3-year clamp).
+#
+# Nothing caught it: the repo has no CI, no pytest.ini/pyproject.toml, and every
+# test is hand-invoked. smoke_imports.py cannot catch this class of breakage --
+# it is AST-based and the broken reference is a STRING PATH, not an import.
+#
+# NOTE: only ingest_from_ocr.py moved. reparse.py and parse_born_digital.py are
+# still in pipeline/5080/ -- verified 2026-07-24. Do not blanket-repoint.
+_ingest_dir = os.path.join(os.path.dirname(__file__), "ingest")
+
 # ingest_from_ocr.py is now import-safe (NITPICK-2): main loop guarded by
 # __name__ == "__main__", so no argv patching needed.
 _ingest = _load_module(
-    os.path.join(_pipeline_dir, "ingest_from_ocr.py"),
+    os.path.join(_ingest_dir, "ingest_from_ocr.py"),
     "ingest_from_ocr",
 )
 
 # Load the tombstoned modules for SERIOUS-1/2 tests.
+# reparse.py is ARCHIVED/DO-NOT-USE but is still loaded here for the tombstone
+# assertions -- do not delete it.
 _reparse = _load_module(
     os.path.join(_pipeline_dir, "reparse.py"),
     "reparse_module",

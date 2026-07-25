@@ -26,12 +26,17 @@ LOG     = os.path.join(OUT_DIR, "chapter-reconstruct-run.log")
 SAMPLE  = os.path.join(OUT_DIR, "chapter_reconstruct_sample.tsv")
 
 # ---- copied verbatim from ingest_from_ocr.py ----
+# cc019 (2026-07-24): _HDR_SEP era-variant fix applied here too -- this is a
+# verbatim copy of the canonical HEADER_RE, so it carried the identical em-dash
+# blindness ("CHAP.—XCI." in the 1876/78 volumes never matched). Keep in sync
+# with ingest_from_ocr.py:_HDR_SEP.
 _DASH = "—–‒‐‑\\-"
+_HDR_SEP = r"[\s.,—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"
     r"|[Cc][Hh][Aa][Pp][Tt][Ee][Rr]\s*)"
-    r"\.?\s*"
+    r"\.?" + _HDR_SEP +
     r"([IVXLCDMivxlcdm0-9JjTtYyLl!|]{1,8})"
     r"\s*[.,;:]?"
     r"(?:\s*[" + _DASH + r"].*)?$",

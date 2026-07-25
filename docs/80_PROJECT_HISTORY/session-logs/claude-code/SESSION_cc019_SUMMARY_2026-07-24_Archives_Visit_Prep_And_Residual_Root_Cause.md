@@ -105,6 +105,58 @@ Three mechanical root causes, **none OCR-related**:
 
 ---
 
+---
+
+## 8. Parser fixes — DEFECT 2 landed, test suite resurrected
+
+**Canonical parse path confirmed** (this decides what gets edited): driver `pipeline/ingest/parse_all.py`; implementation `pipeline/ingest/ingest_from_ocr.py` STAGE 5 (lines 390–707), entry `parse_volume()` @709. **Nuance vs. project memory:** `ingest_from_ocr.py` is superseded only on its *ingest* half (replaced by `ingest_clean.py`) — **its parser half is live.** `ingest_clean.py` does no heading/date extraction, only consumes `iso_date`.
+
+### Defect 2 — em-dash blindness was TOTAL
+
+Verified empirically by executing **every live heading pattern in the pipeline** against the real printed forms: **not one matched `CHAP.—XCI.`** The canonical `HEADER_RE` scored **5/9**; every miss was an em-dash or en-dash variant.
+
+**Root cause is almost comic:** `_DASH` was already defined and used in `HEADER_RE` — but only in the *trailing* `—An Act to…` position. The 1876/78 typesetters put the dash *before* the numeral, where `\.?\s*` could never reach it.
+
+**Fix:** shared `_HDR_SEP` separator class, applied to `ingest_from_ocr.py:393` (canonical) and `chapter/chapter_reconstruct.py:29` (live verbatim copy).
+
+**Measured: 5/9 → 9/9** on real printed forms, **0 false positives** against body text, running heads, enacting clauses, and `[Approved]` lines. Recovered tokens resolve correctly: `XCI`→91, `CLXXIII`→173, `CXLIII`→143.
+
+**Hazard documented inline:** `parse_chapter_number("XCIAN")` returns **91**, not an error — it silently strips non-Roman characters. An over-capturing numeral group does not fail loudly; it returns a *plausible wrong number*. The numeral class must stay letter-free.
+
+### The date test suite was DEAD
+
+`pipeline/test_date_parser_fix.py:68` pointed at `pipeline/5080/ingest_from_ocr.py`; the module moved to `pipeline/ingest/` in the reorg. It died at import, **before its first assertion**, and had since. **Net effect: zero live regression coverage on `parse_act_date`** — including the `_TEXT_NO_DATE` case and the ±3-year clamp.
+
+Nothing caught it: **the repo has no CI at all** (no `pytest.ini`, `pyproject.toml`, `conftest.py`, or workflows — every test is hand-invoked), and `smoke_imports.py` is AST-based while the broken reference is a *string path*.
+
+Also fixed `pipeline/5080/parse_born_digital.py:35`, which used `Path(__file__).with_name(...)` and has therefore been **unloadable since the same reorg**.
+
+**Post-fix: 33 passed / 0 failed** — and it passes clean, so no regressions were hiding behind the broken import.
+
+| Suite | Result |
+|---|---|
+| `test_date_parser_fix.py` | **33 passed / 0 failed** (was dead) |
+| `test_chapter_parser.py` | ALL PASS |
+| `analysis/_test_chap_guards.py` | 0 failures |
+| `analysis/test_recover_early_dedup.py` | ALL PASS |
+| `test_detect_body_start.py` | 9 passed |
+| `ocr/test_consensus.py` | 8/9 — **pre-existing** |
+| `analysis/test_recover_guards.py` | error — **pre-existing** |
+
+Both failures are the same `ModuleNotFoundError: No module named 'config'` sys.path issue in files this session never touched.
+
+**Why defects 1–3 survived so long:** existing heading fixtures are **Arabic and space-separated only** (`"CHAPTER 88."`, `"CHAP. 17"`). They *cannot* fail on the em-dash or Roman gaps. Roman numerals have value-layer coverage only — **no test feeds a Roman numeral through any heading regex.**
+
+### More stale-path rot found (pre-existing, not fixed here)
+
+`analysis/_audit_repair.py:19`, `_eyeball_repairs.py:7`, `_verify_brackets.py:42` hardcode `C:\github\PatoLex\…` — a root that does not exist on this box. Joins `pipeline/tests/check_golden_master.py:18` and `.scratch-certify/test_spillover.py` in needing `PATOLEX_LOCATION_ROOT`.
+
+### Contents-anchored vision pass (in flight)
+
+All 7 biennial volumes **do** carry a chapter-ordered printed CONTENTS in front matter from PDF p3. Columns: `Chap. | TITLE OF ACT | No. of bill | Page`. **Contents numbers are Arabic** — Roman appears only in body running heads. 270 pages rendered at 200 DPI. No alphabetical back-index exists in any of the seven. Expect legitimate `[See volume of Amendments to the Codes.]` entries in 1874/76/78 — real chapters whose text lives in the companion volume, not an artifact.
+
+---
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.

@@ -391,11 +391,29 @@ def safe_str(s, maxlen=None):
 # STAGE 5 PARSER -- byte-for-byte port of reparse.py ROUND2
 # ===========================================================================
 _DASH = "—–‒‐‑\\-"
+# Separator between the CHAP./CHAPTER glyph and the numeral.
+#
+# cc019 (2026-07-24): the era-variant fix. Chapter-heading punctuation is NOT
+# uniform across the corpus -- verified against the printed page:
+#     1866      "CHAP. CXLIII."     period + SPACE
+#     1876/78   "CHAP.—XCI."        period + EM DASH, no space
+# The original pattern used `\.?\s*` here, which matches the 1866 form and is
+# blind to every em-dash volume. _DASH was already defined below but used ONLY
+# in the trailing "—An Act to..." position; the later typesetters put the dash
+# on the other side of the numeral. Measured effect of this class: the canonical
+# regex matched 5/9 real printed forms before, 9/9 after, with 0 false positives
+# against body text, running heads, enacting clauses and [Approved] lines.
+# See lessons/LESSON_2026-07-24_residual_71_is_parser_grammar_not_ocr.md defect 2.
+#
+# NOTE: keep the numeral character class letter-free. parse_chapter_number()
+# silently strips non-Roman characters, so an over-capturing group does not
+# fail loudly -- it returns a plausible WRONG number (e.g. "XCIAN" -> 91).
+_HDR_SEP = r"[\s.,—–‒‐‑-]*"
 HEADER_RE = re.compile(
     r"^[^A-Za-z0-9]*"
     r"(?:[Cc][HhUuNnRrAaOoEe][AaRrVvPpOo][PpVvRrTt]?[a-zA-Z]{0,3}\.?\s*"
     r"|[Cc][Hh][Aa][Pp][Tt][Ee][Rr]\s*)"
-    r"\.?\s*"
+    r"\.?" + _HDR_SEP +
     r"([IVXLCDMivxlcdm0-9JjTtYyLl!|]{1,8})"
     r"\s*[.,;:]?"
     r"(?:\s*[" + _DASH + r"].*)?$",
