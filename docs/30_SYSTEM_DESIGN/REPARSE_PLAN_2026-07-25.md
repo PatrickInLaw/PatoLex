@@ -4,9 +4,55 @@
 
 ---
 
-## ⛔ BLOCKING DISCOVERY — read before anything else
+## ✅ RESOLVED — there is NO bridge. Measured, 2026-07-25.
 
-**The recovery chain has no path into the database. The cc015–cc018 campaign's output is DB-inert.**
+**v2 asserted a missing "bridge" component. Patrick pushed back — *"What bridge?"* — and he was right. Measurement across all 225 volumes settles it.**
+
+### The answer
+
+**Nothing with real statutory text is un-reproducible by a corrected text parser.**
+
+| Bucket | Records | Verdict |
+|---|---|---|
+| Real body text genuinely absent from `fixed.json` | **3,243** | **100% text-pass provenance** (`recovered` 2,082, `early_consensus_v2` 645, `baseline` 356, `chaptered_v2` 145, `lostheader` 15). **Zero vision. Zero external.** Built from the same consensus OCR → a corrected parser can produce them. |
+| Vision / external / human origin | **~2,033** | **Every one has `textlen = 0`.** Vision read a chapter *number* off an image (`status=image_verified`); it never extracted body text. A bridge carries **numbered empty shells**. |
+
+**Both cc018's 12 VLM chapters and the 9 Google Books records (1905 ch. 389–397) are `textlen=0` identity assertions.**
+
+### ★ The real finding — and it is not a bridge
+
+> **7,744 stranded records' text is ALREADY in `parsed_acts_fixed.json`, under `flagged_acts` — which `ingest_clean.py` silently discards** (`:782-788` reads `confident_acts` only).
+
+Real statutory text, already on disk, already in the file ingest reads, dropped by one line. **No new component. No chain re-run.** This is the largest cheap win available and it was hidden behind an architecture problem that did not exist.
+
+*(Live example: cc018's "1956 ch.10" — actually `1957-vol1-56chapters` ch.10 — sits in `flagged_acts` with 2,000 chars and in the chain's `confident_acts` with 989 chars. Ingest drops it purely for being flagged.)*
+
+### Three corrections to v2's picture
+
+1. **The "25,514 chain-only chapters" figure was an artifact.** The chain renumbers (`chapter_int_final`; 13,492 `renumber_status=filled`) while `fixed.json` carries raw, OCR-garbled `chapter_int`. Same physical act, different key. Content-matching collapses 25,514 → **3,243**.
+2. **The chain is NOT a strict superset — it DROPPED 14 acts carrying real text** (469–4,876 chars; 1858 ch84/121, 1859 ch289, 1860 ch170, 1893 ch250, 1913 ch3826, 1915 ch2338, 1933 ch8565, 1945 ×6). So "point ingest at `merged.json`" would be a **regression**, not a fix.
+3. **23 volumes have no `parsed_acts_fixed.json` at all** → invisible to ingest regardless of any bridge. Five of them hold **373 records of real text** (the four `*-code` volumes + `1965-vol1-64chapters`).
+
+### What the work actually is
+
+| Priority | Item | Why |
+|---|---|---|
+| **1** | **Stop discarding `flagged_acts`** (or triage them) | 7,744 records of real text, already on disk. Needs a rule for *why* an act was flagged — dropping wholesale is what caused this. |
+| **2** | **Reparse with the cc019 fixes** | Subsumes the chain's text gains; several thousand of the 3,243 should land in `confident_acts` directly. |
+| **3** | 23 volumes with no base parse | Invisible to ingest today; 5 carry real text. |
+| **4** | ~2,033 identity-only records | **Not a bridge.** Optionally useful as "chapter exists, text pending" markers — a decision, not a blocker. |
+
+**The original v2 framing — that a bridge component is a prerequisite — was wrong. Deleted.** The three options it proposed are struck; none should be built.
+
+*Lesson, twice in one session: measure the problem before designing the solution. Same error class as the comma removal — acting on a plausible diagnosis without the number.*
+
+---
+
+## Superseded — v2's incorrect "blocking discovery"
+
+*Retained for the record; the reasoning below was factually right about the file topology and wrong about what it implied.*
+
+**The recovery chain has no path into the database.**
 
 Verified in code, three independent ways:
 
@@ -26,9 +72,26 @@ The recovery passes were deliberately built **additive and non-destructive** to 
 - The 71 chapters recovered in cc019, and everything cc015–cc018 recovered, **would never reach Postgres** under the current pipeline.
 - v1's Phase 5 ("re-run the recovery chain") was **solving the wrong problem**. Re-running it produces more files nothing reads.
 
-### The actual missing work
+### ⚠ The "bridge" framing is UNDER CHALLENGE — do not act on it yet
 
-**A bridge step that folds recovery output into the ingest path does not exist and has never existed.** It is a new, unbuilt component — not a re-run. Designing it is a prerequisite to this plan mattering at all, and it is a **decision for Patrick**, because there are at least three shapes it could take:
+**Patrick, immediately: *"What bridge?"* — and he is likely right.**
+
+v2 asserted a missing component before measuring whether the gap exists. The recovery chain exists **because the parser was broken**. `recover_early` / `recover_chaptered` / `recover_multiengine` were built to claw back chapters the parser missed — and what they claw back is largely **the exact defects cc019 just fixed**: em-dash and comma headings, acts with no `[Approved …]` bracket, headings that never say "An Act".
+
+**If a corrected reparse recovers what the chain recovered, then `ingest_clean.py` reading only `fixed.json` was never wrong** — it was reading a file produced by a broken parser. Fix the parser and the architecture is already correct. **No bridge.**
+
+The set that genuinely cannot come from a text reparse is far smaller:
+- cc018's 12 **VLM-recovered** chapters (read by vision; the heading is not parseable text)
+- 1905 ch. 389–397 (externally acquired from Google Books)
+- anything where the OCR text simply does not contain the heading
+
+That is on the order of ~20 records, not an architectural layer — and for those, "bridge" is the wrong word; it is a small reconciliation.
+
+**This is an empirical question and it is being measured**: how many chapters exist in the chain artifacts but not in `fixed.json`, bucketed by provenance (text-pass vs vision vs external), and how many carry real body text rather than an identity-only placeholder. **The three options below are retained only in case that number turns out to be non-trivial.** Do not build any of them before the measurement lands.
+
+*(Lesson, again: measure the problem before designing the solution. Same error class as the comma removal — acting on a plausible diagnosis without the number.)*
+
+If the measurement shows a real stranded set, the shapes it could take are:
 
 1. **Merge-into-fixed** — a step that writes recovery gains back into `parsed_acts_fixed.json`. Simplest; destroys the additive-safety property that currently protects the campaign's work.
 2. **Teach `ingest_clean.py` the chain** — have it read the terminal artifact (`merged` or `certified`) instead of `fixed`. Cleaner; changes the canonical ingest contract and needs its own Hans pass.

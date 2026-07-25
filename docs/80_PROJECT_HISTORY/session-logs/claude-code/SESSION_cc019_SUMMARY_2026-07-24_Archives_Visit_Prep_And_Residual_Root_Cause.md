@@ -430,6 +430,44 @@ Until decided, **a reparse changes only files nothing ingests.** Still worth doi
 
 **Hans's sharpest process catch:** Phase 0.5 said "sync the 5090 via `git pull`" — but **`git pull` only moves committed history**, and the harness fix was uncommitted when he reviewed. Syncing first would have shipped the corpus-destroying version to the box that *holds the corpus*. Now committed (`5e4a423`) and gated explicitly.
 
+---
+
+## 19. ✅ "What bridge?" — Patrick was right; measurement killed my invented component
+
+I asserted a missing "bridge" component from file topology alone. Patrick pushed back immediately. **Measurement across all 225 volumes proved him right.**
+
+**Nothing with real statutory text is un-reproducible by a corrected text parser.**
+
+| Bucket | n | Verdict |
+|---|---|---|
+| Real text absent from `fixed.json` | **3,243** | **100% text-pass provenance** — zero vision, zero external. Built from the same consensus OCR, so a corrected parser can produce them. |
+| Vision / external / human | **~2,033** | **Every one `textlen = 0`.** Vision read a chapter *number* off an image; it never extracted body text. A bridge carries **empty shells**. |
+
+Both cc018's 12 VLM chapters and the 9 Google Books records (1905 ch. 389–397) are `textlen=0` identity assertions.
+
+### ★ The real finding — not a bridge at all
+
+> **7,744 stranded records' text is ALREADY in `parsed_acts_fixed.json` under `flagged_acts`, which `ingest_clean.py` silently discards** (`:782-788`, `confident_acts` only).
+
+Real text, already on disk, already in the file ingest reads, dropped by one line. **The largest cheap win in the corpus, hidden behind an architecture problem that did not exist.** Live example: cc018's "1956 ch.10" (really `1957-vol1-56chapters` ch.10) sits in `flagged_acts` with 2,000 chars — dropped purely for being flagged.
+
+### Three corrections to my own picture
+
+1. **"25,514 chain-only chapters" was an artifact** — the chain renumbers (`chapter_int_final`, 13,492 `renumber_status=filled`) while `fixed.json` holds raw garbled `chapter_int`. Same act, different key. Content-matching: **25,514 → 3,243**.
+2. **The chain is NOT a superset — it dropped 14 acts with real text** (469–4,876 chars). "Point ingest at `merged.json`" would be a **regression**.
+3. **23 volumes have no `parsed_acts_fixed.json` at all** — invisible to ingest regardless; 5 hold **373 records of real text**.
+
+### Revised work order
+
+| # | Item | Why |
+|---|---|---|
+| **1** | **Stop discarding `flagged_acts`** (with triage) | 7,744 records, real text, already on disk |
+| **2** | Reparse with cc019 fixes | subsumes the chain's text gains |
+| **3** | 23 volumes with no base parse | 5 carry real text |
+| **4** | ~2,033 identity-only records | not a bridge; optional "chapter exists, text pending" markers |
+
+**Lesson, twice in one session: measure the problem before designing the solution.** Same error class as the comma removal — acting on a plausible diagnosis without the number. The first time cost 116 headings; this time it nearly cost an unnecessary architectural component.
+
 ## Decisions (Patrick)
 
 - Venue: both/undecided → **resolved to Witkin** by research.
