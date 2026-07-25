@@ -1,3 +1,29 @@
+> # ⛔ ON HOLD — DO NOT CARRY YET (2026-07-25)
+>
+> **Patrick's standing rule: nothing goes to a library on an unverified count.**
+> Every count this project has produced without verification has been **overstated** —
+> 9 → 12 → reconciled; "71 unreadable chapters" → **0 actually needed scanning**;
+> the June-29 packet's 1929 "correction" → **wrong**.
+>
+> Two verifications are in flight and BOTH can shrink this list:
+>
+> **1. The chapter attribution is PARSER-DERIVED, and the parser has changed.**
+> "Chapter 881 is missing" originally meant *the old parser did not find it*. That
+> parser was dropping acts wholesale — merged blobs, unsigned enactments, em-dash
+> headings — and the fixed parser now finds **+465 more chapters corpus-wide**.
+> **Some chapters on this list may not be missing at all.** Being re-checked
+> against the corrected parser.
+>
+> *(The printed-page gaps themselves are parser-independent — they come from
+> printed running-head numbers skipping — so those stand or fall on their own.)*
+>
+> **2. Only ~10 of 45 volumes' gaps were ever checked against the page images.**
+> The rest rest on the automated audit — **which is known to be wrong at least
+> once** (it placed 1929's leaf 12 pages from its true location, defeated by an
+> unnumbered section divider). All 45 are now being pixel-verified.
+>
+> **Expect this list to get SHORTER. Do not print it until both land.**
+
 # SACRAMENTO TRIP — FINAL RECONCILED LIST — Monday 2026-07-27
 
 **This supersedes BOTH `ARCHIVES_VISIT_PACKET_2026-07-27.md` and `SACRAMENTO_SCAN_PACKET_2026-06-29.md`.**
